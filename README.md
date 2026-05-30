@@ -58,6 +58,24 @@ python skills\yon-ncc-dev\scripts\build_index.py E:\path\to\ncc\home 2111
 - Python 3（源码索引构建需要）
 - 至少一个 NCC home 目录
 
+## 推荐安装
+
+以下公网技能与本技能包互补，建议额外安装（不随本仓库分发，自行从 npm 安装）：
+
+```bash
+# 代码审查 — 合并前自查、审查 PR
+npx skills add tw93/waza@check -g -y
+
+# 故障排查 — 报错/崩溃先找根因再修
+npx skills add tw93/waza@hunt -g -y
+
+# 方案设计 — 架构/技术选型先出方案再写代码
+npx skills add tw93/waza@think -g -y
+
+# 自我进化 — 从反馈中学习优化
+npx skills add charon-fan/agent-playbook@self-improving-agent -g -y
+```
+
 ## 更新
 
 ```bash

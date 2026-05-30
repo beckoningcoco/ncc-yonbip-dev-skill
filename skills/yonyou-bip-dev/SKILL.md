@@ -71,5 +71,5 @@ description: >
 | 脚本 | 路径 | 用途 |
 |------|------|------|
 | Chrome 调试端口 | `scripts/open_chrome_debug.bat` | 杀旧进程后以 `--remote-debugging-port=9222` 启动 Chrome |
-| Oracle 查询工具 | `C:\Users\99558\Desktop\db_query.py` | 通用 Oracle 数据库查询，支持多项目多环境 |
+| Oracle 查询工具 | `C:\Users\<你的用户名>\Desktop\db_query.py` | 通用 Oracle 数据库查询，支持多项目多环境 |
 

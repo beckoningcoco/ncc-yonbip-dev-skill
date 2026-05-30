@@ -25,7 +25,7 @@ permissions:
 本技能服务于 **用友 NCC（NC Cloud）**。
 
 > **版本区分**：用友有两个主要产品线——
-> - **旗舰版（BIP / YonBIP）** → 对应技能 `yon-bip-dev`（`C:\Users\99558\.claude\skills\yonyou-bip-dev\`）
+> - **旗舰版（BIP / YonBIP）** → 对应技能 `yonyou-bip-dev`（与本技能同级目录）
 > - **NCC（NC Cloud）** ← 本技能
 >
 > 收到问题时务必先判断版本，再使用对应技能及其参考资料。不确定时主动询问用户。

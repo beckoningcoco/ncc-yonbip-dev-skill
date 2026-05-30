@@ -33,7 +33,8 @@
 taskkill /F /IM chrome.exe
 
 # 2. 必须指定独立的用户目录（避免和日常 Chrome 冲突），使用 127.0.0.1 而非 localhost
-"C:\Program Files\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9222 --user-data-dir="C:\Users\99558\chrome-debug"
+# 提示：Chrome 路径和 user-data-dir 因人而异，详见仓库根目录 path_config.json 中的 "Chrome调试用户目录"
+"C:\Program Files\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9222 --user-data-dir="你的chrome-debug目录路径"
 ```
 
 然后在这个 Chrome 中访问 `community.yonyou.com` 和 `c2.yonyoucloud.com` 并登录。
@@ -104,7 +105,7 @@ ws.send(JSON.stringify({
 3. **必须用 CDP + Runtime.evaluate** — 这是唯一直接从已渲染 DOM 提取内容的方式
 4. **等待时间要够** — Vue/React 异步渲染，内容较长的页面建议等 8-12 秒
 5. **必须复用已登录的 Chrome** — CDP 打开的标签页共享浏览器 profile 和 cookies
-6. **必须指定独立用户目录** — `--user-data-dir="C:\Users\99558\chrome-debug"`，否则会和日常 Chrome 冲突导致调试端口失效
+6. **必须指定独立用户目录** — `--user-data-dir="你的chrome-debug目录"`（见仓库根目录 path_config.json），否则会和日常 Chrome 冲突导致调试端口失效
 7. **必须用 127.0.0.1 而非 localhost** — CDP 连接 `localhost:9222` 会失败，要写 `127.0.0.1:9222`
 8. **视频课程页直接跳过** — `learn/detail/` 页面如果 `document.title` 包含"视频播放"则忽略，只抓文档中心和文章页的文字内容
 

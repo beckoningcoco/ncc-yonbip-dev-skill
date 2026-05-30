@@ -1,0 +1,55 @@
+{
+  "_说明": {
+    "用途": "本文件集中管理所有技能中用到的本地路径。从 git 拉取后，只需修改此文件中的路径即可适配你的电脑。",
+    "修改方法": "将下方每个路径改成你电脑上对应的实际路径。路径使用反斜杠 \\ 或正斜杠 / 均可。",
+    "_自动检测说明": "路径值设为 \"auto\" 表示脚本会自动检测（如通过环境变量或相对于技能目录计算），无需手动填写。"
+  },
+
+  "用户目录": {
+    "_说明": "你的 Windows 用户目录，通常为 C:\\Users\\你的用户名",
+    "路径": "C:\\Users\\99558",
+    "_用途": "用于拼接 .claude\\skills 等子目录"
+  },
+
+  "Claude_Code_Skills目录": {
+    "_说明": "Claude Code 安装技能的目录，通常为用户目录下的 .claude\\skills",
+    "路径": "C:\\Users\\99558\\.claude\\skills",
+    "_用途": "技能安装目标位置，setup.bat 会将技能链接/拷贝到此目录",
+    "_默认值_template": "%USERPROFILE%\\.claude\\skills"
+  },
+
+  "NCC_Home_2111": {
+    "_说明": "NCC 2111 版本的 home 目录（用于源码反编译和索引）",
+    "路径": "E:\\NCProject\\NCC\\jixieyuan\\home20260302_newHome\\home",
+    "_用途": "反编译 NCC 2111 的 jar 包、构建类名索引",
+    "_如何获取": "找你的 NCC 2111 项目负责人要 home 目录的路径"
+  },
+
+  "NCC_Home_2312": {
+    "_说明": "NCC 2312 版本的 home 目录（用于源码反编译和索引）",
+    "路径": "E:\\NCProject\\NCC2312\\tianjiu\\biphome_20260331",
+    "_用途": "反编译 NCC 2312 的 jar 包、构建类名索引",
+    "_如何获取": "找你的 NCC 2312 项目负责人要 home 目录的路径"
+  },
+
+  "知识库目录": {
+    "_说明": "Obsidian 知识库存放位置（llm-wiki 技能使用）",
+    "路径": "D:\\yon-bip-obsidian\\yon-bip-obsidian",
+    "_用途": "llm-wiki 技能的默认知识库根目录",
+    "_替代方案": "如果不用本地知识库，保持 ~/.llm-wiki-path 指向 git 仓库内的 knowledge-base\\yon-bip-obsidian 即可"
+  },
+
+  "Chrome调试用户目录": {
+    "_说明": "Chrome 远程调试时使用的独立用户数据目录（baoyu-url-to-markdown 使用）",
+    "路径": "C:\\Users\\99558\\chrome-debug",
+    "_用途": "启动 Chrome 调试端口时的 --user-data-dir 参数",
+    "_如何创建": "随便新建一个空目录即可，如 D:\\chrome-debug"
+  },
+
+  "Typora图片目录": {
+    "_说明": "Typora 编辑器的本地图片缓存目录（仅影响 .md 文件中引用的本地图片）",
+    "路径": "C:\\Users\\99558\\AppData\\Roaming\\Typora\\typora-user-images",
+    "_用途": "文档中的图片引用路径。其他用户用不到 Typora 图片，可忽略此项。",
+    "_影响": "仅视觉影响——文档中引用的 Typora 本地图片在其他电脑上无法显示，不影响技能功能。"
+  }
+}

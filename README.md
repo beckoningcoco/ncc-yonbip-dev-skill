@@ -40,6 +40,16 @@ setup.bat -q --skip-ncc   # 组合使用
 python skills\yon-ncc-dev\scripts\build_index.py E:\path\to\ncc\home 2111
 ```
 
+## 自定义路径
+
+安装前，建议先编辑 **`path_config.json`**，将里面的路径改成你自己电脑上的实际路径：
+
+- `NCC_Home_2111` / `NCC_Home_2312`：你的 NCC home 目录
+- `Chrome调试用户目录`：baoyu-url-to-markdown 使用的 Chrome 调试目录
+- 其他路径一般无需修改
+
+> 文件中每个路径都有中文注释说明用途和如何获取。
+
 ## 使用前提
 
 - **Windows CMD 或 PowerShell** 终端（不要用 Git Bash）

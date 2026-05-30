@@ -97,6 +97,7 @@ call :install_skill yon-ncc-dev yon-ncc-dev
 call :install_skill yonyou-bip-dev yonyou-bip-dev
 call :install_skill baoyu-url-to-markdown baoyu-url-to-markdown
 call :install_skill llm-wiki llm-wiki
+call :install_skill self-improving-agent self-improving-agent
 
 :: === Auto-configure Claude Code permissions ===
 echo.

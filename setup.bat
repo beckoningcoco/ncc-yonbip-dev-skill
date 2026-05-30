@@ -67,7 +67,7 @@ goto :eof
 :skip_helper
 
 :: === 1. Check prerequisites ===
-echo [1/5] Checking environment...
+echo [1/6] Checking environment...
 
 where node >nul 2>nul
 if %errorlevel% neq 0 (
@@ -88,7 +88,7 @@ echo   Claude Code: please verify it is installed
 
 :: === 2. Install skills ===
 echo.
-echo [2/5] Installing skills...
+echo [2/6] Installing skills...
 
 set "SKILLS_DIR=%USERPROFILE%\.claude\skills"
 if not exist "%SKILLS_DIR%" mkdir "%SKILLS_DIR%"
@@ -98,9 +98,18 @@ call :install_skill yonyou-bip-dev yonyou-bip-dev
 call :install_skill baoyu-url-to-markdown baoyu-url-to-markdown
 call :install_skill llm-wiki llm-wiki
 
-:: === 3. Install npm dependencies ===
+:: === 3. Configure llm-wiki knowledge base ===
 echo.
-echo [3/5] Installing npm dependencies...
+echo [3/6] Configuring llm-wiki knowledge base...
+
+set "LLM_WIKI_PATH_FILE=%USERPROFILE%\.llm-wiki-path"
+set "KB_DIR=%~dp0knowledge-base\yon-bip-obsidian"
+echo %KB_DIR%> "%LLM_WIKI_PATH_FILE%"
+echo   Knowledge base path set to: %KB_DIR%
+
+:: === 4. Install npm dependencies ===
+echo.
+echo [4/6] Installing npm dependencies...
 
 set "NPM_DIR=%~dp0skills\baoyu-url-to-markdown\scripts"
 if exist "%NPM_DIR%\package.json" (
@@ -115,7 +124,7 @@ if exist "%NPM_DIR%\package.json" (
 
 :: === 4. Configure NCHOME ===
 echo.
-echo [4/5] Configuring NCC dev environment...
+echo [5/6] Configuring NCC dev environment...
 
 if "%SKIP_NCC%"=="1" (
     echo   [SKIP] --skip-ncc flag set
@@ -154,7 +163,7 @@ if !errorlevel! equ 0 (
 
 :: === 5. Done ===
 echo.
-echo [5/5] Setup complete!
+echo [6/6] Setup complete!
 echo.
 echo ============================================
 echo   Skills installed to: %SKILLS_DIR%

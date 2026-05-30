@@ -1,0 +1,582 @@
+社区文档中心
+首页
+文档导航
+开发者社区
+社区论坛
+视频教程技术博客
+更多
+张宏涛
+资料中心
+专业开发
+产品概述
+快速入门
+操作指南
+开发指南
+开发介绍
+新功能开发
+移动端开发
+扩展开发
+全球化
+组织
+权限
+特征
+基础数据
+审批流
+业务流
+规则引擎
+公式
+UI模板
+参照
+导入导出
+打印
+对象建模
+编码规则
+调度任务
+监控与预警
+日志
+消息平台
+工作台
+事件中心
+文件服务
+YonBuilder应用开发
+前端开发
+后端开发
+iuap-开发规范红皮书
+后端编程模型
+R6后端脚手架升级方案
+R6后端脚手架升级操作指南
+R6后端脚手架二方包坐标变更清单
+分布式锁 yms-lock 实践
+RPC接口开发与调用（iris）
+数据库操作 yms-jdbc 实践
+HTTP请求 yms-http 实践
+上下文开发实践
+线程池 yms-executors 实践
+移动开发
+安全
+数据库
+DevOps技术
+容器云技术
+区块链云技术
+YMS开发
+智能应用开发
+专项开发
+成果迁移
+技术方案
+最佳实践
+参考手册
+常见问题
+视频教程
+专业开发/开发指南/后端开发/分布式锁 yms-lock 实践
+分布式锁 yms-lock 实践
+最后更新时间：2025-05-20
+概述
+适用场景
+部署方案	开发类型	是否适用
+公有云	客户化定制开发	是
+私有云	客户化定制开发	是
+专属云	客户化定制开发	是
+本地部署	客户化定制开发	是
+公有云	ISV生态开发	是
+私有云	ISV生态开发	是
+专属云	ISV生态开发	是
+本地部署	ISV生态开发	是
+业务场景
+
+分布式锁作为一种协调分布式系统中并发访问的核心机制，广泛应用于多个业务场景：
+
+数据一致性与并发控制：如​库存扣减与超卖问题、订单状态更新、​分布式事务协调
+资源互斥与任务调度：如​共享资源访问控制、​分布式任务调度、​消息队列消费幂等性
+系统协调与高可用性：如​领导者选举、​缓存一致性维护、​分布式限流与熔断
+
+本文主要描述yms-lock的依赖配置、YMS配置和使用。
+
+关键词
+
+分布式锁、并发访问、yms-lock、YMS配置、全局锁、领域锁
+
+Maven依赖配置
+
+分布式锁的依赖需手动引入：
+
+<dependency>
+    <groupId>com.yonyou.iuap</groupId>
+    <artifactId>yms-basecomp-starter</artifactId>
+</dependency>
+
+
+注：从二方包7.10.0版本开始分布式锁新增了读写锁、级联锁、加锁状态、一键清除锁、全局锁等功能
+
+注：从二方包15.4开始新增了线程和事务动态锁，默认注入全局锁的bean
+
+YMS配置
+锁类型
+
+按范围维度可以分为领域分布式锁和全局分布式锁。
+
+领域分布式锁场景用于同一应用不同实例间的锁的使用, 不同应用间可以通过配置Redis客户端或StringRedisTemplate Bean指向同一个redis连接池达到跨应用使用同一把锁的目的，默认启用。
+
+全局分布式锁仅用于跨领域间的锁的使用, 如营销、人力、财务三个领域需要共用同一把锁的场景，默认禁用。
+
+专业开发中大部分使用领域分布式锁场景，少数项目需要跨领域使用全局锁。
+
+注意：每个引擎可以作为一个单独的领域。
+
+领域锁配置
+
+使用yms-lock的应用必须配置yms.lock.redisClientCode，它的值为YMS控制台Redis客户端缓存【区域编码】：
+
+参数配置说明如下:
+
+配置参数	作用	说明
+yms.lock.redisClientCode	YMSLock使用的Redis对应的客户端缓存区域编码	必填，String类型
+yms.lock.globalLockTimeout	持有锁时长，超时会自动释放锁	可选，默认5min，单位毫秒，long类型
+yms.lock.globalGetLockTimeout	尝试获取锁时长，只对 lock() 方法生效	可选，默认10h，单位秒，int类型
+
+注意：禁止使用系统属性、环境变量或YMS控制台system级别配置项，否则会造成合并部署时多应用互相影响。
+
+全局锁配置
+
+全局使用reids连接池已在【公共配置】-【Redis】配置，默认客户端编码为ymsredislockclient，请勿更改。
+
+禁止使用系统属性、环境变量或YMS控制台system级别配置项，否则会造成合并部署时多应用互相影响。
+
+参数配置说明如下：
+
+配置参数	作用	说明
+yms.lock.globalLockEnabled	是否开启全局锁	15.4版本后默认注入，当同时存在领域锁和全局锁时，领域锁优先
+yms.lock.globalLockTimeout	持有锁时长，超时会自动释放锁	可选，默认5min，单位毫秒，long类型
+yms.lock.globalGetLockTimeout	尝试获取锁时长，只对 lock() 方法生效	可选，默认10h，单位秒，int类型
+接入方式及代码示例
+接入方式
+spring-boot集成
+import com.yonyou.iuap.yms.lock.YmsLockFactory;
+
+public class YmsLockFactoryDemo {
+    // 领域锁Factory优先级高，如果不指定bean名称，则优先领域锁。
+
+    // 领域锁Factory注入
+    @Resource(name = "ymsDomainYmsLockFactory")
+    private YmsLockFactory domainLockFactory;
+
+    // 全局锁Factory注入
+    @Resource(name = "ymsGlobalYmsLockFactory")
+    private YmsLockFactory globalLockFactory;
+}
+
+API方式集成
+领域锁
+
+通过YMSLockFactoryManager创建YmsLockFactory锁工厂，API接口代码示例：
+
+import com.yonyou.iuap.yms.lock.YMSLockFactoryManager;
+import com.yonyou.iuap.yms.lock.YmsLockFactory;
+
+public class YmsLockFactoryDemo {
+
+    String lockSpace = "p-i-pmd-p000-mpcf";
+    long globalLockTimeout = 300000L;
+    int globalGetLockTimeout = 36000;
+
+    // 示例一：
+    YmsLockFactory ymsLockFactory = YMSLockFactoryManager.getLockFactory(lockSpace);
+
+    // 示例二：
+    YmsLockFactory ymsLockFactory1 = YMSLockFactoryManager.getLockFactory(lockSpace, globalLockTimeout, globalGetLockTimeout);
+}
+
+
+参数说明：
+
+全局锁
+
+通过YMSLockFactoryManager创建YmsLockFactory锁工厂，API接口代码示例：
+
+import com.yonyou.iuap.yms.lock.YMSLockFactoryManager;
+import com.yonyou.iuap.yms.lock.YmsLockFactory;
+
+public class YmsLockFactoryDemo {
+
+    long globalLockTimeout = 300000L;
+    int globalGetLockTimeout = 36000;
+
+    // 示例一：
+    YmsLockFactory ymsLockFactory = YMSLockFactoryManager.getGlobalLockFactory();
+
+    // 示例二：
+    YmsLockFactory ymsLockFactory1 = YMSLockFactoryManager.getGlobalLockFactory(globalLockTimeout,
+            globalGetLockTimeout);
+}
+
+
+参数说明：
+
+YmsLock API
+
+Ymslock相关方法及参数说明如下：
+
+方法签名\参数	holdLockTimeout	getLockTimeout	含义	返回值	备注
+lock()	默认5min	10个小时	阻塞获取锁	boolean：加锁是否成功标识	方法已过时，不推荐使用
+tryLockOnce(long holdLockTimeout, TimeUnit unit)	参数 holdLockTimeout 决定	0秒，即只获取一次，拿不到就放弃	一次性获取锁	boolean：加锁是否成功标识	推荐使用
+tryLock()	默认5min	0秒，即只获取一次，拿不到就放弃	一次性获取锁	boolean：加锁是否成功标识	推荐使用
+tryLock(long getLockTimeout, TimeUnit unit)	默认5min	参数 getLockTimeout 决定	指定获取锁超时时长	boolean：加锁是否成功标识	推荐使用
+tryLock(long holdLockTimeout, long getLockTimeout, TimeUnit unit)	参数 holdLockTimeout 决定	参数 getLockTimeout 决定	指定持有锁时长和获取锁超时时长	boolean：加锁是否成功标识	推荐使用
+unLock()	无	无	释放锁	无	推荐使用
+isLocked()	无	无	lockKey是否加锁状态中本线程和其他线程的加锁都算加锁状态中	boolean：加锁是否成功标识	
+clearLock()	无	无	清除锁清除当前线程持有的该lockKey的锁，无论已经重入多少次无法清除当前线程其他lockKey的锁或其他线程持有的锁	无	
+getLockName()	无	无	获取锁名称	String：锁名称	
+
+参数说明：
+
+holdLockTimeout：获取到锁后最长持有锁时长，超时会自动释放，必须大于业务执行时间
+
+getLockTimeout：未拿到锁时等待获取锁最长时间，超时自动放弃获取锁
+
+unit：holdLockTimeout 和 getLockTimeout 的时间单位
+
+注意事项
+
+1、分布式锁不支持跨线程使用，跨线程后只能有一个线程加锁成功；
+
+2、要求加锁和解锁操作必须成对出现；
+
+3、针对业务数据加锁的情况（例如使用某条数据的ID作为lockKey），必须解锁，此场景所需锁的数量很多，不解锁，长期依赖看门狗的续期机制将导致看门狗续期出现异常。
+
+代码示例
+互斥锁
+
+互斥锁是一种同步机制，确保同一时刻仅有一个线程/进程访问共享资源，防止数据竞争和不一致，其核心操作包括 lock()加锁和 unlock()解锁。
+
+代码示例如下：
+
+package com.yonyou.ucf.mdf;
+
+import java.util.concurrent.TimeUnit;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import com.yonyou.iuap.yms.lock.YMSLockFactoryManager;
+import com.yonyou.iuap.yms.lock.YmsLock;
+import com.yonyou.iuap.yms.lock.YmsLockFactory;
+
+public class BusinessServiceImpl {
+
+    private static final Logger log = LoggerFactory.getLogger(BusinessServiceImpl.class);
+    String lockSpace = "p-i-pmd-p000-mpcf";
+    YmsLockFactory ymsLockFactory = YMSLockFactoryManager.getLockFactory(lockSpace);
+    public void executeBusinessLogic(String businessKey) {
+        YmsLock lock = ymsLockFactory.getLock(businessKey);
+        // 加锁是否成功标识
+        boolean isLocked = false;
+        try {
+            // 尝试加锁
+            isLocked = lock.tryLock(); // 默认获取到锁后，持有锁时间5min,尝试获取一次锁
+            // isLocked = lock.tryLock(10, TimeUnit.SECONDS); //
+            // 默认获取到锁后，持有锁时间5min,尝试获取锁时间10s
+            // isLocked = lock.tryLock(30, 10, TimeUnit.SECONDS); //
+            // 默认获取到锁后，持有锁时间30s,尝试获取锁时间10s
+            if (isLocked) {
+                // 执行业务逻辑
+                // 这里可以添加具体的业务逻辑代码
+            }
+        } catch (Exception e) {
+            // 记录异常日
+            log.error("加锁或执行业务逻辑时发生异常: " + e.getMessage());
+        } finally {
+            // 释放锁
+            if (isLocked) {
+                try {
+                    lock.unLock();
+                } catch (Exception e) {
+                    // 记录异常日志
+                    log.error("释放锁时发生异常: " + e.getMessage());
+                }
+            }
+        }
+    }
+}
+
+级联锁
+
+级联锁是一种在数据库系统、业务逻辑或分布式架构中广泛应用的机制，其核心思想是通过触发条件和规则，实现数据或操作的连锁反应，确保数据一致性、业务完整性或系统高可用性。​
+
+典型场景如：
+
+​数据关联维护：例如删除用户时，自动删除其所有订单记录
+
+​级联更新：主表字段更新后，子表相关字段同步更新（如订单价格调整影响历史账单）。
+
+代码示例如下：
+
+package com.yonyou.ucf.mdf;
+
+import java.util.Arrays;
+import java.util.concurrent.TimeUnit;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.yonyou.iuap.yms.lock.YMSLockFactoryManager;
+import com.yonyou.iuap.yms.lock.YmsLock;
+import com.yonyou.iuap.yms.lock.YmsLockFactory;
+import com.yonyou.iuap.yms.lock.YmsReadWriteLock;
+
+public class BusinessServiceImpl {
+
+    private static final Logger log = LoggerFactory.getLogger(BusinessServiceImpl.class);
+
+    String lockSpace = "p-i-pmd-p000-mpcf";
+
+    YmsLockFactory ymsLockFactory = YMSLockFactoryManager.getLockFactory(lockSpace);
+
+    public void executeBusinessLogic(String businessKey) {
+        // 级联锁中的锁1，lockKey1为业务key，根据业务自定义
+        YmsLock lock1 = ymsLockFactory.getLock("lockKey1");
+        // 级联锁中的锁2，lockKey2为业务key，根据业务自定义
+        YmsLock lock2 = ymsLockFactory.getLock("lockKey2");
+        // 级联锁中的锁3，lockKey3为业务key，根据业务自定义
+        YmsReadWriteLock readWriteLock = ymsLockFactory.getReadWriteLock("lockKey3");
+        YmsLock lock3 = readWriteLock.readLock();
+        // 构建级联锁，级联锁中包含锁1、锁2、锁3（级联锁可支持同时包含互斥锁、读锁、写锁）
+        YmsLock lock = ymsLockFactory.getMultiLock(Arrays.asList(lock1, lock2, lock3));
+        // 加锁是否成功标识
+        boolean isLocked = false;
+        try {
+            // 尝试加级联锁，内部如果锁1、锁2、锁3都加锁成功，则级联锁加锁成功，否则加锁失败
+            // （即锁1、锁2、锁3要么同时加锁成功，要么同时加锁失败，如果锁1、锁2加锁成功，锁3加锁失败，锁1、锁2会回退加锁状态并自动释放锁）
+            isLocked = lock.tryLock(); // 默认获取到锁后，持有锁时间5min,尝试获取一次锁
+            // isLocked = lock.tryLock(10, TimeUnit.SECONDS); //
+            // 默认获取到锁后，持有锁时间5min,尝试获取锁时间10s
+            // isLocked = lock.tryLock(30, 10, TimeUnit.SECONDS); //
+            // 默认获取到锁后，持有锁时间30s,尝试获取锁时间10s
+            if (isLocked) {
+                // 加锁成功，执行业务代码
+                // ...
+            }
+        } finally {
+            // 释放锁，内部会释放掉级联锁包含的所有锁，即锁1、锁2、锁3
+            if (isLocked) {
+                lock.unLock();
+            }
+        }
+    }
+}
+
+批次排他锁（pipeline模式）
+
+批次排他锁利用pipeline模式进行加锁，性能上比级联锁高10倍，该锁仅支持排他锁，仅支持非阻塞锁。
+
+代码示例：
+
+package com.yonyou.ucf.mdf;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.yonyou.iuap.yms.lock.YMSLockFactoryManager;
+import com.yonyou.iuap.yms.lock.YmsBatchLock;
+import com.yonyou.iuap.yms.lock.YmsLock;
+import com.yonyou.iuap.yms.lock.YmsLockFactory;
+import com.yonyou.iuap.yms.lock.YmsReadWriteLock;
+
+public class BusinessServiceImpl {
+
+    private static final Logger log = LoggerFactory.getLogger(BusinessServiceImpl.class);
+
+    String lockSpace = "p-i-pmd-p000-mpcf";
+
+    YmsLockFactory ymsLockFactory = YMSLockFactoryManager.getLockFactory(lockSpace);
+
+    public void executeBusinessLogic(String businessKey) {
+        List<String> keys = new ArrayList<>();
+        keys.add("abc");
+        keys.add("edf");
+        YmsBatchLock ymsBatchLock = ymsLockFactory.exclusivelyBatchLockWithPipeline(keys);
+        boolean getLock = false;
+        try {
+            getLock = ymsBatchLock.batchLock();
+            if (getLock) {
+                // 执行业务逻辑
+            }
+        } finally {
+            if (getLock) {
+                ymsBatchLock.unLock();
+            }
+        }
+
+    }
+}
+
+读写锁
+
+读写锁是一种用于多线程或分布式系统中协调共享资源访问的同步机制。其核心目标是提升并发性能，尤其是在读操作远多于写操作的场景中。
+
+代码示例如下：
+
+package com.yonyou.ucf.mdf;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.yonyou.iuap.yms.lock.YMSLockFactoryManager;
+import com.yonyou.iuap.yms.lock.YmsBatchLock;
+import com.yonyou.iuap.yms.lock.YmsLock;
+import com.yonyou.iuap.yms.lock.YmsLockFactory;
+import com.yonyou.iuap.yms.lock.YmsReadWriteLock;
+
+public class BusinessServiceImpl {
+
+    private static final Logger log = LoggerFactory.getLogger(BusinessServiceImpl.class);
+
+    String lockSpace = "p-i-pmd-p000-mpcf";
+
+    YmsLockFactory ymsLockFactory = YMSLockFactoryManager.getLockFactory(lockSpace);
+
+    public void executeBusinessLogic(String businessKey) {
+        // 获取读写锁YmsReadWriteLock
+        YmsReadWriteLock readWriteLock = ymsLockFactory.getReadWriteLock("lockKey");
+        // 写锁示例
+        // 用YmsReadWriteLock获取写锁
+        YmsLock writeLock = readWriteLock.writeLock();
+        // 写锁加锁是否成功标识
+        boolean isLocked = false;
+        try {
+            // 尝试加写锁
+            isLocked = writeLock.tryLock(); // 默认获取到锁后，持有锁时间5min,尝试获取一次锁
+            // isLocked = writeLock.tryLock(10, TimeUnit.SECONDS); //
+            // 默认获取到锁后，持有锁时间5min,尝试获取锁时间10s
+            // isLocked = writeLock.tryLock(30, 10, TimeUnit.SECONDS); //
+            // 默认获取到锁后，持有锁时间30s,尝试获取锁时间10s
+            if (isLocked) {
+                // 加锁成功，执行业务代码
+                // ...
+            }
+        } finally {
+            // 释放写锁
+            if (isLocked) {
+                writeLock.unLock();
+            }
+        }
+    }
+}        
+
+
+读锁示例
+
+// 读锁示例
+        // 用YmsReadWriteLock获取读锁
+        YmsLock readLock = readWriteLock.readLock();
+        // 读锁加锁是否成功标识
+        boolean isReadLocked = false;
+        try {
+            // 尝试加读锁
+            isReadLocked = readLock.tryLock(); // 默认获取到锁后，持有锁时间5min,尝试获取一次锁
+            // isReadLocked = readLock.tryLock(10, TimeUnit.SECONDS); //
+            // 默认获取到锁后，持有锁时间5min,尝试获取锁时间10s
+            // isReadLocked = readLock.tryLock(30, 10, TimeUnit.SECONDS); //
+            // 默认获取到锁后，持有锁时间30s,尝试获取锁时间10s
+            if (isReadLocked) {
+                // 加锁成功，执行业务代码
+                // ...
+            }
+        } finally {
+            // 释放读锁
+            if (isReadLocked) {
+                readLock.unLock();
+            }
+    }
+
+常见问题
+开启全局分布式锁
+
+问题：如何开启全局分布式锁？
+
+**答案：**如果业务应用确实使用到了跨领域的全局锁（比如财务和采购之间，财务和销售之间用了跨领域业务流 需要使用同一把锁避免并行任务，或者两个或以上应用使用了同一把锁避免并行执行），可以启用全局锁配置，否则没必要配置全局锁。
+
+启用全局锁的配置为：在YMS控制台Spring级别配置项或者application.yml/properties配置yms.lock.globalLockEnabled=true，禁止使用YMS控制台System级别配置项和环境变量、系统属性。
+
+定时任务只有一个进程执行
+
+问题：定时任务防止任务并发用了lock()方法，目的是希望只有一个进程执行
+
+**答案：**可以使用tryLock()只拿一次锁，获取锁失败返回false时不再执行业务，因不同机器可能时钟有几秒偏差或者业务可能在1秒内执行完毕，所以执行完业务后需要Thread.sleep(3000)防止第二个进程的定时任务获取到锁。示例代码如下：
+
+@Scheduled(cron = "0 0/30 * * * ?")
+    public void execute() {
+        String lockString = "ubpm-engine:tasktimeoutJob" + currentMinutes();
+        boolean getLock = false;
+        try {
+            getLock = lock.tryLock();
+            if (getLock) {
+                // 这里是获取锁后做的业务逻辑
+                executeJob();
+                TimeUnit.SECONDS.sleep(3); // 防止机器有秒级时钟偏差导致第二个进程获取到锁
+            }
+        } finally {
+            if (getLock) { // 如果获取到锁，则必须在finally块释放锁
+                lock.unLock();
+            }
+        }
+ }
+
+如何理解批次排它锁
+
+问题：如何理解批次排它锁？ 答案：一种针对批量操作的排他锁，锁定整批数据资源，防止其他事务干扰批量处理过程，如例如财务系统中月末批量结算时锁定待处理记录。
+
+全局分布式锁优先级
+
+问题：全局分布式锁和领域分布式锁谁的优先级高？
+
+**答案：**领域分布式锁的优先级高。
+
+执行业务异常如何解锁
+
+问题：在执行业务过程中出现异常，如何解锁？
+
+**答案：**业务异常要抛出，抛出后需要捕获异常手动解锁。
+
+文档内容是否对您有所帮助？
+为帮助文档评分：
+页内目录
+1. 概述
+1.1 适用场景
+1.2 业务场景
+1.3 关键词
+2. Maven依赖配置
+3. YMS配置
+3.1 锁类型
+3.2 领域锁配置
+3.3 全局锁配置
+4. 接入方式及代码示例
+4.1 接入方式
+4.1.1 spring-boot集成
+4.1.2 API方式集成
+4.1.3 YmsLock API
+4.1.4 注意事项
+4.2 代码示例
+4.2.1 互斥锁
+4.2.2 级联锁
+4.2.3 批次排他锁（pipeline模式）
+4.2.4 读写锁
+5. 常见问题
+5.1 开启全局分布式锁
+5.2 定时任务只有一个进程执行
+5.3 如何理解批次排它锁
+5.4 全局分布式锁优先级
+5.5 执行业务异常如何解锁
+文档反馈
+北京市海淀区北清路68号用友产业园
+4006-600-588
+友情链接
+用友官网用友YonHelp用友iuap平台用友云市场用友云注册协议隐私条款
+
+Copyright ©2020 用友网络科技股份有限公司版权所有京ICP备05007539号-24京公网安备11010802021935号
+
+返回顶部
+加载中...

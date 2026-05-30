@@ -1,0 +1,693 @@
+社区文档中心
+首页
+文档导航
+开发者社区
+社区论坛
+视频教程技术博客
+更多
+张宏涛
+资料中心
+专业开发
+产品概述
+快速入门
+操作指南
+开发指南
+开发介绍
+新功能开发
+移动端开发
+扩展开发
+全球化
+组织
+权限
+权限管理
+字段权限开发
+数据权限开发
+组织权限开发
+特征
+基础数据
+审批流
+业务流
+规则引擎
+公式
+UI模板
+参照
+导入导出
+打印
+对象建模
+编码规则
+调度任务
+监控与预警
+日志
+消息平台
+工作台
+事件中心
+文件服务
+YonBuilder应用开发
+前端开发
+后端开发
+移动开发
+安全
+数据库
+DevOps技术
+容器云技术
+区块链云技术
+YMS开发
+智能应用开发
+专项开发
+成果迁移
+技术方案
+最佳实践
+参考手册
+常见问题
+视频教程
+专业开发/开发指南/权限/数据权限开发
+数据权限开发
+最后更新时间：2025-04-27
+概述
+适用场景
+部署方案	开发类型	是否适用
+公有云	客户化定制开发	否
+私有云	客户化定制开发	是
+专属云	客户化定制开发	是
+公有云	ISV生态开发	否
+私有云	ISV生态开发	是
+专属云	ISV生态开发	是
+业务场景
+
+数据权限是权限管控的一种，在业务过程中，偶尔会出现主组织权限隔离后的业务数据过粗，需要进一步细化数据访问控制的情况。针对于该种情况，需要进一步细化权限的管控，业务开发人员可以通过在元数据上对业务字段增加标记，声明哪些字段需要进行数据权限的管控。数据权限的访问控制范围受限于主组织权限，不可逾越。
+
+数据权限同时支持根据用户和角色进行分配,推荐使用角色进行分配。数据权限的配置模型包含受控对象，管理维度和权限范围，描述了什么单据（受控对象）的什么字段（管理维度）按什么条件（权限范围）进行过滤。
+
+关键词
+
+专业版、开发、数据权限、角色、分配、授权
+
+名词解释
+管理维度
+
+管理维度以基础档案、核心档案为主，其余需要开放数据权限能力的档案需要通过注册过程才能发布出来。
+
+管理维度支持自定义档案，但需自定义档案执行管理维度发布才可使用。
+
+管理维度注册时必须提供独立参照，否则配置界面无法使用。
+
+管理维度需声明所属应用，配置时可按应用查找。
+
+受控对象
+
+受控对象基于元数据计算得来，只有打过数据权限标记的元数据才可以成为受控对象。
+
+受控对象包含受控字段，与管理维度项相对应，同样只有打过数据权限标记的字段才可以进行配置。
+
+受控对象支持多种受控场景配置，在元数据实体上配置，默认使用维护场景，如果只能看到维护场景，其他的编辑、审批等没有的话，说明领域单据并未对接，需要的话，直接给领域提需求；客开单据暂不支持，如需要找应用构建提需求。
+
+权限范围
+
+管控范围支持三种配置方式：档案清单、档案分类、领域自定义规则。
+
+档案清单配置方式，通过档案参照勾选固定数量的档案数据，保存后不会变化，且不会触发数据权限的定时调度计算任务。
+
+档案分类配置方式，通过档案关联的分类参照（例如客户分类）进行勾选，保存后因档案数据的分类信息会发生变化，因此数据权限提供了系统级的档案扫描调度计算任务，每5分钟执行一次。
+
+领域自定义规则配置方式，规则默认不支持参数，选择保存时进行一次规则计算，并将结果保存至user_auth_custom_refer_rule表和临时表中，此后数据权限提供了租户级的规则扫描调度计算，5分钟计算一次。客开单独注册的维度，支持参数（R5及以后），详见权限维度与范围扩展开发章节。
+
+应用层面来看，除权限范围中的“条件关系”设定外，不同数据权限行之间也存在运算关系：数据权限默认都是按用户（不区分用户配置，还是角色配置）视角计算的（CRM除外，按角色角度，多角色并集），呈现的效果如下：某个用户某个单据配置了某些数据权限，这些权限是按照维度分类的，同维度取并集，不同维度取交集。例如张三的销售订单，配置了5条权限，其中2条是客户维度的，3条是物料维度的，最后他的权限就是 客户 和 物料 取交集，客户和物料内部之间是并集。权限也支持多角色并集机制，即按角色视角计算。角色之间取并集；角色之内，不同维度取交集，同维度取并集（角色内计算逻辑与默认的用户视角是一样的）。不过多角色并集需要单独开通，具体原厂单据的，联系集团权限同事，客开单据的联系应用构建。
+
+如何区分当前单据走的是什么权限呢，可以通过诊断工具识别，方法参考数据权限查询章节。
+
+快速上手
+
+本小节简单介绍一个数据权限的开发配置过程，以部门字段为例，通过本小节大家可以了解如何对客开单据进行数据权限的配置。
+
+使用流程
+
+首先，对新建的业务对象勾选数据权限的业务场景，如下图所示：
+
+其后，我们需要声明对哪个字段进行数据权限的控制，这个步骤是通过在业务对象上增加标签的方式来实现的，如下图所示：
+
+注意：如果出现应用构建配置的引用参照不在权限维度范围内，可以在下面页面补充配置映射，数据权限类型，就填权限支持的 url , 组织： aa.baseorg.OrgMV，部门：bd.adminOrg.AdminOrgVO， 人员：bd.staff.StaffNew ，参照实体uri一定跟这里的对应上才行，直接搜索就行。例如组织字段编辑详细配置，如下图：
+
+第三步，需要在单据设计器上配置数据权限，如下图所示：
+
+第四步，可以是客户或者实施人员配置，在数据权限节点配置数据权限，如下图所示：
+
+数据权限受控对象展示：
+
+使用说明
+
+本章节主要讲述数据权限的过滤原理。
+
+YonBIP旗舰版的数据权限相关功能主要是在名称为“权限服务”的微服务中。其大致的工作流程是根据用户在数据权限节点进行的配置，从一个后台任务当中根据用户配置项，分析出对应的用户可见的数据有哪些，然后将对应的有权限的数据的主键插入到一张表中。
+
+当设置了数据权限的用户在进行相关单据的查询的时候，将会从上述的表中获取到用户有权限的数据主键，并且根据对应的主键进行数据的过滤操作。如下面这段语句所示，就是查询有权限的部门主键：
+
+(SELECT id AS "id" FROM auth_0.dataauth_string_cache WHERE table_name = 'auth_0.temp_perm_v2_1951602980418486279')
+
+若是列表查询的话，会在查询的SQL语句当中将上述SQL语句作为片段拼接进where条件当中。
+
+刷新缓存
+
+权限缓存清理：打开权限的诊断工具，按照如下操作清理当前租户的受控对象缓存。
+
+权限工具地址：
+
+https://域名/mdf-node/platform/api-function-search?locale=zh_CN&domainKey=u8c-auth&showCacheBtn=true，直接更改域名即可。搜索：auth:dataperm:ctrlentity:m7iw94zr，某个租户的受控对象，全部清理即可，注意m7iw94zr更换下具体的租户id。
+
+权限维度与范围扩展开发
+权限维度扩展
+扩展维度和参照
+
+如果在专属话环境，客户想要自己添加维度，并且只使用清单，如下图所示效果，首先找到权限的数据 iuap_apcom_auth，然后按照下面的实例sql,拼接自己的sql并保存入库即可。注意：
+
+ba_data_manager_refer：id 唯一long型，code和name根据实际情况自行定义，fullname为目标实体的entityuri, domain所属元数据上的服务域编码，bind_service_code可不填，application_code 为所属应用编码，在受控对象那体现为挂在那个目录下，micro_service_code,微服务编码，提供参照或计算规则的微服务编码（表里若没有这个字段，忽略即可），name_resid 多语标签，没有置空，old_id与id一致即可，其他字段默认或自行调整即可。
+
+ba_data_manager_refer_item：：id 唯一long型，code和name根据实际情况自行定义，field_name（参照被使用的值）一般就是ID，可根据实际调整，fullname与维度相同，manager_refer_id和old_manager_refer_id为维度的id,ref_code 为提供参照服务的编码（很重要），domain所属元数据上的服务域编码，name_resid 多语标签，没有置空，old_id与id一致即可，其他字段默认或自行调整即可。
+
+备注：这个是23年以后的盘，应该是330以后的脚本模式，如果实际不是这样的，按照实际环境调整一下脚本字段即可，相差不大。
+
+23年3月之前示例脚本：
+
+INSERT INTO ba_data_manager_refer(id, code, name, fullname, old_id, pubts, suggest_join_type, `domain`, bind_service_code, name_resid, disable, no_setting_auth_flag, tenant_id, remote_call_flag, ytenant_id, application_code)VALUES(2672052221219077, 'aa_department', '部门', 'bd.adminOrg.AdminOrgVO', 14, '2022-03-03 14:32:33', 'IN', 'ucf-org-center', 'GZTORG014', 'P_YS_PF_GZTSYS_0000012557', 0, 0, 0, 1, '0', 'GZTORG');INSERT INTO ba_data_manager_refer_item(id, code, name, fullname, field_name, manager_refer_id, old_manager_refer_id, manager_refer_code, old_id, pubts, ref_code, iContainsSub, tree_build_type, table_scan_type, `domain`, `filter`, item_entity_display_field, name_resid, trans_flag, item_entity_code_field, calc_type, refer_key_flag, ytenant_id)VALUES(2672053167657224, 'aa_department', '部门清单', 'bd.adminOrg.AdminOrgVO', 'id', 2672052221219077, 14, 'aa_department', 21, '2022-03-03 15:02:40', 'ucf-org-center.org_admin_dept_tree_ref', 0, NULL, 'INCREMENT', 'ucf-org-center', '{"isExtend":true,"simpleVOs":[{"field":"enable","op":"eq","value1":"1"},{"field":"dr","op":"eq","value1":"0"},{"field":"id","op":"neq","value1":"666666"}]}', NULL, 'P_YS_PF_GZTACT_0000025738', 0, NULL, NULL, 0, '0');
+
+
+23年3月之后的脚本，多一个微服务编码 micro_service_code :
+
+INSERT INTO ba_data_manager_refer(id, code, name, fullname, old_id, pubts, suggest_join_type, `domain`, bind_service_code, name_resid, disable, no_setting_auth_flag, tenant_id, remote_call_flag, ytenant_id, application_code,micro_service_code)VALUES(2672052221219077, 'aa_department', '部门', 'bd.adminOrg.AdminOrgVO', 14, '2022-03-03 14:32:33', 'IN', 'ucf-org-center', 'GZTORG014', 'P_YS_PF_GZTSYS_0000012557', 0, 0, 0, 1, '0', 'GZTORG','iuap-apcom-org');INSERT INTO ba_data_manager_refer_item(id, code, name, fullname, field_name, manager_refer_id, old_manager_refer_id, manager_refer_code, old_id, pubts, ref_code, iContainsSub, tree_build_type, table_scan_type, `domain`, `filter`, item_entity_display_field, name_resid, trans_flag, item_entity_code_field, calc_type, refer_key_flag, application_code,micro_service_code,ytenant_id)VALUES(2672053167657224, 'aa_department', '部门清单', 'bd.adminOrg.AdminOrgVO', 'id', 2672052221219077, 14, 'aa_department', 21, '2022-03-03 15:02:40', 'ucf-org-center.org_admin_dept_tree_ref', 0, NULL, 'INCREMENT', 'ucf-org-center', '{"isExtend":true,"simpleVOs":[{"field":"enable","op":"eq","value1":"1"},{"field":"dr","op":"eq","value1":"0"},{"field":"id","op":"neq","value1":"666666"}]}', NULL, 'P_YS_PF_GZTACT_0000025738', 0, NULL, NULL, 0, 'GZTORG','iuap-apcom-org', '0');
+
+刷新缓存
+
+脚本完成后，需要手动清理下缓存才能生效，如果只是租户级，加上租户id 。
+
+工具：https://域名/mdf-node/platform/api-function-search?locale=zh_CN&domainKey=u8c-auth&showCacheBtn=true，域名换成自己的redis地址：
+
+auth:dataperm:allBaManagerRefers* 和 auth:dataperm:allBaManagerRefersUnit*
+
+权限范围扩展（自定义计算规则）
+注册脚本
+
+如果客户还想要自己扩展规则，如下图所示，则在上节基础上，还需要再补充两个表。
+
+ba_data_refer_parameter：manager_refer_item_code很重要（ba_data_manager_refer_item表对应的编码），其他值按需调整即可，比如id、domain、多语、对应服务id等等，也可以参考维度默认带的清单，比如部门清单的配置，application_code 为所属应用编码，在受控对象那体现为挂在那个目录下，micro_service_code,微服务编码。
+
+ba_data_refer_custom_service：service_url自定义为微服务地址（服务实现可参照扩展实现规则接口小节），invoke_type 、interface_name默认就好，其他id、domain、多语自行处理,application_code 为所属应用编码，在受控对象那体现为挂在那个目录下，micro_service_code，微服务编码。
+
+规则带参数
+
+注意： （没有要求使用规则参数，忽略）如果是需要权限范围规则参数，则要在 ba_data_refer_custom_service 表中service_name4 字段上给上 这个值：{"paramValue":"ucf-org-center.org_admin_dept_tree_ref","fullName":"bd.adminOrg.AdminOrgVO","itemCode":"ucfbasedoc.bd_enterprisebankacct","itemEntityDisplayField":"","itemEntityCodeField":"","paramField":"deptIds"}，还有 表中 interface_name 中的要换成这个 com.yonyoucloud.uretail.sys.itf.custom.ICustomVersionAuthReferRpcZoneService 。
+
+paramValue 就是参照编码；fullname 就是参数实体的，如果使用的是权限系统自带的维度对应的参照，可以去ba_data_manager_refer_item中查找就好。entityurl ,itemCode 为 系统预置维度的 ba_data_manager_refer_item 中的编码，deptIds 这个自己定义。同时 ba_data_refer_parameter 表中param_value字段上，给上文中 paramValue 的一样值，还有一点格外注意下，需要这个参数时，要确保ba_data_refer_parameter 主键id和ba_data_refer_custom_service主键id一样。
+
+23年3月之前示例脚本：
+
+INSERT INTO ba_data_refer_parameter(id, old_id, tenant_id, `domain`, pubts, param_code, param_name, param_name2, param_name3, param_name4, param_name5, param_name6, param_explain, param_def_value, param_value, param_type, service_id, old_service_id, service_code, manager_refer_item_code, ytenant_id)VALUES(2671904402804995, 11, 0, 'ucf-org-center', '2022-03-03 15:19:03', 'orgcenter_dept_01', '本人负责的部门', 'Department in charge', '本人負責的部門', NULL, NULL, NULL, '本人负责的部门', NULL, NULL, 'SERVICE', 2671904402804995, 12, 'orgCenterDeptRule', 'aa_department', '0');INSERT INTO ba_data_refer_custom_service(id, old_id, tenant_id, service_code, service_name, service_name2, service_name3, service_name4, service_name5, service_name6, service_explain, service_type, service_url, invoke_type, `domain`, pubts, ytenant_id, interface_name)VALUES(2671904402804995, 12, 0, 'orgCenterDeptRule', '本人负责的部门', NULL, NULL, NULL, NULL, NULL, '本人负责的部门', 'CUSTOM_RULE', 'rpc://ucf-org-center@c87e2267-1001-4c70-bb2a-ab41f3b81aa3/deptInChargeRule', 'RPC', 'ucf-org-center', '2022-03-03 15:24:43', '0', 'com.yonyoucloud.uretail.sys.itf.custom.ICustomVersionRuleAuthReferService');
+
+
+23年3月之后示例脚本，多了 micro_service_code 和 application_code :
+
+INSERT INTO ba_data_refer_parameter(id, old_id, tenant_id, `domain`, pubts, param_code, param_name, param_name2, param_name3, param_name4, param_name5, param_name6, param_explain, param_def_value, param_value, param_type, service_id, old_service_id, service_code, manager_refer_item_code, application_code,micro_service_code,ytenant_id)VALUES(2671904402804995, 11, 0, 'ucf-org-center', '2022-03-03 15:19:03', 'orgcenter_dept_01', '本人负责的部门', 'Department in charge', '本人負責的部門', NULL, NULL, NULL, '本人负责的部门', NULL, NULL, 'SERVICE', 2671904402804995, 12, 'orgCenterDeptRule', 'aa_department', 'GZTORG','iuap-apcom-org','0');INSERT INTO ba_data_refer_custom_service(id, old_id, tenant_id, service_code, service_name, service_name2, service_name3, service_name4, service_name5, service_name6, service_explain, service_type, service_url, invoke_type, `domain`, pubts, ytenant_id, interface_name,application_code,micro_service_code)VALUES(2671904402804995, 12, 0, 'orgCenterDeptRule', '本人负责的部门', NULL, NULL, NULL, NULL, NULL, '本人负责的部门', 'CUSTOM_RULE', 'rpc://ucf-org-center@c87e2267-1001-4c70-bb2a-ab41f3b81aa3/deptInChargeRule', 'RPC', 'ucf-org-center', '2022-03-03 15:24:43', '0', 'com.yonyoucloud.uretail.sys.itf.custom.ICustomVersionRuleAuthReferService','GZTORG','iuap-apcom-org');
+
+刷新缓存
+
+脚本完成后，需要手动清理下缓存才能生效，通过工具，同维度缓存清理过程。
+
+工具：https://域名/mdf-node/platform/api-function-search?locale=zh_CN&domainKey=u8c-auth&showCacheBtn=true，域名换成自己的redis地址：
+
+23年 3月之前的盘：
+
+auth:dataperm:allBaReferParameters* 和 auth:dataperm:allBaReferCustomServices*
+
+23年3月后的盘：
+
+auth:dataperm:baReferCustomServices:{0}和auth:dataperm:baReferParameters:{0}
+
+使用以上内容进行清理。
+
+扩展接口实现规则
+引入api包
+
+版本以项目上使用的为准，如果有了，就忽略，引入依赖内容参考 API服务章节。
+
+示例代码
+
+注意，用户租户信息一定从参数中取，不能从上下文。特殊场景实现，需要规则参数的，当需要权限规则参数时，要实现以下接口：
+
+com.yonyoucloud.uretail.sys.itf.custom.ICustomVersionAuthReferRpcZoneService
+
+下方实例参数也要改下 ： CustomAuthExtContent
+
+具体代码如下：
+
+import com.yonyoucloud.uretail.sys.auth.CustomAuthContent;import com.yonyoucloud.uretail.sys.auth.CustomAuthRuleResponse;import org.springframework.stereotype.Service;import java.util.Date;import java.util.HashSet;import java.util.Set;@Servicepublic class XxxCustomVersionRuleAuthReferService implements ICustomVersionRuleAuthReferService {@Overridepublic CustomAuthRuleResponse getValues(CustomAuthContent content) throws Exception {//营销租户主键Long yxyUserId = content.getYxyUserId();//营销租户主键Long yxyTenantId = content.getYxyTenantId();//友互通用户主键String yhtUserId = content.getYhtUserId();//友互通租户主键String yhtTenantId = content.getYhtTenantId();//日期版本Date version = content.getVersion();CustomAuthRuleResponse customAuthRuleResponse = new CustomAuthRuleResponse();Set<String> idSet = new HashSet<>();//业务逻辑....idSet.add("abc");//业务是否成功完成boolean isSuccess = true;if (isSuccess) {customAuthRuleResponse.setiSuccess(true);customAuthRuleResponse.setVersion(new Date());customAuthRuleResponse.setValues(idSet);} else {customAuthRuleResponse.setiSuccess(false);customAuthRuleResponse.setFailMessage("失败信息");customAuthRuleResponse.setVersion(new Date());}return customAuthRuleResponse;}}
+
+注册微服务
+
+在项目或工程的启动类中，注册上边的服务。只需要修改setAppCode和 setAlias值即可，AppCode为领域自己的微服务名，如果不知道，可以观察启动项目时，如下图所示的appId值：
+
+setAlias为脚本中，service_url中的最后/后边的内容，比如service_url 为
+
+rpc://ucf-org-center@c87e2267-1001-4c70-bb2a-ab41f3b81aa3/deptInChargeRule，setAlias就应该为deptInChargeRule，也就是领域本地实现的这个ICustomVersionRuleAuthReferService接口的服务类名称，但首字母小写，以实际情况为准即可：
+
+@Beanpublic RemoteCallInfo initUpcCustomAuthRule(){RemoteCallInfo rci = new RemoteCallInfo();rci.setAppCode("productcenter");rci.setNameSpace("c87e2267-1001-4c70-bb2a-ab41f3b81aa3");注意，如果上边使用了 ICustomVersionAuthReferRpcZoneService，下面这里也要替换rci.setClassName(ICustomVersionAuthReferRpcZoneService.class.getName());rci.setClassName(ICustomVersionRuleAuthReferService.class.getName());rci.setAlias("upcDeptTestCustomAuthRule");((IRemoteCallInfoManagerService)MwLocator.lookup(IRemoteCallInfoManagerService.class)).regRemoteCall(rci);return rci;}
+
+手动调试
+
+https://域名/mdf-node/platform/api-function-search?locale=zh_CN&domainKey=u8c-auth&showCacheBtn=true
+
+打开这个调试工具，域名自己更改即可，然后按照下图找到自己的新加的任务，正常结果是这个，如果有问题，f12, 看返回信息即可：
+
+如果这里看不到你的任务，检查下脚本中，租户id是不是0，然后在用权限工具清理下缓存：
+
+auth:dataperm:baReferParameters
+
+auth:dataperm:baReferCustomServices
+
+auth:dataperm:allBaManagerRefers
+
+增加调度任务
+
+客开的规则，一般是单独的服务和领域，所以需要增加一个领域级的调度任务（如果是系统自带的领域下扩展，比如人力，组织部门、CRM等，则不需要，因为已经存在调度任务，可以忽略这一步）。租户管理员登录，打开调度任务，找到权限管理，右侧新建任务，如下图所示：
+
+打开新增页面，按实际情况配置租户级调度任务即可。这里主要domain要与扩展脚本中一致，另外记得配置定时规则。
+
+如果一起正常，开调度任务后，数据权限那配置成规则，就可以正常生效了。
+
+权限范围扩展（档案分类）
+
+如下图所示，需要在权限范围内，清单级别同层次，扩展出一个分类扫描，即按照某个分类，计算目标维度值：
+
+下面以人员为例，扩展前：
+
+注册脚本
+
+ba_data_manager_refer_item：扩展表是这个，辅助信息查询，查出信息，备用，下面模版中可以直接用到部分查询结果：
+
+select * from ba_data_manager_refer_item r WHERE NAME LIKE '%人员%';
+
+
+模版，23年的盘，可能需要跟上文脚本一样，补充应用和微服务编码字段信息：
+
+INSERT INTO ba_data_manager_refer_item (id,code,name,fullname,field_name,manager_refer_id,old_manager_refer_id,manager_refer_code,old_id,pubts,ref_code,`iContainsSub`,tree_build_type,table_scan_type,`domain`,`filter`,item_entity_display_field,name_resid,trans_flag,item_entity_code_field,calc_type,refer_key_flag,ytenant_id) VALUES (1519935995068284936,'bd_staff_dept','所在部门','org.func.AdminOrg', 'dept_id', 2672052221219076,13,'bd_staff', 1519935995068284936,'2022-08-10 23:02:40','ucf-org-center.org_admin_dept_tree_ref',0,NULL, 'INCREMENT','ucf-staff-center',NULL,NULL,NULL,0,NULL,NULL,0,'0000KS75E9XB887QWZ0000');
+
+
+Id主键，保证唯一，code和name自行按需命名即可，fullname为档案分类的entityuri(fullname)，例如人员维度中，要添加按部门分类扫描计算人员，这里就填人员所用的部门的fullname.field_name，为分类在人员维度中的元数据字段名，可以在下图1中查看，这里的分类，使用部门作为示例。manager_refer_id,old_manager_refer_id,manager_refer_code，这个三个值，参照人员清单.old_id因为新增，所以与id保持一致即可.ref_code 分类参照编码，必须能够访问到。当前维度的domain 领域编码，name_resid 多语标签.ytenant_id，如果是所有租户都要用，则给'0'，否则就是指定租户。
+
+刷新缓存
+
+以上准备好sql后，插入数据库，然后需要手动清理下缓存，才可以显示出来。清缓存步骤如下：
+
+第一，打开权限工具：（也可以直接清理全部的维度信息）
+
+https://域名/mdf-node/platform/api-function-search?locale=zh_CN&domainKey=u8c-auth&showCacheBtn=true，域名更换自己的就行。
+
+第二，按照下图，提取租户的营销云id
+
+第三，按照下图清理缓存，auth:dataperm:allBaManagerRefers2383307465773312
+
+2383307465773312 为第二步查到的：
+
+3）效果展示
+
+清理完缓存之后，在数据权限页面，再打开人员维度，即可看到多出一个所属部门
+
+打开部门展示的参照信息
+
+增加扫描任务
+
+手动增加系统级档案分类扫描任务。
+
+第一，访问地址：https://域名/iuap-apcom-scheduler/warning/#/taskmanagedev/ ，域名自行更换即可，找到权限目录，点击新建任务。如果地址不行，使用最新的地址：
+
+https://域名/iuap-apcom-scheduler/ucf-wh/bpaas-dispatch-fe/index.html#/taskmanagedev/?noIframe=false 。
+
+第二，如下图所示，创建任务，这俩参数基本就够了，按照实际的来即可，类型选择 档案变动扫描（异步）
+
+设置执行规则，可周期性执行，自行设置即可，如下图：
+
+如果配置都正确的话，应该出现如下的效果：
+
+数据权限查询
+
+具体使用了哪些数据权限，可通过运行时的监控面板查询到。
+
+查询界面所在地址：
+
+https://域名/mdf-node/platform/api-function-search?locale=zh_CN&domainKey=u8c-auth&showCacheBtn=true
+
+找到监控面板，如下图所示：
+
+点击右侧开启录制
+
+打开单据，点击查询按钮
+返回监控工具，查看是否获取到监控信息，有这个接口 batchGetDataPermission，表示是默认的权限，不是多角色并集，如下图：
+
+如果有接口 batchGetDataPermissionGroup 表示多角色并集的权限，如下图：
+
+标品特征数据权限
+
+通过特征分配的方式进行标准产品扩展开发的场景中，特征数据权限开发可参考以下方案进行。基于特征的标品扩展开发过程可参考标品扩展开发在线文档，这些特征字段需要注意：特征类型选择基础档案时，组织、部门和人员(数字化建模-组织管理下)，一定要选择权限支持的，组织：aa.baseorg.OrgMV，部门： bd.adminOrg.AdminOrgVO， 人员：bd.staff.StaffNew ，参照实体uri一定跟这里的对应上才行。
+
+打权限标签
+
+在业务对象设计器，给目标单据实体新增的特征字段，打权限标签。给单据增加完特征字段后，还需要打权限标签，具体操作如下，菜单搜索“业务对象”，打开，然后按照下图找到才特征分配到的节点，如下图所示。编辑这个实体，找到实体属性性，自定义项下边增加的那个特征字段，选中，点击右侧的标签按钮，打数据权限标签，如下图：
+
+打完标签之后的效果如下图：
+
+最后修改完成，发布一下，如下图：
+
+再清理下缓存，如下图：
+
+分配数据权限
+
+在数据权限页面，给单据的特征字段配置数据权限，正常情况下，按照打标签后，再打开数据权限，选择新增加的档案维度，这里受控对象就应该看到上文新增的实体了， 例如客户档案，也能看到受控字段就是新增加的特征字段，如下图：
+
+如果看不到分配的数据权限受控的字段，需要进行缓存刷新，操作方法和前面提到的刷新缓存方法一致，请求工具地址：
+
+https://域名/mdf-node/platform/api-function-search?locale=zh_CN&domainKey=u8c-auth&showCacheBtn=true
+
+把地址域名换成现场的，然后打开权限工具，按照图打开缓存管理，输入下面键值：0000L7PISMYKARJ3MC0000为友互通租户ID，GZTBDM为目标单据所属应用编码，这俩都以实际为准，搜索到后，删除即可，auth:dataperm:ctrlentity:0000L7PISMYKARJ3MC0000:GZTBDM，如下图：
+
+验证效果
+
+在单据页面，验证数据权限效果，打开单据，客户档案，没有配置权限前，如下图：
+
+给原有数据增加特征值，如下图：
+
+然后配置数据权限，如下图：
+
+配置数据权限后，刚才修改的数据，特征值，不在权限范围内，所以不会显示。这里只显示业务线条字段为空或者为“生产”的数据，管理员增加—zz01就是生产，满足权限要求，如下图：
+
+制单人权限
+
+本人只能看到自己创建或属于自己的单据数据，此时就需要进行制单人权限开发，具体开发过程参考下面章节。
+
+制单人字段开发
+
+制单人字段在平台中对应的是员工，对应的实体URI 为 bd.staff.StaffNew 。根据实际的需求进行开发，如果是新功能开发，创建实体时候添加制单人字段，类型为单选引用，引用的实体为员工bd.staff.StaffNew ；如果是标品扩展开发，参考标品特征数据权限章节进行特征类型为基础档案，引用为员工bd.staff.StaffNew的开发与分配 。
+
+分配数据权限
+
+在数据权限页面，给单据的特征字段配置数据权限，选择新增加的档案维度，这里受控对象就应该看到上文新增的实体了，例如客户分类档案，也能看到受控字段就是新增加的特征字段。
+
+权限管理维度
+
+维度选择【人员新】，如下图：
+
+打开受控对象就可以看到制单人了，如下图：
+
+权限范围
+
+权限范围选择 【本人】规则，如果这里看不到，https://域名/mdf-node/platform/api-function-search?locale=zh_CN&domainKey=u8c-auth&showCacheBtn=true，把域名换成现场的，然后打开权限工具，按照图打开缓存管理，输入下面键值：0000L7PISMYKARJ3MC0000为友互通租户ID，GZTBDM为目标单据所属应用编码，这俩都以实际为准，搜索到后，删除即可，auth:dataperm:ctrlentity:0000L7PISMYKARJ3MC0000:GZTBDM ，如下图：
+
+调度任务开启
+
+确认员工调度任务开启，专属化环境中，搜索【调度任务】，打开 （公有云不需要，有默认任务执行，一般需要等5分钟左右），如下图：
+
+进入任务管理，搜索【员工-自定义规则集计算】，如下图：
+
+如果是关闭状态，点击右侧详情，进入里边，打开启用开关，如下图：
+
+然后保存即可，然后再点击下立即执行，如下图：
+
+结果如下，表示基本执行成功，如下图：
+
+验证效果
+
+在单据页面，验证数据权限效果。制单人为空或者是本人的数据是符合条件能看到的数据范围。打开单据，客户分类档案，没有配置权限前，新增一个数据，第一条不是本人的单单据，如下图：
+
+然后配置数据权限，如下图：
+
+配置数据权限后，刚才修改的数据（第一条），特征值，不在权限范围内，所以不会显示，满足权限要求，如下图：
+
+自动填充制单人
+
+如果这个制单人不想手动选择，可以通过ui模版配置自动填充，当单据需要使用人员维度作为受控字段，并且单据要求只能看到自己创建的单据，即自己是业务员，申请人等，这个时候，客户偶尔会希望，新增数据时，这个字段自动补充，不需要编辑，不需要填写等，此时，可以利用应用构建自带的公式设计器实现，卡片页面，找到对应参照，右侧下方有一个设置公式按钮，可进行配置，如下图：
+
+打开公式设置弹框，这里有很多公式，自己按需使用即可，这里主要使用了业务函数中的getvalues，作用是根据上下文当前用户，查询对应的员工信息，比如id，然后把返回值给到对应的字段即可 getValue('bd.staff.Staff','id','user_id',userId()) ，如下图：
+
+如果是不可编辑等其他控制，请在上一个页面，找到对应控制按钮就可。
+
+深入理解
+
+数据权限会针对于权限的配置生成一张临时表，并且在临时表当中插入用户有权限的数据主键，在进行有数据权限的查询时会从表中提取有权限主键并进行过滤操作。
+
+时序图
+
+相关时序图如下所示：
+
+临时表特征
+
+数据权限的临时表管理有以下几个特征：
+
+一、临时表的重算时机：数据权限保存以及删除时、定时任务重算所有非清单类别的权限维度。
+
+二、临时表命名方式：以雪花算法生成表名。
+
+三、临时表数据管理：重算后新的数据插入到临时表中，重算不创建新的临时表；删除管理维度会触发临时表的删除操作。
+
+列表态查询操作的过程当中如果配置了数据权限，那么框架提供的查询接口将会使用数据权限过滤对应的数据。
+
+列表态查询的过程在com.yonyou.ypd.bill.controller.YpdBillController#list方法当中，该方法通过com.yonyou.ypd.bill.action.query.BillListQueryAction类实现查询逻辑，数据查询调用com.yonyou.ucf.mdd.ext.dao.meta.MetaDaoHelper#queryByPage(com.yonyou.ucf.mdd.ext.model.BillContext, org.imeta.orm.schema.QuerySchema, java.util.List<org.imeta.orm.schema.QueryField>, java.util.List<java.lang.String>)，该方法执行数据库查询前会处理数据权限，调用com.yonyou.ucf.mdd.ext.dao.meta.crud.QuerySchemaExecutor#handleDataPermission方法。
+
+API服务
+
+数据权限提供了若干接口供业务人员调用，开发场景中如果需获取相关数据权限信息，可调用数据权限SDK中的接口获取具体的数据。
+
+数据权限SDK
+
+在进行数据权限获取的操作之前，首先需要注意以下几点内容：
+
+通过RPC调用的方式，需要首先引入权限的SDK，通过在pom.xml中加入如下的依赖项：
+
+R6版本为：
+
+<dependency>
+<groupId>com.yonyou</groupId>
+<artifactId>iuap-ap-auth-sdk</artifactId>
+</dependency>
+
+
+R5及以前为：
+
+<dependency>
+<groupId>com.yonyou</groupId>
+<artifactId>auth-permission-sdk</artifactId>
+</dependency>
+
+API使用方式
+
+数据权限提供的API主要是IDataPermissionService接口，获取到该接口有以下两种方式：
+
+通过Spring中注册的方式，示例代码如下：
+@SpringBootApplication(exclude = {RedisAutoConfiguration.class, DataSourceAutoConfiguration.class})
+@ComponentScan(basePackages = {"com.yonyou","com.yonyoucloud"},scopedProxy= ScopedProxyMode.NO)
+public class TestSimpleApplication {
+public static void main(String[] args) {
+SpringApplication.run(TestSimpleApplication.class, args);
+}
+// 重点看这里
+@Beanpublic static RPCBeanFactory irisService() {
+List<String> servs = new ArrayList<>();
+servs.add("com.yonyoucloud.uretail.sys.pubItf.IDataPermissionService");
+//servs.add("com.yonyoucloud.uretail.sys.pubItf.IFuncPermissionService");
+return new RPCBeanFactory("u8c-auth","c87e2267-1001-4c70-bb2a-ab41f3b81aa3",servs);
+}}
+
+在需要调用的地方获取对应对象的实例，如下列代码所示：
+RPCStubBeanFactory rpChainBeanFactory = new RPCStubBeanFactory("u8c-auth","c87e2267-1001-4c70-bb2a-ab41f3b81aa3", null, IDataPermissionService.class);
+rpChainBeanFactory.afterPropertiesSet();
+IDataPermissionService remoteBean = (IDataPermissionService) rpChainBeanFactory.getObject();
+
+批量获取数据权限，根据用户查询数据权限范围（不返回values）
+
+方法：List getUserDataPermissions(DataPermissionRequestDto requestDto)
+
+功能：批量获取数据权限，根据用户查询数据权限范围
+
+调用： List resDto =
+
+AuthSdkFacadeUtils.getUserDataPermissions(requestDto);
+
+参数：DataPermissionRequestDto 中，变量复数形式，表示多维度查询，例如entityUris，其他复数参数与entityUris一一对应
+
+返回：每个DataPermissionResponseDto 就表示一个实体的数据权限信息
+
+代码示例如下：
+
+public void getDataPerm() throws Exception {
+DataPermissionRequestDto requestDto = new DataPermissionRequestDto();
+String [] entityUris = {"sfa.clue.Clue"};
+requestDto.setEntityUris(entityUris); 
+// 实体的uri，即fullname
+requestDto.setSysCode("SFA");
+// 实体所属应用编码
+String [] fieldArgs = {"dept"}; 
+// 元数据实体字段
+requestDto.setFieldNameArgs(fieldArgs);
+// 指定查某个字段，可以不传，查实体的全部受控字段
+requestDto.setYxyUserId("2603881060624896"); // 营销云用户id，可不填，使用上下问题
+requestDto.setYxyTenantId("2601058755186944");// 营销云租户id，可不填，使用上下问题
+List<DataPermissionResponseDto> res = AuthSdkFacadeUtils.getUserDataPermissions(requestDto);
+System.out.println("查询成功："+res.toString());
+}
+
+
+返回结果，如下：
+
+结果的json格式化（与上文不是一起的，但格式一致）：dataPermissionMapList 和resultDtos是一样的结果，自行选择使用。entityUri 为输入的参数，比如线索，也就是数据权限配置中的受控实体；resultDtos中fullname，是参照字段对应的元数据实体fullname，比如客户档案，也就是数据权限配置中的维度；fieldName，线索实体中参照属性的名称，也就是受控字段；columnName与fieldName对应的数据库中列名。tableName 临时表，查询的数据，都在这个表里，拼接sql时，直接使用tableName，避免in导致的数量过多问题，splitTableNames 是多个临时表单独分开。
+
+获取某个单据数据权限，根据用户查询数据权限范围（返回values，2.0.4以上支持）
+
+方法：DataPermissionResponseDto getUserDataPermission(DataPermissionRequestDto requestDto)
+
+功能：获取某个实体数据权限，根据用户查询数据权限范围
+
+调用：DataPermissionResponseDto resDto =
+
+AuthSdkFacadeUtils.getUserDataPermission(requestDto);
+
+参数：DataPermissionRequestDto 中，entityUri，只支持查询一个实体
+
+返回：每个DataPermissionResponseDto 实体的数据权限信息
+
+代码示例如下：
+
+public void getDataPerm() throws Exception {DataPermissionRequestDto requestDto = new DataPermissionRequestDto();requestDto.setEntityUri("aa.merchant.Merchant");requestDto.setSysCode("GZTBDM");// 实体所属应用编码/* String [] fieldArgs = {"dept"};requestDto.setFieldNameArgs(fieldArgs);// 指定查某个字段，可以不传，查实体的全部受控字段*/requestDto.setYxyUserId("1530104922737999877");requestDto.setYxyTenantId("2910033146761808");requestDto.setHaveDetail(true); // 是否返回valuesDataPermissionResponseDto res = AuthSdkFacadeUtils.getUserDataPermission(requestDto);System.out.println("查询成功："+res.toString());}
+
+
+返回结果如下：
+
+[{"haveDetail": false,"entityUri": "aa.merchant.Merchant","dataPermissionMapList": [{"fieldName": "id","values": ["2929312323242342342342342"],"noAuthFlag": false,"fullname": "aa.merchant.Merchant","columnName": "id","tableName": "(select id from auth_0.dataauth_long_cache where table_name = 'auth_0.temp_perm_v2_i_1495073013491040266')","entityTableName": "merchant","splitTableNames": ["(select id from auth_0.dataauth_long_cache where table_name = 'auth_0.temp_perm_v2_i_1495073013491040266')"]}],"resultDtos": [{"fieldName": "id","columnName": "id","values": ["2929312323242342342342342"],"fullname": "aa.merchant.Merchant","tableName": "(select id from auth_0.dataauth_long_cache where table_name = 'auth_0.temp_perm_v2_i_1495073013491040266')","entityTableName": "merchant","noAuthFlag": false,"splitTableNames": ["(select id from auth_0.dataauth_long_cache where table_name = 'auth_0.temp_perm_v2_i_1495073013491040266')"]}],"splitTableNameList": ["(select id from auth_0.dataauth_long_cache where table_name = 'auth_0.temp_perm_v2_i_1495073013491040266')"]}]
+
+RPC调用参数说明
+
+RPC调用时token处理和用户、租户参数说明。
+
+对于mdd框架下，直接调用rpc接口，通常是有上下文的，所以此时不用特别管租户token，入参可以不传用户和租户信息；
+
+对于非mdd，如果能拿到友互通token, 则需要在调用权限rpc服务之前，设置token，保证rpc调用能把token传递到权限这边（见下文示例）；反之，拿不到友户通token，则必须在参数中添加yxyUserId和yxyTenantId，例如 "yxyUserId":"2697492840503808", "yxyTenantId":"2383307465773312"。
+
+使用示例
+
+代码如下：
+
+package com.yonyou.iuap.auth.test.support;import com.yonyou.cloud.middleware.iris.IBeforeInvoke;import com.yonyou.cloud.middleware.iris.RemoteInvocation;import com.yonyou.cloud.middleware.rpc.RPCRequest;import com.yonyou.cloud.plugin.InvokeChain;import com.yonyou.cloud.plugin.InvokeRequest;import com.yonyou.cloud.plugin.InvokeResponse;import com.yonyou.iuap.context.InvocationInfoProxy;
+/**本地实现插件**/
+public class TestBeforeInvokeRpcPlugin implements IBeforeInvoke {@Overridepublic void run(InvokeRequest invokeRequest, InvokeResponse invokeResponse, InvokeChain invokeChain) {try {RPCRequest rpcRequest = invokeRequest.getRequest(RPCRequest.class);RemoteInvocation remoteInvocation = rpcRequest.getRemoteInvocation();String rpcToken = InvocationInfoProxy.getParameter("rpcToken");if (rpcToken!=null){remoteInvocation.addAttribute("rpcToken",rpcToken);}else {rpcToken = (String) InvocationInfoProxy.getExtendAttribute("rpcToken");if (rpcToken!=null){remoteInvocation.addAttribute("rpcToken",rpcToken);}}} finally {invokeChain.run(invokeRequest, invokeResponse, invokeChain);}}@Overridepublic int order() {return 1;}@Overridepublic String getPluginName() {return "TestBeforeInvokeRpcPlugin";}}
+
+问题1
+
+数据权限的权限诊断系统地址是什么？
+
+答案：数据权限诊断系统用于权限查询、数据权限缓存管理、自定义服务调试等功能，专属化地址为：
+
+${域名}/mdf-node/platform/api-function-search?locale=zh_CN&domainKey=u8c-auth 或
+
+${域名}/mdf-node/platform/api-function-search?locale=zh_CN&domainKey=u8c-auth&showCacheBtn=true
+
+问题2
+
+数据权限中，业务对象配置完成以后，在数据权限的受控对象当中看不到如何处理？
+
+答案：该问题分为以下几方面的原因：元数据的所属应用和工作台上是一致的；业务对象增加数据权限的业务场景，业务对象上对应字段是否添加数据权限管控；清理元数据缓存；清除权限缓存，通过访问-对应域名/mdf-node/platform/api-function-search?locale=zh_CN&domainKey=u8c-auth&showCacheBtn=true并删除auth:dataperm:ctrlentity相关缓存，等待五分钟后重试。
+
+问题3
+
+数据权限过滤未生效的原因是什么？
+
+答案：从以下几方面分析：
+
+单据设计器对应页面是否勾选了数据权限控制；
+
+数据权限通过后台任务定时同步，所以需要等待几分钟再去查看。
+
+数据权限节点，受控对象是否包含自己定义的业务对象：如果是全部应用那么可以支持数据权限，如果不是全部应用需要着重看下受控对象中是否包含自己的业务对象。
+
+对于数据权限，我们需要检查下IUAP_APDOC_COREDOC.pub_ref表当中的bauth字段，分为以下两种情况：
+
+bauth为0表示走针对于业务对象的数据权限；
+
+bauth为1表示走针对于参照档案本身的数据权限；
+
+例如开发一个单据个人申请单，其上有一个项目参照，如果项目的bauth=1，则打开参照，不会走个人申请单配置的数据权限，而是直接走项目自己的权限，如果项目的bauth=0，则会走个人申请单配置的项目数据权限。
+
+问题4
+
+如何查看某次档案加载或者业务单据查询是否走了数据权限？
+
+答案：通过权限诊断系统进行监控，访问${域名}/mdf-node/platform/api-function-search?locale=zh_CN&domainKey=u8c-auth&showCacheBtn=true进入权限监控系统；通过监控面板并且点击开始录制，界面操作对应功能查看是否有数据权限查询接口的返回。
+
+问题5
+
+数据权限配置找不到对应的单据，该怎么处理？
+
+答案：首先，检查选择的维度是否正确，在维度正确的情况下检查对应的单据是添加数据权限标识，并检查对应的单据列表是否勾选上了数据权限。
+
+问题6
+
+制单人权限配置完，数据权限不生效，该怎么处理？
+
+答案：这种情况，一般是扩展的特征，选择的人员（员工）不对，检查确认下一定是 bd.staff.StaffNew 。
+
+文档内容是否对您有所帮助？
+为帮助文档评分：
+页内目录
+1. 概述
+1.1 适用场景
+1.2 业务场景
+1.3 关键词
+1.4 名词解释
+2. 快速上手
+2.1 使用流程
+2.2 使用说明
+2.3 刷新缓存
+3. 权限维度与范围扩展开发
+3.1 权限维度扩展
+3.1.1 扩展维度和参照
+3.1.2 刷新缓存
+3.2 权限范围扩展（自定义计算规则）
+3.2.1 注册脚本
+3.2.2 刷新缓存
+3.2.3 扩展接口实现规则
+3.2.4 手动调试
+3.2.5 增加调度任务
+3.3 权限范围扩展（档案分类）
+3.3.1 注册脚本
+3.3.2 刷新缓存
+3.3.3 增加扫描任务
+4. 数据权限查询
+5. 标品特征数据权限
+5.1 打权限标签
+5.2 分配数据权限
+5.3 验证效果
+6. 制单人权限
+6.1 制单人字段开发
+6.2 分配数据权限
+6.2.1 权限管理维度
+6.2.2 权限范围
+6.2.3 调度任务开启
+6.3 验证效果
+6.4 自动填充制单人
+7. 深入理解
+7.1 时序图
+7.2 临时表特征
+8. API服务
+8.1 数据权限SDK
+8.2 API使用方式
+8.3 RPC调用参数说明
+8.4 使用示例
+8.5 问题1
+8.6 问题2
+8.7 问题3
+8.8 问题4
+8.9 问题5
+8.10 问题6
+文档反馈
+北京市海淀区北清路68号用友产业园
+4006-600-588
+友情链接
+用友官网用友YonHelp用友iuap平台用友云市场用友云注册协议隐私条款
+
+Copyright ©2020 用友网络科技股份有限公司版权所有京ICP备05007539号-24京公网安备11010802021935号
+
+返回顶部
+加载中...

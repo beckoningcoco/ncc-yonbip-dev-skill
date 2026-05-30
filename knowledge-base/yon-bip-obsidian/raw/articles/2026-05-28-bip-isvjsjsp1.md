@@ -1,0 +1,405 @@
+HTTP请求 yms-http 实践
+最后更新时间：2025-06-12
+概述
+适用场景
+部署方案	开发类型	是否适用
+公有云	客户化定制开发	是
+私有云	客户化定制开发	是
+专属云	客户化定制开发	是
+本地部署	客户化定制开发	是
+公有云	ISV生态开发	是
+私有云	ISV生态开发	是
+专属云	ISV生态开发	是
+本地部署	ISV生态开发	是
+业务场景
+
+本文介绍了yms-httpclient SDK的功能、使用场景，包括如何通过Maven引入依赖包、创建yms-httpclient对象、发送GET和POST请求的步骤，以及适配YmsHttp拦截器操作。
+
+应用场景
+
+客开或者生态项目中经常需要使用后端脚手架调用外系统对外暴露的http接口做数据交互。比如：获取外系统的基础档案信息、将本系统的业务数据同步到外系统。
+
+统一使用yms-httpclient优势
+便利性
+
+用户改造yms-httpclient后，以后就不用关心底层实现（okhttp、httpclient等)，也不用关心后续okhttp、httpclient版本的更新迭代。
+
+这些都会由yms-httpclient进行适配，二方包对版本进行统一的管理。yms-httpclient的配置也会通过yms进行管理。
+
+功能上
+
+1、支持在yms控制台进行可视化配置
+
+2、支持上下文参数(yms-api InvocationInfoProxy)传递
+
+后续功能：
+
+1、支持监控调用指标
+
+2、支持链路追踪
+
+3、yms-Http配置的热更新
+
+4、共享连接池
+
+.......
+
+性能上
+
+关键词
+
+同步调用、异步调用、get请求、post请求、拦截器、外系统
+
+专业名词术语
+
+外系统：除本系统以外的系统统称
+
+同步调用：在同步调用中，调用者发出调用请求后，会一直等待被调用的接口执行完成并返回结果，然后才能继续执行后续的代码。就像打电话，拨打电话后，需要等待对方接听并完成通话后，才能进行其他事情。
+
+异步调用：异步调用中，调用者发出调用请求后，不会等待被调用的接口执行完成，而是继续执行后续的代码。被调用的函数或方法会在后台独立执行，当执行完成后，通过回调函数、事件通知等方式将结果返回给调用者。类似于发送短信，发送后可以立即去做其他事情，当对方回复短信时，再处理相关信息。
+
+拦截器：基于面向切面编程（AOP）的思想实现的。它会在调用接口前，调用接口后、排序的某个关键执行点插入自定义的逻辑。当调用接口执行到这些关键节点时，拦截器会被触发，执行相应的处理逻辑，处理完成后再继续执行原本的程序流程。
+
+导入yms-httpclient的pom（非必须）
+
+注意：（最新的脚手架有此依赖，如果您的脚手架没有此依赖，可以自行引入）
+
+1、推荐使用二方包管理的版本，不用自己指定版本 (要求二方包版本6.5.0-SNAPSHOT以上）
+
+2、如果没有使用二方包管理版本，或者二方包版本低于6.5.0的，可以指定版本为1.0.4-SNAPSHOT以上的版本的。
+
+<dependency>
+<groupId>com.yonyou.iuap </groupId>
+<artifactId>yms-http-starter</artifactId>
+</dependency>
+
+创建yms-httpclient客户端
+
+严禁动态创建yms-httpclient实例，应该使用@Bean方式，或者应用自身维护的单例实例。否则将造成线程飙升的问题
+
+yms控制台配置YMS-HTTP
+
+1、在YMS控制台对应应用的YMS-HTTP模块下添加Http客户端，操作步骤如下图： 切记配置完成后要发布配置文件
+
+2、YmsHttpClient实例已经由spring创建好了，所以使用如下代码直接注入即可： 注意此处的YmsHttpClient是读取的YMS-HTTP的配置
+
+@RestController
+@RequestMapping("/post")
+public class PostController {
+
+@Autowired
+@Qualifier("cghtjgj")
+private YmsHttpClient client;
+
+}
+
+spring bean自定义创建
+
+1、配置一个YmsHttpClient的bean.
+
+自yms-httpclient：6.3.0-SNAPSHOT，iuap-2nd-party：7.9.0-SNAPSHOT以后，推荐方式改为依赖ymsHttpConfig的bean。beanName为在YMS控制台配置的YMS-HTTP的编码_configBean，如 cghtjgj_configBean
+
+注1：未来httpclient的实例创建将不再依赖spring，因此在YMS控制台配置的yms-http客户端，若相同编码的bean不存在，则自动创建ymsHttpClinet；若存在，则创建code_configBean，需要用户依赖configBean并set到自己的httpclient中，代码示例如下：
+
+注2：YMS控制台仅支持超时时间等简单配置，其他复杂配置还是需要本地配置，因此推荐依赖configBean配置。特别注意，required=false
+
+@Configuration
+public class MyJellyfishConfig {
+private final static Logger logger = LoggerFactory.getLogger(MyJellyfishConfig.class);
+
+@Bean(name = "自己创建的bean名称，比如:cghtjgj")
+public YmsHttpClient ymsHttpClient(@Qualifier("cghtjgj_configBean") @Autowired(required = false) YmsHttpConfig config) {
+if (config == null) {
+config = new YmsHttpConfig();
+}
+SslContext context;
+try {
+context = SslContextBuilder.forClient().build();
+} catch (SSLException e) {
+throw new RuntimeException(e);
+}
+config.setSslContext(context);
+logger.info("在demo中，得到的yms-http config bean [{}]", config);
+return new YmsHttpClient(config);
+}
+
+}
+
+
+2、通过@Autowired注解注入bean使用
+
+@Slf4j
+@RestController
+@RequiredArgsConstructor
+@RequestMapping("/get")
+public class GetController {
+
+@Autowired
+@Qualifier("cghtjgj")
+private YmsHttpClient client;
+
+private final static Logger logger = LoggerFactory.getLogger(GetController.class);
+
+private String requestUrl = "三方接口地址";
+
+@GetMapping("/testGet")
+public String testGet() throws YmsHttpException, IOException {
+
+String result = null;
+
+try {
+YmsHttpResponse ymsHttpResponse = client.get(requestUrl);
+result = ymsHttpResponse.getBodyString();
+} catch (Exception e) {
+logger.error("The YmsHttp call 'execute' method failed because of the Exception!", e);
+}
+
+return result;
+}
+
+}
+
+yms-httpclient请求调用
+
+注意：使用YmsHttpResponse获取body时推荐使用getBodyString()方法获取结果，然后自行反序列化成实体
+
+同步调用
+
+get请求
+String result = null;
+// 方式一, 无添加body和header需求
+try {
+YmsHttpResponse ymsHttpResponse = client.get(requestUrl);
+result = ymsHttpResponse.getBodyString();
+} catch (Exception e) {
+logger.error("The YmsHttp call 'execute' method failed because of the Exception!", e);
+}
+// 方式二, 执行相应execute()方法
+try {
+YmsHttpResponse ymsHttpResponse = client.execute(requestUrl,
+YmsHttpMethod.GET, null, null);
+result = ymsHttpResponse.getBodyString();
+} catch (Exception e) {
+logger.error("The YmsHttp call 'execute' method failed because of the Exception!", e);
+}
+// 方式三, 先构建同步GET请求, 再执行execute(YmsHttpRequest request)方法
+YmsHttpRequest request = new YmsHttpRequestBuilder().url(requestUrl).method(YmsHttpMethod.GET).build();
+try {
+YmsHttpResponse ymsHttpResponse = client.execute(request);
+result = ymsHttpResponse.getBodyString();
+} catch (Exception e) {
+logger.error("The YmsHttp call 'execute' method failed because of the Exception!", e);
+}
+
+
+post请求
+
+请求体为byte[]
+
+String result = null;
+HashMap requestMap = new HashMap<>();
+requestMap.put("code", "G0001");
+String body = JSON.toJSONString(requestMap);
+YmsHttpHeader ymsHttpHeader = new YmsHttpHeader();
+ymsHttpHeader.add("Content-Type", "application/json;charset=utf-8");
+
+try {
+YmsHttpResponse ymsHttpResponse = client.execute(requestUrl, YmsHttpMethod.POST,
+body.getBytes(StandardCharsets.UTF_8), ymsHttpHeader);
+result = ymsHttpResponse.getBodyString();
+} catch (Exception e) {
+logger.error("The YmsHttp call 'execute' method failed because of the Exception!", e);
+}
+
+
+请求体为YmsHttpMultipartEntity
+
+String result = null;
+File file = new File("C:\\Users\\Administrator\\Desktop\\新建文本文档.txt");
+YmsHttpMultipartEntity entity = YmsHttpMultipartEntityBuilder.create()
+.setContentType(YmsHttpContentType.MULTIPART_FORM)
+.addFileBody("files", file)
+.build();
+YmsHttpHeader header = new YmsHttpHeader();
+
+YmsHttpRequest request = new YmsHttpRequestBuilder().url(requestUrl).method(YmsHttpMethod.POST)
+.multipartEntity(entity).addHeader(header).build();
+try {
+YmsHttpResponse ymsHttpResponse = client.execute(request);
+result = ymsHttpResponse.getBodyString();
+} catch (Exception e) {
+logger.error("The YmsHttp call 'execute' method failed because of the Exception!", e);
+}
+
+异步调用
+
+get请求
+@GetMapping("/testAsyncGet")
+public String testAsyncGet() throws YmsHttpException, IOException {
+
+// 回调接口
+YmsHttpCallback<YmsHttpResponse> callback = new YmsHttpCallback<YmsHttpResponse>() {
+String response;
+
+// 异步执行成功后执行的方法
+@Override
+public void onSuccess(YmsHttpResponse result) {
+response = result.getBodyString();
+}
+
+// 异步执行失败后执行的方法
+@Override
+public void onFailure(Throwable ex) {
+
+}
+};
+
+String result = null;
+YmsHttpFuture<YmsHttpResponse> future;
+
+// 方式一, 执行相应asyncExecute()方法
+try {
+future = client.asyncExecute(requestUrl, YmsHttpMethod.GET, (byte[]) null, null);
+YmsHttpResponse ymsHttpResponse = future.get();
+result = ymsHttpResponse.getBodyString();
+System.out.println("执行成功结果：" + result);
+} catch (Exception e) {
+logger.error("The YmsHttp call 'execute' method failed because of the Exception!", e);
+}
+
+// 方式二, 先构建异步GET请求, 再执行asyncExecute(YmsHttpRequest request)方法
+try {
+YmsHttpRequest request = new YmsHttpRequestBuilder().url(requestUrl).method(YmsHttpMethod.GET).build();
+future = client.asyncExecute(request, callback);
+
+YmsHttpResponse ymsHttpResponse = future.get();
+result = ymsHttpResponse.getBodyString();
+System.out.println("执行成功结果：" + result);
+} catch (Exception e) {
+logger.error("The YmsHttp call 'execute' method failed because of the Exception!", e);
+}
+
+return result;
+}
+
+适配YmsHttp拦截器
+实现YmsHttpInterceptor拦截器接口
+
+YmsHttpInterceptor介绍：该接口提供了三个方法,
+
+方法一 ：interceptRequest方法是在requst请求执行前调用，可以在该方法中对request进行处理。
+
+方法二：interceptResponse方法是在request请求执行后调用，可以在该方法中对返回结果response进行处理。
+
+方法三：order方法是排序方法，值越小优先级越高
+
+public class MyInterceptor implements YmsHttpInterceptor {
+
+@Override
+public void interceptRequest(YmsHttpRequest request) {
+String url = request.getUrl();
+System.out.println("执行前的url:"+url);
+}
+
+@Override
+public void interceptResponse(YmsHttpRequest request, YmsHttpResponse response) {
+String url = request.getUrl();
+System.out.println("执行后的url:"+url);
+}
+
+@Override
+public int order() {
+return 80;
+}
+
+}
+
+将实现的YmsHttpInterceptor类加入到拦截器中
+
+调用YmsHttpRequestBuilder的addInterceptors()方法将自己实现的拦截对象加入到拦截器中，这样自己定义的拦截器才会生效。
+
+YmsHttpRequest request = new YmsHttpRequestBuilder().url(requestUrl).method(YmsHttpMethod.GET)
+.addInterceptors(Lists.newArrayList(new MyInterceptor())).build();
+try {
+YmsHttpResponse ymsHttpResponse = client.execute(request);
+result = ymsHttpResponse.getBodyString();
+} catch (Exception e) {
+logger.error("The YmsHttp call 'execute' method failed because of the Exception!", e);
+}
+
+常见问题
+问题：Connection reset by peer
+
+必现，连接被关闭，检查请求的header是否有重复
+
+问题：yms-http deserialization failed
+
+不推荐依赖yms-http进行反序列化，可通过response.getBodyString() 拿到body后自行反序列化
+
+问题：java.lang.IllegalStateException: Closed
+
+排查下代码里是否调用了com.yonyou.iuap.yms.http.YmsHttpClient#close方法
+
+问题：unable to find valid certification path to requested target
+
+可参考如下示例代码绕过验证
+
+X509TrustManager tm = new X509TrustManager() {
+public X509Certificate[] getAcceptedIssuers() {
+return null;
+}
+public void checkClientTrusted(X509Certificate[] xcs, String str) {
+
+}
+public void checkServerTrusted(X509Certificate[] xcs, String str) {
+
+}
+};
+
+SslContext sslContext = SslContextBuilder.forClient().trustManager(tm).build();
+YmsHttpConfig config = new YmsHttpConfig();
+config.setSslContext(sslContext);
+
+问题：简强合并部署环境rest请求返回400
+
+原因是请求header过大，yms-http-starter 8.2.0及以上版本已修复
+
+报错环境需打二三方补丁AP-patch-8886，可在YPR制品仓库搜索下载
+
+问题：java.nio.charset.IllegalCharsetNameException: utf-8, gbk
+
+返回的response header中携带了多个charset, 可在取body时指定下编码，如：response.getBodyString(StandardCharsets.UTF_8)
+
+问题：Required request body is missing
+
+检查请求的Content-Type是否正确
+
+问题：server端接收不到数据
+
+如类似上述请求server端接不到数据， 可在请求header中添加 "Content-Type", "multipart/form-data"
+
+问题：文件上传名称不正确
+
+尝试在Content-Type中指定下编码，将下图标红处代码修改成 setContentType(YmsHttpContentType.create("multipart/form-data", StandardCharsets.UTF_8))
+
+问题：method may not be null
+
+检查下代码里构建请求的地方传入的method是否为null
+
+问题：TooManyConnectionsException
+
+必现且问题不恢复，排查下日志中是否有端口超出范围的报错 （三方包存在包bug, 2nd 8.2.0版本已修复）
+
+确保调用的地址正确
+
+问题：sever接收到的参数值重复
+
+确认下请求的url中是否多拼了请求参数
+
+问题：Request-URI Too Large
+
+确认请求参数是否太长，构建request时可使用addFormParam方法代替addQueryParm方法
+
+问题：415 Unsupported Media Type
+
+检查请求的Content-Type是否正确

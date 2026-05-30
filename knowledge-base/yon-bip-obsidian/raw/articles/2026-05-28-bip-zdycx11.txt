@@ -1,0 +1,656 @@
+社区文档中心
+首页
+文档导航
+开发者社区
+社区论坛
+视频教程技术博客
+更多
+张宏涛
+资料中心
+专业开发
+产品概述
+快速入门
+操作指南
+开发指南
+开发介绍
+新功能开发
+移动端开发
+扩展开发
+全球化
+组织
+权限
+特征
+基础数据
+审批流
+业务流
+规则引擎
+公式
+UI模板
+参照
+导入导出
+打印
+对象建模
+编码规则
+调度任务
+监控与预警
+日志
+消息平台
+工作台
+事件中心
+文件服务
+YonBuilder应用开发
+前端开发
+后端开发
+iuap-开发规范红皮书
+后端编程模型
+R6后端脚手架升级方案
+R6后端脚手架升级操作指南
+R6后端脚手架二方包坐标变更清单
+分布式锁 yms-lock 实践
+RPC接口开发与调用（iris）
+数据库操作 yms-jdbc 实践
+HTTP请求 yms-http 实践
+上下文开发实践
+线程池 yms-executors 实践
+移动开发
+安全
+数据库
+DevOps技术
+容器云技术
+区块链云技术
+YMS开发
+智能应用开发
+专项开发
+成果迁移
+技术方案
+最佳实践
+参考手册
+常见问题
+视频教程
+专业开发/开发指南/后端开发/上下文开发实践
+上下文开发实践
+最后更新时间：2025-05-26
+概述
+适用场景
+部署方案	开发类型	是否适用
+公有云	客户化定制开发	否
+私有云	客户化定制开发	是
+专属云	客户化定制开发	是
+本地部署	客户化定制开发	是
+公有云	ISV生态开发	否
+私有云	ISV生态开发	是
+专属云	ISV生态开发	是
+本地部署	ISV生态开发	是
+业务场景
+
+在开发中通过工具类获取上下文环境变量，各环境微服务拦截器恢复上下文，通过工具类切换上下文跨租户处理相关业务。
+
+关键词
+
+上下文、InvocationInfoProxy、上下文保留的25个具体值、YMS上下文Filter配置、跨租户生单
+
+使用上下文的意义和平台提供的API
+接入上下文的意义
+
+接入上下文后访问上下文发生在JVM内，替代了频繁访问Redis数据库恢复上下文，整体性能提示10%-50%。提供隔离API避免了产生上下文脏数据产生。统一平台和领域上下文使用规范。
+
+上下文保留的25个具体值
+分类	属性名	数据类型	长度	属性含义	说明	是否invocation新增	是否运行期可更改	是否敏感
+租户信息	tenantid	String	22	租户ID		原有	否	是
+	yxyTenantid	String	22	营销云租户ID	营销云兼容适配(严明)	新增	否	是
+	providerid	String	36	ISV id	开发者中心使用	原有	否	是
+用户信息	userid	String	36	用户id		原有	否	是
+	userType	String	1	用户类型	友户通返回给MDD，AppContext设置	新增		是
+	enterpriseUserId	String	36	企业用户id	友户通增加，企业用户id，从第三方进入，集成第三方的id	新增	否	是
+	username	String	50	用户名		原有	否	是
+身份信息	docId	String	19	档案id	保留	新增	否	是
+	docType	String	1	档案类型		新增	否	是
+	identityId	String	19	营销云用户ID，long	身份id(identityId)	新增	否	是
+国际化	locale	String	5	语种		原有	否	否
+	theme	String	1	主题		原有	否	否
+	timezone	String	3	时区		原有	否	否
+	language			当前语种	parameter方式增加	新增		
+	languages			语种列表	parameter方式增加	新增		
+	multilingualFlag		1	当前租户是否开启多语	工作台新增开关，提升效率用	新增	否	否
+Token类	token	String		token	兼容iuap3.x系列，保留一段时间	原有	否	否
+	yhtAccessToken		251	友户通token		新增	否	否
+组织信息	orgId	String	36	组织id	当前组织id，单组织下唯一	新增	是	否
+	defaultOrg	String	36	默认组织id	工作台默认组织，制单页面	新增	否	否
+	isSingleOrg	Boolean	1	是否单组织		新增	否	是
+其他	businessDate	String	10	业务日期（2022-03-15）	工作台首选项中设置的业务日期，默认是当前时间	新增	否	是
+	newArch	String	10	是否新架构	parameter方式增加	新增	是	否
+	productLine	String	20	产品线	parameter方式增加	新增	是	否
+登录信息	logints	String	20	登录时间戳		原有	否	是
+线程内（REQUEST范围）上下文使用
+
+request范围的上下文只对当前线程生效，在发起http、rpc请求时不向下游传递此上下文内容，在发起新线程时也不会传递到子线程内。
+
+API使用：
+
+设置当前线程的request属性键值：
+
+com.yonyou.iuap.context.InvocationInfoProxy.setExtendAttribute(key,value)
+
+获取当前线程的request属性值：
+
+com.yonyou.iuap.context.InvocationInfoProxy.getExtendAttribute(key)
+
+上下文的线程间传递和切换
+
+UserExecutors: 用于前台请求的异步执行，会自动复制登录用户的上下文到回调中, 上下文令牌会随着用户登出失效。 异步API：Future<?> future = UserExecutors.executeInDetachedThread(executorService, runnable); UserOTTExecutors: 用于后台任务的异步执行，会自动复制登录用户的上下文到子线程, 上下文令牌15小时后失效，不受用户登出影响， 可以切换到和登录用户绑定的另一个租户上下文(默认是登录用户所选租户上下文)。 同步API：Future<?> future = UserOTTExecutors.executeInCurrentThread(runnable, invocationBizBuilder); 异步API：Future<?> future = UserOTTExecutors.executeInDetachedThread(executorService, runnable, invocationBizBuilder); RobotExecutors: 用于后台任务的异步执行时根据租户ID生成上下文，生成的上下文携带默认用户上下文(原机器人用户) 同步API：RobotExecutors.runAs("$tenantId", callable); 异步API：RobotExecutors.runAs("$tenantId", callable, executorService);
+
+租户分库
+
+大部分情况下领域数据需要按照租户ID分库，YMS会根据上下文中的租户ID选择DataSource获取数据Connection, 需要保证在操作数据库时有上下文，上下文来源于YmsContextFilter 或YMS三类Executors的恢复 不需要分库的特殊场景（如Quartz）需要备案，在审批后可以新建一个关闭了租户路由的逻辑数据源，将不需要分库的业务指向此逻辑数据源。 需要遍历所有数据场景，提供了以下API：根据逻辑数据源编码和查询SQL执行业务逻辑 T[] result = new FededrateQuery（String logicDatasourceCode, String query).setParameter（...）.execute（ResultSetExtractor extractor); 根据逻辑数据源下的每个物理数据源DataSource或Connection对象执行业务逻辑 T[] result = new FederateOperator(String logicDatasource).query((datasource/connection)->{ // 业务逻辑}); 遍历逻辑数据源执行有事务的业务 List<FededrateResult> resultList = new FederateOperator(String logicDatasource).setPlatformTransactionManager(transcationManger).runWithTransaction(()->{}); List<FededrateResult> resultList = new FederateOperator(String logicDatasource).setPlatformTransactionManager(transactionManager).executeWithTransaction(ExecutorService executorService,()->{});
+
+InvocationInfoProxy变化
+
+进程间上下文传递 1.统一使用YMS提供的YmsContextFilter和各类YmsExecutors写入上下文 2.原InvocationInfoProxy.setXxx()API删除了，只保留了25个上下文只读API 3.业务自定义上下文使用参数传递替代
+
+YMS上下文Filter配置
+
+默认情况下，YmsContextFilter会根据前端或后端请求恢复上下文，拦截路径规则如下
+
+受保护的URL:
+
+说明：如果请求携带的令牌过期或无效，前台请求返回302重定向到登录页, 后端请求401；如果令牌有效，会恢复上下文。
+默认值：/*
+配置键：yms.session.contextFilterPatterns
+配置方式：默认不配置时的值是 /*，如需配置请配置在应用的配置项中（spring类型配置项），配置值需要符合servlet filter的url-pattern, 支持/xxx/*或*.xxx两种形式(不是正则)。如配置多个，使用英文逗号分隔。
+
+白名单：
+
+说明：不拦截不恢复上下文的URL
+
+配置键及默认值如下：
+
+// 按照正则排除不需要恢复上下文路径 新的正则需要带上原来默认正则
+
+yms.session.ymsSessionWhite= ^.*(/ping/?)$
+
+// 按照后缀排除不需要恢复上下文路径 以;分割
+
+yms.session.whiteListSuffixs= .css;.js;.jpg;.png
+
+// 包含方式：以;分割。例："/ping/;health"
+
+yms.session.whiteListContain=
+
+配置方式：如需覆盖默认值请配置在应用的配置项中（spring类型配置项）。
+
+灰名单：
+
+说明：恢复上下文但在恢复失败时(比如YhtAccessToken校验非法) 需要放过的URL：
+
+配置键：正则方式：yms.session.greyListRegex
+
+后缀方式：yms.session.greyListSuffixs,
+
+包含方式：yms.session.greyListContain
+
+配置键及示例如下，默认配置均为空
+
+// 按照正则排除yms.session.greyListRegex=^.\*(/ping/?)$
+// 按照后缀排除 以;分割
+yms.session.greyListSuffixs=.css;.js;.jpg;.png;.ttf;.ico;.html;.jsx;.gif
+// 包含方式：以;分割
+yms.session.greyListContain=/ping/;health
+
+
+配置方式：默认值为空，如需覆盖默认值请配置在应用的配置项中（spring类型配置项）。
+
+健康检查URL：
+
+1：如果使用应用自定义健康检查URL，需要将应用健康检查URL加入白名单
+2：如果使用yms rpc的健康检查URL，用于检查yms rpc是否启动， 格式为： http://ip:port/${ctx}/CloudRemoteCall/ ，注意最后的斜线不能去掉，已经默认加入了白名单
+
+3：如果使用yms 的健康检查URL，用于检查spring容器是否启动，格式为：http://ip:port/${ctx}/yms/healthcheck ，已经默认加入了白名单
+
+获取ClientIP：
+
+com.yonyou.iuap.context.InvocationInfoProxy#getExtendAttribute(ContextConstans.X_FORWARDED_CLIENTIP);
+
+A00字段：
+
+Tenantid, YxyTenantid, Providerid, Userid, UserType, EnterpriseUserId, Username, DocId, DocType, IdentityId, IsSingleOrg, BusinessDate, Logints, YhtAccessToken, ProductLine
+
+线程间传递上下文
+
+业务测对线程的使用通常有两种场景,
+
+场景一 : 响应用户界面请求, 如通过forkjoin加速查询并返回结果到前端界面, 这时候使用当前用户的线程上下文即可.
+
+场景二: 执行后台任务,如导入场景, 这种情况是用户执行执行时立即返回用户成功, 并且进入后台执行, 如果使用用户的token将面临用户注销后token失效的问题, 需要更换一次性OTToken进行执行
+
+YMS对这两种场景进行了包装,
+
+针对场景1：响应用户前台界面请求
+
+注意：以下三种方案(3.6.1.x)任选其一，不要叠加使用
+
+使用YMS线程池
+
+YMS 线程池 组件设计_v0.2.docx
+YMS线程池默认复制主线程的当前上下文到线程内，应用在Runnable 的run() 或Callable的 call() 实现中使用InvocationInfoProxy.getXxx() API获取上下文的提交任务时的主线程上下文一致，无需使用包装器包装Runnable或Callable对象。
+
+private ExecutorService ymsExecutor = YmsExecutors.getYmsExecutor();  
+@Test
+public void testYmsExecutor() {
+Runnable runnable = () -> {
+logger.info("上下文中的 租户id:{}, 用户id:{}", InvocationInfoProxy.getTenantid(),
+InvocationInfoProxy.getUserid());
+};
+ymsExecutor.execute(runnable);
+Callable<String> callable = () -> {
+logger.info("上下文中的 租户id:{}, 用户id:{}",
+InvocationInfoProxy.getTenantid(),
+InvocationInfoProxy.getUserid());
+return "result";
+};
+Future<String> future = ymsExecutor.submit(callable);
+Assert.assertEquals(future.get(), "result");
+}
+
+使用YMS包装自定义线程池
+
+领域、平台应用使用原有自定义线程池创建线程，需要在声明应用线程池时使用YMS上下文API包装线程池，禁止在提交任务时包装线程池。
+
+包装线程池示例：
+
+private ExecutorService appExecutor = YmsContextWrappers.wrap(Executors.newFixedThreadPool(10));
+@Test
+public void testAppExecutor() {
+Runnable runnable = () -> 
+logger.info("上下文中的 租户id:{}, 用户id:{}",
+InvocationInfoProxy.getTenantid(),
+InvocationInfoProxy.getUserid());
+};
+appExecutor.execute(runnable);
+Callable<String> callable = () -> {
+logger.info("上下文中的 租户id:{}, 用户id:{}",
+InvocationInfoProxy.getTenantid(),
+InvocationInfoProxy.getUserid());
+return "result";
+};
+Future<String> future = ymsExecutor.submit(callable);
+Assert.assertEquals(future.get(), "result");
+}}
+
+使用UserExecutors执行新线程
+
+**API说明：**基于当前用户会话令牌并复制当前用户上下文到一个新线程中执行
+
+**API组件：**session-sdk
+
+API: UserExecutors.executeInDetachedThread(ExecutorService es, Runnable userTask) UserExecutors.executeInDetachedThread(ExecutorService es, Callable<T> task)
+
+API 参数：
+
+参数名	java类型	说明
+es	ExecutorService	应用或YMS线程池
+task	Callable或Runnable	需要执行的任务，在任务中可以获取和登录用户相同的上下文
+
+API 使用示例：
+
+Runnable runnable = (() -> {
+Assert.assertEquals(tenantId, InvocationInfoProxy.getTenantid());
+Assert.assertEquals(userId, InvocationInfoProxy.getUserid());
+logger.info("业务使用 tenantId:{} userId:{}", InvocationInfoProxy.getTenantid(), InvocationInfoProxy.getUserid());
+});
+Future<?> future = UserExecutors.executeInDetachedThread(executorService, runnable);
+
+针对场景2 : 后台任务操作
+使用UserOTTExecutors执行
+
+用于用户登录后提交的任务在用户登出时无法保证完成时的场景， 基于当前用户会话令牌，换取一次性令牌(生命周期15个小时, 不受用户主动注销影响)
+
+OTT：意思是一次性令牌，这种token友户通只处理23个最小集的属性，使用sdk的算法恢复，不进行服务端的token的信息的落盘存储；
+异步方式：
+
+**API说明：**以异步方式执行提交的任务，在任务中可以获取到和登录用户相同的上下文
+
+**API组件：**session-sdk
+
+API: 使用当前上下文在新线程执行：
+
+UserOTTExecutors.executeInDetachedThread(ExecutorService es, Runnable/Callable<V> task)
+
+使用当前上下文和 修改业务属性后的 上下文在新线程执行：
+
+UserOTTExecutors.executeInDetachedThread(ExecutorService es, Runnable/Callable<V> task, InvocationBizBuilder invocationBizBuilder)
+
+使用当前上下文用户切换有权限租户后的上下文 和 修改业务属性后的 上下文，在新线程执行：
+
+UserOTTExecutors.executeInDetachedThread(ExecutorService es, Runnable/Callable<V> task, InvocationBizBuilder invocationBizBuilder, String tenantId)
+
+API 参数：
+
+参数名	java类型	说明
+es	ExecutorService	应用或YMS线程池
+task	Callable或Runnable	需要执行的任务，在任务中可以获取和登录用户相同的上下文
+invocationBizBuilder	InvocationBizBuilder	业务上下文参数，会根据 InvocationBizBuilder 构建出业务需要的上下文, 初始化值和当前上下文一致，业务只需覆盖和当前上下文不一致的参数即可, 如果不需要修改业务属性传递null或者调用不需要传入此参数的重载API
+tenantId	String	需要切换的租户ID
+
+API 使用示例
+
+Runnable runnable = (() -> {
+Assert.assertEquals(tenantId, InvocationInfoProxy.getTenantid());
+Assert.assertEquals(userId, InvocationInfoProxy.getUserid());
+logger.info("业务使用 tenantId:{} userId:{}", InvocationInfoProxy.getTenantid(), InvocationInfoProxy.getUserid());
+});
+Future<?> future = UserOTTExecutors.executeInDetachedThread(executorService, runnable);
+InvocationBizBuilder invocationBizBuilder = new InvocationBizBuilder();
+// 此处示例详列了可以设置的所有参数，业务按需设置所需要设置所需覆盖的参数即可，在初始化时默认和当前上下文一致
+InvocationBizBuilder invocationBizBuilder = new InvocationBizBuilder();
+// 此处示例详列了可以设置的所有参数，业务按需设置所需要设置所需覆盖的参数即可，在初始化时默认和当前上下文一致
+invocationBizBuilder.setBusinessDate("BusinessDate")
+                .setDefaultOrg("DefaultOrg")
+                .setDocId("DocId")
+                .setDocType("DocType")
+                .setIdentityId("IdentityId")
+                .setIsSingleOrg(true)
+                .setLanguage("001")
+                .setLanguages("001")
+                .setLocale("Locale")
+                .setMultilingualFlag(true)
+                .setNewArch(true)
+                .setOrgId("OrgId")
+                .setProductLine("ProductLine")
+                .setProviderid("Providerid")
+                .setTheme("Theme")
+                .setTimezone("Timezone")
+                .setUsername("Username")
+                .setUserType("UserType")
+                .setYxyTenantid("YxyTenantid");
+Runnable runnable = (() -> {
+    Assert.assertEquals(tenantId, InvocationInfoProxy.getTenantid());
+    Assert.assertEquals(userId, InvocationInfoProxy.getUserid());
+    logger.info("业务使用 tenantId:{} userId:{}", InvocationInfoProxy.getTenantid(), InvocationInfoProxy.getUserid());
+});
+Future<?> future = UserOTTExecutors.executeInDetachedThread(executorService, runnable, invocationBizBuilder);
+
+
+同步方式：
+
+**API说明：**以同步方式执行提交的任务，在任务中可以获取到和登录用户相同的上下文
+
+**API组件：**session-sdk
+
+**API:**在当前上下文中执行：
+
+UserOTTExecutors.executeInCurrentThread(Runnable/Callable<T task)
+
+在当前上下文 和 修改业务属性后的上下文中执行：
+
+UserOTTExecutors.executeInCurrentThread(Runnable/Callable<T task, InvocationBizBuilder invocationBizBuilder)
+
+在当前上下文用户切换有权限租户后的上下文 和 修改业务属性后的 上下文中执行：
+
+UserOTTExecutors.executeInCurrentThread(Runnable/Callable<T task, InvocationBizBuilder invocationBizBuilder， String tenantId)
+
+API 参数：
+
+参数名	java类型	说明
+task	Callabl或Runnable	需要执行的任务，在任务中可以获取和登录用户相同的上下文
+invocationBizBuilder	InvocationBizBuilder	业务上下文参数，会根据 InvocationBizBuilder 构建出业务需要的上下文, 初始化值和当前上下文一致，业务只需覆盖和当前上下文不一致的参数即可, 不需要修改可设置为null 或者调用不传此参数的API
+tenantId	String	需要切换的租户ID
+
+API 使用示例：
+
+Runnable runnable = (() -> {
+Assert.assertEquals(tenantId, InvocationInfoProxy.getTenantid());
+Assert.assertEquals(userId, InvocationInfoProxy.getUserid());
+logger.info("业务使用 tenantId:{} userId:{}",
+InvocationInfoProxy.getTenantid(), InvocationInfoProxy.getUserid());
+});UserOTTExecutors.executeInCurrentThread(runnable);
+
+
+使用InvocationBizBuilder构建业务上下文
+
+InvocationBizBuilder invocationBizBuilder = new InvocationBizBuilder();
+invocationBizBuilder.setBusinessDate("BusinessDate")
+                .setDefaultOrg("DefaultOrg")
+                .setDocId("DocId")
+                .setDocType("DocType")
+                .setIdentityId("IdentityId")
+                .setIsSingleOrg(true)
+                .setLanguage("001")
+                .setLanguages("001")
+                .setLocale("Locale")
+                .setMultilingualFlag(true)
+                .setNewArch(true)
+                .setOrgId("OrgId")
+                .setProductLine("ProductLine")
+                .setProviderid("Providerid")
+                .setTheme("Theme")
+                .setTimezone("Timezone")
+                .setUsername("Username")
+                .setUserType("UserType")
+                .setYxyTenantid("YxyTenantid");
+    Runnable runnable = (() -> {
+    Assert.assertEquals(tenantId, InvocationInfoProxy.getTenantid());
+    Assert.assertEquals(userId, InvocationInfoProxy.getUserid());
+    logger.info("业务使用 tenantId:{} userId:{}", 
+    InvocationInfoProxy.getTenantid(), InvocationInfoProxy.getUserid());
+});
+Future<?> future = UserOTTExecutors.executeInCurrentThread(runnable, invocationBizBuilder);
+
+开发示例
+业务场景说明
+
+在A租户内提交申请到B租户去审核，B租户审核通过回写到A租户，
+通过重新构建上下文通过ymsJdbcApi.insert()来实现。
+
+A租户新增申请单后提交。
+
+2.切换到B租户
+
+3.B租户看到A租户提交的申请单进行审批。
+
+4.回到A租户看到单据已经审批通过。
+
+上下文跳转的核心业务代码示例
+
+A租户在提交时把ProjectFiling实体对象，在生成B租户的单据跨租户执行过程
+
+import com.yonyou.ucf.yoncmm.isv.entity.ProjectFiling; //实体类
+@Service
+@Slf4j
+public class ProjectFilingServiceImpl implements ProjectFilingService {
+@Value("${operation.tenant.id}")
+private String operationTenantId; //目标租户id
+
+public void checkSubmitByChecking(ProjectFiling projectFiling, String oldId) {
+Runnable runnable = (() -> {
+ log.info("备案信息业务使用切换后的 tenantId:{} ", operationTenantId);
+ // 更新创建时间
+ projectFiling.setCreateTime(new Date());
+// 创建人
+ projectFiling.setCreator(InvocationInfoProxy.getUserid());
+ // 租户ID
+ projectFiling.setYtenantId(operationTenantId);
+ // 源ID置空
+ projectFiling.setId("");
+ // 设置审核状态为审核中
+ projectFiling.setStatus(CheckOutStatusEnum.CHECKING.getIndex());
+ymsJdbcApi.insert(projectFiling);
+});
+}
+RobotExecutors.runAs(operationTenantId, runnable);
+}
+}
+
+常见问题
+判断请求是否携带/恢复上下文
+
+watch com.yonyou.iuap.yms.session.web.YmsContextFilter contextRestoredByHeaderCookie '{@com.yonyou.iuap.context.InvocationInfoProxy@getTenantid(),@com.yonyou.iuap.yms.session.utils.HttpUtil@isIntranet(params[0])}' 'params[0].getRequestURI().indexOf("/purchase/rewrite")!=-1' -n 1 -x 3
+
+获取上下文中的租户id。如果不为空，则证明上下文已正确恢复
+
+com.yonyou.iuap.context.InvocationInfoProxy@getTenantid()
+
+判断是否外网请求，外网请求的时候，token不能是ottToken。否则安全原因，不会还原上下文
+
+com.yonyou.iuap.yms.session.utils.HttpUtil@isIntranet(params[0])
+
+获取上下文中的用户id。
+
+如果==00001951-7ca3-47ac-a462-d5a66e3e6724 则为机器人用户
+com.yonyou.iuap.context.InvocationInfoProxy@getUserid()
+
+此filter只要用于处理机器人用户的访问请求，只有当检测到是机器人用户的访问的时候，用于补全机器人上下文，如果请求中已携带相关上下文，则会直接跳过此filter
+
+com.yonyou.diwork.filter.RobotContextFilter
+
+调用链路
+
+其他说明
+
+前后端代码通过工具类获取上下文变量
+
+后台函数获取上下文
+
+ObjectStore.env().url;
+
+ObjectStore.env().tenantId;
+
+ObjectStore.env().token
+
+前端获取上下文信息
+
+租户用户相关
+
+cb.context.getTenantId() // 租户id
+
+cb.context.getUserId() // 用户id
+
+cb.context.getOrgId() // 组织id
+
+cb.context.getDefaultOrgId() // 默认业务单元
+
+cb.context.isSingleOrg() // 是否是单组织
+
+cb.context.isNewArch() // 是否是新架构
+
+cb.context.getDocType(); // 获取客户、供应商、toB、toC等类型
+
+cb.context.getProductLine(); // 获取产品线
+
+cb.context.getUserType(); // 获取用户类型
+
+cb.context.getExtra('user.id'); // 获取额外属性，支持a.b.c透传
+
+cb.context.getOptionValue(); // 获取option值
+
+cb.context.getQuery(); // 获取url上的参数
+
+cb.context.isMjTenant(); // 是否是mj租户
+
+全球化
+
+cb.context.golbal.getLocale() //当前语种
+
+cb.context.golbal.getMultiList() //语种列表
+
+cb.context.global.getSysLocale() //获取默认语种
+
+cb.context.golbal.getDataFormat() // 数据格式
+
+cb.context.golbal.getTimeZone() // 时区
+
+cb.context.golbal.isMultilingualFlag(); // 是否开启多语
+
+cb.context.global.getBusinessDate()// 业务日期
+
+环境信息
+
+cb.env.getServiceUrl() // 服务地址
+
+cb.env.getNodeServerUrl() // Node服务地址
+
+cb.env.isPremisesEnv(); // 是否是专属化
+
+cb.env.getMainOriginUrl(); // 业务中台地址
+
+配置信息
+
+cb.config.getDomainCode(); // 工作台领域编码
+
+cb.config.getApplicationCode(); // 工作台应用编码
+
+cb.config.getDomainCode(); // 工作台领域编码
+
+cb.config.getApplicationCode(); // 工作台应用编码
+业务相关
+
+cb.context.global.getDataFormat() //获取数据格式
+
+cb.context.getCommonOptionValue(name) //获取公共参数
+
+viewmodel.getOptionValue(name, orgId, domain) //获取单个业务参数
+
+cb.context.getOptionValue(name, orgId, domain, domainKey, query)
+viewmodel.getOptionValues(name, orgId, domain) //获取多个业务参数
+
+cb.context.getOptionValues(name, orgId, domain, domainKey)
+
+cb.context.getQuery() //获取URL上的参数
+
+cb.context.getExtra(viewmodel,property) //获取领域扩展属性
+
+cb.context.getPredicateDate(name) //获取公共服务谓词
+
+cb.context.getYhtAccessToken() //获取友互通token
+
+文档内容是否对您有所帮助？
+为帮助文档评分：
+页内目录
+1. 概述
+1.1 适用场景
+1.2 业务场景
+1.3 关键词
+2. 使用上下文的意义和平台提供的API
+2.1 接入上下文的意义
+2.2 上下文保留的25个具体值
+2.3 线程内（REQUEST范围）上下文使用
+2.4 上下文的线程间传递和切换
+2.5 租户分库
+2.6 InvocationInfoProxy变化
+2.7 YMS上下文Filter配置
+2.7.1
+2.7.2 白名单：
+2.7.3 灰名单：
+2.7.4 健康检查URL：
+2.7.5 获取ClientIP：
+2.7.6 A00字段：
+3. 线程间传递上下文
+3.1 针对场景1：响应用户前台界面请求
+3.1.1 使用YMS线程池
+3.1.2 使用YMS包装自定义线程池
+3.1.3 使用UserExecutors执行新线程
+3.2 针对场景2 : 后台任务操作
+3.2.1 使用UserOTTExecutors执行
+3.2.2 同步方式：
+4. 开发示例
+4.1 业务场景说明
+4.2 上下文跳转的核心业务代码示例
+5. 常见问题
+5.1 判断请求是否携带/恢复上下文
+5.2 获取上下文中的租户id。如果不为空，则证明上下文已正确恢复
+5.3 判断是否外网请求，外网请求的时候，token不能是ottToken。否则安全原因，不会还原上下文
+5.4 获取上下文中的用户id。
+5.5 此filter只要用于处理机器人用户的访问请求，只有当检测到是机器人用户的访问的时候，用于补全机器人上下文，如果请求中已携带相关上下文，则会直接跳过此filter
+5.6 调用链路
+6. 其他说明
+6.1 后台函数获取上下文
+6.2 前端获取上下文信息
+文档反馈
+北京市海淀区北清路68号用友产业园
+4006-600-588
+友情链接
+用友官网用友YonHelp用友iuap平台用友云市场用友云注册协议隐私条款
+
+Copyright ©2020 用友网络科技股份有限公司版权所有京ICP备05007539号-24京公网安备11010802021935号
+
+返回顶部
+加载中...

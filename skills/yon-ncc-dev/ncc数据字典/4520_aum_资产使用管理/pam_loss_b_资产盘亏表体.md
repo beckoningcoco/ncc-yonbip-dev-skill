@@ -1,0 +1,57 @@
+# |<<
+
+**资产盘亏表体 (pam_loss_b / nc.vo.aum.loss.LossBodyVO)**
+
+> https://community.yonyou.com/datadict/datadict-2105yiliao/ddc/4279.html
+
+| 序号 | 属性编码 | 属性名称 | 字段编码 | 字段类型 | 是否必输 | 引用模型 | 默认值 | 取值范围/枚举 |
+|------|------|------|------|------|------|------|------|------|
+| 1 | pk_loss_b | 盘亏单表体主键 | pk_loss_b | char(20) | √ | 主键 (UFID) |
+| 2 | pk_group | 集团 | pk_group | varchar(20) |  | 组织_集团 (group) |
+| 3 | pk_org | 资产组织最新版本 | pk_org | varchar(20) |  | 组织_业务单元_资产组织 (assetorg) |
+| 4 | pk_org_v | 资产组织 | pk_org_v | varchar(20) |  | 组织_业务单元_资产组织版本信息 (assetorg_v) |
+| 5 | rowno | 行号 | rowno | varchar(30) |  | 字符串 (String) |
+| 6 | pk_equip | 设备编码 | pk_equip | varchar(20) | √ | 设备卡片 (EquipHeadVO) |
+| 7 | loss_type | 盘亏方式 | loss_type | varchar(20) |  | 增减方式 (AddreduceStyleVO) |
+| 8 | loss_reason | 盘亏原因 | loss_reason | varchar(20) |  | 原因 (reason) |
+| 9 | dealresult | 处理结果 | dealresult | varchar(200) |  | 字符串 (String) |
+| 10 | check_username | 盘点人 | check_username | varchar(50) |  | 字符串 (String) |
+| 11 | inventory_date | 盘点日期 | inventory_date | char(19) |  | 日期 (UFDate) |
+| 12 | memo | 备注 | memo | varchar(200) |  | 字符串 (String) |
+| 13 | pk_status_before | 盘亏前状态 | pk_status_before | varchar(20) |  | 设备状态 (StatusVO) |
+| 14 | pk_status_after | 盘亏后状态 | pk_status_after | varchar(20) |  | 设备状态 (StatusVO) |
+| 15 | status_date_before | 盘亏前状态日期 | status_date_before | char(19) |  | 日期 (UFDate) |
+| 16 | status_date_after | 盘亏后状态日期 | status_date_after | char(19) |  | 日期 (UFDate) |
+| 17 | pre_text1 | 预置字符1 | pre_text1 | varchar(100) |  | 字符串 (String) |
+| 18 | pre_text2 | 预置字符2 | pre_text2 | varchar(100) |  | 字符串 (String) |
+| 19 | pre_text3 | 预置字符3 | pre_text3 | varchar(100) |  | 字符串 (String) |
+| 20 | pre_text4 | 预置字符4 | pre_text4 | varchar(100) |  | 字符串 (String) |
+| 21 | pre_text5 | 预置字符5 | pre_text5 | varchar(100) |  | 字符串 (String) |
+| 22 | pre_text6 | 预置字符6 | pre_text6 | varchar(100) |  | 字符串 (String) |
+| 23 | pre_text7 | 预置字符7 | pre_text7 | varchar(100) |  | 字符串 (String) |
+| 24 | pre_text8 | 预置字符8 | pre_text8 | varchar(100) |  | 字符串 (String) |
+| 25 | pre_text9 | 预置字符9 | pre_text9 | varchar(100) |  | 字符串 (String) |
+| 26 | pre_text10 | 预置字符10 | pre_text10 | varchar(100) |  | 字符串 (String) |
+| 27 | stock_out_flag | 出库标记 | stock_out_flag | char(1) |  | 布尔类型 (UFBoolean) |
+| 28 | pk_warehouse_out | 出库仓库 | pk_warehouse_out | varchar(20) |  | 仓库 (stordoc) |
+| 29 | pk_location_before | 盘亏前位置 | pk_location_before | varchar(20) |  | 位置 (location) |
+| 30 | def1 | 自定义项1 | def1 | varchar(101) |  | 自定义项 (Custom) |
+| 31 | def2 | 自定义项2 | def2 | varchar(101) |  | 自定义项 (Custom) |
+| 32 | def3 | 自定义项3 | def3 | varchar(101) |  | 自定义项 (Custom) |
+| 33 | def4 | 自定义项4 | def4 | varchar(101) |  | 自定义项 (Custom) |
+| 34 | def5 | 自定义项5 | def5 | varchar(101) |  | 自定义项 (Custom) |
+| 35 | def6 | 自定义项6 | def6 | varchar(101) |  | 自定义项 (Custom) |
+| 36 | def7 | 自定义项7 | def7 | varchar(101) |  | 自定义项 (Custom) |
+| 37 | def8 | 自定义项8 | def8 | varchar(101) |  | 自定义项 (Custom) |
+| 38 | def9 | 自定义项9 | def9 | varchar(101) |  | 自定义项 (Custom) |
+| 39 | def10 | 自定义项10 | def10 | varchar(101) |  | 自定义项 (Custom) |
+| 40 | def11 | 自定义项11 | def11 | varchar(101) |  | 自定义项 (Custom) |
+| 41 | def12 | 自定义项12 | def12 | varchar(101) |  | 自定义项 (Custom) |
+| 42 | def13 | 自定义项13 | def13 | varchar(101) |  | 自定义项 (Custom) |
+| 43 | def14 | 自定义项14 | def14 | varchar(101) |  | 自定义项 (Custom) |
+| 44 | def15 | 自定义项15 | def15 | varchar(101) |  | 自定义项 (Custom) |
+| 45 | def16 | 自定义项16 | def16 | varchar(101) |  | 自定义项 (Custom) |
+| 46 | def17 | 自定义项17 | def17 | varchar(101) |  | 自定义项 (Custom) |
+| 47 | def18 | 自定义项18 | def18 | varchar(101) |  | 自定义项 (Custom) |
+| 48 | def19 | 自定义项19 | def19 | varchar(101) |  | 自定义项 (Custom) |
+| 49 | def20 | 自定义项20 | def20 | varchar(101) |  | 自定义项 (Custom) |

@@ -1,0 +1,2689 @@
+社区文档中心
+首页
+文档导航
+开发者社区
+社区论坛
+视频教程技术博客
+更多
+张宏涛
+资料中心
+专业开发
+产品概述
+快速入门
+操作指南
+开发指南
+开发介绍
+新功能开发
+移动端开发
+扩展开发
+全球化
+组织
+权限
+权限管理
+字段权限开发
+数据权限开发
+组织权限开发
+特征
+基础数据
+审批流
+业务流
+规则引擎
+公式
+UI模板
+参照
+导入导出
+打印
+对象建模
+编码规则
+调度任务
+监控与预警
+日志
+消息平台
+工作台
+事件中心
+文件服务
+YonBuilder应用开发
+前端开发
+后端开发
+移动开发
+安全
+数据库
+DevOps技术
+容器云技术
+区块链云技术
+YMS开发
+智能应用开发
+专项开发
+成果迁移
+技术方案
+最佳实践
+参考手册
+常见问题
+视频教程
+专业开发/开发指南/权限/权限管理
+权限管理
+最后更新时间：2024-10-23
+背景
+
+BIP系统的核心权限服务（BIP-AUTH简称BA）整体分为三个范畴：功能权限、主组织权限和数据权限，三者三位一体互相交融不可分割，共同构成BIP权限体系。
+
+功能权限
+
+BIP核心交互入口为工作台，而工作台围绕领域、应用、服务、按钮等进几个概念对可交互功能范围进行了划分，它们构成整个系统的功能资源的基础。用户虽然可以通过菜单重新组织全部功能的排列与显示，但其访问能力是通过与其关联的服务进行定义。
+
+BA支持了两种互斥的功能权限分配方式：
+
+基于RBAC模型，围绕角色进行服务、按钮、字段、页签等权限设置
+针对工作台服务,批量赋予用户功能访问权限
+
+无论哪种方式，本质都是将用户与功能进行关联。此外，BA还提供了用户、角色角度功能权限范围的查看视图。
+
+主组织权限
+
+在业务过程中，经常需要根据某个主隔离维度（例如，法人公司、行政部门、会计主体）对数据进行筛选，以实现不同用户对不同数据行进行权限的区分。而BIP内多业务系统中已经形成了围绕组织档案的数据模型，并在模型上进行了主组织的标定（当业务数据上包含多个组织字段时，仅有一个组织可作为主组织）。因此BIP便以组织为主隔离维度，对业务数据进行访问控制。
+
+主组织权限作为强管控模型，默认在不分配组织权限时，无法访问到任何业务数据。主组织模型的描述核心要素为：用户身份、角色、组织，即什么用户在什么角色下拥有那些组织的访问权限，支持一个用户在不同角色（即不同功能）下定义不同的组织权限范围。
+
+数据权限
+
+在业务过程中，偶尔会出现主组织权限隔离后的业务数据过粗，需要进一步细化数据访问控制的情况。BA通过与MDD开发模式的结合，实现了数据权限这一精细化数据访问控制模型，业务系统可以通过元数据字段增加标记，声明哪些业务字段需要进行数据权限过滤。数据权限的访问控制范畴受限于主组织权限，不可逾越。
+
+总之，本文档致力于描述BIP-AUTH三个范畴的相关功能用法和接口，帮助开发人员进行权限的接入开发。
+
+名词解释
+
+业务对象：此处指软件中业务主体，可以是基础数据、单据类型。例如：凭证、人员、采购订单、销售订单等，常对应DDD设计中的聚合根
+
+领域、应用、服务：对整个系统功能进行划分的三个层次，是整个系统中全部功能的稳定列举。服务不直接展现，而是通过配置菜单的方式呈现给用户。
+
+菜单：可以理解为是领域-应用-服务体系的一个用户视图。通过多级导航目录，可以给使用者自由配置的左侧功能菜单树并与具体服务挂接。用户有权使用的服务将由该企业的菜单树和该用户的功能权限共同决定。
+
+用户：拥有友户通账号密码(或绑定友户通账号的其他登录方式),可以登录BIP系统,并隶属于某个或某些租户。
+
+用户身份：用户可以设置多重身份。用户身份指定了身份类型（包括不限于：员工、商家、客户、供应商、开发者、外部、三员）。用户身份关联档案，档案将指定用户所属组织。
+
+角色：与RBAC模型中的角色概念相同。允许用户与角色关联，通过角色关联具体功能权限、数据权限、敏感权限等具体权限内容。角色必然属于组织，默认隶属于租户的顶级组织。值得说明的是，现有模型下，角色的组织仅用于角色的分类，与主组织权限没有联系。
+
+角色标签：在角色上可定义多个标签，仅用于标识角色。
+
+角色组：角色仅隶属于一个角色组，用于对角色分组。
+
+授权：将用户和角色相关联的动作称为授权。
+
+组织：是一个租户下的概念。对于单组织租户，仅有一个默认组织；对于多组织租户，租户中的组织可以呈树形。单组织可以单向切换为多组织模式，不可反向切换。
+
+管理员：租户中的用户可以标记为管理员。对于管理员用户，可在全员应用授权中具备特殊的赋权能力，也可以在业务系统中对管理员进行特殊业务处理。
+
+全员应用：权限系统中的一套非RBAC模型的简化权限体系，可以理解为一种特殊的功能权限。全员应用授权将指定应用给全体成员、仅管理员或自定义范围（指定组织、用户、用户标签、用户身份）进行授权，应用直接可用。
+
+功能权限：在角色管理中进行设置。用于控制用户展示功能的权限，包括领域、应用、服务、功能（功能是服务下更细粒度的权限，如新增删除等）。
+
+敏感字段权限：一种字段权限，对业务单据中的敏感字段进行权限的设定（无权、只读、读写）。
+
+主组织权限：也简称组织权限。可以理解为一种特殊处理的数据权限。主组织权限的判定逻辑是，业务方面将记录已标记主组织，用户将由授权（即用户-角色关联关系）中的组织权限确定其组织列表，来决定业务数据的权限。
+
+主组织：针对涉及组织的业务数据，至少会与一个组织相关。如果与不止一个组织相关，也一定会有唯一一个组织与本业务核心业务相关，成为主组织。主组织将影响该业务数据的数据权限。
+
+数据权限：为指定用户或角色设置的业务数据使用权限。业务数据的标识通过权限管理维度、权限范围进行列举。数据权限也可以设定受控对象（全部应用、部分应用、应用中的受控对象）。
+
+权限管理维度：一种系统级的预置数据，是对数据权限受控列类型的一个描述。
+
+权限范围：一种租户级的配置数据，用于描述关联管理维度的单据的数据取值范围。
+
+受控对象：具体需要受控的应用、单据服务、档案等，常以打标的元数据的形式体现。
+
+技术架构
+架构设计
+
+图 1 RBAC
+
+权限模型是基于RBAC（Role-Based Access Control，基于角色的访问控制）设计实现的以角色为核心的权限产品体系。平台采用以“角色为核心”的权限体系，即将系统所有的权限（包括功能权限、组织权限、数据权限等）一起打包分配给角色，用户通过成为适当角色的成员而得到这些角色的权限。
+
+模型设计
+
+ 图 2权限核心数据模型关系总图
+
+权限总体以用户身份、角色为授权主体，关联相应的权限资源，但方式各有不同：
+
+功能权限直接关联角色，支持系统级预制
+组织权限同时关联角色与用户身份，以实现角色在多种不同组织权限场景下的复用
+数据权限较为灵活，既支持用户身份直接关联，也支持角色关联，计算时进行合并处理
+功能权限
+
+ 图 3功能权限数据模型
+
+功能权限存在两套互斥的计算体系，全员服务和标准服务
+
+全员服务
+
+全员服务的核心设计目标是，为共享类服务（例如企查查、瞩目等）提供轻量简易的访问控制能力，如果服务节点需要较为复杂的权限控制，不可归为全员类
+全员类服务包含简单的功能准入控制能力，同时支持4种分配方式：根据组织、根据用户、根据用户标签、根据用户身份。
+全员类服务不支持细化的按钮权限或字段权限
+全员类服务不支持配置组织权限
+全员类服务不在角色管理中出现
+是否为全员类服务，含系统级和租户级两层配置，系统级在工作台运营后台的服务管理中配置，租户级在我的应用中管理，真正发生作用的是租户级，系统级仅起到模板作用
+
+标准服务
+
+标准服务遵循RBAC原则，以角色为核心视角进行功能权限配置
+标准服务在角色管理中进行权限分配，支持按钮权限，字段权限，主组织权限
+标准服务的授权必须通过角色分配给指定用户
+标准服务不可在全员应用授权中操作权限分配
+主组织权限
+
+ 图 4 主组织权限数据模型
+
+主组织权限虽名为组织，但实际支持四种档案作为主隔离维度，组织、开票点、会计主体、管控范围。主组织权限本质上是业务主隔离维度的权限，不同业务场景主隔离维度略有不同，整体上以使用组织的场景为最为普遍，故简称为主组织权限。
+
+ 1. 组织的分配以业务单元为基础，不支持按职能分配
+
+支持部门型组织的分配
+支持包含下级的计算逻辑，存储格式为 children://${组织ID}
+组织参照中的职能过滤通过配置在工作台服务上的org_funcations控制
+组织参照中是否显示“企业账号级”，通过配置在工作台服务上org_funcations_global控制
+数据权限
+
+ 图 5 数据权限数据模型
+
+数据权限同时支持根据用户和角色进行分配,推荐使用角色进行分配。数据权限的配置模型包含受控对象，管理维护和权限范围，描述了什么单据（受控对象）的什么字段（管理维度）按什么条件（权限范围）进行过滤。
+
+管理维度
+
+管理维度以基础档案、核心档案为主，其余需要开放数据权限能力的档案需要通过注册过程才能发布出来
+管理维度支持自定义档案，但需自定义档案执行管理维度发布才可使用
+管理维度注册时必须提供独立参照，否则配置界面无法使用
+管理维度需声明所属应用，配置时可按应用查找
+
+受控对象
+
+受控对象基于元数据计算得来，只有打过数据权限标记的元数据才可以成为受控对象
+受控对象包含受控字段，与管理维度项向对应，同样只有打过数据权限标记的字段才可以进行配置
+受控对象支持多种受控场景配置，在元数据实体上配置，默认使用维护场景
+
+权限范围
+
+管控范围支持三种配置方式：档案清单、档案分类、领域自定义规则
+档案清单配置方式，通过档案参照勾选固定数量的档案数据，保存后不会变化，且不会触发数据权限的定时调度计算
+档案分类配置方式，通过档案关联的分类参照（例如客户分类）进行勾选，保存后因档案数据的分类信息会发生变化，因此数据权限提供了系统级的档案扫描调度计算，5分钟一次
+领域自定义规则配置方式，规则不支持参数，选择保存时进行一次规则计算，并将结果保存至user_auth_custom_refer_rule表和临时表中，此后数据权限提供了租户级的规则扫描调度计算，5分钟计算一次
+除权限范围中的“条件关系”设定外，不同数据权限行之间也存在运算关系：
+同一角色之间不同数据权限行之间，连接条件是“且”，即取交集，相同维度的条件则是“或”，取并集。
+一个用户如果拥有多个角色，角色间连接条件是"且"，即取交集，相同维度的条件则是"或"，取并集。
+使用权限sdk（auth-permission-sdk）2.0版本以上时，权限范围支持多个角色之间取并集
+
+数据权限为了优化查询效率，在拼凑SQL时采用了数据权限临时表join的方式，即预先将需要过滤的数据的id计算出来保存到临时表中，使用时业务单据数据直接与临时表join。
+
+临时表生成过程
+
+使用临时表进行查询过程
+
+功能介绍
+概述
+
+数字化建模是BIP系统中管理企业核心数据的重要模块。其中包含用户管理、权限管理、组织管理、审批中心等一系列数字化建模相关模块。
+
+用户管理用于管理租户内的全部用户，以及用户的身份类型。
+
+权限管理包含多个部分，包括功能权限、主组织权限、数据权限，并具备授权权和三员授权能力。
+
+用户
+
+通过菜单“权限管理-用户管理”，可以对租户下用户、用户所有的身份类型进行管理。
+
+身份视图
+
+身份视图是租户内操作用户的关键入口,可以停用(或移除)租户下友户通用户的所有身份类型
+
+但仅支持员工和开发者身份类型的新增,其余身份类型在其他功能节点入口集成。
+
+用户视图
+
+用户视图可以友户通生态用户的视角查看当前租户下的身份情况，不仅可以管理用户的身份，也可以进行导入导出操作。
+
+功能权限
+
+功能权限主要通过角色管理进行配置，共享类型服务则通过全员应用授权配置。
+
+角色管理
+
+通过菜单“角色管理-角色管理”，可以对角色进行管理。
+
+通过按钮“新增”可以创建角色。角色归属于组织（如果创建时不选择组织，则隶属于顶级组织），这一点在授权时角色视角筛选时有影响。
+
+通过勾选，点击保存，将赋予指定角色功能权限。
+
+授权
+
+授权是将用户和角色进行关联的步骤。通过菜单“授权-授权”，提供了角色视角和用户视角：
+
+角色视角是通过组织树先选定角色，再点击角色数据上的按钮“分配用户”来批量关联用户；
+
+用户视角是先选定用户，再点击用户数据上的按钮“分配角色”来批量关联角色。无论采用哪种视角操作，都将实现相同的授权结果——将选定的用户与选定的角色进行关联。
+
+全员应用授权
+
+全员应用授权是将指定功能权限，直接赋予大量人员的操作。通过菜单“授权-全员应用授权”，可以进行授权操作。
+
+通过可见范围的选择，指定该应用在整个系统的功能权限范围。
+
+全员可见：本租户下的全部成员均可看到此应用。
+
+管理员可见：本租户的组织管理员可以看到此应用。（请参见3.3.3 设置组织管理员）
+
+自定义可见范围：本租户下的指定组织部门、用户、用户标签、用户身份的成员都可以（并集）看到此应用。
+
+组织权限管理员
+
+通过菜单“组织管理员-组织权限管理员”，可以设置租户内组织的管理员。管理员可以影响上述全员应用授权。
+
+查询功能权限
+
+通过菜单“权限查询-用户功能权限查询”和“权限查询-角色功能权限查询”，可以通过用户和角色的视角查看功能权限赋予情况。
+
+主组织权限
+功能描述
+
+主组织权限的设置，最终目标是通过管理，配置用户拥有的主组织的关系。为达到此目标，需要通过将用户和角色进行授权、在授权基础上分配组织两个步骤实现。在实现这两步骤之前，首先确定用户和角色数据已经准备完毕。
+
+角色管理
+
+通过菜单“角色管理-角色管理”，可以对角色进行管理。
+
+通过按钮“新增”可以创建角色。角色归属于组织（如果创建时不选择组织，则隶属于顶级组织），这一点在授权时角色视角筛选时有影响。
+
+注意：此时需要先设定一下功能权限（服务及按钮）。因为组织权限核心计算模型是：查询当前用户在某个功能下的所拥有的组织（业务单元）权限范围，在查询主组织时，会通过用户当前使用的工作台服务编号【ServiceCode】进行查询，若此时不勾选对应服务，将无法查询到组织数据。
+
+授权
+
+授权是将用户和角色进行关联的步骤。
+
+用户和角色的关联（授权）是进行主组织权限赋予的前提条件。关联的角色的要包含已经授权的服务，否则该角色下的用户将失去所有组织权限。
+
+通过菜单“授权-授权”，提供了角色视角和用户视角：
+
+角色视角是通过组织树先选定角色，再点击角色数据上的按钮“分配用户”来批量关联用户；
+
+用户视角是先选定用户，再点击用户数据上的按钮“分配角色”来批量关联角色。无论采用哪种视角操作，都将实现相同的授权结果——将选定的用户与选定的角色进行关联。
+
+分配组织
+
+通过菜单“授权-授权”，在授权关联完成后，在最右侧数据上的按钮“分配组织”进行主组织权限的设定。通过勾选组织树上的组织，保存后即可设置完毕。
+
+查询主组织权限
+
+主组织权限的查询是通过API获取当前用户主组织数据，并在业务系统中使用主组织数据筛选数据的过程。API接口部分请参见下文第六章“开放接口规范”。
+
+数据权限
+功能描述
+
+数据权限的设置，最终目标是通过管理，配置用户与数据业务的关系。为达到此目标，需要业务侧预先定义好受数据权限管控的业务字段（详见“4.1.3.1 配置业务数据的数据权限字段”），否则无法进行数据权限的赋权。
+
+数据权限的授予，可以通过用户和角色两个维度进行。对用户赋予的数据权限，仅针对此用户生效；对角色赋予的数据权限；对具备此角色的所有用户均生效。
+
+角色管理
+
+通过菜单“角色管理-角色管理”，可以对角色进行管理。数据权限操作时便可选择这些角色
+
+数据权限
+
+指定授权对象
+
+通过菜单“授权-数据权限”，可以对用户或角色进行数据权限管理。选定用户或角色的单选框，再从下拉列表中选择需要授权的对象即可。
+
+增加数据权限
+
+点击表格区域的右上角“增行”按钮，开始增加数据权限。
+
+权限管理维度
+
+权限管理维度是在系统中预置的。是对权限范围的分类。
+
+权限范围
+
+权限范围是在系统中预置的。领域方可以进行扩展。（扩展方法详见“5.4.1 扩展管理维度的权限范围”）权限范围设定时的每一行，都将作为限制数据权限的条件。
+
+每行都可以通过下拉框复选数据。一般默认支持通过多选列表进行查询。如果需要自定义规则，需要进行开发。自定义方法详见“3.3.1.3 高级：自定义权限范围规则”。
+
+条件关系可以选择或和并且，标识权限范围设定的各个字段条件的连接方式。如上述例子，表示权限范围是：客户（维度）的客户清单是“欣欣潇湘”或“岁美莞归”，或者客户分类是“大客户”或“零售商”，或者销售区域在“test21020404”或“test21020405”或“test21020406”，三个大条件满足其一即可。即：
+
+客户清单 IN ('欣欣潇湘', '岁美莞归') OR 客户分类 IN ('大客户', '零售商') OR 销售区域 IN ('test21020404', 'test21020405', 'test21020406')
+
+特别的，每行字段不一定都要选择。不选择表示不限制。比如上述例子，如果清空销售区域限制，则逻辑变为：
+
+客户清单 IN ('欣欣潇湘', '岁美莞归') OR 客户分类 IN ('大客户', '零售商')
+
+受控对象
+
+为了进一步限制数据权限生效的范围，引入了受控对象概念。默认值为“全部应用”，指全部应用范围下都会收到数据权限的控制。
+
+当不需要全面应用控制时，可以点击数据行中受控对象修改按钮进行修改。
+
+选择受控对象，显示出该管理维度下，全部可选的受控对象列表
+
+点击“选择受控对象”，将展示全部受控对象的明细。包括受控字段和操作。其中，受控字段显示了该受控对象在本维度的可控制字段。操作即“场景”，目前仅支持维护一个场景。如需控制多个场景，需要业务侧自行进行处理。（自定义部分详见“4.1.3.4 高级：自定义受控对象”）
+
+注意：受控对象树的显示，有缓存。如果需要，可以清理权限系统对应Redis中auth:dataperm:ctrlentitytree:*的缓存，使变化立即生效。可使用权限诊断工具清理缓存，参见5.7章节
+
+授权权
+概述
+
+企业对于管理员职权范围的要求，在YonBIP中通过“管理员授权”节点实现。该节点可对管理类角色设置可授权应用、可授权组织、可管理角色，实现权限管理员权限范围的分级管控。授权权设置了角色的授权能力，可授权应用、可授权组织、区别于功能权限、组织权限，表示其可授予其他角色权限的能力。
+
+授权权开启
+
+整体说明：开启授权权后，受控人群范围：非租户管理员、非商家管理员。受控体现在，当前登录用户能够往下分配权限的能力。（即本身拥有的管理类角色的可转授范围，在【管理员授权】节点可以针对具体角色转授权限进行查看）。
+
+详情参见5.6章节
+
+典型案例
+
+租户管理员在【角色管理】节点新建角色Manager1130，设置角色功能权限为组织管理下的全部服务+权限管理下的全部服务，并将该角色授权给用户18304018025。然后在【管理员授权】节点对Manager1130进行可授权范围设置。具体如下：
+
+案例流程
+
+案例权限设置
+
+（一）角色管理
+
+（二）授权
+
+案例授权权设置
+
+（一）管理员授权
+
+设置可授权应用（案例设置：企业信息、公共参数）
+
+设置可授权组织（案例设置：A、B、C）
+
+（1）可设置单个组织，在参照上进行选择
+
+该案例我们【组织tab】设置C组织。
+
+（2）可设置规则（7种）：如下图
+
+该案例我们【规则tab】设置规则-指定组织及直接下级，选择A组织。
+
+最终可转受组织我们设置了A、B、C，如图：
+
+设置可管理角色（案例设置：门户模板管理员、IT管理员、流程审批管理员）
+
+（1）角色tab：可单独设置某些角色
+
+（2）角色组tab：可设置角色组下的角色
+
+（3）规则tab：可转授组织下的角色、指定组织及所有下级组织的角色、指定组织及直接下级组织的角色
+
+该案例我们只在【角色tab】设置几个角色：
+
+权限各节点受控情况
+
+登录用户18304018025，演示各节点受控情况。
+
+角色管理
+
+（一）角色列表：组织树受控：只展示可授权组织（见3.6.3.2设置）、角色列表受控：只展示可管理角色（见3.6.3.3设置）
+
+（二）角色列表：【导入】按钮受控，只能导入有权组织（见3.6.3.2设置）下的角色。
+
+（三）角色卡片（编辑和新增可进行操作的服务只有3.6.3.1中设置的可授权应用，其余节点均置灰不可操作）、角色卡片页，组织受可授权组织（见3.6.3.2设置）控制
+
+组织权限管理员
+
+（一） 组织树受控：展现形式是可授权组织（见3.6.3.2设置）可操作，其余组织置灰。
+
+（二） 【配置管理员】按钮禁用，【删除】按钮禁用
+
+管理员授权
+
+（一） 列表页：组织受控（见3.6.3.2设置），列表数据受控（见3.6.3.3设置、并且是管理类）
+
+（二） 卡片页
+
+1、可授权应用（能操作的即是可授权应用（见3.6.3.1设置），其余置灰处理）
+
+2、可授权组织：组织tab受控（见3.6.3.2设置），规则tab涉及选组织参照的受控，其余指定用户任职类的3个规则不受控
+
+3、可管理角色：角色tab受控（见3.6.3.3设置）、角色组tab不控制、规则tab受可授权组织（见3.6.3.2设置）控制
+
+4、 可管理用户
+
+目前没有对可管理用户的设置。在系统中，用户的可管理用户，就是此人可管理组织下的全部用户。
+
+授权
+
+（一）用户视角
+
+1、组织受控（3.6.3.2设置）
+
+2、用户列表受控：根据受控组织查询用户任职组织展示用户列表
+
+3、用户列表：行按钮【分配角色】、【分配角色】批量->参照受控，参照上组织受控（3.6.3.2设置），参照上角色数据受控（3.6.3.3设置）
+
+4、行按钮【分配角色】（单人多角色进行分配）、批量【分配角色】（多人多角色进行分配）向下授权时，（已分配的历史权限不计在校验范围内），新分配的角色例如ED01，在进行授权时，受控场景：ED01上的权限大于当前登录用户的可授权应用，那么会对授权进行控制，不允许新增授权。
+
+5、用户已分配角色列表，【分配组织】受可授权组织控制（展现形式：可操作和置灰）
+
+6、用户已分配角色列表右上角【批量操作】弹出批量参照，批量分配分配组织时，组织受控，受控范围是可授权组织控制（展现形式：可操作和置灰）
+
+（二）角色视角
+
+1、组织受控（3.6.3.2设置）
+
+2、角色列表受控（3.6.3.3设置）
+
+3、给角色分配用户受控，行按钮【分配用户】参照受控：组织受控，用户受控
+
+4、给角色ED01分配用户受控。行按钮【分配用户】进行向下授权受控。只校验当前行角色ED01上的权限是否大于当前登录用户的可授权应用，若大于那么会对授权进行控制，不允许新增授权弹出合理提示。
+
+5、 角色已分配用户列表，【分配组织】受可授权组织控制（展现形式：可操作和置灰）
+
+6、角色已分配用户列表右上角【批量操作】弹出批量参照，批量分配进行分配组织时，组织受控，受控范围是可授权组织控制（展现形式：可操作和置灰）
+
+7、【导入】按钮也会校验当前登录用户的可转授范围。导入角色的功能权限范围若大于当前登录人的可授权应用，则受控，不允许进行导入授权。
+
+数据权限
+
+（一）角色视角：角色参照，组织受控（见3.6.3.2设置），角色受控（见3.6.3.3设置）
+
+（二）用户视角：用户参照，组织受控（见3.6.3.2设置）
+
+角色组
+
+（一）列表上行按钮【分配角色】弹出角色参照，左侧组织树受控（见3.6.3.2设置）
+
+角色功能权限查询
+
+（一）列表页：角色参照，组织受控（见3.6.3.2设置），角色受控（见3.6.3.3设置）
+
+用户数据权限查询
+
+（一）列表页：用户参照，组织受控（见3.6.3.2设置）
+
+三员授权
+概述
+
+“三员”目的是最终通过将超级管理员权限分配给系统管理员、安全管理员、审计员，"三员"相互独立、相互制约，配合制度建设，可以有效的加强涉密信息系统保密管理，减少泄密风险。
+
+“三员”是指涉密信息系统应该配备的系统管理员、安全保密管理员和安全审计员。分别负责系统运行、安全保密管理和安全审计工作。“三员”只有接受专业知识培训并通过资格考试，取得国家保密行政管理部门统一颁发的资格证书后，才能上岗履行职责。
+
+“三员”并不是特指三个人，而是代表涉密信息系统安全保密管理的三类岗位或者角色，对应不同的职责，由相关人员担任，以相应权限的管理员账号登录设备或系统来完成各项工作。系统管理员、安全保密管理员可以由信息化部门专业技术人员担任，对于涉密信息系统中运行一些业务性比较强的涉密应用系统，如人事管理系统、财务管理系统，对业务要求相对较高，管理这些业务应用系统的系统管理员、安全保密管理员可以由相关业务部门的人员担任。安全审计员可以根据工作需要，由保密部门或其他能够胜任安全审计员工作的人员担任。需要注意的是：同一设备或系统的系统管理员和安全审计员不得由同一个人兼任，安全保密管理员和安全审计员也不得由同一个人兼任。（但系统管理员和安全保密员可以兼任）
+
+“三员”目的是最终通过将超级管理员权限分配给系统管理员、安全管理员、审计员，"三员"相互独立、相互制约，配合制度建设，可以有效的加强涉密信息系统保密管理，减少泄密风险。
+
+三员授权开启
+
+请参考5.8 三员授权开通章节。
+
+三员与授权权的关系
+
+三员开通后，可以选择是否开通授权权。如果额外开通了授权权，三员用户将能够赋予其他角色的权限，将收到授权权的控制，实现三员权限的下级分管能力。初始三员拥有全部授权权能力。
+
+初始三员功能
+系统管理员system administrator
+
+角色管理（标准产品）
+
+系统管理员system administrator登录到核心企业租户中，在数字化建模—权限管理—员角色管理节点，仅创建普通角色基本信息，不可分配功能权限。
+
+三员角色管理（三员特性）
+
+系统管理员system administrator登录到核心企业租户中，在数字化建模—权限管理—三员角色管理节点，仅创建三员角色基本信息，不可分配功能权限。
+
+安全保密管理员Security Administrator
+
+角色管理（标准产品）
+
+安全保密管理员Security Administrator登录到核心企业租户中，在数字化建模—权限管理—角色管理节点，对角色进行功能权限分配。
+
+三员角色管理（三员特性）
+
+安全保密管理员Security Administrator登录到核心企业租户中，在数字化建模—权限管理—三员角色管理，对三员角色进行功能权限分配。
+
+授权（标准产品）
+
+安全保密管理员Security Administrator登录到核心企业租户中，在数字化建模—权限管理—授权，为其他用户与角色进行授权关联，并分配主组织。
+
+三员授权（三员特性）
+
+1） 新增“三员授权”节点，分配给安全保密管理员可用。
+
+2） 安全保密管理员Security Administrator登录到核心企业租户中，在数字化建模—权限管理—三员授权，为其他用户与角色进行授权关联，并分配主组织。
+
+管理员授权（标准产品）
+
+安全保密管理员Security Administrator登录到核心企业租户中，在数字化建模—权限管理—管理员授权，为三员管理类角色设置授权权。
+
+其他权限管理（标准产品）
+
+1） 安全保密管理不员Security Administrator登录到核心企业租户中，在数字化建模—权限管理—角色组，不区分三员特性，按标准产品实现。
+
+2） 安全保密管理不员Security Administrator登录到核心企业租户中，在数字化建模—权限管理—角色标签，不区分三员特性，按标准产品实现。
+
+3） 安全保密管理员Security Administrator登录到核心企业租户中，在数字化建模—权限管理—数据权限，不区分三员特性，按标准产品实现。
+
+4） 安全保密管理员Security Administrator登录到核心企业租户中，在数字化建模—权限管理—权限查询，不区分三员特性，按标准产品实现。
+
+5） 安全保密管理员Security Administrator登录到核心企业租户中，在数字化建模—权限管理—全员应用授权，不区分三员特性，按标准产品实现。
+
+审计日志
+
+1） 安全保密管理员仅支持查看普通用户及安全审计员日志，不可编辑。
+
+2） 日志审计要支持组织级特性过滤查看审计数据。
+
+安全审计员Safety Auditor
+
+审计日志
+
+1） 安全审计员仅支持查看系统管理员及安全保密管理员日志，不可编辑。
+
+2） 日志审计要支持组织级特性过滤查看审计数据。
+
+开发示例
+MDD接入模式
+功能权限
+
+原理：mdd请求权限接口返回用户拥有的权限，与UI模板配置信息match判断是否拥有权限，所以UI模板配置很重要。
+
+按钮权限在MDD配置有个开关 mdd.func.permissions.enable，true表示受控。看下自己配置文件
+
+mdd单据的按钮控制分三步
+
+注册按钮
+
+（参见5.2章节）
+
+配置bill_command表
+
+在领域单据的bill_command表（大部分使用这张表实现按钮控制）的auth_id，注册为button_code. 实现按钮权限的控制。
+
+分配按钮权限，并授权
+
+参见3.3章节
+
+主组织权限
+
+MDD框架中已经集成了对主组织权限的支持。在服务编排过程中，对于Rule的执行，MDD框架中的QueryBillRule能够识别业务系统已配置的主组织字段，并调用了BIS权限中心的主数据权限RPC接口，并对sql进行数据条件拼装，实现数据的过滤（配置过程见3.3.1.1 业务系统主组织的指定与配置）。
+
+MDD框架中启用主组织权限
+
+默认的，MDD框架都将启用主组织权限。我们也可以手动在配置文件中增加：
+
+mdd.org.permissions.enable=true
+
+
+业务系统主组织的指定与配置
+
+MDD框架允许两种方式标记业务对象的主组织。这两种方式取决于项目中配置文件imeta-[环境].properties里load_type的值
+
+当load_type=XML，使用配置文件标记当load_type=JSON，使用编辑器方式维护
+
+当load_type=JSON，使用编辑器方式维护
+
+load_type=JSON
+
+base_path=classpath:.
+
+meta_xml_path=meta-models
+
+meta_res_path=classpath*:meta-models/*.xml
+
+db_dialect=mysql
+
+mode=dev
+
+version=1.0
+
+
+1、使用配置文件标记主组织属性
+
+除配置load_type=XML外，需要将meta_xml_path和meta_res_path的路径配置到指定目录。在目录中xml文件中的元数据属性上配置标签 isMasterOrg="true"。
+
+2、使用编辑器标记主组织属性
+
+打开对应环境的编辑器（此功能由框架提供），将对应字段的标签勾选中流程-审批流组织。
+
+主组织权限的查询
+
+业务系统在此基础上编写的Rule，其数据查询均将委托给MDD框架，不需要额外的操作。
+
+编写Rule需要继承AbstractCommonRule并实现execute方法
+
+import com.alibaba.fastjson.JSONObject;
+
+import com.yonyou.ucf.mdd.common.model.rule.RuleExecuteResult;
+
+import com.yonyou.ucf.mdd.ext.bill.dto.BillDataDto;
+
+import com.yonyou.ucf.mdd.ext.bill.rule.base.AbstractCommonRule;
+
+import com.yonyou.ucf.mdd.ext.core.AppContext;
+
+import com.yonyou.ucf.mdd.ext.filter.util.StringUtil;
+
+import com.yonyou.ucf.mdd.ext.model.BillContext;
+
+import com.yonyou.ucf.mdd.ext.model.TreeInfoVO;
+
+public class XxxRule extends AbstractCommonRule {
+
+private Logger logger = LoggerFactory.getLogger(XxxRule.class);
+
+@Override
+
+public RuleExecuteResult execute(BillContext billContext, Map<String, Object> paramMap) throws Exception {
+
+BillDataDto bill = (BillDataDto) getParam(paramMap);
+
+List<TreeInfoVO> treeInfoVOList = DomainTreeInfoUtils.getDomainTreeInfo(AppContext.getCurrentUser().getYhtTenantId());
+
+//业务内容。。。。
+
+putParam(paramMap, "return", treeInfoVOList);
+
+return new RuleExecuteResult(treeInfoVOList);
+
+}
+
+}
+
+
+高级功能：组织权限关闭扩展点
+
+在Maven: com.yonyou:mdd-ext-common:[version]中存在一个接口ICustomOrgPermissionsHandler，配套了默认实现
+
+package com.yonyou.ucf.mdd.ext.permissions;
+
+import com.yonyou.ucf.mdd.ext.bill.dto.BillDataDto;
+
+import com.yonyou.ucf.mdd.ext.model.BillContext;
+
+import org.imeta.orm.schema.QuerySchema;
+
+public interface ICustomOrgPermissionsHandler {
+
+@Deprecated
+
+default QuerySchema handleOrgPermissionsByCustom(BillContext billContext, QuerySchema querySchema) throws Exception {
+
+return querySchema;
+
+}
+
+default boolean beforeMasterOrgPermissionExt(BillContext billcontext, QuerySchema querySchema) throws Exception {
+
+return true;
+
+}
+
+default boolean beforeReferMasterOrgPermissionExt(BillContext billContext, BillDataDto billDataDto) throws Exception {
+
+return true;
+
+}
+
+}
+
+
+beforeMasterOrgPermissionExt：改为false则将关闭MDD在主组织权限的控制
+
+beforeReferMasterOrgPermissionExt：改为false则将关闭MDD在主组织权限的控制
+
+当不需要进行对应逻辑时，可通过Spring在方法中实现ICustomOrgPermissionsHandler的一个实例，设置接口返回值为false。
+
+数据权限
+引入SDK
+
+直接sdk接入方式，采用本地依赖Jar包方式使用，具体维度执行查询时，走的是RPC方式调用远程权限服务。
+
+接入步骤：最新稳定版本 1.0.2，最新版1.0.3
+
+1、引入: pom修改引入jar包
+
+<dependency>
+
+<groupId>com.yonyou</groupId>
+
+<artifactId>auth-permission-mdd</artifactId>
+
+<version>1.0.0-SNAPSHOT</version>
+
+</dependency>
+
+
+2、工程配置bean扫描路径；com.yonyou.permission.*
+
+@ComponentScan(value = "com.yonyou.permission.*")
+
+或者
+
+（mdd适用）在xml中配置scan路径(找到 context:component-scan 标签，增加扫包路径)
+
+<context:component-scan base-package="com.yonyou.permission">
+
+
+3、使用工具类或者按需注入接口调用方法；
+
+如果是IAuthPermissionService ，可选择以下两种方式：
+
+1）(推荐)AuthSdkFacadeUtils.handleAuthPermission();
+
+或者
+
+2）@Autowired
+
+private IAuthPermissionService authPermissionService;
+
+authPermissionService.handleAuthPermission(context,schema);
+
+
+如果是其他服务，直接调用即可（优先），例如：
+
+AuthSdkFacadeUtils.saveTenantRoleUsers(参数);
+
+
+4、sdk1.0.2版本需要引入的二方包和yms版本信息：
+
+二方包：
+
+com.yonyou.iuapiuap-2nd-party6.0.1-beta-SNAPSHOT这个版本上改了对应的yms版本2.0.1-beta-SNAPSHOT
+
+5、sdk1.0.3 版本需要引入mdd的版本：
+
+MDD发布版本 3.0.8.5-SNAPSHOT
+
+启用数据权限
+
+默认的，MDD框架都将启用数据权限。我们也可以手动在配置文件中增加：
+
+mdd.data.permissions.enable=true
+
+
+MDD框架允许两种方式标记业务对象的数据权限。这两种方式取决于项目中配置文件imeta-[环境].properties里load_type的值
+
+当load_type=XML，使用配置文件标记当load_type=JSON，使用编辑器方式维护
+
+当load_type=JSON，使用编辑器方式维护
+
+load_type=JSON
+
+base_path=classpath:.
+
+meta_xml_path=meta-models
+
+meta_res_path=classpath*:meta-models/*.xml
+
+db_dialect=mysql
+
+mode=dev
+
+version=1.0
+
+
+1、使用配置文件标记数据权限属性
+
+除配置load_type=XML外，需要将meta_xml_path和meta_res_path的路径配置到指定目录。在目录中xml文件中的元数据属性上配置标签
+
+使用编辑器标记数据权限的属性
+
+打开对应环境的编辑器（此功能由框架提供），将对应字段的标签勾选中数据权限-数据权限管控。
+
+（可选）若属性类型跟数据权限注册维度不一致，需要配置转换类型。
+
+注意：请确认在设计器已经选则了应用。
+
+高级：自定义受控对象
+
+如果希望在受控对象的高级设置中增加内容，则按此方法进行扩展。推荐使用“方法一：使用元数据管理器标记受控对象”。
+
+注意：如果在元数据那增加了受控对象，但是在授权那没生效，请先确认，所属应用编码与工作台对应的领域下的应用编码是否一致，还有，确保元数据模型保存后，在设计那边，再保存一下。
+
+方法一：使用元数据管理器标记受控对象（推荐）
+
+所属应用的设定
+
+这里是设置元数据组件所属应用，对应高级设置中左侧领域应用树中的节点；
+
+场景及属性标签的设定
+
+在实体上设置受控场景（可多选），这里的设置对应高级设置中选择单据确认后，受控场景列内容的展示；
+
+在属性列上，设置“数据权限管控”标签，这里的设置影响高级设置中受控对象参照右侧列表的数据展示，以及选择单据确认后，受控字段下拉框内容的展示；
+
+元数据维度转型设置（可选）
+
+按照前面步骤设置完元数据后，高级设置中仍未出现数据；需要进一步检查下单据上维度的类型是否匹配，数据权限受控类型需要是在权限维度中已注册的。
+
+可通过转型设置进行转换（如下图），将权限中注册的维度类型填入元数据属性中；
+
+方法二：开发接口实现
+
+依赖u8c-auth-sdk
+
+pom.xml
+
+<dependency>
+
+<groupId>com.yonyoucloud</groupId>
+
+<artifactId>u8c-auth-sdk</artifactId>
+
+<version>[版本号]</version>
+
+</dependency>
+
+
+实现IAuthCtrlBusBillService接口
+
+import com.yonyoucloud.uretail.sys.auth.AuthCtrlBusBill;
+
+import com.yonyoucloud.uretail.sys.auth.AuthCtrlBusBillAttr;
+
+import com.yonyoucloud.uretail.sys.auth.AuthCtrlBusBillScene;
+
+import com.yonyoucloud.uretail.sys.auth.Page;
+
+import com.yonyoucloud.uretail.sys.pubItf.IAuthCtrlBusBillService;
+
+import java.util.ArrayList;
+
+import java.util.List;
+
+public class XxxAuthCtrlBusBillService implements IAuthCtrlBusBillService {
+
+@Override
+
+public Page getBusBillsBySubId(String tenantId, String[] subId, String attrFullName, String keyword, int pageIndex, int pageSize) throws Exception {
+
+//tenantId 租户
+
+//subId 应用范围，如：["GL","SMCMT"]
+
+//attrFullName 属性fullname，如：aa.vendor.Vendor
+
+//keyword 关键字(按照编码、名称进行模糊匹配)
+
+//pageIndex 当前页
+
+//pageSize 每页数据量
+
+//根据上述参数进行业务查询，将结果存入Page对象
+
+//业务查询...
+
+AuthCtrlBusBill authCtrlBusBill = new AuthCtrlBusBill();
+
+authCtrlBusBill.setId("主键");
+
+authCtrlBusBill.setCode("单据编码");
+
+authCtrlBusBill.setName("单据名称");
+
+authCtrlBusBill.setSubId("所属应用");
+
+authCtrlBusBill.setTableName("物理表名");
+
+//填充属性
+
+List<AuthCtrlBusBillAttr> attrs = new ArrayList<>();
+
+for (...){
+
+AuthCtrlBusBillAttr authCtrlBusBillAttr = new AuthCtrlBusBillAttr();
+
+authCtrlBusBillAttr.setFieldName("属性名");
+
+authCtrlBusBillAttr.setColumnName("物理表列名");
+
+authCtrlBusBillAttr.setFullname("类型元数据URI");
+
+authCtrlBusBillAttr.setIsKey(true);//是否主键
+
+attrs.add(authCtrlBusBillAttr);
+
+}
+
+authCtrlBusBill.setAttrs(attrs);
+
+//填充场景
+
+List<AuthCtrlBusBillScene> scenes = new ArrayList<>();
+
+for (...){
+
+AuthCtrlBusBillScene authCtrlBusBillScene = new AuthCtrlBusBillScene();
+
+authCtrlBusBillScene.setCode("编码");
+
+authCtrlBusBillScene.setName("名称");
+
+}
+
+authCtrlBusBill.setScenes(scenes);
+
+Page page = new Page();
+
+page.setData(authCtrlBusBill);
+
+return page;
+
+}
+
+@Override
+
+public AuthCtrlBusBill getBusBillByCode(String tenantId, String billCode) {
+
+//tenantId 租户
+
+//billCode 表单编码
+
+//根据上述参数进行业务查询，将结果存入Page对象
+
+//业务查询...
+
+AuthCtrlBusBill authCtrlBusBill = new AuthCtrlBusBill();
+
+authCtrlBusBill.setId("主键");
+
+authCtrlBusBill.setCode("单据编码");
+
+authCtrlBusBill.setName("单据名称");
+
+authCtrlBusBill.setSubId("所属应用");
+
+authCtrlBusBill.setTableName("物理表名");
+
+//填充属性
+
+List<AuthCtrlBusBillAttr> attrs = new ArrayList<>();
+
+for (...){
+
+AuthCtrlBusBillAttr authCtrlBusBillAttr = new AuthCtrlBusBillAttr();
+
+authCtrlBusBillAttr.setFieldName("属性名");
+
+authCtrlBusBillAttr.setColumnName("物理表列名");
+
+authCtrlBusBillAttr.setFullname("类型元数据URI");
+
+authCtrlBusBillAttr.setIsKey(true);//是否主键
+
+attrs.add(authCtrlBusBillAttr);
+
+}
+
+authCtrlBusBill.setAttrs(attrs);
+
+//填充场景
+
+List<AuthCtrlBusBillScene> scenes = new ArrayList<>();
+
+for (...){
+
+AuthCtrlBusBillScene authCtrlBusBillScene = new AuthCtrlBusBillScene();
+
+authCtrlBusBillScene.setCode("编码");
+
+authCtrlBusBillScene.setName("名称");
+
+}
+
+authCtrlBusBill.setScenes(scenes);
+
+return authCtrlBusBill;
+
+}
+
+}
+
+
+TIPS：
+
+获取列表接口现在有两个地方触发：
+
+左数右表的参照，传递租户、应用、过滤属性元数据uri、搜索关键字、分页等信息，领域需要按照指定应用、包含指定属性的受控对象信息返回
+
+下拉树参照，传递租户、应用范围信息，领域需要按照应用返回所有的受控对象信息
+
+注册微服务
+
+@Bean
+
+public RemoteCallInfo initUpcCustomAuthRule(){
+
+RemoteCallInfo rci = new RemoteCallInfo();
+
+rci.setAppCode("productcenter");
+
+rci.setNameSpace("c87e2267-1001-4c70-bb2a-ab41f3b81aa3");
+
+rci.setClassName(IAuthCtrlBusBillService.class.getName());
+
+rci.setAlias("upcDeptTestCustomAuthRule");
+
+((IRemoteCallInfoManagerService)MwLocator.lookup(IRemoteCallInfoManagerService.class)).regRemoteCall(rci);
+
+return rci;
+
+}
+
+
+与MDD部门对接
+
+与MDD部门沟通，增加aa_register_conf表数据
+
+权限SDK扩展场景（需MDD3.0.8及以上版本）
+通过实现IBillAuthDataPermission接口来扩展数据权限
+
+扩展示例：数据权限不默认拼or is null
+
+扩展示例：数据权限开关
+
+通过实现IBillAuthOrgPermission接口来扩展主组织权限
+
+扩展示例：组织权限开关
+
+扩展示例：前置、后置扩展
+
+前置、后置扩展分为单据整体和单据权限维度（组织权限、数据权限等）级；按需实现即可；
+
+单据整体：
+
+单权限维度
+
+通过实现IBillAuthPermission 接口来扩展单据整体权限
+
+扩展示例：组织权限同数据权限组合关系（交集 还是 并集）
+
+默认是交集（AND），可根据业务需要扩展采用并集（OR）操作，通过覆写 getOrgPermAndDataPermOperation 方法指定；（如图）
+
+扩展示例：单据禁用权限控制
+
+两种方式，一种通过覆写 enable 方法，一种打注解。（如图）
+
+通过实现ICustomDataPermissionHandler接口来微调数据权限计算过程
+
+数据权限SDK业务支持扩展严控、空和默认值查询
+
+1）扩展标识：
+
+noAuthWithNull——空值没权限，默认为false（isRequired时默认为true）；
+
+noAuthWithDefaultVal——默认值没权限，默认为false；
+
+noAuthWithEmptyVal——严控标识，默认为true（严控），数据权限临时表计算结果为空，则查询时不返回任何数据；
+
+noSetFullNameSet——如果数据权限不配置，默认无权的维度集合。
+
+2）扩展标识应用场景
+
+扩展标识应用场景流程图如下所示。
+
+扩展标识应用场景
+
+由上图可知，针对已经打了权限标签或权限控制的属性，即属性有这个dataPowerAuthAttribute标识的，查询时走join方式：
+
+如果当前属性为必填项，即isRequired=true的，则默认情况noAuthWithNull=true，noAuthWithDefaultVal=false，即查询数据时，如果受控字段为空是没有权限的，为默认值时是有权限的，也就说查询出的权限集合包含为默认值的，不包含为null的。此时noAuthWithNull不支持扩展，noAuthWithDefaultVal支持扩展。如果当前属性为非必填项，即isRequired=false的，则默认情况noAuthWithNull=false，noAuthWithDefaultVal=false，即查询数据时，如果受控字段为空是有权限的，为默认值也是有权限的，也就说查询出的权限集合即包含为默认值的，也包含为null的，此时二者均支持扩展。
+
+如果受控实体的属性没有dataPowerAuthAttribute标识的，则走in的方式：
+
+如果values 返回的结果集为空，此时支持扩展noAuthWithEmptyVal，默认为true即严控，目标字段属性值为空，没有权限，此时不支持noAuthWithNull和noAuthWithDefaultVal，查询不出任何值；如果noAuthWithEmptyVal为false，则正常支持noAuthWithNull和noAuthWithDefaultVal，默认都是false。
+
+如果values 返回的结果集非空，则正常支持noAuthWithNull和noAuthWithDefaultVal，默认都是false。
+
+3）如何扩展上述标识？
+
+业务如果需要扩展上述标识，则需要在业务端实现这个接口ICustomDataPermissionHandler，并且注入到本地即可。
+
+接口中四个扩展方法：
+
+/*** @Description 判断是否当数据权限为空时是否对控制字段为空的数据行进行展示* 如果数据权限返回为空，并且需要对字段空值的行进行展示，* 不进行强权限控制需要返回false 否则返回true;** 由于数据权限控制的扩展插入点可能包含递归处理子表数据，所以目前能提供作为接口参数的只有BillContext;* 建议业务方扩展基于 BillNumber , fullname 等进行判断，* 如果需要租户ID 可以通过AppContext.getTenantId() 获取** @Param [billContext]* @return boolean 数据库字段为空可展示返回false 否则返回true* @Author DaeDalu$* @Date**/boolean forceNoAuthWithNull(BillContext billContext);/*** @Description 判断是否当数据权限为空时是否对控制字段为默认值的数据行进行展示* 如果数据权限返回为空，并且需要对字段空值的行进行展示，* 不进行强权限控制需要返回false 否则返回true;** 由于数据权限控制的扩展插入点可能包含递归处理子表数据，所以目前能提供作为接口参数的只有BillContext;* 建议业务方扩展基于 BillNumber , fullname 等进行判断，* 如果需要租户ID 可以通过AppContext.getTenantId() 获取* @Param [billContext]* @return boolean 数据库字段为默认值可展示返回false 否则返回true* @Author DaeDalu$* @Date**/boolean forceNoAuthWithDefaultValue(BillContext billContext);/*** @Description 判断是否当数据权限临时表里的值为空时是否进行严控,严控时将不展示任何数据* 不进行严控需要返回false 否则返回true;** 由于数据权限控制的扩展插入点可能包含递归处理子表数据，所以目前能提供作为接口参数的只有BillContext;* 建议业务方扩展基于 BillNumber , fullname 等进行判断，* 如果需要租户ID 可以通过AppContext.getTenantId() 获取* @Param [billContext]* @return boolean 数据库字段为默认值可展示返回false 否则返回true* @Author DaeDalu$* @Date**/default boolean forceNoAuthWithEmptyValue(BillContext billContext){return true;};/*** 数据权限：不配置权限的维度，默认无权，HashSet 里存储与权限维度对应的fullname,比如终端： aa.store.VStore* @return*/default Set forceNoAuthWithNoSetFullName(BillContext billContext){return new HashSet<>();};
+非MDD接入模式
+功能权限
+
+方式一：使用注解控制访问（推荐）
+
+1、引入diwork-sdk包
+
+<dependency>
+
+<groupId>com.yonyou.diwork</groupId>
+
+<artifactId>diwork-sdk</artifactId>
+
+<version>版本号</version>
+
+</dependency>
+
+
+当引入SDK包之后，会自动配置拦截器，实现对全部访问的功能权限（功能、按钮）拦截，拦截器逻辑如下：
+
+@Configuration
+
+@ComponentScan
+
+public class DiworkWebAppConfiguration extends WebMvcConfigurerAdapter {
+
+@Autowired
+
+private DiworkPermissionHandler diworkPermissionHandler;
+
+@Autowired
+
+private ButtonPermissionHandler buttonPermissionHandler;
+
+@Override
+
+public void addInterceptors(InterceptorRegistry registry) {
+
+// 多个拦截器组成一个拦截器链
+
+// addPathPatterns 用于添加拦截规则
+
+// excludePathPatterns 用户排除拦截
+
+registry.addInterceptor(diworkPermissionHandler).addPathPatterns("/**");
+
+registry.addInterceptor(buttonPermissionHandler).addPathPatterns("/**");
+
+super.addInterceptors(registry);
+
+}
+
+}
+
+
+2、通过注解方式进行限制
+
+下列注解均可用于方法和类（@Target({ElementType.METHOD,ElementType.TYPE})）
+
+@DiworkPermission //服务控制注解
+
+@ButtonPermission //按钮控制注解
+
+方式二：实现接口，注册过滤器或拦截器
+
+1、依赖pom
+
+<dependency>
+
+<groupId>com.yonyou.diwork</groupId>
+
+<artifactId>diwork-sdk</artifactId>
+
+<version>版本号</version>
+
+</dependency>
+
+
+2、实现接口IAuthFilterParamService并spring中注册服务
+
+@Service("XxxAuthFilterParamService")
+
+public class XxxAuthFilterParamServiceImpl implements IAuthFilterParamService {
+
+private static final String SERVICECODE = "serviceCode";
+
+private static final String BUTTONCODE = "buttonCode";
+
+@Override
+
+public String getService(ServletRequest request) {
+
+return request.getParameter(SERVICECODE);
+
+}
+
+@Override
+
+public String getButton(ServletRequest request) {
+
+return request.getParameter(BUTTONCODE);
+
+}
+
+}
+
+
+注意：defDiworkAuthFilterParamService是jar包中提供的默认实现，从request请求中拿serviceCode和buttonCode信息；正常来说，业务方需要通过实现接口，在根据request里面的信息判定出真实的serviceCode和buttonCode信息。
+
+3、配置过滤器或拦截器（二者选一即可，目标：对访问进行拦截）
+
+过滤器
+
+@Bean
+
+public FilterRegistrationBean AuthPermissionFilter() {
+
+FilterRegistrationBean registrationBean = new FilterRegistrationBean();
+
+registrationBean.setFilter(new AuthPermissionFilter());
+
+registrationBean.addUrlPatterns("/*");
+
+// filterParamBean 是指定过滤参数benId设置，不设置默认是
+
+defDiworkAuthFilterParamServiceregistrationBean.addInitParameter("filterParamBean","defDiworkAuthFilterParamService");
+
+return registrationBean;
+
+}
+
+
+拦截器
+
+<mvc:interceptors>
+
+<mvc:interceptor>
+
+<mvc:mapping path="/**"/>
+
+<mvc:exclude-mapping path="/*.ico" />
+
+<mvc:exclude-mapping path="/health/check" />
+
+<mvc:exclude-mapping path="/rest/multilangruntime" />
+
+<!-- 定义在mvc:interceptor下面的表示是对特定的请求才进行拦截的 -->
+
+<bean id="authPermissionHandlerInterceptor" class="com.yonyou.diwork.permission.AuthPermissionHandlerInterceptor">
+
+<!-- filterParamBean 是指定过滤参数benId设置，不设置默认是defDiworkAuthFilterParamService-->
+
+<property name="filterParamBean" value="defDiworkAuthFilterParamService"/>
+
+</bean>
+
+</mvc:interceptor>
+
+</mvc:interceptors>
+
+
+方式三：自定义过滤器或者拦截器手动判断
+
+领域自定义过滤器或者拦截器，通过调用权限接口，拿到受控的功能权权限范围，在判断集合中是否存在。
+
+1、需要引入diwork-pub-auth包
+
+<dependency>
+
+<groupId>com.yonyou.diwork</groupId>
+
+<artifactId>diwork-pub-auth</artifactId>
+
+<version>版本号</version>
+
+</dependency>
+
+
+2、定义拦截器
+
+DiworkPermissionFilter filter = new DiworkPermissionFilter();
+
+filter.withWeb().withClient().withPhone().withCapable().withRetail().withServiceCode(service.getServiceCode());
+
+Set serviceAndButtonPerms = diWorkPermissionService.getServiceAndButtonPerms(tenantId, userId,
+
+filter);
+
+
+方式四：接入权限auth-permission-SDK，调用权限接口实现权限控制
+
+（推荐，可不引mdd）
+
+1：SDK 使用说明（auth-permission-sdk）
+
+主组织权限
+
+对于不适用Rule的场景，BIS权限中心提供了API接口，允许业务方直接进行自行数据筛选。
+
+获取用户的主组织权限1、获取当前登录用户的主组织权限●PRC模式（推荐）
+//注入RPC服务
+
+@Autowired
+
+private IOrgPermissionService orgPermissionService;
+
+public ResponseDto xxx(String authId){
+
+Set<String> orgIdSet = orgPermissionService.getOrgPermissions(authId);
+
+}
+
+
+●REST方式：参见接口6.1.3.1
+
+//通过上下文获取登录者信息
+
+LoginUser currentUser = AppContext.getCurrentUser();
+
+if (currentUser == null) {
+
+ throw new RuntimeException("未获得用户登录信息，请检查 rpcToken 正确传输，用户正确登录");
+
+}
+
+//友户通租户id
+
+String yhtTenantId = user.getYhtTenantId();
+
+//友户通用户id
+
+String yhtUserId = user.getYhtUserId();
+
+//远程调用伪代码
+
+ResponseDto resp = HttpUtil.get(urlOf3_2_2, params);
+
+//处理resp数据
+
+resp.getCode()
+
+resp.getData()
+
+
+2、获取指定用户的主组织权限REST方式：参见接口6.1.3.1方法同获取当前登录用户主组织权限中的REST方式，仅在传入参数来源有所不同
+
+结合本地业务进行数据过滤
+
+基于查询到的主组织记录，对业务进行过滤。可采用以下两种方式。1、先查询，从查询结果过滤
+
+Java复制代码
+
+List<BusinessData> bizDataList = xxxx; //业务查询出的全部数据列表
+List<BusinessData> dataResult = bizDataList.stream()
+.filter(data -> orgIdSet.contains(data.getMainOrgId())) //通过orgIdSet进行过滤
+.collect(Collectors.toList());
+
+
+2、先组织查询条件，再进行查询
+
+QuerySchema querySchema = QuerySchema.create().addSelect("*")
+.addCondition(QueryConditionGroup.and( QueryCondition.name("mainOrgId").in(orgIdSet)));
+
+数据权限
+
+通过调用数据权限接口，能够获得对应数据权限的结果。其中包含临时表名，如：auth_1.temp_perm_262994872267440128。其中包含着具备权限的ID。
+
+有同步机制，能够将业务表与auth_1.temp_perm_262994872267440128同步到本地库中。因此业务方只要将temp_perm_262994872267440128表的id字段与业务部分进行JOIN，实现对业务数据进行的筛选。（接口见第六章数据权限相关接口）
+
+SELECT*FROMXXX_TABLE xxxINNER JOIN temp_perm_262994872267440128 temp_perm ON xxx.xxid = temp_perm.id
+典型业务场景介绍
+预制角色
+
+领域产品通过工作台的产品运营后台预制，需要各领域产品经理联系工作台增加各环境系统运营租户的操作用户
+
+按钮注册
+背景介绍
+
+扩展功能权限，需要扩展“领域-应用-服务”的数据。此部分数据由工作台组负责维护。
+
+按钮的扩展，需要扩展服务下“按钮”数据，此部分数据由权限服务组负责维护。
+
+预制按钮现在有二种方式
+
+（1）按钮注册工具（推荐）
+
+（2）产品运营后台预制（此种方式添加按钮的不支持多语，所以不做推荐。）
+
+应用及应用下的服务都在工作台提供的运营后台去注册和维护数据信息，按钮是服务下的子功能或者是子服务。
+
+按钮预制工具
+
+工具说明
+
+背景：
+
+按钮流水线很难实现git脚本精确管控，经常导致他人按钮被删除，产品运营后台不支持按钮多语的维护。今后按钮注册主推按钮预制工具。
+
+按钮注册地址：
+
+日常环境：[https://bip-daily.yyuap.com/mdf-node/meta/voucherlist/sys_buttonPermission_list?serviceCode=u8c_GZTACT020&domainKey=u8c-auth&secret=](https://bip-daily.yyuap.com/mdf-node/meta/voucherlist/sys_buttonPermission_list?serviceCodeu8c_GZTACT020&domainKeyu8c-auth&secreta9b037d0-20f0-11ec-9f55-b8599feb8d54" \t "_blank){secret}
+
+其中{secret} 为各领域自己持有，初次使用填写注册表格后联系权限部门 刘文鹏，董航申请。申请后拼上秘钥即可，其他参数无需改动。
+
+PS : secret 已申请人作区分，同部门统一填写一个人就可以。填写后私聊对应人员。定时统一处理
+
+申请地址：
+
+申请地址：[https://docs.diwork.com/l/79873A206E6F](https://docs.diwork.com/l/79873A206E6F" \t "_blank) 【友空间云文档】权限工具secret申请表.xlsx
+
+工具基本操作
+
+查看
+
+注册页面采用左树右表结构，左边可以根据领域-应用-服务进行检索，查询区域可以根据按钮的编码和名称进行检索
+
+新增
+
+点击新增，添加关键信息。注意按钮编码不可以重复，否则权限无法设置成功，建议采用服务编码-自定义编码来实现。避免使用特殊字符。多语资源需要填写
+
+编辑
+
+编辑操作同新增。这里建议按钮编码创建完成之后最好不要修改。
+
+删除
+
+可以单独选择按钮删除，也可以多选，进行批量删除。删除操作需慎重，删除属于物理删除，不可恢复。
+
+同步
+
+一键同步功能保证按钮维护一次，各个环境通过一键操作来实现统一，通过选择需要同步的按钮，选择需要同步的环境。注意：只支持同步到日常环境
+
+按钮同步
+
+按钮同步：指日常->预发->生产，不同环境服务下按钮数据的同步。
+
+（1）通过按钮注册工具在日常环境增加按钮注册。
+
+（2）日常环境验证完成后，通过平台统一脚本导出工具（[脚本导出](https://bip-daily.yyuap.com/iuap-yonbuilder-designer/ucf-wh/uilibrary-center/uilibrarycenter-fe-isv/index.html" \l "/ScriptTool" \t "_blank)）（下图 基准是预发 连调是日常）导出按钮SQL脚本，并留存在各领域代码库的相应目录中
+
+（ /scripts/db/mysql/patch/xxxx_领域编号/0010_iuap_common/DML/0250_iuap_button），以备上线或专属化所需。
+
+（3）各领域用此脚本在各自的预发环境执行【sql升级流水线】(运维为各领域单独创建，执行领域各种sql脚本)，验证上预发的过程
+
+（4）预发验证成功后，继续用【sql升级流水线】执行上线过程
+
+（5）如有其他环境按钮删除情况，在抽取工具按钮删除节点，填写好服务编码和按钮编码可直接导出删除脚本。 导出后检查脚本无问题添加到对应位置。
+
+PS：沙箱环境目前每天凌晨三点从生产环境全量同步数据
+
+按钮升级
+升级场景
+
+勾选服务下全部按钮，或者指定按钮(标准场景)
+
+根据xxx条件，进行勾选xxx按钮。特殊场景需要额外支持
+
+升级流程
+
+按钮升级过程通过升级工具完成，目前未对外开放。
+
+（1）领域需明确告知升级哪些服务下的什么按钮（列出服务按钮名称及编码）
+
+（2）常规场景的升级已有后台工具可以支持，（复杂场景需具体沟通确认）。
+
+流程：领域开发完成按钮权限文档登记-->领域产品提PM（协作内请截图登记文档信息，描述清要做什么）-->权限产品方婵-->转成jira给权限开发-->收到jira后找到对应登记信息完成协作。
+
+重复按钮处理
+
+5.3.3.1 将按钮编码改为${serviceCode}_${buttonCode}
+
+以下图为例新的按钮编码应为：po_picking_requisition_list_2_po_picking_requisition_list_unsubmit，po_picking_requisition_list_1_po_picking_requisition_list_unsubmit，po_picking_requisition_list_po_picking_requisition_list_unsubmit 在运营后台或者按钮注册工具的对应的地方修改成新的编码；并且需要将bill_command表中对应的authId也改成新的编码,并形成补丁脚本。
+
+5.3.3.2 抽取sql
+
+如果5.3.3.1完成并调试成功，可以将修改的数据发给权限同事来提取脚本，用作上线和专属化使用。
+
+抽取的脚本分为两部分，
+
+5.3.3.3 将脚本放到相应的目录
+
+将脚本放到相应的目录，执行SQL流水线即可把数据刷新。领域可以根据自己的上线节奏进行安排
+
+上述脚本1放到项目目录的按钮目录下：scripts/db/mysql/patch/0001_XXXX/0010_iuap_common/DML/0250_iuap_button
+
+脚本2放到项目的权限目录下：
+
+/scripts/db/mysql/patch/0001_XXXX/0010_iuap_common/DML/0130_iuap_auth
+
+同时需要将2.1更新的bill_command的脚本放到自己项目的执行目录下
+
+数据权限管理维度注册
+扩展管理维度
+
+当在使用过程中，如希望在管理维度层面增加内容，则需要进行扩展。
+
+扩展流程：由领域的产品经理向负责权限的产品经理（方婵）申请协作任务增加。确认后，由开发对接处理。领域侧提供信息，由权限侧进行统一管控。
+
+领域侧需要提供有：
+
+管理维度编码（code）：形如“aa_merchantref”，可通过“附录B：已登记的管理维度”查询）
+
+管理维度名称（name）：形如“客户”
+
+元数据URI（fullname）：形如“aa.salearea.SaleArea”
+
+建议连接方式（suggest_join_type）：默认值“IN”
+
+所属域/微服务名（domain）：形如“productcenter”
+
+多语词条（name_resid）：形如“P_YS_PF_GZTSYS_0000013395”
+
+绑定显示服务编码（bind_service_code）：形如“aa_merchant”，可以为空。非空时，界面维度是否显示，依据绑定编码的服务是否开通来定
+
+是否禁用（disable）：0否 1是，默认0
+
+未设置默认无权（no_setting_auth_flag）：0否 1是，默认0 (主要门店在用)
+
+远程调用标识（remote_call_flag）：0否 1是，默认1
+
+所属应用编码(sub_id) ：形如“GZTACT”
+
+领域侧需要提供的内容 见附录C：扩展申请单（包含管理维度，权限范围，自定义权限规则）
+
+扩展管理维度的权限范围
+
+当在使用过程中，如希望在权限范围中增加新的权限范围时（如下图想再增加“客户类型”），则需要进行扩展。如需要扩展管理维度，请参见“5.4.1 高级：扩展管理维度”。
+
+注意：扩展仅支持对主表字段的扩展，不能支持子表扩展。
+
+扩展流程：由领域的产品经理向负责权限的产品经理申请增加。确认后，由开发对接处理。领域侧提供信息，由权限侧进行统一管控。
+
+领域侧需要提供有：
+
+管理维度URI（形如“aa.merchant.Merchant”，可通过“附录B：已登记的管理维度”查询）
+
+管理维度编码（形如“aa_merchantref”，可通过“附录B：已登记的管理维度”查询）
+
+元数据URI（形如“aa.salearea.SaleArea”）
+
+属性名（形如“customerArea”）
+
+微服务名（形如“productcenter”）
+
+参照（形如“productcenter.aa_salearearef”）
+
+多语词条（形如“P_YS_PF_GZTSYS_0000013395”）
+
+提交扩展申请请参见“附录C：扩展申请单”。
+
+扩展数据的缓存清理
+
+修改注册数据后，需要清理系统Redis缓存。
+
+（1）可直接找到权限服务对应的Redis库（专属化在DB12）
+
+权限管理维度：“auth:dataperm:allAuthManagerRefers:1292161350684928:zh_CN”。其中1292161350684928为租户ID，zh_CN为语言。也可直接全部清除auth:dataperm:*。
+
+自定义规则：auth:dataperm:allAuthReferParameters:租户ID:语言。
+
+自定义规则服务：auth:dataperm:allAuthReferCustomServices:租户ID。
+
+受控对象树：auth:dataperm:ctrlentitytree:tenant:
+
+如果缓存有变，查看旁边问号 1130之后的版本缓存key部分更新 eg:auth:dataperm:allBaManagerRefers:
+
+（2）也可通过权限工具做删除处理 权限诊断工具
+
+扩展数据权限环境同步
+
+公有云不同环境的数据同步（管理维度，范围，自定义规则）
+
+（1）领域填写扩展申请单后，权限部门会在测试环境注册数据。
+
+PS : 现阶段，日常预发由权限执行。生产权限部门提供sql工单号给领域。领域将工单号带到上线单由运维审核执行。
+
+数据权限自定义规则注册
+
+权限范围选择时默认采用多选列表形式。当需要在权限范围的自定义规则时，需要按如下步骤进行扩展。已接入的维度管控范围，可参考auth库中的auth_manager_refer_item，auth_refer_custom_service表。
+
+开发接口实现
+
+用于返回自定义规则最终的档案主键的集合。这里提供两种方式的接口：第一种有版本记录，通过调度任务负责触发更新计算；第二种无版本记录，实时调用返回。推荐使用第一种方法。
+
+注意：需要将实现的服务注入到Spring中。使用@Service或配置文件均可。
+
+两种方法均需要依赖u8c-auth-sdk。
+
+废弃
+
+<dependency>
+
+<groupId>com.yonyoucloud</groupId>
+
+<artifactId>u8c-auth-sdk</artifactId>
+
+<version>[版本号]</version>
+
+</dependency>
+
+
+引入新版（当前最新2.0.4-SNAPSHOT-20220523）
+
+<dependency>
+
+<groupId>com.yonyou.diwork</groupId>
+
+<artifactId>u8c-auth-pub-api</artifactId>
+
+<version>[版本号]</version>
+
+</dependency>
+
+
+方法一（有版本，推荐）：
+
+import com.yonyoucloud.uretail.sys.auth.CustomAuthContent;
+
+import com.yonyoucloud.uretail.sys.auth.CustomAuthRuleResponse;
+
+import org.springframework.stereotype.Service;
+
+import java.util.Date;
+
+import java.util.HashSet;
+
+import java.util.Set;
+
+@Service
+
+public class XxxCustomVersionRuleAuthReferService implements ICustomVersionRuleAuthReferService {
+
+@Override
+
+public CustomAuthRuleResponse getValues(CustomAuthContent content) throws Exception {
+
+//营销租户主键
+
+Long yxyUserId = content.getYxyUserId();
+
+//营销租户主键
+
+Long yxyTenantId = content.getYxyTenantId();
+
+//友互通用户主键
+
+String yhtUserId = content.getYhtUserId();
+
+//友互通租户主键
+
+String yhtTenantId = content.getYhtTenantId();
+
+//自定义参数值
+
+String[] customValues = content.getCustomValues();
+
+//日期版本
+
+Date version = content.getVersion();
+
+CustomAuthRuleResponse customAuthRuleResponse = new CustomAuthRuleResponse();
+
+Set<String> idSet = new HashSet<>();
+
+//业务逻辑....
+
+idSet.add("abc");
+
+//业务是否成功完成
+
+boolean isSuccess = true;
+
+if (isSuccess) {
+
+customAuthRuleResponse.setiSuccess(true);
+
+customAuthRuleResponse.setVersion(new Date());
+
+customAuthRuleResponse.setValues(idSet);
+
+} else {
+
+customAuthRuleResponse.setiSuccess(false);
+
+customAuthRuleResponse.setFailMessage("失败信息");
+
+customAuthRuleResponse.setVersion(new Date());
+
+}
+
+return customAuthRuleResponse;
+
+}
+
+}
+
+
+此方法的原理是：借助调度服务，更新缓存数据用于数据查询。
+
+在标准版中，已经采用了统一的调度任务刷新；但在专属化环境，可能因调度任务未被统一升级而导致数据权限中自定义不生效问题（清单仍然生效）。
+
+因此需要专属化环境注意：当出现上述不生效情况时，需要在租户级配置调度任务。关键内容如下：
+
+如果需要增加全部租户，需要与调度任务负责人协调，建立统一的任务。
+
+方法二（不推荐）：
+
+import com.yonyoucloud.uretail.sys.auth.CustomAuthContent;
+
+import org.springframework.stereotype.Service;
+
+import java.util.HashSet;
+
+import java.util.Set;
+
+@Service
+
+public class XxxCustomRuleAuthReferService implements IXxxCustomRuleAuthReferRpcService{
+
+@Override
+
+public Set<String> getValues(CustomAuthContent content) throws Exception {
+
+//营销租户主键
+
+Long yxyUserId = content.getYxyUserId();
+
+//营销租户主键
+
+Long yxyTenantId = content.getYxyTenantId();
+
+//友互通用户主键
+
+String yhtUserId = content.getYhtUserId();
+
+//友互通租户主键
+
+String yhtTenantId = content.getYhtTenantId();
+
+//自定义参数值
+
+String[] customValues = content.getCustomValues();
+
+Set<String> idSet = new HashSet<>();
+
+//业务逻辑....
+
+idSet.add("abc");
+
+
+return idSet;
+
+}
+
+}
+
+### []()注册微服务
+
+@Bean
+
+public RemoteCallInfo initUpcCustomAuthRule(){
+
+RemoteCallInfo rci = new RemoteCallInfo();
+
+rci.setAppCode("productcenter");
+
+rci.setNameSpace("c87e2267-1001-4c70-bb2a-ab41f3b81aa3");
+
+rci.setClassName(ICustomVersionRuleAuthReferService.class.getName());
+
+rci.setAlias("upcDeptTestCustomAuthRule");
+
+((IRemoteCallInfoManagerService)MwLocator.lookup(IRemoteCallInfoManagerService.class)).regRemoteCall(rci);
+
+return rci;
+
+}
+
+与数据权限部门对接
+
+使用RPC方式：提供微服务实现的AppCode、NameSpace、Alias参数。
+
+（也允许使用REST方式：提供域名和接口url）
+
+领域侧需要提供有：
+
+所属域/微服务名（domain）：形如“yycrm”
+
+服务编码（param_code）：形如“dmbase_dept_01”
+
+服务名称（param_name）：形如“当前人员所属部门（任职）[CRM]”
+
+服务英文名称（param_name2）：形如“Department (position) of current personnel [CRM]”
+
+服务繁体名称（param_name2）：形如“當前人員所屬部門（任職）[CRM]”
+
+服务描述（param_explain）：形如“查找当前人员子表“员工任职”的部门”
+
+规则编码（service_code）：形如“dmDeptAuthRule”
+
+服务URL（service_url）：形如“rpc://yycrm@c87e2267-1001-4c70-bb2a-ab41f3b81aa3/dmDeptAuthRule”
+
+访问方式（invoke_type）：形如“RPC”、“REST”
+
+提交扩展申请请参见“附录C：扩展申请单”。
+
+新增计算包含下级的服务扩展规则
+
+规则服务地址提供方式，还是按照上文3一样提供
+
+package com.yonyoucloud.uretail.sys.itf.custom;
+
+import com.yonyoucloud.uretail.sys.auth.CustomAuthRuleResponse;
+
+import com.yonyoucloud.uretail.sys.auth.CustomCaclSubAuthContent;
+
+import org.springframework.stereotype.Service;
+
+import java.util.Date;
+
+import java.util.HashSet;
+
+import java.util.List;
+
+import java.util.Set;
+
+/**
+
+* @author cy
+
+* @description:
+
+* @date 2022/5/23 14:24
+
+*/
+
+@Service
+
+public class XXXICustomVersionCaclSubRuleAuthReferService implements ICustomVersionCaclSubRuleAuthReferService{
+
+@Override
+
+public CustomAuthRuleResponse getValues(CustomCaclSubAuthContent content) throws Exception {;
+
+//营销租户主键
+
+Long yxyTenantId = content.getYxyTenantId();
+
+//友互通租户主键
+
+String yhtTenantId = content.getYhtTenantId();
+
+//父级id
+
+List parentList = content.getParentList();
+
+//日期版本
+
+Date version = content.getVersion();
+
+// fullname
+
+String fullName = content.getFullName();
+
+// 根据父级，计算包含子级
+
+CustomAuthRuleResponse customAuthRuleResponse = new CustomAuthRuleResponse();
+
+Set<String> subIdSet = new HashSet<>();
+
+//业务逻辑....
+
+subIdSet.add("abc");
+
+//业务是否成功完成
+
+boolean isSuccess = true;
+
+if (isSuccess) {
+
+customAuthRuleResponse.setiSuccess(true);
+
+customAuthRuleResponse.setVersion(new Date());
+
+customAuthRuleResponse.setValues(subIdSet);
+
+} else {
+
+customAuthRuleResponse.setiSuccess(false);
+
+customAuthRuleResponse.setFailMessage("失败信息");
+
+customAuthRuleResponse.setVersion(new Date());
+
+}
+
+return customAuthRuleResponse;
+
+}
+
+}
+
+授权权开通
+注意事项
+
+开启授权权后对BIP系统权限配置方式产生极大影响，包括不限于以下节点：角色管理、授权、数据权限、角色组、组织权限管理员、角色功能权限查询、用户数据权限查询
+
+授权权开启后，系统内所有用户除租户管理员外，将无法进行任何权限操作。
+
+开启授权权，会升级组织管理员，详见下文
+
+必要条件
+
+保证租户内存在至少一名租户管理员账号
+
+熟悉掌握授权权使用过程——即完整阅读本手册
+
+与产品经理沟通使用场景是否符合授权权设计
+
+开通流程
+
+整个流程要有邮件形式的留档，并抄送给相关开发部的部门经理和产品经理，避免在执行过程中误操作。
+
+（流程图如下）
+
+（产品呈现如下）
+
+在数字化建模->我的企业->【公共参数】节点开启是否启用权限授权管控，下拉枚举项选择启用管理员授权权，即可开启授权权，开启授权权的同时，会关闭启用组织管理员和角色管理受用户权限控制两个参数功能。授权权一旦开启，无法再关闭，该操作不可逆。
+
+注意：开启方式公有云与专属化有所差异。公有云需要联系【权限服务开发部】先进行参数脚本升级，才能在公共参数节点的【是否启用权限授权管控】的枚举值内看到【启用管理员授权权】，选择该项，并点击右下角【保存】按钮。
+
+权限调试工具
+访问地址
+
+工具访问地址-日常：
+
+[https://bip-daily.yyuap.com/mdf-node/platform/api-function-search?locale=zh_CN&domainKey=u8c-auth](https://bip-daily.yyuap.com/mdf-node/platform/api-function-search?localezh_CN&domainKeyu8c-auth" \t "_blank)
+
+工具访问地址-测试：
+
+[http://bip-test.yyuap.com/mdf-node/platform/api-function-search?locale=zh_CN&domainKey=u8c-auth](http://bip-test.yyuap.com/mdf-node/platform/api-function-search?localezh_CN&domainKeyu8c-auth&v1true" \t "_blank)
+
+工具访问地址-预发：
+
+[https://bip-pre.diwork.com/mdf-node/platform/api-function-search?locale=zh_CN&domainKey=u8c-auth](https://bip-pre.diwork.com/mdf-node/platform/api-function-search?localezh_CN&domainKeyu8c-auth" \t "_blank)
+
+工具访问地址-生产：
+
+[https://www.diwork.com/mdf-node/platform/api-function-search?locale=zh_CN&domainKey=u8c-auth](https://www.diwork.com/mdf-node/platform/api-function-search?localezh_CN&domainKeyu8c-auth" \t "_blank)
+
+工具地址拼接方式为当前环境域名后面拼接诊断地址连接：
+
+{各环境入口地址}+[/mdf-node/platform/api-function-search?locale=zh_CN&domainKey=u8c-auth](https://bip-pre.diwork.com/mdf-node/platform/api-function-search?localezh_CN&domainKeyu8c-auth" \t "_blank)
+
+各个环境入口地址变化：
+
+开发环境入口地址：bip-test.yyuap.com 常用 bip-test.yyuap.com/login
+
+日常环境入口地址：bip-daily.yyuap.com
+
+预发环境入口地址：bip-pre.diwork.com
+
+生产环境入口地址不变，yonsuite.yonyou.com,yonbip.yonyou.com www.diwork.com
+
+专属化 专属化域名：根据专属化域名登录入口的域名地址即可
+
+功能描述
+
+5.7.2.1 常用查询
+
+5.7.2.1.1 自定义服务查询
+
+选择serviceId，并且输入token来进行查询
+
+结果如下列：（仅供参考）
+
+查询正确：直接返回步骤
+
+查询错误：提示查看请求返回值
+
+5.7.2.1.2 token信息查询
+
+输入token进行查询
+
+5.7.2.2 监控管理
+
+5.7.2.2.1 缓存管理
+
+首次进入页面不显示内容，输入缓存可以根据Key值查询缓存，如果不知道缓存关键字可以点击问号查看常用缓存提示。搜索完毕后，可以进行查看，删除，等相关操作。
+
+5.7.2.2.2 监控面板
+
+点击开始录制则可以开始记录，然后打开目标单据页面，刷新或者和重新打开，就可以观察到当前页面或操作调用权限接口的信息了。
+
+录制结果如下展示
+
+5.7.2.2.3 权限接口排行榜
+
+5.7.2.3 问题排查
+
+5.7.2.3.1 元数据排查
+
+输入fullname进行查询：
+
+查询结果如下：
+
+点击所属应用可继续查询
+
+5.7.2.3.2 数据权限
+
+首次进入页面点击选择接口下拉框选择接口，进行查询，可以查询临时表和清除缓存等操作。
+
+5.7.2.3.3 主组织权限
+
+输入authId进行查询，右侧可以进行清除缓存
+
+5.7.2.3.4 功能权限
+
+根据tokenId进行查询
+
+查询成功返回如下数据
+
+点击各列可以展开查看相关数据
+
+三员模式开通
+安装三员补丁
+
+三员开通需要安装“军工三员”补丁包。然后在三员开通页面，将租户转换为三员模式。三员模式打开后，将创建三员用户并交由三员管理，不再允许转变为非三员模式。
+
+开通三员
+
+系统管理—企业账号管理—启用三员管理
+
+点击启用“启用三员管理”
+
+开放接口规范
+RESTful接口
+角色及授权
+rest调用方式，通过走网关调用，需要加签验签，签名采用开发者中心AccessKey jwt算法
+
+url：${域名}/service-adapter/rpc-adapter/gateway
+
+method：post
+
+content-type：application/x-www-form-urlencoded
+
+requestHeaders：
+
+参数名称	参数说明
+userId	当前用户id
+tenantId	当前租户id
+locale	当前语种
+yht_access_token	友互通认证token
+请求参数：
+
+serviceName：接口名（详见6.2.1 列表）
+
+methodName：方法名（详见6.2.1 列表）
+
+args：接口输入参数（详见上方列表）（注：参数是对象的话，转成json格式字符串传递即可）
+
+返回参数说明：
+
+返回数据为统一格式{ status:1, data:......, msg:"查询成功"}
+
+代码示例
+
+
+public****voidtestConfigValueService()throwsBusinessException {String url ="https://u8c-daily.yyuap.com/service-adapter/rpc-adapter/gateway";RestfulClient client =newRestfulClient("tasz0ERoG9kqUJnH","uxCZVKuLInq1ep8OwiMGFN9MpWlhY7");//accessKey, accessSecretMap<String,String> params =newHashMap<>();params.put("serviceName","com.yonyou.uap.tenant.service.itf.ITenantRoleService");params.put("methodName","findByRoleId");// 注意此处方法名与上边serviceName的服务一定要匹配params.put("args","["a326472f-6ca8-4ac4-b7b0-802de2b8b100"]");// 多个参数，如 ITenantRoleUserService 服务下方法，findRolesByUserIds// Object[] paramArray = new Object[3];// List userids = new ArrayList<>();// userids.add("e07fcbc1-cf30-42fc-851f-75373cccc162");// paramArray[0] = userids;// paramArray[1] = "c04cstr1";// paramArray[2] = "diwork";// params.put("args", JSON.toJSONString(paramArray));try{System.out.println(client.signAndPost(url, params));}catch(BusinessException e) {e.printStackTrace();}}
+功能权限
+根据应用编码查询租户下功能权限
+url：域名/iuap-apcom-auth/u8c-auth/rest/funPermission/getFunPermission
+
+请求方式：POST
+
+入参：
+参数	是否必填	参数类型	参数名
+subIds	是	LIst	应用编码集合
+
+入参请求形式实例 ：["GZTACT"]
+
+出参：
+
+参数	类型	名称
+code	int	返回200成功，其他失败
+data	List	有权限的服务编码与按钮编码集合
+message	String	提示信息
+主组织权限
+获取指定用户在指定隔离维度下的组织权限列表（REST）
+
+接口URL：[域名]/service-adapter/rpc-adapter/gateway/
+
+方法：POST
+
+接口说明：获取用户在指定隔离维度下的组织权限列表（本质上就是通过框架调用3.2.3中的接口）
+
+参数列表：
+
+			
+参数名称	参数类型	参数说明	是否必填
+serviceName	String	微服务类名，固定值：com.yonyou.diwork.service.auth.IServiceIsolateService	是
+methodName	String	微服务方法名，固定值：findUserDataPermission	是
+args	Map<String, Object>	微服务参数列表:userId：用户idisolateId：隔离维度编码（主组织权限固定为orgdept）orgdept：组织部门billPoint：开票点finbd：会计主体controlsope：管控范围serviceCode：服务编码tenantId：租户id	是
+
+返回值：
+
+类型：JSON（基于com.yonyou.ucf.mdd.ext.dto.ResponseDto）
+
+说明：组织编码List集合
+
+data形如：["1","2"]
+
+数据权限
+按单据查询数据权限（REST）
+
+接口名称：[域名]/u8c-auth/rest/dataPermission/getDataPermissionByGroup
+
+方法：POST
+
+方法说明：按单据查询获取维度的过滤范围（按照用户与角色做分组返回）
+
+参数列表：
+
+			
+名称	描述	是否必填	备注
+yxyUserId	营销用户主键	否	当传递了用户token时，此属性无需赋值
+yxyTenantId	营销租户主键	否	
+yhtTenantId	友户通租户主键	否	
+sysCode	应用编码	是	
+serviceCode	服务编码	否	
+entityUri	元数据URI	是	
+entityUris	元数据URI数组	否	
+scene	场景	否	
+haveDetail	是否包含明细	否	
+fieldNameArgs	过滤属性范围	否	
+fullnameArgs	过滤类型范围	否	
+
+返回值：
+
+		
+字段名称	备注	数据类型
+userDataPermissionDto	用户数据权限json	json
+	haveDetail	
+	entityUri	
+	dataPermissionMapList	过滤信息
+		fieldName
+		fullname
+		columnName
+		tableName
+roleDataPermissionList	角色数据权限list	list
+	roleId	
+	roleDataPermissionRequestDto	角色数据权限json
+		haveDetail
+		entityUri
+		dataPermissionMapList
+{		
+
+"userDataPermissionDto":{
+
+"haveDetail":false,
+
+"entityUri":"voucher.order.Order",
+
+"dataPermissionMapList":[
+
+{
+
+"fieldName":"vendor",
+
+"fullname":"aa.vendor.Vendor",
+
+"columnName":"iVendorId",
+
+"suggestJoinType":"IN",
+
+"tableName":"auth_3.temp_perm_311994666520150016"
+
+}
+
+]
+
+},
+
+"roleDataPermissionList":[
+
+{
+
+"roleId":"角色Id",
+
+"roleDataPermissionRequestDto":{
+
+"haveDetail":false,
+
+"entityUri":"voucher.order.Order",
+
+"dataPermissionMapList":[
+
+{
+
+"fieldName":"vendor",
+
+"fullname":"aa.vendor.Vendor",
+
+"columnName":"iVendorId",
+
+"suggestJoinType":"IN",
+
+"tableName":"auth_3.temp_perm_311994666520150016"
+
+}
+
+]
+
+}
+
+}
+
+]
+
+}|
+
+RPC接口
+角色及授权
+			
+接口名称	方法名称	方法返回值	备注
+ITenantRoleService(com.yonyou.uap.tenant.service.itf.ITenantRoleService)			提供角色本身的增删改查
+	save(TenantRole role)	TenantRole	单个保存
+	save(List roleList)	List	批量保存
+	updateRole(TenantRole role)	void	角色修改，角色ID必输
+	deleteRole(String roleId)	void	角色删除
+	findByRoleId(String roleId)	TenantRole	根据ID查角色（单个）
+	findByRoleIds(String[] ids)	List	批量根据ID查角色列表
+	findRolesBySystemCodeAndTenantId(String systemCode, String tenantId)	List	根据系统编码和租户ID查询systemCode：diworktenantId：友户通租户ID
+ITenantRoleUserService(com.yonyou.uap.tenant.service.itf.ITenantRoleUserService)			提供用户关联角色的操作接口
+	saveRole(TenantRoleUser tru)	TenantRoleUser	单个保存用户角色
+	saveRoles(List trus)	List	批量保存用户角色
+	deleByUserAndRole(String userId, String roleId)	void	移除用户关联的指定的角色
+	deleByUserAndRole(List userIds, String roleId)	void	移除角色下关联的用户
+	deleByUserAndRole(String userId, List roleIds)	void	移除用户下关联的多个角色
+	findRolesByUserIds(List userIds,String tenantId,String systemCode)	Map<String,List>	获取用户下的所有的角色
+	findRolesByUserId(String userId,String tenantId,String systemCode)	List	查询该用户下的所有的角色
+功能权限
+			
+接口	方法	参数	说明
+IDiWorkPermissionService	Set getAuthorizedServices(String tenantId, String userId, DiworkPermissionFilter filter)	tenantId:友互通租户IDuserId:友互通用户IDfilter:查询过滤实体（具体见示例）	查询用户权限范围内的服务
+IDiWorkPermissionService	Set getServiceAndButtonPerms(String tenantId, String userId,DiworkPermissionFilter filter)	tenantId:友互通租户IDuserId:友互通用户IDfilter:查询过滤实体（具体见示例）	查询用户权限范围内的服务和按钮编码
+
+接口示例：
+
+DiworkPermissionFilter filter = new DiworkPermissionFilter().withWeb().withClient().withPhone().withRetail().withVx().withDingding();//指定查询多端
+
+DiworkPermissionFilter filter = new DiworkPermissionFilter().withWeb().withClient().withPhone().withRetail().withVx().withDingding().withServiceCodes(serviceCodes);//查询指定范围内的服务编码
+
+DiworkPermissionFilter filter = new DiworkPermissionFilter().withWeb().withClient().withPhone().withRetail().withVx().withDingding().withLabel(labelCodes);//查询指定应用内的服务编码
+
+Set<ServiceVO> sets = diworkPermissionService.getAuthorizedServices(tenantId, userId,filter)
+
+主组织权限
+获取当前登录用户在指定服务下的组织权限列表（RPC）
+
+接口名称：IOrgPermissionService
+
+方法名称：getOrgPermissions
+
+方法说明：获取当前登录用户在指定服务下的组织权限列表
+
+参数列表：
+
+			
+参数名称	参数类型	参数说明	是否必填
+authId	String	工作台服务编码，serviceCode	是
+
+返回值：
+
+类型：Set
+
+说明：组织编码Set集合
+
+获取指定用户在指定隔离维度下的组织权限列表（RPC）
+
+接口名称：IServiceIsolateService
+
+方法名称：findMainOrgPermissionGroupByRole
+
+方法说明：获取当前登录用户在指定服务下的组织权限列表（出参的组织权限是按照角色进行分组的）
+
+参数列表：
+
+			
+参数名称	参数类型	参数说明	是否必填
+userId	String	友户通用户id	是
+serviceCode	String	服务编码	是
+tenantId	String	友户通租户id	是
+
+返回值：
+
+类型：List
+
+data形如：
+
+[
+
+{
+
+"source":"role",
+
+"roleId":"1221233ddd",
+
+"resourceIds": [
+
+"1232",
+
+"123333333"
+
+]
+
+}
+
+]
+
+			
+参数名称	参数类型	参数说明	是否必填
+source	String	组织权限来源。（org：组织，role：角色，ncc：ncc同步，duty：职务）	是
+roleId	String	角色Id,只有source是role，roleId才有值	是
+resourceIds	Set	组织权限集合	是
+获取指定用户在指定隔离维度下的组织权限列表（RPC）
+
+接口名称：IServiceIsolateService
+
+方法名称：findUserDataPermission
+
+方法说明：获取用户在指定隔离维度下的组织权限列表。（此接口在隔离维度的通用性强）
+
+参数列表：
+
+			
+参数名称	参数类型	参数说明	是否必填
+userId	String	友户通用户id	是
+isolateId	String	隔离维度编码（主组织权限固定为orgdept）orgdept：组织部门billPoint：开票点finbd：会计主体controlsope：管控范围	是
+serviceCode	String	服务编码	是
+tenantId	String	友户通租户ID	是
+
+返回值：
+
+类型：List
+
+说明：组织编码List集合
+
+数据权限
+按单据查询数据权限（RPC）
+
+接口名称：IDataPermissionService
+
+方法名称：getDataPermission(DataPermissionRequestDto requestDto)
+
+方法说明：按单据查询数据权限
+
+参数列表：
+
+
+DataPermissionRequestDto
+名称
+yxyUserId
+yxyTenantId
+yhtTenantId
+sysCode
+serviceCode
+entityUri
+entityUris
+scene
+haveDetail
+fieldNameArgs
+fullnameArgs
+
+返回值：
+
+
+DataPermissionResponseDto
+haveDetail
+entityUri
+dataPermissionMapList
+{
+
+"haveDetail": false,
+
+"entityUri": "voucher.order.Order",
+
+"dataPermissionMapList": [
+
+{
+
+"fieldName": "vendor",
+
+"fullname": "aa.vendor.Vendor",
+
+"columnName": "iVendorId",
+
+"suggestJoinType": "IN",
+
+"tableName": "auth_3.temp_perm_311994666520150016"
+
+}
+
+]
+
+}|
+
+指定批量单据查询数据权限（RPC）
+
+接口：IDataPermissionService
+
+方法：batchGetDataPermission(DataPermissionRequestDto requestDto)
+
+接口说明：指定批量单据查询数据权限。批量查询接口，入参中haveDetail的指定不启作用，只返回权限分表，不返回明细。
+
+参数列表：
+
+
+DataPermissionRequestDto
+名称
+yxyUserId
+yxyTenantId
+yhtTenantId
+sysCode
+serviceCode
+entityUri
+entityUris
+scene
+haveDetail
+fieldNameArgs
+fullnameArgs
+
+返回值：List
+
+
+DataPermissionResponseDto
+haveDetail
+entityUri
+dataPermissionMapList
+[{
+
+"haveDetail": false,
+
+"entityUri": "voucher.order.OrderDetail",
+
+"dataPermissionMapList": [{
+
+"fieldName": "saleDepartmentId",
+
+"values": [],
+
+"fullname": "bd.adminOrg.AdminOrgVO",
+
+"columnName": "iSaleDepartmentId",
+
+"suggestJoinType": "IN",
+
+"tableName": "auth_1.temp_perm_262994872267440128"
+
+}
+
+]},
+
+{
+
+"haveDetail": false,
+
+"entityUri": "voucher.order.Order",
+
+"dataPermissionMapList": [{
+
+"fieldName": "saleDepartmentId",
+
+"values": [],
+
+"fullname": "bd.adminOrg.AdminOrgVO",
+
+"columnName": "iSaleDepartmentId",
+
+"suggestJoinType": "IN",
+
+"tableName": "auth_1.temp_perm_262994872267440128"
+
+}
+
+]
+
+}
+
+]|
+
+指定应用查询数据权限（RPC）
+
+接口：IDataPermissionService
+
+方法：getDataPermissionBySysCode(DataPermissionRequestDto requestDto)
+
+接口说明：指定应用查询数据权限。接口返回的信息不带元数据属性、数据库列名信息；按照维度类型合并后返回；（注意：无法控制到指定字段，例如：采购供应商、供货供应商两个只想设置并控制一个）
+
+参数列表：
+
+
+DataPermissionRequestDto
+名称
+yxyUserId
+yxyTenantId
+yhtTenantId
+sysCode
+serviceCode
+entityUri
+entityUris
+scene
+haveDetail
+fieldNameArgs
+fullnameArgs
+
+返回值：
+
+
+DataPermissionResponseDto
+haveDetail
+entityUri
+dataPermissionMapList
+{
+
+"haveDetail": false,
+
+"entityUri": "voucher.order.Order",
+
+"dataPermissionMapList": [
+
+{
+
+"fieldName": "",
+
+"fullname": "aa.vendor.Vendor",
+
+"columnName": "",
+
+"suggestJoinType": "IN",
+
+"tableName": "auth_1.temp_perm_262994872267440128"
+
+}
+
+]
+
+} |
+
+文档内容是否对您有所帮助？
+为帮助文档评分：
+页内目录
+1. 技术架构
+1.1 架构设计
+1.2 模型设计
+1.2.1 功能权限
+1.2.2 主组织权限
+1.2.3 数据权限
+2. 功能介绍
+2.1 概述
+2.2 用户
+2.2.1 身份视图
+2.2.2 用户视图
+2.3 功能权限
+2.3.1 角色管理
+2.3.2 授权
+2.3.3 全员应用授权
+2.3.4 组织权限管理员
+2.3.5 查询功能权限
+2.4 主组织权限
+2.4.1 功能描述
+2.4.2 角色管理
+2.4.3 授权
+2.4.4 分配组织
+2.4.5 查询主组织权限
+2.5 数据权限
+2.5.1 功能描述
+2.5.2 角色管理
+2.5.3 数据权限
+2.6 授权权
+2.6.1 概述
+2.6.2 授权权开启
+2.6.3 典型案例
+2.6.4 权限各节点受控情况
+2.7 三员授权
+2.7.1 概述
+2.7.2 三员授权开启
+2.7.3 三员与授权权的关系
+2.7.4 初始三员功能
+3. 开发示例
+3.1 MDD接入模式
+3.1.1 功能权限
+3.1.2 主组织权限
+3.1.3 数据权限
+3.2 非MDD接入模式
+3.2.1 功能权限
+3.2.2 主组织权限
+3.2.3 数据权限
+4. 典型业务场景介绍
+4.1 预制角色
+4.2 按钮注册
+4.2.1 背景介绍
+4.2.2 按钮预制工具
+4.2.3 按钮同步
+4.3 按钮升级
+4.3.1 升级场景
+4.3.2 升级流程
+4.3.3 重复按钮处理
+4.4 数据权限管理维度注册
+4.4.1 扩展管理维度
+4.4.2 扩展管理维度的权限范围
+4.4.3 扩展数据的缓存清理
+4.4.4 扩展数据权限环境同步
+4.5 数据权限自定义规则注册
+4.5.1 开发接口实现
+4.5.2 与数据权限部门对接
+4.5.3 新增计算包含下级的服务扩展规则
+4.6 授权权开通
+4.6.1 注意事项
+4.6.2 必要条件
+4.6.3 开通流程
+4.7 权限调试工具
+4.7.1 访问地址
+4.7.2 功能描述
+4.8 三员模式开通
+4.8.1 安装三员补丁
+4.8.2 开通三员
+5. 开放接口规范
+5.1 RESTful接口
+5.1.1 角色及授权
+5.1.2 功能权限
+5.1.3 主组织权限
+5.1.4 数据权限
+5.2 RPC接口
+5.2.1 角色及授权
+5.2.2 功能权限
+5.2.3 主组织权限
+5.2.4 数据权限
+文档反馈
+北京市海淀区北清路68号用友产业园
+4006-600-588
+友情链接
+用友官网用友YonHelp用友iuap平台用友云市场用友云注册协议隐私条款
+
+Copyright ©2020 用友网络科技股份有限公司版权所有京ICP备05007539号-24京公网安备11010802021935号
+
+返回顶部
+加载中...

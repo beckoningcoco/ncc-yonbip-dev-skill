@@ -1,0 +1,729 @@
+社区文档中心
+首页
+文档导航
+开发者社区
+社区论坛
+视频教程技术博客
+更多
+张宏涛
+资料中心
+专业开发
+产品概述
+快速入门
+操作指南
+开发指南
+开发介绍
+新功能开发
+移动端开发
+扩展开发
+全球化
+组织
+权限
+特征
+基础数据
+审批流
+业务流
+规则引擎
+公式
+UI模板
+参照
+导入导出
+打印
+对象建模
+编码规则
+调度任务
+监控与预警
+日志
+消息平台
+工作台
+事件中心
+文件服务
+YonBuilder应用开发
+前端开发
+后端开发
+iuap-开发规范红皮书
+后端编程模型
+R6后端脚手架升级方案
+R6后端脚手架升级操作指南
+R6后端脚手架二方包坐标变更清单
+分布式锁 yms-lock 实践
+RPC接口开发与调用（iris）
+数据库操作 yms-jdbc 实践
+HTTP请求 yms-http 实践
+上下文开发实践
+线程池 yms-executors 实践
+移动开发
+安全
+数据库
+DevOps技术
+容器云技术
+区块链云技术
+YMS开发
+智能应用开发
+专项开发
+成果迁移
+技术方案
+最佳实践
+参考手册
+常见问题
+视频教程
+专业开发/开发指南/后端开发/数据库操作 yms-jdbc 实践
+数据库操作 yms-jdbc 实践
+最后更新时间：2025-05-20
+概述
+业务场景
+
+YMS-JDBC 是一个轻量级数据持久化组件，基于 JDBC 进行封装，提供面向对象的 ORM 映射能力，简化数据库操作代码，支持原生 SQL 与动态条件构造，适用于需要灵活控制 SQL 但希望减少重复代码的场景。
+
+作为YPD,MDD框架的底层持久化框架，同时也支持非YPD,MDD框架下的持久化功能。
+
+关键词
+
+持久化组件、注解驱动、元数据映射、类型处理器、多数据源
+
+接入方式
+maven依赖方式接入
+
+其中yms-jdbc.version在二方包中统一管理
+
+<dependency>
+<groupId>com.yonyou.iuap</groupId>
+<artifactId>yms-jdbc-sdk</artifactId>
+<version>{yms-jdbc.version}</version>
+</dependency>
+
+spring集成方式
+<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+<property name="dataSource" ref="配置YMSDataSource"></property>
+</bean>
+<bean id="baseDAO" class="com.yonyou.iuap.yms.dao.BaseDAO">
+<property name="jdbcTemplate" ref="jdbcTemplate"/>
+</bean>
+
+Springboot集成方式
+单一数据源
+@Configuration
+@EnableTransactionManagement
+public class CustomDsConfiguration {
+    //逻辑数据源编码规则为：spring.application.name + "_" + 数据源的beanName
+   @Bean("master")
+    public DataSource masterDatasource() {
+        return new HikariDataSource();
+    }
+    @Bean("jdbcTemplate")
+    public JdbcTemplate jdbcTemplate(DataSource master) {
+        JdbcTemplate jdbcTemplate = new JdbcTemplate();
+        jdbcTemplate.setDataSource(master);
+        return jdbcTemplate;
+    }
+    @Bean("baseDAO")
+    public BaseDAO baseDAO(JdbcTemplate jdbcTemplate) {
+        BaseDAO baseDAO = new BaseDAO();
+        baseDAO.setJdbcTemplate(jdbcTemplate);
+  		baseDAO.setTypeProcessorManager(new TypeProcessorManager());//可注册自定义类型管理器 
+  		return baseDAO;
+    }
+}
+
+多数据源
+@Configuration
+@EnableTransactionManagement
+public class CustomDsConfiguration { 
+   //YMS控制台配置的逻辑数据源编码规则为：spring.application.name + "_" + 数据源的beanName
+   @Bean("master")
+    @Primary
+    public DataSource masterDatasource() {
+        return new HikariDataSource();
+    }
+ 
+    @Bean("jdbcTemplate")
+@Primary
+    public JdbcTemplate jdbcTemplate(DataSource master) {
+        JdbcTemplate jdbcTemplate = new JdbcTemplate();
+        jdbcTemplate.setDataSource(master);
+        return jdbcTemplate;
+    }
+ 
+    @Bean("baseDAO")
+    @Primary
+    public BaseDAO baseDAO(JdbcTemplate jdbcTemplate) {
+        BaseDAO baseDAO = new BaseDAO();
+        baseDAO.setJdbcTemplate(jdbcTemplate);
+	 	baseDAO.setTypeProcessorManager(new TypeProcessorManager());//可注册自定义类型管理器
+        return baseDAO;
+    } 
+  //YMS控制台配置的逻辑数据源编码规则为：spring.application.name + "_" + 数据源的beanName 
+   @Bean(name = "slave")
+    public DataSource slaveDatasource() {
+        return new HikariDataSource();
+    }
+ 
+    @Bean(name = "jdbcTemplate2")
+    public JdbcTemplate jdbcTemplate2(@Qualifier("slave") DataSource slave) {
+        JdbcTemplate jdbcTemplate = new JdbcTemplate();
+        jdbcTemplate.setDataSource(slave);
+        return jdbcTemplate;
+    }
+ 
+    @Bean(name = "baseDAO2")
+    public BaseDAO baseDAO2(@Qualifier("jdbcTemplate2") JdbcTemplate jdbcTemplate2) {
+        BaseDAO baseDAO = new BaseDAO();
+        baseDAO.setJdbcTemplate(jdbcTemplate2);
+  		baseDAO.setTypeProcessorManager(new TypeProcessorManager());//可注册自定义类型管理器
+     	return baseDAO;
+    }
+ 
+}
+
+脚手架中接入方式 （默认单一数据源）
+@Resource(name = "busiBaseDAO", type = BaseDAO.class)
+private BaseDAO baseDAO;
+
+注解设计
+实体
+
+实体注解（@YMSEntity）：用于描述java实体与数据库表的映射关系。
+
+属性	类型	描述	默认值
+name	String	实体名(namespace+domain+name 要保证唯一性)	空
+domain	String	域	空
+namespace	String	所属命名空间	空
+列
+
+列注解（@YMSColumn）：用于描述java实体的属性与数据库字段的对应关系，以及对数据的行为、数据长度、数据精度等进行约束。
+
+属性	类型	描述	默认值
+name	String	名称	空
+unique	Boolean	是否唯一	false
+nullable	Boolean	是否可以为null	true
+insertable	Boolean	是否支持插入	true
+updatable	Boolean	是否支持更新	true
+columnDefinition	String	列定义	空
+table	String	对应表	空
+length	int	长度限制	255
+precision	int	精度（字段长度）	0
+scale	int	范围（小数位数）	0
+主实体
+
+主实体（@YMSRoot）：平行表或主子孙实体中用于标识该实体是主实体
+
+主键
+
+主键（@YMSId）：用于标识该字段是主键
+
+主键生成策略：
+
+主键生成策略（@YMSGeneratedValue）：用于描述主键的生成策略
+
+属性	类型	描述	默认值
+strategy	Stragegy(枚举)	策略	YMS OID
+domain	String	域	
+customClass	String	定制类全限定名	空
+表
+
+表注解（@YMSTable）：用于描述java实体与数据库表的对应关系。
+
+属性	类型	描述	默认值
+tableName	String	表名称	空
+一对一
+
+一对一（@OneToOne）：用于描述Java实体与Java实体的一对一关系。
+
+属性	类型	描述	默认值
+targetEntity	Class	目标实体	
+columnName	String	关联外键，不填默认使用@YMSId主键关联OneToOne表	""
+cascade	CascadeType[]	级联持久化控制枚举，与JPA类似	CascadeType.ALL
+fetch	FetchType	级联查询控制枚举，与JPA类似	FetchType.EAGER
+一对多
+
+一对多（@OneToMany）：用于描述Java实体与Java实体的一对多关系。
+
+属性	类型	描述	默认值
+targetEntity	Class	目标实体	
+associationProperty	String	一对多关联属性(如pid)	
+cascade	CascadeType[]	级联持久化控制枚举，与JPA类似	CascadeType.ALL
+fetch	FetchType	级联查询控制枚举，与JPA类似	FetchType.NOT
+DTO别名
+
+DTO别名（@YMSAlias）： 用于映射DTO属性和查询SQL中的别名
+
+属性	类型	描述	默认值
+name	String	名称	空
+API设计
+基础实体设计
+
+所有调用API接口的实体类，强类型弱类型都需继承自BaseEntity，类图如下：
+
+BaseEntity设计描述：
+
+status默认为0，本条记录未变更，主子孙操作时，每个实体分别设置不同的状态，可以实现差量修改，例：主实体修改，子实体新增一条，孙实体删除一条。详细的枚举值见下表
+changedPropertyNames支持指定字段的新增，查询，更新操作。新增操作时只写此字段，可以只新增指定的字段。查询也会利用此字段实现返回指定字段的数据。修改时指定该字段实现对指定字段的更新操作
+status	说明
+0	本条记录未变更
+1	本条记录被修改
+2	本条记录为新增数据
+3	本条记录被删除
+查询接口
+基本查询（对于元数据支持关联查询特征表和平行表）
+方法名	描述
+<T extends BaseEntity> T queryByPK(T t, ID pk)	根据主键查询
+<T extends BaseEntity> T queryByPK(T t, ID pk, String[] selectedFields)	根据主键查询(只返回指定字段数据)
+<T extends BaseEntity> List<T> queryByPKList(T t, List<ID> pkList)	根据主键列表查询，结果返回与PkList对应顺序的实体List，如果PKList其中某个pk未查询到结果，则结果List中对应此pk下标位置的结果为null
+<T extends BaseEntity> List<T> queryByPKList(T t, List<ID> pkList, String[] selectedFields)	根据主键列表查询(只返回指定字段数据)，结果返回与PkList对应顺序的实体List，如果PKList其中某个pk未查询到结果，则结果List中对应此pk下标位置的结果为null
+<T extends BaseEntity> List<T> queryByUnionkey(T t, List<ID> pkList, Map<String,Object> unionKeyMap, String[] selectedFields)	根据联合主键查询(主键支持List,unionKeyMap为联合唯一不包含主键，selectedFields传null查询全部)
+<T extends BaseEntity> List<T> queryAll(T t)	查询对应表的所有数据
+<T> List<T> queryByClause(Condition condition)	按条件(Condition对象)，可参考8.7基于Condition的查询操作代码样例
+<T> List<T> queryByClause(BaseEntity baseEntity, String[] properties, String condition, SQLParameter parameter)	按条件查询指定字段
+<T extends BaseEntity> T selectOne(T t, Map<String,Object> conditions,String[] selectedFields)	按条件单条查询
+int selectCount(BaseEntity baseEntity, Map<String,Object> conditions)	根据条件查询总数量
+原生SQL查询
+方法名	描述
+<T> T queryForObject(String sql, ResultSetProcessor processor)	基于结果集处理器与SQL无参数查询对象数据，ResultSetProcessor 定义见下面第5章节
+<T> T queryForObject(String sql, SQLParameter parameter, ResultSetProcessor processor)	基于结果集处理器与SQL带参数查询对象数据，ResultSetProcessor 定义见下面第5章节
+<T> T queryForDTO(String sql, Class<?> clz)	基于DTO类型与SQL无参数查询对象数据
+<T> T queryForDTO(String sql, SQLParameter parameter, Class<?> clz)	基于DTO类型与SQL带参数查询对象数据
+<T> List<T> queryForList(String sql, ResultSetProcessor processor)	基于结果集处理器与SQL无参数查询列表数据，ResultSetProcessor 定义见下面第5章节
+<T> List<T> queryForList(String sql, SQLParameter parameter, ResultSetProcessor processor)	基于结果集处理器与SQL带参数查询列表数据，ResultSetProcessor 定义见下面第5章节
+<T> List<T> queryForDTOList(String sql, Class<?> clz)	基于DTO类型与SQL无参数查询列表数据
+<T> List<T> queryForDTOList(String sql, SQLParameter parameter, Class<?> clz)	基于DTO类型与SQL带参数查询列表数据
+分页查询
+方法名	描述
+<T> Page<T> queryPage(BaseEntity baseEntity, String[] properties, String condition, SQLParameter parameter, PageRequest pageRequest)	按条件查询指定字段(支持排序)
+<T> Page<T> queryPage(String sql, SQLParameter parameter, PageRequest pageRequest, BaseEntity baseEntity)	基于SQL带参数分页查询数据(支持排序)
+<T> Page<T> queryDtoPage(String sql, SQLParameter parameter, PageRequest pageRequest, BaseEntity baseEntity)	基于SQL带参数分页查询数据(支持排序，支持混合实体)
+<T> Page<T> queryPage(String sql, SQLParameter parameter, ResultSetProcessor processor, PageRequest pageRequest)	基于SQL带参数分页查询数据(支持排序，支持List结果处理器，比如BeanListProcessor，MapListProcessor)
+新增接口
+方法名	描述
+<T extends BaseEntity> ID insert(T vo)	单个对象新增
+<T extends BaseEntity> ID[] insert(List<T> vos)	批量新增
+<T extends BaseEntity> ID insertWithPK(T vo)	单个对象新增（自带主键）
+<T extends BaseEntity> ID[] insertWithPK(List<T> vos)	批量新增(自带主键)
+ID insertOptional(BaseEntity vo)	单个对象新增（选择性保存字段）
+ID[] insertOptional(List<? extends BaseEntity> vo)	批量新增(选择性保存字段)
+ID insertOptionalWithPK(BaseEntity vo)	单个对象新增（选择性保存字段，自带主键）
+ID[] insertOptionalWithPK(List<BaseEntity> vo)	批量新增(选择性保存字段，自带主键)
+MergeResultType<ID> save(List<? extends BaseEntity> entityList)	差量保存(支持新增，修改，删除不同状态实体同时处理)
+MergeResultType<ID> batchSave(List<? extends BaseEntity> entityList)	仅供MDD框架调用，批量新增
+修改接口
+方法名	描述
+<T extends BaseEntity> int update(T vo)	基于对象po的修改，以主键为条件
+<T extends BaseEntity> int update(List<T> vos)	批量修改，以主键为条件
+<T extends BaseEntity> int update(T vo, String... fieldNames)	基于对象po的修改(特定字段修改)，以主键为条件
+<T extends BaseEntity> int update(List<T> vos, String... fieldNames)	批量修改；(特定字段修改)，以主键为条件
+int updateOptional(BaseEntity vo)	基于对象po的修改(选择性更新字段)，以主键为条件
+int updateOptional(List<? extends BaseEntity> vo)	批量修改；(选择性更新字段)，以主键为条件
+<T extends BaseEntity> int update(String sql)	基于SQL无参数更新
+<T extends BaseEntity> int update(String sql, SQLParameter parameter)	基于SQL有参数更新
+<T extends BaseEntity> int updateByCondition(T vo, Partition partition)	仅供MDD框架调用，基于对象po的修改
+<T extends BaseEntity> int updateByCondition(List<T> vos, Partition partition)	仅供MDD框架调用，批量修改
+删除接口
+方法名	描述
+<T extends BaseEntity> int remove(T vo)	单个删除
+<T extends BaseEntity> int remove(List<T> vos)	批量删除
+int removeByClause(BaseEntity baseEntity, String clauseSql, boolean isLogic)	条件删除 isLogic:true 逻辑删除 false:物理删除，注解实体以@LogicDelete作为删除标识
+<T extends BaseEntity> int deleteByCondition(T vo, Partition partition)	仅供MDD框架调用，单个删除
+<T extends BaseEntity> int deleteByCondition(List<T> vos, Partition partition)	仅供MDD框架调用，批量删除
+查询结果集处理器
+解析器类名	说明
+BeanProcessor	值对象处理器，返回一个javaBean,每个javaBean对应结果中一行数据
+BeanListProcessor	值对象集合处理器，返回一个ArrayList集合，集合中的每一个元素是一个javaBean,每个javaBean对应结果集合中一行数据
+ColumnProcessor	列值处理器，返回一个Java对象，结果集中只有一行数据，该对象对应与结果集中某一列的值，该处理器通过结果集列的序号或名称来确定列
+ColumnListProcessor	列值处理器，返回一个ArrayList对象，结果集中有多行数据，该对象对应与结果集中某一列的值，该处理器通过结果集列的序号或名称来确定列
+MapProcessor	HashMap处理器，返回一个HashMap, 结果集中只有一行数据，其中结果集合中每一列的列名和列值对应HashMap的一个关键字和相应的值
+MapListProcessor	HashMap集合处理器，返回一个ArrayList集合，集合中的每一个元素是一个HashMap，每个HashMap对应结果集中的一行数据,其中结果集合中每一列的列名和列值对应HashMap的一个关键字和相应的值
+ArrayProcessor	数组处理器，返回一个对象数组，结果集中只有一行数据，其中结果集中每一列对应数组的一个元素
+ArrayListProcessor	数组集合处理器，返回一个ArrayList集合，集合中的每一个元素是一个数组，每个数组对应结果集中的一行数据，其中结果集中每一列对应数组的一个元素
+DTOProcessor	DTO处理器，返回一个DTO, 结果集中只有一行数据，其中结果集合中每一列的列名和列值对应DTO的一个关键字和相应的值，DTO支持带注解与不带注解两种方式
+DTOListProcessor	DTO集合处理器，返回一个ArrayList集合，集合中的每一个元素是一个DTO，每个DTO对应结果集中的一行数据,其中结果集合中每一列的列名和列值对应DTO的一个关键字和相应的值，DTO支持带注解与不带注解两种方式
+AutoBeanProcessor	值对象处理器，返回一个javaBean,每个javaBean对应结果中一行数据，支持自动映射
+AutoBeanListProcessor	值对象集合处理器，返回一个ArrayList集合，集合中的每一个元素是一个javaBean,每个javaBean对应结果集合中一行数据，支持自动映射
+类型处理器
+
+目前类型处理器已默认支持的类型如下
+
+类型
+boolean
+java.lang.Boolean
+byte
+java.lang.Byte
+short
+java.lang.Short
+int
+java.lang.Integer
+long
+java.lang.Long
+float
+java.lang.Float
+double
+java.lang.Double
+java.lang.String
+java.io.Reader
+java.lang.Object
+java.math.BigInteger
+java.math.BigDecimal
+java.io.InputStream
+Byte[]
+byte[]
+java.util.Date
+java.sql.Date
+java.sql.Time
+java.sql.Timestamp
+java.time.Instant
+java.time.LocalDateTime
+java.time.LocalDate
+java.time.LocalTime
+java.time.OffsetDateTime
+java.time.OffsetTime
+java.time.Month
+java.time.Year
+java.time.YearMonth
+java.lang.Character
+com.yonyou.iuap.yms.type.NullParamType
+com.yonyou.iuap.yms.type.BlobParamType
+com.yonyou.iuap.yms.type.ClobParamType
+样例
+注解实体代码样例
+@YMSEntity(name = "iuap.auth.ipuquotation.IpuQuotation")
+@YMSTable(tableName = "ipuquotation_test")
+public class IpuQuotation extends BaseEntity {
+    @YMSId
+    @YMSColumn(name = "ipuquotaionid")
+    @YMSGeneratedValue(domain = "iuap_auth")
+    private String ipuquotaionid;
+
+    @YMSColumn(name = "btax")
+    private String btax;
+
+    @YMSColumn(name = "buyoffertime")
+    private Date buyoffertime;
+    //Getter  Setter
+
+注解DTO代码样例
+@YMSEntity(name = "iuap.test.TestDTO")
+@YmsTable
+public class TestDTO {
+	@YMSAlias(name = "id")
+    private String id;
+
+    @YMSAlias(name = "btax")
+    private String btax;
+
+    @YMSAlias(name = "buyoffertime")
+    private Date buyoffertime;
+       //Getter  Setter 
+
+新增代码样例
+public class BaseDao{
+  @Autowired
+   private IYmsJdbcApi ymsJdbcApi; 
+   public void testSave() throws DAOException {
+        IpuQuotation quotation = new IpuQuotation();
+        quotation.setBtax("btax_test1");
+        quotation.setIpuquotaionid("test_save12");
+      ymsJdbcApi.insert(quotation);
+    }
+    public void testUpdateWithFreeCTId() throws JsonProcessingException {
+        FeatureParent parent = new FeatureParent();
+        parent.setId("56b154f7-6eb7-476f-bd10-8f6dee6ffd5e");
+        parent.set_status(1);
+        parent.setName("abc");
+        parent.setChangedPropertyNames(new String[]{"name", "code"});
+        parent.setFullName("test.parent");
+        FeatureChild child2 = new FeatureChild();
+        child2.setId("10154522-4fb9-4e1d-babc-7b573e0bc5b0");
+        child2.setName("c更新了");
+        child2.setFullName("test.child");
+        child2.setSalary(1);
+        child2.set_status(1);
+        child2.setChangedPropertyNames(new String[]{"name", "score", "teacher", "salary"});
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("teacher", "liaoshi");
+        map.put("score", 60);
+        map.put("id", "468dd683-4a54-4f5c-a5cc-4efd186f5c44");
+        FreeCTChild freeCTChild = new FreeCTChild(map);
+        child2.setFreeCT(freeCTChild);
+        List<FeatureChild> childs = new ArrayList<>();
+        childs.add(child2);
+        parent.setChildList(childs);
+      ymsJdbcApi.save(Arrays.asList(parent));
+    }
+}
+
+修改代码样例
+public class BaseDao{
+  @Autowired
+   private IYmsJdbcApi ymsJdbcApi;
+    public void testUpdate3() throws DAOException {
+        IpuQuotation ipuQuotation = new IpuQuotation();
+        IpuQuotation quotation = ymsJdbcApi.queryByPK(ipuQuotation, "2");
+        quotation.setBtax("btax_test3");
+        quotation.setContact("aaa");
+        ymsJdbcApi.update(quotation, "btax", "concat");
+    }
+    
+   public void testUpdate4() throws DAOException {
+        SQLParameter parameter = new SQLParameter();
+        parameter.addParam("btax_test5");
+        parameter.addParam("0000026a-f46f-4eee-98a7-ff4d4114bcf3");
+        parameter.addParam("2022-07-21 18:45:09.0");
+        ymsJdbcApi.update("update ipuquotation_test set btax=? where ipuquotaionid=? and pubts=? ", parameter);
+    }
+    public void testUpdate() {
+        Parent parent = new Parent();
+        Parent a = ymsJdbcApi.queryByPK(parent, "d3bcdba4-0863-4f8b-b2d3-3003ba5e27cf");
+        a.setName("change11");
+        a.setCode("change__1_");
+        a.setChangedPropertyNames(new String[]{"name", "code"});
+        SQLParameter parameter = new SQLParameter();
+        parameter.addParam("d4c871ce-82ca-4c2e-a2fb-d948db02eb41");
+        Child child = new Child();
+        List<Child> aList = ymsJdbcApi.queryByClause(child, null, "t_child.pid=?", parameter);
+        a.setChildList(aList);
+        ymsJdbcApi.update(a);
+    }
+}
+
+删除代码样例
+public class BaseDao{
+  @Autowired
+   private IYmsJdbcApi ymsJdbcApi; 
+    
+    public void testLogicDeleteByClause() {
+        FeatureParent featureParent = new FeatureParent();
+        featureParent.setFullName("test.parent");
+        int result = ymsJdbcApi.removeByClause(featureParent, "id='56b154f7-6eb7-476f-bd10-8f6dee6ffd5e'", true);
+    }
+
+    public void testPhysicsDeleteByClause() {
+        FeatureParent featureParent = new FeatureParent();
+        featureParent.setFullName("test.parent");
+        int result = ymsJdbcApi.removeByClause(featureParent, "id='fd2836fc-fa3c-471b-8e77-b218fe5193ce'", false);
+    }
+}
+
+查询代码样例
+public class BaseDao{
+  @Autowired
+   private IYmsJdbcApi ymsJdbcApi; 
+    
+    public void testPageQuery() throws DAOException {
+        SQLParameter parameter = new SQLParameter();
+        IpuQuotation ipuQuotation = new IpuQuotation();
+        parameter.addParam("test");
+        Page<IpuQuotation> ipuQuotations = ymsJdbcApi.queryPage("select * from ipuquotation_test " + "where btax like ?", parameter, PageRequest.of(0, 10, Sort.Direction.ASC, "ipuquotaionid", "pubts"), ipuQuotation);
+    }
+    public void testQueryForObject() throws DAOException {
+        SQLParameter parameter = new SQLParameter();
+        IpuQuotation ipuQuotation = new IpuQuotation();
+        parameter.addParam("%test");
+        IpuQuotation ipuQuotations =ymsJdbcApi.queryForObject("select * from ipuquotation_test " + "where btax like ?", parameter,new BeanProcessor(ipuQuotation));
+    }
+    public void testQueryForList() throws DAOException {
+        SQLParameter parameter = new SQLParameter();
+        parameter.addParam("%btax_test1");
+        List<Map> ipuQuotations =ymsJdbcApi.queryForList("select * from ipuquotation_test " + "where btax like ?", parameter,new MapListProcessor());
+     }
+     public void testQueryForList2() throws DAOException {
+        SQLParameter parameter = new SQLParameter();
+        IpuQuotation ipuQuotation = new IpuQuotation();
+        parameter.addParam("%test%");
+        List<IpuQuotation> ipuQuotations =ymsJdbcApi.queryForList("select * from ipuquotation_test " + "where btax like ?", parameter,new BeanListProcessor(ipuQuotation));
+    }
+    public void testQueryByClause() throws DAOException {
+        SQLParameter parameter = new SQLParameter();
+        parameter.addParam("btax_test");
+        IpuQuotation ipuQuotation = new IpuQuotation();
+        List<IpuQuotation> ipuQuotations =ymsJdbcApi.queryByClause(ipuQuotation, null, "btax=?",parameter);
+    }
+    public void testQueryAll() throws DAOException {
+        IpuQuotation ipuQuotation = new IpuQuotation();
+        List<IpuQuotation> quotation = ymsJdbcApi.queryAll(ipuQuotation);
+    }
+    public void testQueryByConditionClause() throws DbException {
+        FeatureChild child = new FeatureChild();
+        child.setFullName("test.child");
+        BaseCondition condition1 = new BaseCondition(child, "ID", ConditionKeyWord.EQ, "4493935421902767509");
+        BaseCondition condition2 = new BaseCondition(child, "CODE", ConditionKeyWord.EQ, "testCodeC1");
+        Condition condition = ConditionFromYpd.Builder.buildAllAnd(condition1, condition2);
+        ymsJdbcApi.queryByClause(child, null, condition.expression().toString(), new SQLParameter());
+    }
+    public void testQueryForDTO() {
+        String sql = "SELECT ipuquotation_test.DR dr,ipuquotation_test.pubts pubts,ipuquotation_test.btax btax,ipuquotation_test_1.i_name i_name,ipuquotation_test_1.i_code i_code,ipuquotation_test.IPUQUOTAIONID ipuquotaionid " +
+                "FROM ipuquotation_test JOIN ipuquotation_test_1 ON ipuquotation_test.IPUQUOTAIONID=ipuquotation_test_1.IPUQUOTAIONID " +
+                "WHERE ipuquotation_test.IPUQUOTAIONID IN  (?,?);";
+        SQLParameter sqlParameter = new SQLParameter();
+        sqlParameter.addParam(1);
+        sqlParameter.addParam(2);
+        List<IpuQuotation> ipuQuotations = baseDAO.queryForDTOList(sql, sqlParameter, IpuQuotation.class);
+   }
+ 	public void testPageUniteDTO() {
+        String sql = "select aId,bId,aName,bName,b_status from a,b where a.aId = b.Bid and a.aName like ?";
+        SQLParameter parameter = new SQLParameter();
+        parameter.addParam("%test%");
+        UniteDTO uniteDTO = new UniteDTO();
+        Page<UniteDTO> uniteDTOs = baseDAO.queryDtoPage(sql, parameter, PageRequest.of(0, 10, Sort.Direction.ASC,"aId"), uniteDTO);
+    } 
+
+}
+
+基于条件的查询操作
+public void testQueryByQueryCondition() throws DbException {
+		FeatureChild child = new FeatureChild();
+		child.setFullName("test.child");
+		QueryCondition<FeatureChild> q = new QueryCondition(child);
+		q.in("id", "1", "2").eq("ytenant_id", "zxc")
+			.and(q1 -> q1.like("name", "zhangsan").or().like("name", "lisi"));//这一行是嵌套AND条件示例，OR条件同理
+		ymsJdbcApi.queryByClause(q);//where id in (1, 2) and ytenant_id = 'zxc' and (name like %zhangsan% or name like %lisi%)
+    } 
+     public void testQueryByLambdaQueryCondition() throws DbException {
+		FeatureChild child = new FeatureChild();
+ 		child.setFullName("test.child");
+		LambdaQueryCondition<FeatureChild> q = new LambdaQueryCondition(child);
+		q.in(FeatureChild::getId, "1", "2").eq(FeatureChild::getYtenantid, "zxc");
+		ymsJdbcApi.queryByClause(q);
+    } 
+	  //Condition也可用来直接生成sql, WHERE id IN (?, ?) AND ytenantid = ?,参数存在 SQLParameter 
+	  public void testConditionToSQL() throws DbException {
+		QueryCondition q = new QueryCondition();
+		q.in("id", "1", "2").eq("ytenantid", "zxc");
+		System.out.println(q.getCondition());
+		SQLParameter param = q.getSQLParameter();
+    }  
+    @Test
+    public void test115Update611() throws DAOException {
+        String sql = "update ipuquotation_test set btax=?,dr=?";
+        List<String> list = new ArrayList<>();
+        list.add("1");
+        list.add("2");
+        list.add("3");
+        SQLParameter sqlParameter = new SQLParameter();
+        sqlParameter.addParam("btax_test4");
+        sqlParameter.addParam(true);
+        QueryCondition condition = new QueryCondition<>();
+        condition.in("ipuquotaionid", list);
+        sql = sql + condition.getCondition();
+        List<Object> parameters = condition.getSQLParameter().getParameters();
+        sqlParameter.addAllParam(parameters);
+        baseDAO.update(sql, sqlParameter);
+    } 
+
+常见问题
+1. 数据源
+1.1. 数据源没有配置jdbcUrl
+
+检查数据源配置文件yms_dynds.json是否存在
+如果数据源配置文件不存在，查看yms_config.json内容是否存在异常
+如果yms_config.json也不存在，查看ym制台地址是否正确，spring.application.name、moduleName、yms控制台的领域编码是否一致
+检查数据源bean名称是否规范：beanName是逻辑数据源下划线后的值。
+1.2. 当前查询条件查询的结果超过100001，数据量过多，建议缩小范围查询，提升查询效率，例如缩小时间范围到一月或一周
+优先优化自己代码，缩小查询范围
+增加配置 uap.resultset.maxRowsValue=-1
+1.3. 本地启动缺少数据库驱动
+添加对应驱动的依赖
+1.4. 租户 [租户ID] 已经创建,但尚未激活,请联系商务代表! 错误码:200002[没有在YMS控制台数据源连接池配置租户映射，请联系运维配置]
+检查租户是否绑定到对应的连接池上，连接池是否绑定到逻辑数据源上，发布配置重启
+1.5. 创建数据源失败
+检查是否缺少驱动
+检查数据库是否可以连接
+1.6. 启用了租户路由，但是获取数据源连接时上下文没有租户id，检查此处调用是否有上下文, 没有上下文需要检查调用的上游有没有设置上下文
+
+检查该逻辑数据源是否需要开启租户路由，如果不需要，在yms控制台修改配置，发布，重启服务。
+
+检查此处调用是否有上下文, 没有上下文需要检查调用的上游有没有设置上下文。
+
+检查是否在新线程内操作，检查是否在定时任务中操作。修改方法：使用yms线程池或者使用联邦查询。
+
+1.7. com.yonyou.iuap.yms.datasource.ds.YMSDataSource.init()方法出现空指针
+
+查看YMSDataSource的dsProvider属性是否为空
+
+是否能获取到ymsProvider这个bean
+
+查看是否有其他报错，导致spring容器启动失败
+
+1.8. 数据加密失败
+
+检查yms控制台是否开启加密 uap.encrypt.switch=1 需要配置在对应的微服务上。
+
+检查yms控制台配置文件是否发布，发布后重启服务。
+
+ognl -x 3 '@com.yonyou.cloud.tualatin.monitor.YMSSlowSqlMonitorUtils@encryptSwitch' 通过arthas命令查看是否开启加密开关 返回值大于0就可以。如果是-1 需要检查yms控制台配置 发布yms控制台配置并重启服务。
+
+1.9. 获取默认连接池为空
+
+先确定是哪个实例出现的异常，然后通过arthas查看实例是哪个维度的 vmtool -x 3 --action getInstances --className com.yonyou.iuap.yms.config.service.YmsConfigService --express 'instances[0].getCurrentDimension()'
+
+然后询问运维这个租户组是哪个维度，如果租户组的维度和实例的维度不一致，说明请求打错实例了，需要联系赵永军老师或张威老师排查。
+
+如果租户组维度和实例维度一致需要接着排查。
+
+先通过arthas命令查看逻辑数据源绑定了哪些连接池 vmtool -x 3 --action getInstances --className com.yonyou.iuap.yms.datasource.ds.provider.impl.YMSGlobalDataSourceProviderV2 --express 'instances[0].groupConfigMap.get("逻辑数据源编码").getDsList()'
+
+再通过arthas命令查看连接池绑定的租户组 vmtool -x 3 --action getInstances --className com.yonyou.iuap.yms.datasource.ds.provider.impl.YMSGlobalDataSourceProviderV2 --express 'instances[0].dsDefineGroupMap.get("连接池编码").getTenantGroupSet()'
+
+检查逻辑数据源绑定的连接池是否有绑定异常信息中的租户组，如果没有绑定需要检查yms控制台配置，询问运维这个租户组对应的连接池并把这个连接池绑定到逻辑数据源上，发布重启，如果这个租户组没有绑定连接池，询问运维这个租户组需要绑定到哪个连接池，绑定后再把这个连接池绑定到逻辑数据源上 发布重启。
+
+文档内容是否对您有所帮助？
+为帮助文档评分：
+页内目录
+1. 概述
+1.1 业务场景
+1.2 关键词
+2. 接入方式
+2.1 maven依赖方式接入
+2.2 spring集成方式
+2.3 Springboot集成方式
+2.3.1 单一数据源
+2.3.2 多数据源
+2.3.3 脚手架中接入方式 （默认单一数据源）
+3. 注解设计
+3.1 实体
+3.2 列
+3.3 主实体
+3.4 主键
+3.5 主键生成策略：
+3.6 表
+3.7 一对一
+3.8 一对多
+3.9 DTO别名
+4. API设计
+4.1 基础实体设计
+4.2 查询接口
+4.2.1 基本查询（对于元数据支持关联查询特征表和平行表）
+4.2.2 原生SQL查询
+4.2.3 分页查询
+4.3 新增接口
+4.4 修改接口
+4.5 删除接口
+4.6 查询结果集处理器
+4.7 类型处理器
+5. 样例
+5.1 注解实体代码样例
+5.2 注解DTO代码样例
+5.3 新增代码样例
+5.4 修改代码样例
+5.5 删除代码样例
+5.6 查询代码样例
+5.7 基于条件的查询操作
+6. 常见问题
+6.1 1. 数据源
+6.1.1 1.1. 数据源没有配置jdbcUrl
+6.1.2 1.2. 当前查询条件查询的结果超过100001，数据量过多，建议缩小范围查询，提升查询效率，例如缩小时间范围到一月或一周
+6.1.3 1.3. 本地启动缺少数据库驱动
+6.1.4 200002\[没有在YMS控制台数据源连接池配置租户映射，请联系运维配置\]
+6.1.5 1.5. 创建数据源失败
+6.1.6 1.6. 启用了租户路由，但是获取数据源连接时上下文没有租户id，检查此处调用是否有上下文, 没有上下文需要检查调用的上游有没有设置上下文
+6.1.7 1.7. com.yonyou.iuap.yms.datasource.ds.YMSDataSource.init方法出现空指针
+6.1.8 1.8. 数据加密失败
+6.1.9 1.9. 获取默认连接池为空
+文档反馈
+北京市海淀区北清路68号用友产业园
+4006-600-588
+友情链接
+用友官网用友YonHelp用友iuap平台用友云市场用友云注册协议隐私条款
+
+Copyright ©2020 用友网络科技股份有限公司版权所有京ICP备05007539号-24京公网安备11010802021935号
+
+返回顶部
+加载中...

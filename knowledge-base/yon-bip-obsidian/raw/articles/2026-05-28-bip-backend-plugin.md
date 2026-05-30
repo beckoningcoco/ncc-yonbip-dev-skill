@@ -1,0 +1,373 @@
+---
+source_url: https://c2.yonyoucloud.com/iuap-hc-client/ucf-wh/client/index.html#/detail/HDCJKFYDS1
+extracted: 2026-05-28
+title: 后端插件开发（YDS）
+version: BIP5
+images: 26
+---
+
+概述
+快速入门
+操作指南
+开发指南
+开发介绍
+新功能开发
+新应用开发（YDS）
+后端插件开发YDS
+前端开发(MDF)
+前端典型示例开发(MDF)
+新应用开发YNF
+本地前端开发环境搭建（YNF）
+前端开发（YNF）
+前端典型示例开发（YNF）
+移动端开发
+扩展开发
+全球化
+组织
+权限
+特征
+基础数据
+审批流
+业务流
+规则引擎
+公式
+UI模板
+参照
+导入导出
+打印
+对象建模
+编码规则
+调度任务
+监控与预警
+日志
+消息平台
+工作台
+事件中心
+文件服务
+YonBuilder应用开发
+前端开发
+后端开发
+移动开发
+安全
+数据库
+DevOps技术
+容器云技术
+区块链云技术
+YMS开发
+智能应用开发
+专项开发
+成果迁移
+技术方案
+最佳实践
+参考手册
+常见问题
+视频教程
+专业开发/开发指南/新功能开发/后端插件开发YDS
+后端插件开发YDS
+最后更新时间：2025-09-24
+概述
+适用场景
+部署方案	开发类型	是否适用
+公有云	客户化定制开发	否
+私有云	客户化定制开发	是
+专属云	客户化定制开发	是
+公有云	ISV生态开发	否
+私有云	ISV生态开发	是
+专属云	ISV生态开发	是
+业务场景
+
+复杂业务场景下，YonBuilder专业版可进行前后端脚手架工程的开发以实现具体的业务功能，本文讲解使用YPD脚手架工程对商品采购需求单进行客开，实现客开逻辑的扩展。
+
+关键词
+
+专业版、开发、YPD、Java类、插件类
+
+YPD框架原理
+
+YPD框架内置单据动作的实现，基本涵盖了页面上的所有操作，且提供了单据动作调度器，其中定义了插件扩展的切面，如下图：
+
+基于平台YPD框架，以保存操作为例，动作请求的处理链路，如下图：
+
+基于保存请求的链路图，保存动作预留的扩展点如下图：
+
+YPD后端脚手架工程
+
+后端脚手架工程结构，如下图：
+
+
+以bootstrap结尾的子工程为应用的启动工程，在以service结尾的子工程中进行业务功能的客开。
+
+开发环境适配JDK21
+
+如果开发环境是All in one版本，需要下载最新的JDK21内核版本的版本。本地配置的需要本地安装JDK21，调整VSCODE用户全局配置
+
+//Java 运行时配置（数组形式，可配置多个运行时环境）
+"java.configuration.runtimes": [
+  {
+    "name": "JavaSE-21",
+    "path": "C:\\Program Files\\Java\\jdk-21",
+    "default": false
+  }
+],
+
+业务需求
+
+本文以商品采购需求单为例进行相关业务逻辑的扩展，具体业务场景为：
+
+触发时机：
+
+保存商品采购需求单前
+
+校验信息：
+
+1、校验需求单明细预算金额需大于0
+
+2、来源单据号和付款日期不能同时为空
+
+赋值运算：
+
+将采购组织信息添加到备注字段中
+
+插件开发
+
+根据业务场景开发业务插件，可在单据对应动作的前后执行扩展业务逻辑。 本示例是在保存动作前进行数据检验和赋值。
+
+插件运行原理
+
+应用启动时，Spring容器加载插件，并组装缓存信息到插件MAP，以便执行action时获取对应时机的插件，如下图：
+
+插件开发
+添加JAVAPOJO类
+
+在应用构建对象建模中，选择对应的业务对象，这里为“商品采购需求单”，编码为“kkfnProductPurchaseRequisition”；导出JAVAPOJO类，如下图：
+
+将导出下载的压缩包解压，添加到后端脚手架xxxxx-service子工程的com.yonyou.ucf.mdf.bill.entity包中。
+
+实体JAVAPOJO类继承SuperDO类；注解@YMSEntity，描述java实体与对应元数据的信息，其中name属性描述实体URI，domain属性描述域名，如下图：
+
+开发插件JAVA类
+创建自定义的插件JAVA类并继承com.yonyou.ypd.bill.plugin.AbstractBillPlugin抽象类，该抽象类实现了预制好的单据动作插件接口。
+自定义插件JAVA类通过@BillPlugin注解将对应的bean注入到Spring容器并通过其busiObj属性缓存起来，供动作调度器调用；属性busiObj就是业务对象的编码值，此处和基于业务对象的实体建模相呼应。
+根据业务需求重写抽象类对应动作的beforeXxxx或afterXxxx方法，预制插件方法如下表：
+序号	动作编码	插件方法	备注
+1	ACTIONCODE_ADD	initBillDefaultValueWhenNew	执行新增单据初始化默认值插件
+2	ACTIONCODE_AUDIT	beforeAudit、afterAudit	执行审核前处理插件、执行审批后处理插件
+3	ACTIONCODE_BATCHAUDIT	beforeAudit、afterAudit	执行审核前处理插件、执行审批后处理插件
+4	ACTIONCODE_DELETE	beforeDelete、afterDelete	执行删除前处理插件、执行删除后处理插件
+5	ACTIONCODE_BATCHDELETE	beforeDelete、afterDelete	执行删除前处理插件、执行删除后处理插件
+6	ACTIONCODE_PRINTDATA	afterPrintDataQuery	执行处理卡片查询后数据处理插件
+7	ACTIONCODE_DETAIL	beforeBillDetailQuery、afterBillDetailQuery	执行处理卡片查询条件插件、执行处理卡片查询后数据处理插件
+8	ACTIONCODE_LIST	beforeBillListQuery、afterBillListQuery	执行处理列表查询条件插件、执行处理列表查询后数据插件
+9	ACTIONCODE_QUERYTREE	beforeBillTreeQuery、afterBillTreeQuery	执行处理树查询条件插件、执行处理树查询后数据处理插件
+10	ACTIONCODE_REFER	beforeRefDataQuery、afterRefDataQuery、beforeRefDataRefQuery、afterRefDataRefQuery、beforeDataQuerySchema	执行处理参照查询前条件处理插件、执行处理参照查询后数据处理插件、执行处理参照查询前条件处理插件(走参照的busiObj)、执行处理参照查询后数据处理插件(走参照的busiObj)、修改生成的querySchema
+11	ACTIONCODE_LISTDETAIL	beforeListDetailQuery、afterListDetailQuery	执行处理列表细节查询条件插件、执行处理列表细节查询后数据处理插件
+12	ACTIONCODE_SAVE	beforeSave、afterSave、initBillConfig	执行保存前处理插件、执行保存后处理插件、保存前单据配置
+13	ACTIONCODE_SAVEANDSUBMIT	beforeSubmit、afterSubmit	执行提交前处理插件、执行提交后处理插件
+14	ACTIONCODE_SUBMIT	beforeSubmit、afterSubmit	执行提交前处理插件、执行提交后处理插件
+15	ACTIONCODE_UNAUDIT	beforeUnAudit、afterUnAudit	执行弃审前处理插件、执行弃审后处理插件
+16	ACTIONCODE_UNSUBMIT	beforeUnSubmit、afterUnSubmit	执行反提交前处理插件、执行反提交后处理插件
+17	ACTIONCODE_STOP	beforeStop、afterStop	执行停用前处理插件、执行停用后处理插件
+18	ACTIONCODE_UNSTOP	beforeUnStop、afterUnStop	执行启用前处理插件、执行启用后处理插件
+19	ACTIONCODE_CHECK	beforeCheck、afterCheck	执行检查前处理插件、执行检查后处理插件
+20	ACTIONCODE_BIZFLOWPUSH	beforePush、afterConvert、afterPush	推单前处理、推单，单据转换后处理、推单后处理
+21	ACTIONCODE_BPMCOMPLETE	beforeBpmcomplete、afterBpmcomplete	审批流回调前、后处理插件—不推荐，推荐使用业务插件audit,unaudit,deletebpm
+22	ACTIONCODE_DELETEBPM	beforeDeleteBpm、afterDeleteBpm	deletebpm前处理插件、deletebpm后处理插件
+23	ACTIONCODE_COPY	beforeCopy、afterCopy	执行复制前插件、执行复制后插件
+插件对应的实现方法如下图：
+
+根据具体业务扩展需求，重写方法体内的逻辑代码。
+YPD框架中可以存在并且仅可存在一个0租户的Plugin，即不绑定业务对象的plugin，运行时如若未走绑定业务对象的plugin对应的方法，默认走0租户的plugin。
+@BillPlugin
+public class CommonPlugin extends AbstractBillPlugin {
+private static final Logger logger = LoggerFactory.getLogger(CommonPlugin.class);
+@Override
+public void beforeSave(YpdBillContext billContext) throws Exception {
+  logger.info("执行保存动作前执行...");
+}
+}
+
+
+业务流自动生单客开脚手架需要实现的内容。
+
+
+扩展的写法。
+所有插件继承AbstractBillPlugin，并重写需要扩展的方法。支持业务对象级扩展。
+
+@BillPlugin(busiObj = "normal")
+public class CustomBillSavePlugin extends AbstractBillPlugin {
+private static final Logger logger = LoggerFactory.getLogger(CustomBillSavePlugin.class);
+@Override
+public void beforeSave(YpdBillContext billContext) throws Exception {
+  logger.info("执行保存动作前执行...");
+}
+@Override
+public void afterSave(YpdBillContext billContext) throws Exception {
+   logger.info("执行保存动作后执行...");
+}
+@Override
+public void beforeDB(YpdBillContext billContext) throws Exception {
+  logger.info("执行持久化前执行...");
+}
+@Override
+public void commonDoPlugin(AbsBillContext billContext, Object args) {
+   logger.info("执行保存动作前执行租户级扩展点");
+}
+@Override
+public void beforePush(YpdBillContext billContext, BizFlowParam bizFlowParam) throws Exception {
+  System.out.println("扩展beforePush");
+}
+@Override
+public void afterConvert(YpdBillContext billContext, BizFlowParam bizFlowParam, ConvertResult convert) throws Exception {
+  System.out.println("扩展afterConvert");
+}
+@Override
+public void afterPush(YpdBillContext billContext, BizFlowParam bizFlowParam) throws Exception {
+  System.out.println("扩展afterPush");
+}
+}
+
+YpdBillContext参数说明
+名称	类型	说明
+billDO	IBillDO	单据对象（强类型）
+billDOs	IBillDO[]	单据对象数组
+workflowParam	WorkflowParam	工作流参数
+formulaMap	Map<String, String>	公式map集合
+获取业务对象数据方法
+
+业务对象继承于SuperDO，且SuperDO实现了IBillDO，通过控制层对数据请求参数的转化并封装到YPD上下文（YpdBillContext对象实例billContext）中，因此，在插件中可直接获取到业务对象数据，如下示例方法：
+
+KkfnProductPurchaseRequisition purreq = (KkfnProductPurchaseRequisition) ypdContext.getBillDO();
+
+实体字段赋值
+
+直接使用JavaPOJO类的set成员变量的值，如下示例方法：
+
+String purorg = “example org”;
+purreq.setRemark(purorg);
+
+开发商品采购需求单插件
+
+首先，在后端工程中找到xxxx-service子工程（xxxx为引擎编码），在该工程下的com.yonyou.ucf.mdf.plugin包中添加插件包，本示例根据超市商品采购的场景，添加了“supermarket”包；
+
+在该包下新建插件JAVA类，建议根据业务对象编码命名，例如这里命名为“kkfnProductPurchaseRequisitionBillPlugin”，注意：一个业务对象只能有一个插件类，如果多个插件类的busiObj注解参数为同一个业务对象编码，系统只能加载到其中一个；
+
+插件类继承AbstractBillPlugin类，重写beforeSave方法；
+
+添加@BillPlugin注解，对应的busiObj属性值为“kkfnProductPurchaseRequisition”；
+
+然后，根据业务需求进行代码开发，开发中方法可参考上小节。
+
+创建结果如下图：
+
+Java规则代码如下：
+
+package com.yonyou.ucf.mdf.plugin.supermarket;
+import com.yonyou.cloud.utils.CollectionUtils;
+import com.yonyou.ucf.mdf.bill.entity.FnProductPurchaseReqDetail;
+import com.yonyou.ucf.mdf.bill.entity.FnProductPurchaseRequisition;
+import com.yonyou.ypd.bill.annotation.BillPlugin;
+import com.yonyou.ypd.bill.context.YpdBillContext;
+import com.yonyou.ypd.bill.plugin.AbstractBillPlugin;
+import org.apache.commons.lang3.StringUtils;
+import org.imeta.biz.base.BizException;
+
+import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
+
+/**
+ * 商品采购需求单插件扩展开发
+ */
+@BillPlugin(busiObj = "fnProductPurchaseRequisition")
+public class FnProductPurchaseRequisitionBillPlugin extends AbstractBillPlugin {
+
+    /**
+     * 保存前业务扩展
+     *
+     * @param billContext
+     * @throws Exception
+     */
+    @Override
+    public void beforeSave(YpdBillContext billContext) throws Exception {
+        super.beforeSave(billContext);
+
+        //校验需求单明细预算金额需大于0
+        FnProductPurchaseRequisition purreq = (FnProductPurchaseRequisition) billContext.getBillDO();
+        if (!CollectionUtils.isEmpty(purreq.getFnProductPurchaseReqDetailList())) {
+            Set<String> materialcodes = null;
+            for (FnProductPurchaseReqDetail dtl :
+                    purreq.getFnProductPurchaseReqDetailList()) {
+                BigDecimal money = dtl.getTotal();
+                if (money == null || BigDecimal.ZERO.compareTo(money) >= 0) {
+                    if (materialcodes == null) {
+                        materialcodes = new HashSet<>();
+                    }
+                    materialcodes.add(dtl.getMaterialCode());
+                }
+            }
+            if (materialcodes != null) {
+                throw new BizException("需求单明细中预算金额需大于0。不满足条件的物料编码为：" + StringUtils.join(materialcodes.toArray(), ","));
+            }
+        }
+
+        String purorg = purreq.getPurOrg();
+        if (StringUtils.isNotBlank(purorg)) {
+            // 将采购组织信息加到备注字段中
+            purreq.setRemark(purorg);
+        }
+        // 来源单据号和付款日期不能同时为空
+        if (StringUtils.isBlank(purreq.getSourceBillno())
+                && StringUtils.isBlank(purreq.getPayDate())) {
+            throw new BizException("来源单据号和付款日期不能同时为空！");
+        }
+    }
+}
+
+
+至此，插件开发完毕，可进行本地调试。
+
+本地调试
+
+本地环境验证应用效果，首先，启动脚手架前、后端工程，确保工程都正常运行，然后通过浏览器打开本地前端服务访问需求单列表，通过新增或编辑商品采购需求单验证应用效果。
+
+调试方法
+启动本地工程调试YMS微服务，首先选择自己的引擎，如下图：
+
+2.选择调试YMS微服务如图：
+
+3.本地后端服务启动成功。
+
+4.本地前端端服务启动，自动打开业务控制台。
+
+点击【新增】按钮进入单据编辑页面，输入相关信息点击【保存】按钮进行验证。后端脚手架工程可打断点查看数据交互情况，如下图：
+
+业务验证
+
+来源单据号和付款日期同时为空，保存数据，提示“来源单据号和付款日期不能同时为空！”，如下图：
+
+需求单明细预算金额需大于0，保存数据，提示“需求单明细中预算金额需大于0。不满足条件的物料编码为：3447000001”，如下图：
+
+采购组织信息添加到备注字段，按着业务需求将表单数据编辑完毕，保存数据，提示“保存成功”并跳转到列表页面，如下图：
+
+至此，本地调试完毕，可将插件扩展开发相关功能部署到引擎后端应用中。
+
+常见问题
+问题1插件类开发后运行后端服务，未加载到？
+
+答案：确保插件类编译成功，查看业务对象编码值是否正确。
+
+问题2列表查询时提示映射错误？
+
+答案：Maven清理依赖包，重新拉取新包，运行服务尝试。
+
+问题3插件类执行时，报弱类型转换错误？
+
+答案：首先确保JavaPOJO类已下载复制到工程的对应目录下，且已编译，对应的包路径需要能被启动类加载到。
+
+问题4单据修改后保存数据，插件类中子表的数据不全？
+
+答案：修改数据时，未改动的子表数据点没有提交到后端服务，所以在插件类中对应的数据是没有的。
+
+问题5插件中重写的afteraudit方法，审批后没有加载到该方法体中的逻辑？
+
+答案：afteraudit和beforeaudit方法调用时机是最后一次审批节点，也就是该方法对应的是终审。

@@ -1,0 +1,161 @@
+字段权限开发
+最后更新时间：2025-04-27
+概述
+适用场景
+部署方案	开发类型	是否适用
+公有云	客户化定制开发	否
+私有云	客户化定制开发	是
+专属云	客户化定制开发	是
+公有云	ISV生态开发	否
+私有云	ISV生态开发	是
+专属云	ISV生态开发	是
+业务场景
+
+字段权限也属于特殊数据权限的一种。字段权限是针对于业务对象上的字段，控制被授权用户对于该字段的读写等是否允许，本章节主要介绍如何在低代码当中让自己的单据能够支持字段权限。
+
+关键词
+
+低代码、开发、字段权限、业务对象、单据
+
+快速上手
+
+应用构建当中新建业务对象后，需要针对于业务对象勾选“字段权限”的场景支持。如下图：
+
+需要研发人员在开发阶段指定哪些字段是可配置字段权限的，这一步骤通过修改业务对象，选中场景支持，针对于需要进行字段权限管控的勾选中“字段权限”一列。如下图：
+
+在角色管理当中，针对于需要进行授权的字段进行权限的分配，如下图：
+
+将相关的进行了权限配置的角色授权给对应的用户，然后手动点击业务对象功能中相应对象建模右侧的清理缓存按钮（多点几次，效果更佳），即可完成权限的配置工作。
+
+典型场景
+字段权限类型
+
+字段权限分为以下四种，如下表所示：
+
+字段权限	设置效果
+读写	页面上可以看到字段并且可修改保存
+只读	页面上可以看到该字段，但是置灰不可编辑
+无权	页面上看不到该字段
+禁止	页面上看不到该字段
+
+当用户的多个角色同时对某个字段设置了字段权限的时候，此时系统针对于该字段取如下的优先级：禁止>读写>只读>无权。所以当某个用户存在多个角色的时候，我们需要小心设置字段权限，避免显示错乱问题。
+
+平台字段权限开启
+
+通常情况下我们的字段权限是不开启的。字段权限是按照租户进行开通的，公有云环境对应的租户开通字段权限需要联系集团相关老师，私有化部署的环境可以通过权限工具开启对应租户的字段权限，通过如下的方式：
+
+1、通过访问${域名}/mdf-node/platform/api-function-search?locale=zh_CN&domainKey=u8c-auth进入到权限工具的网页。
+
+2、通过访问权限工具的问题排查->字段权限->开启权限选项，开启对应租户的字段权限。
+
+3、开启对应的权限后，用户即可在角色管理当中对相应的支持字段权限的单据进行权限的配置。如下图所示：
+
+原理理解
+
+字段权限主要是在角色管理当中进行配置的，当我们打开角色管理的时候，将会调用数据权限的后台微服务，加载业务对象的相关信息，获取到对应元数据上配置了字段权限的字段，然后展示到界面上。
+
+其中获取字段权限的树结构的过程当中，是从业务对象上获取配置了字段权限的字段，并且是通过Redis缓存进行获取的，所以有时候我们需要注意缓存的问题。字段权限本身配置了以后会将数据存储在iuap_apcom_auth.ba_fieldauth数据库表当中，当我们存在问题的时候可以从该表当中查询对应的数据是否配置正确。其中auth_level字段对应了几种不同字段权限情况：0：无权；5：只读；-1：禁止；9：读写。
+
+详细的查询数据权限的逻辑可参考数据权限微服务当中的字段权限服务层的具体实现com.yonyou.iuap.bipauth.fieldauth.bizservice.impl.FieldAuthBizServiceImpl#queryFieldAuthByServiceCode方法。
+
+在使用大前端的情况下，每次大前端展示每个服务的页面的时候会查询一下字段权限，获取当前登录人在该服务下的字段权限，以此显隐界面上的字段，从而实现字段的权限控制。如果是想要自主控制的情况下，可以调用权限服务的相关接口，从而实现获取字段权限并自主编写前端代码根据权限返回数据控制每个字段的显隐等。
+
+字段权限API
+
+字段权限的功能集中于权限服务当中，通过调用权限服务相关的API可以返回当前用户拥有的字段权限，如下图所示：
+
+字段权限提供了相关的API接口供其他服务调用，通过相关的接口可以返回对应的字段权限配置：
+
+字段权限查询（给MDD框架，返回主子多个实体对象）
+
+调用方法：AuthSdkFacadeUtils.getFieldAuth(fullName,serviceCode);
+
+入参：fullName和业务对象所属服务编码；
+
+出参：List ，CtrlObjEntityDTO中包含实体的fullName以及对应字段权限列表，List ctrlObjFieldList，CtrlObjFieldDTO 中包含字段编码和权限受控级别（code=define13, authLevel=RW），注：authLevel值为枚举值，CtrlObjFieldAuthLevelEnum
+
+相关的示例源码如下：
+
+@Test
+
+public void getFiledAuth() throws Exception {
+
+AppContext.setToken(token);
+
+AppContext.setThreadContext("skipAfterLoginRule", "true");
+
+InvocationInfoProxy.setParameter("rpcToken", token);
+
+InvocationInfoProxy.setExtendAttribute("rpcToken", token);
+
+LoginUser loginUser = new LoginUser();
+
+loginUser.setYhtUserId("794a20a3-8dd6-4404-a22b-fb8bcbd4dc91");
+
+loginUser.setYhtTenantId("0000L2K8XBGPBET4XL0000");
+
+Long ldd = 1443326551608262665L;
+
+loginUser.setId(ldd);
+
+AppContext.setCurrentUser(loginUser);
+
+List<CtrlObjEntityDTO> ss =
+
+AuthSdkFacadeUtils.getFieldAuth("aa.warehouse.Warehouse", "aa_warehouselist");
+
+System.out.println("sss"+ss.size());
+
+System.out.println("sss"+ss.toString());
+
+}
+
+
+通过上述调用后返回的结果如下：
+
+CtrlObjEntityDTO(code=aa.warehouse.Warehouse,ctrlObjFieldList=[CtrlObjFieldDTO(code=createTime, authLevel=RW),CtrlObjFieldDTO(code=creatorId, authLevel=RW),CtrlObjFieldDTO(code=modifierId, authLevel=RW),CtrlObjFieldDTO(code=tenant, authLevel=RW),CtrlObjFieldDTO(code=code, authLevel=RW),CtrlObjFieldDTO(code=name, authLevel=RW),CtrlObjFieldDTO(code=address, authLevel=RW),CtrlObjFieldDTO(code=longitude, authLevel=RW),CtrlObjFieldDTO(code=latitude, authLevel=RW),CtrlObjFieldDTO(code=linkman, authLevel=RW),CtrlObjFieldDTO(code=phone, authLevel=RW),CtrlObjFieldDTO(code=erpCode, authLevel=RW),CtrlObjFieldDTO(code=iUsed, authLevel=RW),CtrlObjFieldDTO(code=creator, authLevel=RW),CtrlObjFieldDTO(code=createDate, authLevel=RW),CtrlObjFieldDTO(code=modifier, authLevel=RW),CtrlObjFieldDTO(code=modifyTime, authLevel=RW),CtrlObjFieldDTO(code=modifyDate, authLevel=RW),CtrlObjFieldDTO(code=id, authLevel=RW),CtrlObjFieldDTO(code=pubts, authLevel=RW),CtrlObjFieldDTO(code=org, authLevel=RW),CtrlObjFieldDTO(code=countCost, authLevel=R),CtrlObjFieldDTO(code=isWasteWarehouse, authLevel=R),CtrlObjFieldDTO(code=regionCode, authLevel=NO_AUTH),CtrlObjFieldDTO(code=headDefine, authLevel=RW),CtrlObjFieldDTO(code=stocks, authLevel=RW),CtrlObjFieldDTO(code=warehouseFreeDefines, authLevel=RW)])
+字段权限查询（给MDD框架，返回单个实体）
+
+调用方法：AuthSdkFacadeUtils.getCtrlObjEntityFieldAuth(fullName,serviceCode);
+
+入参：fullName和业务对象所属服务编码；
+
+出参：CtrlObjEntityDTO ，其中包含实体的fullName以及对应字段权限列表，List ctrlObjFieldList，CtrlObjFieldDTO 中包含字段编码和权限受控级别（code=define13, authLevel=RW），
+
+备注：authLevel值为枚举值，CtrlObjFieldAuthLevelEnum。
+
+调用：CtrlObjEntityDTO ctrlObjEntityDTO =
+
+AuthSdkFacadeUtils.getCtrlObjEntityFieldAuth("aa.warehouse.Warehouse","aa_warehouselist");
+
+问题1
+
+修改字段权限后，前端表现没有任何变化？
+
+答案：由于前端存在缓存，导致字段权限的变化不能及时反映到界面上，清理浏览器缓存或者开启无痕模式浏览。
+
+问题2
+
+字段权限已经设置为只读或者无权，但是界面上仍然是可读写的？
+
+答案：初步原因是由于该用户下存在多个角色，多个角色之间的权限发生了覆盖导致，因为字段权限的优先级是禁止>读写>只读>无权。简单的排查方式是将分配给该用户的某个角色当中相关字段设置为禁止，然后清除浏览器缓存后查看界面是否生效；如果生效则需要仔细排查所有角色的权限，以确定是否存在权限冲突。
+
+问题3
+
+私有化部署环境下如何开启对应租户的字段权限？
+
+答案：私有部署的环境可以通过权限工具开启对应租户的字段权限，具体方式如下几步：
+
+登录到业务中台环境,访问权限工具，地址如下：${域名}/mdf-node/platform/api-function-search?locale=zh_CN&domainKey=u8c-auth ,在权限工具页面点击问题排查->字段权限菜单，并且在右侧界面中点击开启权限。
+
+问题4
+
+在业务对象里，字段权限都勾上也发布了，但是角色的字段权限中还是空白？
+
+答案：该问题是应用操作类问题，使用字段权限需要在业务对象上对主实体进行【字段权限场景】的勾选以及字段的【字段权限场景】勾选才可以在角色管理进行字段权限的设置。
+
+问题5
+
+特征字段不支持字段权限，该怎么处理？
+
+答案：自定义项特征支持字段权限已于20240517上线，可获取相关补丁满足该能力。

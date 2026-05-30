@@ -1,0 +1,76 @@
+# |<<
+
+> https://community.yonyou.com/datadict/datadict-2105yiliao/ddc/12173.html
+
+| 序号 | 属性编码 | 属性名称 | 字段编码 | 字段类型 | 是否必输 | 引用模型 | 默认值 | 取值范围/枚举 |
+|------|------|------|------|------|------|------|------|------|
+| 1 | cbillid | cbillid | cbillid | char(20) | √ |
+| 2 | approver | approver | approver | varchar2(20) |  |  | '~' |
+| 3 | billmaker | billmaker | billmaker | varchar2(20) |  |  | '~' |
+| 4 | dbilldate | dbilldate | dbilldate | char(19) |
+| 5 | dmakedate | dmakedate | dmakedate | char(19) |
+| 6 | fstatusflag | fstatusflag | fstatusflag | number(38, 0) |
+| 7 | iprintcount | iprintcount | iprintcount | number(38, 0) |
+| 8 | ntotalastnum | ntotalastnum | ntotalastnum | number(28, 8) |
+| 9 | pk_group | pk_group | pk_group | varchar2(20) |  |  | '~' |
+| 10 | pk_org | pk_org | pk_org | varchar2(20) |  |  | '~' |
+| 11 | pk_org_v | pk_org_v | pk_org_v | varchar2(20) |  |  | '~' |
+| 12 | taudittime | taudittime | taudittime | varchar2(19) |
+| 13 | vbillcode | vbillcode | vbillcode | varchar2(40) |
+| 14 | vnote | vnote | vnote | varchar2(181) |
+| 15 | def1 | def1 | def1 | varchar2(101) |  |  | '~' |
+| 16 | def2 | def2 | def2 | varchar2(101) |  |  | '~' |
+| 17 | def3 | def3 | def3 | varchar2(101) |  |  | '~' |
+| 18 | def4 | def4 | def4 | varchar2(101) |  |  | '~' |
+| 19 | def5 | def5 | def5 | varchar2(101) |  |  | '~' |
+| 20 | def6 | def6 | def6 | varchar2(101) |  |  | '~' |
+| 21 | def7 | def7 | def7 | varchar2(101) |  |  | '~' |
+| 22 | def8 | def8 | def8 | varchar2(101) |  |  | '~' |
+| 23 | def9 | def9 | def9 | varchar2(101) |  |  | '~' |
+| 24 | def10 | def10 | def10 | varchar2(101) |  |  | '~' |
+| 25 | def11 | def11 | def11 | varchar2(101) |  |  | '~' |
+| 26 | def12 | def12 | def12 | varchar2(101) |  |  | '~' |
+| 27 | def13 | def13 | def13 | varchar2(101) |  |  | '~' |
+| 28 | def14 | def14 | def14 | varchar2(101) |  |  | '~' |
+| 29 | def15 | def15 | def15 | varchar2(101) |  |  | '~' |
+| 30 | def16 | def16 | def16 | varchar2(101) |  |  | '~' |
+| 31 | def17 | def17 | def17 | varchar2(101) |  |  | '~' |
+| 32 | def18 | def18 | def18 | varchar2(101) |  |  | '~' |
+| 33 | def19 | def19 | def19 | varchar2(101) |  |  | '~' |
+| 34 | def20 | def20 | def20 | varchar2(101) |  |  | '~' |
+| 35 | def21 | def21 | def21 | varchar2(101) |  |  | '~' |
+| 36 | def22 | def22 | def22 | varchar2(101) |  |  | '~' |
+| 37 | def23 | def23 | def23 | varchar2(101) |  |  | '~' |
+| 38 | def24 | def24 | def24 | varchar2(101) |  |  | '~' |
+| 39 | def25 | def25 | def25 | varchar2(101) |  |  | '~' |
+| 40 | def26 | def26 | def26 | varchar2(101) |  |  | '~' |
+| 41 | def27 | def27 | def27 | varchar2(101) |  |  | '~' |
+| 42 | def28 | def28 | def28 | varchar2(101) |  |  | '~' |
+| 43 | def29 | def29 | def29 | varchar2(101) |  |  | '~' |
+| 44 | def30 | def30 | def30 | varchar2(101) |  |  | '~' |
+| 45 | def31 | def31 | def31 | varchar2(101) |  |  | '~' |
+| 46 | def32 | def32 | def32 | varchar2(101) |  |  | '~' |
+| 47 | def33 | def33 | def33 | varchar2(101) |  |  | '~' |
+| 48 | def34 | def34 | def34 | varchar2(101) |  |  | '~' |
+| 49 | def35 | def35 | def35 | varchar2(101) |  |  | '~' |
+| 50 | def36 | def36 | def36 | varchar2(101) |  |  | '~' |
+| 51 | def37 | def37 | def37 | varchar2(101) |  |  | '~' |
+| 52 | def38 | def38 | def38 | varchar2(101) |  |  | '~' |
+| 53 | def39 | def39 | def39 | varchar2(101) |  |  | '~' |
+| 54 | def40 | def40 | def40 | varchar2(101) |  |  | '~' |
+| 55 | def41 | def41 | def41 | varchar2(101) |  |  | '~' |
+| 56 | def42 | def42 | def42 | varchar2(101) |  |  | '~' |
+| 57 | def43 | def43 | def43 | varchar2(101) |  |  | '~' |
+| 58 | def44 | def44 | def44 | varchar2(101) |  |  | '~' |
+| 59 | def45 | def45 | def45 | varchar2(101) |  |  | '~' |
+| 60 | def46 | def46 | def46 | varchar2(101) |  |  | '~' |
+| 61 | def47 | def47 | def47 | varchar2(101) |  |  | '~' |
+| 62 | def48 | def48 | def48 | varchar2(101) |  |  | '~' |
+| 63 | def49 | def49 | def49 | varchar2(101) |  |  | '~' |
+| 64 | def50 | def50 | def50 | varchar2(101) |  |  | '~' |
+| 65 | creationtime | creationtime | creationtime | char(19) |
+| 66 | creator | creator | creator | varchar2(20) |  |  | '~' |
+| 67 | dr | dr | dr | number(10, 0) |  |  | 0 |
+| 68 | modifiedtime | modifiedtime | modifiedtime | char(19) |
+| 69 | modifier | modifier | modifier | varchar2(20) |  |  | '~' |
+| 70 | ts | ts | ts | char(19) |  |  | to_char(sysdate,'yyyy-mm-dd hh24:mi:ss') |

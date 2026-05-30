@@ -1,0 +1,53 @@
+{
+  "projects": {
+    "机械院(NCC2111)": {
+      "test": {
+        "host": "192.168.8.139",
+        "port": 1521,
+        "service_name": "orcl",
+        "users": {
+          "NCC20250912": "NCC20250912",
+          "NCC20250614": "NCC20250614"
+        }
+      },
+      "prod": {
+        "host": "192.168.8.143",
+        "port": 1521,
+        "service_name": "ORCL",
+        "users": {
+          "NCC": "WffkeeAlIY4HidfQ05wj1W"
+        }
+      }
+    },
+    "天九(NCC2312)": {
+      "test": {
+        "host": "pc-2zek8f77996c0g6zz.o.polardb.rds.aliyuncs.com",
+        "port": 1521,
+        "service_name": "biptestdb3",
+        "users": {
+          "bipuser": "2Gjzt+6LcB.Kdq!Z#"
+        }
+      }
+    },
+    "泸州老窖(BIP旗舰版)": {
+      "test": {
+        "host": "10.0.120.160",
+        "port": 5236,
+        "service_name": "",
+        "users": {
+          "YYBIP": "SC_yybip2025"
+        }
+      }
+    },
+    "国投中鲁(BIP R6)": {
+      "test": {
+        "host": "10.61.128.217",
+        "port": 3306,
+        "service_name": "",
+        "users": {
+          "oper_dc": "yaSBpV3yzTgnW5OQs"
+        }
+      }
+    }
+  }
+}

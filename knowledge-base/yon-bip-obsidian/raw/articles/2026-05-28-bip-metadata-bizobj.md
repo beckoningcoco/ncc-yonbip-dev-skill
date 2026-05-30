@@ -1,0 +1,1233 @@
+元数据及业务对象
+最后更新时间：2025-05-30
+基本概念
+背景
+
+实体元数据是业务中台的核心服务，主要提供元数据管理和元数据查询功能。元数据管理主要为开发人员在开发态提供元数据的设计服务，主要维护元数据的实体、接口和组件。元数据运行态以SDK方式提供，SDK提供元数据查询接口、元数据持久化引擎、元数据查询引擎等功能。使用元数据SDK的服务必须能连元数据服务端使用的Redis，否则会导致SDK不可用。
+
+实体元数据包含ORMapping的内容，持久化引擎和查询引擎依赖实体元数据的ORMapping的信息，生成的SQL语句在数据库中执行并返回对应的结果。除了ORMapping信息，元数据还记录了一些特征信息，用于标识实体或者属性具有某种特性，比如说日志特征，该特征打在属性上标识记录业务日志的时候需要将该属性的值记入业务日志里。
+
+实体元数据广泛用于支撑服务中，有了实体元数据，支撑服务可以获取业务服务中的实体对象和实体对象的描述，有了这些信息就能做很多事情，比如说编码规则可以读取实体的上有哪些属性，然后根据这些属性配置编码的组成方式；消息模板可以配置实体上的那些属性的值显示在消息上；自定义项根据实体元数据上配置的是否支持自定义项去动态扩展实体上的属性。
+
+名词解释
+
+**元元模型：**为了描述元模型而定义的一种"抽象语言"。元元模型的定义要比元模型更加抽象、简洁(即元元模型是关于元元数据本身的更深一个层次的抽象,即是对元元数据的抽象)。
+
+**元模型：**元模型是一种语法结构,用于定义模型的各个部件.它由所谓的元元数据组成.元元数据为更加抽象的一个层次,它是用来进行描述如何去构建一个语法结构的数据。
+
+**元数据：**是指对设计领域模型的进一步抽象，使用数据描述设计领域模型
+
+业务对象：此处指软件中业务主体，可以是基础数据、单据类型。例如：凭证、人员、采购订单、销售订单等，可以认为是元数据的一种能力扩展。
+
+**uri：**是具有业务含义的唯一标识，通过这个标识可以找到实体和组件。元数据的组件uri由两段组件：所属模块+组件编码。元数据的实体uri由三段组成：所属模块+组件编码+实体编码。
+
+**服务域：**微服务对应唯一的服务编码，服务域一般指的就是这个服务编码。
+
+技术架构
+元数据分层
+元数据分层介绍
+
+根据元数据的归属和个性化维护，元数据目前的业务分层如下图
+
+元数据分层
+
+ 元数据简化为两层元数据
+
+*  标准元数据是领域内通用业务模型
+
+个性化元数据是按照个性化的业务模型
+个性化元数据可以有不同纬度，目前主要是租户
+租户级数据之间通过租户ID进行数据隔离
+下层元数据是上层元数据的个性化扩展
+下层元数据不能修改删除上层元数据属性，但是可以增加个性化属性进行新增或者覆盖
+两层元数据分别按照不同维度存储，下层元数据只存储个性化扩展部分
+元数据租户级扩展方式
+
+原厂的元数据不能满足租户要求时可以对原厂的数据进行扩展，扩展主要有以下几种情况
+
+原厂没有的功能
+
+可以通过YonBuilder构建应用，实现扩展。详情参考YonBuilder相关文档。
+
+在原厂的实体上添加属性或者子实体
+
+在YonBuilder里可以扩展原厂的实体属性及子实体。详情参考YonBuilder相关文档。
+
+原厂预留的扩展方式
+
+对应简单的档案，可以通过租户添加自定义档案的方式实现扩展。原厂部分档案和单据支持自定义项，自定义项是预留了字段，在租户里可以根据需要重新定义预留字段的名称类型等信息。
+
+元数据逻辑服务架构
+
+逻辑服务架构图
+
+元数据存储主要由词汇库、系统库和租户库组成。词汇库用于存放分类、标签、策略等数据。系统库用于原厂开发的元数据。租户库用于租户扩展的元数据，如自定义项、自定义档案、原厂扩展、YonBuilder建模数据。
+
+服务层主要是元数据提供的服务，包含元数据管理、元模型管理和业务词汇管理。
+
+驱动层主要提供ORM、查询翻译引擎、元数据和业务对象的对外接口。
+
+元数据缓存介绍
+
+针对元数据变化频率较低的特点，采用二级缓存方案，大幅度提高客户端使用元数据的效率，具体架构如下图：
+
+元数据缓存
+
+二级缓存分别是服务端缓存和客户端缓存。服务端缓存采用Redis缓存。客户端缓存是在业务微服务实例中的内存级缓存，选取了Caffeine在具体的业务微服务端作为本地二级缓存。使用二级缓存，可以大幅度减少了微服务运行期和统一元数据服务的网络交互，网络传输数量得到大幅降低。
+
+业务对象
+业务对象介绍
+
+业务对象是对实体元数据的扩展和补充，运行态都是元数据的实体。业务对象是以一个元数据实体作为主实体的聚合实体。一个业务对象包含主实体以及主实体下的子孙实体。业务对象对元数据实体进行了如下方面的增强：
+
+业务对象增加了场景、原子服务、动作等
+业务对象对应的实体的属性增加了属性业务类型、属性上的默认参照、规则信息(dataRule)、日期格式等
+一个业务对象下有且只有一个主实体
+元数据实体上支持定义表达式属性
+业务对象增加了业务数据类型,取值范围：文本、数值、整数、日期、日期时间、单选、多选、单选引用、多选引用、联系方式、开关、附件、图片、证件号、定位、多语文本、大文本、评分、时间。
+支持在实体上支持设置过滤条件（报销单、组织和部门场景）
+
+元数据模型和业务对象模型的区别如下图：
+
+业务对象场景
+
+业务对象的可使用范围通过场景来定义，在业务对象上标记场景后就可以支持相关业务功能，如在业务对象上标记报表场景，表示该业务对象可以进行报表分析。场景支持标记在业务对象上，也可以标注在业务对象的属性上。
+
+常用的场景：
+
+场景编码	场景名称	场景描述
+print	打印	打印场景，当前业务对象支持进行打印模板、打印控制等相关功能配置。
+billcode	编码规则	编码规则场景，支持业务对象实体字段编号的生成规则的定义和维护。
+bpm	审批流	审批流场景，支持对业务对象单据配置审批流程，做到业务单据与业务审批流程联动。
+workflow	业务流	业务流场景，支持对业务对象单据进行业务数据流转的规则配置，如：转换规则等。
+report	报表	报表场景，支持对业务对象配置报表，用表格、图表等格式来动态显示数据。
+extdevelop	扩展开发	扩展开发场景，支持在租户级对原厂单据进行扩展开发，包括扩展业务对象子实体和扩展原厂单据的业务逻辑。
+econtract	电子合同	电子合同场景，支持业务对象数据字段参与电子合同编制，成为销售合同、采购合同、人力合同等合同主体的编制内容。
+msgtemplate	消息模版	消息模板场景，支持对业务对象定义系统发送的各种消息的不同展现样式，包括消息标题和消息内容、消息。
+transtype	交易类型	交易类型场景，支持租户级基于业务的不同性质及管理要求，对同一业务对象下的业务场景进行的细分分类的定义，可作用于流程、模板等。
+b-evidence	区块链存证	区块链存证场景，可以实现在【数字化建模-可信存证】中配置当前业务对象的存证属性，以便业务数据通过区块链存证的能力做业务追溯和其他扩展。
+filegroup	附件分组	附件分组场景，支持将单据的文件按分类聚合
+prewarning	预警任务	预警任务场景，支持业务对象动态选择字段作为预警条件，支持自定义项作为预警条件。同时支持预警通知用业务对象定义展现样式。
+isCoreBill	业务流起始单据	业务流程比如采购订货(普通采购)流程，流程以核心单据采购订单起始，流程id会从核心起始单据一直向下游携带。
+UITemplate	UI模板	UI模板场景，支持UI模板左边树基于业务对象下统一管理，并能支持原厂预置、用户自定义交易类型的多模板个性化扩展。
+ruleengine	规则引擎	规则引擎是一种嵌入在应用中的组件，使用预先定义好的语义规范来实现剥离出来的业务规则，通过接受输入的环境和业务数据，进行业务评估，执行业务动作，做出业务决策。
+DataAuth	数据权限	数据权限控制场景，支持业务对象实体、单据的数据权限配置。
+FieldAuth	字段权限	字段权限控制场景，支持业务对象实体、单据中具体字段的权限配置。
+元模型介绍
+
+目前基于元元模型，从面向对象的角度出发，定义出基础元模型，包含能描述一个对象模型的常用模型（组件、接口、实体、属性、实现、泛化、关联、枚举），如下图，并可根据实际模型进行部分裁剪。
+
+元模型
+
+**组件：**描述的是一个相对独立和完整的业务块，主要是从业务层次上进行划分，比如“销售订单”可以作为一个组件，“客商档案”也可以作为一个组件，划分组件时，注意组件间的重用，且注意不要形成相互依赖。组件是部署的基本单元，一个典型的组件会包含若干个有相互关系的实体，以及业务接口、枚举类型等。
+
+组件包含组件名称，组件编码，组件所属模块及组件所属领域组成。
+
+**实体：**特性是从各种各样不同的实体中提取出来的一些共同的有特点的属性，比如说单据主实体上一定会有单据号，单据日期等。利用实体的特性，可以方便地构造出具有某些属性的实体，降低开发人员的工作量。实体可以实现继承单个实体，但是可以实现多个接口。实体包含实体名称，实体编码，实体对应的表名等元素组成。
+
+**接口：**接口被用来描述一种抽象。接口是一系列方法的声明，是一些方法特征的集合，一个接口只有方法的特征没有方法的实现，因此这些方法可以在不同的地方被不同的类实现，而这些实现可以具有不同的行为（功能）。接口可以继承接口，也可以被多个实体实现。
+
+**枚举：**是列出某些有穷序列集的所有成员的集合，或者是一种特定类型对象的集合。
+
+属性：是实体或者接口的基本元素，由属性名，属性类型及表字段名等组成。
+
+属性的类型：分为普通类型，枚举和实体三种。
+
+其中普通类型为PrimitiveType，包括String，Text，Integer，Short，Long，Real，Boolean，Timestamp，Date，Time类型。
+
+枚举类型为Enumeration，可以选择服务中注册的枚举。
+
+实体类型为Class，可以选择服务中注册的实体。
+
+**组合关系：**常见的主子、 主子孙关系。组合关系是紧密程度最高的关系，要求组合实体具有相同的生命周期（主实体对象生命周期≥子实体对象生命周期），即：主实体对象不存在，子实体对象一定不存在。 如果主实体对象被销毁，子实体对象一定要同时被销毁。
+
+**继承和实现关系：**继承(泛化，Generalization)和实现(Realization)分别对应 JAVA 中的 extends 和 implements，遵循JAVA 中单继承、 多实现的规范。继承主要体现类型体系，从不同的视角，同一个类型会属于不同的类型体系，所以要求从核心业务角度出发，确定类型体系结构。实现主要体现契约／协议／约定，即定下一个契约，如果一个类型遵守此契约，则可以说改类型实现了此接口。
+
+元数据(业务对象)模型结构和主要方法
+
+根据目前用友各领域的实际业务场景，结合以前元数据的模型基础，基于基础元模型进行了属性扩展，最后融合总结出业务元数据元模型。
+
+具体模型主要属性介绍
+
+组件
+名称	类型	说明
+Id	String	组件ID
+Uri	String	唯一标识URI
+ownModule	String	所属模块
+domain	String	服务域
+Name	String	编码
+displayName	String	名称
+appId	String	所属应用
+description	String	描述信息
+实体
+名称	类型	说明
+Id	String	组件ID
+Uri	String	唯一标识URI
+tableName	String	表名
+Name	String	编码
+displayName	String	名称
+terms	List	标签
+metaIndex	String	数据ES索引
+dataPowerScene	String	受控场景
+service	String	服务类型
+description	String	描述信息
+metaComponentId	String	所属组件ID
+ownedAttribute	List<属性>	属性集合
+属性
+名称	类型	说明
+columnName	String	表字段名
+iLength	String	字段长度
+precise	String	精度
+name	String	编码
+displayName	String	名称
+isKey	Boolean	是否主键
+type	String	字段类型
+terms	List	标签
+nullable	Boolean	是否为空
+maxValue	String	最大值
+minValue	String	最小值
+defaultValue	String	默认值
+dataPowerType	String	数据权限类型
+validation	String	格式校验：正则表达式
+isUnique	boolean	是否唯一
+unionKey	String	联合唯一，多个属性用逗号分隔
+refType	String	参照编码。业务对象扩展
+businessScenes	List	场景。业务对象扩展
+expression	String	表达式。业务对象扩展
+dataRule	String	规则信息。业务对象扩展
+dateFormat	String	日期格式。业务对象扩展
+order	Int	排序号，用于前端展示排序。业务对象扩展。
+bizType	枚举	业务类型。业务对象扩展。
+authLevel	Int	权限级别
+isHidden	Bool	是否隐藏
+isJoinQuery	Bool	是否支持关联查询
+isRowAuthControlled	Bool	是否权限控制
+dataRule	String	规则信息
+sumType	String	汇总类型
+isMasterOrg	Bool	是否主组织
+isPrint	Bool	是否支持打印
+isMultiple	Bool	是否多选参照
+接口
+名称	类型	说明
+title	String	名称
+name	String	编码
+ownedAttribute	List<属性>	属性集合
+metaComponentId	String	所属组件ID
+组合关系
+名称	类型	说明
+typeB	String	源实体URI
+roleA	String	关联List名称
+typeA	String	目标实体URI
+roleB	String	关联源实体字段
+roleAMulti	String	多重性
+实现
+名称	类型	说明
+supplier	String	提供方组件URI
+client	String	本组件URI
+metaComponentId	String	所属组件ID
+继承
+名称	类型	说明
+parent	Long	父实体URI
+child	String	子实体URI
+metaComponentId	String	所属组件ID
+功能介绍
+功能概述
+
+元数据设计器主要包括对元数据和业务词汇的管理两大块，元数据管理主要包括元数据的导入导出，元数据的增删改查。业务词汇的管理主要是标签、元模型、分类管理。
+
+元数据功能架构图
+
+通过设计器创建元数据组件
+
+元数据设计创建包含了三种方式:元数据管理的新建功能、导入组件和模板新增功能。元数据管理的新建功能方式是在元数据新建完毕后，可以通过元数据管理功能的元数据的设计功能，使用元数据设计工具进行全新设计。
+
+元数据管理的导入组件方式是在两种情况下，第一、用户以标准xml的方式做元数据设计的详细设计；第二、之前设计好的元数据详细设计导出的标准xml。本功能方式支持xml直接导入详细设计，导入后即可在元数据管理功能中查询到其详细设计信息，然后可以继续使用元数据设计工具进行设计。
+
+元数据模板新增功能，实现在已有元数据设计模板基础上，快速进行元数据设计。
+
+在元数据管理的新增下，找到模板新增
+
+在弹出的选择模板对话框中，选择基础的模板，点击确认。
+
+填写新模板的名称、编码及所属模块信息，最后点击确认，即可在元数据管理功能查看到该新元数据设计信息，然后可以继续使用元数据设计工具进行设计。
+
+元数据设计器画布功能
+
+元数据设计创建为用户提供元数据详细设计的工具，实现元数据详细信息的图形化设计。
+
+在元数据管理功能下，选择待详细设计的元数据，在行中选中设计按钮。
+
+弹出详细设计工具，利用工具提供的模型，如实体、业务接口、关联等，在画布区进行设计组装。通过组件详情可以进行组件详细信息的维护管理。
+
+选中实体类，可以实现实体详情以及类属性字段和接口信息的配置管理。
+
+选中接口interface，可以实现接口详情和接口属性字段的管理。
+
+元数据导出功能
+
+用户通过元数据设计工具设计完毕后，可以通过进行元数据设计的下载导出、数据库sql语句的导出(规划未实现)、Java代码的导出(规划未实现)。
+
+在元数据管理功能中，选中待导出元数据，可以在行更多中选择元数据下载，进行元数据设计xml下载。
+
+业务对象设计器
+
+业务对象设计器左侧为领域应用业务对象树，第一级为领域，第二级为领域下的应用，第三级为应用下的业务对象，选择对应的业务对象后，可以配置业务对象下的场景和对应服务。设计器展示的业务对象可能会有重复，这个不用担心，在运行态时将按照对应服务进行展示，设计器并非所见即所得。
+
+开发示例
+接入方式
+
+maven依赖
+
+metadata-sdk-starter
+
+com.yonyou.metadata
+
+版本由MDD进行统一管理
+
+配置由YMS控制台统一管理，不需要额外添加配置
+
+生成元数据
+通过元数据设计器编辑
+
+通过元数据设计器编辑的元数据为系统级元数据，各租户都可见
+
+设计器支持xml导入
+
+专属化默认不支持编辑元数据，如果要放开编辑功能则按如下操作
+
+先在MongoDB的metadata库的secret 的Collection添加一条记录，记录描述如下
+
+key	名称	描述
+id	主键	GUID，不重复即可
+secret	访问密钥	修改域的密钥，建议使用GUID通过密钥修改元数据设计器地址为：http://环境域名(或ip)/iuap-metadata-designer/ucf-wh/metadata/index.html#/metadata/index?id=8f7ad435-3326-4ad0-9819-de187381fae5&secret=访问密钥
+domain	可修改的域	密钥能修改的域，能修改多个域时用逗号分隔
+
+然后找到元数据设计器服务，在设计器服务的应用管理里的属性中添加环境变量
+
+metadata.system.enableEdit=true
+
+加完重启服务，即可用上面生成的地址编辑元数据了
+
+元数据导入的xml示例
+
+通过YonBuilder编辑
+
+详见YonBuilder相关文档
+
+生成业务对象
+
+生成业务对象有三种方式
+
+通过业务对象设计器直接新增
+原厂业务对象可以通过UI模板抽取生成业务对象
+通过YonBuilder设计器生成业务对象
+
+生成业务对象后就可以在业务对象设计器维护业务对象的相关属性了
+
+QuerySchema介绍
+
+根据查询方案进行查询，查询方案一般由前台传入，在预置方案上设置值，用户可以选择查询栏目、查询条件、分组、排序。
+
+预置查询方案可以分为标准、行业、伙伴、客户级别，运行时使用 接近客户的级别，与元数据扩展不同，不进行合并。
+
+查询结果为扁平化对象，是弱类型对象，没有实际的业务类型与之对应。
+
+查询方案的结构
+
+示例
+
+查询方案模型
+查询字段
+字段	含义	说明
+name	字段名称	使用“.”符号连接关联实体字 段，例如：belongOrder.code可以是公式表达式
+alias	别名	可空
+format	格式	可空
+aggr	聚集函数	可空例如：sum,count,avg
+查询方案关联
+
+主要用于 join 的 on 子句，存在多个限定条件。
+
+字段	含义	说明
+name	字段名称	使用“.”符号连接关联实体字 段，例如：belongOrder.code
+join	关联语句	如果 join 中字段名与 name 有相同的内容，可以将 name 部分省略，例如：.qty>100
+joinType	关联类型	inner,left,alone其中 alone 和 inner 或 left 组合使用alone 表示仅使用 join 中的过滤条件，不再使用 FK 关联。
+
+示例：
+
+查找订单(order)和订单明细(details)，订单明细状态(status)为 1 的数据：
+
+"joins":[{"name":"details","join":".order=id&& .status=1","joinType":"left,alone"} ]
+
+等价于
+
+"joins":[{"name":"details","join":".status=1","joinType":"left"}]
+
+生成的 SQL 语句为：
+
+from eshop_order T0
+
+left join eshop_order_detail as T1 on ((T1.order_id=T0.id) and (T1.status=1))
+
+查询分组
+字段	含义	说明
+name	字段名称	使用“.”符号连接关联实体字 段，例如：belongOrder.code
+查询排序
+字段	含义	说明
+name	字段名称	使用“.”符号连接关联实体字 段，例如：belongOrder.code
+order	排序方式	asc 升序，desc 降序可空默认值为asc
+查询条件组
+字段	含义	说明
+op	操作符	and 并且，or 或者
+items	条件项集合
+查询条件项
+字段	含义	说明
+name	字段名称	使用“.”符号连接关联实体字段，例如：belongOrder.status可以是公式表达式
+op	操作符	eq 等于neq 不等于lt 小于between 在…和…之间，结合v2is_null 空，字符串null 和''都是空is_not_null 非空，字符串null 和''之外的是非空
+v1	值 1	可以为数字、布尔、字符串、数组只有op 为in 和nin 时，v1 为数组（注③ ）。
+v2	值 2	可以为数字、字符串只有op 为between 时，v2 有效
+典型业务场景介绍
+代码创建查询方案
+查询的实体模型
+
+JAVA 代码创建查询方案
+Integer rank = 2;
+Integer[] ranks = new Integer[]{0, 2};
+String contact = "18910721234";
+Boolean byMonth = true;
+Date today = DateTimeUtils.maxTimeOfToday();
+Date oneMonthAgo = DateUtils.addDays(today, -30);
+Date oneWeekAgo = DateUtils.addDays(today, -7);
+// 过滤条件
+QueryConditionGroup group = QueryConditionGroup.and(
+// 分支 switch，rank 序号从 0 开始，代表使用第几个(从 0 开始)条件
+QueryCondition.which(rank,
+QueryCondition.name("totalMoney").between(1, 100),
+QueryCondition.name("totalMoney").between(100, 1000),
+QueryCondition.name("totalMoney").between(1000, 10000)	),
+// 分支 switch，ranks 是数组，代表使用哪几个(从 0 开始)条件，条件间为 OR 关系
+QueryConditionGroup.which(ranks,
+QueryCondition.name("totalMoney").between(1, 100),
+QueryCondition.name("totalMoney").between(100, 1000),
+QueryCondition.name("totalMoney").between(1000, 10000)	),
+// 分支 if，byMonth 为 true 时，使用后面条件
+QueryCondition.when(byMonth,
+QueryCondition.name("createTime").between(oneMonthAgo,today)),
+// 分支 if..else，byMonth 为 true 时，使用后面第一个条件，否则使用第二个
+QueryCondition.when(byMonth,
+QueryCondition.name("createTime").between(oneMonthAgo,today),
+QueryCondition.name("createTime").between(oneWeekAgo,today)),
+QueryCondition.name("status").in(0, 1),
+// or 分组
+QueryConditionGroup.or(
+QueryCondition.name("user.phone").eq(contact),
+QueryCondition.name("user.email").eq(contact),
+QueryCondition.name("user.name").eq(contact)));
+// 查询方案
+QuerySchema schema = QuerySchema.create()
+//distinct 去重复
+.distinct()
+//多个查询字段
+.addSelect("id,code")
+//查询字段和别名
+.addSelect("details.goods	 as goods,details.goods.code,details.goods.name")
+//ifnull 如果空
+.addSelect("totalMoney?'N/A' as totalMoney")
+//case 1
+.addSelect("case  status  when  1  then  '未支付'  when  2  then  '已完成'  else '开立' end as status")
+//case 2
+.addSelect("case  when  details.sku=null  then  details.goods.barcode else details.sku.barcode end as barcode")
+//formula
+.addSelect("details.goods.price*details.qty as detailMoney")
+.addCondition(group)
+.addOrderBy("orderTime desc");
+
+对应JSON
+{
+"fields":[
+{"name":"1","aggr":"distinct"},
+{"name":"id"},
+{"name":"code"},
+{"name":"details.goods","alias":"goods"},
+{"name":"details.goods.code"},
+{"name":"details.goods.name"},
+{"name":"totalMoney?'N/A'","alias":"totalMoney"},
+{"name":"case status when 1 then '未支付' when 2 then '已完成' else '开立' end","alias":"status"},
+{"name":"case when details.sku=null then details.goods.barcode else details.sku.barcode end","alias":"barcode"},
+{"name":"details.goods.price*details.qty","alias":"detailMoney"}
+],
+"conditions":[
+{
+"op":"and","items":[
+{"name":"details.goods.cate.name","op":"eq","v1":"家电"},
+{"name":"details.isDeleted","op":"eq","v1":false},
+{
+"op":"or","items":[
+{"name":"status","op":"in","v1":[1,2,3]},
+{"name":"totalMoney","op":"gt","v1":10000}
+]
+}
+]
+}
+],
+"orders":[
+{"name":"orderTime","order":"desc"}
+]
+}
+
+生成的SQL
+select
+distinct
+T0.id as `id`,
+T0.code as`code`,
+ifnull(T0.total_money,'N/A') as `totalMoney`,
+(case T0.status when 1 then '未支付' when 2 then '已完成' else '开立' end) as `status`,
+(case when (T1.sku_id is null) then T3.barcode else T2.barcode end) as `barcode`,
+(T3.price*T1.qty) as `detailMoney`,
+T1.goods_id as `goods`,
+T3.code as `goods_code`,
+T3.name as `goods_name`
+from eshop_order T0
+inner join eshop_order_detail as T1 on T1.order_id=T0.id
+inner  join  eshop_sku as T2 on T2.id=T1.sku_id
+inner join eshop_goods as T3 on T3.id=T1.goods_id
+inner join eshop_goods_cate as T4 on T4.id=T3.cate_id
+where (T4.name='家电' and T1.isDeleted=false
+and (T0.status in (1,2,3) or T0.total_money>10000))
+order by T0.order_time desc
+
+方案详细解释
+字段	含义	说明
+distinct()	去掉重复数据	相当于.addSelect(new QueryField("1", null,"distinct"))，但.distinct 可以放在任意位置；第三个参数表示聚合函数，例如 sum,count。
+id,code	查询字段	多个字段使用逗号分隔，注意是字段名称，不是列名。没有设置别名，则别名为自身，如果自身包含点符号，将点符号替换为下划线。别名两边加上识别符，mysql、oracle、mssql 分别为``、""、[]。
+details.goods as goods,details.goods.code	查询字段	有关联关系的实体字段，可以通过点符号访问其属性别名可以继承，由于 details.goods 别名为 goods，则 details.goods.code 的别名为 goods_code
+totalMoney?'N/A' as totalMoney	如果空	对应 mysql 的 SQL 为ifnull(T0.total_money,'N/A') as
+totalMoney，oracle 和 mssql 分别为 nvl、isnull
+case status when 1 then '未支付'when 2 then '已完成' else '开立' end as status	case 1	一般适用于将枚举值转换成显示名称。case 语句可以嵌套使用，也可以嵌套其它表达式。如果不确定运算符优先级，使用括号括起来。
+case when details.sku=null then details.goods.barcode else details.sku.barcode end as barcode	case 2	一般适用于多个条件分支。其中 details.sku=null 对应 SQL 为(T1.sku_id is null)，如果等号后面值不是 null，则为等于该值。
+details.goods.price*details.qty as detailMoney	四则运算	加减乘除分别对应：+-*/
+QueryConditionGroup.and QueryConditionGroup.or	条件间逻辑关系	查询条件 终是树型结构，非叶子节点均为QueryConditionGroup，叶子节点为QueryCondition、SimpleConditon 等。
+QueryCondition.name("details.goods.cate.name").eq("家电")	查询条件	快捷的创建方法，等价于 newQueryCondition("details.goods.cate.name", ConditionOperator.eq,"家电") 快捷方法和比较符映射：eq()-----------ConditionOperator.eq not_eq()-------ConditionOperator.neq lt()-----------ConditionOperator.lt elt()----------ConditionOperator.elt egt()----------ConditionOperator.egt between()------ConditionOperator.between in()-----------ConditionOperator.in not_in()-------ConditionOperator.nin like()---------ConditionOperator.like left_like()----ConditionOperator.leftlike right_like()---ConditionOperator.rightlike is_null()------ConditionOperator.is_null is_not_null()--ConditionOperator.is_not_null
+QueryCondition.name("status"). in(1, 2, 3)	in 条件	等价写法还有参数为数组和集合（例如 List）：QueryCondition.name("status").in(newInteger[]{1, 2, 3})QueryCondition.name("status").in(Arrays.asList(1,2, 3))
+QueryCondition.name("totalMoney").gt(10000)	数值条件	这里面的 10000，在 JAVA 中是 Integer 类型，解析查询方案时，会转换成 BigDecimal 类型。如果想直接设置为 BigDecimal，使用 10000D。
+常量
+示例查询方案
+{
+"fields":[
+{"name":"123","alias":"iFld"},
+{"name":"123.45","alias":"dFld"},
+{"name":"null","alias":"nullFld"},
+{"name":"'null'","alias":"cFld"},
+{"name":"'123'","alias":"ciFld"},
+{"name":"case code when 'A' then 1 else null end","x"},
+{"name":"case when code=null then 0 when code='A' then 1 else 2 end","y"}
+]
+}
+
+
+其中：数字为数值，null 为 null，单引号扩起来为字符。
+
+QuerySchema schema = QuerySchema.create()
+.addSelect("123 as iFld,123.45 as dFld,null as nullFld,'null' as cFld,'123' as siFld")
+.addSelect("case code when 'A' then 1 else null end as x")
+.addSelect("case when code=null then 0 when code='A' then 1 else 2 end as y");
+
+SQL 示例
+select
+123 as `iFld`,
+123.45 as `dFld`,
+null as `nullFld`,
+'null' as `cFld`,
+'123' as `siFld`,
+case T0.code when 'A' then 1 else null end as `x`,
+case when (T0.code is null) then 0 when (T0.code='A') then 1 else 2 end as `y`
+from eshop_goods T0
+
+CASE 语句
+示例查询方案
+
+Case 语句可以进行嵌套使用：
+
+{
+"fields":[
+{"name":" case case when id=1 then 6 when id>10 && id<1000 then 6 else 9 end when case when id=1 then 1 else 5 end then case id when 1 then 1 else 11 end else case id when 2 then 2 else '21' end end","alias":"ids"}
+]
+}
+
+
+其中：
+
+case when id=1 then 6 when id>10 && id<1000 then 6 else 9 end case when id=1 then 1 else 5 end case id when 1 then 1 else 11 end
+case id when 2 then 2 else '21' end
+
+
+均为 case 子句。 case 语句有两种形式：
+
+1、case when ... then ... else ... end
+
+2、case ... when ... then ... else ... end
+
+如果出现复杂语句，好是使用括号将子句/表达式括起来，便于查看及排查问题。
+
+JAVA 代码创建查询方案
+QuerySchema schema = QuerySchema.create()
+.addSelect("case case when id=1 then 6 when id>10 && id<1000 then 6 else 9 end when case when id=1 then 1 else 5 end then case id when 1 then 1 else 11 end else case id when 2 then 2 else '21' end end as ids");
+
+SQL 示例
+select
+case case when (T0.id=1) then 6 when ((T0.id>10) and (T0.id<1000)) then 6 else 9 end when case when (T0.id=1) then 1 else 5 end then case T0.id when 1 then 1 else 11 end else case T0.id when 2 then 2 else '21' end end as `ids`
+from eshop_order T0
+from eshop_order T0
+
+distinct 去重
+使用限制
+
+1、需要一个包含 distinct 聚合函数的查询字段。
+
+2、该查询字段必须位于第一个位置。
+
+示例查询方案
+
+第一个查询字段设置为{"name":"1","aggr":"distinct"}，表示使用 distinct 聚合函数，生成 SQL 时，会忽略 name 中的内容， 好使用常量 1。
+
+示例：
+
+{
+"fields":[
+{"name":"1","aggr":"distinct"},
+{"name":"code"},
+{"name":"status"},
+{"name":"orderTime"}
+],
+"pager":{"pageIndex":1,"pageSize":10}
+}
+
+JAVA 代码创建查询方案
+QuerySchema schema = QuerySchema.create()
+.distinct().addSelect("code,status,orderTime")
+.addPager(1,10);
+
+
+这里面，distinct()可以在任意地方调用，终会在查询字段中第一个位置增加一个具有 distinct 聚合函数查询字段。
+
+SQL 示例
+总数量查询
+
+使用 distinct 时，总数量计算也需要使用distinct，这时无法简化 SQL。
+
+select count(1) as totalCount from (
+select distinct T0.code as `code`,T0.status as `status`,T0.order_time as `orderTime` from eshop_order T0
+) t
+
+分页查询
+select distinct T0.code as `code`,T0.status as `status`,T0.order_time as `orderTime` from eshop_order T0 limit 0,10
+
+查询字段重名
+使用限制
+
+如果查询字段重复，需要保证别名不重复，否则 SQL 执行会报错。
+
+示例查询方案
+{
+"fields":[
+{"name":"code","alias":"code1"},
+{"name":"code","alias":"code2"}
+]
+"pager":{"pageIndex":1,"pageSize":10}
+}
+
+JAVA 代码创建查询方案
+QuerySchema schema = QuerySchema.create()
+.addSelect("code as code1,code as code2")
+.addPager(1, 10);
+
+SQL 示例
+总数量查询
+select count(1) as totalCount from ( select 1 as num
+from eshop_order T0
+) t
+
+分页查询
+select T0.code as `code1`,T0.code as `code2`
+from eshop_order T0 limit 0,10
+
+查询所有字段
+示例查询方案
+{
+"fields":[
+{"name":"*"},
+{"name":"customer.code"}
+] }
+
+JAVA 代码创建查询方案
+
+QuerySchema schema = QuerySchema.create().addSelect("*,customer.code");
+
+SQL 示例
+总数量查询
+select count(1) as totalCount
+from ( select 1 as num
+from eshop_order T0
+left join eshop_customer as T1 on T1.id=T0.customer_id
+) t
+
+分页查询
+select
+T0.code as `code`,
+T0.total_money as `totalMoney`,
+T0.order_time as `orderTime`,
+T0.status as `status`,
+T0.user_id as `user`,
+T0.customer_id as `customer`,
+T1.code as `customer_code`,
+T0.define1 as `define1`,
+T0.define2 as `define2`,
+T0.id as `id`,
+T0.create_time as `createTime`
+from eshop_order T0
+left join eshop_customer as T1 on T1.id=T0.customer_id
+limit 0,10
+
+函数
+使用限制
+
+必须是注册过的函数才可以使用，使用时参数需要与声明的参数类型兼容。如果使用了未注册的函数，报错：
+
+org.imeta.orm.base.FunctionNotFoundException: 函数 xxx 未注册
+
+如果参数个数不匹配，或者类型不兼容，报错：
+
+org.imeta.orm.base.IllegalArgumentException: 函数 xxx 参数不匹配
+
+注册方法
+
+Spring 中注册方法：
+
+<bean class="org.imeta.orm.query.QuerySqlBuilder">
+<property name="functionRepository">
+<bean class="org.imeta.spring.support.orm.DefaultFunctionRepository">
+<property name="signatures">
+<list>
+<value>String date_format(DateTime,String)</value>
+<value>Number sum(Number)</value>
+<value>Number count(Any)</value>
+</list>
+</property>
+</bean>
+</property> </bean>
+
+参数类型兼容性检查
+
+查询方案中的函数会根据注册的函数进行参数的类型检查。
+
+函数参数兼容性表：
+
+函数参数类型	兼容元数据类型	说明
+Number	Byte、Short、Integer、LongDecimal、IntDate、IntDateTime、null	数值
+Decimal	Decimal、null	十进制数
+Boolean	Boolean、null	布尔
+DateTime	Date、DateTime、null	日期
+IntDateTime	IntDate、IntDateTime、null	数值日期
+String	String、Text、Time 、null	字符
+Any	任意类型、null	任意
+示例查询方案
+{
+"fields":[
+{"name":"id"},
+{"name":"code"},
+{"name":"case date_format(createTime,'%w') when 0 then '周日' else '工作日' end","alias":"WeekDay"}
+],
+"conditions":[
+{"name":"date_format(createTime,'%Y')","op":"eq","v1":"2017"}
+] }
+
+JAVA 代码创建查询方案
+QuerySchema schema = QuerySchema.create()
+.addSelect("id,code")
+.addSelect(new QueryField("case date_format(createTime,'%w') when 0 then '周日' else '工作日' end", "WeekDay"))
+.appendQueryCondition(QueryCondition.name("date_format(createTime,'%Y')").eq(2 017));
+
+
+SQL 示例
+总数量查询
+select count(1) as totalCount from ( select 1 as num from eshop_order T0
+where date_format(T0.create_time,'%Y')=2017 ) t
+
+分页查询
+select T0.id as `id`,T0.code as `code`,case date_format(T0.create_time,'%w') when 0 then '周日' else '工作日' end as `WeekDay` from eshop_order T0
+where date_format(T0.create_time,'%Y')=2017 limit 0,10
+
+分组过滤
+示例查询方案
+{
+"fields":[
+{"name":"goods"},
+{"name":"goods.name","alias":"goods_name"},
+{"name":"1","alias":"totalCount","aggr":"count"},
+{"name":"qty*price","alias":"totalMoney","aggr":"sum"}
+],
+"groups":[
+{"name":"goods"}
+],
+"havings":[
+{"name":"count(1)","op":"gt","v1":1}
+],
+"orders":[
+{"name":"totalMoney","order":"desc"}
+],
+"pager":{"pageIndex":1,"pageSize":10}
+}
+
+JAVA 代码创建查询方案
+QuerySchema schema = QuerySchema.create()
+.addSelect("goods,goods.name")
+.addSelect(new QueryField("count(1)", "totalCount"))
+.addSelect(new QueryField("sum(qty*price)", "totalMoney"))
+.addGroupBy("goods")
+.addHaving(QueryCondition.name("count(1)").gt(1))
+.addOrderBy("totalMoney desc");
+
+SQL 示例
+总数量查询
+select count(1) as totalCount from ( select 1 as num from eshop_order_detail T0 group by T0.goods_id
+having count(1)>1
+) t
+
+分页查询
+select T0.goods_id as `goods`,T1.name as `goods_name`,count(1) as `totalCount`,sum(T0.qty*T0.price) as `totalMoney`
+from eshop_order_detail T0
+inner join eshop_goods as T1 on T1.id=T0.goods_id
+group by T0.goods_id having count(1)>1
+order by `totalMoney` desc limit 0,10
+
+动态条件
+实体结构
+
+示例查询方案
+{
+"fields":[
+{"name":"code"},
+{"name":"details.qty"},
+{"name":"customer.name"},
+{"name":"customer.contacts.phone","alias":"contact_phone"}
+],
+"joins":[
+{"name":"details","join":".order=id && .define1=define1","joinType":"left,alone"},         {"name":"customer.contacts","join":".isDefault=1"}
+]
+}
+
+
+其中：
+
+join 为关联条件，可选，设置规则为：
+
+以 dot(.)符号开头的，是简写，表示前面的 name 加上该值，仅一个 dot(.)符号，是简写，表示前面的字段名。例如：{"name":"contacts","join":".isDefault=1，其中.isDefault 与 contacts.isDefault 等价。
+所有路径均是以传入实体为起点计算，例如：customer.contacts.isDefault 是指当前实体上的 customer(客户实体)的 contacts（客户的组合实体：联系人）的 isDefault 属性。
+join 中的表达式处理方式同 “查询方案/查询条件项”章节。
+joinType 为关联类型，可选，取值含义为：
+值	含义	说明
+inner	inner join	不能与 left 同时存在
+left	left join	不能与 inner 同时存在
+alone	独立的条件，不再使用 id 关联	没有 alone 时，会在主键关联的基础上，增加 join 条件，两者之间为 and 关系。
+
+可以同时使用 inner,alone 和 left,alone。如果不设置 joinType，将根据默认规则设置 join 类型。
+
+{"name":"details","join":".order=id && .define1=define1","joinType":"left,alone"}
+
+等价于
+
+{"name":"details","join":".define1=define1","joinType":"left"}
+
+{"name":"customer.contacts","join":".isDefault=1"}
+
+等价于
+
+{"name":"customer.contacts","join":".customer=customer.id && .isDefault=1"}
+
+不支持在基础类型字段上设置条件，字段类型需要是实体类型（Entity）。
+
+JAVA 代码创建查询方案
+QuerySchema schema = QuerySchema.create()
+.addSelect("code,details.qty,customer.name,customer.contacts.phone")
+.addJoin(new QueryJoin("details", ".order=id && .define1=define1", "left,alone"))
+.addJoin(new QueryJoin("customer.contacts", ".isDefault=1", null));
+
+SQL 示例
+select T0.code as `code`,T1.qty as `details_qty`,T3.phone as `customer_contacts_phone`
+from eshop_order T0
+left join eshop_order_detail as T1 on ((T1.order_id=T0.id) and (T1.define1=T0.define1)) left join eshop_customer as T2 on T2.id=T0.customer_id
+left join eshop_customer_contact as T3 on T3.customer=T2.id and (T3.is_default=1)
+
+动态类型
+说明
+动态类型运行时设置，仅与当前请求（线程）相关，设置的类型在其它请求（线程）中不生效。
+动态类型可以跨域。
+可以在查询方案中设置，也可以在代码中设置。
+任意路径上字段都可以设置动态类型，例如：子实体.字段 1。
+示例查询方案
+{
+"fields":[
+{"name":"code"},
+{"name":"define1","type":"eshop.customer.Customer/code","alias":"owner_code"},注 1
+{"name":"define1.id","alias":"owner"},
+{"name":"define1.name","alias":"owner_name"}
+],
+"pager":{"pageIndex":1,"pageSize":10}
+}
+
+
+示例含义：
+
+示例中为 define1 设置了动态类型 eshop.customer.Customer，这样就可以将 define1 作为客户来使用，例如：define1.id 和 define1.name 代表获取客户的 id 和 name。
+
+注 1：
+
+示例中 define1 的类型设置为 eshop.customer.Customer/code，后面的**/code **表示 define1 字段与客户的 code 字段关联。等价于设置动态关联条件：
+
+{
+"fields":[
+{"name":"code"},
+{"name":"define1","type":"eshop.customer.Customer","alias":"owner_code"},
+{"name":"define1.id","alias":"owner"},
+{"name":"define1.name","alias":"owner_name"}
+],
+"pager":{"pageIndex":1,"pageSize":10},
+"joins":[
+{"name":"define1","join":".code=define1","joinType":"alone"}
+] }
+
+JAVA 代码创建查询方案
+QuerySchema schema = QuerySchema.create().addSelect("code")
+//不跨域
+.addSelect(new QueryField("define1", "owner_code", null, "eshop.customer.Customer/code"))
+.addSelect("define1.id as owner,define1.name as owner_name");
+
+SQL 示例
+select T0.code as `code`,T0.define1 as `owner_code`,T1.id as `owner`,T1.name as `owner_name` from eshop_order T0
+left join eshop_customer as T1 on T1.code=T0.define1
+
+设置跨域动态类型
+查询方案
+{
+"fields":[
+{"name":"code"},
+{"name":"define1","type":"eshop.customer.Customer/code","alias":"owner_code"},
+{"name":"define1.id","alias":"owner"},
+{"name":"define1.name","alias":"owner_name"},
+{"name":"define2","type":"aa.goods.Goods/code","alias":"goods_code"},
+{"name":"define2.id","alias":"goods"},
+{"name":"define2.name","alias":"goods_name"}
+],
+"pager":{"pageIndex":1,"pageSize":10}
+}
+
+JAVA 代码创建查询方案
+QuerySchema schema = QuerySchema.create().addSelect("code")
+//不跨域
+.addSelect(new QueryField("define1", "owner_code", null,
+"eshop.customer.Customer/code"))
+.addSelect("define1.id as owner,define1.name as owner_name")
+//跨域，商品中心
+.addSelect(new QueryField("define2", "goods_code", null, "aa.goods.Goods/code"))
+.addSelect("define2.id as goods,define2.name as goods_name");
+
+SQL 示例
+
+1 、当前域 SQL：
+
+select T0.code as `code`,T0.define1 as `owner_code`,T2.id as `owner`,T2.name as
+`owner_name`,T0.define2 as `goods_code` from eshop_order T0
+left join eshop_customer as T2 on T2.code=T0.define1
+
+
+2、商品中心域查询方案（动态生成）：
+
+{
+"fields":[
+{"name":"code","alias":"goods_code"},
+{"name":"id","alias":"goods"},
+{"name":"name","alias":"goods_name"}
+],
+"conditions":[
+{"op":"and","items":[
+{"op":"and","items":[
+{"name":"code","op":"in","v1":["1001"]}
+]}
+]}
+]
+}
+
+
+其中，过滤条件中的值是由当前域查询结果记录中找出的 goods_code 字段的去重后的集合。
+
+商品中心域 SQL：
+select T0.code as `goods_code`,T0.id as `goods`,T0.name as `goods_name` from eshop_goods T0
+where T0.code in ('1001')
+
+终结果示例
+[
+{code="1710130001", owner_code="1001", owner=1, owner_name="红孩子", goods_code="1001", goods_name="手机", goods=100}
+]
+
+依赖属性
+实体结构
+
+示例查询方案
+
+以客户为主实体查询：
+
+{
+"fields":[
+{"name":"name"},
+{"name":"eshopcustomerOrder.code","alias":"order_code"}
+],
+"joins":[
+{"name":"eshopcustomerOrder","join":".id!=null"}
+]
+}
+
+
+其中：
+
+示例中的 eshopcustomerOrder 为依赖属性，表示 Customer 被 Order 依赖，该属性是 Customer 的属性，在元数据设置和数据库表中均不存在，存在于运行期内存中，可以在领域模型文档(doc)中查看到。关联关系中的被关联实体会产生依赖属性。
+
+依赖属性命名规则（eshopcustomerOrder）：**eshop **为 Order 的组件的 moduleName，**customer **为 Customer 在 Order 中的属性名称，**Order **为 Order 的实体名称。
+
+JAVA 代码创建查询方案
+QuerySchema schema = QuerySchema.create()
+.addSelect("name,eshopcustomerOrder.code as order_code")
+.addJoin(new QueryJoin("eshopcustomerOrder",".id!=null"));
+
+SQL 示例
+select T0.name as `name`,T1.code as `order_code`
+from eshop_customer T0
+left join eshop_order as T1 on T1.customer_id=T0.id and (T1.id is not null)
+
+元数据诊断工具
+
+先启动arthas 位置一：/usr/local/bin 位置二： /root/.arthas/lib/3.6.2/arthas
+
+先找classload的hash值
+
+启动arthas以后执行： sc -d org.imeta.core.monitor.Actuator
+
+常用命令
+
+
+
+开放接口说明
+API说明
+运行态常用模型
+
+实体模型
+
+名称	数据类型类型	描述
+extraData	Map<String, Object>	扩展属性
+id	String	元数据实体id
+name	String	实体编码
+title	String	实体显示名称
+owner	组件	元数据实体对应的组件
+fullname	String	实体的唯一标识，全名
+resId	String	实体名称对应的资源id
+service	String	标识是否ES实体，es 表示从ES中获取数据，否则从关系数据库中获取数据
+isGeneric	boolean
+attributes	List	实体的属性列表
+tableName	String	元数据对应的物理表名如果是ES类型时为ES的索引名临时表或者视图可为空
+isMain	Boolean	当前实体没有子类 isMain为true
+isView	Boolean	是否是视图,true 为 视图, false 为实体
+syncAttribute	Property	用于并发控制的属性，如时间戳等
+keyAttribute	Property	实体对应的主键属性isKey 为 true的属性，没有isKey为true的属性时默认id
+codeAttribute	Property	实体对应的编码属性：打了isCode标签的属性
+nameAttribute	Property	实体对应的名称属性：打了isName标签的属性
+isParent	Boolean	在元数据据主子关系中描述中被当做父实体False：没有子实体True：有子实体
+isChild	Boolean	在元数据据主子关系中描述中被当做父实体True：被当做其他实体的子实体
+associationAttributes	List	引用属性或者子表在主表上虚拟属性
+childAttributes	List	子表在主表上的虚拟属性，childAttributes根据assocation关系生成的运行态虚拟属性
+parentAttribute	List	外键属性
+isLabel	Boolean	判断是否打了特定标签
+isBusinessScenes	boolean	判断是否打了某个场景标签
+getUnionKeyAttributes	List	所有配了唯一约束的属性
+domain	String	元数据实体所在的服务域
+
+属性模型
+
+名称	数据类型类型	描述
+extraData	Map<String, Object>	扩展属性
+name	String	属性编码
+title	String	属性名称
+owner	String	实体id
+resId	String	属性名称对应的资源id
+columnName	String	列名
+isKey	Boolean	是否主键
+isCode	Boolean	是否编码
+isName	Boolean	是否名称
+isRequired	Boolean	是否必输
+isSyncKey	Boolean	是否同步
+isUnique	Boolean	是否唯一校验属性
+isPartition	Boolean	是否分词属性
+partitionName	String	分词名
+isRedundant	Boolean	是否为冗余属性
+iLength	Integer	长度
+iPrecision	Integer	精度
+iScale	Integer	小数位
+defaultValue	String	默认值
+minValue	String	最小值
+maxValue	String	最大值
+ignorePartitions	String	社会化场景下需要忽略的分词
+isCompositionAttribute	Boolean	主子组合属性
+isRoleA	Boolean	True：子表在主表上属性一般是虚拟属性
+isRoleB	Boolean	True：子表外键
+isDependencied	Boolean	True：反向依赖属性
+unionKey	String	联合唯一属性
+filterKey	String	生成join语句时的过滤条件
+validate	String	当validate为如下值时，按对应的正则表达式校验phone:手机号，以可选以0开头，手机号必须为11位并且以1开头的数字tel:电话号码，由-和数字组成的4到20位字符email:电子邮箱qq:qq号，为5-12位的数字
+type	Type	type() 方法获取属性类型数据类型：1 DataType 基本数据类型isPrimitive()isEnumeration()isNumber()isDateTime()isIntDateTime()isStringDateTime()isBoolean()isString()isDecimal()2 Entity 实体数据类型3 Enumeration 枚举数据类型 Enumeration是DataType子类
+isBusinessScenes	boolean	判断是否打了某个场景标签
+isUserDefine	boolean	True:在租户下启用了自定义项
+根据元数据全名获取元数据实体
+
+org.imeta.biz.base.BizContext.getMetaRepository().entity(fullName)
+
+返回参数为entity，模型参见 运行态常用模型
+
+根据元数据id获取元数据实体
+
+org.imeta.biz.base.BizContext.getMetaRepository().getEntityById(id)
+
+返回参数为entity，模型参见 运行态常用模型
+
+根据billNo获取业务对象编码
+
+实现类
+
+com.yonyou.iuap.metadata.businessobject.BusinessObjectController#getBusinessObjectCodeByBillNo
+
+接口地址：
+
+/iuap-metadata-base/api/BusinessObject/getCodeByBillNo
+
+调用方式：
+
+get
+
+调用参数：
+
+** ** 参数通过url传
+
+参数编码	参数名称	参数类型	描述
+domain	查询的领域	字符串	要查的领域，可为空
+tenantId	租户id	字符串	为空时只查系统库，不为空时查系统库+租户库并合并结果
+billNo	单据编号	字符串	业务对象的编码是 domain+billNo生成的，只传billNo查出来的数据只返回第一条，返回的是那条无法保证
+
+返回参数
+
+参数编码	参数名称	参数类型	描述
+resultCode	返回状态码	字符	100：参数校验错误，请检查参数是否正确200：查询正确执行500：查询过程中出现了错误
+data	返回数据	字符串	返回业务对象编码
+msg	错误信息	字符	返回状态码为 500时返回
+
+返回值示例
+
+{
+
+"data":“jsf.test”,
+
+"resultCode":"200"
+
+}
+
+通过服务域获取业务对象
+
+实现类
+
+com.yonyou.iuap.metadata.businessobject.BusinessObjectController#queryListByDomain
+
+接口地址：
+
+/iuap-metadata-base /api/BusinessObject/queryListByDomain
+
+调用方式：
+
+get
+
+调用参数：
+
+参数通过body传
+
+参数编码	参数名称	参数类型	描述
+domain	要查询的领域	字符串	要查的领域，不能为空
+tenantId	租户id	字符串	为空时只查系统库，不为空时查系统库+租户库并合并结果
+termCode	标签编码	字符串	要查询的标签，可以为空，只返回打了该标签的业务对象，如查询打上档案标签的业务对象，则传doc
+condition	自定义查询条件	字符串	符合MongoDB查询语法的字符串
+
+参数示例
+
+{
+
+"domain":"jsf",
+
+"tenantId":"",
+
+"termCode":"",
+
+"condition":"{"id":"bcb4ca1b-6771-4738-8913-2baf28c53432"}"
+
+}
+
+返回参数
+
+参数编码	参数名称	参数类型	描述
+resultCode	返回状态码	字符	100：参数校验错误，请检查参数是否正确200：查询正确执行500：查询过程中出现了错误
+data	返回数据	集合类型	返回状态码为200时返回没有查到数据时返回空对象
+msg	错误信息	字符	返回状态码为 500时返回
+
+data数据说明
+
+参数编码	参数名称	参数类型	描述
+id	业务对象对应主实体的id	字符
+uri	业务对象对应主实体唯一标识	字符
+displayName	显示名称	字符
+resourceId	资源id	字符	显示名称对应的资源id
+businessObjectId	业务对象id	字符
+businessObjectCode	业务对象唯一编码	字符
+
+返回值示例
+
+{
+"data": [
+{
+"id": "bcb4ca1b-6771-4738-8913-2baf28c53432",
+"uri": "jsftest.jsftest.code1",
+"displayName": "新增1",
+"resourceId": null
+}
+],
+"resultCode": "200"
+}
+
+常用元数据接口
+Uri	接口名称
+ucfbase.ucfbaseItf.Deletable	逻辑删除相关
+ucfbase.ucfbaseItf.IAuditInfo	审计信息
+ucfbase.ucfbaseItf.IApprovalInfo	审批信息
+ucfbase.ucfbaseItf.LogicDelete	逻辑删除相关
+ucfbase.ucfbaseItf.IPosition	位置信息
+ucfbase.ucfbaseItf.IApprovalFlow	审批流信息
+ucfbase.ucfbaseItf.ITenant	租户接口
+ucfbase.ucfbaseItf.IAutoCode	自动编码
+ucfbase.ucfbaseItf.IEnable	启用
+ucfbase.ucfbaseItf.ITree	树型结构
+ucfbase.ucfbaseItf.CustomItem	自由自定义项(过期)
+ucfbase.ucfbaseItf.IBarCode	条形码
+ucfbase.ucfbaseItf.IYTenant	统一租户接口
+常用标签
+标签编码	标签名称	描述
+data_auth	数据权限管控	标识这个属性是否受数据权限管控
+isCoding	是否可编码	标记元数据使用编码规则
+doc	基本档案	注册参照时需要先打该标签
+report	报表实体	给实体打了该标签后，报表模型才可以看到
+reportHide	报表隐藏	打了该标签报表中不会展示该实体
+isOrg	是否组织类参照	在组织类元数据上标记该元数据是否走编码映射， 比如销售组织，库存组织等
+ID	ID	用于业务日志标识ID
+isBusinessLog	支持业务日志	标记该元数据是否记录业务日志， 可以打在实体或者字段上， 打在实体上且字段上未打则记录所有字段； 打在实体上且打在字段上则记录具体打了的字段
+CODE	编码	用于业务日志标识编码
+NAME	名称	用于业务日志标识名称

@@ -1,0 +1,1294 @@
+社区文档中心
+首页
+文档导航
+开发者社区
+社区论坛
+视频教程技术博客
+更多
+张宏涛
+资料中心
+专业开发
+产品概述
+快速入门
+操作指南
+开发指南
+开发介绍
+新功能开发
+移动端开发
+扩展开发
+全球化
+组织
+权限
+特征
+基础数据
+审批流
+业务流
+规则引擎
+公式
+UI模板
+参照
+导入导出
+打印
+对象建模
+编码规则
+调度任务
+监控与预警
+日志
+消息平台
+工作台
+事件中心
+文件服务
+YonBuilder应用开发
+前端开发
+后端开发
+移动开发
+安全
+数据库
+iuap-数据库规范红皮书
+分布式事务
+多数据库编程模型
+ISV原生产品多数据库适配规范
+DevOps技术
+容器云技术
+区块链云技术
+YMS开发
+智能应用开发
+专项开发
+成果迁移
+技术方案
+最佳实践
+参考手册
+常见问题
+视频教程
+专业开发/开发指南/数据库/多数据库编程模型
+多数据库编程模型
+最后更新时间：2024-03-27
+多数据库技术架构
+
+多数据库技术架构主要体现在JDBC翻译器和MYSQL基准库，JDBC翻译器使用的是阿里alibaba druid开源技术，以MYSQL为基准库，进行不同数据库的翻译与执行。
+
+在业务调用时，从前端业务访问经过中间件JDBC层进行SQL翻译，根据不同的数据库翻译相应的SQL语句，当然SQL语句在开发设计时要符合一定规范和约束，特殊语法不能使用，具体多数据库技术架构如下图。
+
+基准库介绍
+
+多数据库适配是指以MySQL脚本为基准，通过SQL翻译器把Mysql的脚本翻译为其他数据库类型的脚本。
+
+目前计划支持的数据库有MySQL，Oracle，PG，openGauss，达梦，神通。截止本文档发布时，已适配的数据库有MySQL，PG，达梦。
+
+业务调用过程
+
+SQL驱动层的调用流程如下，当前端业务发起调用时，在驱动层根据不同的数据库进行SQL的翻译和转化，然后在执行数据库操作，最后返回执行结果。
+
+脚本目录规范
+脚本目录概述
+
+一、名词解释
+
+专属化脚本指所有数据库sql脚本。
+
+从脚本类型上区分包括不同数据库类型的sql文件，mongodb的脚本文件（zip格式），groovy脚本（通过程序处理sql），目前存在以上这几种脚本。
+从执行库不同区分的话，存在三种脚本：mdd框架的公共脚本（基于mdd开发的服务会涉及到）、插入到公共服务的脚本、插入到业务服务自身库的脚本。
+从场景上区分的话，脚本分为：init（初始化）脚本，upgrade（升级）脚本，patch（补丁）脚本。
+空库初始化的场景，即新安装，这个场景下要执行init+patch脚本。
+老版本升级场景，这个场景下要执行upgrade+patch脚本。
+相同版本打补丁场景，这个场景下要执行patch脚本。
+
+二、脚本原则
+
+脚本目录规范就是设计好目录结构，能规范好以上这些不同的脚本，使安装器能够正确识别脚本，执行到正确的库里。
+
+脚本的原则：
+
+每个脚本都需要有所有者，所有者管理自己的所有脚本。预置在公共服务里的数据，需要抽取出来dml脚本放在业务服务里。
+脚本根目录scripts放在微服务打包工程里，与src同级，确保脚本与代码一样打包到war包。
+所有脚本应该是支持幂等。
+
+三、脚本目录结构
+
+目录规范：
+
+db目录下区分init、upgrade、patch目录，作为不同场景的脚本区分。另外的章节会对不同场景的脚本目录单独做说明。这里对通用的目录结构说明一下：
+
+根据不同的数据库类型：rdb（关系型数据库）、mongodb作为目录区分这两种类型的数据库脚本。其中rdb下脚本主要以mysql作为语法标准。
+脚本按照模块管理，所以可以用0001_模块1、0002_模块2这样的目录来区分。
+模块内脚本进一步区分两类：公共服务的预制数据脚本（只有DML）、本服务自己的预制脚本（DDL和DML）。FIN代表DDL和DML目录下执行完之后才会执行，里面既可以放ddl建库语句，也可以放dml预制数据语句。
+
+通用规范：
+
+脚本执行顺序是，同一个目录下本层所有的文件+子目录，按照名称进行自然排序（升序），所以文件名和目录名要求是4位数字序号_服务名-时间戳.数据库类型.sql。
+
+上文提到的三种脚本：mdd框架的公共脚本（基于mdd开发的服务会涉及到）、插入到公共服务的脚本、插入到业务服务自身库的脚本。
+
+分别有固定的目录：0000_iuap_component、xxxx_模块名/0010_iuap_common、xxxx_模块名/0020_self。
+
+其中：xxxx_模块名是为了方便进行脚本按照模块管理而设置的一层目录，如果不需要区分多个模块，可以定义为：0001_微服务编码。
+
+上图所示的目录结构是固定的，必须按照此结构定义自己的目录。
+
+四、公共服务脚本目录
+
+0010_iuap_common下放的是所有公共服务预置脚本（只有DML），下一层目录必须是规定的预先分配好的目录名称：下图并不是最全的目录，具体公共脚本负责人清单找平台索取。
+
+五、mdd框架脚本
+
+制品中mdd框架脚本放在0000_iuap_component下，在业务服务的工程git中不需要放框架脚本，这些脚本是由后端框架开发部负责统一维护的（有统一的公共git）。
+
+只需要业务服务在自己git工程中该目录下放配置文件，生成制品时可以自动拉取。
+
+version文件的内容：
+
+目前这部分脚本区分了两种风格：yht和u8c 所以必须要先确定自己是哪种风格，两种风格对应的git分支是不一样的，所以需要在version文件中指定分支。 yht风格对应的分支：mdddev、mddrelease u8c风格对应的分支：u8cdev、u8crelease。
+
+0000_iuap_component下不需要放脚本，流水线制作YPR时会自动从公共脚本git库里拉取脚本到这个目录。
+
+六、mongodb的脚本
+
+mongodb的脚本放在专门的mongodb目录下，内部结构同其他。
+
+mongodb的脚本由专门的执行器执行，负责人是蒋生锋。脚本按照统一要求以zip压缩包的方式，具体生成方式可以咨询蒋生锋。
+
+七、groovy脚本
+
+详见groovy专门的说明文档。
+
+八、脚本目录样例
+
+初始化脚本目录规范
+
+说明如下：
+
+db目录下有一个init目录，代表初始化脚本。
+init目录下区分两个数据库类型mongodb和rdb，分别放mongo数据库的脚本和关系数据库的脚本（基于mysql语法）。
+rdb目录下有0000_iuap_component(基于mdd框架开发的服务才需要此目录)。
+rdb和mongodb下有按照模块名来分目录的脚本，里面包括两个子目录：（0010_iuap_common、0020_self）。
+每逢大版本发盘时，需要重新抽取初始化脚本。
+初始化脚本必须是规范的最终状态的脚本，不能包含例如加字段，改字段这种增量脚本。
+所以初始化脚本必须是通过统一的抽取工具进行抽取。
+补丁脚本目录规范
+
+patch放的是从金盘发布时间点之后增量维护的幂等脚本。公有云脚本流水线也会执行此目录下脚本，当需要做补丁盘时，直接从制品库做盘，安装执行的就是patch目录下脚本。
+
+patch中的脚本要求做到幂等。patch的目录结构如图：
+
+由于530之后安装器会支持自动翻译，并且只针对新的patch目录（如图，直接在db下的patch目录）进行自动翻译，所以patch目录下用rdb来代表关系型数据库脚本。
+
+其中，特殊不能支持自动翻译的脚本，需要如图上所示，针对各类型数据库提供单独的脚本，在文件名上如图所示规范命名。
+
+一、新的patch目录规范：
+
+530之后启用新patch目录，如上图，db目录下直接放patch目录，patch目录里区分mongodb和rdb。
+
+rdb代表关系型数据库脚本。
+
+rdb目录下的dml脚本在安装器执行时支持自动翻译。
+
+rdb目录下的ddl脚本不支持自动翻译。这里指的ddl不是说DDL目录，而是说所有的ddl语句，包括建表，建索引，修改表结构，修改索引等等。
+
+不支持自动翻译的脚本，需要手工翻译，然后提供不同数据库类型的脚本文件，这种脚本文件还是都放在rdb下，但是，以.mysql.sql/.oscar.sql/.postgresql.sql这样的后缀命名。
+
+二、文件名规范：
+
+支持自动翻译的脚本文件名按照以前的规范：4位数字序号_表名或服务名-时间戳.sql--------此为建议，不强制，因为有历史脚本的原因。
+
+rdb下如果有特殊语法的脚本不支持翻译的，需要针对不同数据库分别准备脚本，文件名规范：4位数字序号_服务名-时间戳.数据库类型.sql----必须携带数据库类型标识。
+
+公有云脚本流水线只会执行通用脚本以及带mysql标识的脚本。
+
+4．如果有同名的.sql/.mysql.sql/.oscar.sql，安装器和脚本流水线的逻辑是什么呢？
+
+如：
+
+0001_abc.sql
+
+0001_abc.mysql.sql
+
+0001_abc.oscar.sql
+
+三、公有云脚本流水线的逻辑：
+
+过滤掉除了.sql和.mysql.sql以外的其他脚本。
+
+判断0001_abc.sql，是否本目录下存在一个同名的.mysql.sql的脚本。
+
+如果没有则执行0001_abc.sql。
+
+如果有则不执行0001_abc.sql，只执行0001_abc.mysql.sql。
+
+四、安装器的逻辑：
+
+如果当前数据库类型是oscar，则拿到0001_abc.sql和0001_abc.oscar.sql。
+
+先判断0001_abc.sql是否在本目录有一个同名的.oscar.sql文件，有则，不翻译跳过0001_abc.sql。
+
+如果没有，则翻译。
+
+3.1.如果当前数据库类型是mysql，则拿到0001_abc.sql和0001_abc.mysql.sql。
+
+3.2.先判断0001_abc.sql是否在本目录有一个同名的.mysql.sql文件，有则跳过不执行0001_abc.sql，只执行0001_abc.mysql.sql。
+
+3.3. 如果没有，则执行0001_abc.sql。
+
+五、patch的描述文件配置：
+
+关于patch中文件数量比较多不好管理怎么办？
+
+可以按照阶段性的子目录来管理文件，子目录的命名规范是：yyyymm，如202205
+
+5月份的增量脚本放在202205目录下，6月开始的增量脚本就放在202206目录下。
+
+如图：
+
+注意：
+
+按照目录管理一定要注意排序规则，目录/文件之间都是按照名称排序的。
+
+专项补丁目录规范
+
+专项补丁是指专门给某一个项目打的补丁（专指脚本），不能在其他项目上执行该脚本。这种脚本需要有一个特殊的目录存放，以便让安装器能够识别出来。
+
+专门定义个专项补丁脚本的目录：patch_special，目录下一层是以项目编码标识命名的目录：qdg(青岛港为例)。 qdg以下目录结构同普通的patch目录。
+
+描述文件中增加对专项补丁的配置，如右图。 code标签定义项目编码，path标签定义对应的脚本目录。
+
+补丁名称上增加项目编码标识： YonBIP202203_patch_QP_QDG_20220407-1-39_sPaaS--iuap-apcom-auth.tar.gz 安装器安装此补丁时如果解析到项目标识，代表是专项补丁，则去描述文件中找code=QDG的patch配置，找到path对应的脚本目录执行。
+升级脚本目录规范
+
+upgrade放的是金盘发布的本版本对某一历史版本的数据库升级脚本，如针对YonBIP202105的升级，或者针对YonBIP202111的升级等。脚本要求幂等，通过DBDescribe.xml来描述升级目录。
+
+针对某个版本的升级脚本，必须放在专门的目录里，如图：
+
+说明：
+
+代表的是202111发版时，针对2105这个版本的升级脚本在里面。
+
+这个目录以下的结构同init和patch，没有区别，需要加component目录的mdd服务同样要配置version.xml。
+
+说明：
+
+其中YonBIP202105-YonBIP202111是2021年1230发版时老目录，内容不动。但是内部目录微调，请参照截图。
+YonBIP202105-YonBIP202111下包含mongodb和mysql,分别是原来的mongodb/YonBIP202105-YonBIP202111下的脚本挪过来，mysql/YonBIP202105-YonBIP202111下的脚本挪过来。
+2022-8-30版新增YonBIP202111-iuap.V6.R1_2208(领域新增的目录名应该叫：YonBIP202111-YonBIP.V3.R1_2208)目录，代表从YonBIP202111版本升级到最新。目录中内容来自两个方面：
+
+原mysql/patch里的脚本，直接挪到YonBIP202111-iuap.V6.R1_2208/mysql/patch目录下（如图）,该目录下脚本不翻译
+
+原patch里的脚本，直接挪到YonBIP202111-iuap.V6.R1_2208/patch目录下（如图），该目录下脚本会调用翻译器进行翻译
+
+3.原mongodb/patch里的脚本，直接挪到YonBIP202111-iuap.V6.R1_2208/mongodb/patch目录下。
+
+挪完之后，原三个patch中的脚本就清掉了。
+特殊目录规范
+
+一、有脚本不能在公有云上执行怎么办？
+
+通过固定的脚本目录，标识出来在哪里执行：xxxx-private-only。 xxxx必须是4位数字（用来排序）。
+
+如：
+
+这样公有云的脚本流水线就忽略掉这个特殊目录不执行。
+
+二、有脚本不能在专属盘里执行怎么办？
+
+方法同上，也是用一个特殊命名的目录放脚本：xxxx-public-only。 xxxx必须是4位数字（用来排序）。
+
+如：
+
+这样安装器会忽略掉这个特殊目录不执行。
+
+脚本描述文件说明
+
+脚本描述文件是指在scrits/db目录下的DBDscribe.xml文件，该文件用来对数据库脚本以及数据源的关系进行描述，对初始化安装、升级安装、补丁安装进行配置。
+
+描述文件的主要结构为：
+
+其中：
+
+serviceName必须填微服务编码。
+
+dbScripts配置各种场景的描述信息。
+
+下面以各种场景介绍如何配置
+
+一、初始化安装
+
+当初始化安装时，最典型的dbScript配置如下：
+
+rdbiuap-apcom-prewarning_dataSource1
+
+说明：
+
+不指定type标签，默认代表type=init。
+dbType配置脚本对应的数据库类型：rdb或者mongodb。
+logicDataSource对应yms上的逻辑数据源编码。
+如果是mongo数据源的，配置的是mongodb对应的mongo template上的数据源编码。
+
+如果一个微服务存在多个数据源，脚本要区分在哪个数据源执行时，可以配置多套数据源配置：
+
+rdbiuap-apcom-prewarning_dataSource2mysql/init/0001_模块名/0020_self/DDL/init/rdb/0001_模块名/0020_self/DML/rdbiuap-apcom-prewarning_dataSource3mysql/init/0002_模块名/0020_self/DDL/init/rdb/0002_模块名/0020_self/DML/
+
+注意：
+
+通过ddl,dml,fin标签来指定要执行的脚本目录。
+建议通过模块目录来区分脚本，不同模块目录指定到不同的数据源上。
+ddl,dml,fin必须指定到目录，不要到具体文件。（避免频繁修改）。
+如果在一个标签里要指定多个目录的，用分号隔开，如
+
+init/rdb/0002_模块名/0020_self/DDL/;init/rdb/0003_模块名/0020_self/DDL/。
+
+二、升级安装
+
+典型的升级描述，mongodb的升级脚本描述同样处理。
+
+说明：
+
+type：upgrade代表升级。
+fromVersion：从哪个版本升级，多个版本用分号间隔。
+path：从fromVersion指定的版本升级时，要执行哪几个目录的升级脚本，多个目录用分号间隔。
+所有版本号：平台：YonBIP202111;YonBIP202203;iuap.V6.R1_2205;iuap.V6.R1_2207 。
+领域是：YonBIP202111;YonBIP202203;YonBIP.V3.R1_2207。
+其中对YonBIP202105来说，描述文件应该是：
+
+同样的，如果有多个数据源，也需要配置多套配置，通过ddl,dml,fin来区分脚本目录（同init）。
+
+详细例子见2.1脚本目录概述里的scripts附件。
+
+三、补丁安装
+
+补丁的场景分为通用补丁和专项补丁两种，如下是典型的通用补丁配置：
+
+rdbpatchiuap-apcom-prewarning_dataSource1
+
+说明：
+
+type=patch代表是补丁配置。
+dbType：代表脚本对应的数据库类型。
+同样的如果是多个数据源，那么需要配置多套。
+
+专项补丁配置：
+
+QDG青岛港专项补丁rdbpatchiuap-apcom-prewarning_dataSource1patch_special/qdg/rdb
+
+说明：
+
+code：必须录入规范的项目编码，咨询ypr为准。
+path：执行专项补丁的脚本目录。
+专项补丁的脚本必须放在patch_special目录中，以项目编码作为子目录。
+同样的如果是多个数据源，需要配置多套。
+
+四、裸金属的参数如何配置
+
+如果服务支持裸金属安装，那么需要再描述文件中加入如下的属性：
+
+mongodb{{ eq (index . "productForm.code") "alone"}}
+
+五、要在某个数据源忽略mdd框架脚本如何配置
+
+存在这种场景，服务有两个逻辑数据源，其中一个需要执行mdd框架脚本，另一个不需要执行mdd框架，这样可以在不需要执行mdd框架脚本的数据源配置中增加开关配置：
+
+isIgnoreComponent说明如下：
+
+rdbiuap-apcom-prewarning_dataSource1true
+脚本检查清单
+
+脚本在抽取时，检查清单如下：
+
+分类	条目
+描述文件规范	db下DBDescribe.xml文件里serviceName必须与微服务编码一致
+描述文件中必须针对每种数据库类型每种场景（init/patch/upgrade）分别进行描述，要与脚本目录一致	
+描述文件中ddl和dml标签不要指定到具体文件，只指定到目录	
+脚本规范	脚本文件命名要符合规范：4位数字序号_服务名[或者表名]-时间戳，不允许包含中文
+脚本中不许指定字符集	
+init/patch两个目录内部的结构要一致	
+去掉自增id后，新dml脚本必须带主键	
+联合唯一索引里，不能存在null值	
+非专属化不允许有drop table	
+不允许有不带条件的delete	
+不允许删字段	
+表名/字段名/索引名不允许包含中文以及特殊字符，只能使用英文字母，数字和下划线，字母全部小写	
+不允许在脚本里放存储过程的定义	
+字段名不允许使用数据库保留字，如type，rowid，rownum，具体范围见亚利规范	
+insert语句中必须明确字段	
+表必须有主键	
+新建表禁止使用bit类型，使用SMALLINT代替	
+禁止使用 ON DUPLICATE KEY UPDATE语法	
+是否漏了抽取common下公共脚本	
+所有脚本都要幂等	
+已经发布补丁或者落在盘里的脚本文件不能再修改	
+公共建库规范	把公共建库脚本放在平台基础盘的27个公共服务，需要注意每次修改公共表结构，都必须在基础盘里放增量的ddl脚本
+多数据库适配规范
+
+多数据库脚本适配原则如下：
+
+init即初始化脚本目录不支持安装时自动翻译，所以需要在init目录下根据不同的数据库类型提前预置好脚本。
+patch和upgrade目录下脚本430之后新安装器会支持自动翻译，原则上只需要预置一份mysql的脚本就可以。
+如果有脚本因为使用了特殊语法不能通过翻译器自动翻译的，需要针对不同的数据库提供不同的脚本文件。
+只要遵循了多数据库适配规范的脚本，原则上都可以通过翻译器来自动翻译。
+多数据库开发方案
+
+目前平台已支持多种数据库，在项目开发时，就要决策环境数据库方案，由于不同数据库语法有一些差异，所以需要遵循一些SQL规范。
+
+多数据库环境方案
+
+在项目上环境和数据库对照表如下，我们以MySQL，PG为例来讲解开发环境，测试环境，生产环境的数据库如何选择，一些原则如下。
+
+三个环境数据库都一样，这是最优选择，设置语法排除后，还能使用一些特殊的语法。
+开发环境选择MySQL，其他两个环境选择PG，因为开发环境选择了基准库，那么这种方式也是支持的，但开发时语法必须是标准的。
+不支持开发环境PG，而其他两个环境选择别的数据库。
+开发环境	测试环境	生产环境	是否推荐	说明
+MySQL	MySQL	MySQL	最优	设置排除语法检查后，开发时可以使用MySQL特殊语法。
+PG	PG	PG	最优	设置排除语法检查后，开发时可以使用PG特殊语法。
+MySQL	PG	PG	支持	开发时只能是标准语法
+SQL编程规范
+SQL字段类型对照
+
+各个数据库之间字段类型对照表如下：
+
+Java类型	MySQL类型	PG类型	Oracle类型	OSCAR类型	openGauss类型
+String	varchar	character varying	varchar2	VARCHAR	VARCHAR
+Integer	int	int4	NUMBER(10,0)	int	INT4
+String	longtext	clob	clob	text	VARCHAR
+BigInteger	bigint	int8	NUMBER(20,0)	bigint	bigint
+	enum			CHARACTER VARYING	CHARACTER VARYING(0)
+	json	json	clob	json	json
+	text	character varying	clob	text	VARCHAR
+	mediumtext	character varying	clob	text	VARCHAR
+	timestamp	TIMESTAMP	timestamp	timestamp	TIMESTAMP(0)
+	datetime	TIMESTAMP	timestamp	timestamp	TIMESTAMP(0)
+	set			binary	
+	binary	VARBIT	RAW	varchar	VARBIT
+	char	char	char	varchar	CHAR
+	float	float 没有精度和长度	BINARY_FLOAT	mm float(24)	FLOAT
+	varbinary	BYTEA 没有长度	RAW	varbinary	BYTEA
+	tinyint	int2	NUMBER(3,0)	smallint	INT2
+	decimal	decimal	decimal	decimal	DECIMAL
+	blob	BYTEA	BLOB	blob	BYTEA
+	double	DOUBLE PRECISION	BINARY_DOUBLE	DOUBLE PRECISION	DOUBLE PRECISION
+boolean	bit	number(1,0)	number(1,0)	bool	numeric(1)
+	date	date	date	date	DATE
+	smallint	INTEGER	NUMBER(5,0)	smallint	INTEGER
+	mediumblob	BYTEA	BLOB	text	BYTEA
+	longblob	BYTEA	BLOB	text	bYTEA
+	time	time	DATE	time	time
+	tinytext	VARCHAR	CLOB		VARCHAR
+SQL语法对照
+
+各数据库之间语法对照表如下：
+
+SQL类型	MYSQL	gauss	PG	达梦	oracle12	OSCAR
+中文字符长度问题	varchar字段长度=字符个数，不区分中文和英文	语法相同	语法相同	如果是中文字符集，utf8=字段长度*3	（ZHS16GBK）如果是中文字符集，AL32UTF8 =字段长度3，ZHS16GBK=字段长度2	
+DDL	表是否存在（exists）示例：create table if not exists teacher;drop table if exists teacher;	语法相同	语法相同	不支持翻译器移除if not exists	不支持翻译器移除if not exists	语法相同
+主键自增（auto_increment）示例：id primary key auto_increment;	SERIAL示例：id serial;	SERIAL示例：id serial;	IDENTITY 示例：id IDENTITY;	字段添加约束：GENERATED BY DEFAULT AS IDENTITY。id GENERATED BY DEFAULT AS IDENTITY	serial（integer） BIGSERIAL和serial8（bigint）	
+字段注释(comment)示例：name varchar(32) comment '名称';	通过comment语句追加:示例：COMMENT ON COLUMN teacher.name IS '名称'	通过comment语句追加:示例：COMMENT ON COLUMN teacher.name IS '名称'	通过comment语句追加:示例：COMMENT ON COLUMN teacher.name IS '名称'	通过comment语句追加:示例：COMMENT ON COLUMN teacher.name IS '名称'	COMMENT ON COLUMN teacher.name IS '名称'	
+索引（约束）定义：示例：UNIQUE KEY UQ_UK_code (code) USING BTREE	通过alter table 约束语句适配：示例：ALTER TABLE teacher ADD CONSTRAINT unique_idx_tea UNIQUE ("type",code)	通过alter table 约束语句适配：示例：ALTER TABLE teacher ADD CONSTRAINT unique_idx_tea UNIQUE ("type",code)	通过create 约束语句适配：示例：CREATE UNQIUE INDEX idx_code ON teacher （code)	通过alter table 约束语句适配：示例：ALTER TABLE teacher ADD CONSTRAINT unique_idx_tea UNIQUE ("type",code)	ALTER TABLE teacher ADD CONSTRAINT unique_idx_tea UNIQUE (type,code)	
+时间自动更新触发器示例： pubts timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP	触发器适配示例create or replace function teacher_pubts() returns trigger as$$begin new.modified = current_timestamp; return new;end$$language plpgsql;CREATE TRIGGER teacher_pubts BEFORE UPDATE ON teacherFOR EACH ROWEXECUTE PROCEDURE teacher_pubts();	触发器适配示例create or replace function teacher_pubts() returns trigger as$$begin new.modified = current_timestamp; return new;end$$language plpgsql;CREATE TRIGGER teacher_pubts BEFORE UPDATE ON teacherFOR EACH ROWEXECUTE PROCEDURE teacher_pubts();	触发器适配示例CREATE OR REPLACE TRIGGER triggerName BEFORE UPDATE ON teacher FOR EACH ROW BEGIN :NEW.pub_ts = current_timestamp END;	触发器适配示例CREATE TRIGGER triggerNameBEFORE UPDATEON teacherFOR EACH ROWBEGIN:NEW.pub_ts := SYSDATE;END;/	CREATE TRIGGER AA_BILLCODE_CANDIDATEPROP_PUBTSBEFORE UPDATEON auth.aa_billcode_candidatepropFOR EACH ROWBEGIN:NEW.pubts := SYSDATE ; END ; //oracle的触发器删除 最后的 /	
+create table like 'teacher'	CREATE TABLE "teacher0"( LIKE "teacher" INCLUDING INDEXES INCLUDING COMMENTS) ;	CREATE TABLE "teacher0"( LIKE "teacher" INCLUDING INDEXES INCLUDING COMMENTS) ;	不支持log.error翻译器不输出	CREATE TABLE teacher As SELECT * FROM teacher where 1 = 2 ;	CREATE TABLE teacher As SELECT * FROM teacher where 1 = 2 ;	
+create table as select xxx	语法相同	语法相同	语法相同	语法相同	语法相同	
+重命名表rename teacher to tea;alter table teacher rename to tea ;	alter table teacher rename to tea ;	alter table teacher rename to tea ;	RENAME TABLE "teacher" TO "tea";	AlTER TABLE teacher RENAME TO tea ;	AlTER TABLE teacher RENAME TO tea ;（文档中未找到实例）	
+增加列alter table teacher add age int;	alter table teacher add column age int;	alter table teacher add column age int;	alter table "teacher" add column "age" int;	语法相同	语法相同	
+修改列类型（modify）alter table teacher modify code char(10);	alter table teacher alter column code type char(10);	alter table teacher alter column code type char(10);	alter table "teacher" modify "code" char(10);	语法相同	语法相同	
+修改列类型（change）alter table teacher change code,codde varchar(64);	适配为两条 alter column语句。alter table teacher rename code to codde;alter table teacher alter column codde type varchar(64);	适配为两条 alter column语句。alter table teacher rename code to codde;alter table teacher alter column codde type varchar(64);	适配为两条 alter column语句。alter table "teacher" modify "code" char(64);alter table "teacher" alter column "code" RENAME TO "codde";			
+删除列alter table teacher drop address;	alter table teacher drop column address;	alter table teacher drop column address;	alter table "teacher" drop column "address";	ALTER TABLE teacher DROP COLUMN address;	ALTER TABLE teacher DROP COLUMN address;	
+修改列默认值alter table teacher alter code set default '--';	alter table teacher alter column code set default '--';	alter table teacher alter column code set default '--';	alter table "teacher" alter column "code" set default '--';	ALTER TABLE teacher MODIFY code DEFAULT '--';	语法相同	
+增加索引alter table teacher add index idx_code(code);	CREATE INDEX idx_code ON teacher (code)	CREATE INDEX idx_code ON teacher (code)	CREATE INDEX idx_code ON "teacher" ("code")	CREATE INDEX teacher_I_idx_code ON teacher (code)	CREATE INDEX teacher_I_idx_code ON teacher (code)	
+删除索引alter table teacher drop index idx_code;	语法相同	语法相同	语法相同	DROP INDEX teacher_I_idx_code;	DROP INDEX teacher_I_idx_code;	
+删除表：drop table teacher;	语法相同	语法相同	语法相同	语法相同	语法相同	
+主键为char类型	不支持字符长度不足会有空格，导致关联匹配不到数据。修改为varchar	不支持字符长度不足会有空格，导致关联匹配不到数据。修改为varchar	不支持字符长度不足会有空格，导致关联匹配不到数据。修改为varchar	不支持字符长度不足会有空格，导致关联匹配不到数据。修改为varchar2	不支持字符长度不足会有空格，导致关联匹配不到数据。修改为varchar	
+DML	单条保存insert into teacher(id,name,code) values(1,'tom','001');	语法相同	语法相同	需要手动开启 identity_insertset identity_insert "teacher" on;insert into xxx	语法相同	语法相同
+多条保存insert into teacher(id,name,code) values(1,'tom','001'),(2,'jerry','002');	语法相同	语法相同	需要手动开启 identity_insertset identity_insert "teacher" on;insert into xxx	oracle不支持这种语法，可以适配为insert allinto teacher values(1,'tom','001')into teacher values(2,'jerry','002')select 1 from dual;	语法相同	
+不指定列保存insert into teacher values(1,'tom','001');	语法相同	语法相同	如果不存在自增列，支持如果存在自增列，抛错！需要业务修改	语法相同	语法相同	
+ON DUPLICATE KEY UPDATE insert into teacher (id,name,code) values(1,'tom','001') ON DUPLICATE KEY UPDATE code='002'	不支持适配为ON CONFLICT insert into teacher (id,name,code) values(1,'tom','001') on conflict (id,code) do update set code='002'	不支持适配为ON CONFLICT insert into teacher (id,name,code) values(1,'tom','001') on conflict (id,code) do update set code='002'	不支持适配为MERGE INTO 语句MERGE INTO [target-table] A USING [source-table sql] B ON([conditional expression] and [...]...)WHEN MATCHED THEN [UPDATE sql]WHEN NOT MATCHED THEN [INSERT sql]	不支持适配为MERGE INTO 语句MERGE INTO [target-table] A USING [source-table sql] B ON([conditional expression] and [...]...)WHEN MATCHED THEN [UPDATE sql]WHEN NOT MATCHED THEN [INSERT sql]	不支持适配为MERGE INTO 语句MERGE INTO [target-table] A USING [source-table sql] B ON([conditional expression] and [...]...)WHEN MATCHED THEN[UPDATE sql]WHEN NOT MATCHED THEN[INSERT sql]OSCAR必需有主键，否则，on后面括号是空的,ON ()	
+保存，重复指定列名insert into teacher(id,name,code,name) values(1,'tom','001','tom');	不支持翻译器排除重复列名insert into teacher(id,name,code) values(1,'tom','001');	不支持翻译器排除重复列名insert into teacher(id,name,code) values(1,'tom','001');	不支持翻译器排除重复列名insert into teacher(id,name,code) values(1,'tom','001');	不支持翻译器排除重复列名insert into teacher(id,name,code) values(1,'tom','001');	不支持翻译器排除重复列名insert into teacher(id,name,code) values(1,'tom','001');	
+更新数据update teacher set name='tom' where code='001'	语法相同	语法相同	语法相同	语法相同（不支持同个字段重复赋值）	语法相同（不支持同个字段重复赋值）	
+关联更新update org_admin a left join (select * from org_admin where parentid in ('2208028677525760') and tenantid='jj8blzvw') child on a.id=child.parentid set a.isEnd=case when child.id is null then 1 else 0 end where a.id in ('2208028677525760') and a.tenantid='jj8blzvw'	不支持适配为update setupdate org_admin a set a.isEnd=case when child.id is null then 1 else 0 end from (select * from org_admin where parentid in ('2208028677525760') and tenantid='jj8blzvw') child where a.id=child.parentid and a.id in ('2208028677525760') and a.tenantid='jj8blzvw'	不支持适配为update setupdate org_admin a set a.isEnd=case when child.id is null then 1 else 0 end from (select * from org_admin where parentid in ('2208028677525760') and tenantid='jj8blzvw') child where a.id=child.parentid and a.id in ('2208028677525760') and a.tenantid='jj8blzvw'	不支持，需要改程序	MERGE INTO org_admin a USING ( SELECT * FROM org_admin WHERE parentid IN ('2208028677525760') AND tenantid = 'jj8blzvw' ) child on (a.id = child.parentid) WHEN matched THEN UPDATE set isEnd = CASE WHEN child.id IS NULL THEN 1 ELSE 0 END WHERE a.id IN ('2208028677525760') AND a.tenantid = 'jj8blzvw'（目前只支持left join单张表 或者关联表为一个结果集）	采用 update set 子查询方式处理UPDATE org_admin aSET a.isEnd = (CASE WHEN (SELECT count(1)FROM (SELECT *FROM org_adminWHERE parentid IN ('2208028677525760')AND tenantid = 'jj8blzvw') childWHERE a.id = child.parentidAND child.id IS NULL) IS NULLTHEN 1ELSE 0END)WHERE a.id IN ('2208028677525760')AND a.tenantid = 'jj8blzvw' ;	
+REPLACE INTOREPLACE INTO teacher (id,name,age) VALUES(123, ‘chao’, 50);	不支持适配为 ON CONFLICT	不支持适配为 ON CONFLICT	不支持适配为MERGE INTO 语句	不支持适配为MERGE INTO 语句	不支持适配为MERGE INTO 语句	
+删除数据delete from teacher where code='001'	语法相同	语法相同	语法相同	语法相同	语法相同	
+删除数据delete from teacher T0 where T0.code='001'	语法相同	语法相同	不支持，需要将表别名去掉delete from teacher where code='001'	语法相同	语法相同	
+	show tables like 'teacher'	不支持适配为查询系统表select table_name from information_schema.tables WHERE upper(table_schema) = ? and table_name='teacher'	不支持适配为查询系统表select table_name from information_schema.tables WHERE upper(table_schema) = ? and table_name='teacher'	不支持适配为查询系统表select table_name from all_tables WHERE upper(OWNER)=? and AND TABLE_NAME = 'teacher'	不支持适配为查询系统表select table_name from all_tables WHERE upper(OWNER)=? and AND TABLE_NAME = 'teacher'	不支持适配为查询系统表select table_name from all_tables WHERE upper(OWNER)=? and AND TABLE_NAME = 'teacher'
+DQL	单表查询	语法相同	语法相同	语法相同	语法相同	语法相同
+select distinct * from teacher	语法相同	语法相同	如果表中存在blob,clob字段,不支持。需要业务调整	语法相同	语法相同	
+多表关联	语法相同	语法相同	语法相同	语法相同	语法相同	
+子查询	语法相同	语法相同	语法相同	语法相同	语法相同	
+UNION 查询	语法相同	语法相同	语法相同	语法相同	语法相同	
+比较符(=,!=,>,<,exists,between and ,...)	语法相同	语法相同	语法相同	语法相同	语法相同	
+聚合group by orders	存在group by，则 select 中非聚合函数字段与group by中数量必须一致，而且order by字段必须出现在select 和 group by的字段中翻译器适配	存在group by，则 select 中非聚合函数字段与group by中数量必须一致，而且order by字段必须出现在select 和 group by的字段中翻译器适配	存在group by，则 select 中非聚合函数字段与group by中数量必须一致，而且order by字段必须出现在select 和 group by的字段中翻译器适配	出现在select列表中的字段，如果没有在组函数中，那么必须出现在group by 子句中。(select中的字段不可以单独出现，必须出现在group语句中或者在组函数中。)，而且order by字段必须出现在select 和 group by的字段中	出现在select列表中的字段，如果没有在组函数中，那么必须出现在group by 子句中。(select中的字段不可以单独出现，必须出现在group语句中或者在组函数中。)，而且order by字段必须出现在select 和 group by的字段中	
+字段映射(大小写敏感)问题现状：1）mybatis，mapper中字段映射大小写敏感2）业务代码中，存在使用map获取数据的，获取字段的key值是列名称Map<String,Object> dataMap = ...;String userName = dataMap.get("userName");	创建表的时候，全部转换为小写。翻译器翻译的时候，将字段名转换为消息，原有字段名设置为别名。例如：select id,userName,userCode from teacher;翻译为：select id as "id",username as "userName",usercode as "userCode" from teacher	创建表的时候，全部转换为小写。翻译器翻译的时候，将字段名转换为消息，原有字段名设置为别名。例如：select id,userName,userCode from teacher;翻译为：select id as "id",username as "userName",usercode as "userCode" from teacher	创建表的时候，全部转换为小写。翻译器翻译的时候，将字段名转换为消息，原有字段名设置为别名。例如：select id,userName,userCode from teacher;翻译为：select id as "id",username as "userName",usercode as "userCode" from teacher	创建表的时候，全部转换为大写。翻译器翻译的时候，将字段名转换为大写，原有字段名设置为别名。例如：select id,userName,userCode from teacher;翻译为：select ID as "id",USERNAME as "userName",USERCODE as "userCode" from TEACHER	创建表的时候，全部转换为大写。翻译器翻译的时候，将字段名转换为大写，原有字段名设置为别名。例如：select id,userName,userCode from teacher;翻译为：select ID as "id",USERNAME as "userName",USERCODE as "userCode" from TEACHER	
+escapeselect * from teacher where name like '/_xx' escape '/'	不支持翻译器删除escape	不支持翻译器删除escape	不支持翻译器删除escape	语法相同	语法相同	
+ifnull(？,0)=false	coalesce(CAST(productextend.stopstatus AS INTEGER),0) = 0	coalesce(CAST(productextend.stopstatus AS INTEGER),0) = 0	coalesce(CAST(productextend.stopstatus AS INTEGER),0) = 0	NVL(productextend.stopstatus, 0) = 0	NVL(productextend.stopstatus, 0) = 0	
+业务中使用0+ifnull作为boolean返回值做判断CASE WHEN productextend.iStatus = TRUE THEN 0 + ifnull( productskuextend.iStatus, 0 ) ELSE FALSE END	0+ifnull(？,0)转换成case ifnull(cast(？as integer)，0) when 0 then false else true end	0+ifnull(？,0)转换成case ifnull(cast(？as integer)，0) when 0 then false else true end	0+ifnull(？,0)转换成case ifnull(？，0) when 0 then false else true end	0+ifnull(？,0)转换成case nvl(？，0) when 0 then false else true end	0+ifnull(？,0)转换成case nvl(？，0) when 0 then false else true end	
+函数适配	参考函数差异	参考函数差异	参考函数差异	参考函数差异	参考函数差异	
+字段类型隐式转换（性能问题）业务库表关联字段，类型不一致。	PG不支持隐式转换，翻译器使用CAST函数适配只支持表上的原有列的列类型获取。	PG不支持隐式转换，翻译器使用CAST函数适配只支持表上的原有列的列类型获取。	DM支持隐式转换。	ORACLE支持隐式转换	OSCAR 支持隐式转换	
+BIT类型和TURE/FALSE比较使用case when兼容col_bit=?转换为col_bit=case cast(? as character varying) when 'true' then 1 when '1' then 1 else 0 end;	BIT类型和TURE/FALSE比较使用case when兼容col_bit=?转换为col_bit=case cast(? as character varying) when 'true' then 1 when '1' then 1 else 0 end;	oracle使用number代替mysql的bit类型；隐式类型转换规则：varhcar or char可以转成date和number；date和number可以转成varchar				
+单表select * from teacher where id='1';转换为select * from teacher where id=cast('1' as bigint);	单表select * from teacher where id='1';转换为select * from teacher where id=cast('1' as bigint);					
+关联表select * from teacher t ,student s where t.id=s.id转换为select * from teacher t,student s where t.id=cast(s.id as bigint)select * from teacher t ,student s on t.id=s.id转换为select * from teacher t,student s on t.id=cast(s.id as bigint)	关联表select * from teacher t ,student s where t.id=s.id转换为select * from teacher t,student s where t.id=cast(s.id as bigint)select * from teacher t ,student s on t.id=s.id转换为select * from teacher t,student s on t.id=cast(s.id as bigint)					
+子查询select * from (select * from student ) t where t.id='1'转换为select * from (select * from student ) t where t.id=cast('1' as bigint)	子查询select * from (select * from student ) t where t.id='1'转换为select * from (select * from student ) t where t.id=cast('1' as bigint)					
+子查询关联select * from (select * from teacher) t,(select * from student) s where t.id=s.id转换为select * from (select * from teacher) t,(select * from student) s where t.id=cast(s.id as bigint)	子查询关联select * from (select * from teacher) t,(select * from student) s where t.id=s.id转换为select * from (select * from teacher) t,(select * from student) s where t.id=cast(s.id as bigint)					
+UNIONselect id,code from teacher union select id,code from student where id='1'转换为select id,code from teacher union select id,code from student where id=cast('1' as bigint)	UNIONselect id,code from teacher union select id,code from student where id='1'转换为select id,code from teacher union select id,code from student where id=cast('1' as bigint)					
+EXISTS子句select * from (select * from teacher) T0 where exists EXISTS ( SELECT "id" FROM ( SELECT adptt.ID FROM ( SELECT ID FROM auth_2.temp_perm_null_table UNION SELECT ID FROM auth_3.temp_perm_430100409143525376 UNION SELECT ID FROM auth_2.temp_perm_462051241342533632 ) adptt ) tmpTb WHERE tmpTb.ID = T0.agentId )转换为select * from (select * from teacher) T0 where exists EXISTS ( SELECT "id" FROM ( SELECT adptt.ID FROM ( SELECT ID FROM auth_2.temp_perm_null_table UNION SELECT ID FROM auth_3.temp_perm_430100409143525376 UNION SELECT ID FROM auth_2.temp_perm_462051241342533632 ) adptt ) tmpTb WHERE tmpTb.ID = cast(T0.agentId as character varying) )	EXISTS子句select * from (select * from teacher) T0 where exists EXISTS ( SELECT "id" FROM ( SELECT adptt.ID FROM ( SELECT ID FROM auth_2.temp_perm_null_table UNION SELECT ID FROM auth_3.temp_perm_430100409143525376 UNION SELECT ID FROM auth_2.temp_perm_462051241342533632 ) adptt ) tmpTb WHERE tmpTb.ID = T0.agentId )转换为select * from (select * from teacher) T0 where exists EXISTS ( SELECT "id" FROM ( SELECT adptt.ID FROM ( SELECT ID FROM auth_2.temp_perm_null_table UNION SELECT ID FROM auth_3.temp_perm_430100409143525376 UNION SELECT ID FROM auth_2.temp_perm_462051241342533632 ) adptt ) tmpTb WHERE tmpTb.ID = cast(T0.agentId as character varying) )					
+IN 子查询select * from teacher where id in (select id from student)转换为select * from teacher where cast(id as character varying) in (select id from student)	IN 子查询select * from teacher where id in (select id from student)转换为select * from teacher where cast(id as character varying) in (select id from student)					
+(NOT) IN (?)占位符传参不支持，需要做适配	(NOT) IN (?)占位符传参不支持，需要做适配					
+between and不支持，需要做适配	between and不支持，需要做适配					
+case when then else end不支持，需要做适配	case when then else end不支持，需要做适配		如果case when在select子句。case when then else endcase when在where子句。(case when then else end)=1	如果case when在select子句。case when then else endcase when在where子句。(case when then else end)=1		
+比较符 >,>=,<,<=,=,!=,like支持转换	比较符 >,>=,<,<=,=,!=,like支持转换					
+						
+	case when then else end	语法相同	语法相同	语法相同	如果case when在select子句。case when then else endcase when在where子句。(case when then else end)=1	如果case when在select子句。case when then else endcase when在where子句。(case when then else end)=1
+数据库适配
+适配版本
+
+适配的数据库及版本如下（YonBIP产品整体适配版本以发版说明为准，以下仅是底层JDBC组件适配内容）：
+
+适配的多数据库版本：
+
+神通Oscar：7.0.8+
+
+达梦DM：8.1.1.88+
+
+openGauss：2.0.1+
+
+PG：11+
+
+Oracle：12C+
+
+MySQL：8.0+
+
+数据类型
+
+适配多数据库中，数据类型映射详见如下连接：
+
+https://docs.diwork.com/l/9A8C45957D0B 【友空间云文档】多数据库适配类型映射及函数统计表.xlsx
+
+MySQL新开发业务，请严格遵守【MySQL可用数据类型】，禁止使用规范之外的数据类型。
+
+基于多数据库适配考虑，MySQL只可使用以下数据类型，JSON类型目前不建议使用。
+
+类型	范围	MySQL
+可变字符型	长度不固定（最大1000）	varchar
+16位整数	-32768 ~ 32767	smallint
+32位整数	-2147483648 ~2 147483647	int
+64位整数	-9223372036854775808 ~ 9223372036854775807	bigint
+精确数值型	pppppppppppppp.ss	decimal(p,s)
+日期型	yyyy-mm-dd	varchar(10)
+日期时间型	YYYY-MM-DD HH:MM:SS	datetime
+布尔型	0/1操作	smallint
+ID/PK	建议有序	varchar(22)
+长文本	4G	longtext
+二进制	4G	longblob
+函数
+
+适配多数据库函数详见如下连接：
+
+https://docs.diwork.com/l/9A8C45957D0B 【友空间云文档】多数据库适配类型映射及函数统计表.xlsx
+
+关键字
+
+目前只有 rowid/rownum 需要修改，其他关键字翻译器做了兼容处理。在后续设计表时，尽量避免使用数据库关键字，数据库关键字见下面云文档。
+
+https://docs.diwork.com/l/ef7d131d74a5 【友空间云文档】数据库关键字.xlsx
+
+程序使用不兼容语法方式
+
+由于各种数据库特性不同。无法避免同一业务需求，在不同数据库上SQL写法完全兼容。例如MySQL多表关联更新、删除的语法，使用子查询写法的话，会存在性能问题，但是Oracle上不支持多表关联更新、删除的语法，所以不同数据库SQL不同的处理方法如下：
+
+String com.yonyou.iuap.yms.sqltranslate.utils.DatabaseUtil.getDbType(DatabaseMetaData metaData)
+
+// 为SQL添加HINT sql_no_translate，翻译器遇到该HINT跳过翻译过程
+
+DBType = DatabaseUtil.getDbType(getConnection().getMetaData());
+
+if (DBType.equalsIgnoreCase(DBTypeConstant.DB_OSCAR)) {
+
+// OSCAR SQL语法
+
+SELECT /*+ sql_no_translate */ NAME FROM TABLE_A;
+
+}else if (DBType.equalsIgnoreCase(DBTypeConstant.POSTGRESQL)) {
+
+// POSTGRESQL SQL语法
+
+SELECT /*+ sql_no_translate */ NAME FROM TABLE_A;
+
+}else {
+
+// 其他
+
+SELECT NAME FROM TABLE_A;
+
+}
+
+
+翻译器处理的数据库类型如下：
+
+public static final String MYSQL = "MYSQL";
+
+public static final String OCEAN_BASE = "OCEAN_BASE";
+
+public static final String MSSQL = "MSSQL";
+
+public static final String SQL_SERVER = "SQLSERVER";
+
+public static final String MS_SQL_SERVER = "MSSQLSERVER";
+
+public static final String MYCROSOFT_SQL_SERVER = "MICROSOFT SQL SERVER";
+
+public static final String ORACLE = "ORACLE";
+
+public static final String DB2 = "DB2";
+
+public static final String DB2UDB = "DB2UDB";
+
+public static final String POSTGRESQL = "POSTGRESQL";
+
+public static final String PG = "pg";
+
+public static final String POSTGRE = "Postgre";
+
+public static final String GAUSS = "GAUSS";
+
+public static final String GREENPLUM = "GREENPLUM";
+
+public static final String DAMENG = "DAMENG";
+
+public static final String DM = "DM";
+
+public static final String DM_DBMS = "DM DBMS";
+
+public static final String DM_GBASE = "GBASE";
+
+public static final String DB_ZENITH = "ZENITH";
+
+public static final String DB_INFORMIX = "INFORMIX";
+
+public static final String DB_OSCAR = "OSCAR";
+
+public static final String DB_HSQL = "HSQL";
+
+public static final String DB_SYBASE = "SYBASE";
+
+public static final String DB_KINGBASE = "KINGBASE";
+
+public static final String DB_KINGBASEES = "KINGBASEES";
+
+特殊语法
+JSON类型在多个数据库之间使用方式不同，风险较大，不推荐使用，如果需要详见【3.5.5多数据库适配-程序使用不兼容语法方式】。
+SQL语句中引用字符时使用单引号，如：select name1 from t2_uniq where name1 = 'xxx';，使用双引号时，PostgreSQL会报错。★
+
+反例：
+
+select name1 from t2_uniq where name1 = "xxx";
+
+ERROR: column "xxx" does not exist
+
+LINE 1: select name1 from t2_uniq where name1 = "xxx"
+
+
+正例：
+
+select name1 from t2_uniq where name1 = 'xxx';
+
+严禁使用select * from table_a形式的语句，必须指出select的具体字段，即select col1,col2,… from table_a where …(Oracle、Oscar返回列全部大写,MySQL、PG返回列全部小写，翻译器无法准确映射)。★
+
+反例：
+
+select * from tablea;
+
+
+正例：
+
+select a.id, a.name, a.age from tablea a;
+
+严禁使用 insert into table a values(?,?,?)，必须指出具体要赋值的字段，即insert into table a (col1, col2,…) values(?,?,…)。★
+数据表必须有主键。INSERT IGNORE VALUES/REPLACE INTO VALUES幂等语法强依赖主键或者唯一索引。对于表中列全部是主键的表，专属化脚本必须使用INSERT IGNORE VALUES,禁止REPLACE INTO VALUES语法。★
+
+MySQL MGR集群强制要求表必须有主键。
+
+(root@localhost) [fff]> create table no_pk (id int);
+
+Query OK, 0 rows affected (0.15 sec)
+
+(root@localhost) [fff]> insert into no_pk values (1);
+
+ERROR 3098 (HY000): The table does not comply with the requirements by an external plugin.
+
+错误日志：
+
+2022-04-24T06:00:55.383157Z 70 [ERROR] [MY-011542] [Repl] Plugin group_replication reported: 'Table no_pk does not have any PRIMARY KEY. This is not compatible with GroupReplication.'
+
+(root@localhost) [fff]> alter table no_pk add primary key(id) ;
+
+Query OK, 0 rows affected (0.34 sec)
+
+Records: 0 Duplicates: 0 Warnings: 0
+
+(root@localhost) [fff]> insert into no_pk values (1);
+
+Query OK, 1 row affected (0.01 sec)
+
+临时表不需要主键：
+
+(root@localhost) [fff]> CREATE TEMPORARY TABLE tmp_no_pk (id int );
+
+Query OK, 0 rows affected (0.00 sec)
+
+(root@localhost) [fff]> insert into tmp_no_pk values (1);
+
+Query OK, 1 row affected (0.00 sec)
+
+(root@localhost) [fff]> select * from tmp_no_pk;
+
++------+
+
+| id |
+
++------+
+
+| 1 |
+
++------+
+
+1 row in set (0.00 sec)
+
+避免隐含的类型转换。例如select col_a from table_a where col_a = x; x的数据类型必须和col_a一致，当col_a为varchar，x为数字时，MySQL会有性能问题，PostgreSQL则会直接报错。当col_a为数字，x为字符时，MySQL中会转换为 col_a = 0查询，PostgreSQL则会直接报错。★
+
+iuap_apdb=# select q1.fid from qz_file_2 q1,qz_file_2 q2 where q1.group_id=q2.title_keywords;
+
+错误: 操作符不存在: integer = character varying
+
+LINE 1: ...d from qz_file_2 q1,qz_file_2 q2 where q1.group_id=q2.title_...
+
+^
+
+HINT: 没有匹配指定名称和参数类型的操作符. 您也许需要增加明确的类型转换.
+
+业务上禁止使用视图、自定义函数、存储过程、触发器。★
+MySQL使用bit(1)类型代表布尔类型，并且代码使用1/0判断，禁止布尔判断。（目前PG、Oscar、Oracle中把bit(1)翻译成number(1,0)类型，翻译器针对bit(1)类型在PrepareStatement做了兼容，开发不需要修改代码。直接拼接的SQL语句需要修改为1/0判断）。新业务建议使用smallint，代码1/0判断。★
+禁止对整数类型做布尔运算，MySQL支持该操作，PostgreSQL、Oscar等数据库会直接报错。★
+
+反例：
+
+dr字段在MySQL中是bit(1)类型或者数字类型时。
+
+select id from table_a where dr is true;
+
+ERROR: argument of IS TRUE must be type boolean, not type integer
+
+LINE 1: select dr from table_a where dr is true;
+
+正例：
+
+select id from table_a where dr = 1;
+
+业务上禁止使用SELECT INTO 语法，SELECT c1, c2, c3, ... INTO @v1, @v2, @v3,... FROM table_name WHERE condition。程序兼容处理。 ★
+业务上禁止使用变量SET @var_name = expr。程序兼容处理。★
+group by，group by HAVING后面不能使用列的别名，MySQL数据库支持别名，Oracle不支持。★
+
+反例：
+
+select id, count(*) c from test_serial group by id having c > 1;
+
+ERROR: column "c" does not exist
+
+LINE 1: ...ct id, count(*) c from test_serial group by id having c > 1;
+
+正例：
+
+select id, count() c from test_serial group by id having count() > 1;
+
+对于GROUP BY聚合操作，如果在SELECT中的列，没有在GROUP BY中出现，那么这个SQL是不合法的，MySQL支持该语法，Oracle、PG等数据库不支持。后续MySQL设置 sql_mode来限制语法。★
+
+sql_mode = “ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION"
+
+ONLY_FULL_GROUP_BY：
+
+对于GROUP BY聚合操作，如果在SELECT中的列，没有在GROUP BY中出现，那么这个SQL是不合法的，因为列不在GROUP BY从句中
+
+STRICT_TRANS_TABLES：
+
+在该模式下，如果一个值不能插入到一个事务表中，则中断当前的操作，对非事务表不做限制
+
+NO_ZERO_IN_DATE：
+
+在严格模式下，不允许日期和月份为零
+
+NO_ZERO_DATE：
+
+设置该值，mysql数据库不允许插入零日期，插入零日期会抛出错误而不是警告。
+
+ERROR_FOR_DIVISION_BY_ZERO：
+
+在INSERT或UPDATE过程中，如果数据被零除，则产生错误而非警告。如 果未给出该模式，那么数据被零除时MySQL返回NULL
+
+NO_AUTO_CREATE_USER：
+
+禁止GRANT创建密码为空的用户
+
+NO_ENGINE_SUBSTITUTION：
+
+如果需要的存储引擎被禁用或未编译，那么抛出错误。不设置此值时，用默认的存储引擎替代，并抛出一个异常
+
+反例：
+
+select name ,address from table_a group by name;
+
+ERROR: column "table_a.address " must appear in the GROUP BY clause or be used in an aggregate function
+
+正例：
+
+select name ,address from table_a group by name, address ;
+
+时间列禁止插入值 '0000-00-00 00:00:00'，禁止插入不合法数据，例如 2022-02-31 15:28:27。禁止不合法数据作为时间戳的默认值，MySQL支持该格式，其他数据不支持。建议时间戳列修改为create_time datatime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间' 。NOT NULL属性的时间戳，不准许设置NULL(pubts字段翻译器目前通过触发器解决，其他字段需要修改代码)。★
+in的元素建议控制在500以内，Oracle、Oscar数据库对in的参数有强限制。★
+
+ERROR at line 1002:
+
+ORA-01795: maximum number of expressions in a list is 1000
+
+连接使用INNER JOIN/ LEFT JOIN /RIGHT JOIN写法，禁止使用=(+)， 类如p.project_type_id (+) = pt.project_type_id。★
+ALTER TABLE 不允许使用FIRST 和 AFTER关键字。MySQL目前支持了快速加列特性，使用FIRST 和 AFTER关键字会导致快速加列特性失效，Oracle不支持FIRST 和 AFTER关键字。★
+
+反例：
+
+ALTER TABLE t2_uniq ADD COLUMN name3 INT(10) NULL AFTER name1;
+
+正例：
+
+ALTER TABLE t2_uniq ADD COLUMN name3 INT(10) NULL ;
+
+所有唯一索引列必须设置NOT NULL属性，唯一索引默认值无业务含义的使用"~"，有业务含义的由业务决定默认值，Oracle NULL无法使用索引。在唯一索引中，不同数据库对NULL的唯一性判断是不同的。★
+
+反例：
+
+MySQL数据库:
+
+CREATE TABLE t2_uniq (
+
+name1 varchar(20) DEFAULT NULL,
+
+name2 varchar(20) DEFAULT NULL,
+
+UNIQUE KEY i_u_name1_name2 (name1,name2)
+
+) ;
+
+insert into t2_uniq values (NULL,'XX');
+
+insert into t2_uniq values (NULL,'XX');
+
+select name1,name2 ,count(*) from t2_uniq group by name1,name2;
+
+
++-------+-------+----------+
+
+| name1 | name2 | count(*) |
+
++-------+-------+----------+
+
+| NULL | XX | 2 |
+
++-------+-------+----------+
+
+正例：
+
+Oracle数据库：
+
+SQL> CREATE TABLE t2_uniq(
+
+name1 VARCHAR(20),
+
+name2 VARCHAR(20)
+
+);
+
+Table created.
+
+SQL> CREATE UNIQUE INDEX i_u_name1_name2 ON t2_uniq (name1,name2) ;
+
+Index created.
+
+SQL> insert into t2_uniq values (NULL,'XX');
+
+insert into t2_uniq values (NULL,'XX');
+
+1 row created.
+
+SQL>
+
+insert into t2_uniq values (NULL,'XX')
+
+*
+
+ERROR at line 1:
+
+ORA-00001: unique constraint (SYS.I_U_NAME1_NAME2) violated
+
+不要将Null与空串""视为相同，在不同的数据库中对这两者的理解是不相同的。Oracle中插入空值，实际上插入的是NULL，MySQL中空值与NULL是不同的含义，Oracle的null也无法使用索引，建议非空默认值为“~”。当条件中出现(A.NAME IS NULL OR A.NAME = ''),MySQL中会造成索引失效（包括复合索引），领域自行决定是否要修改，需要在业务上保证使用正确。★
+
+特别注意 char 在不同数据库的表现：
+
+MySQL数据库中：
+
+create table t5(name char(5));
+
+insert into t5 values('');
+
+insert into t5 values(' ');
+
+select count(*) from t5 where name = '';
+
+
++----------+
+
+| count(*) |
+
++----------+
+
+| 2 |
+
++----------+
+
+select count(*) from t5 where name = ' ';
+
++----------+
+
+| count(*) |
+
++----------+
+
+| 2 |
+
++----------+
+
+插入一个空格或者多个空格，数据库以空格为条件都能查询出。
+
+Oracle数据库中：
+
+create table t5(name char(5));
+
+insert into t5 values('');
+
+insert into t5 values(' ');
+
+
+SQL> select count(*) from t5 where name is null;
+
+COUNT(*)
+
+1
+
+SQL> select count(*) from t5 where name = ' ';
+
+COUNT(*)
+
+1
+
+SQL> select count(*) from t5 where trim(name) is null;
+
+COUNT(*)
+
+2
+
+SQL> select count(*) from t5 where name = '';
+
+COUNT(*)
+
+0
+
+插入一个空格，数据库实际插入的是NULL，插入多个空格，数据库存的是char长度的字符串。查询条件是trim(name) is null时，才会把所有数据查出。
+
+禁止使用 ON DUPLICATE KEY UPDATE语法。★
+INSERT IGNORE VALUES/REPLACE INTO VALUES语句的适配(注意不是子查询，子查询见33条)，必须有主键或者唯一索引，多个唯一索引的话，需要指定。values内数据禁止主键冲突（VALUES(1, 'm'),(1, 'n'),(4, 'c')）
+
+反例：
+
+postgres=# INSERT INTO t1(id, "name") VALUES(1, 'm'),(1, 'n'),(4, 'c') ON conflict(id) DO UPDATE SET name = excluded.name;
+
+
+ERROR: ON CONFLICT DO UPDATE command cannot affect row a second time
+
+HINT: Ensure that no rows proposed for insertion within the same command have duplicate constrained values.
+
+不允许使用MySQL的zerofill特性。★
+
+SELECT id FROM t;
+
+0000000002
+
+0000000003
+
+0000000005
+
+MySQL禁止使用 limit ? offset ?，使用limit ?,?。适配多数据库过程中，druid翻译器在语法解析时，会将limit ? offset ?自动解析为limit ?,?，业务上按照limit ? offset ?顺序赋值时，limit ?,?语义是反的。★
+
+反例：
+
+select id from app_manage_id limit 10 offset 20;
+
+
+正例：
+
+select id from app_manage_id limit 20, 10;
+
+业务代码上禁止使用CREATE TABLE IF NOT EXIST，使用CREATE TABLE 语法，程序处理表重名异常，脚本中的CREATE TABLE IF NOT EXIST语法翻译器负责翻译。★
+避免使用数据库关键字及系统变量。目前只有 rowid/rownum 需要修改，其他关键字翻译器做了兼容处理。后续建表不允许使用其他关键字。详情见详见【3.5.4多数据库适配-关键字】★
+多表关联更新/删除语法，Oracle不支持此语法，需要改写为子查询方式。子查询方式更新删除语法，MySQL存在性能问题。修改方式见【3.5.5多数据库适配-程序使用不兼容语法方式】。★
+PG数据库中强类型限制，在使用PrepareStatement向bigint中插入值加了引号如'123'，PG驱动会报错。数据库中类型操作要一致。★
+UPDATE语句禁止对同一字段重复SET，类似 UPDATE TABLE_A SET X = 'A',SET X='A'。MySQL支持，PG会直接报错。★
+CLOB/BLOB 列禁止创建索引，在达梦中BLOB不能建立任何索引，在Oracle中不允许在LOB列创建索引。由于在MySQL有行长度限制，很多部门在修改字符集时把varchar列改成了text列，并且创建了前缀索。因此在翻译中默认会把MySQL中text列翻译成Oracle中varchar(4000),如果在MySQL中text列存储的是大字段，请在列上添加注释 ALTER TABLE TABLE_A MODIFY COLUMN FIELD_NAME INT COMMENT '字段注释 oracle:clob'; (语法仅供参考，根据实际情况编写，关键只是注释内的oracle:clob。不要完全复制语句！！不要完全复制语句！！不要完全复制语句！！)。翻译器会查询列的注释，遇到关键字会oracle:clob翻译成clob字段。或者直接使用MySQL的MEDIUMTEXT或者LONGTEXT字段存储大字段。大字段上也禁止进行distinct、group by及其他函数操作。★
+对于查询列中使用了max()和min()函数的场景，mysql整数会返回Integer和Long，对应Oracle的类型都是BigDecimal无法区分，所以针对整数类型的这两个函数翻译器会统一返回Long类型接收。
+禁止使用的函数列表，详见【3.5.3多数据库适配-函数】。
+MySQL中如果有对字段（包括int、tinyint、char、varchar等）做布尔操作，需要在列上添加注释 ALTER TABLE TABLE_A MODIFY COLUMN FIELD_NAME tinyint(1) COMMENT ' oracle:bool';(语法仅供参考，根据实际情况编写，关键只是注释内的oracle:bool。不要完全复制语句！！不要完全复制语句！！不要完全复制语句！！) 。翻译器会查询列的注释，遇到关键字oracle:bool会针对不同数据库做不同的特殊处理。典型场景tenant.isOpen 字段。★
+禁止使用 INSERT IGNORE XXX SELECT /REPLACE INTO XXX SELECT 语句，该SQL在PG中无法翻译。★
+在preparestatement 中select a from table_a where 1 = ？，代码需要自己保持?类型相同，1='1'，PG会报错。
+id 为自增主键列，禁止 insert into t (id) values(null); 向ID列插入NULL值。目前翻译器已经做了兼容，不需要修改。★
+在preparestatement中，不建议select ?,?,? from ? where ?=? and ‘1’=? group by ? ，列名作为变量传递。正常翻译器会负责不同数据类型之间的转换。当是变量的时候，翻译器会拿不到列的数据类型，直接跳过数据类型转换。★
+PG数据库DDL并不会自动提交事务。事务中如果有SQL报错，PG会回滚整个事务，开发代码时需要注意。★
+A LEFT JOIN B ON A.ID = B.ID,A.ID = B.ID类型必须一致。★
+
+postgres@postgres=>create table t_number(id int);
+
+CREATE TABLE
+
+postgres@postgres=>create table t_varchar(id varchar(10));
+
+CREATE TABLE
+
+postgres@postgres=>select * from t_number n,t_varchar v where n.id = v.id;
+
+ERROR: operator does not exist: integer = character varying
+
+LINE 1: select * from t_number n,t_varchar v where n.id = v.id;
+
+^
+
+HINT: No operator matches the given name and argument types. You might need to add explicit type casts.
+
+Oracle也存在类型转换问题：
+
+Predicate Information (identified by operation id):
+
+1 - access("N"."ID"=TO_NUMBER("V"."ID"))
+
+禁止使用MySQL数字自增特性，统一使用OID算法。★
+针对历史数字自增列，业务代码上禁止一部分插入指定值，一部分依赖自增插入值。(PG中数字自增是靠序列来实现的，插入指定值的时候，并不会自动增大序列的值，会造成后续业务数据主键冲突)。★
+禁止使用列计算之后做布尔运算， (smallint -1) is true。
+char在不同数据库上表现不同，禁止使用char类型。
+
+MySQL数据库：
+
+(root@172.20.58.135) [fangyli_test]> create table t_char(name char(10));
+
+Query OK, 0 rows affected (0.06 sec)
+
+(root@172.20.58.135) [fangyli_test]> insert into t_char values('12345');
+
+Query OK, 1 row affected (0.00 sec)
+
+(root@172.20.58.135) [fangyli_test]> create table t_varchar2(name varchar(10));
+
+Query OK, 0 rows affected (0.03 sec)
+
+(root@172.20.58.135) [fangyli_test]> insert into t_varchar2 values('12345');
+
+Query OK, 1 row affected (0.00 sec)
+
+(root@172.20.58.135) [fangyli_test]> select * from t_varchar2 v,t_char c where c.name = v.name;
+
++-------+-------+
+
+| name | name |
+
++-------+-------+
+
+| 12345 | 12345 |
+
++-------+-------+
+
+1 row in set (0.00 sec)
+
+(root@172.20.58.135) [fangyli_test]> SELECT LENGTH(NAME) FROM t_char;
+
++--------------+
+
+| LENGTH(NAME) |
+
++--------------+
+
+| 5 |
+
++--------------+
+
+1 row in set (0.00 sec)
+
+Oracle数据库：
+
+SQL> create table t_char(name char(10));
+
+Table created.
+
+SQL> insert into t_char values('12345');
+
+1 row created.
+
+SQL> create table t_varchar2(name varchar2(10));
+
+Table created.
+
+SQL> insert into t_varchar2 values('12345');
+
+1 row created.
+
+SQL> select * from t_varchar2 v,t_char c where c.name = v.name;
+
+no rows selected
+
+SQL> SELECT LENGTH(NAME) FROM t_char;
+
+LENGTH(NAME)
+
+10
+
+对数据库字段做sum/avg等函数操作时，要注意字段类型，对字符串求平均值，MySQL会把字符当做0处理，其他数据库不支持。★
+
+iuap_apdb=# select sum(name) from iuap_apcom_benchservice.portal_component;
+
+错误: 函数 sum(character varying) 不存在
+
+LINE 1: select sum(name) from iuap_apcom_benchservice.portal_compone...
+
+^
+
+HINT: 没有匹配指定名称和参数类型的函数. 您也许需要增加明确的类型转换.
+
+SELECT XX FROM TABLE_A WHERE vendor.id = ? order by ? ?,禁止对desc/asc做变量传递，翻译器解析SQL会报错。
+truncate table dispatch_tasklog_?，在preparestatement中禁止变量拼接表名，翻译器解析SQL会报错。
+禁止使用MySQL的SQL_CALC_FOUND_ROWS的特性，其他数据库无法兼容。
+WHERE 语句中不要出现：? <= tl.starttime <= ? 写法，修改为 tl.starttime <= ? AND tl.starttime >= ?。
+MySQL中禁止在相同列上创建索引，比如index_a(col_a)/idx_a(col_a)，索引列相同，索引名字不相同，MySQL虽然不会报错，但是会影响性能，其他数据库相同列创建索引会报错。创建联合索引时，注意是否和当前索引功能重复复，比如已经存在idx_a_b(col_a,col_b)，在添加索引idx_a_b_c(col_a,col_b,col_c),索引idx_a_b_c基本包含了索引idx_a_b的全部功能，添加索引idx_a_b_c后应该删掉索引idx_a_b。
+PG数据库数字类型禁止like操作。
+多数据库开发方式
+新功能开发
+
+在项目上一般会涉及三种开发方式：标准版开发，专业版开发，扩展开发，目前平台支持多种数据源，对于项目来说，可能一开始就选择了某一种数据库，也可能是上线一段时间后需要转成另一种数据库，这些都涉及数据库的迁移，验证等过程。
+
+YPD专业版开发框架图如下：
+
+YonBuilder开发模式：
+
+MDD引擎升级
+
+升级成功后，可以新建一个引擎，查看一下工程结构，pom参数，尤其是pom中MDD的版本，例如本次升级成功后MDD版本是520，如图2。
+
+如果在升级之前已经创建了引擎，如图1，那么就需要对比一下MDD的版本，如果不一致，则原来的引擎需要升级，需要把引擎工程中的pom按照工程顺序全部替换，在加载变化后的maven，然后在验证一下工程是否可以启动等工作。
+
+ 
+
+升级前mdd版本-图1 升级后mdd版本-图2
+
+**注意：**如果MDD的版本一致，也需要查看一下所有的pom配置项是否一致。此外还要检查项目结构升级前后是否一致。
+开发成果打包方案
+
+对于项目开发，开发成果可以通过安装盘的方式制盘安装，也可以通过数据迁移包的方式进行部署，第一种方式可以开发0租户系统安装，第二种方式只能是租户级数据部署。那种部署方式合适取决于项目实际需求。
+
+开发成果迁移包
+
+开发成果包最简单的方式是租户级数据迁移，数据迁移既可以是同一环境不同租户，也可以是不同环境下的租户间，迁移场景如下：
+
+同一环境，例如开发环境，可是从A开发租户迁移到B测试租户。
+不同环境，例如开发环境到测试环境，可是从开发环境的A开发租户迁移到测试环境的B测试租户。
+
+安装盘
+
+本文档主要讲解，在YonBIP私有云项目的开发成果，通过开发者中心的制品仓库，出盘或补丁，然后安装到私有云其他环境中，具体出盘场景包括：
+
+升级0租户导出预置脚本
+在微服务(帮助中心)申请表中，新增微服务信息，包括编码等
+私有云创建流水线并开启同步YPR节点
+私有云YMS控制台注册（产品形态）并配置自己应用的信息
+添加产品盘初始化配置信息文件，然后绑定到产品或补丁盘
+YPR制品仓库创建产品盘，并上传流水线制品到YPR仓库
+出盘或补丁
+在私有云预发环境安装产品盘
+验证产品盘
+
+补丁包
+
+对项目上开发变更，可以自行出补丁包，整个补丁流程如下：
+
+历史数据迁移介绍
+
+在项目交付过程中，可能会出现项目组正在使用MySQL数据库开发，而客户购买了别的商业数据库，例如PG数据库，尤其项目已经上线一段时间，那就涉及已上线的业务数据转换到客户购买的商业数据库，这就涉及不同数据库间数据的迁移和转化。
+
+数据库迁移过程
+
+我们以MySQL迁移到PG数据库为例，大致迁移过程如下，MySQL数据库的数据迁移到PostgreSQL需要把MySQL的数据导出之后进行翻译，然后导入到PostgreSQL数据库内。还需要进行两个数据库数据的对不，确认无误后，就可以进行数据库的
+
+数据库迁移工具介绍
+
+YMSTranslateStudio.jar是用友开发的针对不同数据库间迁移的工具，主要功能是支持数据的导出、翻译、导入、比对，实现多种数据库的数据迁移。
+
+数据库是PG，还可以使用mybatis的mapper文件吗。
+
+答复：可以，只是sql语句要用标准语法，不能用MySQL中的特殊语法，那样PG识别不了。
+
+参考资料
+
+iuap平台多数据库适配-问题排查指南.docx
+
+iuap-数据库规范红皮书.docx
+
+数据库SQL编程规范-v1.1 .docx
+
+SQL语法对照.xlsx
+
+脚本检查清单.xlsx
+
+数据类型对应列表.xlsx
+
+YonBIP基础技术-MySQL到PG数据库迁移方案.docx
+
+YonBIP专属化项目开发成果出盘.docx
+
+文档编写过程，请注明相关参考资料，主要目的包括：
+
+尊重原始版权，在原始素材下资料扩展；利于使用者更好的使用文档。
+资料文件溯源，挖掘深层意义与价值。
+文档内容是否对您有所帮助？
+为帮助文档评分：
+页内目录
+1. 多数据库技术架构
+1.1 基准库介绍
+1.2 业务调用过程
+2. 脚本目录规范
+2.1 脚本目录概述
+2.2 初始化脚本目录规范
+2.3 补丁脚本目录规范
+2.3.1 专项补丁目录规范
+2.4 升级脚本目录规范
+2.5 特殊目录规范
+2.6 脚本描述文件说明
+2.7 脚本检查清单
+2.8 多数据库适配规范
+3. 多数据库开发方案
+3.1 多数据库环境方案
+3.2 SQL编程规范
+3.2.1 SQL字段类型对照
+3.2.2 SQL语法对照
+3.2.3 数据库适配
+3.3 多数据库开发方式
+3.3.1 新功能开发
+3.3.2 MDD引擎升级
+3.4 开发成果打包方案
+3.4.1 开发成果迁移包
+3.4.2 安装盘
+3.4.3 补丁包
+4. 历史数据迁移介绍
+4.1 数据库迁移过程
+4.2 数据库迁移工具介绍
+5. 参考资料
+文档反馈
+北京市海淀区北清路68号用友产业园
+4006-600-588
+友情链接
+用友官网用友YonHelp用友iuap平台用友云市场用友云注册协议隐私条款
+
+Copyright ©2020 用友网络科技股份有限公司版权所有京ICP备05007539号-24京公网安备11010802021935号
+
+返回顶部
+加载中...

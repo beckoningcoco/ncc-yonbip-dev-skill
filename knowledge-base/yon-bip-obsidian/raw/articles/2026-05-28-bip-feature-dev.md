@@ -1,0 +1,1214 @@
+特征开发
+最后更新时间：2025-09-24
+概述
+
+特征管理包含对特征分类、特征、特征组的管理。特征分类、特征、特征组都是BIP新架构提供的新产品形态。
+
+特征提供了租户级实施态对业务对象扩展属性进行统一定义和描述的能力，用户可使用特征去扩展档案或者单据的属性，即特征可用来描述物料动态属性、静态属性，也可以描述基础档案的自定义项、单据的自定义项。
+
+也就是说BIP新架构使用特征来统一定义业务对象扩展属性的语义。而特征组支持将特征打包放到特征组内实现对特征的封装，通过对一组特征的封装，特征体系构造出特征组弹性结构这种底层模型，特征组弹性结构能够解决同一业务对象基于不同业务上下文扩展不同属性的业务场景。
+
+注意：
+
+特征相关能力仅支持在开通了新架构的新租户中使用，老租户不支持特征。新架构租户开通后，只能使用特征来统一定义业务对象扩展属性；而“固定自定义项、自定义项设置、物料规格、物料属性、SKU属性、客户属性、供应商属性”等老产品形态仅在老租户环境可用，在新架构租户不可见也不可用。|
+
+适应场景
+部署方案	开发类型	是否适用
+公有云	客户化定制开发	是
+私有云	客户化定制开发	是
+专属云	客户化定制开发	是
+本地部署	客户化定制开发	是
+公有云	ISV生态开发	是
+私有云	ISV生态开发	是
+专属云	ISV生态开发	是
+本地部署	ISV生态开发	是
+应用价值
+
+基于特征的新业务框架价值如下：
+
+2、基于上下文的弹性扩展能力：通过特征组，支持相同业务对象，根据不同的上下文，有不同扩展属性结构。
+
+基于特征组底层模型提供的弹性结构能力，系统可实现不同物料可扩展不同物料属性。
+基于特征组的弹性结构能力，系统可实现在业务中动态维护同类物料的动态特征值。
+
+3、基于业务对象的完整支撑能力：特征是业务对象实体的一部分，业务对象的前后端框架、相关性规则、支撑服务、流程、集成、报表能力同样也支撑特征弹性字段的应用。
+
+相关性规则支持特征之间的相关性约束（显隐、值范围、赋值、合法性校验等）、支持业务单据原厂字段和特征弹性字段之间的相关性约束。
+
+4、丰富的数据类型：特征支持文本、数值、布尔、基础档案、自定义档案、日期、时间等多种数据类型。
+
+名词解释
+特征
+
+租户级实施态对业务对象扩展属性描述的统一能力，特征需要明确数据类型，可以是数值、字符、日期、档案等。档案类型的特征，引用的档案可以理解为特征的值集：比如颜色可以定义为一个特征，颜色档案是该特征的值集。
+
+特征值或特征值集
+
+特征值是特征的具体赋值，存储在业务对象扩展实体上，类型一般是字符串，日期，整型等简单类型。特征值集一般对应的业务档案，例如平台预置婚姻状况，或业务对象，例如客户档案。
+
+特征分类
+
+特征数量繁多时，为了便于管理，可以对特征本身进行分类管理，特征分类本身不承载管理含义。比如可以将描述物理属性的特征分为一个类：硬度，刚性，延展性，膨胀系数等，将描述化学属性的特征分为一个类：如各种碳含量、磷含量、硫含量等。
+
+特征组
+
+为了满足特定对象和场景（对应特征组类型）的属性扩展需求，支持将N个特征打包到特征组里，用于描述具有一组相同或者相似属性的业务对象。
+
+特征组类型
+
+描述特征组用于描述的场景和用途，往往决定了特征组作用于什么业务对象。特征组必须明确对应的特征组类型。业务对象上弹性字段，都必须明确对应的特征组类型，以明确业务如何解读。比如销售订单行.自由项字段，对应的特征组类型是自由项特征组。
+
+本版支持的特征组类型有：物料属性特征组、自由项特征组、选配特征组、SKU属性特征组。其中物料属性特征组和SKU属性特征组是静态属性，自由项特征组和选配特征组是动态属性，其应用场景如下：
+
+物料属性特征组内的特征是用来描述物料的静态属性的，当一个物料在创建和维护时，就可以确定物料属性特征值；
+SKU属性特征组内的特征是用来描述SKU的静态属性，相同物料，不同SKU对应的SKU属性值可能不同，SKU属性特征值是在创建或者维护SKU档案时就可以明确和指定的。
+自由项特征组内的特征是用来描述物料的动态属性，可以在业务中动态描述和指定物料的自由项特征值；
+选配特征组内的特征也是用来描述物料的动态属性，选配特征值在选配单据上动态指定，并可向下游单据传递，指导计划、生产和拣货等。
+自定义项
+
+概念和用友传统的自定义项一样，业务对象实体上的通用扩展属性。一个特征可以分配到多个业务对象实体上，作为不同业务对象实体的自定义项，此时特征代表公共语义，业务流转时，上下游单据业务实体的自定义项可基于相同语义自动识别对照。
+
+旧版仍然使用自定义项，新版就用特征来代替了。
+
+自由项（自由项特征组）
+
+特征广义上包括自由项特征组和自定义项特征，他们都是特征，只是使用场景不同而已。
+
+自由项指的是自由项特征组，一般应用于物料在业务单据中使用自由项特征组。当我们说自定义项的时候（MDD时期的自定义项概念已深入人心），那自定义项类似现在的“特征”提供相同能力。
+
+物料、商品SKU、选配物料、派生物料
+
+1、物料
+
+与企业生产、交易、经营有关的所有物品，如原材料、辅助用品、半成品、成品，包括服务、费用类物料等。
+物料主档是贯穿采购、销售、库存、生产、成本等领域的核心业务对象，是一个抽象的业务对象模型，可代表世间万物。
+
+2、商品SKU
+
+是营销环节经营的最小单元，类似于商品的概念。一个料号，可以基于动态属性的不同，对应多个商品SKU。比较典型的是服装一个款号，对应不同颜色尺码的组合，分别对应不同的商品SKU。
+SKU是独立的档案，目前主要营销云关注。SKU档案，可以基于物料自由项中，商品SKU敏感特征组合值生成。
+
+3、选配物料
+
+针对选配支持的场景，需要用一个总的料号，描述有哪些客户可个性化指定的特征，在业务中动态描述。
+可选配物料对应一组特征，可在需求单据中，描述客户具体的需求。
+可选配物料+选配特征值组合：可唯一确定某个客单对产品的需求。
+
+4、派生物料
+
+对于可选配物料，对于常用的配置，可以作为标配产品，提前备货生产，对应的就是派生物料。
+派生物料主档上一定会定义来源的可选配物料。
+物料模板
+
+物料模板是将同类型物料的公共属性提取出来而形成的属性集合。在物料模板中可设置物料的规格、参数、物料属性、SKU属性、订单属性、周期购、计量单位、商城运费模板、关联品牌等信息。这样用户就可为相同类型的物料设置一个公共的物料模板，在创建物料档案时只需引用这个物料模板，就能把模板的物料相关规格、参数、属性自动带入物料档案中，一方面减少物料信息重复录入，另一方面方便统一管理和维护同类型物料的规格及属性等信息。
+
+静态属性、动态属性
+
+静态属性和动态属性是对特征组而言的，静态属性是在创建物料档案的时候进行赋值保存，值在物料档案上存储，特征组有物料属性特征组和SKU属性特征组；动态属性是在客户下单，在业务单据上赋值保存，值在业务单据上存储，特征组有物料自由项特征组和物料选配特征组。
+
+业务对象
+
+此处指软件中业务主体，可以是基础数据、单据类型。例如：凭证、人员、采购订单、销售订单等，可以认为是元数据的一种能力扩展。
+
+平行表
+
+平行表为元数据名词。对于一个元数据来说，元数据实体上含有必输字段：tableName（表名），对于元数据单一模型来说，随着领域业务的不断补充，元数据字段越来越多，此时需要将一些字段放置在与tableName隔离的另外一张表上，以满足领域数据的敏捷寻找利用。此时多出来的一张物理表（Mysql表或者其他数据库表）称为平行表。平行表本身不是额外扩展新的元数据，而是在原有基础元数据上进行了字段分类。
+
+开发准备
+
+在新建企业租户时一定要启用“业务新架构”，如下图所示，启用后，才能使用特征业务场景。
+
+新建企业租户后，管理员登录，能够看到特征管理下的特征分类，特征，特征组，如下图所示，这样就可以使用新架构特征业务场景了。
+
+开发实战
+
+新版特征既可以在标准版应用使用，也可以在专业版应用使用，大体使用方式基本是一样，专业版对比标准版几点差别如下：
+
+业务对象需要创建表结构，需要生成JavaPOJO，并发布到流水线。
+对于特征组会生成特征实体，也需要创建表结构。
+如果涉及开发代码，标准版可以写前端函数，后端函数，专业版更加灵活，前端可以写extend的js文件，后端可以写java代码。
+标准版开发
+
+YPD标准版开发也支持特征的使用，以及特征组相关应用等，下面以“采购订单”为例讲解其应用场景。
+
+业务场景
+
+本文档标准版特征使用场景如下：
+
+特征创建以及分配，使用。
+特征组的使用，例如物料属性特征组，SKU属性特征组，自由项特征组，选配特征组。
+特征组字段在列表查询方案中的使用。
+特征组字段显示在列表表格上。
+创建业务对象
+
+创建业务对象之前必须先新建应用，建完业务对象就可以创建实体，进而进行后续业务设计。
+
+新建应用
+
+新建应用步骤如下：
+
+1、打开应用构建页签，点击“新建应用”按钮打开新建应用对话框。
+
+2、输入应用名称，选择所属领域，所属领域可以选择平台已有领域，或者也可以自己添加新的领域，标准版应用引擎必须选择“公共引擎”，例如应用名称“ypd标准版zxy”。
+
+3、应用对象创建完毕后，应用编码会自动生成。
+
+新建业务对象
+
+创建业务对象步骤如下：
+
+1、打开标准版应用，例如创建好的“ypd标准版zxy”，在“数据建模”页签下，新增业务对象。
+
+2、以“采购订单”为例，创建业务对象，对象信息如下，名称：“采购订单zxy”，编码：“purchaseorderzxy”。
+
+3、业务对象创建完毕后，还需要创建实体。
+
+4、实体对象如下：实体名称：采购订单zxy，实体编码：purchaseorderzxy
+
+字段信息如下：
+
+字段编码	字段名称	字段类型	备注
+puorg	采购组织	单选引用：组织单元（系统）
+materiaid	采购物料	单选引用：物料（系统）
+num	采购数量	数值
+price	采购单价	数值
+total	总金额	数值
+mdefine	物料自由项特征	特征组：物料自由项特征组	特征属性需要关联采购物料
+sdefine	选配特征	特征组：选配特征组	特征属性需要关联采购物料
+vdefine	自定义项	特征组：自定义项特征组
+busidate	采购日期	日期
+memo	备注	文本
+
+创建的实体信息如下，同时引用接口还需要勾选：审批，业务流，自动编码。
+
+5、对于特征组：物料自由项特征，选配特征，还需要设置特征属性，需要设置本实体参照物料的字段，如上图是“采购物料”字段。
+
+如上图，点击行按钮“详细配置”，打开详细配置对话框，特征属性页签选择“采购物料”字段即可，同样方式，物料选配特征组也这样设置。
+
+创建特征实体，
+
+如果要使用特征，还需要单独创建自定义项特征组的实体
+
+7、创建完实体后，还需要发布实体，才能生效。
+
+8、实体发布后，状态变成“已发布”。
+
+9、除了引用接口勾选外，还需要勾选场景支持，例如编码规则，审批流，业务流，这样UI页面才会生成相关按钮。如果使用到特征，还需要勾选自定义项，这样特征才支持分配。
+
+10、页面建模，选择单卡来生成UI页面。
+
+11、输入页面信息，例如页面名称“采购订单zxy”，页面编码“purchaseorderzxy”，元数据选择“采购订单”。
+
+12、页面创建完毕后，可以预览页面。
+
+13、新增页面，输入信息，保存页面，测试数据是否保存。
+
+特征场景
+
+特征主要使用场景有两个，一个是自定义项特征，另一个是特征组。新架构中的自定义项特征和原来MDD架构时期的自定义项使用方式类似，主要应用于在实施阶段，对实体的业务字段扩展；另一个特征组，主要应用于物料四种特征组的场景使用。
+
+本小节主要讲解第一种场景，操作过程包括新建特征，特征启用，分配特征，特征使用等。
+
+新建特征分类
+
+首先是创建特征分类，具体步骤如下：
+
+1、通过“特征管理”，找到特征分类页面。
+
+2、打开“特征分类”页面，新建特征分类，输入编码和名称，例如编码“m10”，名称“硬件设备”。
+
+3、创建“特征分类”后如下。
+
+新建特征
+
+新建特征具体步骤如下：
+
+1、打开特征列表，点击新建按钮，打开特征新建页面，输入特征编码，特征名称，例如特征编码“tm10”，特征名称“到货日期”，数据类型是“日期”，保存后，就创建了一个特征字段。
+
+特征启用
+
+保存特征后，在列表页面，还要启用特征才能使用，只有启用成功才能使用特征
+
+，如下图所示。
+
+特征分配
+
+创建完特征后，需分配特征到具体实体上，实体才能使用，具体步骤如下：
+
+1、在特征列表，鼠标放到“到货日期”特征上，点击“分配”按钮。
+
+2、打开自定义项分配页面，找到我们创建的“采购订单zxy”，如下图，在勾选表头，保存即可。
+
+注意：
+
+特征分配时，能够勾选表头是因为做了两个步骤，第一在实体上设置字段特征组，要选择自定义项特征组，第二在场景支持上勾选了自定义项，否则表头无法勾选。|
+
+特征分配失败处理
+
+特征分配后，会向平台，领域同步特性信息，以及执行其他相关业务（例如会在实体站位表注册真实字段和真实表信息等），按照注册好的任务顺序支持，一旦某个任务执行失败，后续其他任务不在执行。如上图所示，会有执行成功和失败的条数，如果分配失败，可以查看失败日志信息，根据日志信息自行处理后，再次“重试”任务，具体步骤如下：
+
+点击特征列表上方的“失败”记录，打开“分配任务列表”页面，可以搜索失败记录，如下图。
+
+在失败记录上，点击“查看进度”按钮，来查看日志详情，如下图所示，任务状态有处理完成的，有处理失败的，有未开始的。一旦任务执行失败，后续业务就不在执行，所以有一些是未开始的任务。
+
+未开始的任务。
+
+需要对状态为“处理失败”的任务，根据日志信息进行处理，处理完毕后，点击列表上的“重试”按钮重新执行任务，就会执行后续同步任务。
+特征使用
+
+特征分配后，在“采购订单zxy”列表页面和详情页面，就会有“到货日期”特征字段。
+
+1、列表“到货日期”特征如下。
+
+2、详情“到货日期”特征如下。
+
+特征组场景
+
+目前新版本设计的特征组有四种，分别是物料属性特征组，SKU属性特征组，自由项特征组和选配特征组，前两个是静态属性，后两个是动态属性。
+
+它们的使用场景下面进行说明。
+
+创建特征
+
+在使用特征组时，必须要使用到特征，一个或多个特征组成特征组，为了便于区分，本文档举例的特征名称比较简单直白，这样便于后续在使用的时候，能够通过名称就知道是那个类型的特征。
+
+下面是先创建好所有的特征，便于后续特征组使用，具体需要创建的特征列表如下。
+
+特征编码	特征名称	备注
+tm21	物料属性1	物料属性特征组使用
+tm22	sku1	SKU属性特征组使用
+tm23	自由项1	自由项特征组使用
+tm24	选配1	选配特征组使用
+
+创建后特征列表如下：
+
+创建特征组
+
+特征创建完毕后，需要创建特征组，并关联特征字段，我们需要先创建好四组特征组，分别是：物料属性特征组，SKU属性特征组，自由项特征组和选配特征组。
+
+物料属性特征组
+
+创建物料属性特征组步骤如下：
+
+1、特征组类型选择“物料属性特征组”，输入特征组编码和特征组名称，如下，例如特征编码“group21”，特征组名称“物料属性特征组1”，保存即可。
+
+2、创建特征组后，需要启用才能使用。
+
+SKU属性特征组
+
+同样的方式创建SKU属性特征组，信息如下，特征组类型“sku属性特征组”，特征组编码“group22”，特征组名称“sku属性特征组1”
+
+同样，需要启用特征组。
+
+自由项特征组
+
+同样的方式创建自由项特征组，信息如下，特征组类型“自由项特征组”，特征组编码“group23”，特征组名称“自由项特征组1”
+
+选配特征组
+
+同样的方式创建选配特征组，信息如下，特征组类型“选配特征组”，特征组编码“group24”，特征组名称“选配特征组1”
+
+最终，创建的四个特征组如下。
+
+创建物料模板
+
+特征组创建完毕后，需要创建物料模板来组合特征组，在物料创建时，根据物料模板自动生成相关特征组信息，这样使用比较方便。
+
+物料模板有两种，一个是普通的物料模板，可以组合的特征组有：物料属性特征组、SKU属性特征组、物料自由项特征组，以及物料参数等；另一个是选配物料模板，可以组合的特征组有：物料属性特征组、选配特征组，以及物料参数等。
+
+创建普通物料模板（带物料属性特征组、SKU属性特征组、物料自由项特征组）
+
+创建普通的物料模板，步骤如下：
+
+1、通过基础数据，找到物料模板菜单。
+
+2、打开物料模板，可以看到有五个页签，分别是：自由项特征组，物料属性特征组，sku属性特征组，物料参数，计量单位，这几个特征组都要关联上前面创建好的特征组，输入信息如下，模板名称“tpl普通物料模板”，第一个页签自由项特征组，增行来选择“自由项特征组1”。
+
+同时，物料模板还有很多属性，例如“SKU随业务动态产生”，启用周期购等等，限于篇幅这些场景不在本文档介绍。
+
+3、物料属性特征组，增行后，选择“物料属性特征组1”。
+
+4、sku属性特征组，增行后，选择“sku属性特征组1”。
+
+5、物料参数，增行后，例如参数组“p10”，参数名称“参数1”，加入分类查询条件“否”。
+
+6、设置完毕后，保存模板即可。
+
+创建选配物料模板（带物料属性特征组、选配特征组)
+
+创建选配物料模板，方式和普通物料模板类似，他的页签分别是：物料属性特征组，选配特种组，物料参数，计量单位，名称输入“选配模板m30”。
+
+1、物料属性特征组，选择“物料属性特征组1”。
+
+2、选配特征组，选择“选配特征组1”。
+
+3、设置完毕后，保存模板即可。
+
+创建物料使用静态属性特征组
+
+物料模板创建完毕后，就可以创建物料来引用物料模板的，当然物料模板并不是必选项，也可以自行创建。
+
+物料大概有几种，分别是：普通物料，SKU物料（或者称SKU商品档案），选配物料，派生物料。
+
+创建物料时，就可以赋值相关物料的静态属性了，静态属性特征组有：物料属性特征组，SKU属性特征组。
+
+创建普通物料（带物料属性特征）
+
+创建普通物料，步骤如下：
+
+1、打开物料新建页面，物料模板选择前面创建好的“tpl普通物料模板”，可以看到会自动新增三个页签，分别是：物料特征，物料参数，物料自定义属性，可以分别输入页签中的信息，然后在输入物料名称，例如“物料m20”，以及其他必输字段信息，保存即可。
+
+2、物料特征，其实是自由项特征，在这里也可以设置敏感信息，但前提是先在特征组哪里勾选敏感信息，这里才可以使用。
+
+创建SKU特征物料
+
+同样方式，在创建一个物料“物料m21”来设置SKU商品信息，具体如下图所示。
+
+1、选择一个物料，如“物料m21”，行按钮，点击“查看商品SKU”就打开商品SKU档案页面。
+
+2、在商品SKU档案页面，点击“编辑”按钮。
+
+3、打开商品SKU档案，就可以输入SKU信息了，来具体确定一个商品。
+
+4、例如SKU字段“sku1”，可以输入信息，来保存到SKU商品档案上，来确定一个具体商品。
+
+创建选配特征物料
+
+对于选配物料，在物料新建页面，需要选择“是否可选配”为“是”，这样物料模板就能选择可选配类型的物料模板了，例如前面创建好的“物料模板m30”，在输入物料名称“物料m22”，以及其他信息，就可以保存物料了。
+
+业务单据使用动态属性特征组
+
+在创建物料时，讲解了静态属性如何使用，那么对于动态属性，主要是在具体业务单据上来使用，也就是客户在下单的时候才能确定购买具体商品，下面就是讲解动态属性如何使用。
+
+动态属性特征组有：物料自由项特征组，物料选配特征组。
+
+物料自由项特征使用
+
+物料自由项特征组，是在新建具体单据，才输入自由特征字段信息，他是在单据上来使用的，如下图，采购物料选择“物料m20”后，在物料自由项特征上就会有自由项特征信息，点击后，可以打开物料自由项特征对话框，来输入信息，最终保存单据。
+
+列表查询方案自由项查询
+
+对于物料自由项特征字段，可以应用于查询方案上来进行信息查询与过滤，设置步骤如下：
+
+1、打开“采购订单zxy”列表设计器，在查询方案上，打开字段设置对话框，可以拖“物料自由项特征”中的“自由项1”特征到查询方案字段上。
+
+2、自由项特征字段查询如下。
+
+列表表格显示自由项字段
+
+物料自由项特征字段，默认是对话框打开，输入信息，然后组合显示名称，不显示在列表表格上，如果有些自由项特征比较重要，需要经常查看，那么可以拖到表格上显示，具体设置步骤如下。
+
+1、在“采购订单zxy”列表上，选择表格，打开字段设置对话，把自由项特征“自由项1”拖到表格上即可。
+
+2、自由项特征字段“自由项1”显示如下。
+
+物料选配特征使用
+
+选配特征和自由项特征使用方式是一样的，就是物料需要是选配物料，如下图，选择选配物料“物料m22”后，点击“选配特征”字段，就可以输入选配特征字段信息。
+
+专业版开发
+
+特征专业版和标准版使用方式基本一样，只是需要创建sql表结构，需要把JavaPOJO实体发布到流水线才行，否则页面就打不开。
+
+所以在专业版场景中，仅仅举例一些特殊场景。其和标准版相同使用方式的，这里就不在赘述了。
+
+业务场景
+
+专业版具体业务场景如下：
+
+业务对象创建过程。
+物料自由项特征组使用方式。
+业务流特征字段推单下发。
+开发环境准备
+
+对于专业版特征使用，就必须使用自建引擎了，还需要把JavaBen实体发布到流水线。
+
+引擎发布
+
+首选是自建引擎，后端工程需要发布到技术中台的流水线上，具体过程需要运维工程师来完成。
+
+本地环境准备
+
+从git把引擎工程下载到本地，工程包括前端工程，后端工程，移动工程，仅仅需要配置前两个工程即可，如果仅仅是发布JavaPOJO，那么仅仅需要配置后端工程即可。
+
+1、配置前端工程，并保证能够运行。
+
+2、配置后端工程，并保证能够运行。
+
+创建业务对象
+新建应用
+
+首先是创建专业版应用，这个时候应用引擎就不能是公共引擎了，必须是自建引擎，例如“engineypd”，在输入其他信息，应用名称，所属领域，应用编码，保存即可。
+
+新建业务对象
+
+创建完专业版应用后，新建业务对象，信息如下，例如名称是“采购合同”，编码是“puconzxy”。
+
+下面是创建实体过程，具体步骤如下：
+
+1、实体对象如下：实体名称：“采购合同zxy”，实体编码：“puconzxy”。
+
+字段信息如下：
+
+字段编码	字段名称	字段类型	备注
+puorg	采购组织	单选引用：组织单元（系统）
+materiaid	采购物料	单选引用：物料（系统）
+num	采购数量	数值
+price	采购单价	数值
+total	总金额	数值
+mdefine	物料自由项特征	特征组：物料自由项特征组	特征属性需要关联采购物料
+sdefine	物料选配特征	特征组：物料选配特征组	特征属性需要关联采购物料
+vdefine	自定义项	特征组：自定义项特征组
+busidate	采购日期	日期
+memo	备注	文本
+
+创建的实体信息如下：引用接口还需要勾选：审批，业务流，自动编码。
+
+2、发布实体“采购合同zxy”。
+
+3、新建UI页面，如下图，页面名称“采购合同zxy”，页面编码“puconzxy”，元数据选择“采购合同zxy”。
+
+4、UI页面创建完毕后。
+
+执行sql表结构
+
+实体发布后，还需要把sql表结构信息，在引擎对应的数据库中预置进去，步骤如下：
+
+1、选中“采购合同zxy”，在更多中，选择“导出sql”。
+
+2、在引擎对应数据库，执行sql语句。
+
+JavaPOJO实体发布
+
+实体发布后，还需要把JavaPOJO类信息，放到后端工程中，然后发布到流水线，步骤如下：
+
+1、选中“采购合同zxy”，在更多中，选择“导出JavaPOJO”。
+
+2、导出JavaPOJO后，类信息如下，注意包路径，必须相同。
+
+3、需要把类放到后端工程中，需要放到service工程中，首先根据类的包路径，先创建好类包，然后在放入Java类，并提交到git上。
+
+业务对象流水线发布
+
+JavaPOJO在后端工程上提交后，需要重新发布一下引擎的流水线。
+
+特征组场景
+
+特征组的使用方式，专业版和标准版是一样的，唯一的区别是特征实体的sql表结构需要提前预置到数据库，所以这里就举例这一个场景。
+
+物料自由项特征组
+特征实体表预置
+
+一旦实体中引用了特征组，那么特征实体中就会有实体，标准版无需建表即可使用，而专业版就必须预置表到对应引擎数据库了。
+
+具体预置过程如下。
+
+1、打开特征实体列表。
+
+2、编辑自定义项实体，首选修改表名称，只要和引擎数据库中的表不冲突即可，例如“define50”
+
+3、需要创建三个表，该三个表也需要导出，,结构是“表名称_数字（1到3）”，例如表名称：define50_1，define50_2，define50_3，表的结构一样，就是表名称序号不一样而已，同时注意，还需要修改表的索引。
+
+CREATE TABLE IF NOT EXISTS`define50_1` (
+`id` varchar(64)  NOT NULL,
+`object_id` varchar(64)  DEFAULT NULL,
+`sysCol0` varchar(255)  DEFAULT NULL,
+`sysCol1` varchar(255)  DEFAULT NULL,
+`sysCol2` varchar(255)  DEFAULT NULL,
+`sysCol3` varchar(255)  DEFAULT NULL,
+`sysCol4` varchar(255)  DEFAULT NULL,
+`vcol1` varchar(255)  DEFAULT NULL,
+`vcol2` varchar(255)  DEFAULT NULL,
+`vcol3` varchar(255)  DEFAULT NULL,
+`vcol4` varchar(255)  DEFAULT NULL,
+`vcol5` varchar(255)  DEFAULT NULL,
+`vcol6` varchar(255)  DEFAULT NULL,
+`vcol7` varchar(255)  DEFAULT NULL,
+`vcol8` varchar(255)  DEFAULT NULL,
+`vcol9` varchar(255)  DEFAULT NULL,
+`vcol10` varchar(255)  DEFAULT NULL,
+`vcol11` varchar(255)  DEFAULT NULL,
+`vcol12` varchar(255)  DEFAULT NULL,
+`vcol13` varchar(255)  DEFAULT NULL,
+`vcol14` varchar(255)  DEFAULT NULL,
+`vcol15` varchar(255)  DEFAULT NULL,
+`vcol16` varchar(255)  DEFAULT NULL,
+`vcol17` varchar(255)  DEFAULT NULL,
+`vcol18` varchar(255)  DEFAULT NULL,
+`vcol19` varchar(255)  DEFAULT NULL,
+`vcol20` varchar(255)  DEFAULT NULL,
+`vcol21` varchar(255)  DEFAULT NULL,
+`vcol22` varchar(255)  DEFAULT NULL,
+`vcol23` varchar(255)  DEFAULT NULL,
+`vcol24` varchar(255)  DEFAULT NULL,
+`vcol25` varchar(255)  DEFAULT NULL,
+`vcol26` varchar(255)  DEFAULT NULL,
+`vcol27` varchar(255)  DEFAULT NULL,
+`vcol28` varchar(255)  DEFAULT NULL,
+`vcol29` varchar(255)  DEFAULT NULL,
+`vcol30` varchar(255)  DEFAULT NULL,
+`vcol31` varchar(255)  DEFAULT NULL,
+`vcol32` varchar(255)  DEFAULT NULL,
+`vcol33` varchar(255)  DEFAULT NULL,
+`vcol34` varchar(255)  DEFAULT NULL,
+`vcol35` varchar(255)  DEFAULT NULL,
+`vcol36` varchar(255)  DEFAULT NULL,
+`vcol37` varchar(255)  DEFAULT NULL,
+`vcol38` varchar(255)  DEFAULT NULL,
+`vcol39` varchar(255)  DEFAULT NULL,
+`vcol40` varchar(255)  DEFAULT NULL,
+`vcol41` varchar(255)  DEFAULT NULL,
+`vcol42` varchar(255)  DEFAULT NULL,
+`vcol43` varchar(255)  DEFAULT NULL,
+`vcol44` varchar(255)  DEFAULT NULL,
+`vcol45` varchar(255)  DEFAULT NULL,
+`vcol46` varchar(255)  DEFAULT NULL,
+`vcol47` varchar(255)  DEFAULT NULL,
+`vcol48` varchar(255)  DEFAULT NULL,
+`vcol49` varchar(255)  DEFAULT NULL,
+`vcol50` varchar(255)  DEFAULT NULL,
+`vcol51` varchar(255)  DEFAULT NULL,
+`vcol52` varchar(255)  DEFAULT NULL,
+`vcol53` varchar(255)  DEFAULT NULL,
+`vcol54` varchar(255)  DEFAULT NULL,
+`vcol55` varchar(255)  DEFAULT NULL,
+
+`ncol1` decimal(24,8) DEFAULT NULL,
+`ncol2` decimal(24,8) DEFAULT NULL,
+`ncol3` decimal(24,8) DEFAULT NULL,
+`ncol4` decimal(24,8) DEFAULT NULL,
+`ncol5` decimal(24,8) DEFAULT NULL,
+`ncol6` decimal(24,8) DEFAULT NULL,
+`ncol7` decimal(24,8) DEFAULT NULL,
+`ncol8` decimal(24,8) DEFAULT NULL,
+`ncol9` decimal(24,8) DEFAULT NULL,
+`ncol10` decimal(24,8) DEFAULT NULL,
+`ncol11` decimal(24,8) DEFAULT NULL,
+`ncol12` decimal(24,8) DEFAULT NULL,
+`ncol13` decimal(24,8) DEFAULT NULL,
+`ncol14` decimal(24,8) DEFAULT NULL,
+`ncol15` decimal(24,8) DEFAULT NULL,
+`ncol16` decimal(24,8) DEFAULT NULL,
+`ncol17` decimal(24,8) DEFAULT NULL,
+`ncol18` decimal(24,8) DEFAULT NULL,
+`ncol19` decimal(24,8) DEFAULT NULL,
+`ncol20` decimal(24,8) DEFAULT NULL,
+`ncol21` decimal(24,8) DEFAULT NULL,
+`ncol22` decimal(24,8) DEFAULT NULL,
+`ncol23` decimal(24,8) DEFAULT NULL,
+`ncol24` decimal(24,8) DEFAULT NULL,
+`ncol25` decimal(24,8) DEFAULT NULL,
+`ncol26` decimal(24,8) DEFAULT NULL,
+`ncol27` decimal(24,8) DEFAULT NULL,
+`ncol28` decimal(24,8) DEFAULT NULL,
+`ncol29` decimal(24,8) DEFAULT NULL,
+`ncol30` decimal(24,8) DEFAULT NULL,
+`ncol31` decimal(24,8) DEFAULT NULL,
+`ncol32` decimal(24,8) DEFAULT NULL,
+`ncol33` decimal(24,8) DEFAULT NULL,
+`ncol34` decimal(24,8) DEFAULT NULL,
+`ncol35` decimal(24,8) DEFAULT NULL,
+`ncol36` decimal(24,8) DEFAULT NULL,
+`ncol37` decimal(24,8) DEFAULT NULL,
+`ncol38` decimal(24,8) DEFAULT NULL,
+`ncol39` decimal(24,8) DEFAULT NULL,
+`ncol40` decimal(24,8) DEFAULT NULL,
+`ncol41` decimal(24,8) DEFAULT NULL,
+`ncol42` decimal(24,8) DEFAULT NULL,
+`ncol43` decimal(24,8) DEFAULT NULL,
+`ncol44` decimal(24,8) DEFAULT NULL,
+`ncol45` decimal(24,8) DEFAULT NULL,
+`ncol46` decimal(24,8) DEFAULT NULL,
+`ncol47` decimal(24,8) DEFAULT NULL,
+`ncol48` decimal(24,8) DEFAULT NULL,
+`ncol49` decimal(24,8) DEFAULT NULL,
+`ncol50` decimal(24,8) DEFAULT NULL,
+`lcol1` bigint(20) DEFAULT NULL,
+`lcol2` bigint(20) DEFAULT NULL,
+`lcol3` bigint(20) DEFAULT NULL,
+`lcol4` bigint(20) DEFAULT NULL,
+`lcol5` bigint(20) DEFAULT NULL,
+`lcol6` bigint(20) DEFAULT NULL,
+`lcol7` bigint(20) DEFAULT NULL,
+`lcol8` bigint(20) DEFAULT NULL,
+`lcol9` bigint(20) DEFAULT NULL,
+`lcol10` bigint(20) DEFAULT NULL,
+`lcol11` bigint(20) DEFAULT NULL,
+`lcol12` bigint(20) DEFAULT NULL,
+`lcol13` bigint(20) DEFAULT NULL,
+`lcol14` bigint(20) DEFAULT NULL,
+`lcol15` bigint(20) DEFAULT NULL,
+`lcol16` bigint(20) DEFAULT NULL,
+`lcol17` bigint(20) DEFAULT NULL,
+`lcol18` bigint(20) DEFAULT NULL,
+`lcol19` bigint(20) DEFAULT NULL,
+`lcol20` bigint(20) DEFAULT NULL,
+`lcol21` bigint(20) DEFAULT NULL,
+`lcol22` bigint(20) DEFAULT NULL,
+`lcol23` bigint(20) DEFAULT NULL,
+`lcol24` bigint(20) DEFAULT NULL,
+`lcol25` bigint(20) DEFAULT NULL,
+`lcol26` bigint(20) DEFAULT NULL,
+`lcol27` bigint(20) DEFAULT NULL,
+`lcol28` bigint(20) DEFAULT NULL,
+`lcol29` bigint(20) DEFAULT NULL,
+`lcol30` bigint(20) DEFAULT NULL,
+`lcol31` bigint(20) DEFAULT NULL,
+`lcol32` bigint(20) DEFAULT NULL,
+`lcol33` bigint(20) DEFAULT NULL,
+`lcol34` bigint(20) DEFAULT NULL,
+`lcol35` bigint(20) DEFAULT NULL,
+`lcol36` bigint(20) DEFAULT NULL,
+`lcol37` bigint(20) DEFAULT NULL,
+`lcol38` bigint(20) DEFAULT NULL,
+`lcol39` bigint(20) DEFAULT NULL,
+`lcol40` bigint(20) DEFAULT NULL,
+`lcol41` bigint(20) DEFAULT NULL,
+`lcol42` bigint(20) DEFAULT NULL,
+`lcol43` bigint(20) DEFAULT NULL,
+`lcol44` bigint(20) DEFAULT NULL,
+`lcol45` bigint(20) DEFAULT NULL,
+`lcol46` bigint(20) DEFAULT NULL,
+`lcol47` bigint(20) DEFAULT NULL,
+`lcol48` bigint(20) DEFAULT NULL,
+`lcol49` bigint(20) DEFAULT NULL,
+`lcol50` bigint(20) DEFAULT NULL,
+
+`dcol1` datetime DEFAULT NULL,
+`dcol2` datetime DEFAULT NULL,
+`dcol3` datetime DEFAULT NULL,
+`dcol4` datetime DEFAULT NULL,
+`dcol5` datetime DEFAULT NULL,
+`dcol6` datetime DEFAULT NULL,
+`dcol7` datetime DEFAULT NULL,
+`dcol8` datetime DEFAULT NULL,
+`dcol9` datetime DEFAULT NULL,
+`dcol10` datetime DEFAULT NULL,
+`dcol11` datetime DEFAULT NULL,
+`dcol12` datetime DEFAULT NULL,
+`dcol13` datetime DEFAULT NULL,
+`dcol14` datetime DEFAULT NULL,
+`dcol15` datetime DEFAULT NULL,
+`dcol16` datetime DEFAULT NULL,
+`dcol17` datetime DEFAULT NULL,
+`dcol18` datetime DEFAULT NULL,
+`dcol19` datetime DEFAULT NULL,
+`dcol20` datetime DEFAULT NULL,
+`dcol21` datetime DEFAULT NULL,
+`dcol22` datetime DEFAULT NULL,
+`dcol23` datetime DEFAULT NULL,
+`dcol24` datetime DEFAULT NULL,
+`dcol25` datetime DEFAULT NULL,
+`dcol26` datetime DEFAULT NULL,
+`dcol27` datetime DEFAULT NULL,
+`dcol28` datetime DEFAULT NULL,
+`dcol29` datetime DEFAULT NULL,
+`dcol30` datetime DEFAULT NULL,
+`dcol31` datetime DEFAULT NULL,
+`dcol32` datetime DEFAULT NULL,
+`dcol33` datetime DEFAULT NULL,
+`dcol34` datetime DEFAULT NULL,
+`dcol35` datetime DEFAULT NULL,
+`dcol36` datetime DEFAULT NULL,
+`dcol37` datetime DEFAULT NULL,
+`dcol38` datetime DEFAULT NULL,
+`dcol39` datetime DEFAULT NULL,
+`dcol40` datetime DEFAULT NULL,
+`dcol41` datetime DEFAULT NULL,
+`dcol42` datetime DEFAULT NULL,
+`dcol43` datetime DEFAULT NULL,
+`dcol44` datetime DEFAULT NULL,
+`dcol45` datetime DEFAULT NULL,
+`dcol46` datetime DEFAULT NULL,
+`dcol47` datetime DEFAULT NULL,
+`dcol48` datetime DEFAULT NULL,
+`dcol49` datetime DEFAULT NULL,
+`dcol50` datetime DEFAULT NULL,
+
+`bcol1` tinyint(1) DEFAULT NULL,
+`bcol2` tinyint(1) DEFAULT NULL,
+`bcol3` tinyint(1) DEFAULT NULL,
+`bcol4` tinyint(1) DEFAULT NULL,
+`bcol5` tinyint(1) DEFAULT NULL,
+`bcol6` tinyint(1) DEFAULT NULL,
+`bcol7` tinyint(1) DEFAULT NULL,
+`bcol8` tinyint(1) DEFAULT NULL,
+`bcol9` tinyint(1) DEFAULT NULL,
+`bcol10` tinyint(1) DEFAULT NULL,
+`bcol11` tinyint(1) DEFAULT NULL,
+`bcol12` tinyint(1) DEFAULT NULL,
+`bcol13` tinyint(1) DEFAULT NULL,
+`bcol14` tinyint(1) DEFAULT NULL,
+`bcol15` tinyint(1) DEFAULT NULL,
+`bcol16` tinyint(1) DEFAULT NULL,
+`bcol17` tinyint(1) DEFAULT NULL,
+`bcol18` tinyint(1) DEFAULT NULL,
+`bcol19` tinyint(1) DEFAULT NULL,
+`bcol20` tinyint(1) DEFAULT NULL,
+`bcol21` tinyint(1) DEFAULT NULL,
+`bcol22` tinyint(1) DEFAULT NULL,
+`bcol23` tinyint(1) DEFAULT NULL,
+`bcol24` tinyint(1) DEFAULT NULL,
+`bcol25` tinyint(1) DEFAULT NULL,
+`bcol26` tinyint(1) DEFAULT NULL,
+`bcol27` tinyint(1) DEFAULT NULL,
+`bcol28` tinyint(1) DEFAULT NULL,
+`bcol29` tinyint(1) DEFAULT NULL,
+`bcol30` tinyint(1) DEFAULT NULL,
+`bcol31` tinyint(1) DEFAULT NULL,
+`bcol32` tinyint(1) DEFAULT NULL,
+`bcol33` tinyint(1) DEFAULT NULL,
+`bcol34` tinyint(1) DEFAULT NULL,
+`bcol35` tinyint(1) DEFAULT NULL,
+`bcol36` tinyint(1) DEFAULT NULL,
+`bcol37` tinyint(1) DEFAULT NULL,
+`bcol38` tinyint(1) DEFAULT NULL,
+`bcol39` tinyint(1) DEFAULT NULL,
+`bcol40` tinyint(1) DEFAULT NULL,
+`bcol41` tinyint(1) DEFAULT NULL,
+`bcol42` tinyint(1) DEFAULT NULL,
+`bcol43` tinyint(1) DEFAULT NULL,
+`bcol44` tinyint(1) DEFAULT NULL,
+`bcol45` tinyint(1) DEFAULT NULL,
+`bcol46` tinyint(1) DEFAULT NULL,
+`bcol47` tinyint(1) DEFAULT NULL,
+`bcol48` tinyint(1) DEFAULT NULL,
+`bcol49` tinyint(1) DEFAULT NULL,
+`bcol50` tinyint(1) DEFAULT NULL,
+
+`operator` varchar(255)  DEFAULT NULL,
+`domain` varchar(255)  DEFAULT NULL,
+`ytenant_id` varchar(64)  NOT NULL,
+`pubts` datetime DEFAULT NULL,
+`create_date` datetime DEFAULT NULL,
+`update_date` datetime DEFAULT NULL,
+`dr` smallint(6) DEFAULT NULL,
+PRIMARY KEY (`id`),
+KEY ` define50_1_update_date_IDX` (`update_date`) USING BTREE
+) ENGINE=InnoDB ;
+
+
+4、同样方式，预置物料自由项特征实体表。
+
+物料自由项特征使用
+
+通过选择物料，就可以添加物料自由项特征信息了。
+
+业务流特征字段推单下发场景
+
+特征也经常应用于业务流推单业务场景，例如把上游单据的特征推到下游单据字段上，便于后续业务使用。
+
+具体特征字段推单下发过程如下。
+
+1、首先创建一个业务流，如下图。
+
+2、设计业务流，例如A单据推B单据，如下图。
+
+3、在转换规则中，就可以配置A单据特征字段信息推到B单据字段上。
+
+4、在B单据某个字段上接收上游特征字段值了
+
+数据库表结构说明
+
+特征和特征组在使用过程中，主要涉及特征表，特征租表，特征站位表，物料表，以及特征数据存储表，它们之间的关系如下图所示：
+
+我们以特征，特征组在使用中如何数据存储为例，简要说明如下：
+
+一、特征使用说明
+
+1、首先是新建特征，然后是分配特征到具体业务单据上。
+
+2、特征分配成功后，会将特征信息同步到实体站位表中，其中记录了当前特征对应的真实物理表和物理列。
+
+二、特征组使用说明
+
+1、新建特征组，在组内添加已启用的特征，特征组启用成功后，物料模板可引用启用成功的特征组，然后物料创建时，可选引用特征组的物料模板。
+
+2、特征组在启用成功后，会将特征组及特征相关信息同步到实体站位表中。
+
+3、特征组一旦被业务对象的实体使用，每个特征组对应一个特征实体，每个特征实体都对应有三张真实的动态扩展表，他们都是实体的平行表（后续说动态扩展表，都是指平行表，是一个意思）。
+
+三、特征站位表使用说明
+
+主要描述特征和动态扩展字段之间的关系信息，以及存储在那一个动态存储表上。
+
+四、平行表使用说明
+
+平行表也是实体的动态扩展表，默认都是三张表，特征的策略表是用来定义平行表结构的，策略表中的默认策略是55列varchar类型、50列number类型、50列long类型、50列datetime类型、50列boolean类型；平行表的表名为实体中的tableName拼接_1,_2,_3，也就是根据默认策略字符型理论上最多扩展165个字段，其他最多扩展150个字段。在第一张扩展表_1中50个扩展字段使用完后，可以扩展第二张_2表中50个扩展字段，以此类推。
+
+下面讲解物料相关特征组，标准版应用，专业版应用扩展表应用情况。
+
+1、特征组扩展信息表，都是实体的平行表，例如物料属性特征组，有些是提前规划的，例如物料使用到的特征组，有些是动态生成的，例如标准版应用，有些可以自建表，例如专业版应用，每个特征组都对应一个特征实体，都会有三张表结尾为_1,_2,_3的平行表。
+
+2、标准版应用使用特征时，会在iuap_yonbuilder_dynamic_ds数据库中动态创建扩展表，默认有三张表结尾为_1,_2,_3。
+
+3、专业版应用使用特征时，特征实体对应的平行表名称开发人员可以修改，然后在引擎对应的数据库中预置，表结构前面有说明。
+
+|注意：
+
+业务对象存储在MySQL中，对应的数据库是iuap_metadata_base，表是md_meta_class。|
+
+表结构说明
+
+主要对特征，特征组，特征实体站位表，以及物料相关特征组表的数据库表结构进行说明，同时，也说明表之间关系。
+
+特征、特征组表
+
+创建的特征分类，特征，特征组主要存储在元数据模型扩展服务的数据库的相关表中，公有云数据库是 cloud_ext；专属化数据库是iuap_metadata_extendservice。
+
+主要表关系如下：
+
+主要表说明如下：
+
+数据库表	表名称	主要字段
+base_character	特征表	id主键，cCode编码，cName名称，dataType数据类型
+base_characteristics	特征组表	id主键，cCode编码，cName名称，iCharacteristicsType特征组类型，status是否启用
+base_characteristics_relation	特征和特征组关系表
+parallel_meta_strategy	策略表	定义特征扩展总列数，默认255列
+parallel_meta_strategy_detail	策略详情表	定义特征每个类型扩展列数，默认策略是字符型55列，数字型50列，数值型50列，日期型50列，布尔型50列
+character_position	特征实体占位表	特征分配后，特征和特征存储字段映射关系表，id主键，characteristics_code特征组编码（FreeCT：自由项特征组;SkuPropCT：sku属性特征组;MaterialPropCT：物料属性特征组;Userdefine：自定义项特征），character_code特征编码，entity_uri实体URI，table_column表字段,column_type字段类型
+base_character_class	特征分类表
+业务对象表
+
+业务对象，元数据以及特征在分配后的特征实体字段等信息存储在MySQL库中，所在数据库iuap_metadata_base，同时design_*开头的是实体未发布表，md_*开头的是实体发布后的表，他们之间的映射关系如下图所示。
+
+主要表说明如下：
+
+数据库表	表名称	说明
+md_meta_component	组件/应用表	元数据组件，通过应用构建创建的应用或者领域产品配置的组件包，是一个包含多个元数据对象的闭包
+md_biz_obj	业务对象表	业务对象表，一个业务对象下有且只有一个主实体
+md_meta_class	元数据表	元数据实体是整个BIP元数据模型中的核心对象。类似java中的类，元数据实体包含一组属性（attribute），以及一组描述元数据实体自身的字段（例如name，displayName等），用以描述业务模型和对应的数据模型。同样，元数据实体可以通过实现接口（支持实现多个接口），继承父实体（仅支持单继承），在运行时获得元数据接口和父实体上的属性，以及描述元数据实体的字段。元数据表定义了多种实体类型，例如普通实体（trivial），VO（vo），特征实体 （characteristic），多选引用（quoteList），报表数据模型实体（reportModel），协同表单（ecForm），供应链批次序列号（scBatchSerial），人力自定义信息子集(hrCustomizedEntity)
+md_metaclass_character	元数据特征表	元数据实体特征表，该表用于保存特征实体相关信息，为元数据实体表一对一扩展表
+md_meta_constraint	元数据约束表	类似于数据库约束，元数据提供一系列约束用于描述对元数据实体属性的约束，目前提供以下四种约束类型：主键约束，唯一约束，分词约束，业务主键约束
+md_association	元数据关系表	元数据实体可以通过关联关系描述主实体与子实体间关系，或者实体属性引用实体关系，只支持：1）一个子实体对应一个主实体，不支持一个子实体对应多个主实体的方式建模2）一个主实体同一属性，映射到某一子实体时，只能映射到同一字段
+md_interface	元数据接口表	元数据建模提供多继承能力，一个元数据实体可实现多个元数据接口，当实体继承某接口后，该实体在运行时具有该接口包含的属性和相关标签
+md_attribute	元数据属性表	元数据实体属性用于描述业务模型或者数据模型的具体字段信息，包含属性对应的物理表字段名称、业务类型、基础数据类型、长度、精度以及默认值等。同时，元数据实体属性还会通过外观、格式及数据规则等描述元数据实体属性在元数据运行时的行为
+md_attribute_character	属性特征组表	用于描述实体属性业务类型是特征组后，引用相关特征实体的信息
+md_biz_type	属性业务类型表	用于描述元数据实体属性/接口属性的类型，具体含义如下：1）业务属性具备一定业务含义，并通过基础类型（DataType）关联到java类型及数据库类型（特征业务类型无对应数据类型）2）业务类型组是对业务类型进行分组，分为数字、范围值、特征组、文本、选项、时间及其它 7 类3）目前元数据业务类型不开放维护，全部由原厂预置，不支持租户级扩展。如需要增加、删除或者修改元数据业务类型，必须经过应用平台架构部评审
+md_data_type	属性基础类型表	即是数据类型，用于描述元数据基础数据类型，以及元数据基础数据类型与java类型及mysql数据库类型间映射关系。目前元数据数据类型不开放维护，全部由原厂预置，不支持租户级扩展。如需要增加、删除或者修改元数据基础类型，必须经过应用平台架构部评审
+md_enumeration	枚举表	枚举类型定义表
+md_enumeration_literal	枚举值表	枚举具体明细值定义表
+md_term_value	元数据标签表	元数据实体支持标签定义，定义实体具体使用的标签
+md_term_category	标签分类表	定义标签分组
+md_term	元数据标签表	在整个BIP元数据建模体系中，标签（Terms）是其中非常重要的概念。它是一种标记在元数据实体（meta class）、元数据实体属性(meta class owned attributes)、元数据接口（interface）及元数据接口属性（interface owned attribute）上的特定记号。MDD框架、平台支撑服务以及领域服务本身，在程序运行时都会根据元数据上所标记的特定标签而执行相应的逻辑。因此，元数据标签可以被认为是一种配合代码特定逻辑分支使用的功能开关。并且，一个元数据对象可以同时被标记多个元数据标签
+md_meta_class_option_relation	元数据所选场景表	定义元数据所选择的支持场景
+md_biz_operate	业务对象操作表	描述业务对象允许的操作，例如审核，弃审，审批，提交，编辑，查询，撤回，提交撤回，保存，删除，审批撤回
+md_biz_operate_action_relation	业务对象操作动作关系表	业务对象操作和动作关系配置表，例如审核对应动作audit，编辑对应动作edit
+md_biz_service_code	业务对象所属微服务表	定义业务对象所属的微服务表
+md_ext_available_table	元数据扩展配置表	领域产品默认对实体预置扩展表，例如人力云员工扩展的自定义信息集
+物料属性特征组平行表
+
+目前特征组主要应用于物料场景，通过物料选择物料模板，通过物料模板可以配置平台默认提供的四种特征组，那么业务对象在使用物料相关特征组时，就涉及到特征值的存储问题。
+
+物料四种特征组的数据扩展，是平台提前规划好的（下表有说明），它们和物料在同一个数据库（公有云数据库是 ugoods；专属化数据库是iuap_apdoc_coredoc）中，同样每个特征组也是结尾是_1，_2，_3的三张表，表结构完全一样，主要表关系图如下：
+
+主要表说明如下：
+
+数据库表	表名称	主要字段说明
+product	物料表	在特征组存储时，物料id和特征组id并不是一样的，物料上有字段来映射，例如iProductPropCharacterDefine 物料属性字段，根据值去productpropcharacterdefine表中查询物料属性记录。product_character_def物料特征（自定义项）字段，根据值去product_character_def表中查询物料特征记录
+productsku	商品sku表	同理skufreecharacter物料自由项特征组对应字段，skupropcharacter物料sku特征组对应字段，productsku_character_def 物料sku特征（自定义项）字段
+productpropcharacterdefine_1	物料属性特征组表	id主键,object_id逻辑表的id 目前不用了,sysCol0-sysCol4（系统预留字段，由领域对接物料时使用，例如sysCol0：producttpl_id物料模板id,sysCol1:characteristics_id特征组id,sysCol2：product_id物料id,sysCol3:敏感域类型）,vcol1-vcol55字符型字段, ncol1-ncol50数值型字段, lcol1-lcol50 long类型字段, dcol1-dcol50日期型字段, bcol1-bcol50布尔型字段，ytenant_id租户id
+skupropcharacter_1	物料sku特征组表	同上
+skufreecharacter_1	自由项特征组表	同上
+(特征实体表)	物料选配特征组表	选配特征组自动生成特征实体，对应有真实动态扩展表，其中：1、标准版自动生成特征实体扩展表2、专业版自建特征实体扩展表
+product_character_def_1	物料特征表	同上
+
+注意：
+
+如何获取特征实体存储表名称，大致方式如下，在特征实体界面，专业版可以直接查询表名，标准版可以通过调试的方式查询/iuap-metadata-designer/metadata-designer/simplemeta
+
+data/getLocalClassTreeList接口返回值，里面有对应的表名称，需要“表名称_1”就可以查询到对应的特征存储值。
+
+数据存储举例说明
+
+业务单据实体引用特征组，或者特征分配到业务单据上，在页面上特征字段输入数据后，这些数据是需要存储的，下面举例说明存储过程。
+
+特征存储示例
+
+无论标准版还是专业版，自建应用后，对于创建的业务对象都可以分配特征，那么在业务输入这些特征值后，那么值在哪里存储呢，本小节说明如何查询动态扩展表。
+
+标准版
+
+标准版应用对应的动态扩展表是平台自动创建的，在业务对象页面上输入特征数据后，如何查找特征对应的动态扩展表在哪里，有两种种方式，第一种方式通过特征实体接口返回值查询，第二种直接登录MySQL数据库查询，这种方式最直接，下面说明查找过程。
+
+一、第一种方式：通过特征实体接口返回值查询。
+
+如果业务对象想使用特征，那么在业务对象上需字段引用自定义项特征，然后就会生成一个自定义项特征实体，类型是UserDefine，如下图。
+
+然后调试“对象建模”下的“特征实体”页签，在/iuap-metadata-designer/metadata-designer/simplemetadata/getLocalClassTreeList下查看返回值，找类型是“UserDefine”的，通过tableName就可以查询到具体扩展表名称，在加上后缀“_1”就是具体的动态扩展表了，如下图所示，和4.2.2.2小节查询方式类似。
+
+第二种方式：登录MySQL的iuap_metadata_base数据库md_meta_class表，根据实体URI路径查询，同时特征实体类型是特征实体（characteristic）。
+
+专业版
+
+专业版应用的特征实体表需要自己提前预置，所以扩展表在特征实体上可以看到，所以在特征实体页面查询即可。
+
+当然，特征实体站位表也同样存储专业版的动态扩展表信息，也可以采用和标准版同样的方式查询。
+
+特征组存储示例
+
+物料有四种特征组，分为静态属性和动态属性，静态属性示例是物料属性特征组，动态属性示例是物料选配特征组，具体过程如下。
+
+物料属性特征组存储（静态属性）
+
+物料所使用的特征组对应的扩展表，都是领域提前规划好的表，例如在创建物料时，物料属性输入值后，那么其值存储在productpropcharacterdefine对应的三张表中，相关表在上面有说明，当然也可以去实体站位表表中查询字段映射关系。
+
+其查询过程如下：
+
+1、物料对应的数据库是iuap_apdoc_coredoc，可以搜索product，可以查询到物料和物料相关特征组的一些表截图如下。
+
+2、根据物料id去物料属性特征组表productpropcharacterdefine的id上是查询不到数据的，因为物料id和物料属性特征组id并不一致。
+
+物料属性的主键值，存储在物料product表的iProductPropCharacterDefine字段上，根据其值去productpropcharacterdefine表中。同理，物料特征字段是product_character_def，根据值去product_character_def表中查询其记录。
+
+3、在弹性字段表elastic_field中，查询特征字段和动态扩展表字段的映射关系，同时，动态扩展表有三张，记录具体关联的动态扩展表。
+
+4、打开物料属性特征组的动态扩展表productpropcharacterdefine_1，可以查看特征具体值。
+
+物料选配特征组存储（动态属性）
+
+我们创建选配物料后，就可以在业务单据上使用，选择选配物料后，就可以录入选配特性，然后单据保存，那么如何知道选配特性存在哪里呢，其实在特性实体页面就可以查询出对应的动态扩展表。
+
+对于专业版应用是需要自行预置，当然也就可以看到。对于标准版平台自动创建，界面上看不到，但是通过调试特征实体列表就可以查询出特征实体对应的动态扩展表名称，然后去iuap_yonbuilder_dynamic_ds数据库中查询。
+
+下面的示例是标准版动态扩展表查询过程，具体如下。
+
+1、业务对象实体设计如下，特征组使用了物料选配特征组。
+
+2、生成页面后，物料选择创建好的选配物料，在字段上就可以弹出选配字段，输入值保存。
+
+3、实体保存后，针对特征组生成了特征实体，FreeCT是自由项特征组，OptionCT是选配特征组，UserDefine是自由项特征组，我们的示例是选配特征组。
+
+调试“特征实体”页面，在/iuap-metadata-designer/metadata-designer/simplemetadata/
+
+getLocalClassTreeList下查看返回值，如下图uri中有“OptionCT”表示选配特征组，可以查询到字段“tableName”这就是对应的特征组存储的表名称。
+
+接口返回的特征实体数据结构：
+
+5、在数据库iuap_yonbuilder_dynamic_ds查询elastic_field表，根据特征字段查询映射的真实扩展字段，例如字段vcol13。
+
+6、在数据库iuap_yonbuilder_dynamic_ds查询，前面查询到的选配特征组对应表，在后缀加上“_1”，例如t_ea3d53c82299ce77fbbde0bf93_1，如下图，就可以查询到页面上输入的特征值了。
+
+客开代码实现
+业务场景
+
+一、前端客开代码场景
+
+1、特征在页面初始化时赋初值
+
+2、得到特征的值
+
+3、得到特征组数据
+
+二、后端客开代码场景
+
+1、得到特征字段值信息，特征实体uri
+
+2、查询特征实体，特征组实体
+
+三、接口客开代码场景
+
+采购合同单据的“保存”业务按钮被发布成openapi接口，第三方调用，实现特征字段值第三方数据同步。
+
+前端客开
+
+本案例客开单据是第三章节的采购合同，我们测试特征，物料自由项特征组，选配特征组。
+
+前端代码主要涉及特征赋值，获取值，以及特征组内特征赋值，获取值，如下图所示。
+
+源码如下：
+
+//特征字段直接赋值
+
+viewModel.get("vdefine\_\_zxytm11").setValue('测试1');
+
+//通过自定义特征组，赋值特征字段
+
+viewModel.get('vdefine').setValue({zxytm11:"测试2"});
+
+//通过选配特征组，得到字段值
+
+viewModel.get('sdefine').get('tm24').getValue();
+
+//通过选配特征组，字段赋值
+
+viewModel.get('sdefine').get('tm24').setValue(6);
+
+//刷新页面
+
+// viewModel.execute('refresh');
+
+
+调试前端页面，得到特征组的数据结构如下图所示，mdefine是属性特征组，sdefine是选配特征组，vdefine是自定义项特征组。
+
+说明：
+
+sdefine：characteristicsId：特征组表记录id，id：特征实体表记录id，productTplId：选配物料记录id，tm24：本示例的选配特征，fullName：特征组实体uri。
+vdefine： id：特征实体表记录id，zxytm11：本示例的自定义特征，fullName：特征组实体uri。
+实体特征字段：vdefine__id，vdefine__zxytmll，通过实体也可以直接获取自定义特征值。
+后端客开
+
+后端业务场景是得到特征值相关信息，例如自定义项特征组，得到特征记录id，特征到货地点。
+
+源码如下：
+
+//得到自定义项特征组
+ZxypuconvdefineUserDefine vdefine=(ZxypuconvdefineUserDefine)body.get("vdefine");
+//特征记录id
+String id= (String)vdefine.get("id");
+//得到特征zxytm11的值
+Object zxytm11= vdefine.get("zxytm11");
+//得到特征uri路径
+String fullName=vdefine.getFullName();
+//得到特征记录状态
+int status=vdefine.get_status();
+
+
+后端得到特征实体id，特征组实体id，然后通过uri和id进行查询。
+
+源码如下：
+
+//查询特征
+QuerySchema schema1 = QuerySchema.create().addSelect("*").appendQueryCondition(QueryCondition.name("id").eq(id));
+schema1.appendQueryCondition(QueryCondition.name("dr").eq("0"));
+List<Map<String, Object>> query1 = MetaDaoHelper.query("base.character.Character", schema1, "test-r2");
+
+//特征组
+//得到自定义项特征组
+ZxypuconsdefineOptionCT sdefine=(ZxypuconsdefineOptionCT)body.get("sdefine");
+//特征组表记录id
+String characteristicsId= (String)vdefine.get("characteristicsId");
+//选配对应的物料记录id
+String productTplId= (String)vdefine.get("productTplId");
+//查询特征组
+QuerySchema schema2 = QuerySchema.create().addSelect("*").appendQueryCondition(QueryCondition.name("id").eq(characteristicsId));
+schema2.appendQueryCondition(QueryCondition.name("dr").eq("0"));
+List<Map<String, Object>> query2 = MetaDaoHelper.query("base.character.Characteristics", schema2, "test-r2");
+String s2="";
+
+接口客开
+
+采购合同单据的“保存”业务按钮被发布成openapi接口，供第三方调用，实现特征字段值第三方数据同步，接口客开过程如下：
+
+获取“保存”接口信息
+
+首先通过调试采购合同的“保存”按钮，得到保存接口路径，输入参数，输出参数，然后通过Postman测试保存接口，确保Postman也能保存数据。
+
+页面调试“保存”接口
+
+调试“保存”接口，得到接口路径，输入输出参数，步骤如下：
+
+打开“采购合同”页面，输入数据，打开浏览器开发者，清空调试“网络”中接口调用信息，如下图。
+
+输入页面信息，保存页面，如下图，“save”接口就是保存信息。
+
+在标头，得到请求网址，cookie，Domain-key信息。如下图。
+
+请求网址值：
+
+Cookie值：
+
+Domain-Key值：
+
+把这些信息整理出来，（cookie是有时效的，从你的接口拷贝接口），后面Postman用。
+
+请求网址	https://bip-v3r2-2302.yyuap.com/mdf-node/uniform/bill/save?cmdname=cmdSave&businessActName=zxy%E9%87%87%E8%B4%AD%E5%90%88%E5%90%8C-%E4%BF%9D%E5%AD%98&terminalType=1&busiObj=zxypucon&designPreview=true
+Cookie	值太长，各自从项目拷贝
+Domain-Key	test-r2
+获取请求网络的入参信息，从载荷页签，请求载荷中，查看已解析的结果得到，如下图，得到json结构。
+
+去掉转移“\”，以及data的“{}”外面的“"”，保证data也是一个json，可以在json网站格式验证一下，确保是一个json，最终请求json结构如下图：
+
+{
+"billnum": "zxypucon",
+"data": {
+"materiaid": "1722251211286511621",
+"materiaid_name": "选配物料",
+"mdefine": {},
+"sdefine": {
+"tm24": 888,
+"characteristicsId": "1722130935027597319",
+"productTplId": "1722201320946401282"
+},
+"vdefine__zxytm10": "2023-06-14",
+"vdefine__zxytm11": "测试2",
+"vdefine": {
+"zxytm10": "2023-06-14",
+"zxytm11": "测试2"
+},
+"memo": "备注1",
+"code": "000013",
+"verifyState": 0,
+"createTime": "2023-06-15 11:02:48",
+"_status": "Insert"
+}
+}
+
+在响应页签，得到出参信息。
+
+得到出参信息如下：
+
+{
+"code": 200,
+"message": "操作成功",
+"errorDetail": null,
+"total": 1,
+"data": {}
+}
+
+至此得到请求网址，cookie，Domain-Key，请求入参，响应出参。
+Postman测试“保存”接口
+
+通过页面调试“保存”按钮得到请求网址，cookie，Domain-Key，请求入参，响应出参，可以先通过Postman，测试“保存”接口，这些参数是否可用，测试步骤如下：
+
+打开Postman，输入请求网站，请求类型是POST，header中输入cookie，Domain-Key，如下图。
+
+在Body中，输入请求参数信息，同时，请求类型是JSON结构。
+
+点击“Send”测试“保存”接口，可以见到输出参数信息，保存成功，说明接口信息查找的没有问题。
+
+查看页面是否有这条记录。
+通过Postman测试成功后，就可以配置自定义接口。
+自定义接口开发
+
+自定义OpenApi接口配合过程如下。
+
+API发布
+
+API接口发布步骤如下：
+
+在集成平台->API管理->发布API打开API发布，选中“保存测试”分类，在下拉“新增”按钮，选择“向导式新增API”。
+
+通过向导填写信息，在第一步页面，填写API接口名称，选择分类，其他信息如图默认即可，然后点击下一步。
+
+填写请求路径，这个是对外发布的，第三方可以访问的接口路径（注意不是前面Postman调试的保存接口路径），请求类型POST，ContentType默认是application/json即可。
+
+接口入参，通过参数导入的方式导入
+
+点击参数导入，打开对话框，选择“简单JSON格式”，我们在5.4.1.1章节，已经整理了入参json结构，粘贴过来即可，然后保存。
+
+入参json导入后的结构如下图，然后点击下一步。
+
+后端信息配置，如下图：
+
+说明：
+
+后端请求地址：在5.4.1.1章节已经获取后端地址，把uniform改为本示例“采购合同”引擎配置的nginx的后端服务编码，例如本案例是“test-r2-be”。
+yms微服务：本案例测试是2023R2版本，必须选择public.domain.url。
+后端请求类型：POST。
+后端超时：改为300。
+常量参数：键必须是Domain-Key，值是引擎编码。
+信息配置完毕，点击下一步。
+配置出参信息，和入参方式一样，通过参数导入方式配置。
+
+出参信息配置后，点击保存，API接口信息配置完毕。
+
+API测试
+
+API接口保存后，如下图，通过“调试”可以测试接口是否配置成功，步骤如下。
+
+点击“调试”按钮，打开API调试工具。
+
+点击上图“切换为文本输入”，复制5.4.1.1章节入参json信息，根据情况可以修改特征值等信息。
+
+点击“API调试”按钮，调试接口。在响应体信息中输出“操作成功”，表示记录插入成功，也可以从页面查看记录信息。

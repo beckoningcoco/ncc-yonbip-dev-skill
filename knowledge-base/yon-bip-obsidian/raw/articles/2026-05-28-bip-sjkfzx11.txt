@@ -1,0 +1,1247 @@
+社区文档中心
+首页
+文档导航
+开发者社区
+社区论坛
+视频教程技术博客
+更多
+张宏涛
+资料中心
+专业开发
+产品概述
+快速入门
+操作指南
+开发指南
+开发介绍
+新功能开发
+移动端开发
+扩展开发
+全球化
+组织
+权限
+特征
+基础数据
+审批流
+业务流
+规则引擎
+公式
+UI模板
+参照
+导入导出
+打印
+对象建模
+编码规则
+调度任务
+监控与预警
+日志
+消息平台
+工作台
+事件中心
+事件中心开发
+事件中心开发介绍
+文件服务
+YonBuilder应用开发
+前端开发
+后端开发
+移动开发
+安全
+数据库
+DevOps技术
+容器云技术
+区块链云技术
+YMS开发
+智能应用开发
+专项开发
+成果迁移
+技术方案
+最佳实践
+参考手册
+常见问题
+视频教程
+专业开发/开发指南/事件中心/事件中心开发
+事件中心开发
+最后更新时间：2025-11-14
+本文摘要
+
+事件中心是一个集中的事件管理中心，事件发出方可以把事件发布到事件中心，订阅方通过在事件中心注册订阅接口，当事件触发时，事件中心调用订阅接口，执行业务， 做到上下游业务解耦。
+
+本文主要介绍了事件中心的设计，包含事件的各种事件类型、消息优化的方式、事件中心解决领域传递数据的交互。包含以下核心内容：
+
+1、事件中心的技术架构和功能特性；
+
+2、发送方和接收方快速接入事件的流程和步骤；
+
+3、流程使用事件场景的详细操作，包含事件的注册类型、事件订阅及查询事件等。开发者可以通过本文档了解事件中心的注册类型和事件订阅机制，并掌握发送方和
+
+接收方接入以及查看事件详情的方式。
+
+熟悉以上内容，可快速实现业务接入事件中心，同时在业务领域间数据传递的场景中合理使用事件中心来优化设计，提供统一和快捷的解决方案。
+
+第一章 基本概念
+背景
+
+什么是事件？事件是指系统中业务对象状态发生的变化，如组织启用了，订单审批通过了，这种我们都称之为业务事件。
+
+而系统里需要对这种变化作出反应，如产品入库单保存之后需要自动对生产订单关闭，那么就需要系统能够监听到这个事件。传统的同步调用接口的方式也可以实现这个功能，如产品入库单保存后调用生产订单关闭的接口。但是这样就有几个问题。
+
+产品入库单就依赖了生产订单的接口。
+
+本来是生产订单的逻辑（生产订单决定要自动关闭，而不是产品入库单），而这段逻辑反而需要写到产品入库单里面。
+
+同步调用失败影响产品入库单的事务。
+
+如果还有别的业务需要监听产品入库单保存的事件时，比如自动增加库存（随便举例），还需要在产品入库单保存后逻辑里增加新的逻辑。
+
+如上所述，如果有一个中心节点，产品入库单保存后发布自己的事件，所有需要监听这个事件处理业务的下游业务，都来中心节点订阅这个事件，那么就能够把上下游的服务进行解耦，业务进行解耦，也具有了很灵活的扩展性。
+
+产品亮点
+
+**业务松耦合：**对整个软件系统来说，能够形成一个松耦合的结构，不会服务之间的逻辑耦合在一起，减少了系统复杂性。
+
+**易于扩展：**增加了扩展性，当有新的业务加入，只需要订阅事件，注册自己的业务接口即可，不需要修改上游服务的代码逻辑。
+
+**处理高效：**同步调用变为了异步处理，减少了业务长事务链条，加快了上游业务的响应。
+
+**运行稳定 ：**通过消息队列机制，增强了系统的可靠性，减少因为网络问题带来的接口调用失败的情况。
+
+第二章 技术架构
+总体架构设计
+
+关键技术
+事件推送的三种模式及记录
+
+模式一： 同步发送
+
+事件中心把事件发送至下游应用，应用立即返回事件的处理结果
+事件中心记录该监听应用对此事件的处理结果（成功，失败） 模式二：异步发送
+事件中心把事件发送至下游应用，事件中心记录此次发送结果 (异步发送中/失败)
+监听应用处理事件，把处理结果以回调的形式反馈给事件中心, 事件中心记录此次回调结果
+
+（回调成功/回调失败） 模式三：
+
+事件中心把事件发送至指定 kafka 的 topic 中（推送成功/推送失败）
+监听应用到 kafka 中拉取该事件
+把处理结果回调给事件中心（拉式回调成功/拉式回调失败）
+有序事件
+
+关键点：
+
+ *           *                1. 注册事件时需要指定事件类型是否支持有序同时指定 orderkey，注册监听时指定是否有序消
+
+
+费。
+
+ *           *                1. 如果需要跨事件类型控制有序，需要定义关联关系。
+   2. 事件中心 sdk 按照有序维度做事件拆分。
+   3. 事件中心 eos 按照有序维度控制，只有事件中心不存在未消费完的有序事件，才生产下一个
+
+
+事件。
+
+事件中心维护有序事件的状态表，记录有序事件的消费情况
+
+消息拉取
+
+创建监听，选择拉取模式，并填入 YMS 中的 kafka broker 配置项和 topic
+下游消费程序监听 kafka topic 的消息，处理完成之后，主动回调事件中心上报处理结果。
+消息精简
+
+处理流程：
+
+用户发起单据修改操作，产生一条事件
+事件精简之后，录到本地可靠消息表
+事件中心消息发送服务，将事件发送到事件中心。事件体中，只包含单据线索和时间戳。
+事件中心调用下游财务服务，将事件体发送给财务
+财务接收到消息之后，根据单据线索和时间戳调用供应链服务，获取最新消息体。然后进行业务处理。并将处理结果返回给事件中心。
+消息忽略
+
+应用调用忽略服务，将错误事件删除。
+重试记录监测到该事件被阻断之后，不再进行消息投递。
+重试策略
+
+事件中心支持订阅方配置重试策略：禁止、默认、循环。
+
+当事件中心调用下游订阅者接口发生失败时，可根据重试策略进行重试操作：
+
+ *           *                1. 当设定为默认策略，则一共重试 5 次，每次间隔 5 分钟。
+   2. 当设定是循环策略，则间隔 5 分钟，在固定时间内重试。
+
+用户态事件消费状态查询
+
+场景：事件中心的管理和查询目前都是开发态的，用户不可见。但是像业务单据上下游推单的场景，发生了异常，用户没法查询异常情况，也不能做手工重试。所以希望有一个用户态的查询功能；
+
+可以按照事件类型查询，也可以按照订阅者查询。
+
+查询结果显示每一条事件的 id，发出方，接收方，开始时间，结束时间，状态是成功还是失败。
+
+失败的事件可以做重发。
+
+第三章 功能介绍
+功能概述
+
+ 架构设计 事件中心支持的特性：
+
+支持可靠事件发布，保证事件不丢失。
+支持大并发下处理效率。
+支持限流功能，保证订阅者服务的安全可控。
+支持事件库持久化，能够基于历史事件进行事件的管理和跟踪查询。
+支持开发配置界面进行事件类型注册和监听器注册。
+支持基于事件类型定义通知消息。
+支持 MDD 事件规则。
+支持向前向后补偿以及补偿策略的灵活配置。
+支持事件失败报警。
+功能
+注册事件类型
+
+事件中心首页：
+
+点击应用管理首先注册事件源。
+
+找到要增加事件源对应的应用，如果左侧应用树上没有，则点击左上角新建。（慎用， 尽量在工作台注册的应用下新增，这样数据权限控制以及开通过滤设置才能生效）。
+
+新增事件源：
+
+在应用事件源管理页签点击新增，创建新的事件源。
+
+注册事件类型
+
+在事件中心首页点击事件类型管理：
+
+选择对应的应用下的事件源，点击右上角新增，创建事件类型。
+
+事件类型编码和名称是必填项，需要勾选“是否启用”，其他可不填。
+
+当需要保证事件是有序消费的场景（原则：按照事件触发时间排序，上一条事件成功消费之后才会消费下一条），可以选择有序事件：
+
+有序特性支持按照事件源有序还是按照事件类型有序。
+
+事件源有序是指基于事件源的维度内按顺序消费事件
+事件类型有序是基于事件类型维度内按顺序消费事件
+
+orderkey 可选，如果在事件源或者事件类型维度下还需要细分维度，如按照单据id 维度有序。
+
+例：事件源是采购订单，事件类型是新增，修改，删除。设置的有序是事件源有序， 同时设置 orderkey=billid，那么会按照同一个采购订单的业务事件顺序消费，不同采购订单不受影响。
+
+如果不设置 orderkey，那么就所有的采购订单的业务事件会按照触发时间统一控制顺序消费。
+
+用户态可见：勾选之后在工作台-系统管理下的事件查询节点可以查询此事件类型的数据。
+
+注册事件订阅
+
+从事件中心首页点击事件监听管理，进入注册页面：
+
+左侧是领域-应用-事件源-事件类型树，选中对应的事件类型，点新增创建订阅。
+
+录入信息包括：
+
+监听名称、节点编码（同一事件类型下不能重复）
+
+重试策略：默认（失败后重试 5 次）、循环（一直重试）、禁用（不重试）
+
+请求方式：默认（标准签名方式的 rest 接口）、token 请求、RPC 请求、协同方式（协同有自己的验证方式）。
+
+事件接受地址：填写实现订阅逻辑的业务接口。
+
+如果是 rest 接口，直接填地址。
+如果业务接口是 rpc 接口，那么：
+
+需要实现类填写：com.yonyou.iuap.event.mq.listener.RPCListener rpc 接口填写方法示例，事件接收地址（参考）：
+
+rpc://iuap-event-server@9194af05-6466-4f8c-8c41-40768e0ee4f5/alias rpc://iuap-event-server@9194af05-6466-4f8c-8c41-40768e0ee4f5
+
+报警邮箱：订阅失败后报警信息接收邮箱地址。
+
+限流值：针对下游接口的限流参数。以秒为单位。支持小数精度 4 位，例：0.0001 意思是每 10000 秒发送一个事件，100 就是每秒发送 100 个事件。
+
+所属应用编码：这个订阅属于哪个应用
+
+异步请求：如果下游业务接口是异步方式，则勾取此选项。并且需要支持业务处理完毕回调事件中心
+
+应用过滤：勾选此选项时，必须录入应用编码。运行时会根据租户开通应用情况来过滤事件是否发送。
+
+是否有序：当事件类型那里支持有序事件之后，可以在订阅注册时在指定本订阅是否要按顺序消费，如果此处不勾选，即使事件类型支持有序，本订阅也不控制有序消费。
+
+是否启用：勾选之后，注册才生效。
+
+拉取模式：可以定义是否主动拉式消费事件，当勾选时，需要指定过期时间。  拉取模式需要主动调用拉取事件的接口。
+
+注意拉取模式调用接口时，不要频繁调用，否则会对事件中心造成压力，确实有拉取场景请先与事件中心开发人员沟通。
+
+事件查询
+
+事件查询是能够根据事件类型、开始结束时间查询订阅的事件，对失败的事件快速定位原因并重新执行。
+
+1、事件查询
+
+通过筛选栏中输入相关信息，进行查询
+
+当进行跨日期或者通过事件进行查询时，需制定查询方案
+
+2、失败事件
+
+针对错误事件，可以查看事件内容，消费信息，并可对失败事件进行重发操作
+
+第四章 开发示例
+发送方接入
+事件中心页面注册事件源，事件类型
+
+专属化环境使用对应事件中心的地址注册。
+
+事件源注册
+
+首先进入事件中心日常环境界面，地址如下：
+
+（专属化）https://example.yyuap.com/iuap-apcom-event/event-center/#/ 选择应用管理
+
+需要输入 token,token 获取地址https://example.yyuap.com
+
+/iuap-apcom-event/event-center/tools/getToken?userId=794a20a3-8dd6-4404-a22b-fb8bcb d4dc91
+
+点击应用事件源管理，选择要注册的事件源所在的领域和应用，比如这里要在（领域：AI 中台，应用：企业画像）下面注册事件源，如下所示：点击新增。
+
+输入要注册的事件源编码和名称，这里我定义的事件源是 testSourceId,并保存
+
+保存后如果提示用户无权限，请参照事件中心授权。授权后再注册
+
+事件类型注册
+
+在事件中心专属化环境界面，选择事件类型管理
+
+（专属化）https://example.yyuap.com/iuap-apcom-event/event-center/#/
+
+进去以后选择要在哪个领域—应用—事件源下创建事件类型，比如我要在上一步中创建的事件源 testSourceId 下创建事件类型,输入事件类型编码，名称并保存，如下所示：
+
+自身业务代码中实现发送事件的方式（rpc rest eos 三种方式）
+RPC 的方式发送事件
+引入 maven 依赖
+
+com.yonyou.iuap
+
+iuap-event-rpc
+
+2.6.0-RELEASE
+
+实现 demo
+
+import com.yonyou.iuap.event.rpc.IEventSendService； @Resource
+
+private IEventSendService eventSendService;
+
+BusinessEventBuilder businessEventBuilder = new BusinessEventBuilder();
+
+businessEventBuilder.setSourceId("APPLICATION"); businessEventBuilder.setEventType("CREATE_APPLICATION"); Object businessObject = new HashMap<>(); businessEventBuilder.setUserObject(businessObject); businessEventBuilder.setTenantCode("");
+
+// 如 果 需 要 租 户 默 认 token，tenantCode 要 传 入 yht 租 户 id BusinessEvent businessEvent = businessEventBuilder.build();
+
+// 多数据中心支持，如果事件还需要分发给租户，则将租户租户信息businessEvent.getTenantIds().add("tenantId1"); businessEvent.getTenantIds().add("tenantId2"); businessEvent.getTenantIds().add("tenantId3"); eventSendService.sendEvent(businessEvent);
+
+rest 的方式发送事件
+post 请求地址
+
+（专属化）https://example.yyuap.com/event-pub/pub/rest/sendEvent 请求体-bussinessEvent
+
+{
+
+"eventType":"demo",
+
+"sourceID":"demo", "tenantCode":"cr2ru8x5",
+
+"userObject":"{"operation":"add","identityType":0,"tenantId":"cr2ru8x5"," userIds":["406d8313-9a7a-4eb0-9426-56895b4b005a"]}",
+
+"uuid":"5d5ca9ff-2a7f-4210-93ea-2072e2dad999"
+
+// 多数据中心支持，如果事件还需要分发给租户，则将租户租户信息
+
+"tenantIds":"tenantId1,tenantId2,tenantId3";
+
+}
+
+rest 接口调用 demo
+
+@Test
+
+public void testSendEvent( ) throws BusinessException { BusinessEventBuilder businessEventBuilder = new
+
+BusinessEventBuilder();
+
+businessEventBuilder.setSourceId("test"); businessEventBuilder.setEventType("test001"); Map<String, String> businessObject = new HashMap<>(); businessObject.put("key", "value"); businessEventBuilder.setUserObject(businessObject); businessEventBuilder.setTenantCode("");
+
+//如果需要租户默认 token，tenantCode 要传入 yht 租户 id BusinessEvent businessEvent = businessEventBuilder.build();
+
+// 多数据中心支持，如果事件还需要分发给租户，则将租户租户信息businessEvent.getTenantIds("tenantId1,tenantId2,tenantId3"); bus
+
+AuthSDKClient authSDKClient = new AuthSDKClient("", "**"); HttpPost httpPost = new
+
+HttpPost("https://example.yyuap.com/event-pub/pub/rest/sendEvent"); StringEntity stringEntity = new
+
+StringEntity(JSONObject.toJSONString(businessEvent), "UTF-8"); stringEntity.setContentEncoding("UTF-8"); stringEntity.setContentType("application/json"); httpPost.setEntity(stringEntity);
+
+BasicHeader basicHeader = new BasicHeader("Content-Type", "application/json");
+
+httpPost.setHeader(basicHeader);
+
+HttpResult execute = authSDKClient.execute(httpPost); Assert.assertEquals(200, execute.getStatusCode()); logger.info("return:{}", execute.getResponseString());
+
+}
+
+eos 的方式发送事件(推荐)
+
+1.共享逻辑数据源，接入事件中心消息发送服务2.引入 maven 依赖
+
+com.yonyou.iuap
+
+iuap-event-sdk
+
+2.6.0-RELEASE
+
+3.发送事件 demo
+
+import com.yonyou.iuap.event.service.EventService; @Resource
+
+private EventService eventService;
+
+BusinessEventBuilder businessEventBuilder = new BusinessEventBuilder();
+
+businessEventBuilder.setSourceId("APPLICATION"); businessEventBuilder.setEventType("CREATE_APPLICATION"); Object businessObject = new HashMap<>(); businessEventBuilder.setUserObject(businessObject); businessEventBuilder.setTenantCode("");
+
+BusinessEvent businessEvent = businessEventBuilder.build();
+
+// 多数据中心支持，如果事件还需要分发给租户，则将租户租户信息
+
+businessEvent.getTenantIds("tenantId1,tenantId2,tenantId3");
+
+eventService.fireLocalEvent(businessEvent );
+
+注意事项
+事件体大小限制在 10M 以下
+事件 id 是个全局唯一的标识，不要自定义事件体的 uuid 属性。
+如果使用 EOS 发送方式，需要保证 EOS 写入动作和当前业务操作在同一个事务
+
+内。
+
+基于 RPC/Rest 直接调用方式，如果接口失败，需要业务方自行处理。
+如果事件没有定义监听，在事件中心开发态页面不会查询到数据。
+接收方接入
+事件中心页面注册事件监听
+
+日常环境可以自行注册，预发和生产需要发邮件给相关人员同步；
+
+专属化环境按照环境级别管理。
+
+进入事件中心页面，选择事件监听管理
+
+专属化环境：https://example.yyuap.com/iuap-apcom-event/event-center/#/
+
+选择要要监听的事件类型，新建监听，比如我要监听上述我新建的事件类型，填入相关信息，保存即可，如下所示：
+
+自身业务代码中实现接收事件的方式（rpc rest 两种方式）
+rest 方式接入注意事项
+
+事件监听方需要实现幂等，事件中心不能保证不重复调用。
+
+重复收到请求，如果业务已经处理过了事件（即幂等掉了），不要向事件中心返回异常，否则事件 中心会当成失败，再次重试（有重试策略的话）
+
+返回值：json 中 success 值为字符串 true，表示成功。其他均是失败。
+
+引入 pom 依赖
+
+com.yonyou.iuap
+
+iuap-2nd-party
+
+6.3.0-RELEASE
+
+com.yonyou.cloud
+
+auth-sdk-server
+
+接收方 rest 方式 demo
+
+@ResponseBody
+
+@RequestMapping(value = "/***", method = RequestMethod.POST) public Object getErrorRecord(HttpServletRequest request) {
+
+String sourceID = request.getParameter("sourceID"); String eventType = request.getParameter("eventType"); String userObject =
+
+request.getParameter("userObject");
+
+String queueName = request.getParameter("queueName"); String tenantCode =
+
+request.getParameter("tenantCode");
+
+// 幂等处理
+
+if (已处理过) {
+
+// 此处不要抛出异常，否则会导致事件中心状态不正确，如果有重试策略，会不断重试，且状态不对
+
+Map<String, String> response = new HashMap<>(); response.put("success", "true");
+
+response.put("msg":"msg"); return response;
+
+}
+
+/**
+
+业务处理
+
+*/
+
+Map<String, String> response = new HashMap<>(); response.put("success", "true");
+
+response.put("msg", "xxxxxx");
+
+return response;
+
+}
+
+rpc 方式接入引入 pom 依赖
+
+com.yonyou.iuap
+
+iuap-2nd-party
+
+6.3.0-RELEASE
+
+com.yonyou.iuap
+
+iuap-event-rpc
+
+接收方 rpc 方式 demo
+
+//需要实现的接口： com.yonyou.iuap.event.rpc.IEventReceiveService; public class DemoEventReceiveServiceImpl implements
+
+IEventReceiveService{
+
+@Override
+
+public String onEvent(BusinessEvent businessEvent, String queueName) throws BusinessException {
+
+// 幂等处理
+
+if (已处理过) {
+
+// 此处不要抛出异常，否则会导致事件中心状态不正确，如果有重试策略，会不断重试，且状态不对
+
+return StringResponseUtil.success("ok");
+
+}
+
+//业务处理
+
+return StringResponseUtil.success("ok");
+
+}
+
+}
+
+第五章 典型业务场景介绍
+流程产品使用事件
+事件中心接入
+
+事件中心接入需要处理几个方面：
+
+一、事件发送方：在事件中心注册事件源和事件类型；需要依赖事件的 sdk；发送事件到本地事件库；部署 EOS
+
+二、事件监听方：实现监听接口，注册到事件中心，事件监听方需要实现幂等，事件中心不能 保证不重复调用.
+
+专属化环境：https://example.yyuap.com/iuap-apcom-event/event-center/#/
+
+详情如下：
+
+引入 maven 依赖
+
+com.yonyou.iuap
+
+iuap-event-rpc
+
+2.6.0-RELEASE
+
+ *           *                1. 发送事件 demo
+
+
+import com.yonyou.iuap.event.rpc.IEventSendService；
+
+@Resource
+
+private IEventSendService eventSendService;
+
+BusinessEventBuilder businessEventBuilder
+
+= new BusinessEventBuilder(); businessEventBuilder.setSourceId("APPLICATION"); businessEventBuilder.setEventType("CREATE_APPLICATION"); Object businessObject = new HashMap<>(); businessEventBuilder.setUserObject(businessObject); businessEventBuilder.setTenantCode("");
+
+//如果需要租户默认 token，tenantCode 要传入 yht 租户 id
+
+BusinessEvent businessEvent = businessEventBuilder.build();
+
+// 多数据中心支持，如果事件还需要分发给租户，则将租户租户信息
+
+businessEvent.getTenantIds().add("tenantId1"); businessEvent.getTenantIds().add("tenantId2");
+
+businessEvent.getTenantIds().add("tenantId3");
+
+eventSendService.sendEvent(businessEvent);
+
+事件发送（REST）：
+
+POST 接口地址：专属化环境：https://example.yyuap.com/event-pub/pub/rest/sendEvent
+
+请求体 - BusinessEvent 实体：
+
+{
+
+"eventType":"demo",
+
+"sourceID":"demo", "tenantCode":"cr2ru8x5",
+
+"userObject":"{"operation":"add","identityType":0,"tenantId":"c r2ru8x5","userIds":["406d8313-9a7a-4eb0-9426-56895b4b005a"]}",
+
+"uuid":"5d5ca9ff-2a7f-4210-93ea-2072e2dad999"
+
+// 多数据中心支持，如果事件还需要分发给租户，则将租户租户信息
+
+"tenantIds":"tenantId1,tenantId2,tenantId3";
+
+}
+
+加签方式 - AuthSdkClient
+发送事件 Demo
+
+@Test
+
+public void testSendEvent( ) throws BusinessException {
+
+BusinessEventBuilder businessEventBuilder
+
+= new BusinessEventBuilder(); businessEventBuilder.setSourceId("test"); businessEventBuilder.setEventType("test001"); Map<String, String> businessObject = new HashMap<>(); businessObject.put("key", "value"); businessEventBuilder.setUserObject(businessObject); businessEventBuilder.setTenantCode("");
+
+//如果需要租户默认 token，tenantCode 要传入 yht 租户 id
+
+BusinessEvent businessEvent = businessEventBuilder.build();
+
+// 多数据中心支持，如果事件还需要分发给租户，则将租户租户信息businessEvent.getTenantIds("tenantId1,tenantId2,tenantId3"); bus
+
+AuthSDKClient authSDKClient
+
+= new AuthSDKClient("", "**");
+
+HttpPost httpPost = new HttpPost("https://
+
+example.yyuap.com/event-pub/pub/rest/sendEvent");
+
+StringEntity stringEntity
+
+= new StringEntity(JSONObject.toJSONString(businessEvent), "UTF-8"
+
+);
+
+stringEntity.setContentEncoding("UTF-8"); stringEntity.setContentType("application/json");
+
+httpPost.setEntity(stringEntity);
+
+BasicHeader basicHeader
+
+= new BasicHeader("Content-Type", "application/json"); httpPost.setHeader(basicHeader);
+
+HttpResult execute = authSDKClient.execute(httpPost); Assert.assertEquals(200, execute.getStatusCode()); logger.info("return:{}", execute.getResponseString());
+
+}
+
+5.1.2.1 事件查询
+
+通过事件中可以查看自己监听的事件，步骤如下：
+
+1、进入事件中心注册地址，点击右上角【事件查询】按钮，如下图所示：
+
+https://example.yyuap.com/event-center/#/  2、输入完整的事件源或者事件类型，点击【搜索】即可，如下图所示
+
+【注意】现在事件中心还不支持模糊查询，请注意输入完成的事件源名或事件类型名！！！
+
+其他事件中心的使用和操作，请咨询事件中心的官方开发人员。
+
+流程开放的事件（开发阶段关注）
+
+接入事件中心流程事件，需要关注以下几个属性
+
+事件源
+事件类型
+
+这也是接入事件中心必须要素。
+
+根据目前产品现状及综合各领域需求，并结合目前事件中心提供的事件发送和监听机制，根据不同领域的服务应用编码（source）的不同来注册为不同的事件源，即实现服务应用的事件隔离。
+
+事件源（开发阶段关注）
+事件源分类
+ *           *                *                     *  根据流程里 source 来做事件发送的隔离；具体而言是领域的一个 souceId 会对应一个具体的事件源。
+      *  同一个 source，开放出以下 3 大类事件源
+
+任务事件源，事件源规范为 bpm_task_{source}
+节点事件源，事件源规范为 bpm_activity_{source}
+流程实例事件源，事件源规范为 bpm_process_{source}
+已注册生效的事件源列表
+
+【注意】【注意】【注意】重要事件说三遍!!！
+
+领域接入事件无需在流程中心登记注册，流程审批过程中任何（领域）source 的事件都会默认发送到事件中心。
+
+需要在事件中心注册自己领域（source）的事件，
+
+领域只需要去事件中心监听消费即可，这一步有领域开发来完成。
+
+  1. []()**事件源示例**
+
+事件源名称	事件源编码	所属应用
+活动节点人力云事件源	bpm_activity_hr_cloud	流程管理
+云流程人力云事件源	bpm_process_hr_cloud	流程管理
+任务人力云事件源	bpm_task_hr_cloud	流程管理
+任务 USMPEXP 事件源	bpm_task_USMPEXP	流程管理
+活动 USMPEXP 事件源	bpm_activity_USMPEXP	流程管理
+流程 USMPEXP 事件源	bpm_process_USMPEXP	流程管理
+事件类型（开发阶段关注）
+事件类型为流程（模型）定义里对应的标准事件名，即 end、complete、create 等
+不同的事件源的事件也不尽相同，请按照 bpm 规范选择合适事件进行监听
+
+例如：任务类事件源有 ***complete ***但没有 end，而流程、活动节点类事件源有 ***end ***但没有 complete
+
+需要开放更多的事件，请联系流程中心开发部相关人员具体说明如下：
+任务事件类型
+事件类型名称	事件类型编码	描述
+任务完成	complete	1、任务完成事件，事件体对象结构保持和原来一致
+		2、但没有 execution 对象，只有 task 对象
+		场景：审批组件同意时触发
+		业务调用 complete 任务接口
+任务创建	create	
+任务跳转	jump	
+撤回	withdraw	
+删除	delete	
+超时提醒	outtime	待验证
+
+【注意】上述的事件类型的前提是模型定义中要有相应的定义，这点请开发务必注意！
+
+模型定义里的事件清单
+
+对于一个任务而言，相对比较全的事件监听如下：
+
+<activiti:executionListener event="end" class="com.yonyou.bpm.listener.ActivityEndExecutionListener"/>
+
+<activiti:executionListener event="start" class="com.yonyou.bpm.listener.ActivityStartExecutionListener"/>
+
+<activiti:taskListener event="create" class="com.yonyou.bpm.message.defaultImpl.EsnMessageSendAdapter"/>
+
+<activiti:taskListener event="complete" class="com.yonyou.bpm.message.defaultImpl.EsnMessageSendAdapter"/>
+
+<activiti:taskListener event="jump" class="com.yonyou.bpm.message.defaultImpl.EsnMessageSendAdapter"/>
+
+<activiti:taskListener event="withdraw" class="com.yonyou.bpm.message.defaultImpl.EsnMessageSendAdapter"/>
+
+<activiti:taskListener event="outtime" class="com.yonyou.bpm.message.defaultImpl.EsnMessageSendAdapter"/>
+
+事件中心注册的事件类型
+
+环节（活动）事件类型
+
+流程（实例）事件类型
+事件类型名称	事件类型****编码	描述
+流程结束	end	1、流程结束事件，事件体保持和原先
+		一致，但不含 task 部分
+		2、流程的正向终审后会触发该事件，其中 deleteReason 为 null
+流程开始（提交）	start	暂时无需开放，目前各领域都是靠返回值来做业务处理的
+撤回流程（ 反提交）	deleteAll	**场景：发起人撤回单据流程（即反提交）， 会触发该事件， 其中返回值属性deleteReason 也为 deleteAll
+
+事件监听(验证、测试阶段关注)
+
+在事件中心管理页面，打开【数字化建模】》【流程管理】，找到自己对应的领域的事件源，例如下图是【流程任务友报账 ybz 事件源】
+
+注意：如果没有自己领域的事件源，说明没有在流程中心这里登记事件源，需要联系流程中心相关开发进行登记即可。
+
+查看事件监听
+
+如果没有增加过监听事件可以先参照【如何新增事件监听】
+
+专属化地址：https://example.yyuap.com/event-center/userRecord.html#/evertregist
+
+具体操纵步骤：
+找到对应的事件源
+在右侧事件类型列表中，找到对应的事件，例如任务 complete 事件
+在鼠标浮动菜单中点击【查看监听】，即可进入事件监听页面，如下图
+
+这里的事件接收地址，就是各个领域自行注册在事件中心的回调地址，事件的消费
+
+者
+
+新增事件监听
+
+第一次进入时，应该是空的，即没有对该事件进行监听，通过右上角的【新增】按钮进行新增即可。如下图所示：
+
+新增事件监听在使用上的疑问可以咨询事件中心负责人或开发。
+
+查看事件
+
+在事件中心管理页面点击右上角的【事件查询】，如下图
+
+进入事件查询页面后，可以录入相应的参数，进行搜索事件
+
+小技巧：
+
+在【事件内容】里通过录入 id，可以高效精确的查找相应的事件
+正常完整的事件记录会有 2 条记录，一个是流程发送事件记录，一个是领域消费事件记录，对应的事件状态为【进入】和【成功】
+
+ 
+
+第六章 开放接口说明
+
+事件中心对外提供加签调用方式，加签调用方式通过加签文件验证。
+
+加签调用接口
+
+内部模块通过 iris 调用到的接口
+
+RPC 发送事件
+
+接口：com.yonyou.iuap.event.rpc.IEventSendService 接口类型：rpc
+
+接口说明：事件中心对外 RPC 接口
+
+1) sendEvent
+
+方法说明：发送事件至事件中心请求参数：
+
+参数名称	参 数 类****型	参数说明	是否必填	示例值
+sourceID	String	事件源	true	
+eventType	String	事件类型	true	
+tenantCode	String	租户 id	false	
+userObject	Serializable	业务对象	true	
+uuid	String	id	false	
+响应参数：
+
+Void(异常时会抛出 BusinessException) 请求示例：
+
+BusinessEventBuilder businessEventBuilder = new BusinessEventBuilder();
+
+businessEventBuilder.setSourceId("APPLICATION"); businessEventBuilder.setEventType("CREATE_APPLICATION"); Object businessObject = new HashMap<>(); businessEventBuilder.setUserObject(businessObject); businessEventBuilder.setTenantCode("");
+
+BusinessEvent businessEvent = businessEventBuilder.build(); eventService.sendEvent(businessEvent);
+
+REST 发送事件
+
+接口：/pub/rest/sendEvent
+
+接口类型：post 请求，application/json 接口说明：发送事件至事件中心接口
+
+参数：
+
+请求体：BusinessEvent 对应 json。响应参数：
+
+参数名称	参数类型	参数说明	示例值
+Status	Int	状态码：1 成功，0	
+Msg	String	返回信息	
+请求示例：
+
+{
+
+}
+
+响应示例：
+
+{
+
+"eventType":"demo",
+
+"sourceID":"demo", "tenantCode":"cr2ru8x5", "userObject":"{"key":"value"}",
+
+"uuid":"5d5ca9ff-2a7f-4210-93ea-2072e2dad999"
+
+"status":1,
+
+"msg":"发送事件成功."
+
+}
+
+异常示例：
+
+{
+
+"status":0,
+
+"msg":"发送至 mq 时发生异常：."
+
+}
+
+RPC 注册事件类型
+
+接口：com.yonyou.iuap.event.rpc.IEventManageService 接口类型：rpc
+
+接口说明：注册事件类型
+
+方法：void createEventType(EventTypeVO eventTypeVO) 方法说明：创建一个新的事件类型
+
+方法：void saveEventType(EventTypeVO eventTypeVO) 方法说明：保存事件类型
+
+请求参数： EventTypeVO：
+
+参数名称	参 数 类****型	参数说明	是否必填	示例值
+sourceId	String	事件源主键	是	
+sourceName	String	事件源名称	是	
+eventTypeCode	String	事件类型编码	是	
+eventTypeName	String	事件类型名称	是	
+eventTypeDesc	String	事件类型描述	是	
+wikiLink	String	关联 wiki	是	
+eventDetai lDesc	String	事件体描述	是	
+eventDemo	String	事件体示例	是	
+sourceName 2～sourceName6	String	事件源名称多语字段	是	
+sourceNameExt	String	事件源名称多语扩展字段	是	
+eventTypeN ame2～6	String	事件类型名称多语字段	是	
+eventTypeN ameExt	String	事件类型名称多语扩展字段	是	
+eventDetai lDesc2 ～ eventDetailDes c6	String	事件描述多语字段	是	
+eventDetai lDescExt	String	事件描述多语扩展字段	是	
+creator	String	创建人	是	
+creatorName	String	创建人名称	是	
+createTime	String	创建时间	是	
+modifier	String	最后修改人	是	
+modifierName	String	最后修改人名称	是	
+modifiedTime	String	最后修改时间	是	
+tenantId	String	租户 Id	否	
+sortType	Integer	排 序方 式: 0-无序，1-事件源有序，2-事件类型有序	否	
+orderRule	String	排序规则	否	
+listeners	List	有序事件监听	否	
+响应参数：
+
+Void(异常时会抛出 BusinessException)
+
+REST 注册事件类型
+
+接口：event-pub/pub/rest/createEventType 接口类型：post 请求，application/json 接口说明：注册事件类型
+
+参数：
+
+EventTypeVO 对应 json
+
+响应参数：
+
+参数名称	参数类型	参数说明	示例值
+Status	Int	状态码：1 成功，0	
+data	String	创建事件类型成功	
+Msg	String	返回信息	
+RPC 注册订阅
+
+接口：com.yonyou.iuap.event.rpc.IEventManageService 接口类型：rpc
+
+接口说明：注册订阅
+
+方 法 ： void createEventListener(EventListenerVO eventListenerVO) throws BusinessException
+
+方法说明：创建一个新的订阅
+
+方 法 ： void saveEventListener(EventListenerVO eventListenerVO) throws BusinessException
+
+方法说明：保存订阅
+
+**请 求 参 数 **： EventListenerVO：
+
+参数名称	参 数类型	参数说明	是否必填	示例值
+sourceId	String	事件源主键	是	
+eventTyp eCode	String	事件类型编码	是	
+listener Name	String	订阅名称	是	
+nodeCode	String	节点编码	是	
+listenerUrl	String	订阅地址	是	
+emails	String	报警邮箱	是	
+nodeCons umer	String	调用方式	是	
+receiveS trategy	String	重试策略	是	
+userId	String	用户	是	
+listener Name2～6	String	订阅名称多语字段	是	
+listener NameExt	String	订阅名称多语扩展字段	是	
+rateLimit	int	限流参数	是	
+creator	String	创建人	是	
+creatorName	String	创建人名称	是	
+createTime	String	创建时间	是	
+modifier	String	最后修改人	是	
+modifier Name	String	最后修改人名称	是	
+modified Time	String	最后修改时间	是	
+tenantId	String	租户 id	否	
+category Code	String	分类编码	否	
+needSort	Boolean	是否有序	否	
+响应参数：
+
+Void(异常时会抛出 BusinessException)
+
+REST 注册订阅
+
+接口：event-pub/pub/rest/createListener 接口类型：post 请求，application/json 接口说明：注册订阅
+
+参数：
+
+EventListenerVO 对应 json
+
+响应参数：
+参数名称	参数类型	参数说明	示例值
+Status	Int	状态码：1 成功，0	
+data	String	创建订阅成功	
+Msg	String	返回信息	
+
+请求示例：
+
+通过 authsdk 进行验签demo：
+
+@Test
+
+public void testCreateEventListener( ) {
+
+EventListenerVO eventListenerVO = new EventListenerVO(); eventListenerVO.setSourceId("demo"); eventListenerVO.setEventTypeCode("demo"); eventListenerVO.setNodeCode("test_1026"); eventListenerVO.setListenerName("test_1026"); eventListenerVO.setListenerUrl("www.hahaha.com"); eventListenerVO.setEmails("dingbinhahaha@yonyou.com");
+
+String jsonString = JSONObject.toJSONString(eventListenerVO);
+
+AuthSDKClient authSDKClient = new AuthSDKClient("tasz0ERoG9kqUJnH", "uxCZVKuLInq1ep8OwiMGFN9MpWlhY7");
+
+HttpPost httpPost = new HttpPost("http://uastest.yyuap.com/event-pub/pub/rest/createListener");
+
+StringEntity stringEntity = new StringEntity(jsonString, "UTF-8");
+
+stringEntity.setContentEncoding("UTF-8"); stringEntity.setContentType("application/json"); httpPost.setEntity(stringEntity);
+
+BasicHeader basicHeader = new BasicHeader("Content-Type", "application/json");
+
+httpPost.setHeader(basicHeader);
+
+HttpResult execute = authSDKClient.execute(httpPost); Assert.assertEquals(200, execute.getStatusCode()); logger.info("return:{}", execute.getResponseString());
+
+}
+
+提供REST 订阅接口
+
+接口规范：
+
+传入参数: sourceID,eventType,userObject,queueName,tenantCode.
+返回值：json 中 success 值为字符串 true，表示成功。其他均是失败。
+订阅接口实现示例： @ResponseBody
+
+@RequestMapping(value = "/***", method = RequestMethod.POST) public Object getErrorRecord(HttpServletRequest request) {
+
+String sourceID = request.getParameter("sourceID"); String eventType = request.getParameter("eventType"); String userObject = request.getParameter("userObject"); String queueName = request.getParameter("queueName"); String tenantCode = request.getParameter("tenantCode");
+
+/**
+
+业务处理
+
+*/
+
+Map<String, String> response = new HashMap<>();
+
+response.put("success", "true"); return response;
+
+}
+
+注意：
+
+如果订阅方是基于 MDD 框架，则 rest 接口需要传 token，所以传入参数会略有不同：
+
+sourceID,eventType,userObject,queueName,tenantId,id,yht_access_token.
+
+提供RPC 订阅接口
+添加依赖：
+
+com.yonyou.iuap
+
+iuap-event-rpc
+
+2.2.0-RELEASE
+
+实现接口： 需要实现的接口：
+
+com.yonyou.iuap.event.rpc.IEventReceiveService; 方法说明：
+
+/** * rpc 接收事件方法 * @param businessEvent 事件中心业务对象 * @param queueName 队列 名 * @return 成 功 ：{"success":"true"}， 失 败 ：{"success":"false"} * @throws BusinessException */
+
+String onEvent(BusinessEvent businessEvent, String queueName) throws BusinessException;
+
+声明 rpc 接口：
+
+2.3.1 版本： @Bean
+
+public RemoteCallInfo initApplicationSearchService(){ RemoteCallInfo rci = new RemoteCallInfo(); rci.setClassName(IEventReceiveService.class.getName()); rci.setAppCode("iuap-event-server"); rci.setNameSpace("9194af05-6466-4f8c-8c41-40768e0ee4f5");
+
+RemoteCallInfoManagerService.regRemoteCall(rci); return rci;
+
+}
+
+5.0.0 版本： @Bean
+
+public RemoteCallInfo initApplicationSearchService(){ RemoteCallInfo rci = new RemoteCallInfo(); rci.setAppCode("iuap-event-server"); rci.setNameSpace("9194af05-6466-4f8c-8c41-40768e0ee4f5"); rci.setClassName(IEventReceiveService.class.getName());
+
+MwLocator.lookup(IRemoteCallInfoManagerService.class).regRemoteCall(rci); return rci;
+
+}
+
+异步回调接口
+
+事件订阅支持异步接口，事件中心提供了异步回调接口，支持 rest 和 rpc 两种： 一、REST
+
+接口地址：event-pub/pub/rest/asyncCallBack
+
+接口类型：POST 请求，Content-Type:application/json 参数：json，EventAsyncResultVO 对应 json。
+
+返回值：
+
+成功：
+
+{"status":1,"data":"操作成功。"} 失败：
+{"status":0,"msg":"操作失败。"}
+
+EventAsyncResultVO：
+
+属性	类型	必填	备注
+success	boolean	是	是否成功
+msg	String	否	返回信息
+needRetry	boolean	是	是否需要重试
+eventId	String	是	事件 ID
+
+二、RPC）
+
+接 口 ：com.yonyou.iuap.event.rpc.IEventCallBackService 方法：
+
+/**
+
+异步事件回调处理 service
+
+@param eventAsyncResult
+
+*/
+
+void callBack(EventAsyncResultVO eventAsyncResult) throws Exception;
+
+拉取模式拉取事件
+
+一、REST
+
+接口地址：/event-center /pull/pullMessage
+
+接口类型：POST 请求，Content-Type:application/json 参数：
+
+参数名称	参数类型	参数说明	示例值
+size	Int	拉取事件数量	
+sourceId	String	事件源 id	
+eventTypeCode	String	事件类型 code	
+nodeCode	String	监听节点编码	
+
+返回值：{"status":1,"count":1} status 1 为成功 0 为失败 count 成功拉取的条数成功：
+
+{"status":1," count":"1"} 失败：
+
+{"status":0,"msg":"操作失败。"}
+
+二、RPC
+
+接口：com.yonyou.iuap.event.rpc.IEventPullService
+
+方法：
+
+/**
+
+取的条数
+
+拉取模式拉取事件
+@param size 拉取事件数量
+@param sourceID 事件源 id
+@param eventTypeCode 事件类型 code
+@param nodeCode 监听节点编码
+@return {"status":1,"size":1} status 1 为成功 0 为失败 size 成功拉
+
+*/
+
+Map pullMessage(int size, String sourceID, String eventTypeCode, String nodeCode);
+
+使用EOS 发送本地事件
+引入 maven 依赖
+
+com.yonyou.iuap
+
+iuap-event-sdk
+
+2.2.0-RELEASE
+
+发送事件 demo
+
+BusinessEventBuilder businessEventBuilder = new BusinessEventBuilder(); businessEventBuilder.setSourceId("APPLICATION"); businessEventBuilder.setEventType("CREATE_APPLICATION");
+
+Object businessObject = new HashMap<>(); businessEventBuilder.setUserObject(businessObject); businessEventBuilder.setTenantCode("");
+
+BusinessEvent businessEvent = businessEventBuilder.build(); MQSendSuccessPO mqSendSuccessPO =
+
+EventUtil.buildMQSendSuccessPO(businessEvent); mqSendSuccessPO.setExtone("扩展字段 1")
+
+mqSendSuccessPO.setExttwo("扩展字段 2")
+
+//eventService 是 EventService 的实例。eventSendService.fireLocalEvent(mqSendSuccessPO);
+
+事件类属性介绍
+
+BusinessEvent 的创建及属性意义
+属性	非空	意义
+sourceId	true	事件源
+eventType	true	事件类型
+userObject	true	业务对象
+tenantCode	false	租户 id
+
+ps:事件源和事件类型必须是已注册的，否则发送时会报错。
+
+文档内容是否对您有所帮助？
+为帮助文档评分：
+页内目录
+1. 本文摘要
+2. 第一章 基本概念
+2.1 背景
+2.2 产品亮点
+3. 第二章 技术架构
+3.1 总体架构设计
+3.2 关键技术
+3.2.1 事件推送的三种模式及记录
+3.2.2 有序事件
+3.2.3 消息拉取
+3.2.4 消息精简
+3.2.5 消息忽略
+3.2.6 重试策略
+3.2.7 用户态事件消费状态查询
+4. 第三章 功能介绍
+4.1 功能
+4.1.1 注册事件类型
+4.1.2 注册事件订阅
+4.1.3 事件查询
+5. 第四章 开发示例
+5.1 发送方接入
+5.1.1 事件中心页面注册事件源，事件类型
+5.1.2 自身业务代码中实现发送事件的方式（rpc rest eos 三种方式）
+5.1.3 注意事项
+5.2 接收方接入
+5.2.1 事件中心页面注册事件监听
+5.2.2 自身业务代码中实现接收事件的方式（rpc rest 两种方式）
+6. 第五章 典型业务场景介绍
+6.1 流程产品使用事件
+6.1.1 事件中心接入
+6.1.2 流程开放的事件（开发阶段关注）
+6.1.3 事件源（开发阶段关注）
+6.1.4 事件类型（开发阶段关注）
+6.1.5 流程（实例）事件类型
+6.1.6 事件监听(验证、测试阶段关注)
+6.1.7 查看事件
+7. 第六章 开放接口说明
+7.1 加签调用接口
+7.1.1 RPC 发送事件
+7.1.2 REST 发送事件
+7.1.3 RPC 注册事件类型
+7.1.4 REST 注册事件类型
+7.1.5 RPC 注册订阅
+7.1.6 REST 注册订阅
+7.1.7 提供REST 订阅接口
+7.1.8 提供RPC 订阅接口
+7.1.9 异步回调接口
+7.1.10 拉取模式拉取事件
+7.1.11 使用EOS 发送本地事件
+文档反馈
+北京市海淀区北清路68号用友产业园
+4006-600-588
+友情链接
+用友官网用友YonHelp用友iuap平台用友云市场用友云注册协议隐私条款
+
+Copyright ©2020 用友网络科技股份有限公司版权所有京ICP备05007539号-24京公网安备11010802021935号
+
+返回顶部
+加载中...

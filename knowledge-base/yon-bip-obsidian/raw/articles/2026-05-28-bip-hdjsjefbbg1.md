@@ -1,0 +1,529 @@
+R6后端脚手架二方包坐标变更清单
+最后更新时间：2024-09-25
+概述
+适用场景
+部署方案	开发类型	是否适用
+公有云	客户化定制开发	否
+私有云	客户化定制开发	是
+专属云	客户化定制开发	否
+公有云	ISV生态开发	否
+私有云	ISV生态开发	是
+专属云	ISV生态开发	否
+业务场景
+
+简强架构下，平台对二方包进行了精简治理，二方包坐标发生了变化，同时内部一些方法也进行了升级改造。
+
+本文提供平台常用二方包精简后的变更清单，项目可根据实际使用情况来进行检查及替换。
+
+全平台及领域的二方包精简治理可参考以下链接：
+
+yonbip-2nd-parent二方包精简治理详细文档
+
+关键词
+
+简强架构
+
+二方包精简治理
+
+yonbip-2nd-parent
+
+二三方包坐标清单
+
+全平台及领域的二方包精简治理可参考以下链接：
+
+yonbip-2nd-parent二方包精简治理详细文档
+
+以下主要列出与客开相关紧密的开发平台的主要变更内容。
+
+开发平台
+元数据
+涉及到的api变更
+
+org.imeta.core.utils.MetadataPropertyUtil里部分方法删除，在org.imeta.orm.util.IMetaPropertyUtil里有对应的方法。
+
+对应的坐标
+
+分组	旧的groupId	旧的artifactId	新的groupId	新的artifactId
+元数据	org.imeta	imeta-core	com.yonyou.iuap	iuap-ap-metadata-starter
+** **公式/编码规则
+涉及到的api变更
+类变更
+包名	类名	更改方式	备注
+bPaaS_formula-core	SpringContextHolder	删除	不再提供基于spring的beanutil工具
+DependentBeanUtils	删除	不再维护单独的spring的bean工具类
+com.yonyou.iuap.formula.service.impl.FormulaServiceImpl	增加显示构造函数	不允许直接new出来，使用注入方式使用FormulaService接口实例
+FormulaUpgradeUtils	删除	特征升级使用工具类，未使用代码
+IrisReferenceUtil	删除	不再提供基于iris的beanutil工具，直接注入FormulaService
+OkHttpUtil	删除	不再对外单独提供httputil工具类
+RegularJsonUtils	删除	内部使用工具类，不再提供
+CustomFunctionUtil	删除	内部管局类,不再对外提供
+FormulaEngine	里面的方法不对外提供	使用FormulaService注入的方式替换原有功能
+iuap-ap-log-sdk	BusinessException	删除	不再对外提供异常类，有使用到的换成自己的异常
+iuap-billcode-domain	BillCodeMappingConfUtils	移到iuap-ap-billcode-impl	不再是工具类，作为bean直接注入
+iuap-billcode-common	SpringContextUtil	删除	不再提供基于spring的beanutil工具
+对应坐标
+分组	旧groupId	旧artifactId	新artifactId	新groupId
+公式	com.yonyou.iuap	bPaaS_formula-api	iuap-ap-formula-api	com.yonyou.iuap
+com.yonyou	antlr4-yonyou-runtime	iuap-ap-formula-impl	com.yonyou.iuap
+com.yonyou.iuap	bPaaS_formula-core	com.yonyou.iuap
+com.yonyou.iuap	bPaaS_formula-support	com.yonyou.iuap
+com.diwork.intelliv	formula(intelliv)	com.yonyou.iuap
+com.diwork.intelliv	formula-bpaas-adapter(intelliv)	com.yonyou.iuap
+com.yonyou.iuap	bPaaS_formula-starter	iuap-ap-formula-starter	com.yonyou.iuap
+编码规则	com.yonyou.iuap	iuap-billcode-sdk	iuap-ap-billcode-api	com.yonyou.iuap
+com.yonyou.iuap	iuap-bilcode-common	iuap-ap-billcode-impl	com.yonyou.iuap
+com.yonyou.iuap	iuap-billcode-core	com.yonyou.iuap
+com.yonyou.iuap	iuap-billcode-domain	com.yonyou.iuap
+com.yonyou.iuap	iuap-billcode-component	iuap-ap-billcode-starter	com.yonyou.iuap
+** **Ui模版
+涉及到的api变更
+废弃包
+
+UI模板废弃包：iuap-metadata-ui-translate, 此包用于历史版本的公式SDK使用，用于通过UI元数据服务查询领域服务业务数据
+
+废弃方法
+类名	修改方案
+UnifiedUiModelDaoBizItf.queryVM4Query	UnifiedUiModelDaoBizItf.queryVM4QueryByParam
+UnifiedMetaBizItf.findAllOrOneBillContext	UnifiedMetaBizItf.findAllOrOneBillContextNew
+删除类
+类名	修改方案
+com.yonyou.iuap.uimeta.sdk.unified.svc.context.UnifiedUiMetaContext	无，自行重构
+com.yonyou.yonbuilder.uimeta.mdf.unified.service.impl.context.UiMetaUnifiedUiMetaContext	无，自行重构
+com.yonyou.yonbuilder.uimeta.mdf.unified.util.MdfUnifiedRedisCacheUtil	可以使用UiMetaCombineCommonAdaptor
+变更类
+类型	改动前类	改动后类
+接口	com.yonyou.iuap.uimeta.sdk.unified.itf.UnifiedBillMetaBizItf	com.yonyou.yonbuilder.uimeta.mdf.unified.itf.UiMetaUnifiedBillMetaBizItf
+com.yonyou.iuap.uimeta.sdk.unified.itf.UnifiedBillMetaDaoBizItf	com.yonyou.yonbuilder.uimeta.mdf.unified.itf.UiMetaUnifiedBillMetaDaoBizItf
+com.yonyou.iuap.uimeta.sdk.unified.itf.UnifiedFilterBizItf	com.yonyou.yonbuilder.uimeta.mdf.unified.itf.UiMetaUnifiedFilterBizItf
+com.yonyou.iuap.uimeta.sdk.unified.itf.UnifiedItemRuleBizItf	com.yonyou.yonbuilder.uimeta.mdf.unified.itf.UiMetaUnifiedItemRuleBizItf
+com.yonyou.iuap.uimeta.sdk.unified.itf.UnifiedJointQueryBizItf	com.yonyou.yonbuilder.uimeta.mdf.unified.itf.UiMetaUnifiedJointQueryBizItf
+com.yonyou.iuap.uimeta.sdk.unified.itf.UnifiedMetaBizItf	com.yonyou.yonbuilder.uimeta.mdf.unified.itf.UiMetaUnifiedMetaBizItf
+com.yonyou.iuap.uimeta.sdk.unified.itf.UnifiedOptionBizItf	com.yonyou.yonbuilder.uimeta.mdf.unified.itf.UiMetaUnifiedOptionBizItf
+com.yonyou.iuap.uimeta.sdk.unified.itf.UnifiedPrintBoTransBizItf	com.yonyou.yonbuilder.uimeta.mdf.unified.itf.UiMetaUnifiedPrintBoTransBizItf
+com.yonyou.iuap.uimeta.sdk.unified.itf.UnifiedRefBizItf	com.yonyou.yonbuilder.uimeta.mdf.unified.itf.UiMetaUnifiedRefBizItf
+com.yonyou.iuap.uimeta.sdk.unified.itf.UnifiedReportSubscriptionBizItf	com.yonyou.yonbuilder.uimeta.mdf.unified.itf.UiMetaUnifiedReportSubscriptionBizItf
+com.yonyou.iuap.uimeta.sdk.unified.itf.UnifiedRuleRegisterMapperDaoBizItf	com.yonyou.yonbuilder.uimeta.mdf.unified.itf.UiMetaUnifiedRuleRegisterMapperDaoBizItf
+com.yonyou.iuap.uimeta.sdk.unified.itf.UnifiedRuleRegisterServiceBizItf	com.yonyou.yonbuilder.uimeta.mdf.unified.itf.UiMetaUnifiedRuleRegisterServiceBizItf
+com.yonyou.iuap.uimeta.sdk.unified.itf.UnifiedSqlHelperBizItf	com.yonyou.yonbuilder.uimeta.mdf.unified.itf.UiMetaUnifiedSqlHelperBizItf
+com.yonyou.iuap.uimeta.sdk.unified.itf.UnifiedTenantBizItf	com.yonyou.yonbuilder.uimeta.mdf.unified.itf.UiMetaUnifiedTenantBizItf
+com.yonyou.iuap.uimeta.sdk.unified.itf.UnifiedUiModelDaoBizItf	com.yonyou.yonbuilder.uimeta.mdf.unified.itf.UiMetaUnifiedUiModelDaoBizItf
+com.yonyou.iuap.uimeta.sdk.unified.adpter.UnifiedUiMetaCommonAdaptor;	com.yonyou.yonbuilder.uimeta.mdf.unified.itf.adaptor.UiMetaUnifiedCommonAdaptor
+服务Bean	com.yonyou.iuap.uimeta.sdk.unified.svc.UnifiedBillMetaBizSvc	com.yonyou.yonbuilder.uimeta.mdf.unified.service.impl.UiMetaUiMetaUnifiedFilterBizSvc
+com.yonyou.iuap.uimeta.sdk.unified.svc.UnifiedBillMetaDaoBizSvc	com.yonyou.yonbuilder.uimeta.mdf.unified.service.impl.UiMetaUnifiedBillMetaBizSvc
+com.yonyou.iuap.uimeta.sdk.unified.svc.UnifiedFilterBizSvc	com.yonyou.yonbuilder.uimeta.mdf.unified.service.impl.UiMetaUnifiedBillMetaDaoBizSvc
+com.yonyou.iuap.uimeta.sdk.unified.svc.UnifiedItemRuleBizSvc	com.yonyou.yonbuilder.uimeta.mdf.unified.service.impl.UiMetaUnifiedItemRuleBizSvc
+com.yonyou.iuap.uimeta.sdk.unified.svc.UnifiedJointQueryBizSvc	com.yonyou.yonbuilder.uimeta.mdf.unified.service.impl.UiMetaUnifiedJointQueryBizSvc
+com.yonyou.iuap.uimeta.sdk.unified.svc.UnifiedMetaBizSvc	com.yonyou.yonbuilder.uimeta.mdf.unified.service.impl.UiMetaUnifiedMetaBizSvc
+com.yonyou.iuap.uimeta.sdk.unified.svc.UnifiedOptionBizSvc	com.yonyou.yonbuilder.uimeta.mdf.unified.service.impl.UiMetaUnifiedOptionBizSvc
+com.yonyou.iuap.uimeta.sdk.unified.svc.UnifiedPreparedSqlCheckSvc	com.yonyou.yonbuilder.uimeta.mdf.unified.service.impl.UiMetaUnifiedPreparedSqlCheckSvc
+com.yonyou.iuap.uimeta.sdk.unified.svc.UnifiedPrintBoTransBizSvc	com.yonyou.yonbuilder.uimeta.mdf.unified.service.impl.UiMetaUnifiedPrintBoTransBizSvc
+com.yonyou.iuap.uimeta.sdk.unified.svc.UnifiedRefBizSvc	com.yonyou.yonbuilder.uimeta.mdf.unified.service.impl.UiMetaUnifiedRefBizSvc
+com.yonyou.iuap.uimeta.sdk.unified.svc.UnifiedReportSubscriptionBizSvc	com.yonyou.yonbuilder.uimeta.mdf.unified.service.impl.UiMetaUnifiedReportSubscriptionBizSvc
+com.yonyou.iuap.uimeta.sdk.unified.svc.UnifiedRuleRegisterMapperDaoBizSvc	com.yonyou.yonbuilder.uimeta.mdf.unified.service.impl.UiMetaUnifiedRuleRegisterMapperDaoBizSvc
+com.yonyou.iuap.uimeta.sdk.unified.svc.UnifiedRuleRegisterServiceBizSvc	com.yonyou.yonbuilder.uimeta.mdf.unified.service.impl.UiMetaUnifiedRuleRegisterServiceBizSvc
+com.yonyou.iuap.uimeta.sdk.unified.svc.UnifiedSqlHelperBizSvc	com.yonyou.yonbuilder.uimeta.mdf.unified.service.impl.UiMetaUnifiedSqlHelperBizSvc
+com.yonyou.iuap.uimeta.sdk.unified.svc.UnifiedTenantBizSvc	com.yonyou.yonbuilder.uimeta.mdf.unified.service.impl.UiMetaUnifiedTenantBizSvc
+com.yonyou.iuap.uimeta.sdk.unified.svc.UnifiedUiModelDaoBizSvc	com.yonyou.yonbuilder.uimeta.mdf.unified.service.impl.UiMetaUnifiedUiModelDaoBizSvc
+com.yonyou.iuap.uimeta.sdk.unified.svc.userdefine.UnifiedUserDefineGroupService	com.yonyou.yonbuilder.uimeta.mdf.unified.service.impl.userdefine.UiMetaUnifiedUserDefineGroupService
+com.yonyou.iuap.uimeta.sdk.unified.svc.multilang.UnifiedAbstractMlDataService	com.yonyou.yonbuilder.uimeta.mdf.unified.service.impl.multilang.UiMetaUnifiedAbstractMlDataService
+com.yonyou.iuap.uimeta.sdk.unified.svc.multilang.UnifiedMultiLangForUiMetaService	com.yonyou.yonbuilder.uimeta.mdf.unified.service.impl.multilang.UiMetaUnifiedMultiLangForUiMetaService
+com.yonyou.iuap.uimeta.sdk.unified.svc.multilang.ui.itemset.UnifiedItemSetMlDataService	com.yonyou.yonbuilder.uimeta.mdf.unified.service.impl.multilang.ui.itemset.UiMetaUnifiedItemSetMlDataService
+com.yonyou.iuap.uimeta.sdk.unified.svc.multilang.ui.va.UnifiedContainerMlDataService	com.yonyou.yonbuilder.uimeta.mdf.unified.service.impl.multilang.ui.va.UiMetaUnifiedContainerMlDataService
+com.yonyou.iuap.uimeta.sdk.unified.svc.multilang.ui.va.UnifiedControlMlDataService	com.yonyou.yonbuilder.uimeta.mdf.unified.service.impl.multilang.ui.va.UiMetaUnifiedControlMlDataService
+com.yonyou.iuap.uimeta.sdk.unified.svc.multilang.ui.va.UnifiedViewApplicationMlDataService	com.yonyou.yonbuilder.uimeta.mdf.unified.service.impl.multilang.ui.va.UiMetaUnifiedViewApplicationMlDataService
+com.yonyou.iuap.uimeta.sdk.unified.svc.multilang.ui.va.UnifiedViewMlDataService	com.yonyou.yonbuilder.uimeta.mdf.unified.service.impl.multilang.ui.va.UiMetaUnifiedViewMlDataService
+com.yonyou.iuap.uimeta.sdk.unified.svc.multilang.ui.vm.UnifiedActionMlDataService	com.yonyou.yonbuilder.uimeta.mdf.unified.service.impl.multilang.ui.vm.UiMetaUnifiedActionMlDataService
+com.yonyou.iuap.uimeta.sdk.unified.svc.multilang.ui.vm.UnifiedEntityMlDataService	com.yonyou.yonbuilder.uimeta.mdf.unified.service.impl.multilang.ui.vm.UiMetaUnifiedEntityMlDataService
+com.yonyou.iuap.uimeta.sdk.unified.svc.multilang.ui.vm.UnifiedFieldMlDataService	com.yonyou.yonbuilder.uimeta.mdf.unified.service.impl.multilang.ui.vm.UiMetaUnifiedFieldMlDataService
+com.yonyou.iuap.uimeta.sdk.unified.svc.multilang.ui.vm.UnifiedViewModelMlDataService	com.yonyou.yonbuilder.uimeta.mdf.unified.service.impl.multilang.ui.vm.UiMetaUnifiedViewModelMlDataService
+com.yonyou.iuap.uimeta.sdk.unified.svc.multilang.ref.UnifiedRefEntityMulDataService	com.yonyou.yonbuilder.uimeta.mdf.unified.service.impl.multilang.ref.UiMetaUnifiedRefEntityMulDataService
+com.yonyou.iuap.uimeta.sdk.unified.svc.multilang.filter.UnifiedFilterItemMulDataService	com.yonyou.yonbuilder.uimeta.mdf.unified.service.impl.multilang.filter.UiMetaUnifiedFilterItemMulDataService
+com.yonyou.iuap.uimeta.sdk.unified.svc.multilang.filter.UnifiedSolutionMulDataService	com.yonyou.yonbuilder.uimeta.mdf.unified.service.impl.multilang.filter.UiMetaUnifiedSolutionMulDataService
+com.yonyou.iuap.uimeta.sdk.unified.svc.fieldauth.UnifiedFieldAuthForUIMetaService	com.yonyou.yonbuilder.uimeta.mdf.unified.service.impl.fieldauth.UiMetaUnifiedFieldAuthForUIMetaService
+com.yonyou.iuap.uimeta.sdk.unified.svc.context.UnifiedUiMetaContext	com.yonyou.yonbuilder.uimeta.mdf.unified.service.impl.context.UiMetaUnifiedUiMetaContext
+常量	com.yonyou.iuap.uimeta.sdk.unified.common.util.UiMetaConst	com.yonyou.yonbuilder.uimeta.mdf.unified.consts.UiMetaConst
+对应坐标
+分组	旧groupId	旧artifactId	新artifactId	新groupId
+UI模板	com.yonyou.iuap	uimeta-basic	iuap-ap-uimeta-api	com.yonyou.iuap
+com.yonyou.iuap	uimeta-common	iuap-ap-uimeta-impl	com.yonyou.iuap
+com.yonyou.iuap	iuap-metadata-ui-basic	iuap-ap-uimeta-api	com.yonyou.iuap
+com.yonyou.iuap	iuap-metadata-ui-common	iuap-ap-uimeta-starter	com.yonyou.iuap
+com.yonyou.iuap	iuap-metadata-ui-sdk	iuap-ap-uimeta_mdd-starter	com.yonyou.iuap
+** **MDD框架
+涉及到的api变更
+删除
+类名	代替方式
+com.yonyou.ucf.mdd.core.http.HttpsRequest	正常方法替换为com.yonyou.ucf.mdd.advanced.http.service.YmsHttpClientService(需注入)中的同名方法，之前已经打过废弃标签的方法，找到相同能力的方法进行替换
+com.yonyou.ucf.mdd.core.http.HttpsRequestClientSpi
+com.yonyou.ucf.mdd.core.http.HttpsRequestFactory
+com.yonyou.ucf.mdd.core.http.ResultEntity
+com.yonyou.ucf.mdd.core.http.SSLClient
+com.yonyou.ucf.mdd.ext.util.http.HttpsRequest
+com.yonyou.ucf.mdd.ext.util.http.SSLClient
+框架废弃类
+
+一般不会有使用下面的废弃类，如果有，请联系框架说明使用原因以及提供替代方案。
+
+com.yonyou.ucf.mdd.ext.util.Langkit
+com.yonyou.ucf.mdd.ext.util.operationlog.OperationLog
+com.yonyou.ucf.mdd.ext.util.http.MultilThreadRequest
+com.yonyou.ucf.mdd.ext.sys.service.SmsService
+com.yonyou.ucf.mdd.ext.util.WeChatLoginUtils
+com.yonyou.ucf.mdd.ext.robot.service.RobotService
+com.yonyou.ucf.mdd.ext.robot.service.impl.RobotServiceImpl
+com.yonyou.ucf.mdd.ext.robot.controller.RobotController
+com.yonyou.ucf.mdd.ext.robot.util.RobotResponseUtils
+com.yonyou.ucf.mdd.ext.robot.util.RobotUtils
+com.yonyou.ucf.mdd.ext.bill.meta.loader.ViewModelLoaderReConstruct
+com.yonyou.ucf.mdd.ext.bill.service.AssistService
+com.yonyou.ucf.mdd.ext.bill.service.StatusService
+com.yonyou.ucf.mdd.ext.bill.controller.UnitTestController
+com.yonyou.ucf.mdd.ext.bill.meta.service.BillMetaServiceUtils
+com.yonyou.ucf.mdd.ext.bill.dao.StatusDAO
+com.yonyou.ucf.mdd.ext.bill.dao.StatusDAOImpl
+com.yonyou.ucf.mdd.ext.bill.dao.StatusItemDAO
+com.yonyou.ucf.mdd.ext.bill.dao.StatusItemDAOImpl
+com.yonyou.ucf.mdd.ext.bill.dao.CommandDAO
+com.yonyou.ucf.mdd.ext.bill.dao.CommandDAOImpl
+com.yonyou.ucf.mdd.ext.bill.meta.converter.ConverterHandler
+com.yonyou.ucf.mdd.ext.bill.meta.converter.ActionConverter
+com.yonyou.ucf.mdd.ext.bill.meta.converter.ContainerConverter
+com.yonyou.ucf.mdd.ext.bill.meta.converter.ControlConverter
+com.yonyou.ucf.mdd.ext.bill.meta.converter.EntityConverter
+com.yonyou.ucf.mdd.ext.bill.meta.converter.FieldConverter
+com.yonyou.ucf.mdd.ext.bill.meta.converter.StateConverter
+com.yonyou.ucf.mdd.ext.bill.meta.converter.StateItemConverter
+com.yonyou.ucf.mdd.ext.bill.meta.converter.ViewApplicationConverter
+com.yonyou.ucf.mdd.ext.bill.meta.converter.ViewConverter
+com.yonyou.ucf.mdd.ext.bill.meta.converter.ViewModelConverter
+com.yonyou.ucf.mdd.ext.bill.meta.converter.AbstractConverter
+com.yonyou.ucf.mdd.ext.bill.meta.converter.IConverter
+com.yonyou.ucf.mdd.ext.bill.dao.ToolbarDAO
+com.yonyou.ucf.mdd.ext.data.fill.UserdefineUtils
+com.yonyou.ucf.mdd.ext.bill.meta.util.GroupItemUtils
+com.yonyou.ucf.mdd.ext.bill.dao.JointQueryDAOImpl
+com.yonyou.ucf.mdd.ext.bill.dao.JointQueryDAO
+com.yonyou.ucf.mdd.core.developer.ClassCypher
+com.yonyou.ucf.mdd.uimeta.service.va.VaBillControlHandler
+com.yonyou.ucf.mdd.uimeta.service.va.VaBillEntityMapHandler
+com.yonyou.ucf.mdd.uimeta.service.va.VaBillItemControlMapHandler
+com.yonyou.ucf.mdd.uimeta.service.va.VaBillToolbarItemControlHandler
+com.yonyou.ucf.mdd.uimeta.service.va.VaBillTplGroupMapHandler
+com.yonyou.ucf.mdd.uimeta.service.va.VaMultiUtil
+com.yonyou.ucf.mdd.ext.util.localcache.VaDataRuleVaCache
+com.yonyou.ucf.mdd.ext.util.localcache.TimelineConfigCacheUtil
+com.yonyou.ucf.mdd.ext.util.localcache.TimelineCacheUtil
+com.yonyou.ucf.mdd.ext.util.localcache.RegistryConfigCacheUtil
+com.yonyou.ucf.mdd.ext.util.localcache.GetTHYUserCacheUtil
+com.yonyou.ucf.mdd.ext.util.ExtCloneUtil
+com.yonyou.ucf.mdd.ext.util.PhoneCheck
+com.yonyou.ucf.mdd.ext.util.id.ExtMacUtils
+com.yonyou.ucf.mdd.ext.util.id.UnionWorker
+com.yonyou.ucf.mdd.core.listener.UserDefineNotifyListener
+com.yonyou.ucf.mdd.ext.core.MddHeartBeat
+com.yonyou.ucf.mdd.ext.bill.meta.extract.util.BizTypeCacheUtil
+com.yonyou.ucf.mdd.ext.util.Time
+com.yonyou.ucf.mdd.ext.sys.service.RefreSelfDifinitionItemService
+com.yonyou.ucf.mdd.ext.datasource.ChangeDataSourceUtil
+com.yonyou.ucf.mdd.ext.beans.GlobalParamService
+com.yonyou.ucf.mdd.ext.config.mybatis.VariableConfig
+com.yonyou.ucf.mdd.ext.core.PropertiesAgent
+com.yonyou.ucf.mdd.ext.core.RedisLimiter
+com.yonyou.ucf.mdd.ext.config.MddProperties
+com.yonyou.ucf.mdd.common.config.CommonConfig
+com.yonyou.ucf.mdd.common.interfaces.context.IMddContextService
+com\yonyou\ucf\mdd\common\context\impl\MddContextService.java
+com.yonyou.ucf.mdd.common.interfaces.context.IMddContextService
+com.yonyou.ucf.mdd.interfaces.IDataSourcePropConfHandler(mdd-framework-api)
+com.yonyou.ucf.mdd.common.interfaces.rpc.ICommonQueryRPCService
+com.yonyou.ucf.mdd.common.interfaces.rpc.IRuleRPCService
+com.yonyou.ucf.mdd.core.interfaces.IUimetaService
+com.yonyou.ucf.mdd.ext.loginNew.NewLoginService
+com.yonyou.ucf.mdd.ext.util.MySqlImportAndExport
+com.yonyou.ucf.mdd.ext.util.link.ExtDoubleLinkedList
+com.yonyou.ucf.mdd.ext.util.sign.UdhSignKit
+com.yonyou.ucf.mdd.uimeta.context.UIMetaConfProps
+com.yonyou.ucf.mdd.uimeta.context.UIMetaSDKContext
+com.yonyou.ucf.mdd.ext.util.login.FetchLoginUserHandler
+com.yonyou.ucf.mdd.ext.util.login.FetchLoginFromNewYht
+com.yonyou.ucf.mdd.ext.util.login.FetchLoginFromYht
+com.yonyou.ucf.mdd.ext.util.login.FetchLoginFactory
+com.yonyou.ucf.mdd.ext.util.NotifyCleanCacheUtil
+com.yonyou.ucf.mdd.ext.sys.auth.AuthCache
+com.yonyou.ucf.mdd.ext.bill.meta.extract.util.RedisQueueUtil
+com.yonyou.ucf.mdd.ext.bill.itemrule.js.JSCompressErrorReporter
+com.yonyou.ucf.mdd.ext.config.tenant.ITenantBiz
+com.yonyou.ucf.mdd.ext.config.tenant.TenantExtBiz
+com.yonyou.ucf.mdd.ext.config.tenant.TenantUnionBiz
+com.yonyou.ucf.mdd.ext.config.TenantConditionalConfig
+com.yonyou.ucf.mdd.common.utils.uimeta.CrudCommonSqlUtil
+com.yonyou.ucf.mdd.common.utils.uimeta.CrudExtDTOConverter
+com.yonyou.ucf.mdd.common.utils.uimeta.MddCommonConverter
+com.yonyou.ucf.mdd.common.utils.uimeta.MddCommonSqlUtil
+com.yonyou.ucf.mdd.common.utils.uimeta.MddPreparedSqlUtil
+com.yonyou.ucf.mdd.ext.util.NotifyCleanCacheUtil
+com.yonyou.ucf.mdd.ext.util.EmailUtil
+UI元数据废弃类
+
+一般不会有使用下面的废弃类，如果有，请联系框架说明使用原因以及提供替代方案
+
+com.yonyou.ucf.mdd.uimeta.service.vm.MddViewModelService
+com.yonyou.ucf.mdd.uimeta.plugin.VMPluginChainActuator
+com.yonyou.ucf.mdd.uimeta.chain.vm.field.LoadAuthLevelOfFieldStructurePlugin
+com.yonyou.ucf.mdd.uimeta.chain.vm.field.LoadDataRuleOfFieldStructurePlugin
+com.yonyou.ucf.mdd.uimeta.chain.vm.field.LoadEnumOfFieldStructurePlugin
+com.yonyou.ucf.mdd.uimeta.chain.vm.field.LoadImportOfFieldStructurePlugin
+com.yonyou.ucf.mdd.uimeta.chain.vm.field.LoadSensDataOfFieldStructurePlugin
+com.yonyou.ucf.mdd.uimeta.chain.vm.field.LoadTimelineOfFieldStructurePlugin
+com.yonyou.ucf.mdd.uimeta.chain.vm.field.LoadTransTypeOfFieldStructurePlugin
+com.yonyou.ucf.mdd.uimeta.chain.vm.field.BaseLoadFieldStructurePlugin
+com.yonyou.ucf.mdd.uimeta.spi.vm.field.VMEntityFieldStructurePlugin
+com.yonyou.ucf.mdd.uimeta.chain.vm.entity.LoadEntityIntoVMFromCExtPropsPlugin
+com.yonyou.ucf.mdd.uimeta.spi.vm.entity.VMEntityStructurePlugin
+com.yonyou.ucf.mdd.uimeta.plugin.ChainRequest
+com.yonyou.ucf.mdd.uimeta.factory.UIMetaDataMartFactory
+com.yonyou.ucf.mdd.uimeta.factory.BaseMetaFactory
+com.yonyou.ucf.mdd.uimeta.extract.rdb.RDBMetaBillDataMart
+com.yonyou.ucf.mdd.uimeta.extract.document.DocumentMetaBillDataMart
+com.yonyou.ucf.mdd.uimeta.datamark.MetaBillDataMark
+com.yonyou.ucf.mdd.uimeta.dao.itf.IMetaBillDataMart
+com.yonyou.ucf.mdd.uimeta.crud.rdb.bill.BillTplDAOImpl
+com.yonyou.ucf.mdd.uimeta.crud.rdb.bill.BillTplGroupDAOImpl
+com.yonyou.ucf.mdd.uimeta.crud.rdb.bill.BillItemDAOImpl
+com.yonyou.ucf.mdd.uimeta.crud.rdb.bill.BillBaseDAOImpl
+com.yonyou.ucf.mdd.uimeta.crud.rdb.toolbar.BillToolbarDAOImpl
+com.yonyou.ucf.mdd.uimeta.crud.rdb.toolbar.BillToolbarItemDAOImpl
+com.yonyou.ucf.mdd.uimeta.crud.rdb.entity.BillEntityDAOImpl
+com.yonyou.ucf.mdd.uimeta.crud.rdb.action.BillCommandDAOImpl
+com.yonyou.ucf.mdd.uimeta.dao.rdb.action.IBillCommandDAO
+com.yonyou.ucf.mdd.uimeta.dao.rdb.bill.IBillBaseDAO
+com.yonyou.ucf.mdd.uimeta.dao.rdb.bill.IBillItemDAO
+com.yonyou.ucf.mdd.uimeta.dao.rdb.bill.IBillTplDAO
+com.yonyou.ucf.mdd.uimeta.dao.rdb.bill.IBillTplGroupDAO
+com.yonyou.ucf.mdd.uimeta.dao.rdb.entity.IBillEntityDAO
+com.yonyou.ucf.mdd.uimeta.dao.rdb.toolbar.IBillToolbarDAO
+com.yonyou.ucf.mdd.uimeta.dao.rdb.toolbar.IBillToolbarItemDAO
+com.yonyou.ucf.mdd.uimeta.extract.BaseBillDAO
+com.yonyou.ucf.mdd.uimeta.dao.document.UIMetaBillDAO
+com.yonyou.ucf.mdd.uimeta.dao.document.UIMetaTemplateDAO
+com.yonyou.ucf.mdd.uimeta.dao.document.UIMetaTemplateUserDAO
+com.yonyou.ucf.mdd.rule.thread.LoginUserExecutorService
+com.yonyou.ucf.mdd.ext.utils.VersionUtil
+com.yonyou.ucf.mdd.ext.server.resource.manager.factory.MddDefaultThreadFactory
+com.yonyou.ucf.mdd.ext.server.resource.manager.service.ThreadPoolResourceBuilder(框架内部已经废弃使用，外部使用需要使用com.yonyou.ucf.mdd.thread.ThreadPoolBuilder替换)
+com.yonyou.ucf.mdd.ext.ts.TccTransactionHelper
+com.yonyou.ucf.mdd.ext.ts.ITransactionHandler
+com.yonyou.ucf.mdd.ext.bill.rule.common.DefaultCommitHandler
+com.yonyou.ucf.mdd.ext.bill.rule.common.DefaultRollbackHandler
+com.yonyou.ucf.mdd.ext.server.resource.manager.factory.MddDefaultThreadFactory
+com.yonyou.ucf.mdd.ext.server.resource.manager.factory.MddForkJoinFactory
+com.yonyou.ucf.mdd.ext.poi.service.ExampleEventUserModel
+com.yonyou.ucf.mdd.ext.poi.service.SaxToReadExcel
+com.yonyou.ucf.mdd.ext.poi.impl.MddOssServer
+com.yonyou.ucf.mdd.ext.model.UserFacade
+com.yonyou.ucf.mdd.ext.dubbo.ServiceConfigUtils
+com.yonyou.ucf.mdd.ext.data.intersect.IntersectEntity
+com.yonyou.ucf.mdd.ext.data.intersect.IntersectManager
+com.yonyou.ucf.mdd.ext.timer.PrintDataTask
+com.yonyou.ucf.mdd.ext.util.ThreadFactoryUtils
+com.yonyou.ucf.mdd.ext.bill.service.TaskExectorService
+com.yonyou.ucf.mdd.ext.util.thread.MddThreadConfig
+com.yonyou.ucf.mdd.common.configruation.PartitionConfig
+com.yonyou.ucf.mdd.rule.context.RuleSDKContext
+com.yonyou.ucf.mdd.rule.conf.RuleConfProps
+com.yonyou.ucf.mdd.rule.context.IUserTenantTransfer
+com.yonyou.ucf.mdd.rule.api.UserTenantTransferImpl
+com.yonyou.ucf.mdd.ext.util.VersionUtils
+com.yonyou.ucf.mdd.ext.util.SysUtils
+com.yonyou.ucf.mdd.ext.cache.Cache
+com.yonyou.ucf.mdd.ext.cache.redis.RedisCacheImp
+com.yonyou.ucf.mdd.ext.cache.MemcachedImpl
+com.yonyou.ucf.mdd.ext.cache.CacheHandler
+com.yonyou.ucf.mdd.ext.cache.redis.ObjectSerializingTranscoder
+com.yonyou.ucf.mdd.ext.cache.redis.RedisClient
+不再支持各种oss
+
+一般不会有使用下面的废弃类，如果有，请联系框架说明使用原因以及提供替代方案
+
+com.yonyou.ucf.mdd.ext.util.file.oss.AliOss
+com.yonyou.ucf.mdd.ext.util.file.oss.FastDFS
+com.yonyou.ucf.mdd.ext.util.file.oss.HuaweiObs
+com.yonyou.ucf.mdd.ext.util.file.oss.HuaweiObs3
+com.yonyou.ucf.mdd.ext.util.file.oss.MinioServer
+com.yonyou.ucf.mdd.ext.util.file.oss.Qiniu
+com.yonyou.ucf.mdd.ext.util.file.fastdfs.FastdfsClient
+com.yonyou.ucf.mdd.ext.util.file.fastdfs.PropertyUtil
+com.yonyou.ucf.mdd.ext.util.file.builder.QiniuBuilder
+com.yonyou.ucf.mdd.ext.util.file.builder.MinioBuilder
+com.yonyou.ucf.mdd.ext.util.file.builder.HuaweiOBSBuilder
+com.yonyou.ucf.mdd.ext.util.file.builder.FastDFSBuilder
+com.yonyou.ucf.mdd.ext.util.file.builder.AliOssBuilder
+com.yonyou.ucf.mdd.ext.util.file.oss.Object#getFileServer
+com.yonyou.ucf.mdd.ext.util.file.oss.Object#upload
+com.yonyou.ucf.mdd.ext.util.file.oss.Object#uploadLogo
+com.yonyou.ucf.mdd.ext.util.file.oss.Object#uploadGoods
+com.yonyou.ucf.mdd.ext.util.file.oss.Object#getGoodsUrl
+com.yonyou.ucf.mdd.ext.util.file.oss.Object#getSrvFullPath
+com.yonyou.ucf.mdd.ext.util.file.oss.Object#getAttachmentUrl
+com.yonyou.ucf.mdd.ext.util.file.oss.Object#getCarouselUrl
+com.yonyou.ucf.mdd.ext.util.file.oss.Object#getFullUrl
+com.yonyou.ucf.mdd.ext.util.file.oss.Object#getOriUrl
+删除的方法
+
+一般不会有使用下面的删除方法，如果有，请联系框架说明使用原因以及提供替代方案
+
+com.yonyou.ucf.mdd.ext.sys.controller.UserController#resetPhone
+com.yonyou.ucf.mdd.ext.sys.controller.UserController#sendSms
+com.yonyou.ucf.mdd.ext.sys.controller.UserOperationController#smsAuthCheck
+com.yonyou.ucf.mdd.ext.dao.app.BillContextDao#findAll
+com.yonyou.ucf.mdd.ext.dao.app.BillContextDaoImpl#findAll
+com.yonyou.ucf.mdd.ext.bill.meta.service.BillMetaService#STATEMENT_FIND_BILL_ITEMS
+com.yonyou.ucf.mdd.ext.bill.meta.service.BillMetaService#getBillItems
+com.yonyou.ucf.mdd.ext.bill.meta.service.BillMetaService#STATEMENT_FIND_TPL_GROUPS
+com.yonyou.ucf.mdd.ext.bill.meta.service.BillMetaService#getBillGroups
+com.yonyou.ucf.mdd.ext.bill.meta.service.BillMetaService#STATEMENT_GET_YXY_TENENT_ID_BY_TYH_TENENTID
+com.yonyou.ucf.mdd.ext.bill.meta.service.BillMetaService#getBillElements
+com.yonyou.ucf.mdd.ext.bill.meta.service.BillMetaServiceUtils#getBillItemTitle
+com.yonyou.ucf.mdd.ext.config.uimeta.IMetaBiz#getBillForeignKeysWithoutTenant
+com.yonyou.ucf.mdd.ext.config.uimeta.MetaExtBiz#getBillForeignKeysWithoutTenant
+com.yonyou.ucf.mdd.ext.bill.service.StateRuleService#loadStateRuleAndBaseOnByBillNo
+com.yonyou.ucf.mdd.ext.bill.service.CommandService#getBillCommands
+com.yonyou.ucf.mdd.ext.bill.service.CommandService#getBillActions
+com.yonyou.ucf.mdd.ext.bill.service.CommandService#getAllBillActions
+com.yonyou.ucf.mdd.ext.sys.service.ActionAuthService#findAction
+com.yonyou.ucf.mdd.ext.bill.dao.ToolbarDAO#getToolbarByBill
+com.yonyou.ucf.mdd.ext.bill.dao.ToolbarDAO#getMainToolbarId
+com.yonyou.ucf.mdd.ext.bill.dao.ToolbarDAO#getAllTplToolbars
+com.yonyou.ucf.mdd.ext.bill.dao.ToolbarDAOImpl#getToolbarByBill
+com.yonyou.ucf.mdd.ext.bill.dao.ToolbarDAOImpl#getMainToolbarId
+com.yonyou.ucf.mdd.ext.bill.dao.ToolbarDAOImpl#getAllTplToolbars
+com.yonyou.ucf.mdd.ext.bill.dao.ToolbarDAOImpl#userDefineToolbarDelete
+com.yonyou.ucf.mdd.ext.bill.service.ToolbarService#getToolbarContainers
+com.yonyou.ucf.mdd.ext.bill.service.ToolbarService#getBillToolbars
+com.yonyou.ucf.mdd.ext.bill.dao.ToolbarDAOImpl#getToolbars
+com.yonyou.ucf.mdd.ext.bill.meta.biz.BillMetaExtBizImpl#getBaseBill
+com.yonyou.ucf.mdd.rule.service.MddExtRuleRegisterService#findRuleRegistersByTenantId
+com.yonyou.ucf.mdd.ext.poi.util.POIUtils#insertUserDefineRefTransferConfig
+com.yonyou.ucf.mdd.ext.bill.utils.BillUtils#processVmOrderExt
+com.yonyou.ucf.mdd.ext.bill.utils.BillUtils#getVmUserDefOrderList
+com.yonyou.ucf.mdd.ext.bill.utils.BillUtils#setVmUserDefOrder
+com.yonyou.ucf.mdd.ext.bill.controller.BillPrintController#batchUpdataBo
+com.yonyou.ucf.mdd.ext.bill.service.BillPrintService#batchUpdataBo
+com.yonyou.ucf.mdd.ext.bill.dao.ItemRuleDAO#getRulesByBill
+com.yonyou.ucf.mdd.ext.bill.dao.ItemRuleDAOImpl#getRulesByBill
+com.yonyou.ucf.mdd.ext.model.LoginUser#judgeHaveNoAuth(废弃，新权限判断直接调用权限服务，使用com.yonyou.ucf.mdd.auth.AuthUtilService.hasAuth 方法，返回是否有权限，和该方法相反)
+com.yonyou.ucf.mdd.ext.util.schema.DbSchemaUtil#supportSnowId
+com.yonyou.ucf.mdd.ext.util.schema.DbSchemaUtil#getLengthIdColumn
+com.yonyou.ucf.mdd.ext.util.ObjectUtils#getFieldValue
+com.yonyou.ucf.mdd.ext.util.ObjectUtils#setFieldValue
+com.yonyou.ucf.mdd.ext.util.ObjectUtils#object2Map
+com.yonyou.ucf.mdd.ext.util.ObjectUtils#object2Object
+com.yonyou.ucf.mdd.ext.util.file.oss.Object#getFileServer
+com.yonyou.ucf.mdd.ext.util.file.oss.Object#upload
+com.yonyou.ucf.mdd.ext.util.file.oss.Object#uploadLogo
+com.yonyou.ucf.mdd.ext.util.file.oss.Object#uploadGoods
+com.yonyou.ucf.mdd.ext.util.file.oss.Object#getGoodsUrl
+com.yonyou.ucf.mdd.ext.util.file.oss.Object#getSrvFullPath
+com.yonyou.ucf.mdd.ext.util.file.oss.Object#getAttachmentUrl
+com.yonyou.ucf.mdd.ext.util.file.oss.Object#getCarouselUrl
+com.yonyou.ucf.mdd.ext.util.file.oss.Object#getFullUrl
+com.yonyou.ucf.mdd.ext.util.file.oss.Object#getOriUrl
+com.yonyou.ucf.mdd.ext.sys.other.util.TenantCenterUtils#getAuthValueByKey
+com.yonyou.ucf.mdd.ext.sys.other.util.TenantCenterUtils#openAppCallBack
+com.yonyou.ucf.mdd.ext.service.AbstractCommandService#asynExeOpenTenant
+com.yonyou.ucf.mdd.ext.core.AppContext#propertiesPersister
+com.yonyou.ucf.mdd.ext.consts.Constants#UDHSERVERURL = AppContext.getEnvConfig("udhServerUrl");
+com.yonyou.ucf.mdd.ext.consts.Constants#UDHAPISERVERURL = AppContext.getEnvConfig("udhApiServerUrl");
+com.yonyou.ucf.mdd.ext.consts.Constants#UPCSERVERURL = AppContext.getEnvConfig("upcServerUrl");
+com.yonyou.ucf.mdd.ext.consts.Constants#UDHAPPKEY = AppContext.getEnvConfig("udhAppKey");
+com.yonyou.ucf.mdd.ext.consts.Constants#UDHSECRET = AppContext.getEnvConfig("udhSecret");
+com.yonyou.ucf.mdd.ext.consts.Constants#UDHTOKEN = AppContext.getEnvConfig("udhToken");
+com.yonyou.ucf.mdd.ext.consts.Constants#UDHURL = AppContext.getEnvConfig("udhUrl");
+com.yonyou.ucf.mdd.ext.consts.Constants#UDHHOMEURL = AppContext.getEnvConfig("udhHomeUrl");
+com.yonyou.ucf.mdd.ext.consts.Constants#LONGINUSERTYPELIST = AppContext.getAppConfig().getProperty("login.userTypeList");
+com.yonyou.ucf.mdd.ext.consts.Constants#CONFIG_TREE_ITF = AppContext.getAppConfig().getProperty("tree.itf.fullname", "base.itf.ITree");
+com.yonyou.ucf.mdd.ext.consts.Constants#APILINKBASEURL = AppContext.getEnvConfig("linkapi.baseurl");
+com.yonyou.ucf.mdd.ext.consts.Constants#BUSINESSAPICODE = AppContext.getAppConfig().getProperty("tenant.business.apicode");
+com.yonyou.ucf.mdd.ext.consts.Constants#BASEDOMAIN = AppContext.getAppConfig().getProperty("base.domain");
+com.yonyou.ucf.mdd.ext.consts.Constants#RPCBASEDOMAIN = AppContext.getAppConfig().getProperty("base.domain", "productcenter");
+com.yonyou.ucf.mdd.ext.consts.Constants#AUTHDOMAIN = AppContext.getAppConfig().getProperty("auth.domain", "u8c-auth"); // u8c 权限中心
+com.yonyou.ucf.mdd.ext.consts.Constants#OPTIONDOMAIN = AppContext.getAppConfig().getProperty("option.domain", "u8c-config"); // u8c 系统参数
+com.yonyou.ucf.mdd.ext.consts.Constants#SYSTEMCODE = AppContext.getAppConfig().getProperty("systemCode");
+com.yonyou.ucf.mdd.ext.consts.Constants#QINIUZONE = AppContext.getEnvConfig("QINIU.ZONE");
+com.yonyou.ucf.mdd.ext.consts.Constants#BIZFLOWURL = AppContext.getEnvConfig("bizFlow.url");//请使用业务流提供的方法
+com.yonyou.ucf.mdd.ext.consts.Constants#ISCOLLECTREQUESTINFO = AppContext.getAppConfig().getProperty("isCollectRequestInfo", "false");
+com.yonyou.ucf.mdd.ext.consts.Constants#CONFIG_BILL_STATUS_FILED = AppContext.getAppConfig().getProperty(MddConstants.CONFIG_BILL_STATUS_FIELD_NAME, "status");
+com.yonyou.ucf.mdd.ext.consts.Constants#MDD_ENABLE_SYSUSERSET = BooleanUtils.b(AppContext.getEnvConfig("mdd.enable.sysbillitemset", "false"));
+com.yonyou.ucf.mdd.ext.consts.Constants#LIST_SEARCH_NOT_LIKE = BooleanUtils.b(AppContext.getEnvConfig("list.search.not.like", "false"));
+com.yonyou.ucf.mdd.ext.login.util.YhtUserUtil#queryUserObject
+com.yonyou.ucf.mdd.ext.login.util.YhtUserUtil#getBizObjectByUserMap
+com.yonyou.ucf.mdd.ext.login.util.YhtUserUtil#getBizObjectByTenantMap
+com.yonyou.ucf.mdd.ext.login.util.YhtUserUtil#getYhtTenantMap
+com.yonyou.ucf.mdd.ext.login.util.YhtUserUtil#geYhtUserMap
+com.yonyou.ucf.mdd.ext.login.util.YhtUserUtil#getUserByNewYhtAccessToken
+com.yonyou.ucf.mdd.ext.core.AppContext#yhtEqualsCache
+com.yonyou.ucf.mdd.ext.core.AppContext#buildLoginUserByResCache
+com.yonyou.ucf.mdd.ext.sys.service.AbstractOpenTenantService#openRetail
+com.yonyou.ucf.mdd.ext.util.TenantUtils#getTenantBySchema
+com.yonyou.ucf.mdd.ext.util.TenantUtils#update
+com.yonyou.ucf.mdd.ext.util.TenantUtils#getTenantList
+com.yonyou.ucf.mdd.ext.util.TenantUtils#getUsertnfoList
+com.yonyou.ucf.mdd.ext.util.TenantUtils#getMerchantList
+com.yonyou.ucf.mdd.ext.util.TenantUtils#getTenantnfoListByUserIds
+com.yonyou.ucf.mdd.ext.util.TenantUtils#getTenantnfoListByMobile
+com.yonyou.ucf.mdd.common.context.ThreadLocaleWrapper
+com.yonyou.ucf.mdd.common.context.UBaseContext#getInstance
+com.yonyou.ucf.mdd.common.context.UBaseContext#setAllThreadLocal
+com.yonyou.ucf.mdd.ext.core.AppContext#setCache(java.lang.String, java.lang.String)
+com.yonyou.ucf.mdd.ext.core.AppContext#setCache(String key, String value, int expire)
+com.yonyou.ucf.mdd.ext.core.AppContext#getCache
+com.yonyou.ucf.mdd.ext.core.AppContext#getSqlSession4meta
+com.yonyou.ucf.mdd.ext.core.AppContext#priEqualsPubCache
+com.yonyou.ucf.mdd.ext.core.AppContext#getPartitionContextData2
+com.yonyou.ucf.mdd.ext.utils.AppUtils#covertAuths
+com.yonyou.ucf.mdd.ext.sys.util.AuthUtils#getAuthList
+com.yonyou.ucf.mdd.ext.sys.util.AuthUtils#getAuthProfile
+com.yonyou.ucf.mdd.ext.dao.base.BaseMapperDao#find
+com.yonyou.ucf.mdd.ext.dao.base.BaseMapperDao#findFirst
+com.yonyou.ucf.mdd.ext.dao.base.BaseMapperDaoImpl#find
+com.yonyou.ucf.mdd.ext.dao.base.BaseMapperDaoImpl#findFirst
+替换
+
+com.yonyou.ucf.mdd.ext.enums.RuleStatus 替换为：
+
+com.yonyou.ucf.mdd.rule.enums.RuleStatus
+
+对应坐标
+分组	旧groupId	旧artifactId	新artifactId	新groupId
+Mdd	com.yonyou	yonyou-mdd-starter-parent	yonyou-mdd-starter-parent	com.yonyou.iuap
+com.yonyou	mdd-framework-api	iuap-ap-mdd-api	com.yonyou.iuap
+com.yonyou	mdd-ext-support-sdk	iuap-ap-mddsupport-sdk	com.yonyou.iuap
+com.yonyou	mdd-framework-core	iuap-ap-mdd-impl	com.yonyou.iuap
+com.yonyou	mdd-framework-orm	com.yonyou.iuap
+com.yonyou	mdd-features-openapi	com.yonyou.iuap
+com.yonyou	mdd-framework-support	com.yonyou.iuap
+com.yonyou	mdd-query-starter	iuap-ap-basedoc-sdk	com.yonyou.iuap
+com.yonyou	mdd-pub-jar	com.yonyou.iuap
+** **YTS
+改动点	模块	改动	遇到问题的解决方案
+yts_rel_日期、yts_trans_日期表结构增加租户ID	sdk	com.yonyou.cloud.yts.internal.service.impl.JdbcTplTransactionRelServicecom.yonyou.cloud.yts.internal.service.impl.JdbcTplTransactionService	联系框架说明使用原因
+框架不再使用的废弃类		com.yonyou.cloud.yts.config.YtsMockcom.yonyou.cloud.yts.help.MockException	联系框架说明使用原因
+框架类中删除的方法登记		com.yonyou.cloud.yts.config.YtsSpringContextHolder#autowireInstance	联系框架说明使用原因
+框架类中删除的类登记		com.yonyou.cloud.yts.config.YtsPropertiesConfigcom.yonyou.cloud.yts.dsadapter.IuapDynamicDsAdaptercom.yonyou.cloud.yts.dsadapter.YysscDynamicDsAdaptercom.yonyou.cloud.yts.compress.FlateCompressor	联系框架说明使用原因
+bean改为sdk框架自注入		com.yonyou.cloud.yts.ymshttpclient.AbstractExecutor#ymsHttpClient
+注入bean名称修改名称		com.yonyou.cloud.yts.ymshttpclient.spi.YtsYmsHttpClientInterceptor	联系框架说明使用原因
+线程池规范使用，采用统一线程池		com.yonyou.cloud.yts.internal.trans.TransactionHookcom.yonyou.cloud.yts.config.YtsScheduler
+废弃的模块		废除对httpclient客户端的适配支持废除对okhttp客户端的适配支持	联系框架说明使用原因
+** **友户通
+改动点	改动	遇到问题的解决方案
+新增方法	com.yonyou.yht.sdk.YhtSessionSpi新增如下两个SPI方法实现：@Overridepublic String checkMasquid(String masquid, String userId, String token) {return YhtSessionCenter.checkMasquid(masquid, userId, token);}@Overridepublic String getMasquid(String masquid, String userId, String token) {return YhtSessionCenter.getMasquid(masquid, userId, token);}
+新增客户端session续期功能	友户通sdk，在客户端session会话快过期的时候，如果有请求，就续命客户端session会话，涉及如下类的修改：com.yonyou.yht.cache.RedisSessionStore关键代码片段：// 在客户端session会话快过期的时候，如果有请求，就续命客户端session会话if(assertionExpireTime <= ADD_TOKEN_LIFE_BEFORE_TIME){ // 赋值的同时会续命 setUser(user.getUserId(), user); setAssertion(user.getUserId(), assertion);}
+异常码规范改造	按照架构部要求进行整改
+getTenantById接口缓存	com.yonyou.iuap.tenant.sdk.TenantCenterpublic static String getTenantById(String tenantId) {...}备注：此方法缓存，只在专属化环境进行缓存，公有云不涉及缓存；	客户端缓存有30秒时间，有可能在项目上会遇到更新完租户的信息后不能够立即看到更新后的效果。经评估，影响不是很大，不涉及关键信息丢失，跟项目上解释清楚，为了性能考虑，牺牲了部分实时性。
+客开赋能资源申请
+
+源码申请 和 培训赋能申请 请参考在线最新信息：
+
+【客开赋能资源申请使用说明】
+
+https://community.yonyou.com/article/detail/8486

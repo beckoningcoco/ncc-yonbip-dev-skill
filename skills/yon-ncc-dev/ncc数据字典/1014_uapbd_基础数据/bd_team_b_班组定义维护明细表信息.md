@@ -1,0 +1,38 @@
+# |<<
+
+**班组定义维护明细表信息 (bd_team_b / nc.vo.bd.team.team01.entity.TeamItemVO)**
+
+> https://community.yonyou.com/datadict/datadict-2105yiliao/ddc/998.html
+
+| 序号 | 属性编码 | 属性名称 | 字段编码 | 字段类型 | 是否必输 | 引用模型 | 默认值 | 取值范围/枚举 |
+|------|------|------|------|------|------|------|------|------|
+| 1 | cteam_bid | 班组明细表 | cteam_bid | char(20) | √ | 主键 (UFID) |
+| 2 | pk_group | 集团 | pk_group | varchar(20) |  | 组织_集团 (group) |
+| 3 | pk_org | 库存组织 | pk_org | varchar(20) |  | 组织 (org) |
+| 4 | pk_org_v | 库存组织版本 | pk_org_v | varchar(20) |  | 组织_版本信息 (org_v) |
+| 5 | cworkmanid | 作业员 | cworkmanid | varchar(20) |  | 人员基本信息 (psndoc) |
+| 6 | pk_psnjob | 人员工作信息 | pk_psnjob | varchar(20) |  | 人员工作信息 (psnjob) |
+| 7 | bmanager | 负责人 | bmanager | char(1) |  | 布尔类型 (UFBoolean) |
+| 8 | dstartdate | 开始日期 | dstartdate | char(10) | √ | 模糊日期 (UFLiteralDate) |
+| 9 | denddate | 结束日期 | denddate | char(10) |  | 模糊日期 (UFLiteralDate) |
+| 10 | vbnote | 备注 | vbnote | varchar(181) |  | 字符串 (String) |
+| 11 | vdef1 | 自定义项1 | vdef1 | varchar(101) |  | 自定义项 (Custom) |
+| 12 | vdef2 | 自定义项2 | vdef2 | varchar(101) |  | 自定义项 (Custom) |
+| 13 | vdef3 | 自定义项3 | vdef3 | varchar(101) |  | 自定义项 (Custom) |
+| 14 | vdef4 | 自定义项4 | vdef4 | varchar(101) |  | 自定义项 (Custom) |
+| 15 | vdef5 | 自定义项5 | vdef5 | varchar(101) |  | 自定义项 (Custom) |
+| 16 | vdef6 | 自定义项6 | vdef6 | varchar(101) |  | 自定义项 (Custom) |
+| 17 | vdef7 | 自定义项7 | vdef7 | varchar(101) |  | 自定义项 (Custom) |
+| 18 | vdef8 | 自定义项8 | vdef8 | varchar(101) |  | 自定义项 (Custom) |
+| 19 | vdef9 | 自定义项9 | vdef9 | varchar(101) |  | 自定义项 (Custom) |
+| 20 | vdef10 | 自定义项10 | vdef10 | varchar(101) |  | 自定义项 (Custom) |
+| 21 | vdef11 | 自定义项11 | vdef11 | varchar(101) |  | 自定义项 (Custom) |
+| 22 | vdef12 | 自定义项12 | vdef12 | varchar(101) |  | 自定义项 (Custom) |
+| 23 | vdef13 | 自定义项13 | vdef13 | varchar(101) |  | 自定义项 (Custom) |
+| 24 | vdef14 | 自定义项14 | vdef14 | varchar(101) |  | 自定义项 (Custom) |
+| 25 | vdef15 | 自定义项15 | vdef15 | varchar(101) |  | 自定义项 (Custom) |
+| 26 | vdef16 | 自定义项16 | vdef16 | varchar(101) |  | 自定义项 (Custom) |
+| 27 | vdef17 | 自定义项17 | vdef17 | varchar(101) |  | 自定义项 (Custom) |
+| 28 | vdef18 | 自定义项18 | vdef18 | varchar(101) |  | 自定义项 (Custom) |
+| 29 | vdef19 | 自定义项19 | vdef19 | varchar(101) |  | 自定义项 (Custom) |
+| 30 | vdef20 | 自定义项20 | vdef20 | varchar(101) |  | 自定义项 (Custom) |

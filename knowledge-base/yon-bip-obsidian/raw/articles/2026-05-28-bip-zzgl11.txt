@@ -1,0 +1,2137 @@
+社区文档中心
+首页
+文档导航
+开发者社区
+社区论坛
+视频教程技术博客
+更多
+张宏涛
+资料中心
+专业开发
+产品概述
+快速入门
+操作指南
+开发指南
+开发介绍
+新功能开发
+移动端开发
+扩展开发
+全球化
+组织
+主组织配置方案
+组织管理
+权限
+特征
+基础数据
+审批流
+业务流
+规则引擎
+公式
+UI模板
+参照
+导入导出
+打印
+对象建模
+编码规则
+调度任务
+监控与预警
+日志
+消息平台
+工作台
+事件中心
+文件服务
+YonBuilder应用开发
+前端开发
+后端开发
+移动开发
+安全
+数据库
+DevOps技术
+容器云技术
+区块链云技术
+YMS开发
+智能应用开发
+专项开发
+成果迁移
+技术方案
+最佳实践
+参考手册
+常见问题
+视频教程
+专业开发/开发指南/组织/组织管理
+组织管理
+最后更新时间：2024-01-21
+本文摘要
+
+企业的组织机构通常都是由具有一定职能的组织单元、部门和组织间的关系构成。组织管理是指通过建立组织机构及组织间的关系，规定职务或职位，明确责权关系等， 构建企业的组织架构，实现企业内外部业务管理和协作的过程。
+
+本文主要介绍了组织管理涉及的几个核心概念、使用方式和开发指南，可概括为以下核心要点：
+
+1、业务单元核心业务使用及开发说明；
+
+2、部门核心业务使用及开发说明；
+
+3、委托关系业务使用及开发说明；
+
+4、职能共享业务使用及开发说明；
+
+5、组织参照开发使用说明；
+
+6、组织业务函数开发使用说明；
+
+7、组织数据同步开发使用说明；
+
+8、组织开放接口开发使用说明；
+
+开发者通过学习本文，可了解 BIP 组织管理的基本概念、使用方法、开发对接流程。
+
+第一章 基本概念
+1.1 背景
+
+企业的组织机构通常都是由具有一定职能的组织单元、部门和组织间的关系构成。组织管理是指通过建立组织机构及组织间的关系，规定职务或职位，明确责权关系等，构建企业的组织架构， 实现企业内外部业务管理和协作的过程。组织是系统业务运行的基础，也是权限隔离的基本维度。
+
+1.2
+
+第二章 技术架构
+总体架构设计
+
+组织服务作为平台核心服务，其职责是管理组织相关的核心模型，并支撑各领域业务。根据组织业务，将组织服务划分为五个主要的业务模块，如上图所示。其中，组织核心模型管理模块包括业务单元的创建、职能的维护、部门的维护、职能的扩展等，该模块维护了组织的核心模型，支撑多职能、矩阵式的建模方式。在基础模块之上，分别提供了描述间横向关系的委托关系模块，提供组织期初设置与查询的业务期初模块，解决部门人、员共享场景问题的职能共享模块，支撑平台主组织权限、数据权限的组织相关权限模块。在这些模块基础上，组织服务对外提供了多种支撑能力，包括元数据、接口、参照等，同时支撑混合云场景下的组织数据集成，通过这些支撑能力，组织服务支撑了 YonBIP 全领域的组织相关业务。
+
+上图描述了组织服务与其他微服务及外部系统的调用关系。
+
+组织服务使用 MDD 开发框架开发，依赖平台多语、业务日志、事件等基础组件服务，同时，依赖应用框架中的工作台和权限中心服务。YonBIP 各领域服务使用组织中心标准的 REST/RPC 接口使用组织服务，部分领域服务会通过事件中心订阅组织相关事件， 实现特定业务。
+
+对外能力上，组织相关的管理界面通过 MDF 统一前端提供给终端用户，前端界面的所有请求均通过该网关进行转发。对于公司外部开发者，组织中心通过开放平台暴露了一组 OpenAPI，开放了组织核心维护能力，通过开放平台网关来保证该场景下的安全问题。对于与外部 ERP 集成的混合云场景，组织中心通过 YonLinker 提供了一套标准的集成能力，支持将 NC、NCC、U8 等主流 ERP 的组织架构同步到云端。
+
+模型设计
+
+组织业务模型包括核心组织模型、委托关系、期初设置
+
+核心组织模型包括：
+
+组织基本信息：核心属性，主要包括编码、名称、主键等
+
+组织单元：职能组织的公共信息，包含组织基本信息及负责人、纳税人识别号等信息。业务单元与组织为相同表存储，通过是否组织单元字段判断。
+
+部门：管理人员的组织，一般在组织单元下建立，可同时为组织单元，与组织单元一起构成完整的行政体系结构。
+
+具体职能组织：按业务划分，部分职能组织本身支持上下级关系，可独立构成职能体系结构。
+
+业务期初包括：
+
+期初类型注册：租户下支持的期初类型。
+
+组织类型及期初关系：用于控制启用职能后组织上可设置期初类型设置。组织期初：具体期初的时间数据存储。
+
+委托关系：包括业务组织、被委托业务组织、开票组织、是否默认（但组织下存在多个委托关系时，业务可以根据参数获取默认的委托组织，可修改）。
+
+第三章 功能介绍
+
+创建企业账号，激活开通并进行产品初始化后，登录YonSuite进入企业账号，进入数字化建模平 台，开始组织建模、权限建模、基础数据建模、流程建模等。  
+
+启用多组织（公有云特性）
+
+系统提供单组织和多组织两种使用模式，由客户购买产品时选择决定。产品初始化时，系统会由向导提示用户是否启用多组织。单组织模式时，企业的业务应用只能在一个组织中完成，不支持组织机构维护以及处理对应的多组织业务；启用多组织后可以进行多组织业务。
+
+很多小型企业通常为单公司多部门的管理方式，日常的接单、出货、核算、记账等生产经营活动都由一个组织完成，可以只购买单组织特性。后续随着企业的发展可以购买多组织特性，系统通过【启用多组织】功能协助企业从单组织模式切换到多组织模式。启用后可以进行如下业务：
+
+ *           *                1. 可以创建组织机构并维护组织间的各种关系;
+   2. 基础数据支持企业账号级和组织级，企业账号级的基础数据支持在组织间共享，组织级的基 础数据为组织私用数据;
+   3. 支持组织间的内部结算和内部协同。多组织启用界面如下图所示：
+
+
+建立组织单元及部门、组织职能
+
+企业的组织机构通常都是由具有一定职能的组织单元、部门和组织间的关系构成。
+
+在企业账号下建立企业的组织机构。通过建立组织单元、部门及组织单元的上下级关系构建企业的营运组织架构。
+
+组织单元是指企业中承担某项独立业务职能的最小经营机构，可以是行政实体机构，也可以是虚拟机构。组织一旦建立就成为组织单元，可以指定组织单元的上下级关系。
+
+部门是组织单元下划分的一些行政管理单元。企业中的人员都基于部门建立。部门档案的定义也为业务单据上记录原始业务发生的部门提供依据。
+
+企业的人力资源管理、协同办公、业务及财务管理，以及基础数据、流程、权限、模版等的分级管控都基于组织单元进行。组织单元也是业务数据隔离的基本单元，通过对组织的授权完成业务数据的隔离，控制不同的人使用和管理的不同的业务数据。组织的授权是企业内部最基本的权限隔离维度之一。
+
+**组织职能：**即组织所承担的功能，不同的组织职能具有不同的业务处理规则，通过组织职能为组织明确权责，让不同组织职能的组织间彼此协同又相互制衡。目前组织的职能有采购、销售、库存会计主体。组织职能会对应一类的业务领域，组织必须具有这些职能才能做相应的业务，例如会计主体职能，主要在财务领域应用，只有具备会计主体职能的组织才能处理财务业务。除此之外， 企业的人力资源、协同办公管理基于组织单元进行管理，不需要设置组织职能。
+
+组织职能	业务范围	主组织
+业务单元	企业中营运组织架构通过业务单元建立。企业的人 力资源管理、协同办公，以及基础数据、流程、权 限、模版等的分级管控都基于业务单元及其上下级关系进行。不再单独设置行政职能组织	员工管理、考勤、薪资管理的主组织协同业务依赖的组织
+采购职能组织	处理采购业务的业务单元，包括采购订货、采购跟 单、退换货、以及采购价格管理和供应商管理、询比价等	采购订单主组织：采购组织
+销售职能组织	处理销售业务的业务单元，包括销售订单管理、销售跟单、销售价格、客户管理等	销售订单主组织：销售组织
+库存职能组织	处理库存管理业务的业务单元：包括库存物料、仓储业务收发、调拨与存量管理、库存计划等	库存调拨单主组织：库存组织
+工厂组织	处理生产制造业务的业务单元，包括生产订单的下达、生产计划的指定，MRP 等	生产订单主组织：工厂组织
+会计主体组织	会计核算的业务范围：1、对外核算目的的会计主体一般是实体的业务 单元，最常见的是法人公司、子公司等，由于需要对外提供独立财务报告所以需要设置对外核算的会计主体；2、对内核算的会计主体，也是管理会计的会计 主体，主要用于对内的财务核算，可能是有实体业务单元存在，比如一个事业部，一个车间等；也可能无实体业务单元，例如产品线，设备线、自驱组织等。提供独立的会计主体档案节点来维护所有的会计主体，通过业务单元建模生成的会计主体会自动同步到会计主体档案中 ，其他非业务单元的会计主体则只能在会计主体档案中建模。	财务基础数据的主组织：会计主体
+纳税主体组织	管理税、票业务的业务单元	发票管理的主组织：纳税主体
+研发组织	研发组织是企业中负责产品的开发研制、技术 标准制定的业务单元。对于一些集团企业，通常会 设置集团研发组织，对设计 BOM、Routing 等做统一定义，下发工厂。	PLM 系统中的 BOM、工艺管理等的主组织为研发组织。标准工序、工艺路线模板的主组织；
+质检组织	质检组织是企业中负责质量检测的业务单元， 包括完工产品的质检、 原材料入库的质检、退货入库商品的质检等。质检组织通常对应企业中的品质管理部、检验部等。	质检基础数据、业务数据的主组织
+安环管理组织	安环管理组织是企业中负责安全管理、职业健康管理、环境管理的组织。	风险管控，隐患排查，应急管理的主组织为安环中心
+能源管理组织	能源管理组织是企业中负责能源管理的组织， 涉及能源管网的绘制、数据采集、能源管网的差异 平衡等等。	能流网，平衡网，外购能源结算单的主组织为能源中心
+服务组织	是企业中负责客户服务的组织，包括售前的咨 询、售后的服务等，通常对应企业中的客服部或售 后服务部。	客户服务、callceter 中工单的主组织
+
+上图是业务单元配置界面，其中上半部分是业务单元基本信息，其中上级组织单元字段规定了该组织在业务树上的位置。页面中间是组织职能的选择区域，该区域中选择所需职能后，下方会显示出该职能所需的特定信息的填写区域，部分职能组织是有自己独立的树结构的，比如人力资源组织，职能组织的上级在对应的职能区域进行选择。 
+
+组织上下级管理关系
+
+支持按多种视角设置组织的上下级关系，组织的上下级关系是业务政策下达、上下级管控的主要依赖结构。
+
+目前支持设置的上下级关系有：
+
+组织单元和部门的上下级关系：企业中营运组织架构通过组织单元和部门的上下级关系建立。企业的人力资源管理、以及基础数据、流程、权限、模版等的分级管控都基于组织单元和部门的上下级关系进行。
+
+销售组织的上下级关系：主要用于销售政策的管控、下发等。 会计主体上下级关系：主要用于财务政策的管控、下发等。
+
+企业中的组织有几类：有承载业务的组织、有承载财务核算的组织、有 HR 管理部门和人员的组
+
+织。
+
+查看组织结构
+
+通过组织结构图节点，用户可以查看各个职能完整的组织架构。 
+
+业务委托关系
+
+企业的通常按照职能分工要求将内部组织机构划分若干职能组织，有分工就会产生协作，组织业务关系就是根据业务的上下游协同关系建立的业务组织之间的相互协作关系。
+
+ *           *                1. 销售业务委托关系：定义销售组织接单后，可以委托哪个库存组织进行出货，以及默认的开票结算财务组织。
+
+
+ *           *                1. 采购业务托关系：定义库存组织物资产生需求后委托哪个采购组织进行采购，以及默认的收票结算财务组织。
+
+
+ *           *                1. 核算委托关系：核算委托关系主要用于定义组织单元委托哪个会计主体组织进行财务核算。
+
+
+职能共享设置
+
+一些企业出于管理需要，会将处理业务的人员集中在总部/总公司的职能部门，这些职能部门通 常会对整个组织提供服务。常见场景比如有，比如一套人马服务于多个牌子公司；在总公司建立多个共享部门，为下级组织处理业务，以达到节约人力、发挥专业优势的目的。
+
+通过【职能共享设置】功能设置企业内某些组织单元的部门、人员档案可以服务的组织范围。支持按业务职能设置部门、人员可以服务的范围。
+
+系统中有承载业务的组织、有承载财务核算的组织、有 HR 管理部门和人员的组织，多数企业中这三个组织都是一致，但也存在不一致的情况。对于业务组织、财务核算的组织和 HR 管理组织一致的情况，单据上的部门、人员直接参照主组织下的部门、人员即可；对于 HR 管理组织与业务组织不一致的情况，业务组织做业务选择部门和人员时，可以选择业务职能共享设置组织中的部门和人员； 对于 HR 管理组织与财务核算组织不一致的情况，财务组织做业务选择部门和人员时，可以选择核算委托关系来源组织的下的部门和人员，和来源组织在职能共享设置组织中的部门和人员。
+
+职能共享设置节点如下图所示：
+
+支持建立部门型组织
+
+有些部门，比如事业部，虽然不是独立的法人企业，但具有较大的经营权限，实行独立核算、自负盈亏。需要将这种类型的部门建立为组织单元，设置一定的组织职能，并将【是否部门】设置为是，保存后，部门档案上可以看见这类部门型的组织，可以在其下维护人员信息。
+
+第四章 开发示例
+组织参照
+组织对外参照
+code	说明	包含组织	包含部门	支持全局	默认受权限****控制
+org_pure_tree_ref	业务单元（纯组织）	Y	N	Y	Y
+org_unit_tree_ref	组织部门树（业务树）	Y	Y （业务部门）	Y	Y
+bd_adminorgsharetreeref	业务部门树（含职能共享）	N	Y（业务部门）	N	N
+org_unit_manager_auth_ref	业务单元（目前仅权限节点使用）懒加载	Y	N	Y	N
+admin_dept_tree_ref	人力部门树参照	N	Y（人力部门）	N	Y
+bd_dept_list_ref	人力部门列表参照	N	Y（人力部门）	N	N
+orgcenter_admin_tree_ref	人力资源组织	Y（人力组织）	N	Y	Y
+org_admin_dept_tree_ref	人力资源组织部门树（人力树）懒加载	Y	Y（人力部门）	N	Y
+org_assets_tree_ref	资产组织参照	Y	N	Y	Y
+org_taxpayer_tree_ref	纳税主体参照	Y	N	Y	Y
+bd_planorg	计划中心	Y	N	Y	Y
+bd_qualityorg	质检中心	Y	N	Y	Y
+bd_energyorg	能源组织	Y	N	Y	Y
+bd_rdorg	研发中心	Y	N	Y	Y
+bd_safetyorg	安环组织	Y	N	Y	Y
+bd_logisticsorg	物流组织	Y	N	Y	Y
+bd_maintainorg	维修组织	Y	N	Y	Y
+bd_purchaseorg	采购组织	Y	N	Y	Y
+bd_factoryorg	工厂组织	Y	N	Y	Y
+bd_inventoryorg	库存组织	Y	N	Y	Y
+bd_salesorg	销售组织	Y	N	Y	Y
+bd_financeorgtreeref	会计主体	Y	N	Y	Y
+org_fun_filter_list_ref	业务单元列表参照(支持职能过滤)	Y	N	Y	Y
+组织已废弃参照及替换说明
+原参照	替代参照	说明
+bd_admindepttreeref（非公共参照）	admin_dept_tree_ref	部门参照
+bd_admindepttreeviewref(公共参照废弃)	admin_dept_tree_ref	视图参照逐渐废弃，用部门的参照
+bd_adminorgtreeref(公共参照废弃)	org_admin_dept_tree_ref	人力组织视图参照逐渐废 弃，用人力资源组织部门树（人力树）
+bd_adminorgtreeviewref(公共参照废弃)	orgcenter_admin_tree_ref	人力组织视图参照逐渐废弃，用人力资源组织参照
+bd_baseorgref(公共参照废弃)	org_unit_tree_ref	基础业务组织部门参照，用org_unit_tree_ref 代替
+bd_dept_list_ref(公共参照废弃)		部门列表参照
+bd_dept_table_ref(公共参照废弃)		标准部门参照
+bd_itorgdepttreeref（非公共参照）		IT 部门参照
+原参照	替代参照	说明
+dept_bus_tree_ref	bd_adminorgsharetreeref	业务部门参照，只有采购用， 后续不维护
+org_admin_tree_ref(公共参照废弃)	orgcenter_admin_tree_ref	人力资源组织参照，人力资源组织树
+org_assets_global_tree_ref(公共参照废弃)	org_assets_tree_ref	资产组织
+org_fin_global_view_table_tree_ref(公共参照废弃)	bd_financeorgtreeref	会计主体
+org_shop_list_ref(公共参照废弃)		门店组织参照
+组织参照参数控制
+参数	说明	示例
+ref_parentorgid	传入部门所属组织的 id，返回该组织下的部门	"ref_parentorgid": "12345678"
+noPermissionRequired	传 true 跳过参照的主组织权限过滤，不传默认进行主组织权限过滤	"noPermissionRequired": true
+groupType	职能组合方式and/or	groupType:"or"
+funcCodes	查询的职能数组	
+ *           1. []()[]()**组织参照主组织权限控制**
+
+
+主组织权限支撑整个领域的数据隔离，领域服务通过框架直接依赖权限中心，权限中心保存了组织授权数据，在领域查询组织权限时，权限会调用组织中心接口进行组织规则解析和职能过滤。
+
+一个典型的业务单据如下图所示，其单据上采购组织为主组织字段，需要受主组织权限控制，其他收获组织、收票组织等均不需要进行主组织权限控制。
+
+组织参照为了兼容非 mdd 项目和某些历史项目，对外提供的参照默认进行了主组织权限控制，对于非主组织字段，如果需要使用组织参照，不希望进行组织权限控制， 需要在 externalData 中显示传递 "noPermissionRequired": true。
+
+主组织权限详见《iuap-权限管理红皮书》
+
+组织参照显示企业账号级
+
+组织参照默认不显示企业账号级，如需显示，在确认参照支持的情况下，需进行如下配置：确认是否支持，请参考 4.1.1.1 图中的【支持全局】列
+
+ *           *                1. ![](https://ncc-pub-ublim.oss-cn-beijing.aliyuncs.com/help/photo/9503b2f4-6628-4136-b35c-91905315762d.png)运营后台 - 服务管理，确认对应服务勾选 “主组织包含全局”
+   2. 确认授权节点已经授权 “企业账号级”
+
+
+![](https://ncc-pub-ublim.oss-cn-beijing.aliyuncs.com/help/photo/df14dd12-c7ad-495f-9547-b961ffc65650.png
+
+确认在请求参照的时候 externalData 里已经增加了 ShowGlobal: true
+
+**示 例 **："externalData": { "ShowGlobal": "true"
+
+}
+
+组织业务函数
+组织提供的公式方法
+*getDeptLevel(deptId) *用于计算当前部门所属组织下的层级
+*getDeptPath(deptId, fromRoot, includeCurrentNode) *获取部门全路径名称
+*getNodeOnDeptPath(deptId, fromRoot, level) *获取部门路径上的某级路径
+适配组织公式
+引组织 jar，确认是否引入过 iuap-org-api.jar
+
+公式的触发
+
+参考《iuap-公式组件红皮书》
+
+ *           *                *                     1. []()**非持久化方式**
+
+
+通过后端业务触发， 实时计算， 用于查询展示， 结果不入库（ 涉及到的动作detail/query/querytree 和对应规则）
+
+适配注意事项：
+
+detail/query/querytree 动作里加入规则 mddExtFormulaRule
+
+适配前端框架新特性 getTplIdFirst，20220117-领域接入新版本 UI 模板管理功能 参考 1.3
+
+导出时需在 bill_command 里导出的 svcurl 上跟个参数 action=output，目的是可以查到正确的模板 id
+
+ *           *                *                     1. []()**持久化方式**
+
+
+前端触发，可以配置自定义项，然后在高级设计器中给自定义项配上公式，达到持久化效果
+
+适配注意事项：
+
+自定义 controller 入口代码
+
+加入运行时规则信息
+
+公式使用示例
+环境：预发
+
+租户：0116 预发旗舰全
+
+公式方法： getDeptLevel(dept_id)
+
+以“员工”节点为例，预发环境上UI 模板里“组织管理”下的节点都是旧模板入
+
+口
+
+非持久化
+ *           *                *                     1. []()**层级公式**
+
+找到页面的 UI 模板。
+
+进入 UI 模板，右上有 “未升级原 UI 模板入口” 按钮，点这里进入
+
+打开页面的设计器。
+
+进入旧版 UI 模板，在组织管理下找到 “岗位列表”，右侧在非系统级模板下，点击设计按钮，进入设计器页面
+
+设计器里配置文本框。
+
+在高级模板设计器里，从左侧拖拽一个”文本框” 到模板列表上 ，修改多语标题为“部门层级”
+
+配置公式。
+
+选中这个文本框表头后，在右侧属性里找到“设置公式”，点击进入公式设计器进行配置;
+公式设计器里，左侧“业务函数”的分类下，找到部门的公式 getDeptLevel，单机后进入公式编辑区，
+公式设计器里，右侧选择 “所属部门” id 作为参数传入公式，保存
+
+设计器配置完成后，保存，去界面上查看效果，第一条为例， “测试部”为“曾氏总部”组织下的一级部门
+
+ *           *                *                     1. []()**路径公式**
+
+公式简介：
+
+getDeptPath(deptId, fromRoot, includeCurrentNode)
+
+**功能: **获取部门路径名称 如 AA/BB/CC
+
+**备注：部门型组织按部门处理参数: ***deptId *--当前部门 ID
+
+*fromRoot *-- 是否从根开始， 1 根开始， 0 所属组织开始， 默认 1
+
+*includeCurrentNode *--是否包含当前节点，1 包含，0 不包含，默认 1
+
+前 1，2，3 步同上面部门层级公式
+
+配置公式
+
+选中这个文本框表头后，在右侧属性里找到“设置公式”，点击进入公式设计器进行配置;
+公式设计器里，左侧“业务函数”的分类下，找到部门的公式 getDeptPath， 单机后进入公式编辑区，
+公式设计器里，右侧选择 “所属部门” id 作为参数传入公式，
+第 2，3 参数可根据实际需要配置
+
+设计器配置完成后，保存，去界面上查看效果，第一条为例， “测试部”为从根开始全路径下 的二级路径
+
+持久化
+
+项目节点为例：
+
+在 “自定义项设置” 里加个自定义项，并分配到相应的单据上
+
+在“UI 模板” 找到对应的单据后，打开设计器，选择新加的自定义项后，在右侧 设置公式 里配上 getDeptLevel(deptId) ，deptId 从“单据字段” 上选择对应的部门
+
+保存后，去“项目” 节点新增
+第五章 典型业务场景介绍
+人力组织部门树与业务组织部门树
+
+企业管理过程中，人力组织架构往往根据行政发文建立，与实际业务管控架构不完全一样，这是许多企业中常见的管控分离的场景。该场景下，人力资源组织与人力部门会构成一棵人力组织部门树，应用于人力的大部分场景，业务单元和部门会组成一棵业务组织部门树，应用于人力以外的大部分场景。组织管理提供这两棵树的维护、查看、参照等基础能力。
+
+人力组织部门树的设置
+
+人力组织树的上级设置，在人力资源的职能上设置上级
+
+人力部门树的上级设置，选完人力资源组织后设置所属上级，构成部门树。
+
+人力组织部门树的查看，可以在组织结构图节点选择人力资源组织职能后查看。
+
+人力组织部门树的使用场景列举如下： 人力业务场景的参照
+
+业务组织部门树的设置
+
+业务组织的上级设置，在组织基本信息的上级组织单元设置
+
+业务树中部门的上级在部门节点设置，部门节点的业务归属字段指定了部门在业务树上的位置，如下图所示：
+
+业务组织部门树可以在组织结构图节点查看，职能类型选中业务单元
+
+业务组织部门的使用，
+
+权限角色管理及授权的组织部门参照
+
+财务、营销、制造、等非人力场景用的是业务组织部门参照
+
+协同、审批流用的是业务组织部门树 
+
+组织数据同步
+产品目的
+
+为了便于客户快速迁移原有系统的数据到 BIP 系统，数据集成功能负责同步 nc63， nc65 等其他外部系统的数据到 bip 系统的数据库中。
+
+组织服务支持了数据集成功能中的各种职能组织和部门的同步视图，提供了同步业务单元，职能组织和部门的能力。
+
+组织数据集成接口
+同步视图	接口地址	备注
+预制全局集团组织	/rest/yql/adminorg/precut	GLOBLE00 — 666666，建立全局组织映射
+组织单元	/rest/yql/adminorg/save/y3me	同步业务单元
+部门	/rest/yql/adminorg/save/dept	同步部门，单组织租户无法使用
+财务组织	/rest/yql/finorg/save/y3me	同步会计主体
+资产组织	/rest/yql/assets/save/y3me	同步资产组织
+采购组织	/rest/yql/purchase/save/y3me	同步采购组织
+库存组织	/rest/yql/inventory/save/y3me	同步库存组织
+人力资源职能	/rest/yql/rest/save/y3me	同步人力组织
+销售组织	/rest/yql/sales/save/y3me	同步销售组织
+工厂组织	/rest/yql/factory/save/y3me	同步工厂组织
+同步删除数据	/rest/yql/rest/yql/delete	同步外部系统删除的数据
+组织同步流程
+数据同步总体流程
+
+YonLinker 提供同步任务配置及从外系统中拉取数据的功能，基础数据平台接收YonLinker 推送的外部系统数据，进行批量处理校验后，存储到云平台数据库，通过调用友互通 SDK 同步用户信息到友互通，然后通过事件中心，将同步数据以事件的形式推送到友空间和友人才等系统(这部分主要是人员同步相关，组织主要是发送组织的新增， 更新，启停事件给外部服务，例如财务，库存)，将错误数据和外系统与云平台的主键映射关系回写到友企连。（这里以组织单元档案的同步为例，由于组织档案为为树形档案所以存在主键回写的步骤，非树形档案则没有主键回写的步骤）。
+
+ *           *                *                     1. YonLinker 根据事先构建的数据映射关系，拉取数据，并构造成 bip 组织数据的结构。
+      2. 将拉取到的组织数据分页推送到组织服务。
+      3. 校验推送数据，将合法数据保存，并回写错误信息和主键映射。
+      4. 重复第 2，3 步操作，直至整批数据全部推送完成。
+      5. 组织服务重新计算内部码，并向下游服务推送组织事件。
+
+
+组织树形档案同步
+
+树形档案和非树形档案的区别在于，树形档案需要同步上级 id 字段，而该字段需要将原来的外部系统 id 替换为 bip 系统的 id，所以需要在完全同步一次数据后，建立 bip 数据与外部系统数据的 id 映射关系，再将原来的外部系统 id 替换为 bip 系统 id，并再次同步，更新上一次的同步数据，恢复成原有的结构层次。
+
+所以，对于树形档案来说，一条数据需要经历两次同步，一次新增，一次更新，才能成功同步。组织服务涉及的树形档案：业务单元，部门，人力资源组织，销售组织， 会计主体。其余档案都是非树形档案。
+
+对应属性没有同步过来，此类问题，主要有两种可能，一是，YonLinker 没有拉取该字段，可以去数据同步任务节点，检查相应视图的同步 sql；二是，组织同步接口不支持该字段，在排除第一种可能之后，可以联系组织开发，排查第二种可能。 
+
+某一条数据没有同步过来，提示编码重复。这种情况往往由于，同步数据的编码已被占用，即在 bip 端已经建立了拥有该编码的数据，组织服务根据同步过来的数据的 objid 属性区分新增更新，而直接在 bip 端建立的数据不具有该属性，所以无法更新，解决此方法的手段主要有两种，一是，删除在 bip 端的数据，重新同步；二是， 联系组织开发，手动补充 objid 属性，建立 bip 数据与外部系统数据的联系。
+
+数据同步完成，但是视图同步结果提示失败，“事件发送失败”，这种情况主要由于之前同步或者本次同步数据的内部码计算失败导致，可尝试重新全量同步解决，如果无法解决，请联系组织开发排查。
+
+数据全量同步，可在数据同步任务节点，修改相应同步视图的视图条件定义，将其
+
+修改为 1=1，再次同步，即可实现全量同步。注意，全量同步完成后，注意将其恢复原状，以免影响后续的同步任务。
+
+同步过来的数据无法保存，提示 null，这种情况往往是由于，同步的组织数据没有正确计算内部码，内部码为空导致。对于此种情况，可尝试重新同步该条数据（所有职能）。若无法解决，可联系组织开发人员使用维护工具排查解决。 
+
+5.3** **职能共享
+
+使用示例
+ *           *                1. 在职能共享设置里添加共享的数据，即如图：天津组织下的部门服务于北京组织
+
+
+ *           *                1. 在财务的“成本中心”节点卡片里，选择会计主体是北京组织，然后再选择下面的部门时，请求部门的共享参照 ucf-org-center.bd_adminorgsharetreeref
+
+
+ *           *                1. 请求参照时，传入参数"externalData": {
+
+
+"ref_parentorgid": "对应的组织 id,这里传入北京组织的 id",
+
+}
+
+如图天津组织下的部门也会返回：
+
+职能共享参照使用说明
+参数名称	是否必填	参数描述
+dataType	是	参照类型 ：grid 列表 ，tree 树形
+refCode	是	参照编码： ucf-org-center.bd_adminorgsharetreeref
+ref_parentorgid	是	要 查 的 组 织 id， 可 批 量 ， 如 ： "2034695258575104,1995587886878976"
+funcCode	是	职能编码：all 全部职能，salesorg 销售组织，inventoryorg 库存组织，purchaseorg 采购组织，financeorg 财务组织
+accountdelegate	否	是否去查核算委托 "true" 查 ，"false"不查
+accountdelegatei d	否	填销售组织 id
+OrgShow	否	是否显示传入的组织 ( true 显示 ，false 不显示，默认 false）
+
+getRefData 获取数据请求参数如下示例： 
+
+5.4 期初设置
+
+期初设置先设置期间方案，如果只设置库存期初，则只需要选中库存职能，其他期初都是和会计主体职能做的关联。
+
+其中，期初显示规则如下：
+
+如果当前租户是 Yonsuite 专业版，会根据当前租户开通的产品应该来过滤展示期初，比如，如果当前租户只有财务的固定资产节点，那么期初设置只会展示固定资产节点的期初设置
+如果当前租户是 YonBip 版本，总账、应收管理、应付管理、固定资产、责任会计、产品成本、成本中心、专项成本、存货核算期初模块的期间需要在账簿节点进行配置，如下图，其他模块会根据购买产品来是否展示对应模块的期初
+
+期初设置的校验逻辑如下：
+
+库存期初，设置库存期初时，库存职能需要是启用状态
+存货期初，设置存货前必须先设置库存期初，存货的期初时间不能早于库存的期初
+产品成本，设置产品成本需要先设置存货期初，成本中心，产品成本不能早于存货， 不能早于成本中心
+专项成本，设置专项成本前需要设置存货期初，专项成本期初时间不能早于存货针对财务新架构的调整说明如下：
+第六章 开放接口说明
+
+编码组件对外提供 RESTful 和加签两种调用方式，RESTful 方式通过上下文中的用户登录信息验证请求合法性，加签调用方式通过加签文件验证。
+
+RESTful 接口
+
+组织中心不对外网直接暴露 API，所有的对外接口都通过开放平台的 OpenAPI 进行暴露，本章节给出主要 OpenAPI 的设计。
+
+业务单元详情接口
+请求说明
+请求地址	https://api.diwork.com/yonbip/digitalModel/orgunit/detail
+请求方式	GET
+ContentType	application/json
+事务和幂等性	无
+ *           *                1. []()**请求参数**
+
+名称	类型	参数位置	必填	描述
+access_token	string	query	是	调用方应用 token企 业 自 建 获 取token服务商获取 token
+id	string	query	是	业务数据 ID
+请求示例
+
+url:https://api.diwork.com/yonbip/digitalModel/orgunit/detail?access_to ken=&id=
+
+ *           *                1. []()**返回值参数**
+
+名称	类型	数组	描述
+code	string	否	返回码，调用成功时返回 200
+message	string	否	调用失败时的错误信息
+data	object	否	调用成功时的返回数据
+pageIndex	int	否	当前页数
+pageSize	int	否	每页行数
+pageCount	int	否	总页数
+beginPageIndex	int	否	开始页码（第一页）
+endPageIndex	int	否	结束页码（有多少页）
+recordCount	int	否	总数
+pubts	string	否	时 间 戳 , 格 式 为 :yyyy-MM-dd HH:mm:ss
+recordList	object	是	返回结果对象
+code	string	否	编码
+name		否	名称,支持多语
+名称	类型	数组	描述
+shortname		否	简称,支持多语
+companytype	string	否	组织形态id
+companytype_name	string	否	组织形态名称
+parent	string	否	上级组织单元id
+parent_name	string	否	上级组织单元名称
+orgtype	string	否	是否部门
+depttype	string	否	部门性质id
+depttype_name	string	否	部门性质名称
+principal	string	否	负责人id
+principal_name	string	否	负责人名称
+branchleader	string	否	分管领导id
+branchleader_name	string	否	分管领导名称
+corpid	string	否	对应合同主体id
+corpid_name	string	否	对应合同主体名称
+locationid	string	否	工作地点id
+locationid_name	string	否	工作地点名称
+taxpayerid	string	否	纳税人识别号
+名称	类型	数组	描述
+taxpayername	string	否	纳税人名称
+usedtaxpayerid	string	否	曾用纳税人识别号
+usedtaxpayername	string	否	曾用纳税人名称
+taxpayertype	string	否	纳税人类型, 1:一般纳税人、2:小规模纳税人、
+exchangerate	string	否	汇率类型id
+exchangerate_name	string	否	汇率类型名称
+language	string	否	语言
+language_select_language	string	否	语言
+timezone	string	否	时区
+timezone_timename	string	否	时区
+contact	string	否	联系人
+telephone	string	否	联系电话
+address		否	联系地址,支持多语
+description		否	描述,支持多语
+effectivedate	string	否	生 效 日 期 , 格 式 为 yyyy-MM-dd HHmmss
+expirationdate	string	否	失 效 日 期 , 格 式 为 yyyy-MM-dd
+名称	类型	数组	描述
+			HHmmss
+enable	int	否	状态, 0:未启用、1:启用、2:停用、
+id	string	否	主键
+orgid	string	否	组织单元主键
+pubts	string	否	时 间 戳 , 格 式 为 :yyyy-MM-dd HH:mm:ss
+objid	string	否	YonLinker 同步主键
+businessid	string	否	YonLinker 同步业务主键
+synchts	string	否	YonLinker 同 步 时 间 戳 , 格 式 为yyyy-MM-dd HHmmss
+financeOrg	object	否	financeOrg
+salesOrg	object	否	salesOrg
+purchaseOrg	object	否	采购组织id
+inventoryOrg	object	否	inventoryOrg
+factoryOrg	object	否	factoryOrg
+assetsOrg	object	否	assetsOrg
+taxpayerOrg	object	否	taxpayerOrg
+functypes	string	否	职能类型, orgunit:组织单元、salesorg:
+名称	类型	数组	描述
+			销 售 组 织 、 purchaseorg: 采 购 组 织 、inventoryorg:库存组织、factoryorg:工厂组织、financeorg:会计主体、assetsorg:资产组织、taxpayerorg:纳税主体、
+ *           *                1. []()**正确返回示例**
+
+
+{
+
+"code": "200",
+
+"message": "操作成功", "data": {
+
+"parent": "", "enable": 1,
+
+"companytype_name": "公司", "id": "1511040517705984",
+
+"orgtype": false, "telephone": "62986688", "shortname": {
+
+"zh_CN": "yontest 云创股份"
+
+},
+
+"orgid": "1511040517705984",
+
+"name": {
+
+"zh_CN": "yontest 云创股份"
+
+},
+
+"code": "yontest", "exchangerate": "umwz7rz7", "description": {},
+
+"effectivedate": "2019-12-05 00:30:02",
+
+"pubts": "2020-08-29 03:39:14",
+
+"address": {
+
+"zh_CN": "北清路 68 号"
+
+},
+
+"taxpayername": "yontest 云创股份", "exchangerate_name": "基准汇率",
+
+"companytype": "45ebda24614f424abe5dfb04e00f737c", "taxpayerid": "111111111111111111",
+
+"salesOrg": {
+
+"dr": 0,
+
+"pubts": "2020-08-29 03:39:14",
+
+"enable": 1,
+
+"effectivedate": "2020-08-28 14:39:14",
+
+"id": "1511040517705984"
+
+},
+
+"factoryOrg": {
+
+"pubts": "2020-08-29 03:39:14",
+
+"effectivedate": "2020-08-28 14:39:14",
+
+"id": "1511040517705984",
+
+"dr": 0,
+
+"enable": 1
+
+},
+
+"purchaseOrg": {
+
+"id": "1511040517705984",
+
+"dr": 0,
+
+"enable": 1,
+
+"pubts": "2020-08-29 03:39:14",
+
+"effectivedate": "2020-08-28 14:39:14"
+
+},
+
+"financeOrg": {
+
+"currency": "G001ZM0000DEFAULTCURRENCT00000000001", "dr": 0,
+
+"periodschema_name": "基准会计期间方案", "periodschema": 1509685126811907,
+
+"effectivedate": "2020-08-28 14:39:14",
+
+"id": "1511040517705984",
+
+"currency_name": " 人 民 币 ", "isexternalaccounting": "true", "pubts": "2020-08-29 03:39:14",
+
+"enable": 1
+
+},
+
+"inventoryOrg": { "enable": 1,
+
+"finorgid_name": "yontest 云创股份", "id": "1511040517705984",
+
+"dr": 0,
+
+"finorgid": "1511040517705984",
+
+"pubts": "2020-08-29 03:39:14",
+
+"effectivedate": "2020-08-28 14:39:14"
+
+}
+
+}
+
+}
+
+业务单元列表查询接口
+请求说明
+请求地址	https://api.diwork.com/yonbip/digitalModel/orgunit/querytree
+请求方式	POST
+ContentType	application/json
+事务和幂等性	无
+ *           *                1. []()**请求参数**
+
+名称	类型	参数位置	必填	描述
+access_token	string	query	是	调用方应用 token企 业 自 建 获 取token服务商获取 token
+
+Body 参数
+
+名称	类型	数组	必填	描述
+code	string	否	否	组织编码 示例：yy1
+name	string	否	否	组织名称 示例：测试组织
+enable	string	否	否	状态, 0:未启用、1:启用、2:停用、 示例：1
+请求示例
+
+{
+
+"code": "yy1",
+
+"name": "测试组织",
+
+"enable": "1"
+
+}
+
+ *           *                1. []()**返回值参数**
+
+名称	类型	数组	描述
+code	string	否	状态码
+message	string	否	提示信息
+data	object	是	返回数据
+正确返回示例
+
+{
+
+"code": "200",
+
+"message": "操作成功", "data": [
+
+{
+
+"parent": "",
+
+"code": "yontest", "exchangerate": "umwz7rz7",
+
+"modifier": "0b32d89f-3b0b-4008-9c4c-6145422af156", "effectivedate": "2019-12-05 00:30:02", "innercode": "THUK",
+
+"dr": 0,
+
+"parentid": "",
+
+"modifiedtime": "2020-08-28 14:39:14", "children": [
+
+{
+
+"parent": "1511040517705984",
+
+"code": "bj_cczx", "exchangerate": "umwz7rz7",
+
+"modifier": "0b32d89f-3b0b-4008-9c4c-6145422af156", "effectivedate": "2019-12-05 00:31:42", "innercode": "THUKZVPY",
+
+"dr": 0,
+
+"parentid": "1511040517705984",
+
+"modifiedtime": "2019-12-05 03:49:52",
+
+"enable": 1, "tenantid": "umwz7rz7",
+
+"id": "1511042233094400",
+
+"isdefault": 0,
+
+"isbizunit": 1,
+
+"pubts": "2020-05-16 13:50:03",
+
+"tenant": "umwz7rz7", "orgtype": 1,
+
+"creator": "0b32d89f-3b0b-4008-9c4c-6145422af156", "sysid": "diwork",
+
+"level": 2,
+
+"displayorder": 2,
+
+"sort": 2,
+
+"shortname": "北京仓储中心", "orgid": "1511042233094400",
+
+"companytype": "45ebda24614f424abe5dfb04e00f737j", "name": "仓储中心-北京",
+
+"creationtime": "2019-12-05 00:31:39",
+
+"taxpayerid": "123456789",
+
+"ts": "2020-05-16 13:50:03"
+
+}
+
+],
+
+"enable": 1, "tenantid": "umwz7rz7",
+
+"id": "1511040517705984",
+
+"isdefault": 0,
+
+"isbizunit": 1,
+
+"pubts": "2020-08-29 03:39:14",
+
+"tenant": "umwz7rz7", "orgtype": 1,
+
+"creator": "0b32d89f-3b0b-4008-9c4c-6145422af156", "address": "北清路 68 号",
+
+"sysid": "diwork", "level": 1,
+
+"telephone": "62986688",
+
+"displayorder": 1,
+
+"sort": 1,
+
+"shortname": "yontest 云创股份", "orgid": "1511040517705984",
+
+"taxpayername": "yontest 云创股份",
+
+"companytype": "45ebda24614f424abe5dfb04e00f737c", "name": "yontest 云创股份",
+
+"creationtime": "2019-12-05 00:29:54",
+
+"taxpayerid": "111111111111111111",
+
+"ts": "2020-08-29 03:39:14"
+
+}
+
+]
+
+}
+
+业务单元保存接口
+请求说明
+请求地址	https://api.diwork.com/yonbip/digitalModel/orgunit/save
+请求方式	POST
+ContentType	application/json
+事务和幂等性	无
+ *           *                1. []()**请求参数**
+
+名称	类型	参数位置	必填	描述
+access_token	string	query	是	调用方应用 token企 业 自 建 获 取token服务商获取 token
+
+Body 参数
+
+名称	类型	数组	必填	描述
+data	object	否	是	组 织 单 元[org.func.BaseOrg]
+code	string	否	是	编码
+name	muti_lang	否	是	名称,支持多语
+shortname	muti_lang	否	否	简称,支持多语
+companytype	string	否	否	组织形态id
+companytype_name	string	否	否	组织形态名称
+parent	string	否	否	上级组织单元id
+parent_name	string	否	否	上级组织单元名称
+orgtype	boolean	否	是	是否部门 true 部门 false 非部门）
+depttype	string	否	否	部门性质id
+depttype_name	string	否	否	部门性质名称
+principal	string	否	否	负责人id
+principal_name	string	否	否	负责人名称
+branchleader	string	否	否	分管领导id
+branchleader_name	string	否	否	分管领导名称
+corpid	string	否	否	对应合同主体id
+名称	类型	数组	必填	描述
+corpid_name	string	否	否	对应合同主体名称
+locationid	string	否	否	工作地点id
+locationid_name	string	否	否	工作地点名称
+taxpayerid	string	否	否	纳税人识别号
+taxpayername	string	否	否	纳税人名称
+usedtaxpayerid	string	否	否	曾用纳税人识别号
+usedtaxpayername	string	否	否	曾用纳税人名称
+taxpayertype	string	否	否	纳税人类型, 1:一般纳税人、2:小规模纳税人、
+exchangerate	string	否	否	汇率类型id
+exchangerate_name	string	否	否	汇率类型名称
+language	string	否	否	语言
+language_select_language	string	否	否	语言
+timezone	string	否	否	时区
+timezone_timename	string	否	否	时区
+contact	string	否	否	联系人
+telephone	string	否	否	联系电话
+名称	类型	数组	必填	描述
+address	muti_lang	否	否	联系地址,支持多语
+description	muti_lang	否	否	描述,支持多语
+effectivedate	string	否	否	生 效 日 期 , 格 式 为yyyy-MM-dd HHmmss
+expirationdate	string	否	否	失 效 日 期 , 格 式 为yyyy-MM-dd HHmmss
+enable	int	否	否	状态, 0:未启用、1:启用、2:停用、
+id	string	否	否	主键 新增时无需填写， 修改时必填 新增时无需填写，修改时必填
+orgid	string	否	否	组织单元主键
+pubts	string	否	否	时 间 戳 , 格 式为:yyyy-MM-dd HH:mm:ss
+objid	string	否	否	YonLinker 同步主键
+businessid	string	否	否	YonLinker 同步业务主键
+synchts	string	否	否	YonLinker 同步时间戳, 格 式 为 yyyy-MM-dd HHmmss
+financeOrg	object	否	是	会计主体
+salesOrg	object	否	是	销售组织
+名称	类型	数组	必填	描述
+purchaseOrg	object	否	否	采购组织
+inventoryOrg	object	否	是	库存组织
+factoryOrg	object	否	否	工厂组织
+assetsOrg	object	否	否	资产组织
+taxpayerOrg	object	否	是	纳税主体
+functypes	string	否	否	职能类型, orgunit:组织单元、salesorg:销售组织、purchaseorg: 采 购 组 织 、inventoryorg: 库 存 组 织 、factoryorg: 工 厂 组 织 、financeorg: 会 计 主 体 、assetsorg: 资 产 组 织 、taxpayerorg:纳税主体、
+_status	string	否	是	操作标识, Insert:新增、Update:更新
+externalData	object	否	否	扩展参数
+typelist	string	是	否	职能类型列表,salesorg: 销售组织、purchaseorg:采购组织、inventoryorg:库存组织、factoryorg:工厂组织、financeorg: 会 计 主 体 、assetsorg: 资 产 组 织 、taxpayerorg:纳税主体、
+请求示例
+
+{
+
+"data": {
+
+"code": "019",
+
+"name": { "zh_CN": "teset"
+
+},
+
+"shortname": {
+
+"zh_CN": "01"
+
+},
+
+"companytype": "45ebda24614f424abe5dfb04e00f737c", "companytype_name": "公司",
+
+"parent": "1511040517705984",
+
+"parent_name": "yontest 云创股份", "orgtype":"0",
+
+"dr":"0",
+
+"depttype": "561d9c8b5ede4f57bf28d96ced5cefbe", "depttype_name": "研发部门",
+
+"principal": "1889146172363008",
+
+"principal_name": "ww", "branchleader": "1889066421195008", "branchleader_name": "ss",
+
+"corpid": "4342c3daef42443387cdf92d31732738", "corpid_name": " 合 同 主 体 2020-03-24 16:30:21", "locationid": "b006d4acf02947d4bc6df3d2a080aa6c", "locationid_name": "工作地点 2020-04-13 16:30:19",
+
+"taxpayerid": "1111111111111", "taxpayername": "ss", "usedtaxpayerid": "1111", "usedtaxpayername": "ss", "taxpayertype": "1", "exchangerate": "umwz7rz7", "exchangerate_name": "基准汇率",
+
+"language": "d3a95d36-0ce4-11ea-817e-7cd30abea0c3", "language_select_language": "français",
+
+"timezone": "faaf24f3-8d43-4bf8-a7bc-e04a90f63c32", "timezone_timename": "(UTC+05:00) 俄罗斯 TZ 4 标准时间", "contact": "18896012675",
+
+"telephone": "18896012675", "address": {
+
+"zh_CN": "ypnyou"
+
+},
+
+"description": {
+
+"zh_CN": "test",
+
+"dr": "0"
+
+},
+
+"enable": "0", "id": null,
+
+"pubts": null, "_status": "Insert", "level": 2,
+
+"assetsOrg": {
+
+"enable": "0",
+
+"dr": "0"
+
+},
+
+"financeOrg": {
+
+"currency": "G001ZM0000DEFAULTCURRENCT00000000001",
+
+"periodschema_name": "基准会计期间方案", "periodschema": "1509685126811907",
+
+"parentid_name": "yontest 云创股份", "parentid": "1511040517705984",
+
+"currency_name": "人民币", "enable": "0",
+
+"isexternalaccounting": "1",
+
+"dr": "0"
+
+},
+
+"inventoryOrg": {
+
+"enable": "0"
+
+},
+
+"purchaseOrg": {
+
+"enable": "0"
+
+},
+
+"taxpayerOrg": {
+
+"enable": "0",
+
+"dr": "0"
+
+},
+
+"factoryOrg": {
+
+"enable": "0"
+
+},
+
+"salesOrg": {
+
+"enable": "0"
+
+}
+
+},
+
+"externalData": {
+
+"typelist": ["financeorg"]
+
+}
+
+}
+
+返回值参数
+名称	类型	数组	描述
+code	string	否	返回码，调用成功时返回 200
+message	string	否	调用失败时的错误信息
+data	object	否	调用成功时的返回数据
+code	string	否	编码
+name	muti_lang	否	名称,支持多语
+shortname	muti_lang	否	简称,支持多语
+名称	类型	数组	描述
+companytype	string	否	组织形态 id
+companytype_name	string	否	组织形态名称
+parent	string	否	上级组织单元 id
+parent_name	string	否	上级组织单元名称
+orgtype	string	否	是否部门 (1 部门 0 非部门）
+depttype	string	否	部门性质 id
+depttype_name	string	否	部门性质名称
+principal	string	否	负责人 id
+principal_name	string	否	负责人名称
+branchleader	string	否	分管领导 id
+branchleader_name	string	否	分管领导名称
+corpid	string	否	对应合同主体 id
+corpid_name	string	否	对应合同主体名称
+locationid	string	否	工作地点 id
+locationid_name	string	否	工作地点名称
+taxpayerid	string	否	纳税人识别号
+taxpayername	string	否	纳税人名称
+名称	类型	数组	描述
+usedtaxpayerid	string	否	曾用纳税人识别号
+usedtaxpayername	string	否	曾用纳税人名称
+taxpayertype	string	否	纳税人类型, 1:一般纳税人、2:小规模纳税人、
+exchangerate	string	否	汇率类型 id
+exchangerate_name	string	否	汇率类型名称
+language	string	否	语言
+language_select_language	string	否	语言
+timezone	string	否	时区
+timezone_timename	string	否	时区
+contact	string	否	联系人
+telephone	string	否	联系电话
+address	muti_lang	否	联系地址,支持多语
+description	muti_lang	否	描述,支持多语
+effectivedate	string	否	生效日期,格式为 yyyy-MM-dd HHmmss
+expirationdate	string	否	失效日期,格式为 yyyy-MM-dd HHmmss
+enable	int	否	状态, 0:未启用、1:启用、2:停用、
+id	string	否	主键
+名称	类型	数组	描述
+orgid	string	否	组织单元主键
+pubts	string	否	时间戳,格式为:yyyy-MM-dd HH:mm:ss
+objid	string	否	YonLinker 同步主键
+businessid	string	否	YonLinker 同步业务主键
+synchts	string	否	YonLinker 同步时间戳, 格式为 yyyy-MM-dd HHmmss
+financeOrg	object	否	会计主体
+salesOrg	object	否	销售组织
+purchaseOrg	object	否	采购组织
+inventoryOrg	object	否	库存组织
+factoryOrg	object	否	工厂组织
+assetsOrg	object	否	资产组织
+taxpayerOrg	object	否	纳税主体
+functypes	string	否	职能类型, orgunit:组织单元、salesorg:销售组织、purchaseorg:采购组织、inventoryorg:库存组织、factoryorg:工厂组织、financeorg:会计主体、assetsorg:资产组织、taxpayerorg:纳税主体、
+ *           *                1. []()**正确返回示例**
+
+
+{
+
+"code": 200, "message": "操作成功",
+
+"data": { "corpid_name": "合同主体 2020-03-24 16:30:21", "corpid": "4342c3daef42443387cdf92d31732738", "principal_name": "ww",
+
+"language": "d3a95d36-0ce4-11ea-817e-7cd30abea0c3", "branchleader": "1889066421195008",
+
+"enable": 0,
+
+"contact": "18896012675",
+
+"companytype_name": "公司", "id": "1890382467486464",
+
+"orgtype": 1,
+
+"usedtaxpayerid": "1111",
+
+"level": 2,
+
+"telephone": "18896012675", "shortname": {
+
+"zh_CN": "01"
+
+},
+
+"usedtaxpayername": "ss", "name": {
+
+"zh_CN": "teset"
+
+},
+
+"taxpayertype": 1,
+
+"locationid_name": "工作地点 2020-04-13 16:30:19",
+
+"code": "009", "exchangerate": "umwz7rz7",
+
+"timezone": "faaf24f3-8d43-4bf8-a7bc-e04a90f63c32", "depttype_name": "研发部门",
+
+"description": {
+
+"zh_CN": "test"
+
+},
+
+"principal": "1889146172363008",
+
+"timezone_timename": "(UTC+05:00) 俄罗斯 TZ 4 标准时间", "pubts": "2020-08-28 09:56:29",
+
+"address": {
+
+"zh_CN": "ypnyou"
+
+},
+
+"language_select_language": "français", "taxpayername": "ss", "exchangerate_name": "基准汇率",
+
+"companytype": "45ebda24614f424abe5dfb04e00f737c", "locationid": "b006d4acf02947d4bc6df3d2a080aa6c", "branchleader_name": "ss",
+
+"depttype": "561d9c8b5ede4f57bf28d96ced5cefbe", "taxpayerid": "1111111111111",
+
+"parentid": "1511040517705984",
+
+"parentid_name": "yontest 云创股份", "sysid": "diwork",
+
+"dr": 0,
+
+"isbizunit": 1,
+
+"orgid": "1890382467486464",
+
+"parentorgid": "1511040517705984",
+
+"creator": "0b32d89f-3b0b-4008-9c4c-6145422af156", "creationtime": "2020-08-28 09:56:29", "innercode": "THUKVCUL",
+
+"displayorder": 12, "tenant_id": "umwz7rz7",
+
+"yhtTenant": "umwz7rz7", "tenant": "umwz7rz7", "multiLangName": "teset", "adminOrg": { "isbizunit": 1, "exchangerate": "umwz7rz7", "tenant": "umwz7rz7", "innercode": "THUKVCUL", "name": {
+
+"zh_CN": "teset"
+
+},
+
+"orgid": "1890382467486464",
+
+"principal": "1889146172363008",
+
+"taxpayertype": 1, "usedtaxpayername": "ss", "taxpayername": "ss", "enable": 0,
+
+"creator": "0b32d89f-3b0b-4008-9c4c-6145422af156", "address": {
+
+"zh_CN": "ypnyou"
+
+},
+
+"creationtime": "2020-08-28 09:56:29", "locationid": "b006d4acf02947d4bc6df3d2a080aa6c", "companytype": "45ebda24614f424abe5dfb04e00f737c", "usedtaxpayerid": "1111",
+
+"corpid": "4342c3daef42443387cdf92d31732738", "code": "009",
+
+"dr": 0,
+
+"parentorgid": "1511040517705984",
+
+"depttype": "561d9c8b5ede4f57bf28d96ced5cefbe", "taxpayerid": "1111111111111",
+
+"branchleader": "1889066421195008",
+
+"id": "1890382467486464",
+
+"orgtype": 2,
+
+"shortname": {
+
+"zh_CN": "01"
+
+},
+
+"telephone": "18896012675", "sysid": "diwork", "language":
+
+"d3a95d36-0ce4-11ea-817e-7cd30abea0c3",
+
+"parentid": "1511040517705984",
+
+"yhtTenant": "umwz7rz7", "displayorder": 12, "timezone":
+
+"faaf24f3-8d43-4bf8-a7bc-e04a90f63c32",
+
+"level": 2,
+
+"contact": "18896012675",
+
+"pubts": "2020-08-28 09:56:29"
+
+},
+
+"financeOrg": {
+
+"corpid": "4342c3daef42443387cdf92d31732738", "periodschema": 1509685126811907,
+
+"telephone": "18896012675", "tenant": "umwz7rz7", "usedtaxpayerid": "1111", "shortname": {
+
+"zh_CN": "01"
+
+},
+
+"currency_name": "人民币", "language":
+
+"d3a95d36-0ce4-11ea-817e-7cd30abea0c3",
+
+"principal": "1889146172363008",
+
+"contact": "18896012675",
+
+"parentid": "1511040517705984",
+
+"timezone": "faaf24f3-8d43-4bf8-a7bc-e04a90f63c32",
+
+"description": {
+
+"zh_CN": "test"
+
+},
+
+"name": {
+
+"zh_CN": "teset"
+
+},
+
+"branchleader": "1889066421195008",
+
+"companytype": "45ebda24614f424abe5dfb04e00f737c", "address": {
+
+"zh_CN": "ypnyou"
+
+},
+
+"currency": "G001ZM0000DEFAULTCURRENCT00000000001",
+
+"creator": "0b32d89f-3b0b-4008-9c4c-6145422af156", "dr": 0,
+
+"periodschema_name": "基准会计期间方案", "orgtype": 2,
+
+"displayorder": 6, "yhtTenant": "umwz7rz7", "exchangerate": "umwz7rz7", "id": "1890382467486464",
+
+"code": "009",
+
+"isexternalaccounting": 1,
+
+"orgid": "1890382467486464",
+
+"creationtime": "2020-08-28 09:56:29",
+
+"taxpayertype": 1,
+
+"pubts": "2020-08-28 09:56:29",
+
+"sysid": "diwork", "innercode": "IGHBS0J4", "level": 2,
+
+"parentid_name": "yontest 云创股份",
+
+"locationid": "b006d4acf02947d4bc6df3d2a080aa6c", "taxpayername": "ss",
+
+"depttype": "561d9c8b5ede4f57bf28d96ced5cefbe", "enable": 0,
+
+"taxpayerid": "1111111111111", "usedtaxpayername": "ss"
+
+}
+
+}
+
+}
+
+部门详情查询接口
+请求说明
+请求地址	https://api.diwork.com/yonbip/digitalModel/admindept/detail
+请求方式	GET
+ContentType	application/json
+事务和幂等性	无
+请求参数
+名称	类型	参数位置	必填	描述
+access_token	string	query	是	调用方应用 token企业自建获取 token服务商获取 token
+id	string	query	是	业务数据 ID
+
+Body 参数
+
+名称	类型	数组	必填	描述
+请求示例
+
+https://api.diwork.com/yonsuite/digitalModel//admindept/detail?access_t oken=&id=
+
+返回值参数
+名称	类型	数组	描述
+code	string	否	返回码，调用成功时返回 200
+名称	类型	数组	描述
+message	string	否	调用失败时的错误信息
+data	object	否	调用成功时的返回数据
+principal	string	否	负责人 id
+parent	string	否	所属上级 id
+parentorgid_name	string	否	所属上级组织
+id	string	否	部门 ID
+parent_name	string	否	所属上级名称
+depttype	string	否	部门类型 id
+branchleader	string	否	分管领导 id
+sysid	string	否	系统 id
+principal_name	string	否	负责人名称
+orgid	string	否	部门组织
+depttype_name	string	否	部门性质名称
+name	muti_lang	否	多语
+innercode	string	否	内部编码
+dr	string	否	删除标识
+sort	string	否	排序
+名称	类型	数组	描述
+parent_code	string	否	所属上级
+code	string	否	部门编码
+branchleader_name	string	否	分管领导名称
+pageIndex	int	否	当前页数
+pageSize	int	否	每页行数
+pageCount	int	否	总页数
+beginPageIndex	int	否	开始页码（第一页）
+endPageIndex	int	否	结束页码（有多少页）
+recordCount	int	否	总数
+path	string	否	父级路径
+effectivedate	string	否	生效时间,格式为:yyyy-MM-dd HH:mm:ss
+enable	int	否	状态 0 未启用 1.启用 2.停用
+is_biz_unit	int	否	是否业务单元 0 否 1.是
+orgtype	int	否	组织部门 1 组织 2.部门
+isEnd	string	否	是否末级节点 0 是 1.否
+bizorgid	string	否	上级组织
+bizorgid_name	string	否	上级组织名称
+名称	类型	数组	描述
+parentorgid	string	否	上级组织
+creationtime	string	否	创建时间,格式为:yyyy-MM-dd HH:mm:ss
+pubts	string	否	时间戳,格式为:yyyy-MM-dd HH:mm:ss
+正确返回示例
+
+{
+
+"code": "200",
+
+"message": "操作成功", "data": {
+
+"parent_name": "yontest**", "parent": "1511040517705984",
+
+"code": "test004", "depttype_name": "管理部门", "principal_name": "**",
+
+"effectivedate": "2020-09-01 21:04:40", "innercode": "THUKNUFV",
+
+"dr": 0,
+
+"principal": "1511226816925952",
+
+"branchleader": "1511399123505408",
+
+"enable": 1,
+
+"is_biz_unit": 0, "parent_code": "yontest", "id": "1896701619245312",
+
+"pubts": "2020-09-01 21:04:40",
+
+"orgtype": 2,
+
+"level": "2",
+
+"sysid": "diwork", "sort": 99999,
+
+"isEnd": 1,
+
+"orgid": "1896701619245312",
+
+"parentorgid": "1511040517705984", "branchleader_name": "**",
+
+"name": {
+
+"zh_CN": "测试部门 04"
+
+},
+
+"depttype": "9715b5c078b74d14b40c0ebcc3eb636d", "parentorgid_name": "yontest**"
+
+}
+
+}
+
+部门树查询
+请求说明
+请求地址	https://api.diwork.com/yonbip/digitalModel/admindept/tree
+请求方式	POST
+ContentType	application/json
+事务和幂等性	无
+ *           *                1. []()**请求参数**
+
+名称	类型	参数位置	必填	描述
+access_token	string	query	是	调用方应用 token企业自建获取 token服务商获取 token
+
+Body 参数
+
+名称	类型	数组	必填	描述
+externalData	object	否	是	业务数据
+请求示例
+
+{
+
+"externalData": {
+
+"parentorgid": "1511040517705984", "enable": [
+
+"0",
+
+"1"
+
+]
+
+}
+
+}
+
+ *           *                1. []()**返回值参数**
+
+名称	类型	数组	描述
+code	string	否	返回码，调用成功时返回 200
+message	string	否	调用失败时的错误信息
+data	object	是	调用成功时的返回数据
+innercode	string	否	内部码
+id	string	否	主键 id
+expirationdate	string	否	启用日期,格式为 yyyy-MM-dd HHmmss
+shortname	string	否	简称
+name	string	否	部门名称
+level	int	否	层级
+principal_name	string	否	负责人名称
+sort	int	否	排序号
+depttype_name	string	否	部门性质名称
+parentorgid_name	string	否	组织单元名称
+branchleader_name	string	否	分管领导名称
+orgid	string	否	基本组织主键
+名称	类型	数组	描述
+orgtype	string	否	组织类型 1 非部门 2 部门
+isEnd	int	否	是否末级 1 是 0 否
+effectivedate	string	否	启用日期,格式为 yyyy-MM-dd HHmmss
+parent_name	string	否	所属上级名称
+code	string	否	部门编码
+sysid	string	否	应用主键
+parent_code	string	否	上级组织
+branchleader	string	否	分管领导 id
+enable	int	否	状态, 0:未启用、1:启用、2:停用、
+parent	string	否	上级组织 id
+is_biz_unit	string	否	是否组织单元 1 是 0 否
+parentorgid	string	否	组织单元 id
+depttype	string	否	部门性质 id
+dr	string	否	删除标识 0 未删除 1 已删除
+principal	string	否	负责人 id
+pubts	string	否	时间戳,格式为:yyyy-MM-dd HH:mm:ss
+children	object	是	子集内容
+ *           *                1. []()**正确返回示例**
+
+
+{
+
+"code": "200",
+
+"message": "操作成功", "data": [
+
+{
+
+"parent_name": "销售事业部-北京", "orgtype": 2,
+
+"parent": "1511044359426304",
+
+"code": "sh_xsyeb",
+
+"sysid": "diwork", "sort": 5,
+
+"effectivedate": "2019-12-05 00:35:03", "innercode": "THUKM95L4HOI",
+
+"orgid": "1511045443703040",
+
+"dr": 0,
+
+"children": [],
+
+"parentorgid": "1511040517705984",
+
+"enable": 1,
+
+"is_biz_unit": 1, "name": "销售业务部-上海",
+
+"parent_code": "bj_xssyb", "id": "1511045443703040",
+
+"pubts": "2020-05-16 13:50:03",
+
+"parentorgid_name": "yontest 云创股份"
+
+}
+
+]
+
+}
+
+部门保存接口
+请求说明
+请求地址	https://api.diwork.com/yonbip/digitalModel/admindept/save
+请求方式	POST
+ContentType	application/json
+事务和幂等性	无
+ *           *                1. []()**请求参数**
+
+名称	类型	参数位置	必填	描述
+access_token	string	query	是	调用方应用 token企业自建获取 token服务商获取 token
+
+Body 参数
+
+名称	类型	数****组	必****填	描述
+data	object	否	是	部门[bd.adminOrg.DeptOrgVO]
+parent	string	否	否	所属上级 id（组织或部门）,parent 和 parent_code 都为空时，系统默认取上级组织 id
+parent_code	string	否	否	所属上级编码（组织或部门）
+level	int	否	否	层级
+path	string	否	否	路径
+sort	int	否	否	排序号
+isEnd	int	否	否	是否末级 0 否 1 是
+id	string	否	否	主键 ID，部门 ID 新增时无需填写， 修改时必填
+orgid	int	否	否	基本组织主键
+code	string	否	是	部门编码
+name	muti_lang	否	是	部门名称,支持多语
+名称	类型	数****组	必****填	描述
+parent_name	string	否	否	所属上级名称
+depttype	string	否	否	部门性质 id
+depttype_name	string	否	否	部门性质名称
+principal	string	否	否	负责人 id
+principal_name	string	否	否	负责人名称
+branchleader	string	否	否	分管领导 id
+branchleader_name	string	否	否	分管领导名称
+pubts	string	否	否	时 间 戳 , 格 式 为 :yyyy-MM-dd HH:mm:ss
+dr	string	否	否	删除标识 0:未删除 1：已删除
+parentorgid	string	否	否	上级组织 id，上级组织 id 和上级组织编码不能同时为空，id 和编码同时存在，以 id 为准
+parentorgCode	string	否	否	上级组织编码，上级组织 id 和上级组织编码不能同时为空，id 和编码同时存在，以 id 为准
+parentorgid_name	string	否	否	上级组织名称
+orgtype	string	否	否	组织类型 1 组织 2 部门
+enable	int	否	否	状态, 0:未启用、1:启用、2:停用、
+名称	类型	数****组	必****填	描述
+innercode	string	否	否	新增时可空，更新时必填，使用新增返回结果的值即可
+sysid	string	否	否	应用主键
+effectivedate	string	否	否	启 用 日 期 , 格 式 为 yyyy-MM-dd HHmmss
+expirationdate	string	否	否	失 效 日 期 , 格 式 为 yyyy-MM-dd HHmmss
+is_biz_unit	string	否	否	是否业务单元 0 否 1 是 默认否
+busidate	string	否	否	版 本 日 期 , 格 式 为 :yyyy-MM-dd HH:mm:ss
+disabledIncluded	string	否	否	部门状态, 0:未启用、1:启用、2:停用、
+_status	string	否	是	操作标识, Insert:新增、Update:更新
+请求示例
+
+{
+
+"data": {
+
+"parent": "1511040517705984",
+
+"isEnd": false, "id": null, "code": "test005", "name": {
+
+"zh_CN": "bumen123",
+
+"en_US":"bumen123", "zh_TW":"bumen123"
+
+},
+
+"parent_name": "yontest 云创股份",
+
+"depttype": "9715b5c078b74d14b40c0ebcc3eb636d", "depttype_name": "管理部门",
+
+"principal": "1511226816925952",
+
+"principal_name": " 黄 俊 涛 ", "branchleader": "1511399123505408", "branchleader_name": " 李 秀 英 ", "pubts": null,
+
+"dr": "0",
+
+"orgtype": "2",
+
+"enable": "1",
+
+"sysid": "diwork",
+
+"is_biz_unit": "0",
+
+"_status": "Insert", "parentorgid": "1511040517705984",
+
+"parentorgCode": "default_org", "parentorgid_name": "yontest 云创股份", "parent_code": "1",
+
+"innercode": "S0FNXUSIAAAA", "busidate": "2021-05-24",
+
+"disabledIncluded": "1",
+
+"level": 3,
+
+"path": "1511040517705984|", "sort": 999999,
+
+"orgid": "2275461790454016",
+
+"effectivedate":"2021-05-27 10:39:13", "expirationdate":"9999-12-31",
+
+}
+
+}
+
+ *           *                1. []()**返回值参数**
+
+名称	类型	数组	描述
+code	string	否	返回码，调用成功时返回 200
+message	string	否	调用失败时的错误信息
+data	object	否	调用成功时的返回数据
+正确返回示例
+
+{
+
+"code": "200",
+
+"message": "操作成功", "data": {
+
+"parent_name": "yontest 云创股份", "parent": "2271183607304448",
+
+"code": "test006", "depttype_name": "管理部门", "principal_name": "黄俊涛",
+
+"effectivedate": "2021-05-27 10:39:13", "innercode": "G5U3EDRLKRGKHY1N", "dr": 0,
+
+"principal": "1511226816925952", "path": "1511040517705984|",
+
+"branchleader": "1511399123505408",
+
+"enable": 1,
+
+"is_biz_unit": 0,
+
+"parent_code": "1",
+
+"orgtype": 2, "sysid": "diwork", "level": 4,
+
+"sort": 999999,
+
+"expirationdate": "9999-12-31 00:00:00", "isEnd": true,
+
+"orgid": "2291564846567680",
+
+"disabledIncluded": "1",
+
+"parentorgid": "1989749004603648", "parentorgCode":"default_org", "busidate": "2021-05-24",
+
+"name": {
+
+"zh_TW": "bumen123",
+
+"en_US": "bumen123", "zh_CN": "bumen123"
+
+},
+
+"branchleader_name": "李秀英",
+
+"depttype": "9715b5c078b74d14b40c0ebcc3eb636d", "parentorgid_name": "yontest 云创股份",
+
+"id": "2291564846567680",
+
+"creator": "00001951-7ca3-47ac-a462-d5a66e3e6724", "creationtime": "2021-06-07 19:40:18", "yhtTenant": "zz7scnko",
+
+"tenant": "zz7scnko", "yhtTenantId": "zz7scnko", "yTenantId": "zz7scnko", "pubts": "2021-06-07 19:40:18",
+
+"isbizunit": 0, "multiLangName": "bumen123"
+
+}
+
+}
+
+RPC 接口
+引入依赖
+
+com.yonyou.iuap
+
+iuap-org-api
+
+4.1.7-RELEASE
+
+期初查询
+期初查询接口 IBeginningPeriodService
+
+com.yonyou.iuap.org.service.itf.bp.IBeginningPeriodService
+
+查询组织某个期初设置
+
+@ApiOperation(value = "查询租户和应用下的期初设置", notes = "成功返回启用后的数据，失败则抛出异常")
+
+SimpleBeginningPeriod getBeginningPeriodInfo(@ApiParam(name = "tenantId", description = "租户标识") String tenantId,@ApiParam(name = "orgId", description
+
+= "组织主键") String orgId,@ApiParam(name = "typeCode", description = "期初代码") String typeCode);
+
+说明 : 查询组织某个期初设置
+
+入参：
+
+接口参数
+
+参数	说明	必传
+tenantId	租户 ID	是
+orgId	组织 ID	是
+typeCode	期初代码	是
+
+期初代码：
+
+代码	说明
+generalLedger	总账
+assets	固定资产
+inventory	库存
+purchase	采购
+receivables	应收管理
+pay	应付管理
+cashManagement	现金管理
+stock	存货
+base_cost	成本
+CC	成本中心
+SC	专项成本
+PCM	产品成本
+BSD	商业汇票
+
+返回：
+
+null 该组织没改有对应的期初
+如果返回的主键 ID 为 ### 组织的期初没有配置
+其他为正常返回的期初设置
+SimpleBeginningPeriod
+参数	说明
+id	主键
+typeCode	期初代码
+periodIdEndDate	期间结束日期
+periodIdBeginDate	期间开始日期
+periodId	期间 ID
+periodIdName	期间名称
+
+测试代码:
+
+@Autowired
+
+private IBeginningPeriodService beginningPeriodService;
+
+@Test
+
+public void getBp*(){ *SimpleBeginningPeriod generalLedger =
+
+beginningPeriodService.getBeginningPeriodInfo*(tenantId*, orgId, "generalLedger");
+
+if*(null!=generalLedger) {*
+
+if ("###".equalsIgnoreCase*(generalLedger.getId())) {*
+
+Assert.assertNotNull(generalLedger.getPeriodId());
+
+}
+
+}
+
+}
+
+组织职能查询
+
+com.yonyou.iuap.org.service.itf.core.IFuncTypeQueryService
+
+查询组织职能
+
+@ApiOperation(value = "根据组织id 查询职能编码", notes = "用于组织集合的职能编码，为避免性能问题，目前最多传 100 条")
+
+List getOrgFunc(@ApiParam(name = "tenantId", description = "租户id") @NonNull String tenantId, @ApiParam(name = "orgIdList", description = " 组 织 id 集 合 ") @NonNull List orgIdList,@ApiParam(name = "includeDisabled", description = "是否包含停用")boolean includeDisabled);
+
+说明: 查询组织的职能
+
+**入参： **接口参数
+
+参数	说明	必传
+tenantId	租户 ID	是
+orgIdList	组织 id 集合	是
+includeDisabled	是否包含停用	是
+
+**返回： **OrgFuncDTO
+
+参数	说明
+orgId	组织主键
+orgFuncTypeCodes	职能编码集合
+
+代码示例：
+
+@Autowired
+
+private IFuncTypeQueryService funcTypeQueryService;
+
+@Test
+
+public void getOrgFunc*() {*
+
+//获取所有职能不包含停用
+
+List*<OrgFuncDTO> orgFunc = funcTypeQueryService.getOrgFunc(tenantId*, Collections.singletonList(orgId), false*)*;
+
+for (OrgFuncDTO orgFuncDTO : orgFunc) {
+
+Assert.assertNotNull(orgFuncDTO.getOrgId());
+
+for (String func : orgFuncDTO.getOrgFuncTypeCodes()) {
+
+Assert.assertNotNull(func);
+
+}
+
+}
+
+}
+
+组织通用查询
+支持查询的职能
+库存组织：
+
+接口名称: com.yonyou.iuap.org.service.itf.core.IInventoryOrgQueryService 对应实体:com.yonyou.iuap.org.dto.InventoryOrgDTO
+
+元数据： org.func.InventoryOrg
+
+维修组织：
+
+接口名称: com.yonyou.iuap.org.service.itf.core.IInventoryOrgQueryService
+
+对应实体:com.yonyou.iuap.org.dto.InventoryOrgDTO 元数据： org.func.InventoryOrg
+
+维修组织：
+
+接口名称: com.yonyou.iuap.org.service.itf.core.IMaintainOrgQueryService
+
+对应实体：com.yonyou.iuap.org.dto.MaintainOrgDTO 元数据：org.func.MaintainOrg
+
+纳税主体
+
+接口名称 ： com.yonyou.iuap.org.service.itf.core.ITaxpayerOrgQueryService
+
+对应实体：com.yonyou.iuap.org.dto.TaxpayerOrgDTO 元数据：org.func.TaxpayerOrg
+
+共享中心
+
+接口名称 ： com.yonyou.iuap.org.service.itf.core.ISharingsOrgQueryService
+
+对应实体：com.yonyou.iuap.org.dto.SharingsOrgDTO 元数据：org.func.SharingsOrg
+
+质检中心
+
+接口名称: com.yonyou.iuap.org.service.itf.core.IQualityOrgQueryService
+
+对应实体：com.yonyou.iuap.org.dto.QualityOrgDTO
+
+元数据：org.func.QualityOrg
+
+物流组织
+
+接口名称:com.yonyou.iuap.org.service.itf.core.ILogisticsOrgQueryService 对应实体：com.yonyou.iuap.org.dto.LogisticsOrgDTO
+
+元数据：org.func.LogisticsOrg
+
+资产组织
+
+接口名称: com.yonyou.iuap.org.service.itf.core.IAssetsOrgQueryService
+
+对应实体：com.yonyou.iuap.org.dto.AssetsOrgDTO 元数据：org.func.AssetsOrg
+
+采购组织
+
+接口名称: com.yonyou.iuap.org.service.itf.core.IAssetsOrgQueryService
+
+对应实体：com.yonyou.iuap.org.dto.AssetsOrgDTO 元数据：org.func.AssetsOrg
+
+人力资源
+
+接口名称: com.yonyou.iuap.org.service.itf.core.IAdminOrgQueryService
+
+对应实体：com.yonyou.iuap.org.dto.AdminOrgDTO 元数据：org.func.AdminOrg
+
+业务单元
+
+接口名称: com.yonyou.iuap.org.service.itf.core.IOrgUnitQueryService
+
+对应实体：com.yonyou.iuap.org.dto.OrgUnitDTO 元数据：org.func.OrgUnit
+
+会计主体
+
+接口名称: com.yonyou.iuap.org.service.itf.core.IFinOrgQueryService
+
+对应实体：com.yonyou.iuap.org.dto.FinOrgDTO 元数据：org.func.FinOrg
+
+销售组织
+
+接口名称: com.yonyou.iuap.org.service.itf.core.ISalesOrgQueryService
+
+对应实体：com.yonyou.iuap.org.dto.SalesOrgDTO 元数据：org.func.SalesOrg
+
+组织通用查询接口: IOrgCommonQuerySupport
+
+接口签名 com.yonyou.iuap.org.service.itf.core.base.IOrgCommonQuerySupport
+
+说明: 提供组织的通用查询方法定义
+
+getById: 根据主键获取组织
+
+T getById(@ApiParam(name = "tenantId", description = "租户 id") String tenantId,
+
+@ApiParam(name = "id", description = "主键") String id);
+
+入参：
+
+参数	说明
+tenantId	租户 id
+id	组织主键
+
+返回：组织DTO
+
+代码示例：假设查询查询财务职能数据获取期间方案 ID 和币种 ID
+
+@Autowired
+
+private IFinOrgQueryService queryService;
+
+@Test
+
+public void getCurrency*(){*
+
+FinOrgDTO byId = queryService.getById*(tenantId*, orgId);
+
+if *(byId != null && Objects.equals(byId.getEnable(), 1)) { *Assert.assertNotNull(byId.getCurrency()); Assert.assertNotNull(byId.getPeriodschema()); Assert.assertNotNull(byId.getId());
+
+}
+
+}
+
+委托关系查询
+
+接口签名：com.yonyou.iuap.data.service.itf.BizDelegateApi 说明：提供委托关系业务的查询
+
+listSalesDelegateBySalesId 根据销售组织主键查询销售委托关系**方法说明：**根据销售组织主键查询销售委托关系
+
+请求参数:
+
+参数名称	参数类型	参数说明	是否必填	示例值
+salesId	String	销售组织主键	true	
+
+响应参数：
+
+参数类型	参数说明	示例值
+List	委托关系列表	
+listPurchaseDelegateByPurchaseId 根据采购组织主键查询销售委托关系请求参数*：*
+参数名称	参数类型	参数说明	是否必填	示例值
+purchaseId	String	采购组织主键	true	
+
+响应参数：
+
+参数类型	参数说明	示例值
+List	委托关系列表	
+getDefaultSalesDelegateBySalesId 根据销售组织主键查询默认销售委托关系
+
+请求参数：
+
+参数名称	参数类型	参数说明	是否必填	示例值
+salesId	String	销售组织主键	true	
+响应参数：
+参数类型	参数说明	示例值
+List	委托关系列表	
+ *           *                1. []()**listSalesOrgIdByFinOrgIdList 根据会计主体查询销售组织主键列表请求参数**：
+
+参数名称	参数类型	参数说明	是否必填	示例值
+param	BizDelegateQueryParam	业务委托关系查询参数：idList：组织主键statusList：状态（启用/停用）	true	
+响应参数：
+参数类型	参数说明	示例值
+List	销售组织主键列表	
+ *           *                1. []()**listPurchaseOrgIdByFinOrgList 根据会计主体查询采购组织主键列表请求参数**：
+
+参数名称	参数类型	参数说明	是否必填	示例值
+param	BizDelegateQueryParam	业务委托关系查询参数：idList：组织主键statusList：状态（启用/停用）	true	
+响应参数：
+参数类型	参数说明	示例值
+List	采购组织主键列表	
+ *           *                1. []()**listPurchaseDelegateByFinOrgIdList 根据会计主体主键列表查询采购委托关系**
+
+请求参数：
+参数名称	参数类型	参数说明	是否必填	示例值
+param	BizDelegateQueryParam	业务委托关系查询参数：idList：组织主键statusList：状态（启用/停用）	true	
+
+响应参数：
+
+参数类型	参数说明	示例值
+List	采购业务委托关系	
+listPurchaseDelegateByFinOrgIdAndPurchaseOrgId 根据会计主体和采购组织查询采购委托关系
+
+方法说明：根据会计主体和采购组织查询采购委托关系请求参数：
+
+参数名称	参数类型	参数说明	是否必填	示例值
+finOrgId	String	会计主体	true	
+purchaseOrgId	String	采购组织	true	
+响应参数：
+参数类型	参数说明	示例值
+List	采购业务委托关系	
+ *           *                1. []()**listInventoryOrgIdByFinOrgList 根据会计主体查询库存组织主键列表方法说明：**根据会计主体查询库存组织主键列表
+
+请求参数：
+参数名称	参数类型	参数说明	是否必填	示例值
+param	BizDelegateQueryParam	业务委托关系查询参数：idList： 组织主键 statusList：状态（启用/停用）	true	
+
+响应参数：
+
+参数类型	参数说明	示例值
+List	库存组织主键列表	
+文档内容是否对您有所帮助？
+为帮助文档评分：
+页内目录
+1. 本文摘要
+2. 第一章 基本概念
+2.1 1.1 背景
+2.2 1.2
+3. 第二章 技术架构
+3.1 总体架构设计
+3.2 模型设计
+4. 第三章 功能介绍
+5. 第四章 开发示例
+5.1 组织参照
+5.1.1 组织对外参照
+5.1.2 组织已废弃参照及替换说明
+5.1.3 组织参照参数控制
+5.1.4 组织参照显示企业账号级
+5.2 组织业务函数
+5.2.1 组织提供的公式方法
+5.2.2 适配组织公式
+5.2.3 公式使用示例
+6. 第五章 典型业务场景介绍
+6.1 人力组织部门树与业务组织部门树
+6.1.1 人力组织部门树的设置
+6.1.2 业务组织部门树的设置
+6.2 组织数据同步
+6.2.1 产品目的
+6.2.2 组织数据集成接口
+6.2.3 组织同步流程
+6.2.4 使用示例
+6.2.5 职能共享参照使用说明
+6.3 5.4 期初设置
+7. 第六章 开放接口说明
+7.1 RESTful 接口
+7.1.1 业务单元详情接口
+7.1.2 业务单元列表查询接口
+7.1.3 业务单元保存接口
+7.1.4 部门详情查询接口
+7.1.5 部门树查询
+7.1.6 部门保存接口
+7.2 RPC 接口
+7.2.1 引入依赖
+7.2.2 期初查询
+7.2.3 组织职能查询
+7.2.4 组织通用查询
+7.2.5 委托关系查询
+文档反馈
+北京市海淀区北清路68号用友产业园
+4006-600-588
+友情链接
+用友官网用友YonHelp用友iuap平台用友云市场用友云注册协议隐私条款
+
+Copyright ©2020 用友网络科技股份有限公司版权所有京ICP备05007539号-24京公网安备11010802021935号
+
+返回顶部
+加载中...

@@ -1,0 +1,389 @@
+开发单据推原厂单据
+最后更新时间：2025-07-16
+概述
+适用场景
+部署方案	开发类型	是否适用
+公有云	客户化定制开发	是
+私有云	客户化定制开发	是
+专属云	客户化定制开发	是
+本地部署	客户化定制开发	是
+公有云	ISV生态开发	是
+私有云	ISV生态开发	是
+专属云	ISV生态开发	是
+本地部署	ISV生态开发	是
+业务场景
+
+业务流，是多个单据类型串接起来的一个业务流程，每个单据类型在流程中有对应的上游、下游单据。在上游-->下游的单据流转过程中，可定义流转规则，包括单据的拆分、字段映射、回写等。在项目交付过程中，存在客开单据到原厂单据创建业务流的场景。
+
+本文档结合几百个业务流问题单，以及对一些重点项目的调研，从中筛选出影响项目客开效率的共同点，如下几点比较突出：
+
+业务流自动推单不生效，需要客开添加对应的脚本
+业务流设计选不到拉单画面，需要客开拉单页面
+业务流回写不触发，原厂单据需要在对应的规则链中预制回写规则，部分领域未预制
+客开单据自动推原厂单据还存在一些问题，需要客开适配，特别是供应链领域的单据。
+
+结合业务流常用客开场景，基于R5版本进行客开验证（其他版本参考处理），总结出的客开案例，目的是帮助项目客开人员在开发过程中提前识别客开过程中可能遇到的问题，提高项目客开效率。
+
+关键词
+
+业务流、推单、拉单、回写、业务流客开
+
+专业名词术语
+
+上/下游单据：在一个业务流程中，若A单据会直接生成B单据，我们把A单据叫做B单据的上游单据。把B单据叫做A单据的下游单据
+
+原厂单据：领域MDD单据，本案例暂不考虑部分领域YPD框架
+
+客开单据：项目客开人员采用专业版YPD引擎开发的单据，本案例暂不考虑公共引擎客开单据和MDD引擎客开的单据
+
+业务流客开规范
+客开规范
+
+单据编码需与业务对象保持一致
+
+业务流设计中配置的是业务对象与业务对象之间的转换关系，不是指定具体的单据，业务流在处理时候，会将业务对象的编码转换成单据编码获取单据相关的信息，如果单据编码与业务对象编码不一致，会导致业务流在处理的过程中找不到单据信息。
+
+例如，转单画面无法跳转到对应的转单界面，权限校验无法获取正确的servisecode进行权限校验，默认的全局联查无法跳转到对应的单据。
+
+客开单据推原厂单据
+
+上游单据：客开单据 商品采购需求单
+
+下游单据：原厂单据 销售报价单
+
+前置条件
+推拉单前置条件
+
+手动推单前置条件
+
+客开的单据推原厂单据，原厂bizFlowBatchPushRule动作下需有bizFlowBatchPushRule规则
+
+如果没有，可以通过如下脚本添加，建议优先给原厂提需求预制
+
+INSERT INTO `当前单据对应领域的库`.`billruleregister` (`id`, `billnum`, `action`, `ruleId`, `iorder`, `overrule`, `tenant_id`, `key`, `isSystem`, `url`, `isSync`, `isAsyn`, `config`, `domain`, `dataRule`, `mock`) VALUES ('3029097', 'common', 'bizflowbatchpush', 'bizFlowBatchPushRule', '30.00', NULL, 'dw72i0vh', NULL, b'1', NULL, '0', '0', NULL, NULL, NULL, NULL);
+
+
+在本案例中销售报价单原厂已经预制bizFlowBatchPushRule规则，无需自行添加
+
+自动推单前置条件
+
+客开脚手架YPD版本需升级至2.4.13-RELEASE
+
+二方包bizflow-basic需升级至2.0.3.5-RELEASE
+
+回写前置条件
+确认对应动作是否有回写规则
+
+bizFlowWriteBackRule
+
+如果没有，可以自行在这里添加，建议优先给原厂提需求
+
+销售报价单没有回写规则，这里在销售报价单删除动作下添加回写规则
+
+确认原厂单据的业务对象中存在必要的业务流字段
+
+在业务对象中，检查主子实体中是否存在来源单据id，来源单据类型，业务流id字段
+
+来源单据id：用来存储上游业务数据的id
+
+来源单据类型：用来存储上游单据编码
+
+业务流id：用来存储业务流的id
+
+如果缺少这些字段，可以自行扩展这些字段，或向原厂提需求增加这些字段，建议优先给原厂提需求。
+
+由于销售报价主表和子表没有来源单据id，来源单据类型字段，这里可以通过客开平行表的方式扩展字段
+
+扩展主表
+
+扩展子表
+
+确认配置表配置正确
+
+领域单据需要在业务流注册相关字段信息，业务流才知道这个单据是用哪些字段存储业务流id，交易类型，等等。
+
+select * from iuap_apcom_businesssflow.convert_config where domain='领域' and bill_num='单据号'
+select * from iuap_apcom_businesssflow.convert_config where domain='quote' and bill_num='quote_salesquotation'
+
+
+自行注册sql，建议优先给原厂提需求
+
+INSERT INTO `iuap_apcom_businesssflow`.`convert_config` (`id`, `domain`, `sub_id`, `bill_num`, `tenant_id`, `ytenant_id`, `list_page_bill_num`, `name`, `biz_flow_id_field`, `biz_flow_name_field`, `biz_flow_version_field`, `biz_flow_source_id_field`, `biz_flow_source_child_id_field`, `biz_flow_source_grand_id_field`, `biz_flow_source_bill_type_field`, `bus_type_field`, `bus_type_name_field`, `search_bill_path`, `list_header_toolbar_name`, `list_body_toolbar_name`, `brows_toolbar_name`, `ys_list_view_toolbar_name`, `footer_toolbar_name`, `create_time`, `update_time`, `micro_service_code`, `applicationCode`) VALUES (UUID(), '领域', '应用', '卡片页单据编码', '租户', '租户', '列表页单据编码', '单据名称', '业务流id', '业务流名称', 'bizFlow_version', '来源单据ID', 'sourceautoid', '', '来源单据类型', '交易类型id', '交易类型名称', '/report/detail', 'ListHeader', 'ListBody', 'Browstoolbar', 'YSListViewToolBar', 'FooterToolbar_right', '2022-02-21 11:25:36', '2024-04-21 23:20:30', NULL, NULL);
+
+
+销售报价单缺少配置，自行给销售报价单添加配置
+
+INSERT INTO `iuap_apcom_businesssflow`.`convert_config` (`id`, `domain`, `sub_id`, `bill_num`, `tenant_id`, `ytenant_id`, `list_page_bill_num`, `name`, `biz_flow_id_field`, `biz_flow_name_field`, `biz_flow_version_field`, `biz_flow_source_id_field`, `biz_flow_source_child_id_field`, `biz_flow_source_grand_id_field`, `biz_flow_source_bill_type_field`, `bus_type_field`, `bus_type_name_field`, `search_bill_path`, `list_header_toolbar_name`, `list_body_toolbar_name`, `brows_toolbar_name`, `ys_list_view_toolbar_name`, `footer_toolbar_name`, `create_time`, `update_time`, `micro_service_code`, `applicationCode`) VALUES (UUID(), 'quote', 'SQ', 'quote_salesquotation', 'e3kz43em', 'e3kz43em', 'quote_salesquotationlist', '销售报价', 'bizFlow', 'bizFlow_name', 'bizFlow_version', 'sourceId', 'sourceautoid', '', 'sourceCode', 'transactionTypeId', 'transactionTypeId_name', '/report/detail', 'ListHeader', 'ListBody', 'Browstoolbar', 'YSListViewToolBar', 'FooterToolbar_right', '2022-02-21 11:25:36', '2024-04-21 23:20:30', NULL, NULL);
+
+清理缓存
+
+请求类型：POST
+
+请求地址： {domain.iuap-yonbuilder-businessflow}/config/resetCache
+
+请求头：yht_access_token
+
+请求示例：
+
+https://bip-test.yyuap.com/iuap-yonbuilder-businessflow/config/resetCache
+
+返回示例：
+
+{
+"data": {},
+"desc": "OK",
+"flag": 0,
+"msgSuccess": true
+}
+
+确认客开引擎是否注册
+
+领域回写客开单据，必须把客开单据所属的应用和领域信息，注册到业务流，业务流才能知道去哪里查单据信息，去哪里保存单据
+
+select * from iuap_apcom_businesssflow.config_item where domain='客开引擎编码'
+select * from iuap_apcom_businesssflow.config_item where domain='c-sz-create-bacth'
+
+
+如果没有需自行注册，每个客开引擎只需注册一次
+
+将如下脚本中的客开引擎编码替换成自己的客开引擎编码
+
+INSERT INTO iuap_apcom_businesssflow.config_item (`id`,`code`,`domain`,`name`,`name_eng`,`value`,`type`,`ext_info`,`order`,`create_time`,`update_time`) VALUES (UUID(),'客开引擎编码','客开引擎编码','客开引擎编码','{\"en\": \"客开引擎编码\",\"zh-TW\":\"客开引擎编码\",\"zh-CN\":\"客开引擎编码\"}','${domain.url}/客开引擎编码-be','1','{\"vo\":false}','10','2023-11-11 16:57:26',NULL);
+
+
+注册客开引擎
+
+INSERT INTO iuap_apcom_businesssflow.config_item (`id`,`code`,`domain`,`name`,`name_eng`,`value`,`type`,`ext_info`,`order`,`create_time`,`update_time`) VALUES (UUID(),'c-sz-create-bacth','c-sz-create-bacth','c-sz-create-bacth','{\"en\": \"c-sz-create-bacth\",\"zh-TW\":\"c-sz-create-bacth\",\"zh-CN\":\"c-sz-create-bacth\"}','${domain.url}/c-sz-create-bacth-be','1','{\"vo\":false}','10','2023-11-11 16:57:26',NULL);
+
+客开单据推原厂单据
+配置业务流
+
+选择触发方式，选择推送时机
+
+注意：只有配置完工作流，推送时机才可以选择流程动作
+
+手动推单
+
+业务流设计中，推单规则中的触发方式需选择手动触发
+
+客开单据通过页面建模生成的单据会自动携带下推按钮，如不想使用单据默认的下推按钮，可以自定义添加下推按钮。
+
+自定义添加按钮：目前可以通过三种类型组件添加下推按钮
+
+手动规则组件：需绑定具体业务流规则
+业务流组件：功能同手动规则组件，后续版本中会下线手动规则组件
+自动规则组件：无需绑定业务流规则
+
+注意：在客开的过程中，尽量选择添加自动规则组件，如果选择手动规则组件或者业务流规则组件，后续在业务流设计中，删除原有规则，添加新的规则，需要重新给组件绑定规则。
+
+方式一：添加手动规则组件
+
+添加手动规则组件
+
+绑定业务流规则
+
+方式二：添加业务流组件
+
+添加业务流组件
+
+绑定业务流规则
+
+方式三：添加自动规则组件
+
+效果展示
+
+自动推单
+
+自动推单分为单据动作触发和审批流触发。
+
+审批流触发是在单据的审批流事件发生时，由审批流回调触发。
+
+单据动作触发指在单据相关动作发生时，如保存、更新、删除等动作发生时触发。
+
+自动推单，业务流不自动调用，需要在使用业务流的单据的动作扩展点中添加扩展插件调用IYpdBillBizFlowService的push方法推单
+
+在这里配置单据保存后自动推单
+
+修改规则，将触发方式改成保存触发
+
+2、在客开脚手架中，对上游单据保存动作扩展
+
+@BillPlugin(busiObj = "lz_purreq_ys01")
+public class LzpurreqYs01Plugin extends AbstractBillPlugin {
+
+@Autowired(required = false)
+private IYpdBillBizFlowService bizFlowService;
+
+@Override
+public void afterSave(YpdBillContext billContext) throws Exception {
+
+bizFlowService.push(billContext.getBaseBillContext(),billContext.getBillDO());
+
+}
+}
+
+
+3、效果
+
+上游单据保存，自动推单生成下游单据
+
+原厂单据拉取客开单据
+创建客开的拉单页面
+
+应用构建中，页面建模中创建页面，选择列表创建，元数据选择商品采购需求单
+
+然后进入设计器，添加生单按钮和取消按钮
+
+先插入一个底部栏，再插入一个按钮栏，然后再插入一个按钮和一个自动规则按钮
+
+选择自动规则按钮，修改多语标题为生单，业务操作选择生单
+
+选择按钮，修改多语标题为取消，动作添加取消函数
+
+删除不需要的表头按钮栏
+
+保存预览查看拉单界面效果
+
+配置业务流
+
+添加拉单按钮
+
+自动生成按钮：
+
+配置完业务流后，正常情况原厂参照拉单按钮下面会自动生成拉取商品采购需求子按钮
+
+自动生成按钮前提条件：
+
+下游原厂单据已启用租户级模版
+业务流设计中规则需是自定义规则，不能是引用的原厂预制的规则
+
+配置添加按钮：
+
+部分原厂单据没有参照生单按钮，或者参照生单按钮不支持自动生成子按钮，可以通过客开的方式添加拉单按钮。
+
+打开销售报价的页面设计器，依次添加手动规则组，手动规则
+
+手动规则组的属性选择拉单，手动规则的执行规则拉取商品采购需求，并将多语标题修改成拉取商品采购需求。
+
+如果按钮不显示可能原因
+
+角色权限管理中没有授权
+页面配置没有将按钮显示出来
+当前领域缺少特性配置
+
+在mdf配置文件中添加前端特性
+
+"领域": {
+"dependencies": [
+"developplatform"
+]
+}
+
+效果展示
+
+点击拉单按钮跳转到拉单页面，在拉单页面点生单，生成销售报价单
+
+原厂单据回写客开单据
+配置回写规则
+
+效果展示
+
+常见问题
+自动推单报can not parse to json string
+
+解决方案：客开脚手架升级业务流二方包
+
+<dependency>
+<groupId>com.yonyou.ypd</groupId>
+<artifactId>bizflow-basic</artifactId>
+<version>2.0.3.5-RELEASE</version>
+</dependency>
+
+
+客开单据自动下推原厂单据java.util.HashMap cannot be cast to org.imeta.orm.base.BizObject
+
+问题产生的原因：
+
+业务流处理时只把主表转换成BizObject，没有把子表转BizObject导致的
+
+解决方式：
+
+下游子表数据必须是BizObject，手动做了下转换
+
+自动推单表单编码不能为空
+
+解决办法：升级YPD版本至2.4.13-RELEASE
+
+客开单据自动推原厂单据单据来源不是有效的枚举类型
+
+问题产生的原因：
+
+这个是领域的source字段占用了业务流的系统字段，source是业务的系统字段，会自动赋值上游的单据编码，
+
+而领域的source字段是枚举类型，导致字段类型不一致报错
+
+解决方案：
+
+客开在下游单据的保存规则链中添加客开的规则，修改source的值为0和1
+
+@Component
+@Slf4j
+public class ExtTestRule extends AbstractCommonRule implements IYpdCommonRul, ISagaRule {
+@Override
+public RuleExecuteResult execute(BillContext billContext, Map<String, Object> map) throws Exception {
+List<BizObject> bills = this.getBills(billContext, map);
+BizObject bill = bills.get(0);
+bill.put("source",0);
+log.error("IRule========execute============");
+return null;
+}
+@Override
+public Object execute(RulCtxVO rulCtxVO, Map<String, Object> params) {
+log.error("IYpdCommonRul========execute============");
+return null;
+}
+@Override
+public RuleExecuteResult cancel(BillContext billContext, Map<String, Object> map) throws Exception {
+log.error("ISagaRule========cancel============");
+return null;
+}
+}
+
+客开单据推原厂的单据推送成功，未生成数据或没有跳转到转单画面
+
+查看batchPush接口的返回值里面没有转换后的数据，
+
+问题产生的原因：
+
+下游原厂单据缺少业务流的推单规则导致的
+
+bizflowbatchpush动作下没有bizflowbatchpush规则导致的
+
+如何确认原厂单据是否缺少对应的推单规则？
+
+在应用构建中，扩展该单据，打开该单据的页面设计器，在命令管理中查看是否有对应的动作和规则
+
+如果没有，代表缺少对应的规则
+
+解决方式一：
+
+该问题的根本原因是因为领域没有适配业务流，缺少对应的规则导致的，建议优先给领域提需求解决。
+
+解决方式二：
+
+项目客开人员自行添加脚本解决，在对应的领域库执行SQL
+
+insert into billruleregister (`id`, `billnum`, `action`, `ruleId`, `iorder`, `overrule`, `tenant_id`, `key`, `isSystem`, `url`, `isSync`, `isAsyn`, `config`, `domain`, `dataRule`, `mock`) VALUES ('3029097', 'common', 'bizflowbatchpush', 'bizFlowBatchPushRule', '30.00', NULL, 'e3kz43em', NULL, b'1', NULL, '0', '0', NULL, NULL, NULL, NULL);
+
+
+SQL执行完后还需清理redis缓存才能生效
+
+也可以通过重新在命令管理中重新编辑一下这个规则，就可以自动清理缓存
+
+如果通过上述方式处理后，还是不能解决问题，再去领域的服务中用arthas查一下，看是否有bizFlowBatchPushRule规则
+
+Watch com.yonyou.common.bizflow.rule.BizFlowBatchPushRule * '{params,returnObj,throwExp}'  -n 5  -x 3
+
+
+
+如果未找到这个方法，代表领域服务中缺少业务流的sdk，这种情况只能给领域提需求解决

@@ -1,0 +1,1054 @@
+社区文档中心
+首页
+文档导航
+开发者社区
+社区论坛
+视频教程技术博客
+更多
+张宏涛
+资料中心
+专业开发
+产品概述
+快速入门
+操作指南
+开发指南
+开发介绍
+新功能开发
+移动端开发
+扩展开发
+全球化
+组织
+权限
+特征
+基础数据
+审批流
+业务流
+规则引擎
+公式
+UI模板
+参照
+导入导出
+打印
+对象建模
+编码规则
+调度任务
+监控与预警
+日志
+消息平台
+工作台
+事件中心
+文件服务
+YonBuilder应用开发
+前端开发
+后端开发
+移动开发
+安全
+数据库
+DevOps技术
+容器云技术
+区块链云技术
+YMS开发
+智能应用开发
+专项开发
+成果迁移
+开发成果迁移（YDS）
+数据迁移红皮书
+YPR打包出盘红皮书
+公有云ISV生态产品制品
+公有云ISV生态产品制盘及安装
+技术方案
+最佳实践
+参考手册
+常见问题
+视频教程
+专业开发/开发指南/成果迁移/数据迁移红皮书
+数据迁移红皮书
+最后更新时间：2024-03-27
+本文摘要
+
+数据迁移功能，主要是租户间通过传输包的方式进行数据迁移，目前数据迁移功能支持应用构建-自建应用、应用构建扩展应用及应用构建包含的其他组件的单独迁移功能、工作台自建应用、工作台自建服务等等。
+
+要点：
+
+1、数据迁移的功能架构和底层组件；
+
+2、数据迁移的产品形态；
+
+3、开发接入说明，数据迁移SDK使用指南；
+
+4、数据迁移的支持范围说明；
+
+开发者通过对本文的学习，可了解数据迁移SDK接入、数据迁移的使用、数据迁移过程中问题定位。
+
+熟悉本文内容，可为后续使用数据迁移工具奠定良好基础，更快的使用数据迁移实现业务的定制和持续优化。
+
+概述
+
+用友云应用迁移是支持在应用构建中构建的应用发布到其他租户的入口。其支持在开发租户或者沙箱环境应用开发完成后，对应用整体的同环境，跨环境迁移用以验证，使用及发布到云市场或者应用商店进行上线售卖。
+
+其主体通过rest接口对接，SDK封装应用迁移提供的解码，迁移回调服务，便于开发人员在快速上手，提高工作效率。数据迁移主要支持的迁移范围，部署方式及数据迁移过程中主要出现的问题。
+
+功能介绍
+整体功能介绍
+
+名词解释
+
+REST：一种软件架构风格。针对网络应用的设计和开发方式，可以减低开发的复杂性，提高系统的可伸缩性。
+
+产品形态
+产品/服务	研发层级支持	可独立专属	业务类型
+一级菜单	二级菜单	三级菜单	
+应用构建服务	构建平台	传输包管理	系统级/isv级/租户级
+传输包上载			
+传输包部署			
+传输包管理功能描述
+
+在应用构建中创建应用并发布后，可通过该菜单进行新建应用包，并在其内选择应用。在选择应用后，可在包详情界面查看应用详情，打包，导出（专属化）功能。
+
+传输包上载功能描述
+
+在传输包管理中添加传输包后，使用传输包编码，选择目标环境（传输方向设置中添加目标环境）进行传输包上载操作，将传输包上载到目标环境中的传输包部署的待部署中。
+
+传输包部署功能描述
+
+对发布在该环境的应用进行部署。部署完成后，如果该环境存在应用构建菜单，则其内可查询该环境部署的应用；如果没有应用构建，则可在工作台—数字化建模—我的应用中查看部署的应用。部署应用可在该环境正常使用。
+
+传输方向设置
+
+图1
+
+传输包部署右上角显示（租户管理员），其传输方向设置功能是传输包上载时原租户到目标租户的传输选择。使用方法是需要到目标租户的传输方向设置添加原租户信息到图1处。
+
+开发接入说明
+接入模式
+
+Rest接口用于数据的导入导出，sdk对访问接口的参数解密，实体定义以及结果回写。
+
+Sdk引入
+引入文件
+
+com.yonyou.iuap
+
+iuap-datasync-sdk
+
+2.1.1-RELEASE
+
+Sdk API文档
+接口名	com.yonyou.uap.datasync.service.IDataSyncService
+编号	方法名
+1	getParamValue
+2	getOutParamValue
+3	returnStatusData
+
+如没有对接注册中心，可以使用rest接口调用：
+
+调用路径：/datasync-service/dataApi/[RPC方法名]
+
+application/json格式，key：param
+
+Rest接入
+输出接口说明
+
+获取或导入该配置项数据，结果以json格式返回
+
+解密方式：
+
+OutParamDataDTO outParamDataDTO=iDataSyncService
+
+.getOutParamValue(param);
+
+请求说明.
+获取自定义列表结构定义接口
+请求说明：
+
+获取业务方定义的列表显示结构，用于数据迁移过程中的数据选择。对接方需自行维护 树表，列表 的结构定义。该结构仅维护列表结构。对接方根据sdk中定义的对象ListStructureMetadata, 构造StructureDTO对象返回数据迁移服务
+
+请求实体说明：ListStructureMetadata
+
+/**
+
+业务数据获取key
+
+*/
+
+private String key;
+
+/**
+
+列表字段显示名称描述
+
+*/
+
+private String des;
+
+/**
+
+字段排序
+
+*/
+
+private Integer order;
+
+/**
+
+对象类型
+
+*/
+
+private DataTypeEnum dataType;
+
+/**
+
+是否可见，必须填写
+
+*/
+
+private boolean visible;
+
+响应实体说明：StructureDTO
+
+/**
+
+配置项
+
+*/
+
+private String configNode;
+
+/**
+
+结构类型，tree/list
+
+*/
+
+private StructureTypeEnum structureType;
+
+/**
+
+列表结构定义
+
+*/
+
+private List listStructures;
+
+/**
+
+自定义iframe的url，不是自定义结构可不填写
+
+*/
+
+private String url;
+
+获取左侧树数据接口
+请求说明：
+
+根据传入配置项，获取该配置项下的左侧树数据,由数据迁移服务提供领域应用双层树结构，应用下所属对象由业务方提供。如果以列表形式展示的结构，可不实现当前接口。业务方通过构造sdk中定义的TreeDTO返回当前租户的该配置项树数据，例如ui模板，则需要返回领域应用树结构
+
+请求实体说明：SearchParamDTO
+
+/**
+
+直接依赖数据id
+
+*/
+
+private String depId;
+
+/**
+
+直接依赖数据code
+
+*/
+
+private String depCode;
+
+/**
+
+工作台domain
+
+*/
+
+private String bizDomain;
+
+/**
+
+BaseService domain
+
+*/
+
+private String rpcDomain;
+
+/**
+
+BaseService定义的domain获取
+
+*/
+
+private Map<String, String> extParams;
+
+/**
+
+关键字
+
+*/
+
+private String searchKeyword;
+
+/**
+
+分页信息,当前页
+
+*/
+
+private Integer pageNo;
+
+/**
+
+分页信息,当前页大小
+
+*/
+
+private Integer pageSize;
+
+/**
+
+当前查询的配置项
+
+*/
+
+private ConfigNodeEnum configNode;
+
+响应实体说明：TreeDTO
+
+/**
+
+业务id
+
+*/
+
+private String id;
+
+/**
+
+业务code
+
+*/
+
+private String code;
+
+/**
+
+名称，显示描述
+
+*/
+
+private String name;
+
+/**
+
+租户id
+
+*/
+
+private String tenantId;
+
+/**
+
+对象类型，用于以下接口参数获取
+
+*/
+
+private DataTypeEnum dataType;
+
+/**
+
+叶子节点
+
+*/
+
+private Boolean leaf;
+
+/**
+
+目前可不进行填写
+
+*/
+
+private Map<String, String> extParams;
+
+/**
+
+子节点
+
+*/
+
+private List leafNodes;
+
+获取列表业务数据
+请求说明：
+
+接口描述：该接口需要提供搜索功能以及分页功能，并且按照接口1中定义的列表结构返回
+
+1.树表结构：根据树结构返回的信息获取该叶子节点下包含的数据
+
+2.列表结构：根据租户id获取租户下数据,该接口需支持模糊查询(名称)，返回值需支持分页，统一使用org.springframework.data.domain.Page进行分页对象构造
+
+请求实体说明：SearchParamDTO（详见二接口）
+获取基本信息接口
+请求说明：
+
+选择数据后，根据选择数据的配置项，依次获取依赖该配置项的其他配置项数据，该接口废除 根据租户id获取所有数据 的功能
+
+请求实体说明：ViewListParamDTO
+
+/**
+
+租户id
+
+*/
+
+private String tenantId;
+
+/**
+
+配置项
+
+*/
+
+private String configCode;
+
+/**
+
+是否是isv
+
+*/
+
+private Boolean isv;
+
+/**
+
+引用关系数据id
+
+*/
+
+@Deprecated
+
+private Object[] ids;//NOSONAR
+
+/**
+
+领域编码
+
+*/
+
+@Deprecated
+
+private String domain;//NOSONAR
+
+/**
+
+key:domain,value:引用关系数据id
+
+*/
+
+private Map<String, Object[]> idMap;
+
+响应实体说明：DataListDTO
+
+/**
+
+*唯一主键编码
+
+*/
+
+private String id;
+
+/**
+
+唯一编码
+
+*/
+
+private String code;
+
+/**
+
+指定配置项
+
+*/
+
+private String configCode;
+
+/**
+
+*入参数关系Id
+
+*/
+
+private String paramId;
+
+/**
+
+数据名称
+
+*/
+
+private String name;
+
+/**
+
+该实体所在领域：元数据等为黄营处定义的领域，其他为工作台定义。若无则为空
+
+*/
+
+private String domain;
+
+/**
+
+domain name
+
+*/
+
+private String domainName;
+
+/**
+
+结构描述
+
+*/
+
+private String structure;
+
+/**
+
+扩展字段，json格式
+
+*/
+
+private String ext;
+
+private String updateTime;
+
+导出接口请求参数实体：
+请求说明：
+
+GET输出接口，返回内容根据业务域自己定义，用于传递给POST输入接口。接收param参数后调用SDK中getOutParamValue方法，获取OutParamDataDTO实体对应参数。ConfigNodeEnum枚举类提供已经对接的配置项code。说明：full参数为true时获取领域下该配置项的全部数据，如果为false需要获取对应依赖配置项的数据（depConfigCode），检测是否有使用，如果有使用导出获取领域下该配置项的全部数据。
+
+post接口使用text/plain格式，可用@RequestBody String param 直接获取，获取后进行解密
+
+SpringBoot 可直接返回OutReturnDataDTO对象，利用SpringBoot自动装载的HttpMessageConvert进行转换，SpringMVC项目返回序列化后的OutReturnDataDTO对应的Json字符串
+
+请求解密实体说明：OutParamDataDTO
+
+/**
+
+租户Id
+
+*/
+
+private String tenantId;
+
+/**
+
+领域编码
+
+*/
+
+private String domain;
+
+/**
+
+配置项编码
+
+*/
+
+private String configCode;
+
+/**
+
+获取数据范围时间，以当前时间为准获取最新数据（毫秒格式）
+
+*/
+
+private Long queryTime;
+
+/**
+
+有效时间戳
+
+*/
+
+private Long timeStamp;
+
+/**
+
+事件Id
+
+*/
+
+private Long eventId;
+
+/**
+
+是否全量更新
+
+*/
+
+private Boolean full;
+
+/**
+
+当前配置项主键Id
+
+*/
+
+private Object[] dataIds;//NOSONAR
+
+/**
+
+依赖配置项编码
+
+*/
+
+private String depConfigCode;
+
+/**
+
+依赖数据关系 key：Object[]依赖的组件Id
+
+*/
+
+Map<String,Object[]> dataDependent;//NOSONAR
+
+/**
+
+批量、单行
+
+*/
+
+private DataOperationEnum operationEnum;
+
+/**
+
+是否是isv
+
+*/
+
+private Boolean isv;
+
+/**
+
+isv标签
+
+*/
+
+private String isvTag;
+
+响应实体说明：OutReturnDataDTO
+
+/**
+
+1.数据文件url（推荐）
+
+2.业务数据json字符串格式（极其不推荐）
+
+*/
+
+private Object reqValue;//NOSONAR
+
+/**
+
+其它业务依赖当前配置项的数据关系 key：配置项编码,Object[]依赖的主键唯一标识
+
+*/
+
+Map<String,Object[]> dataDependent;//NOSONAR
+
+/**
+
+当前配置项引用的数据关系 key：配置项编码,Object[]依赖的主键唯一标识
+
+*/
+
+Map<String,Object[]> dataQuote;//NOSONAR
+
+/**
+
+文件名称
+
+*/
+
+private String fileName;
+
+/**
+
+文件类型
+
+*/
+
+private String fileType;
+
+/**
+
+文件下载url
+
+*/
+
+private String fileUrl;
+
+private DataExchangeWayEnum urlExchange;
+
+导入接口请求参数实体：
+请求说明：
+
+1、POST输入接口接收参数，可以使用SDK的DTO实体如下：
+
+例如定义接收参数demo：public Result testParam(@RequestBody InputParamDataDTO InputParamData)
+
+注意：输入post接口需要返回数据需要有主键，用于数据增量更新和依赖应用更新 。coverFlag为true时代表强制覆盖，需要根据targetId更新数据，否则如果之前已经执行更新，本次插入无需更新。主键如果是UUID/GUID/雪花算法生成算法唯一时，在不同租户相同情况下，优先匹配主键，如果冲突按coverFlag标识执行。
+
+说明：其中param参数需调用SDK中getParamValue方法，获取Map对应参数的tenantId参数。 租户为0时标识系统租户，ISV场景是A环境租户个性化数据同步到B环境系统租户；专属化产品：公有云系统租户同步到专属会化环境，都有用到。
+
+请求解密实体说明：InputParamDataDTO
+
+/**
+
+加密内容获取租户
+
+*/
+
+private String param;
+
+/**
+
+请求参数
+
+*/
+
+private Object reqValue;//NOSONAR
+
+/**
+
+配置项
+
+*/
+
+private String configCode;
+
+/**
+
+是否强制覆盖
+
+*/
+
+private Boolean coverFlag;
+
+/**
+
+事件Id
+
+*/
+
+private Long eventId;
+
+/**
+
+接口Id
+
+*/
+
+private Long interfaceId;
+
+/**
+
+改变domain标识
+
+*/
+
+private Boolean changeDomain;
+
+/**
+
+修改的domain
+
+*/
+
+private String domain;
+
+/**
+
+isv标签
+
+*/
+
+private String isvTag;
+
+/**
+
+*主键之间关系
+
+*/
+
+@Deprecated
+
+private List dataRelation;
+
+/**
+
+依赖数据对应关系
+
+@Deprecated
+
+private List dependentData;
+
+/**
+
+全部/单个数据 标识
+
+*/
+
+private DataOperationEnum operationEnum;
+
+/**
+
+异步请求标识
+
+*/
+
+private Boolean asyncHttpRequest;
+
+导入后回调实体说明：ReturnDataDTO
+
+保存完成后，构造ReturnDataDTO对象，调用sdk IDataSyncService.returnStatusData
+
+/**
+
+事件Id
+
+*/
+
+private Long eventId;
+
+/**
+
+接口Id
+
+*/
+
+private Long interfaceId;
+
+/**
+
+租户Id
+
+*/
+
+private String tenantId;
+
+/**
+
+执行成功行数
+
+*/
+
+private Integer rowNumber;
+
+/**
+
+对应领域
+
+*/
+
+private String domain;
+
+/**
+
+传输状态
+
+*/
+
+private Boolean datasyncStatus;
+
+/**
+
+异常信息
+
+*/
+
+private String exceptionMessage;
+
+/**
+
+数据关系 key：表名称 tableName,value: id主键
+
+*/
+
+Map<String,List> dataRelation;//NOSONAR
+
+/**
+
+业务直接依赖 key：配置项 ,value: 源id和目标id主键
+
+*/
+
+Map<String,List> depDataRelation;//NOSONAR
+
+Rest请求响应说明：
+
+按照sdk中定义的Result返回
+
+Sdk工具说明
+Result实体定义
+
+public class Result { /** 错误码. / private Integer code; /* 提示信息. / private String msg; /* 具体的内容. */ private T data; public Result(){} public Result(Integer code,String msg){ this.code = code; this.msg = msg; }
+
+}
+
+ResultCode定义了相关响应码
+
+状态码	含义
+0	成功
+1	内部异常
+211	权限不足
+10000	服务器失败
+10001	认证失败
+10002	参数错误
+16000	未知错误
+20000	异步请求接收确认
+
+Result实体可使用ResultUtil构造返回
+
+支撑服务部署包结构说明（备选）
+
+当前支持jar包：iuap-datasync-sdk.jar （适用于jdk1.8）
+
+isv独立的开发环境、专属化开发环境部署：
+
+数据迁移功能说明
+迁移范围、支持的数据类型迁移
+
+传输包管理下拉列表中支持的数据迁移类型
+
+应用构建-自建应用：云平台-应用构建服务-应用构建中标注是“自”的应用
+
+应用构建-扩展应用：云平台-应用构建服务-应用构建中标注是“扩”的应用
+
+应用构建-元数据实体：应用构建中应用的数据建模中的实体下的数据
+
+应用构建-枚举：应用构建中应用的数据建模中的枚举下的数据
+
+应用构建-查询元数据：应用构建中应用的数据建模中的查询下的数据
+
+应用构建-单据页面：应用构建中应用的页面建模中的单据页面
+
+应用构建-参照：应用构建中应用的页面建模中的参照页面
+
+应用构建-函数脚本：应用构建中应用的流程&自动化中的函数下的数据
+
+交易类型：数字化建模-流程管理-流程数据-交易类型
+
+工作流-流程模型：数据化建模-流程管理-工作流或应用构建中应用的流程&自动化中的工作流数据
+
+业务流-业务流设计：应用构建中应用的流程&自动化中的业务流数据
+
+模板-打印模板：应用构建中应用的页面建模中打印模板
+
+支撑服务-编码规则：数字化建模-系统管理-编码规则中的数据
+
+支撑服务-调度任务：数字化建模-系统管理-调度任务任务管理的任务
+
+公共参数：数字化建模-我的企业-公共参数
+
+工作台-自建应用：数字化建模-系统管理-应用管理-我的应用-新建的应用
+
+工作台-自建服务：数字化建模-系统管理-应用管理-我的应用-新建的应用-新建的
+
+自定义项：自定义项是按照租户全部迁移
+
+自定义档案：数字化建模-基础数据-自定义档案设置中的自定义档案
+
+预警任务：数字化建模-系统管理-预警任务中新建的预警任务
+
+工作台门户：数字化建模-系统管理-工作台管理中的自建工作台
+
+消息模板：数字化建模-消息平台-消息模板中自建的消息模板，目前是跨环境迁移，同环境不支持迁移
+
+业务消息配置：数字化建模-消息平台-业务消息配置中新建的业务消息配置，目前支持跨环境迁移，同环境不支持迁移
+
+数据部署方式介绍
+
+传输包部署页签中部署时可对数据迁移部署方式支持覆盖、忽略，业务流支持仅新增。
+
+覆盖：以原环境的数据为准，在目标环境先删后插
+
+忽略：对此业务数据放弃不进行导入操作
+
+仅新增：对目标环境数据不进行先删后插操作，新增到目标环境
+
+首先看日志具体的报错信息：/data/logs/app/iuap-yonbuilder-transdata/目录下的yms-application.log，大多数错误可以根据日志定位到调用业务方接口报错，可以找相应的业务方开发解决问题。
+
+传输包管理添加数据时报空指针
+
+java.lang.NullPointerException
+
+可能原因分析：添加数据时接口返回的数据不正确，或者已经删除的元数据还在被使用
+
+解决方案：使用arthas抓取错误的数据引用watch com.yonyou.datasync.service.impl.polymerization.PolymerizationServiceImpl packComponent2BaseInfo '{params,returnObj,throwExp}' -x 3
+
+应用（专属化应用）迁移到目标环境引擎显示的是公共引擎且元数据实体不显示
+
+原因分析：引擎id错误时默认显示公共引擎，元数据实体不显示是因为，引擎编码对不上
+
+解决方案：需要将iuap_yonbuilder_service.hpa_app(根据app_code、dr=0查询)中的engine_id 改成iuap-devops-data. yonbuilder_pro_engine表中对应的真正的engine_id。
+
+部署包时报文件上传错误
+
+原因分析：确认原环境与目标环境的版本不一致导致部署失败。
+
+解决方案：将环境信息升级至同一版本
+
+目标环境导入zip包时报未知错误或者系统错误
+
+原因分析：包名称修改（包是加密的名称不允许修改）、包名称中存在特殊字符
+
+解决方案：重新添加上载传输包，重新新建时不添加特殊字符如：中划线- 下划线 _ 等等。
+
+文档内容是否对您有所帮助？
+为帮助文档评分：
+页内目录
+1. 本文摘要
+2. 概述
+3. 功能介绍
+3.1 整体功能介绍
+3.2 名词解释
+3.3 产品形态
+3.4 传输包管理功能描述
+3.5 传输包上载功能描述
+3.6 传输包部署功能描述
+3.7 传输方向设置
+4. 开发接入说明
+4.1 接入模式
+4.2 Sdk引入
+4.3 Rest接入
+4.3.1 输出接口说明
+4.3.2 解密方式：
+4.3.3 请求说明.
+4.4 Sdk工具说明
+4.5 支撑服务部署包结构说明（备选）
+5. 数据迁移功能说明
+5.1 迁移范围、支持的数据类型迁移
+5.2 数据部署方式介绍
+5.2.1 传输包管理添加数据时报空指针
+5.2.2 应用（专属化应用）迁移到目标环境引擎显示的是公共引擎且元数据实体不显示
+5.2.3 部署包时报文件上传错误
+5.2.4 目标环境导入zip包时报未知错误或者系统错误
+文档反馈
+北京市海淀区北清路68号用友产业园
+4006-600-588
+友情链接
+用友官网用友YonHelp用友iuap平台用友云市场用友云注册协议隐私条款
+
+Copyright ©2020 用友网络科技股份有限公司版权所有京ICP备05007539号-24京公网安备11010802021935号
+
+返回顶部
+加载中...

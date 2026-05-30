@@ -1,0 +1,339 @@
+社区文档中心
+首页
+文档导航
+开发者社区
+社区论坛
+视频教程技术博客
+更多
+张宏涛
+资料中心
+专业开发
+产品概述
+快速入门
+操作指南
+开发指南
+开发介绍
+新功能开发
+移动端开发
+扩展开发
+全球化
+组织
+权限
+特征
+基础数据
+审批流
+业务流
+规则引擎
+公式
+UI模板
+参照
+参照扩展开发介绍
+导入导出
+打印
+对象建模
+编码规则
+调度任务
+监控与预警
+日志
+消息平台
+工作台
+事件中心
+文件服务
+YonBuilder应用开发
+前端开发
+后端开发
+移动开发
+安全
+数据库
+DevOps技术
+容器云技术
+区块链云技术
+YMS开发
+智能应用开发
+专项开发
+成果迁移
+技术方案
+最佳实践
+参考手册
+常见问题
+视频教程
+专业开发/开发指南/参照/参照扩展开发介绍
+参照扩展开发介绍
+最后更新时间：2025-09-23
+第一章 概述
+参照基本概念
+
+在界面开发过程中，经常会出现需要引用系统中已定义的数据场景。在编辑界面通 过弹出一个参照展示界面供选择参照来源数据。在开发过程中，会经常重复使用相同的 数据选择界面，例如单据上一般都会引用组织。因此需要提供一套统一的数据选择控件 及服务，在业务单据开发时，只需要直接使用，减少业务开发的工作量。其次是基于表 单模版进行开发时，框架需要一套标准的数据选择控件，已便于动态的进行控制。当需要引用数据时，使用统一的前端控件即可完成数据的选择，而不需要开发。为此，在yonbip中提供了统一公共的数据选择控件及服务框架，简称为参照。 参照管理，即管理各个领域服务中注册的参照信息，提供各个领域的参照查询、编辑、新增功能，简单来说，一个实体依赖另外一个实体的数据，另外一个实体就叫参照，参照是主要用于其他页面选择使用的。
+
+在本文档中，我们将描述如何进行参照扩展。开始我们的YonBuilder开发工作。我们模拟的场景为：业务中台已经做好业务初始化操作，基本建模已经具备，我们需要对参照进行一系列的动态操作。
+
+创建参照
+
+第一种方式创建参照
+
+创建页面时勾选参照
+
+第二种方式创建参照
+
+点击元数据，选择自己的页面需要的元数据。
+
+选择完以后，点击确定按钮，然后点击发布
+
+第二章 参照赋值
+
+业务场景，我们需要单独给参照赋值，类似的业务场景如下：当选择第一个参照的时候，要一并带出第二个第三个参照，描述，当我们选完组织参照后，讲属于改组织下面的仓库进行赋值
+
+1.创建后端API函数：
+
+2.创建前端函数
+
+3.前端函数和后端函数进行联调
+
+4.将参数值对参照进行复制
+
+function (event) {
+    var viewModel = this;
+
+    viewModel.get("org_id_name").on('afterValueChange', function (data) {
+
+        viewModel.get('Product_name').setValue("办公\\生活车辆");
+        viewModel.get('Product').setValue("2449987671691520");
+    })
+}
+
+
+监控前端函数
+
+1、第一步，在卡片页面初始化函数里，进行代码逻辑编辑，并且添加参照值发生变化之后事件
+
+//业务员确定以后，得到组织id
+viewModel.get('busiman_name').on('afterValueChange', function (data) {
+    //参照弹窗的确认按钮点击事件
+    //根据组织id来得到需要的仓库
+    cb.rest.invokeFunctionSync = function (id, data, optionsNew) {
+        if (!optionsNew) { var optionsNew = {}; }
+        optionsNew.domainKey = "developplatform";
+        let proxySync = cb.rest.DynamicProxy.create({
+            doProxy: {
+                url: "/web/function/invoke/" + id,
+                method: "POST",
+                options: optionsNew
+            }
+        });
+        return proxySync.doProxySync(data);
+    }
+    var id = data.obj.select.id;
+    let option = { async: false };
+    let resDefault = cb.rest.invokeFunctionSync("spcg.backDefaultGroup.getorgid", { "id": id }, null, option);
+})
+
+根据元数据查找URI
+
+先打开业务模型菜单
+
+打开界面如下：
+
+并在搜索框里输入我们需要的明细，例如：本次我们需要查询仓库档案，那么我们需要输入仓库
+
+点开仓库档案，右侧点击查看就有我们需要的详细信息
+
+新建后端api函数
+
+根据上面确定 的uri和domain,编写我们需要的api函数
+
+let AbstractAPIHandler = require('AbstractAPIHandler');
+class MyAPIHandler extends AbstractAPIHandler {
+    execute(request) {
+        //查询
+        var orgid = request.id
+        if (orgid == undefined) {
+            return false;
+        }
+        var sqlUnitSaleArea = "select name ,id from aa.warehouse.Warehouse where org='" + orgid + "' ";
+        try {
+            var resSaleArea = ObjectStore.queryByYonQL(sqlUnitSaleArea, 'productcenter');
+            return { resSaleArea }
+        } catch (e) {
+            throw new Error("根据组织查询仓库信息出差，请联系")
+        }
+
+        return {};
+    }
+}
+exports({ "entryPoint": MyAPIHandler });
+
+
+后端取到值后进行赋值
+
+ //采购组织值确定以后
+viewModel.get('purorg_name').on('afterValueChange', function (data) {
+    //参照弹窗的确认按钮点击事件
+    debugger
+
+    //根据组织id来得到需要的仓库
+
+    var id = data.obj.select.id;
+    let option = { async: false };
+    let resDefault = cb.rest.invokeFunctionSync("spcg.backDefaultGroup.getwarehouse", { "id": id }, null, option);
+    var data = resDefault.result.resSaleArea;
+    var warid = data[0].id;
+    var name = data[0].name;
+    viewModel.get('purorg').setValue(warid);
+    viewModel.get('purorg_name').setValue(name);
+    viewModel.get('warehouse').setValue(warid);
+    viewModel.get('warehouse_name').setValue(name);
+
+})
+
+第三章 参照过滤
+前端函数进行参照过虑
+
+业务场景：有时需要过滤某一种场景
+
+function (event) {
+    var viewModel = this;
+    viewModel.get("Product_name").on('beforeBrowse', function (data) {
+        var condition = { "isExtend": true, simpleVOs: [] }
+        var conditiontree = { "isExtend": true, simpleVOs: [] }
+        condition.simpleVOs.push({
+            field: 'orgId',
+            op: 'eq',
+            value1: "666666"
+        });
+        conditiontree.simpleVOs.push({
+            field: 'id',
+            op: 'eq',
+            value1: "2790804946768384"
+        });
+        this.setFilter(condition);
+        this.setTreeFilter(conditiontree);
+    })
+} 
+
+后端脚手架进行参照过滤
+编写java函数
+
+在后端脚手架如下位置添加自建规则，进行参照过滤
+
+代理逻辑如下：
+package com.yonyou.ucf.mdf.domain.rule.test;
+import com.yonyou.ucf.mdd.common.model.rule.RuleExecuteResult;
+import com.yonyou.ucf.mdd.common.model.uimeta.filter.vo.FilterVO;
+import com.yonyou.ucf.mdd.ext.bill.dto.BillDataDto;
+import com.yonyou.ucf.mdd.ext.bill.rule.base.AbstractCommonRule;
+import com.yonyou.ucf.mdd.ext.bill.rule.test.TimeoutTestRule;
+import com.yonyou.ucf.mdd.ext.model.BillContext;
+import org.imeta.orm.schema.QueryCondition;
+import org.imeta.orm.schema.QueryConditionGroup;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import java.util.ArrayList;
+import java.util.Map;
+@Component("RefQueryRule")
+public class RefQueryBeforeRule implements IYpdCommonRul {
+    @Autowired
+    private TimeoutTestRule timeoutTestRule;
+    @Override
+    public RuleExecuteResult execute(BillContext billContext, Map<String, Object> map) throws Exception {
+        //判空
+        if (null == billContext) {
+            return new RuleExecuteResult();
+        }
+        //取到规则链参数
+        BillDataDto billDataDto = (BillDataDto) getParam(map);
+        //得到参照的类型
+        String refType = billDataDto.getRefEntity().refType;
+        ArrayList<Object> datalist = (ArrayList<Object>) billDataDto.getData();
+        //判断参照是否是自己要进行逻辑处理的参照
+        if ("bd_purchaseorg".equals(refType) && datalist.size() == 0) {
+            BillDataDto billDataDto1 = (BillDataDto) getParam(map);
+            FilterVO gridFilterVO = billDataDto1.getCondition();
+            if (gridFilterVO == null) {
+                gridFilterVO = new FilterVO();
+            }
+            //添加逻辑条件
+            QueryConditionGroup conditionGroup = new QueryConditionGroup();
+            conditionGroup.appendCondition(QueryCondition.name("companytype").eq("45ebda24614f424abe5dfb04e00f737g"));
+            gridFilterVO.setQueryConditionGroup(conditionGroup);
+            billDataDto1.setCondition(gridFilterVO);
+        }
+        //throw new BusinessException("逻辑处理中常，请等待");
+        return new RuleExecuteResult();
+    }
+
+}
+
+添加规则
+
+1. 添加规则链步骤如下
+
+2．卡片设计器里，点击命令管理，在ref动作里，添加自己的规则
+
+2.1
+
+3. 在规则表里，手动将当前操作的参照编码添加到iuap_metadata_service的表kkfn_billruleregister的key字段，这是为了只点击该参照的时候，进入参照规则链里，点击其他参照则不进入(改步骤bip5.0强求添加, 不添加不生效kkfn_billruleregister，这里的kkfn是后端引擎编码)
+
+3.1．选择参照配置，找到改参照的参照编码，复制
+
+3.2 按图所示找到本次需要的表，
+
+3.3 .并按条件找到自己新加的规则，并在key中添加自己的参照编码
+
+后端脚手架发布
+
+因为java代码在本地开发，需要发布到线上流水线，重新执行才可以生效
+
+需要提交代码，按照git发布的标准流程提交到git,
+
+重新执行流水线
+
+效果预览
+
+第四章 参照执行过程和常见事件
+参照执行过程
+
+参照常见事件
+方法名	说明	备注
+setValue(value,check)	设置参照的值	value：为想要设置的值 check：boolean型 内部调用参数 可不传
+getValue()	获取参照的值	
+clear()	清除数据	清除参照框的数据
+setFilter(filter)	设置参照接口调用的查询条件	filter为扩展的condition
+getFilter()	获取参照的条件	
+setMultiple(multiple)	设置模型单选多选状态	
+事件名	说明	备注
+beforeBrowse	参照弹出之前	一般在这个时机给参照加过滤条件
+afterBrowse	参照弹出之后	
+beforeValueChange	参照值数据改变之前的钩子	
+afterValueChange	参照值数据改变之后的钩子	
+afterInitVm	参照弹窗模型初始化之后的钩子	
+文档内容是否对您有所帮助？
+为帮助文档评分：
+页内目录
+1. 第一章 概述
+1.1 参照基本概念
+1.2 创建参照
+1.3 创建页面时勾选参照
+2. 第二章 参照赋值
+2.1 监控前端函数
+2.2 根据元数据查找URI
+2.3 新建后端api函数
+3. 第三章 参照过滤
+3.1 前端函数进行参照过虑
+3.2 后端脚手架进行参照过滤
+3.2.1 编写java函数
+3.2.2 添加规则
+3.3 后端脚手架发布
+3.4 效果预览
+4. 第四章 参照执行过程和常见事件
+4.1 参照执行过程
+4.2 参照常见事件
+文档反馈
+北京市海淀区北清路68号用友产业园
+4006-600-588
+友情链接
+用友官网用友YonHelp用友iuap平台用友云市场用友云注册协议隐私条款
+
+Copyright ©2020 用友网络科技股份有限公司版权所有京ICP备05007539号-24京公网安备11010802021935号
+
+返回顶部
+加载中...

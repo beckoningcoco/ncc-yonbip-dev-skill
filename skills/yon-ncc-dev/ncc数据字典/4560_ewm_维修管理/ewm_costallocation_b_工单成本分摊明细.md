@@ -1,0 +1,44 @@
+# |<<
+
+**工单成本分摊明细 (ewm_costallocation_b / nc.vo.ewm.costallocation.CostallocationBodyVO)**
+
+> https://community.yonyou.com/datadict/datadict-2105yiliao/ddc/1922.html
+
+| 序号 | 属性编码 | 属性名称 | 字段编码 | 字段类型 | 是否必输 | 引用模型 | 默认值 | 取值范围/枚举 |
+|------|------|------|------|------|------|------|------|------|
+| 1 | pk_allocation_b | 工单成本分摊子表主键 | pk_allocation_b | char(20) | √ | 主键 (UFID) |
+| 2 | pk_org | 维修组织最新版本 | pk_org | varchar(20) |  | 组织_业务单元_维修组织 (maintainorg) |
+| 3 | pk_org_v | 维修组织 | pk_org_v | varchar(20) |  | 组织_业务单元_维修组织版本信息 (maintainorg_v) |
+| 4 | pk_group | 集团 | pk_group | varchar(20) |  | 组织_集团 (group) |
+| 5 | workorder_code | 工单 | workorder_code | varchar(20) |  | 工单 (WorkOrder) |
+| 6 | pk_equip | 设备编码 | pk_equip | varchar(20) |  | 设备卡片 (EquipHeadVO) |
+| 7 | pk_location | 位置编码 | pk_location | varchar(20) |  | 位置 (location) |
+| 8 | allo_weight | 分摊权重 | allo_weight | decimal(28, 8) |  | 数值 (UFDouble) |  | [0 , ] |
+| 9 | allo_percent | 分摊比例 | allo_percent | decimal(28, 8) |  | 金额 (UFMoney) |  | [0 , ] |
+| 10 | allo_mny_org | 本币分摊金额 | allo_mny_org | decimal(28, 8) |  | 金额 (UFMoney) |  | [0 , ] |
+| 11 | allo_mny_group | 集团本币分摊金额 | allo_mny_group | decimal(28, 8) |  | 金额 (UFMoney) |  | [0 , ] |
+| 12 | allo_mny_global | 全局本币分摊金额 | allo_mny_global | decimal(28, 8) |  | 金额 (UFMoney) |  | [0 , ] |
+| 13 | src_pk_bill | 来源单据表头主键 | src_pk_bill | varchar(50) |  | 字符串 (String) |
+| 14 | src_pk_bill_b | 来源单据表体主键 | src_pk_bill_b | varchar(50) |  | 字符串 (String) |
+| 15 | src_head_ts | 来源单据表头时间戳 | src_head_ts | char(19) |  | 日期时间 (UFDateTime) |
+| 16 | src_body_ts | 来源单据表体时间戳 | src_body_ts | char(19) |  | 日期时间 (UFDateTime) |
+| 17 | def1 | 自定义项1 | def1 | varchar(101) |  | 自定义项 (Custom) |
+| 18 | def2 | 自定义项2 | def2 | varchar(101) |  | 自定义项 (Custom) |
+| 19 | def3 | 自定义项3 | def3 | varchar(101) |  | 自定义项 (Custom) |
+| 20 | def4 | 自定义项4 | def4 | varchar(101) |  | 自定义项 (Custom) |
+| 21 | def5 | 自定义项5 | def5 | varchar(101) |  | 自定义项 (Custom) |
+| 22 | def6 | 自定义项6 | def6 | varchar(101) |  | 自定义项 (Custom) |
+| 23 | def7 | 自定义项7 | def7 | varchar(101) |  | 自定义项 (Custom) |
+| 24 | def8 | 自定义项8 | def8 | varchar(101) |  | 自定义项 (Custom) |
+| 25 | def9 | 自定义项9 | def9 | varchar(101) |  | 自定义项 (Custom) |
+| 26 | def10 | 自定义项10 | def10 | varchar(101) |  | 自定义项 (Custom) |
+| 27 | def11 | 自定义项11 | def11 | varchar(101) |  | 自定义项 (Custom) |
+| 28 | def12 | 自定义项12 | def12 | varchar(101) |  | 自定义项 (Custom) |
+| 29 | def13 | 自定义项13 | def13 | varchar(101) |  | 自定义项 (Custom) |
+| 30 | def14 | 自定义项14 | def14 | varchar(101) |  | 自定义项 (Custom) |
+| 31 | def15 | 自定义项15 | def15 | varchar(101) |  | 自定义项 (Custom) |
+| 32 | def16 | 自定义项16 | def16 | varchar(101) |  | 自定义项 (Custom) |
+| 33 | def17 | 自定义项17 | def17 | varchar(101) |  | 自定义项 (Custom) |
+| 34 | def18 | 自定义项18 | def18 | varchar(101) |  | 自定义项 (Custom) |
+| 35 | def19 | 自定义项19 | def19 | varchar(101) |  | 自定义项 (Custom) |
+| 36 | def20 | 自定义项20 | def20 | varchar(101) |  | 自定义项 (Custom) |

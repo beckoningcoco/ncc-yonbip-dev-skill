@@ -1,0 +1,2431 @@
+社区文档中心
+首页
+文档导航
+开发者社区
+社区论坛
+视频教程技术博客
+更多
+张宏涛
+资料中心
+专业开发
+产品概述
+快速入门
+操作指南
+开发指南
+开发介绍
+新功能开发
+移动端开发
+扩展开发
+全球化
+组织
+权限
+特征
+基础数据
+审批流
+业务流
+规则引擎
+公式
+UI模板
+参照
+导入导出
+打印
+对象建模
+编码规则
+调度任务
+监控与预警
+日志
+消息平台
+工作台
+事件中心
+文件服务
+YonBuilder应用开发
+前端开发
+后端开发
+iuap-开发规范红皮书
+后端编程模型
+R6后端脚手架升级方案
+R6后端脚手架升级操作指南
+R6后端脚手架二方包坐标变更清单
+分布式锁 yms-lock 实践
+RPC接口开发与调用（iris）
+数据库操作 yms-jdbc 实践
+HTTP请求 yms-http 实践
+上下文开发实践
+线程池 yms-executors 实践
+移动开发
+安全
+数据库
+DevOps技术
+容器云技术
+区块链云技术
+YMS开发
+智能应用开发
+专项开发
+成果迁移
+技术方案
+最佳实践
+参考手册
+常见问题
+视频教程
+专业开发/开发指南/后端开发/后端编程模型
+后端编程模型
+最后更新时间：2024-10-23
+本文摘要
+
+MDD全称为Model Driven Development，是使用高度抽象的业务模型-元数据为基础，前后端统一基于元数据的开发架构。通过将元数据作为核心资产，在各种模型驱动引擎的支撑下被转换成代码运行，从而达到降低开发成本，提高实施效率，通过模型的配置就能实现各种复杂的需求变更的目标。
+
+本文主要介绍了MDD开发框架的两大模型：元数据模型和UI元数据模型，三大驱动引擎：UI模板引擎、规则引擎、元数据引擎三种核心能力技术栈下的基础Java工程结构和快速入门示例。
+
+以及基于MDD开发框架对接各种支持服务示例等内容。可概括为以下核心要点：
+
+1、MDD技术栈的基础技术架构和功能架构；
+
+2、MDD基础功能介绍和说明；
+
+3、快速入门MDD工程开发过程、完整示例工程介绍；
+
+4、典型业务场景使用和对应核心代码出处；
+
+5、对外开放接口的说明和对应核心代码出处；
+
+6、对外开放的sdk接口说明和扩展插件使用；
+
+开发者通过对本文的学习，可了解MDD工程的完整开发、调试过程，并掌握元数据、UI元数据模型架构和驱动原理，了解MDD工程的基础配置，并最终能基于MDD开发框架进行基础业务场景的开发以及业务个性化的扩展开发。
+
+熟悉本文内容，可为通过MDD开发框架使用业务中台：租户、用户、组织、员工、权限角色等基础能力，和其他各领域服务之间快速进行业务衔接打下基础，让相关领域服务可以更快的加入到YonBIP公共技术架构体系之中。
+
+基本概念
+背景
+
+MDD(Model Driven Development) 模型驱动开发。多年前就由OMGz组织提出模型驱动架构MDA（Model Driven Architecture）的概念，采用了模型和技术分离的架构设计。基于MDA 的具体实现的开发方式即为MDD，通过使用高度抽象的领域业务模型作为构件，配以各种模型驱动引擎配置支撑，达到降低开发成本，应对复杂需求变更的目的。
+
+名词解释
+
+元模型：此处指的是模型的模型。是特定领域的模型，用于创建该领域中的模型的构建元素，相对比较固定，需要和驱动匹配。
+
+元数据：此处指的是描述数据的数据，对数据及信息资源的描述性信息，分为多层，需要与业务模型保持一致。
+
+**UI元数据：**此处指的是描述前端UI的数据，对前端UI数据级信息资源的描述性信息，需要与前端组件模型保持一致。
+
+**参照：**此处指的是对其他档案或者单据信息的参考和对照。
+
+**自定义项：**此处指的是为档案或者单据扩展属性，主要应用场景是租户对系统预制的档案或单据进行属性扩展。
+
+**交易类型：**此处指的是对同一单据类型下的单据定义的细分分类。
+
+**是否层级：**代表该档案的结构是平级还是树形的层级。
+
+**是否支持分级管控：**该档案是否支持基础数据的分级管控规则
+
+产品亮点
+
+MDD 开发框架， 是用友云针对企业数字化中台理念实现的一套开发框架。 从企业云服务核心问题域出发， 总结提炼出最佳实践， 且形成了统一的标准及规约。 致力于支撑中台能力快速孵化， 形成中台各能力间连接的纽带， 最终实现中台基础上的企业数字化业务重构及创新快速开发实现。
+
+框架的主要目的实现模型和技术框架的分离， 系统的业务部分和技术部分都可以各自进化而互不影响， 让开发者更专注业务， 并能够让初级的研发人员快速的开发出复杂的业务功能， 其余由框架来封装屏蔽技术细节， 降低技术难度， 从而节省人力成本， 缩短项目周期，提高软件安全质量。
+
+同时通过各种业务模型沉淀， 也能为实现企业实现业务的技术积累， 有助于企业业务分析。
+
+技术架构
+逻辑架构
+
+逻辑结构设计
+
+UCF-MDD在统一元数据服务能力基础上，提供了UI模板引擎、规则引擎、元数据引擎三种核心能力。
+
+统一元数据服务提供了元模型服务、元数据服务和业务词汇服务等支撑功能；UI模板引擎提供了前端UI驱动、UI元数据存取等功能；规则引擎提供了规则执行引擎和动作规则存取功能；元数据引擎提供了包含持久化驱动和后台服务驱动的功能。
+
+UCF-MDD是基于UCF-CN的日志、异常、运维、三方包、缓存、持久化、微服务规范、专属化、安全规范等基础能力之上建设的。
+
+UCF-MDD的规则引擎使用编码规则、云打印、消息管理、事件管理、云报表、云表单、UI模板等支撑服务，在元数据引擎基础上，整合UI模板引擎对外提供驱动开发。
+
+UCF-MDD支撑UCF-DEM的租户、用户、组织、员工、权限角色等数字化建模，也可以直接支撑营销云、制造云、采购云、金融云、财务云、人力云等业务应用的建设。
+
+功能架构
+
+图2逻辑结构设计
+
+UCF-MDD在UI元数据管理和元数据管理功能基础之上，提供了UI模板引擎、规则引擎和元数据引擎三大核心功能块。
+
+UI元数据管理包含了UI模板设计器的UI模板管理、面向用户的UI模板设计器和面向开发的UI模板设计器
+
+元数据管理包含了基础元模型管理、元模型管理、元数据管理、租户元数据管理、业务词汇管理及元数据缓存管理等功能。
+
+UI模板引擎包含了UI渲染引擎、动态UI界面、统一参照服务、UI元数据存取等核心功能。
+
+元数据引擎包含了后端服务驱动、常用业务驱动、持久化驱动以及物理模型扩展等核心功能模块。
+
+规则引擎包含了规则执行引擎和动作规则存取功能，在元数据引擎基础上整合UI模板引擎，实现对外赋能。
+
+部署架构
+
+图3:部署架构
+
+最外层是防火墙，透过防火墙到达接入层。接入层包含了负载均衡SLB进行转发，到达前端应用层。
+
+前端应用层前端UI的Nodejs部署在Docker容器集群。
+
+前端应用通过接入层的负载均衡SLB进行服务发现后端应用服务。
+
+业务服务依赖UCF-MDD的UI模板SDK、规则SDK、元数据SDK，业务应用部署在Docker容器集群。规则SDK依赖支撑服务，公共支撑服务部署在Docker容器集群部署。元数据SDK依赖元数据服务，元数据服务部署在Docker容器集群部署。UCF-MDD支持在Redis缓存中快速读取元数据。
+
+存储层包含了关系型数据库、非关系型数据库和ES搜索引擎查询仓。业务应用UI元数据从存储业务数据库Mysql中，支持业务查询仓Mysql、ES查询仓存储，提供查询。支撑服务存储在支撑服务数据库Mysql中。物理元数据存储在统一元数据数据库MongoDB中
+
+功能介绍
+UI元数据驱动引擎
+基本信息
+
+UI元数据驱动引擎是将UI模版按照前端协议换成数据模型（viewmodel）和页面模型（viewapplication）供前端页面展示。
+
+将UI模版转换成元数据查询方案，从而使用元数据驱动引擎查询业务数据。
+
+UI元数据
+
+一个系统或产品对用户来说都有人机交互的界面，对于Web应用而言，承担人机交互的界面视图的则是一个个页面或者是一个个组件组成的。
+
+对于一个页面而言，可以将其分为两部分：页面结构+页面数据，如下图所示：
+
+图4:页面结构图
+
+其中，页面结构表达的含义是这个页面都包含什么，由哪些UI组件（或UI控件）组成，布局是什么样的，都有哪些交互（事件）动作，这些都可以使用一套特定描述语言来将其描述，而这些描述的具体形式可以是多样的，例如使用XML、JSON、程序语言等，例如HTML本身就可以理解为一个Web页面的UI元数据，使用HTML可以定义一个Web页面。
+
+无论使用哪种具体的描述语言或描述方式，都需要一些定义，例如需要定义一些容器（Container）、组件（toolbar、card、table、button等）、动作（Action）等，以上这些综合起来就组成UI元数据。
+
+总的来说，UI元数据就是对界面UI的描述数据，它描述了一个页面的组成元素、布局样式、动作规则、交互行为以及页面的输入参数、输出结果（返回值）等
+
+UI模版
+
+一个页面所有的UI元数据就称之为UI模板。一个页面可以有多个UI模板，因为UI模板决定了该页面的结构组成，会影响业务数据的展示形式和人机交互。
+
+UI模型图
+
+图5:UI模版模型图
+
+动作规则管理
+基本信息
+
+动作规则即页面某按钮触发点击动作时，后端服务会执行一系列逻辑，这些逻辑中抽象分装为多个规则接口实现, 每一个实现既称为规则，每个动作所需要执行的规则合集称为某动作的规则链。
+
+规则是通过规则注册表中ruleId（字符串）的值作BeanId 获取到Spring注册的一个service Bean, 并通过接口方法调用execute方法来执行一段逻辑获取最终结果。
+
+图6:规则链图
+
+规则管理
+
+动作规则保存于规则注册表(billruleregister) 中。可通过DML 直接执行SQL注册管理；
+
+表结构说明：
+字段	字段类型	是否可空	描述
+id	bigint(20)	NO	主键
+billnum	varchar(60)	NO	表单bilno
+action	varchar(64)	YES	动作action,对应bill_command 的action
+ruleId	varchar(60)	NO	规则id，规则执行的beanid
+iorder	float(10,2)	NO	排序，规则链会按iorder顺序执行
+overrule	varchar(100)	YES	覆盖的ruleId
+tenant_id	bigint(20)	NO	租户id
+key	varchar(100)	YES	这个规则只作用于表单上某个具的体参照。
+isSystem	bit(1)	YES	默认系统
+url	varchar(200)	YES	规则直接调用外部服务地址
+isAsyn	tinyint(4)	NO	是否异步，默认同步
+config	varchar(1000)	YES	规则配置（可以配置规则条件），开启分布式事务等
+domain	varchar(40)	YES	如果是跨域规则，请配置对应的domain
+dataRule	varchar(1000)	YES	当前规则之下条件
+mock	varchar(255)	YES	分布式做打桩测试
+ytenant_id	varchar(36)	NO	友户通租户ID
+规则分层
+
+规则总的分层分为系统级和租户级，每一级分层下又分为通用级、模块级和单据级。系统和租户分层区分在于注册表中租户ID字段。 不同级别分层区分在billnum字段。系统出厂的时候预制系统级模版（0租户），租户开通时会生成租户级别的。
+
+图8:规则分层图
+
+通用级：billnum字段标识common。适用于所有单据。
+
+模块级：billnum字段标识 【subId】。适用于子产品标识为【subId】的单据，可覆盖common 级别的规则。
+
+单据级：billnum 字段标识 【billNumber】。适用于单据编码为【billNumber】的指定单据。可覆盖模块级和通用级规则。
+
+其他级别扩展，当前规则引擎支持不限层级的分层扩展。暂时通用支持为以上三级。其他级别扩展暂时没有实际的使用场景。
+
+规则分类
+
+规则注册表中注册的规则，按照执行方式又分为同步规则、异步规则、REST规则和远程规则。
+
+图9:规则分类图
+
+RPC规则：规则注册表中domain字段设置服务域，则规则执行器执行时会通过RPC接口调用远程服务，传递规则注册信息到服务端执行获取结果。
+
+REST规则：本地规则中通过REST接口执行逻辑，也是是一种远程规则，但是实际的规则service在本地。
+
+同步规则：正常的本地规则，通过使用规则注册表中的ruleId 作为SpringIOC 的BeanName获取并执行本地service方法。
+
+异步规则： 规则注册表中注册的isAsyn 字段值为1代表是异步。结果不影响前后规则链中的规则结果的情况通过异步线程执行规则service方法。
+
+规则运行图
+
+图10:规则运行图
+
+具体执行核心过程描述：
+
+com.yonyou.ucf.mdd.ext.bill.rule.template.CommonOperator#execute开始执行规则
+com.yonyou.ucf.mdd.rule.api.RuleOperatorProxy#executeRule() 根据billnum，action等查询规则列表并加入缓存(缓存key:billrule*)
+com.yonyou.ucf.mdd.rule.handler.DefaultExecRulesHandler#executeRule() 循环执行规则
+com.yonyou.ucf.mdd.rule.handler.DefaultExecRulesHandler#doExecuteRule 规则条件校验并执行具体的规则
+系统预制规则
+
+框架会提供一系列的默认规则，具体功能描述如下
+
+规则	action	作用
+UIMetaExtLoadRule	uimeta	目前viewmodel和view的生成是框架service直接生成的，如果领域需要进行viewmodel数据修改，可以配置此rule，并在其前后按需配置规则链
+AddBillRule	add	点击新增按钮动作规则，返回构建的带有基本信息的业务对象
+AuditBillRule	check	唯一性检查
+CheckUniqueRule	varchar(60)	NO
+CopyBillRule	copy	拷贝单行数据
+DeleteBillRule	delete	删除规则
+DetailBillRule	detail	详情规则
+FillPKRule	save	为业务对象填充ID 列规则
+MddExtFormulaRule	check	公式计算规则
+MovefirstBillRule	movefirst	翻页到最前
+MovelastBillRule	movelast	翻页到最后
+MovenextBillRule	movenext	翻页下一个
+MoveprevBillRule	moveprev	翻页上一个
+QueryBillRule	query	列表查询规则
+QuerytreeBillRule	querytree	树状数据查询规则
+BeforeRefRule	refer	参照数据查询前置规则，处理权限
+ReferDataRule	refer	获取参照数据规则
+ReferenceCheckRule	delete	数据引用检查
+RefreshTsRule	save	刷新时间戳规则
+ReturnBillCodeRule	save	编码退号规则（在billcode 的jar 中）
+SaveBusinessLogRule	save	业务日志规则
+SaveBillRule	save	保存规则
+SubmitBillRule	submit	审批流提交规则
+UnsubmitBillRule	unsubmit	审批流撤回规则
+UpdateBillCodeRule	save	编码更新规则（在billcode 的jar 中）
+参照管理
+基本信息
+
+在界面开发过程中，经常会出现需要引用系统中已定义的数据场景。在编辑界面通过弹出一个参照展示界面供选择参照来源数据。在开发过程中，会经常重复使用相同的数据选择界面，例如单据上一般都会引用组织。因此需要提供一套统一的数据选择控件及服务，在业务单据开发时，只需要直接使用，减少业务开发的工作量。其次是基于表单模版进行开发时，框架需要一套标准的数据选择控件，已便于动态的进行控制。当需要引用数据时，使用统一的前端控件即可完成数据的选择，而不需要开发。为此，在iuap5.0中提供了统一公共的数据选择控件及服务框架，简称为参照。
+
+参照管理，即管理各个领域服务中注册的参照信息，提供各个领域的参照查询、编辑、新增功能。这里主要描述参照框架的功能和参照管理服务的功能。
+
+功能说明
+
+参照框架分为两个部分：前端组件及后端服务。
+
+图11：参照架构图
+
+当前端请求参照服务时，会根据根据refcode判断是否远程参照，在使用远程参照时，需要指定领域编码。例如 假设组织服务中的部门参照编码为dept，组织服务的界面本身使用部门参照时，refcode指定为dept，其他领域的服务使用时，指定refcode为orgcenter.dept（domain.refcode）即可使用组织服务提供的部门参照 。
+
+参照分类
+
+参照框架目前支持三种界面展现样式：树形、列表形、树表形
+
+树形参照
+
+图12:树形参照
+
+树形参照，主要为有层级关系的档案选择使用，支持显示数据的编码、名称。支持按层级展开查找数据。同时也支持数据的模糊查找。可在搜索框中输入待检索的关键字进行模糊查询
+
+列表形参照
+
+图13:列表形参照
+
+列表形参照支持分页的列表展示，具有和普通参照所有的用户扩展功能。
+
+树表形参照
+
+图14:树表形参照
+
+树表形参照为树和表的组合，支持按左侧树选择的节点查询右侧列表数据。同时左侧树同树型参照支持过滤。右侧列表同列表参照支持配置显示列、模糊查询等能力。
+
+树表形参照前端在调用请求时分别发送了树参照查询和列表形参照参照，共同组建出数据。
+
+参照存储
+
+参照的注册存储在pub_ref 表，由参照code唯一确认参照。可通过DML 直接执行SQL注册管理；
+
+表结构说明
+字段	字段类型	是否可空	描述
+id	bigint(20)	NO	主键
+code	varchar(100)	NO	参照code，唯一标志
+name	varchar(100)	YES	参照名称
+reftype	varchar(100)	YES	设计时是给billitem_base 上creftype使用，目前开发一致使用的refcode
+isorgrel	bit(1)	YES	是否机构相关，如果是true，树参照时会加上组织的过滤
+datasourcetype	varchar(100)	YES	数据源类型 sql
+datasourcesql	varchar(2000)	YES	sql 类型的：具体的sqlmapper类型：mapper的statement
+iparentrefid	int(11)	YES	父参照id
+csub_id	varchar(100)	YES	subID
+centitykeyfld	varchar(100)	YES	表
+ctpltype	varchar(100)	YES	模板类型 Tree
+bmultisel	bit(1)	YES	是否支持多选，默认否
+centitynamefld	varchar(100)	YES	参照显示名称（前端给树参照使用，当前仅当树参照时）
+bauth	bit(1)	YES	是否受权限控制，1:不受，0:受
+ccheckflds	varchar(400)	YES	模糊查询比较字段 , 逗号分隔
+cdatagrid_fullname	varchar(100)	YES	表参照的fullname
+cdataclass_lscode	varchar(100)	YES	左树右表，左边树的keyfield
+cdataclass_lsname	varchar(100)	YES	左树右表，左边树的namefield
+cbillnum	varchar(100)	NO	参照页面的表单billnum
+eventbean	varchar(200)	YES	参照查询数据前后自定义bean去处理数据，比如：前置bean可以加入业务查询参数，后置bean可以处理参照查询的数据
+authType	varchar(40)	YES	权限类型，userStore:主动拼接门店相关隔离属性，可以是JSON类型的隔离条件传入
+extendField	varchar(500)	YES	参照扩展属性
+domain	varchar(40)	YES	rpc 到设置的domain 查询数据，不设置则在本域查询
+treedomain	varchar(40)	YES	rpc 到设置的domain 查询数据，不设置则在本域查询
+name_resid	varchar(200)	YES	参照名称多语言
+参照运行图
+
+图15:参照运行图
+
+具体执行核心过程描述：
+
+com.yonyou.ucf.mdd.ext.ref.service.impl.RefService#getRefEntityByCode 通过refCode在pub_ref里查询refEntity模型，如果是跨域参照（domain.refCode）则rpc到对应domain去查询。
+com.yonyou.ucf.mdd.ext.bill.rule.refer.BeforeRefRule#execute 补充自定义项，组织权限，数据权限，相关性规则等
+com.yonyou.ucf.mdd.ext.bill.rule.refer.ReferDataRule#execute 构建参照查询参数，rpc 或者本域查询数据
+com.yonyou.ucf.mdd.ext.ref.service.impl.RefService#getRefData 根据不同的参照类型查询数据，在查询数据前后可以eventbean做业务扩展。
+查询方案
+基本信息
+
+列表页的头部查询方案区域，用于用户对列表数据的筛选。支持用户自定义扩展方案。
+
+图16:查询方案图
+
+数据模型
+
+图17:方案数据模型图
+
+查询方案分为：方案栏目和查询方案
+
+查询模版：查询模板信息存储在pb_meta_filters、pb_meta_filter_item、pb_meta_filter_item_ext表中，bill_base里的 cFilterId对应pb_meta_filters的id，即默认过滤ID。pb_meta_filter_item 存储系统具体栏目，pb_meta_filter_item_ext 用于存储用户自定义过滤栏目。
+
+查询方案：查询方案信息存储在pb_filter_solution、pb_filter_solution_common、pb_filter_solution_advance表中，查询方案是具体的查询模版实例，是真正作用于页面查询的对象。
+
+设计初衷：可能初始开发者疑惑为什么要设计查询模版，直接使用查询方案即可。从数据模型可以知道一个查询模版可以给多个方案使用，我们可以这么理解查询方案的查询模版就类似于元数据，是数据模型，用于具体的查询，查询方案类似于UI元数据，用于界面的显示。
+
+功能说明
+创建查询方案
+
+点击创建查询方案按钮，弹出创建查询方案界面如下图：
+
+图18:新增方案图
+
+主要录入项说明如下：
+
+方案类型为公共方案时表示所有人可见，个人方案时仅自己可见
+查询方案名称支持多语录入
+勾选默认方案时，列表页初始将选中该方案
+勾选自动搜索时，将自动执行数据查询请求，否则将不自动执行数据请求
+点击添加查询条件后，将会弹出查询模板的所有模板项，勾选后将添加到新增方案的查询条件区域
+查询项后面的下拉区可选项包含“查询区”和“导航区”，用于标记查询项在列表页面的位置，“查询区”为默认选项，表示查询项展示在头部查询区范围内。如果该查询项对应的实体项为参照类型，则可以设置为“导航区”，做此设置后该查询项对应的参照内容将会展开显示在列表左侧，点击某项时，将直接过滤列表数据。
+创建自定义过滤条件
+
+在新建查询方案界面添加查询条件时，待选的查询项来自系统默认查询条件。如果需要扩展查询条件(最终存储在pb_meta_filter_item)，点击自定义过滤条件按钮，如下图，
+
+点击新增按钮如下
+
+图19:新增过滤项
+
+左侧为此单据对应的元数据实体字段信息，右侧为自定义过滤项的信息录入区域。可设置过滤表达式、过滤类型、比较符等信息。录入完成后必须通过校验才可以保存。
+
+保存成功后，新建查询方案时可以勾选该过滤项为查询条件。
+
+自定义项
+数据模型
+
+图20:自定义项数据模型
+
+功能说明
+
+自定义项采用固定自定义项和自由自定义项的共存的方式。自定义项的扩展主要有三方面的操作：更新UI元数据，更新领域元数据，以及插入本地关系表。模板的显示通过UI元数据确定。
+
+固定自定义项：可以提供以下功能，采购、库存、U订货、财务（部分）等支持连带关系；固定自定义项功能主要是为了供应链业务使用，在开发态配置好扩展字段以及字段对应的自定义项，在使用的时候只需要一键启动，后台会根据defineId更新各个领域的扩展字段。
+
+图21:固定自定义项
+
+自由自定义项：有一个分配的概念，新增的自定义项需要先分配给各个实体才能使用，和固定自定义通过defineid固定匹配不同的是，自由自定义项采用的是每次分配占用的方式，它分为自定义项视角和业务对象视角，可以从不同的视角进行分配。
+
+图22:自由自定义项
+
+自定义档案
+支持租户级用户自定义档案；
+支持自定义项档案定义的维护
+支持自定义档案发布到菜单，即需要支持权限管理的自定义档案，发布菜单之后不同的人员进入各自菜单，来维护管理不同的自定义档案
+支持分级管控的自定义档案，需在基础数据分级管控中展示该档案
+支持自定义档案内容的维护
+自定义档案内容支持增删改查
+自定义档案内容支持excel导入
+支持批量（支持多选、全选）删除、启用、停用
+支持分级管控的自定义档案的维护数据根据组织权限和管控权限进行控制
+开发示例
+MDD开发环境搭建
+资源下载
+下载脚手架源码下载：http://git.yonyou.com/mdd-pub/ucf-mdf-pub/tree/develop/mddfw-be-3.0.8-dev
+
+下载setting.xml 文件：http://git.yonyou.com/mdd-pub/ucf-mdf-pub/blob/develop/mddfw-be-3.0.8-dev/mddfw/settings.xml
+
+数据库初始化：http://git.yonyou.com/mdd-pub/mdd-db/tree/u8cdev/mysql
+
+后端项目启动
+在IDE中配置jdk路径、maven路径。配置maven的settings
+
+在IDE中导入后端工程，或使用IDE直接导入GIT工程； 通过maven 更新下载jar，并编译通过。
+
+打开application.properties文件，修改注册后的工程名称，防止影响其他的注册服务
+
+#spring基本配置spring.application.name=[iris-domain]spring.domain.name=[iris-domain]
+
+修改端口号和上下文，防止与其他服务产生冲突
+
+#配置容器相关参数server.servlet.context-path=/server.port=8080
+
+配置iris相关信息
+
+mdd.mw.profiles.active=combinemdd.access.key=4ceHfnmlKbR1OyW9mdd.access.secret=Up6wkdGE5w3CgKnJG864U7D9uJRHsH
+
+yms控制台配置redis,db等地址信息
+
+执行bootstrap项目下com.yonyou.ucf.mdd.bootstrap.server.Startup类启动项目。如果启动失败请配置启动参数
+
+图23:启动配置图
+
+脚手架模块说明
+模块	依赖模块	功能说明
+mddfw-api	-	对外服务层
+mddfw-bootstrap	mddfw-bootstrap	脚手架启动模块
+mddfw-domain	mddfw-api	领域业务模块
+mddfw-conf	mddfw-conf	配置模块
+脚手配置文件说明
+文件名	描述
+applicationContext.xml	分词配置(mainAppContext),国际化bean，oss等
+applicationContext-db.xml	数据库配置，事务配置
+applicationContext-imeta.xml	元数据公式，实体的扫描
+applicationContext-mvc.xml	Spring相关配置，比如请求地址拦截等
+applicationContext-redis.xml	redis 相关配置
+MDD驱动模块说明
+模块	依赖模块	功能说明
+mdd-framework-api	-	对外提供的接口模型组件
+mdd-framework-core	mdd-framework-api	MDD 核心驱动包
+mdd-framework-support	mdd-framework-coremdd-framework-api	业务规则支持包
+mdd-pub-jar	all	框架对外提供的统一接入包
+元数据接入
+
+元数据配置地址：http://u8c-test.yyuap.com/metadata/web/u8c/metadata/index.html#/metadata/index?id=8f7ad435-3326-4ad0-9819-de187381fae5&secret=****
+
+领域配置元数据有两种方式：本地xml文件的导入和在线直接编辑，配置完成后刷新缓存，具体文档可以参考<<元数据红皮书>>。
+
+UI元数据接入
+
+UI元数据的接入有两种方式：Excel工具生成和低代码设计器统一存储（细节可以查看UI模版红皮书）
+
+Excel工具
+
+Excel工具是通过一个Excel文件生成UI元数据对应的sql，执行sql可以将UI元数据插入对应的数据库表（table）中
+
+图24:excel工具图
+
+excel每一个部分对应DB中的Table，发布时会将excel中的数据写入对应table，excel每一个部分对应DB中的Table，发布时会将excel中的数据写入对应table。
+
+Excel对应的UI图层关系
+
+图25:Excel与UI图层关心
+
+清理缓存
+
+为了提高运行期效率，UI元数据存储在redis缓存，配置完UI元数据后需要清理redis缓存，缓存key:viewmodel*
+
+规则接入
+规则的脚本执行
+执行脚本库的默认规则。
+根据业务场景按需在默认规则的前后加入业务规则，如果默认规则不符合业务场景也可以注册新的rule去覆盖默认的规则，例子如下
+
+图26:规则注册图
+
+模块级别级别规则billnum为bill_base 上的subid
+规则分为系统规则和租户级别规则，系统级别规则是开发预制的，租户级规则是租户开通时对系统规则的拷贝，整个运行期都使用的租户级别规则。
+清理缓存
+
+为了提高运行期效率，规则在首次使用后存储在redis缓存，所以配置完规则后需要清理redis缓存，缓存key:billrule*
+
+参照接入
+参照脚本执行
+执行脚本库参照的默认规则和添加业务场景需要的规则
+pub_ref 表中注册参照相关信息，并配置对应的UI元数据，如图所示
+
+图27:参照注册图
+
+参照规则
+
+参照规则的扩展同动作规则扩展。参照规则的动作对应为 action=refer。
+
+查询参照数据的默认规则中支持了多种类型的适配扩展。
+
+参照注册表（pub_ref）中datasourceType 可设置获取数据的类别，现默认支持 sql | meta | mapper | es | rpc 等几种适配处理。其他类型扩展步骤：
+
+自定义datasourceType 类型。
+
+自定义适配处理器，Spring注入service名称为 [datasourceType] RefDataHandler。如 esRefDataHandler、 metaRefDataHandler 等。
+
+设置参照的datasourceType 为自定义的类型值。
+
+参照前后置动作
+
+参照规则前后置逻辑处理可通过两种方式扩展。
+
+方式1. 参照规则可以通过规则动作扩展，通过排序设置前后置的规则
+
+方式2. 通过前后置事件来扩展。MddRefServcie中getGridData 和getTreeData 的方法中前后都有调用doRefEvent方法。通过IRefEvent 接口的实现类来执行逻辑。扩展方式是在参照注册表（pub_ref）中设置eventbean的值为IrefEvent接口实现类的Spring注入的BeanName;
+
+枚举接入
+
+现阶段枚举功能主要服务于MDD框架的UI元数据的构建，用于构造枚举类型的数据列。枚举分为系统枚举和租户级别枚举，系统枚举是领域开发配置，租户级别枚举可以从枚举设置界面配置，统一存储。
+
+系统级别枚举
+系统级别的枚举存储在aa_enum表中，如图所示
+
+图28:系统枚举图
+
+配置完枚举后，请清理枚举缓存enumCache*
+枚举在UI元数据中运行期的使用代码出处：com.yonyou.ucf.mdd.ext.bill.meta.util.FieldUtil#setEnumParams(com.yonyou.ucf.mdd.common.model.uimeta.ui.Field)
+自定义项接入
+
+自定义项采用固定自定义项和自由自定义项的共存的方式。目前的文档的方式是老自定义的方式，已经不建议使用，MDD5.2.0后建议统一使用新自定义项的方式接入。
+
+固定自定义项
+
+提供以下功能：采购、库存、U订货、财务（部分）等支持连带关系
+
+billentity_base这个表里的label添加标签fixedUserdef。
+billitem_base中新添加扩展字段对应的cSelfDefineType为
+表头：headDefine1~headDefine60表体：bodyDefine1~bodyDefine60
+固定自定义项需要实现的接口。实体上实现公共接口base.itf.UserdefItem
+<componentname="itf"moduleName="base"title="公用接口组件">
+<interfacename="UserdefItem"title="固定自定义项">
+<attributename="define1"title="自定义项1"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define2"title="自定义项2"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define3"title="自定义项3"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define4"title="自定义项4"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define5"title="自定义项5"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define6"title="自定义项6"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define7"title="自定义项7"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define8"title="自定义项8"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define9"title="自定义项9"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define10"title="自定义项10"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define11"title="自定义项11"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define12"title="自定义项12"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define13"title="自定义项13"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define14"title="自定义项14"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define15"title="自定义项15"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define16"title="自定义项16"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define17"title="自定义项17"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define18"title="自定义项18"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define19"title="自定义项19"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define20"title="自定义项20"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define21"title="自定义项21"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define22"title="自定义项22"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define23"title="自定义项23"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define24"title="自定义项24"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define25"title="自定义项25"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define26"title="自定义项26"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define27"title="自定义项27"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define28"title="自定义项28"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define29"title="自定义项29"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define30"title="自定义项30"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define31"title="自定义项31"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define32"title="自定义项32"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define33"title="自定义项33"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define34"title="自定义项34"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define35"title="自定义项35"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define36"title="自定义项36"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define37"title="自定义项37"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define38"title="自定义项38"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define39"title="自定义项39"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define40"title="自定义项40"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define41"title="自定义项41"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define42"title="自定义项42"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define43"title="自定义项43"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define44"title="自定义项44"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define45"title="自定义项45"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define46"title="自定义项46"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define47"title="自定义项47"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define48"title="自定义项48"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define49"title="自定义项49"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define50"title="自定义项50"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define51"title="自定义项51"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define52"title="自定义项52"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define53"title="自定义项53"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define54"title="自定义项54"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define55"title="自定义项55"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define56"title="自定义项56"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define57"title="自定义项57"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define58"title="自定义项58"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define59"title="自定义项59"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define60"title="自定义项60"type="String"isGlobalization="true"iLength="255"/>
+自由自定义项
+billentity_base这个表里的label添加标签userdef
+需要实现的接口，实体上实现base.itf.FreeCustomItem
+<componentname="itf"moduleName="base"title="公用接口组件">
+<interfacename="FreeCustomItem"title="自定义项">
+<attributename="define1"title="自定义项1"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define2"title="自定义项2"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define3"title="自定义项3"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define4"title="自定义项4"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define5"title="自定义项5"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define6"title="自定义项6"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define7"title="自定义项7"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define8"title="自定义项8"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define9"title="自定义项9"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define10"title="自定义项10"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define11"title="自定义项11"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define12"title="自定义项12"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define13"title="自定义项13"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define14"title="自定义项14"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define15"title="自定义项15"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define16"title="自定义项16"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define17"title="自定义项17"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define18"title="自定义项18"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define19"title="自定义项19"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define20"title="自定义项20"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define21"title="自定义项21"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define22"title="自定义项22"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define23"title="自定义项23"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define24"title="自定义项24"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define25"title="自定义项25"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define26"title="自定义项26"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define27"title="自定义项27"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define28"title="自定义项28"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define29"title="自定义项29"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define30"title="自定义项30"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define31"title="自定义项31"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define32"title="自定义项32"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define33"title="自定义项33"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define34"title="自定义项34"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define35"title="自定义项35"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define36"title="自定义项36"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define37"title="自定义项37"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define38"title="自定义项38"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define39"title="自定义项39"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define40"title="自定义项40"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define41"title="自定义项41"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define42"title="自定义项42"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define43"title="自定义项43"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define44"title="自定义项44"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define45"title="自定义项45"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define46"title="自定义项46"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define47"title="自定义项47"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define48"title="自定义项48"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define49"title="自定义项49"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define50"title="自定义项50"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define51"title="自定义项51"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define52"title="自定义项52"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define53"title="自定义项53"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define54"title="自定义项54"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define55"title="自定义项55"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define56"title="自定义项56"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define57"title="自定义项57"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define58"title="自定义项58"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define59"title="自定义项59"type="String"isGlobalization="true"iLength="255"/>
+<attributename="define60"title="自定义项60"type="String"isGlobalization="true"iLength="255"/>
+自定义项对外提供接口
+
+接口：AttrextQueryRPCService
+
+接口类型：RPC
+
+接口说明：自定义项对外提供的RPC接口
+
+hasRefDocUseByAttrext
+
+方法说明：查询档案参照是否被自定义项使用
+
+参数：refDocId
+
+参数类型：String
+
+参数说明：档案参照的refCode
+
+响应参数：Boolean
+
+getAttrextRelationList
+
+方法说明：查询新老自定义项的code和Column的对应关系，主要用于数据升级时使用
+
+参数1：doctype String类型 老的自定义项的doctype
+
+参数2：tenantId String类型 租户ID
+
+响应参数：[{"code":"ee","columnname":"define1"}]
+
+支持的扩展方式
+
+外表扩展的方式：
+
+主表与外表一对一关联，采用主键关联。
+
+每一个档案的扩展是公用的扩展表（每种类型的档案的不同租户是同一个扩展表），当扩展表的字段不够用时，一次扩展一个表。
+档案的元数据的扩展是组户级的，每扩展一个字段，都需要在租户元数据中添加一个扩展字段，在元数据实体表中添加一条纪录
+扩展的字段和元数据在没有分配前，是没有关系的
+预留扩展只是为了自定义项扩展的时候不需要同步运行期去扩展物理结构而已
+
+JSON扩展方式：一个大字段，走老的代码
+
+新自定义项的接入
+
+新自定义项支持无限制扩展
+
+典型业务场景介绍
+单据基本开发
+单据元数据建模
+
+MDD框架开发单据，元数据模型是基础，所有的页面和逻辑都需要依赖元数据描述模型。
+
+基于xml文件的元数据模型设计,以设计员工staff.xml为例
+
+图29:元数据配置例图
+
+图5.1为员工主子表元数据模型整体设计，其中包括员工实体主表、员工主职、员工兼职、员工银行账号
+
+元数据一般说明
+
+组件
+
+图30:组件图
+
+domain:域名
+
+title:组件显示名称
+
+moduleName:组件模块名称
+
+name:组件名
+
+实体
+
+图31:实体图
+
+name:实体名
+
+title:实体显示名称
+
+tableName:实体对应表名
+
+实体属性
+
+图32:实体属性图
+
+name:属性名
+
+columnName:对应数据库字段名
+
+titile:属性显示名称
+
+type:属性类型
+
+iLength:属性长度
+
+isKey:是否主键
+
+jointUnique:属性导入唯一
+
+isRequired:是否必输
+
+isCode:是否编码
+
+isUnique:属性是否唯一
+
+继承
+
+图33:元数据继承图
+
+继承一个基类
+
+接口
+
+图34:元数据实现图
+
+实现了租户、停启用、逻辑删除接口
+
+主子表关系设置
+
+图35:主子关系图
+
+将整个文件导入上传至web的元数据管理后台服务,整个员工组件下的关系图5.2如下
+
+图36:元数据设计图
+
+单据UI元数据建模
+
+MDD框架上开发单据，设计完成5.1.1步骤的元数据模型，然后需要根据元数据模型，通过在excel模板中去设计页面的模板，并生成SQL文件。
+
+以下主要是以员工页面(比较基础的主子表结构设计)：
+
+员工列表excel模板
+
+图37:列表excel图
+
+员工新增卡片的excel模板
+
+图38:卡片excel图
+
+员工卡片编辑excel模板
+
+图39:卡片编辑图
+
+其中，模板一般都关联了以下表结构：
+
+bill_base：单据信息
+
+billentity_base：单据实体信息
+
+billtemplate_base：模板信息
+
+billtplgroup_base：模板分组
+
+billitem_base：控件字段信息
+
+pb_meta_filters：定义UI模板的过滤组件，包括过滤组件名称
+
+pb_meta_filter_item：过滤方案条件，指定过滤方案的过滤字段、显示字段
+
+pb_filter_solution：配置UI模板过滤方案，指定默认的过滤方案
+
+pb_filte_solution_command：过滤方案控件
+
+bill_toolbar：工具栏信息
+
+bill_toolbaritem：工具栏控件
+
+bill_command：单据动作信息
+
+最后根据execl模板生成sql。
+
+UI模板设计元数据，请参照UI模板设计管理。
+
+员工节点(图)：
+
+图40:员工节点图
+
+员工列表：
+
+图41:员工列表图
+
+员工新增卡片：
+
+图42:员工新增图
+
+员工编辑卡片:
+
+图43:员工编辑图
+
+参照开发
+
+图44:参照配置流程图
+
+创建元数据详见元数据开发接入。
+创建UI模板详见UI元数据接入。
+注册参照到pub_ref表，目前的方式为手动执行DML进行预制。表结构描述及扩展参考统一参照开发接入。
+在使用参照的表单所对应的元数据上增加相应字段保存关联的参照ID. 比如xml元数据中增加币种参照如下
+
+使用统一元数据服务的设计器的元数据请按照设计器功能设置。
+
+在列表页模板中配置使用参照。
+
+图45:UI元数据使用参照
+
+审批流对接
+
+图46:审批流对接图
+
+关键词说明
+
+【安全租户】：流程服务接口认证需要的一个租户ID,（最新的YMS接入以后可以不用配置）
+
+【token】: 流程服务接口认证需要的安全租户生成的对应的token**（最新的YMS接入以后可以不用配置）**
+
+【appsource】: 在流程中作为应用的区分维度，流程定义与此配置相关。 如果一个微服务提供的所有单据全部为同一个应用下，则可自定义并找流程服务预置，预置完成后在后端服务的yms配置中心中配置； 如果多个微服务合并的情况下，还可以不通过固定的配置，而是利用MDD前后端公共功能的支持，使用subId作为应用区分。
+
+云审批数据预置
+流程服务提供的参考文档
+通过以上参考文档配置并注册: appsource, 流程回调的rest地址，(框架提供的默认回调的Controller 为 BpmController.java 中complete 方法)
+这里注册完成后请记住：appsource
+MDD服务端配置
+增加配置项，YMS控制台配置
+
+A63.bpmrest.source= 【appsource】流程服务注册完成的appsource
+
+领域元数据修改
+需要支持审批的元数据或者公共的基类元数据 继承接口 base.itf.IapprovalFlow
+<interfacename="IApprovalFlow"title="审批流信息">
+<attributename="isWfControlled"title="是否审批流控制"type="Boolean"defaultValue="false"/>
+<attributename="verifystate"title="审批状态"type="Short"defaultValue="0"/>
+<attributename="returncount"title="退回次数"type="Short"defaultValue="0"/>
+需要实现审批流管理的业务元数据需要在相应属性上打三个标签
+属性名称	含义	值	备注
+isMasterOrg	组织id字段	true	标识主组织字段 默认取字段名为org的字段, isMasterOrg="true"
+isTransactionType	交易类型id	true	标识交易类型 默认取字段名为 bustype 的字段（如果支持单据级流程此项可根据实际情况是否打标签）
+isCode	编码列	true	标识单据编码列，默认取 code 字段,实现框架编码规则通用接口的默认已标记
+根据业务元数据 建表或修改已有表结构，增加步骤1中的字段
+UI元数据的修改
+列表和卡片页 bill_base 增加 isSupportBpm 列设置为 1，即此单据支持云审
+单据卡片配置 bill_toolbaritem 、bill_command 表中，增加提交、撤销、审批流三个按钮和对应 action,redis里刷新UI元数据缓存
+Name	Text	Command	Action	Url
+btnSubmit	提交	cmdSubmit	submit	/bill/submit
+btnUnsubmit	撤回	cmdUnsubmit	unsubmit	/bill/unsubmit
+btnWorkflow	审批流	cmdWorkflow	workflow	
+刷规则注册表 submit unsubmit 规则注册（指定租户的规则请自行修改插入）
+INSERT****INTObillruleregister(billnum,**action**,ruleId,iorder,overrule,tenant_id,**key**,isSystem,url,isSync,isAsyn,config)
+VALUES('common','submit','submitBillRule',30.00,NULL,'0',NULL,b'1',NULL,0,0,NULL);
+INSERT****INTObillruleregister(billnum,**action**,ruleId,iorder,overrule,tenant_id,**key**,isSystem,url,isSync,isAsyn,config)
+VALUES('common','unsubmit','unsubmitBillRule',30.00,NULL,'0',NULL,b'1',NULL,0,0,NULL);
+INSERT****INTObillruleregister(billnum,**action**,ruleId,iorder,overrule,tenant_id,**key**,isSystem,url,isSync,isAsyn,config)
+VALUES('common','audit','auditBillRule',30.00,NULL,'0',NULL,b'1',NULL,0,0,NULL);
+INSERT****INTObillruleregister(billnum,**action**,ruleId,iorder,overrule,tenant_id,**key**,isSystem,url,isSync,isAsyn,config)
+VALUES('common','unaudit','unauditBillRule',30.00,NULL,'0',NULL,b'1',NULL,0,0,NULL);
+--流程回调时会用到
+INSERT****INTObillruleregister(billnum,**action**,ruleId,iorder,overrule,tenant_id,**key**,isSystem,url,isSync,isAsyn,config)
+VALUES('common','deleteBpm','deleteBpmRule',30.00,NULL,'0',NULL,b'1',NULL,0,0,NULL);
+--删除单据的时候需要删除流程实例动作为delete具体order请业务上自己决定
+INSERT****INTObillruleregister(billnum,**action**,ruleId,iorder,overrule,tenant_id,**key**,isSystem,url,isSync,isAsyn,config)
+VALUES('common','delete','cancelBpmRule',50.00,NULL,'0',NULL,b'1',NULL,0,0,NULL);
+MDD前端配置
+
+由于前端点审批流按钮后需要弹出公共审批组件，需要配置对应的appSource
+
+审批流配置env，在MDF配置中心配置
+
+属性	值	描述	备注
+WORKFLOW_META	{}	审批流配置	
+appSource	appSource	审批流应用编码	建议按应用服务配置
+使用编码规则
+
+MDD接入编码规则是通过插件方式进行接入，详细请参考编码规则的红皮书，MDD只做简单说明。
+
+参照编码规则接入文档
+
+元数据继承接口 ： ucfbase.ucfbaseItf.IAutoCode。
+
+元数据编码字段标记标签 isCode=”true”
+
+为保存动作配置注册默认的编码规则。UpdateBillCodeRule。
+
+使用打印服务
+功能概述
+
+目前打印组件实现了打印预览、打印设计、直接打印功能。用户可以在excel中自定义打印按钮的布局。下面是以dropdown形式你实现的。那如何实现打印功能呢，需要用户增加环境变量、excel配置。
+
+图47:单据打印图
+
+公共服务配置
+在公共服务aa_regist_config表中配置领域数据的调用方式
+通过rest调用/domain/getbillMetaByBillCode返回元数据
+各领域接口实现: com.yonyou.ucf.mdd.ext.support.interfaces.IMddExtSupportService#getSimpleVM MDD有默认实现，业务如果觉得不符合要求可以自行实现
+
+图48:公共服务图
+
+环境变量配置
+
+在src/common/config.env.js 下定义打印相关参数配置如下：
+
+print_url: 连接打印的后台地址，不同环境地址会不同。具体地址值在备注中有说明。
+
+domainCode：域code值，不同业务code值不同。具体值可以咨询云打印人员。
+
+UI元数据配置
+
+首先需要增加打印按钮，配置方式跟普通按钮一样，在Excel中配置[bill_command]表时需要增加paramter、action参数配置。下面为具体的paramter配置说明，其中打印模板printcode、类别编码classifyCode值可向云打印人员咨询。
+
+打印模板printcode：打印模板是先找云打印人员开通一个数据库，每个领域都有一个，然后总共多少应用下多少个服务需要打印。当我们打开打印模板节点，就能看到模板类别了。
+
+类别编码classifyCode：可以支持切换同类别下不同模板打印。预置模板的时候，可以打印的字段，是根据类别编码来查的，比如我给的EMM.emm_pcplan_card，他就会查emm_pcplan_card这个页面的所有字段，都可以配置出来，我这边查询也按照emm_pcplan_card来查询，确保他配置的字段我都能查询出来，这样打印才不会出现打印不出来字段情况
+
+打印预览
+
+bill_command 表配置
+
+name	action	parameter
+自定义	printpreview	{"classifyCode":"ST.st_othinrecord", "params":{"billno":"st_othinrecord"}}
+
+paramter对象字段说明
+
+属性名称	含义	备注
+classifyCode	类别编码	联系打印开发
+printcode	打印模板	eg:"voucher_system_default_20190515"
+serverUrl	数据源请求的url，打印时会通过serverUrl请求业务数据	默认是getPrintData
+params	请求业务数据时，会根据此参数进行筛选，具体由业务来定	
+直接打印
+
+bill_command 表配置
+
+name	action	parameter
+自定义	printnow	{"meta":0, "domainDataBaseByCode":"SD","printcode":"SCM9975911561358670000", "classifyCode":"ST.st_othinrecord", "params":{"billno":"st_othinrecord"}}
+隔离属性配置
+设计图
+
+图49:隔离属性设计图
+
+运行期代码出处
+获取partitionContext，并将partitionContext设置到queryschema的querycontext属性中，代码如下：
+
+com.yonyou.ucf.mdd.ext.dao.meta.crud.MetaDaoSupportUtil#setPartitionToQuerySchema
+
+拼接隔离属性到SQL的 where 条件中，实现代码在：
+
+图50:隔离属性拼接图
+
+除查询场景外， 隔离属性还在 更新，新增等场景中发生作用。
+
+新增场景中：具体详见 InsertSqlExecutor -> setTenantandCorpWhenSave-> InsertSqlBuilder
+
+更新场景中:具体详见 UpdateSqlExecutor -> setTenantandCorpWhenSave-> UpdatePartitionSqlBuilder
+
+业务配置
+
+图51:隔离属性配置图
+
+partition 配置项
+
+属性名称	备注
+p:itf	隔离属性所实现接口的uri
+p:keyField	表示的是运行期构造的 PartitionContext 中的 key字符串是什么，对应的是元数据接口中的属性名称，注意不是数据库的物理列名称(keyField对应租户属性的partitionName，未设置partitionName，默认取租户属性name）
+p:valueField	表示的是运行期构造的 PartitionContext 中 value值 从LoginUser 或者其他对象中取值时所使用的key。 对应的是取值集合中的属性名
+p: isAllSupport	表示的是是否支持全部数据查询，个别特殊场景如果取值为空则进行全量查询不做控制
+p:ifnull	表示的如果通过valueField 再取值集合里面取空的时候所使用的默认值，仅仅查询时使用，如果新增数据的默认值请在元数据上配置
+p:partLevel	表示的当前配置所生效的场景 //0读写,1只读控制,2只写控制
+p:isCallback	表示的是否通过自定义的回调来取值覆盖默认框架取值隔离属性，例子如下
+p:isGlobal	表示的是否全局配置，如果为全局配置则可以再元数据上不是先 itf 所定义的接口
+p:isTenantPartion	表示的当前的接口配置是否为租户隔离的配置项，在社会化的场景中需要明确指定那个配置是租户隔离，以便后续处理租户隔离条件使用
+p:cDataRule	隔离属性支持cdatarule过滤
+iscallback 的例子
+
+实现: com.yonyou.ucf.mdd.common.interfaces.partition.IpartionItfCallback 接口
+
+servicebean name : p:itf的值+”_Callback”,例子如下：
+
+图52:隔离属性扩展示例
+
+注意上图的所有配置均为运行脚手架提供的示例配置，有一些是业务领域特有的并不是公共的; 也不表示这些配置直接运行就可以生效了。 新接入的领域请按照自己的时机需求来自行决定所需要的 itf 进行配置。
+
+国际化配置
+功能说明
+
+目前国际化功能在MDD运行框架中根据实现方式 分为资源多语和内容多语两部分，
+
+资源多语： 所有UI模板的设计中，在浏览器端需要展示的中文字段都需要做国际化适配，实现方式为通过特定工具在保存UI模板的数据库中抽取中文词条，然后调用多语平台生成国际化的资源编码保存到 [原字段名]_resid 字段中。 运行时依据此资源编码在页面加载的过程中动态查询当前语种所对应的词条文本进行展示。
+
+内容多语：当一些档案需要作为参照数据供其他单据模板引用的情况下，所展示的各个名称等描述字段也需要根据当前语种进行国际化展示；实现方式是档案的编辑新增过程中，在编辑页面在国际化的字段中录入多个语种的文本信息。 运行时根据当前语言环境查询展示对应的语种文本； 多语种的文本对应保存在 [字段名]、[字段名]2、[字段名]3、...[字段名]6 中， 序号对应了租户开通过程中语种的开通顺序，目前框架最多支持同时存在6个语种。
+
+资源多语
+
+图53:资源多语图
+
+内容多语
+
+图54:内容多语图
+
+脚手架配置
+mdd.i18n.enable=true
+确认多语 provider 的SPI 注入成功，默认mdd-framework-core/src/main/resources/META-INF/services会自动的注入
+由于diwork-pub-multilingual.jar中提供的 com.yonyou.iuap.ml.provider.IMultiLangProvider 接口的实现需要保证spring 上下文扫描的时候能被扫描到；如果项目启动或运行时发生异常： MddMultiLangProvider 不能初始化，则原因基本时因为 IMultiLangProvider 接口的diwork实现没有被引入依赖，或者没有被扫描
+具体多语言运行期文档
+内容多语配置
+修改业务表字段 name2-name6，以银行网点为例子
+ALTER****TABLEbd_bank_dot
+ADD****COLUMNnamevarchar(255)DEFAULTNULL,
+ADD****COLUMNname3varchar(255)DEFAULTNULL,
+ADD****COLUMNname4varchar(255)DEFAULTNULL,
+ADD****COLUMNname5varchar(255)DEFAULTNULL,
+ADD****COLUMNname6varchar(255)DEFAULTNULL;
+元数据上标记多语
+
+图55:元数据标记示例
+
+修改UI模板多语言字段列设置 cControlType= InputMultiLang ； 且对于需要多语录入的模板中设置 bill_base 表中字段值 i18ndoc = 1
+资源多语配置
+添加资源字段，例如
+
+alter****tablepb_filter_solutionaddsolutionName_residvarchar(200);
+
+UI模版资源抽取：请参考UI模版红皮书的文档
+代码和数据库表多语抽取
+代码出处
+
+com.yonyou.ucf.mdd.ext.i18n.service.IMddMultiLangBaseService
+
+cdatarule
+
+cdatarule条件表达式，UI元数据，领域元数据，规则都支持cdatarule
+
+领域元数据的支持
+
+图56:元数据cdatarule示例
+
+xml 敏感特殊符号，请配置时将特殊符号替换
+
+特殊符号	实体引用	Xml中的含义
+<	<	小于符号
+>	>	大于符合
+&	&	逻辑与
+“	&quto;	双引号
+‘	'	单引号
+IK表达式
+
+支持基本的操作符号，初始开发着可以百度查询ikexpression表达式的基本语法
+
+隔离属性的支持
+
+隔离属性支持cdatarule的配置：例子如图所示
+
+图57: 隔离属性cdatarule示例
+
+各种案例支持
+类型	例子	说明
+参数	"<%option.isOpenUdh %>"=="true"	本地参数支持：option.具体属性
+跨域参数	"<%productcenter.option.productLine%>"=="default"	跨越域参数，domain.option.属性
+登录上下文	"<%loginUser.name%>"=="test"	用户上下文里的属性
+租户上下文	"<%tenant.name%>"=="test"	租户上下文里的属性
+表单上下文	"<%context.billnum%>"=="test"	BillContext 上下文属性的支持context.属性
+环境变量	"<%property.mddEnumCache%>"=="test"	支持环境变量的判断property.属性名称
+规则入参paramsMap	"<%params.iMaxPriceLimitControl%>"!="1"&& "<%productcenter.option.isOpenUPU%>"=="true"	params.具体属性，支持多层
+规则入参BillDataDto 的data	"<%params.data.srcBillType%>"!="st_storescrapped"	params.具体属性，支持多层
+
+注意：所有的匹配是强匹配，如果等式左边有引号，等式右边也得加上引号
+
+代码出处
+
+com.yonyou.ucf.mdd.ext.bill.utils.BillUtils#getExpressionResult(java.lang.String, com.yonyou.ucf.mdd.ext.model.BillContext, java.util.Map<java.lang.String,java.lang.Object>)
+
+删除引用检查
+场景说明
+
+删除档案数据的时候需要检查是否由别的领域单据数据中参照了将要删除的这条档案数据，如果已经被引用使用，则不允许删除。如果没有被引用使用则可删除。
+
+业务配置
+检查当前应用已经在工作台开通
+在公共服务注册了对应的微服务编码，具体注册文档
+在元数据服务注册应用服务域，具体文档
+规则注册：目前两种方案：
+档案在删除的action上注册默认规则referenceCheckRule，如图所示
+
+图58:引用检查规则图
+
+档案在删除的action注册领域自定义的应用检查规则，按不同的业务去处理
+实体如何跳过某个引用检查：
+元数据实体上标记: skipReferenceCheck=true,例子如下
+
+图59:引用检查跳过检查元数据配置
+
+在调用删除引用检查方法事设置excludeList：需要排除的实体的fullname
+
+includeList:需要检查的实体fullname,例子如下
+
+图60:引用检查跳过代码例子
+
+跳过删除引用检查具体代码出处：
+
+com.yonyou.ucf.mdd.ext.bill.referencecheck.BaseReferenceCheck#skipCheck
+
+核心代码运行
+
+核心方法：com.yonyou.ucf.mdd.ext.dao.meta.crud.ReferenceSqlExecutor#execute
+
+图61:引用检查代码运行图
+
+唯一性检查
+场景说明
+
+单据新增编辑时，某些属性要做唯一性检查，比如单据编码当前租户唯一等，主要两种场景，1:单据保存前做检查 2：被检查属性输入完成后直接检查。
+
+业务配置
+配置规则，框架默认规则：CheckUniqueRule，如图
+
+图62:唯一性检查规则配置
+
+如果是属性后检查，请将该属性在billitem_base 上的bcheck设置成1
+领域元数据配置唯一性字段：isUnique,unionKey
+
+图63:唯一性检查元数据例子
+
+如果属性配置的是编码规则的编码，编码规则的自动编码会在生成编码时自动校验，手动编码的仍然走唯一性检查规则
+核心代码逻辑
+编码规则自动编码跳过检查
+
+com.yonyou.ucf.mdd.support.service.check.CheckUniqueCodeService#writeTempCode
+
+本地local内存+redis锁检查数据检查
+
+com.yonyou.ucf.mdd.support.service.check.CheckLocalUniqueService#checkUnionKeyObJVM
+
+数据库检查
+
+com.yonyou.ucf.mdd.support.service.check.CheckDbUniqueService#checkUnionWithOutItem
+
+注意：如果检查完成后redis锁一直没有释放，请检查事务是否扫描到了
+
+com.yonyou.ucf.mdd.support.support.check.checkunique.DoExecuteCheckUniqueService#doExecute
+
+逻辑删除
+业务适配
+元数据实体上实现ucfbase.ucfbaseItf.LogicDelete接口或者实现base.itf.Deletable 接口，两接口目前的差异是前者的数据库物理字段是dr，后者数据库物理字段是ideleted
+目前不需要在xml配置逻辑删除的隔离属性，框架默认会在查询时将dr设置成0，删除时将dr设置成1
+核心代码逻辑
+场景	代码出处
+删除规则	DeleteBillRule -> MetaDaoHelper.logicDelete-> LogicDeleteSqlExecutor-> LogicDeleteSqlBuilder
+查询详情	DetailBillRule -> LogicDeleteHelper.handleAssoDeleteTag(拼主子表的dr)-> QuerySchemaExecutor (经过partition)
+列表查询,删除引用检查	Partition dr 直接控制
+保存操作	SaveBillRule -> SaveBillServiceImpl-> handleLogicDelTag (处理子表中逻辑删除的更新)
+唯一性检查	通过配置dr作为联合来实现
+树查询	LogicDeleteHelper.handleQueryCondDeleteTag(filterVO, billContext.getFullname());
+权限应用
+场景说明
+
+目前权限在mdd中使用主要包括：功能权限，主组织权限，数据权限，字段权限
+
+功能权限
+
+功能权限主要是对按钮动作的控制
+
+权限注册
+
+对应bill_command表的auth_id字段和bill_toolbaritem表的auth_id,优先bill_toolbaritem 里的auth_id ,如果没有配置则取bill_command里的，配置完成后需要在auth表注册对应的权限id
+
+图64:功能权限注册
+
+核心代码逻辑
+首次使用权限时通过权限sdk获取当前用户所有的功能权限并缓存，代码出处LoginUser#getUserAuth
+meta请求构建toolbaritem时移除没有权限的按钮，从而页面不再显示，代码出处ToolbarService#removeNoAuthItems。
+为了防止越权，在拦截器里对请求进行拦截,核心代码出处
+
+AuthServiceContextAop#dubboContext
+
+-> ActionAuthService#findAuthId
+
+主组织权限
+
+主组织权限是对单据主组织进行过滤，主要包括参照选择过滤和业务数据查询过滤
+
+MDD如何配置主组织
+元数据属性上标记主组织标记isMasterOrg="true",例子如下
+
+<attributename="org"title="需求组织"columnName="iOrgId"type="aa.baseorg.OrgMV"isMasterOrg="true"/>
+
+UI元数据billitem_base属性上标记主组织标记isMasterOrg="true"
+参照的主组织过滤主要是在参照前置规则(BeforeRefRule)处理，主要的代码出处com.yonyou.ucf.mdd.ext.bill.rule.refer.BeforeRefRule#execute
+
+-> AuthSdkFacadeUtils#handleAuthPermissionForRef
+
+业务数据主组织过滤在查询数据和隔离属性统一处理的，主要的代码出处
+
+QuerySchemaExecutor#execute
+
+->MetaDaoSupportUtil#setPartitionToQuerySchema
+
+->AuthSdkFacadeUtils#handleAuthPermission
+
+数据权限
+
+数据权限查询用于查询指定用户拥有的全部数据权限。可以达到控制用户对单据数据的查看权限，主要包括参照的数据权限和业务数据的数据权限。
+
+MDD如何配置数据权限，参数数据权限控制，参照的数据权限和主组织权限代码出处在一处
+
+业务数据主组织过滤在查询数据和隔离属性统一处理的，和主组织权限代码出处在一处
+
+字段权限
+
+字段权限是基于业务对象，对列权限的控制，主要是控制meta的展示和queryschema的查询
+
+meta的展示，查询字段权限，如果当前字段没有权限，则移除此字段，如果是只读权限则设置不可修改，核心代码出处
+
+com.yonyou.ucf.mdd.ext.bill.utils.BillUtils#processFieldAuth
+
+com.yonyou.ucf.mdd.ext.bill.utils.BillUtils#processControlAuth
+
+querySchema 查询的处理,拦截一切查询的字段权限
+
+com.yonyou.ucf.mdd.ext.dao.meta.crud.QuerySchemaExecutor#executeSelf
+
+-> com.yonyou.ucf.mdd.core.utils.IMetaUtils#filterFieldsByFieldAuth
+
+其他
+权限开关：所有开关都是全局开关，一旦开启，所有的表单将不受控制
+开关	含义
+mdd.data.permissions.enable	数据权限开关，默认开
+mdd.org.permissions.enable	组织权限开关，默认开
+mdd.func.permissions.enable	功能权限开关，默认开
+mdd.func.aop.skip	功能权限拦截器，默认开
+mdd.ignore.fieldAuth	是否不控制字段权限，默认true，不控制
+分布式事务
+事务配置
+找到config项目下spring-com/applicationContext-db.xml
+在**tx:attributes**下增加如下两个配置
+tx:method**name="doAction"propagation="REQUIRED"**/
+tx:method**name="persist"propagation="REQUIRES_NEW"rollback-for="java.lang.Exception"**/
+在**aop:config**项的expression表达式中增加yts的事务配置：
+execution(com.yonyou.cloud.yts.service...(..))||execution(com.yonyou.ucf.mdd.ext.service...(..))
+创建yts相关的表，ytsjar包会自动建立,例如：
+
+图65:分布式事务建表例子
+
+规则开启分布式事务
+修改需要打开分式事务的rule，为rule的config的json增加 "needDTC":true
+如果cancel操作需要从execute时的入参，需要添加 "params":"key1,key2" key1,key2 替换为需要从cancel时需要从execute时传入的map中需要的key。
+
+案例如下：
+
+updatebillruleregistersetconfig='{"needDTC":true,"params":"backSourceMap"}'whereid=15236675;
+
+规则实现cancel方法
+
+加入YTS分布式事务的规则需要实现 com.yonyou.ucf.mdd.ext.trans.itf.ISagaRule 接口，实现其cancel方法，接口定义如下
+
+public****interfaceISagaRule{
+publicRuleExecuteResultcancel(BillContextbillContext,Map<String,Object>paramMap)throwsException;}
+开放接口说明
+
+MDD对外提供RESTful，工具类SDK，RPC接口，RESTful方式和RPC通过上下文中的用户登录信息验证请求合法性。
+
+RESTful接口
+
+任何系统通过API网关可以调用的接口
+
+获取Tplid
+
+（1）请求体：
+
+URl	/billmeta/getTplId?token=bttZE5
+Method	POST
+
+（2）请求参数：
+
+{"serviceCode":"st_purchaseorderlist","metaType":"voucherlist","name":"采购订单","tplid":2056758,"billNo":"st_purchaseorderlist","noCache":false,}
+
+**（3）参数说明： **
+
+参数	参数类型	是否必须	说明
+billno	String	是	表单billno
+id	Long	否	详情的时候请传入
+extTranstype	Object	否	列表进入详情时如果数据上有交易类型ID请传递
+orgId	String	否	列表进入详情时如果数据上有主组织ID请传递
+businessStepCode	String	否	新模板业务阶段
+terminalType	String	是	端类型
+designPreview	Boolean	否	是否设计器
+tplmode	int	否	模版类型,pc tplmode （0，2），移动（3，4）
+urlCondition	String	否	扩展参数
+transtype	Object	否	交易类型发布菜单时请传递
+serviceCode	String	否	模板的分配关系通过serviceCode联查
+refCode	String	否	自定义参照类型 领域扩展
+extTypeId	String	否	自定义参照值 领域扩展
+systemCode	String	否	有特别的领域会通过这个参数选模板
+
+（4）返回值
+
+{"code":200,"message":"操作成功","data":{"tplId":435648168,"branch":"defaultTpl","hasMultiMode":false}}
+
+（5）服务端代码出处
+
+com.yonyou.ucf.mdd.ext.bill.controller.BillMetaController#getTplId
+
+Meta请求
+请求体：
+前端URl	/meta?terminalType=1&serviceCode=st_purchaseorderlist
+服务端URI	/billmeta/getfebill
+Method	POST
+
+（2）请求参数：
+
+{"isSum":"true","bIncludeViewModel":true,"bIncludeView":true,
+
+"tplid":2056758,"billNo":"st_purchaseorderlist","bDesignMode":false
+
+}
+
+(3) 请求参数说明：
+
+参数	参数类型	是否必须	说明
+billno	String	是	表单billno
+tplid	Long	是	模版ID
+isSum	boolean	否	默认false，表头模式：true
+groupSchemaId	Long	否	报表schemaId
+transtype	Object	否	交易类型发布的菜单不可空，控制权限
+bIncludeViewModel	boolean	否	是否包含viewmodel，默认false
+bIncludeView	boolean	否	是否包含view，默认true
+bDesignMode	boolean	否	是否设计模式（目前低代码使用）
+viewApplicationPubts	String	否	前后端约定的view缓存，如果pubts比对一致，说明没有修改，服务端返回null，直接使用前端缓存
+
+（4）返回值
+
+{"viewApplication":{……},"viewmodel":{……}}
+
+（5）服务端代码出处
+
+核心代码出处
+
+BillMetaController#getFeBill
+
+-> ViewModelLoader#load 或者FeViewModelLoader#load
+
+-> ViewLoader#load
+
+代码运行图
+
+图66:获取meta代码运行图
+
+过滤接口
+
+（1）请求体：
+
+前端URl	/client/getInitFilterInfo? billnum=st_purchaseorder
+服务端URI(3合1接口)	/filterDesign/loadDefaultSolution
+服务端URI(分开接口)	/filterDesign/getFilterBase/filterDesign/getSolutionList/filter/{solutionId}/solutionFilters
+Method	GET
+
+（2）请求参数：
+
+参数	参数类型	是否必须	说明
+billnum	String	是	表单billno
+filterId	Long	是	表单过滤ID，bill_base上的 cFilterId
+
+（3）返回结果：
+
+{"code":200,"data":[{"code":200,"message":"操作成功", //pb_meta_filters**"data":{"id":74282649,"filterName":"bd_currencytenantlist","filterDesc":"币种过滤","subId":"bd","createTime":"2019-06-1210:58:30","isUpGrade":0,"advanceSupport":0,"dr":0}},{"code":200,"message":"操作成功", //pb_filter_solution"data":[{"id":711921954,"filtersId":74282649,"solutionName":"默认方案","solutionNameResid":"P_YS_FED_UCFORG_0000025899","isDefault":1,"isPublic":1,"orderId":0,"terminalType":"1","tenantId":"0","solutionNameMultiLang":{"zh_TW":"默認方案","en_US":"DefaultScheme","zh_CN":"默认方案"}}]},{"code":200,"message":"操作成功","data":{"Order":Object{...},"solutionName":"默认方案","mddVersion":"304","AdvanceModel":Object{...}, //pb_meta_filter_item"CommonModel":Array[3], //pb_filter_solution_common"isDefault":1,"AllFilterModel":Array[3],"isPublic":1,"enableNavFromRefType":true,"id":711921954,"solutionNameMultiLang":{"zh_TW":"默認方案","en_US":"DefaultScheme","zh_CN":"默认方案"},"isInitLoadData":true,"isSys"**:true}}]}
+
+(5)服务端代码出处：
+
+com.yonyou.ucf.mdd.ext.filter.controller.FilterDesignController#getFilterBase
+
+自定义过滤权限
+
+（1）请求体：
+
+前端URl	user/checkAuthByCode
+Method	GET
+参数	code=userdef_filterItem,userdef_schemaSetting（固定值）
+返回结果：
+
+{"code":200,"message":"操作成功","data":{"userdef_filterItem":true,"userdef_schemaSetting":true}}
+
+列表查询
+请求体：
+前端URl	bill/list
+Method	Post
+参数	列表查询请求会并发发两次list请求，一次获取数据，一次获取totalcount（totalcount=-1）
+请求参数：
+
+{"page":{"pageSize":20,"pageIndex":1,"totalCount":-1},"billnum":"st_purchaseorderlist","condition":{"commonVOs":[{"itemName":"schemeName","value1":"默认方案"},{"itemName":"isDefault","value1":true},{"value1":"2022-05-2800:00:00","value2":"2022-05-2823:59:59","itemName":"vouchdate"}],"filtersId":"96512912","solutionId":96968870,"bInit":true},"bEmptyWithoutFilterTree":false,"locale":"zh_CN","serviceCode":"st_purchaseorderlist","refimestamp":"1653722507388","ownDomain":"upu","tplid":2056758}
+
+核心参数说明：
+参数	参数类型	是否必须	说明
+page	Json	是	分页信息
+billnum	String	是	表单billno
+commonVOs	json	是	查询方案上的条件
+tplid	Long	否	模版id，如果模版id为空，查询全模版，影响效率，建议设置
+返回结果：
+
+{"code":200,"message":"操作成功","data":{"pageIndex":1,"pageSize":20,"recordCount":1,"recordList":[{"isMaxLimitPrice":false,"currency_priceDigit":2,"purchaseOrders_allPaymentStauts":1,"oriTax":0,"bEffectStock":false,"invoiceVendor":2700438992720128,"bustype_name":"直运采购","org":"2688836372992256","headParallel!id":"1461764055882006531","bmake_st_purinrecord":true,"auditor":"李志强","headParallel!isConQuantity":false,"headParallel!sendErpMsg":false,"bustype":"2683347768334159","listOriTax":0,"retailInvestors":false,"natCurrency_name3":"人民幣","createTime":"2022-05-2413:55:33","isVMI":false,"natCurrency_name2":"RMB","natMoney":2326,"bizFlow_name":"直运销售（有出入库）"}],"sumRecordList":[],"pageCount":1,"beginPageIndex":1,"endPageIndex":1}}
+
+核心代码出处
+
+controller在业务自定义的controller里
+
+service：com.yonyou.ucf.mdd.ext.bill.biz.BillBiz#queryByPage
+
+默认规则:QueryBillRule#execute
+
+-> UIModelService#querListFillUIModelSetHolder(构建viewmodel)
+
+-> QuerySchemaCreator#create4QueryByPage (viewmodel构建schema)
+
+-> MetaDaoHelper#queryByPage(根据schema查询)
+
+-> QuerySchemaExecutor#executeSelf(使用元数据sdk查询数据)
+
+详情查询
+请求体：
+前端URl	*/detail
+Method	Get
+请求参数	terminalType=1&serviceCode=st_purchaseorderlist&orgId=2688836372992256&billnum=st_purchaseorder&tplid=1309928&id=1461764055882006531&spanTrace=undefined
+请求参数说明：
+参数	参数类型	是否必须	说明
+terminalType	String	是	端
+serviceCode	String	是	服务code，权限等需要
+orgId	String	否	组织id
+billnum	Long	是	表单billno
+tplid	Long	是	表单模版id
+返回数据：
+
+{"code":200,"message":"操作成功","data":{"业务数据":""}}
+
+detail的整个查询schema构建是由UI元数据构建
+
+核心代码出处
+
+controller在业务自定义的controller里detail方法
+
+service：com.yonyou.ucf.mdd.ext.bill.biz.BillBiz#detail
+
+默认规则：DetailBillRule#execute
+
+-> DoExecuteQueryDetailService#getQuerySchema(构建schema)
+
+-> UIModelService#fillUIModel2ServiceHolder(构建vm)
+
+-> QuerySchemaCreator#createDetailQueryCoSchema(vm构建schema)
+
+-> MetaDaoHelper#query (schema 查询数据)
+
+-> QuerySchemaExecutor#executeSelf(使用元数据sdk查询数据)
+
+树查询
+请求体：
+前端URl	bill/querytree?terminalType=1&serviceCode=project_u8c
+Method	Post
+请求参数
+
+{"billnum":"bd_projectlist","treename":"bd.project.ProjectVO","condition":{"filtersId":"246145593","solutionId":246145609,"bInit":true,"simpleVOs":[{"logicOp":"or","conditions":[{"field":"level","op":"eq","value1":1},{"field":"level","op":"is_null"}]}],"isExtend":true,"lazyLoad":true},"showSearch":false,"bEmptyWithoutFilterTree":true,"isTable":false,"externalData":{"serviceCode":"project_u8c","docType":"bd.project.ProjectVO"},"query":{"serviceCode":"project_u8c"},"page":{"pageSize":50,"pageIndex":1,"totalCount":0}}
+
+请求参数说明
+参数	参数类型	是否必须	说明
+billnum	String	是	表单billno
+simpleVOS	json	否	领域自定义查询条件
+isExtend	boolean	是	是否展开
+lazyLoad	boolean	是	是否懒加载
+externalData	json	否	领域扩展参数
+page	json	否	支持分页
+返回结果
+
+{"code":200,"message":"操作成功","data":{"pageIndex":1,"pageSize":50,"recordCount":1,"recordList":[{"orgid_name":"企业账号级","orgid_name3":"企業帳號級","code":"limytest","level":1,"projectType":"2683347768383306","orgid_code":"global00","isEnd":true,"orgid":"666666","dr":0,"orgid_name2":"global","path":"1461171960295194633|","projectType_name":"通用项目","enable":1,"name":"limytest","projectType_name3":"通用專案","id":"1461171960295194633","pubts":"2022-05-2318:46:44","projectType_name2":"Generalpurposeproject"}],"pageCount":1,"beginPageIndex":1,"endPageIndex":1}}
+
+核心代码出处
+
+controller在业务自定义的controller里detail方法
+
+service：com.yonyou.ucf.mdd.ext.bill.biz.BillBiz#querytree
+
+默认规则: QuerytreeBillRule#execute
+
+-> UiMetaDaoHelper#queryTreeByPage(树分页查询)
+
+-> UIMetaUtils#getQuerySchemmaByCond(构建schema)
+
+-> MetaDaoHelper#queryByPage(schema 查询数据)
+
+-> TreeBuilder#build(根据数据构建树结构)
+
+新增空白单据
+请求体：
+前端URl	/bill/add
+Method	Post
+请求参数
+
+** {"billnum":"st_purchaseorder" //表单billno** }
+
+返回结果
+
+{"code":200,"message":"操作成功","data":{"creator":"李志强","creatorId":2711860957517568,"createTime":"2022-05-2821:47:33","createDate":"2022-05-28","vouchdate":"2022-05-28","tenant":2683345979315504, "bustype":"2683347768301342","bustype_name":"普通采购","businesstype":"2683347768301342","businesstype_name":"普通采购","busType":"2683347768301342","busType_name":"普通采购","transTypeKeyField":"bustype","masterOrgKeyField":"org","org":"2688836372992256","masterorg_auto":{"code":"LQ1","name":"LQ全","id":"2688836372992256"},"code":"000006"}}
+
+返回结果
+参数	参数类型	说明
+code	String	编码规则生成编码（并不是最终的code），如果重复，编码规则会在保存时更新一个新的code
+org	String	默认主组织1. 如果工作台设置了默认组织则主组织为默认组织2. 如果1没有则使用lastorg
+masterorg_auto	json	组织id翻译成对应的code和名称
+核心代码出处
+
+controller在业务自定义的controller里detail方法
+
+service：com.yonyou.ucf.mdd.ext.bill.biz.BillBiz#add
+
+默认规则: AddBillRule#execute
+
+-> BillInfoUtils#add 新增数据
+
+-> BillInfoUtils#setAddAuditInfo 设置创建人信息
+
+-> BillInfoUtils#setAddVouchDateInfo 设置单据日期
+
+-> BillInfoUtils#setTenant 设置租户信息
+
+-> BillInfoUtils#addLastOrg 设置默认组织
+
+-> BillNumber#getBatchBillNumber 获取单据编码
+
+复制
+请求体：
+前端URl	/bill/copy
+Method	Post
+请求参数
+
+** {"billnum":"st_purchaseorder" //表单billno** }
+
+返回结果
+
+{"code":200,"message":"操作成功","data":{"vouchdate":"2022-05-28","priceDate":"2022-05-2822:07:46","createDate":null,"tenant":2683345979315504,"code":"000006","creator":null,"creatorId":2711860957517568,"createTime":null,"modifier":null,"modifierId":null,"modifyTime":null,"modifyDate":null,"closer":null,"closerId":null,"closeTime":null,"closeDate":null,"verifystate":null,"auditor":null,"auditorId":null,"auditTime":null,"auditDate":null,"isWfControlled":null,"returncount":null,"id":null,"pubts":null,"status":0,"printCount":null,"paymentIsContract":null,"modifyStatus":null,"isMaterialClass":null,"isFlowCoreBill":null,"totalPayMoney":0},"errorDetail":null}
+
+核心代码出处
+
+controller在业务自定义的controller里detail方法
+
+service：com.yonyou.ucf.mdd.ext.bill.biz.BillBiz#add
+
+默认规则: AddBillRule#execute
+
+-> BillInfoUtils#add 新增数据
+
+-> BillInfoUtils#setAddAuditInfo 设置创建人信息
+
+-> BillInfoUtils#setAddVouchDateInfo 设置单据日期
+
+-> BillInfoUtils#setTenant 设置租户信息
+
+-> BillNumber#getBatchBillNumber 获取单据编码
+
+-> UIMetaUtils#copyClearByUI移除UI元数据uncopyable=1数据
+
+删除
+请求体：
+前端URl	/bill/delete
+Method	Post
+
+(2) 请求参数：
+
+{"billnum":"st_purchaseorder","data":"表单数据"
+
+}
+
+(3) 返回结果：
+
+可点击key和value值进行编辑
+
+{"code":200,"message":"操作成功"}
+
+(4)** 核心代码出处：**
+
+controller在业务自定义的controller里save方法
+
+service：com.yonyou.ucf.mdd.ext.bill.biz.BillBiz#delete
+
+默认规则（1）：com.yonyou.ucf.mdd.ext.bill.rule.crud.DeleteBillRule#execute
+
+DoExecuteQueryDeleteBillService#setExCondition 设置扩展条件
+
+DoExecuteQueryDeleteBillService#verifyBpmState 校验审批状态
+
+MetaDaoHelper.delete(billContext.getFullname(), bill) 删除数据
+
+保存
+请求体：
+前端URl	/bill/save
+Method	Post
+请求参数：
+
+{"billnum":"st_purchaseorder","data":"表单数据","isMdfRowNo":true}
+
+请求参数说明：
+参数	参数类型	是否必须	说明
+billnum	String	是	表单billno
+data	jsonString	是	页面收集的数据，如果页面数据没收集到检查billitem_base 上的bMustSelect是否设置成1
+返回结果：
+
+{"code":200,"message":"操作成功","data":{ ……… //单据数据，包括主键}}
+
+保存核心代码出处
+
+controller在业务自定义的controller里save方法
+
+service：com.yonyou.ucf.mdd.ext.bill.biz.BillBiz#executeUpdate
+
+默认规则(1): FillPKRule#execute 填充整单主键（包括子表主键）
+
+->MddObjectPKWalker#walk 填充主键
+
+-> ObjectFKWalker#walk 填充子表外键
+
+默认规则(2): SaveBillRule#execute 保存（新增保存和修改保存）
+
+（1）InsertSqlExecutor#execute 新增保存
+
+MetaDaoSupport#setTenantandCorpWhenSave 设置隔离属性
+
+InsertCheckWalker#walk 新增数据格式检查
+
+-> InsertSqlExecutor#batchSaveExecute 新增保存执行sql
+
+（2）UpdateSqlExecutor#execute 修改保存
+
+MetaDaoSupport#setTenantandCorpWhenSave 设置隔离属性
+
+UpdateCheckWalker#walk 修改数据格式检查
+
+-> UpdateSqlExecutor#batchUpdateExecute 修改保存执行sql
+
+默认规则(3): RefreshTsRule#execute 刷新时间戳
+
+审核
+请求体：
+前端URl	/bill/audit
+Method	Post
+请求参数：
+
+{"billnum":"st_purchaseorder","data":"……",//单据数据**"externalData":{"isAutoMakeBill"**:true}}
+
+返回结果：
+
+{"code":200,"message":"操作成功","data":Object{...} //审核后单据数据}
+
+（4） 审核核心代码出处
+
+controller在业务自定义的controller里audit方法
+
+service：com.yonyou.ucf.mdd.ext.bill.biz.BillBiz#audit
+
+默认规则(1): com.yonyou.ucf.mdd.ext.bill.rule.crud.AuditBillRule#execute
+
+-> ProcessStatusService#checkStatusBeforeAudit(单据状态是否符合审批要求)
+
+-> ProcessStatusService#updateStatusWhenCompleteAudit(设置审核状态并更新到数据库)
+
+默认规则(2): RefreshTsRule#execute 刷新时间戳
+
+弃审
+请求体：
+前端URl	/bill/unaudit
+Method	Post
+请求参数：
+
+{"billnum":"st_purchaseorder","data":"……",//单据数据**"externalData":{"isAutoMakeBill"**:true}}
+
+返回结果：
+
+{"code":200,"message":"操作成功","data":Object{...} //弃审后单据数据}
+
+（4） 弃审核心代码出处
+
+controller在业务自定义的controller里unaudit方法
+
+service：com.yonyou.ucf.mdd.ext.bill.biz.BillBiz#unaudit
+
+默认规则(1): com.yonyou.ucf.mdd.ext.bill.rule.crud.UnauditBillRule#execute
+
+-> ProcessStatusService#updateStatusWhenWithdraw (更新deleteReason是withdraw 场景中流程的状态)
+
+-> AuditFlowUtils#unaudit (设置单据弃审状态并更新到数据库)
+
+默认规则(2): RefreshTsRule#execute 刷新时间戳
+
+打开
+
+（1）请求体：
+
+前端URl	/bill/open
+Method	Post
+请求参数：
+
+{"billnum":"st_purchaseorder","data":"……",//单据数据**"externalData":{"isAutoMakeBill"**:true}}
+
+返回结果：
+
+{"code":200,"message":"操作成功","data":Object{...} //单据打开后单据数据}
+
+打开核心代码出处
+
+controller在业务自定义的controller里open方法
+
+service：com.yonyou.ucf.mdd.ext.bill.biz.BillBiz#executeUpdate
+
+默认规则(1): com.yonyou.ucf.mdd.ext.bill.rule.crud.OpenBillRule#execute
+
+->BillInfoUtils#setUnCloseInfo (更新单据主子的状态为打开)
+
+-> MetaDaoHelper#update(更新数据)
+
+默认规则(2): RefreshTsRule#execute 刷新时间戳
+
+关闭
+
+请求体：
+
+前端URl	/bill/close
+Method	Post
+请求参数：
+
+{"billnum":"st_purchaseorder","data":"……",//单据数据**"externalData":{"isAutoMakeBill"**:true}}
+
+返回结果：
+
+{"code":200,"message":"操作成功","data":Object{...} //单据关闭后单据数据}
+
+关闭核心代码出处
+
+controller在业务自定义的controller里close方法
+
+service：com.yonyou.ucf.mdd.ext.bill.biz.BillBiz#executeUpdate
+
+默认规则(1): com.yonyou.ucf.mdd.ext.bill.rule.crud.CloseBillRule#execute
+
+-> OpenOrCloseBillBaseService#setCondition (设置条件，打开人是空或者弃审人为空)
+
+-> BillInfoUtils#updateLastStatus (新增单据最后状态到vouch_closestatus表)
+
+->BillInfoUtils#setCloseInfo (更新单据主子的状态为关闭)
+
+-> MetaDaoHelper#update(更新数据)
+
+默认规则(2): RefreshTsRule#execute 刷新时间戳
+
+获取参照Meta
+请求体：
+前端URl	pub/ref/getRefMeta?terminalType=1&refCode=aa_orgpur
+Method	Get
+请求参数	refCode：参照编码
+返回结果
+
+{"code":200,"message":"操作成功","data":{"refEntity":{"id":111263,"code":"aa_orgpur","name":"采购组织","name_resid":"P_YS_PF_GZTORG_0000035435","description":"采购组织","refType":"aa_orgpur","isOrgRel":false,"datasourceType":"meta","cBillnum":"aa_orgpurref","cSub_ID":"AA","cEntityKeyFld":"code","cTpltype":"Table","cEntityNameFld":"name","cRetFld":"code","bMultiSel":false,"cRefFilterSql":"0","bAuth":false,"cCheckFlds":"code,name","bPage":false,"clsName":"name","cDataGrid_FullName":"aa.baseorg.PurchaseOrgMV","cDataGrid_classFk":"id","cDataClass_FullName":"aa.baseorg.PurchaseOrgMV","cDataClass_RefClsName":"code","bDataClass_Rule":false,"bDataClass_RetEndData":false,"cDataClass_lsCode":"code","cDataClass_lsName":"name","cDataClass_sortField":"code","extendField":"{"placeholder_resid":"##P_YS_SCM_STOCK_0000034548##","placeholder":"编码/名称"}","domain":"ucf-org-center","supportConfigCheckFlds":true},"gridMeta":{"viewmodel":Object{...},"viewApplication":Object{...}}}}
+
+返回结果
+参数	参数类型	说明
+refEntity	json	参照注册信息pub_ref
+gridMeta	json	参照页面的viewmodel+viewapplication数据
+参照Meta核心代码出处
+
+controller: com.yonyou.ucf.mdd.ext.controller.RefController#getRefMeta
+
+service：com.yonyou.ucf.mdd.ext.ref.service.impl.RefService#getRefMeta
+
+->RefService#getRefEntityByCode(通过refcode获取refentity)
+
+-> RefService#getGridMeta(获取参照meta数据)
+
+获取参照数据
+请求体：
+前端URl	bill/ref/getRefData
+Method	Post
+请求参数：
+
+{"page":{"pageSize":10,"pageIndex":1,"totalCount":1},"dataType":"grid","refCode":"aa_orgpur","fullname":"pu.purchaseorder.PurchaseOrder","datasource":"org.name","key":"org_name","bSelfDefine":false,"billnum":"st_purchaseorder","isMasterOrg":true,"masterOrgValue":"2688836372992256","billEntityId":2282256,"data":".....","serviceCode":"st_purchaseorderlist"}
+
+请求参数说明：
+参数	参数类型	是否必须	说明
+page	json	是	分页信息
+data	jsonString	是	页面单据数据
+isMasterOrg	boolean	是	是否主组织，是主组织后面会设置主组织权限，如果没有收集到请检查billitem_base 上的ismasterorg是否为1
+datasource	String	是	参照在单据上的属性
+fullname	String	是	单据fullname
+dataType	String	是	参照类型
+bSelfDefine	boolean	是	是否自定义参照
+返回结果：
+
+{"code":200,"message":"操作成功","data":{"pageIndex":1,"pageSize":10,"recordCount":1,"recordList":[{"code":"LQ1","name":"LQ全","id":"2688836372992256"}],"pageCount":1,"beginPageIndex":1,"endPageIndex":1}}
+
+参照数据核心代码出处
+
+controller在业务自定义的controller里close方法
+
+service：com.yonyou.ucf.mdd.ext.bill.biz.BillBiz#getRefData
+
+** ->**RefService#getRefEntityByCode(获取refentity)
+
+默认规则（1）： BeforeRefRule#execute (参照前规则)
+
+-> BeforeRefRule#handleExtendCondition (设置扩展条件)
+
+-> AuthSdkFacadeUtils#handleAuthPermissionForRef(设置主组织权限和数据权限)
+
+-> BeforeRefRule#handleUserDefineCondition(设置自定义项参照条件)
+
+-> BeforeRefRule#handleStopCondition(设置停用条件)
+
+默认规则（2）：ReferDataRule#execute (参照数据规则)
+
+-> RefService#getRefData(获取参照数据)
+
+-> RefService#doRefEvent(参照数据前置处理bean，领域可自定义处理)
+
+-> IExtRefDataHandler#getGridData(获取参照数据)
+
+-> RefService#doRefEvent(参照数据后置处理bean，领域可自定义处理)
+
+列表批改
+请求体：
+前端URl	bill/batchModify
+Method	Post
+a) 选中记录批改请求参数：
+
+{"billnum":"pc_productlist","externalData":{"isAsync":true,"modelDescription":{"zh_CN":"12121"}},"data":"选中的批改的数据"}
+
+ 1. 全部记录批改请求参数：
+
+
+{“billnum”:”pc_productlist”,“externalData”:{“isAsync”:true,“modelDescription”:{“zh_CN”:”1212”}},“condition”:{“commonVOs”:[{“itemName”:”schemeName”,“value1”:”启用的物料”},{“itemName”:”isDefault”,“value1”:true},{“value1”:”false”,“itemName”:”productDetail!stopstatus”}],“filtersId”:”53971746”,“solutionId”:1000299092,“bInit”:true}}
+
+请求参数externalData说明
+参数	参数类型	是否必须	说明
+isAsync	boolean	是	是否异步
+modelDescription	object	是	修改项和修改内容
+condition	json	否	全部数据修改时必须传递，传递的参数为列表查询方案数据
+返回结果
+
+{"code":200,"message":"操作成功","data":{"count":0,"sucessCount":0,"failCount":0,"messages":[],"infos":[{"url":"/bill/status/getBatchDoProcess","asyncKey":"batchModify&save_DCC09EE4-8B6E-F020-C07F-CAD7D1D67B2C"}],"failInfos":[]}}
+
+返回参数infos说明
+参数	参数类型	说明
+url	String	异步请求，前端回调请求结果的url
+asyncKey	String	请求返回结果的的参数
+批改核心代码出处
+
+controller在业务自定义的controller里batchModify方法
+
+service：com.yonyou.ucf.mdd.ext.bill.biz.BillBiz#batchModify
+
+-> UIMetaUtils#getListDetailQuerySchemaByCond（全部批改时获取需要批改的数据）
+
+批改action：batchModify&save
+
+默认规则: BatchModifyBillRule#execute
+
+->设置批改数据的状态为update
+
+RPC接口
+RPC实现原理图
+
+图67:rpc实现图
+
+RPC 调用过程中 调用发起端与被调用服务端 之间会经过 Filter 扩展的处理
+
+对外开放接口
+类名	默认实现	作用
+com.yonyou.ucf.mdd.api.interfaces.rpc.IComQueryApi	com.yonyou.ucf.mdd.ext.service.MddExtComQueryApiService	跨域执行的各种查询操作
+com.yonyou.ucf.mdd.api.interfaces.rpc.IComOperateApi	com.yonyou.ucf.mdd.ext.service.MddExtComOperateApiService	跨域执行的各种 更新/删除 操作
+com.yonyou.ucf.mdd.api.interfaces.rpc.IRefApi	com.yonyou.ucf.mdd.ext.service.MddExtRefApiService	跨域调用查询 参照数据 接口
+com.yonyou.ucf.mdd.api.interfaces.rpc.IRuleApi	com.yonyou.ucf.mdd.ext.service.MddExtRuleApiService	跨域调用 规则相关的接口
+com.yonyou.ucf.mdd.api.interfaces.rpc.IUimetaApi	com.yonyou.ucf.mdd.api.interfaces.rpc.IUimetaApi	跨域调用查询UI模板相关内容
+SDK 工具类
+工具类
+使用元数据CRUD
+
+使用以下接口请先阅读元数据红皮书，了解元数据原理和相关属性
+
+代码出处：com.yonyou.ucf.mdd.ext.dao.meta.MetaDaoHelper
+
+insert(String fullname, String jsonString),新增数据
+参数名称	说明
+fullname	元数据URI
+jsonString	新增数据json结构（支持主子孙接口），注意：此接口不会自动填充主键，如果需要填充主键，q请调用工具类FillFkDao.execute(fullname, bills);
+insert(String fullname, List list) 新增数据
+参数名称	说明
+fullname	元数据URI
+list	1. 需要新增的数据（支持主子孙接口），注意：此接口不会自动填充主键，如果需要填充主键，q请调用工具类FillFkDao.execute(fullname, bills);2. 接口2和接口1的区别在于一个是对象数据，一个是json数据，含义和用法一致。3. 并非批量插入，list循环插入
+delete(String fullname, Long id) 根据id删除数据，支持及联删除
+参数名称	说明
+fullname	元数据URI
+id	主键
+update(String fullname, BizObject bill) 更新单条数据
+参数名称	说明
+fullname	元数据URI
+bill	业务具体数据
+update(String fullname, List bills) 更新多条数据，for循环更新数据，并发sql层面的批量更新
+参数名称	说明
+fullname	元数据URI
+bills	业务具体数据
+insert(String fullname, T bill) 新增单条数据
+参数名称	说明
+fullname	元数据URI
+bill	业务具体数据，注意：此接口不会自动填充主键，如果需要填充主键，q请调用工具类FillFkDao.execute(fullname, bills);
+insertNoPartition(String fullname, T bill)，新增单条数据，bill不自动填充隔离数据
+参数名称	说明
+fullname	元数据URI
+bill	业务具体数据
+insertNoPartition(String fullname, List bills) 新增多条数据，bills不自动填充隔离数据
+参数名称	说明
+fullname	元数据URI
+bills	业务具体数据
+batchDelete(String fullname, List scList) 根据条件删除数据，注意要求scList 必须传入数据，否则删除整库数据
+参数名称	说明
+fullname	元数据URI
+scList	查询条件，SimpleCondition是元数据的一个model,具体可以参考元数据说明，例子：new SimpleCondition("id", ConditionOperator.eq,"1111");
+logicDelete(Entity entity, List bills) 逻辑删除，只是将删除属性（dr|ideleted）标记成1，不删除具体数据
+参数名称	说明
+entity	元数据实体,可以通过元数据URI调用工具类获取com.yonyou.ucf.mdd.ext.dao.meta.MetaDaoHelper#getEntity
+bills	业务数据
+batchSave(Entity entity, List bills) 批量保存数据, 包括insert,update ; 内部实现为每行数据循环执行， 行内子表，孙表批量处理sql,sql批量执行，效率比较高
+参数名称	说明
+entity	元数据实体,可以通过元数据URI调用工具类获取com.yonyou.ucf.mdd.ext.dao.meta.MetaDaoHelper#getEntity
+bills	业务数据，注意：此接口不会自动填充主键，如果需要填充主键，q请调用工具类FillFkDao.execute(fullname, bills);
+batchInsert(Entity entity, List bills) 批量insert ,只支持insert ; 内部实现为多行数据分页批量处理,sql批量执行，效率比较高
+参数名称	说明
+entity	元数据实体,可以通过元数据URI调用工具类获取com.yonyou.ucf.mdd.ext.dao.meta.MetaDaoHelper#getEntity
+bills	业务数据，注意：此接口不会自动填充主键，如果需要填充主键，q请调用工具类FillFkDao.execute(fullname, bills);
+referenceCheck(String fullname, String id) 引用检查，检查所有依赖此档案的单据是否引用
+参数名称	说明
+fullname	档案元数据URI
+id	档案ID
+referenceCheck(String fullname, String id, List excludeList) 引用检查，支持排除某些实体
+参数名称	说明
+fullname	档案元数据URI
+id	档案ID
+excludeList	需要排除的业务单据实体的uri
+referenceCheck(String fullname, String id, List excludeList, String group)
+
+引用检查，传入group后只检查当前group的
+
+参数名称	说明
+fullname	档案元数据URI
+id	档案ID
+excludeList	需要排除的业务单据实体的uri
+group	需要检查的服务domain
+masterOrgReferenceCheck(String fullname, String id, String masterOrg, String group) 主组织引用检查
+参数名称	说明
+fullname	档案元数据URI
+id	档案ID
+masterOrg	主组织名称
+group	需要检查的服务domain
+add(String fullname) 新增空白单据
+参数名称	说明
+fullname	新增表单数据的URI
+findById(String fullname, Object id, int deepth) 根据id查询表单多层数据,但是无法查询参照相关属性
+参数名称	说明
+fullname	表单URI
+id	查询主键
+deepth	查询深度，比如：deepth=3时查询主子孙数据）; 注意返回结果中 对于1:1 的平行表返回结果都是 !的结构，而不是嵌套的map
+findByIdAndHandleParallelTable(String fullname, Object id, int deepth) 根据id查询表单多层数据，平行表处理成嵌套结构
+参数名称	说明
+fullname	表单URI
+id	查询主键
+deepth	查询深度，比如：deepth=3时查询主子孙数据）; 注意返回结果已经对于1:1 的平行表处理成嵌套的 map
+fillLastPubts(String fullname, List list) 填充最新的 pubts
+参数名称	说明
+fullname	表单URI
+list	表单数据
+updateNoPartition(String fullname, T bill) 更新数据，不使用隔离属性，如果数据中没有id，可能出现全租户更新，非特殊场景不建议使用
+参数名称	说明
+fullname	表单URI
+bill	表单数据
+query(String fullname, String json) 查询数据，支持多层穿透
+参数名称	说明
+fullname	表单URI
+json	Schema 的json格式
+query(String fullname, String json, boolean useES) 查询数据，支持多层穿透，支持es查询
+参数名称	说明
+fullname	表单URI
+json	Schema 的json格式
+useES	是否使用es查询，使用es查询则不查询本地库，到es查询数据
+query(String fullname, QuerySchema schema) 通过schema查询，与21号接口一致
+参数名称	说明
+fullname	表单URI
+schema	查询schema
+query(String fullname, QuerySchema schema, String group) rpc查询数据
+参数名称	说明
+fullname	表单URI
+schema	查询schema
+group	跨域查询的domain
+queryObject(String fullname, boolean i18ndoc, QuerySchema schema, String group)
+
+与25号接口区别是可以最终返回强类型的数据，会根据元数据格式化数据出来的数据
+
+参数名称	说明
+fullname	表单URI
+schema	查询schema
+group	跨域查询的domain
+queryNoPartition(String fullname, QuerySchema schema, String group)
+
+查询数据不拼接隔离属性，不建议非特殊场景使用，容易整库查询导致生成数据库拉垮
+
+参数名称	说明
+fullname	表单URI
+schema	查询schema
+group	跨域查询的domain
+getKeyField(String fullname) 获取当前实体的主键属性
+参数名称	说明
+fullname	实体URI
+getCodeField(String fullname) 获取当前实体的code属性
+参数名称	说明
+fullname	实体URI
+queryByPage(String fullname, QuerySchema schema) 分页查询数据，在schema里配置page信息
+参数名称	说明
+fullname	表单URI
+schema	查询schema
+getEntity(String fullname) 通过fullname获取具体的实体
+参数名称	说明
+fullname	表单URI
+getSubEntity(String fullname) 通过fullname获取子实体，获取的第一个子实体
+
+元数据firstChild=true,如果不配置随机返回
+
+参数名称	说明
+fullname	表单URI
+getChildAsso(String fullname, String foreignKey) 通过childkey（roleA）获取子实体
+参数名称	说明
+fullname	表单URI
+foreignKey	Childkey
+getOpensByTenantId(String yhtTenantId) 当前租户开通了哪些应用
+参数名称	说明
+yhtTenantId	友户通租户ID
+Mybatis工具类
+
+MDD 集成了mybatis，如果元数据的schema无法完成业务逻辑，领域可以直接写mapper完成CRUD。
+
+代码出处：com.yonyou.ucf.mdd.ext.dao.sql.SqlHelper
+
+com.yonyou.ucf.mdd.ext.dao.sql.SqlHelper#useUiMeta 快速切换到uimeta数据源
+use(String dataSource): 切换的具体某个数据源
+参数名称	说明
+dataSource	Spring Bean 配置 sqlSession 注入Id
+selectFirst(String statement, Object parameter) 获取到第一条数据
+参数名称	说明
+statement	Mapper statement
+parameter	参数
+selectList(String statement, Object parameter) 查询数据列表
+参数名称	说明
+statement	Mapper statement
+parameter	参数
+insert(String statement, Object parameter) 插入数据
+参数名称	说明
+statement	Mapper statement
+parameter	参数
+update(String statement, Object parameter) 根据查询更新数据
+参数名称	说明
+statement	Mapper statement
+parameter	参数
+delete(String statement, Object parameter) 根据参数删除数据
+参数名称	说明
+statement	Mapper statement
+parameter	参数
+Redis工具类
+
+MDD集成了redis，领域可以通过以下方法操作redis，
+
+代码出处: org.imeta.spring.support.cache.RedisManager
+
+如何获取RedisManager
+
+com.yonyou.ucf.mdd.ext.core.AppContext#cache 获取RedisManager
+
+get(String key)：获取缓存数据 ，返回string
+参数名称	说明
+key	缓存key
+set(String key, String value) ： 设置缓存数据
+参数名称	说明
+key	缓存key
+value	缓存value
+getObject(String key):获取对象数据，返回T
+参数名称	说明
+key	缓存key
+setObject(String key, Object value) 设置缓存数据，设置的是对象类型
+参数名称	说明
+key	缓存key
+value	对象数据
+setObject(String key, Object value, int duration) 设置缓存对象数据，并设置缓存过期时间
+参数名称	说明
+key	缓存key
+value	对象数据
+duration	过期时间
+setnx(String key, String value, int duration) 设置缓存数据，可设置过期时间
+参数名称	说明
+key	缓存key
+value	对象数据
+duration	过期时间
+del(String... keys) 删除缓存数据，可批量删除
+参数名称	说明
+keys	缓存key
+MDD 插件
+通用插件
+
+MDD提供了通用的插件机制，所有插件接口都继承了MDD公共插件接口：
+
+com.yonyou.ucf.mdd.plugin.base.MddPlugin，该接口提供order方法，通过实现该方法决定插件执行顺序。
+
+QuerySchema查询方案执行插件
+
+该插件用于对框架生成的queryschema进行扩展处理，实现一些业务通用逻辑，
+
+需要实现的插件接口为：
+
+com.yonyou.ucf.mdd.plugin.base.QuerySchemaExecutorPlugin
+
+通过实现其中的
+
+extendQuerySchema(Entity entity, QuerySchema schema, BillContext billContext)
+
+方法，来实现对queryschema的扩展修改
+
+参数	参数类型	说明
+entity	Entity	当前查询实体对象
+schema	QuerySchema	当前查询方案
+billContext	BillContext	当前单据上下文
+
+参数说明：
+
+该插件运行位置在queryschema最终执行查询SQL前，通过业务对queryschema的扩展来决定最终生成的查询SQL
+
+QuerySchema查询方案执行插件
+
+该插件用于根据一些上下文，切换查询的数据源，实现一些业务特殊扩展逻辑
+
+需要实现的插件接口为：
+
+com.yonyou.ucf.mdd.plugin.base.QuerySchemaSqlSessionPlugin
+
+通过实现其中的
+
+getExtendSqlSessionTemplate(BillContext billContext)
+
+方法，来实现对数据源的切换
+
+参数说明：
+
+参数	参数类型	说明
+billContext	BillContext	当前单据上下文
+
+billContext 可能为空也可能不为空; 把BillContext 作为方法参数，主要是很多场景需要使用单据上下文 ; 如果不使用billContext作为切换的判断条件， 则判断条件也可通过线程变量设置和使用;
+
+文档内容是否对您有所帮助？
+为帮助文档评分：
+页内目录
+1. 本文摘要
+2. 基本概念
+2.1 背景
+2.2 名词解释
+2.3 产品亮点
+3. 技术架构
+3.1 逻辑架构
+3.2 功能架构
+3.3 部署架构
+4. 功能介绍
+4.1 UI元数据驱动引擎
+4.1.1 基本信息
+4.1.2 UI元数据
+4.1.3 UI模版
+4.1.4 UI模型图
+4.2 动作规则管理
+4.2.1 基本信息
+4.2.2 规则管理
+4.2.3 规则分层
+4.2.4 规则分类
+4.2.5 规则运行图
+4.2.6 系统预制规则
+4.3 参照管理
+4.3.1 基本信息
+4.3.2 功能说明
+4.3.3 参照分类
+4.3.4 参照存储
+4.3.5 参照运行图
+4.4 查询方案
+4.4.1 基本信息
+4.4.2 数据模型
+4.4.3 功能说明
+4.5 自定义项
+4.5.1 数据模型
+4.5.2 功能说明
+4.6 自定义档案
+5. 开发示例
+5.1 MDD开发环境搭建
+5.1.1 资源下载
+5.1.2 后端项目启动
+5.1.3 脚手架模块说明
+5.1.4 脚手配置文件说明
+5.1.5 MDD驱动模块说明
+5.2 元数据接入
+5.3 UI元数据接入
+5.3.1 Excel工具
+5.3.2 Excel对应的UI图层关系
+5.3.3 清理缓存
+5.4 规则接入
+5.4.1 规则的脚本执行
+5.4.2 清理缓存
+5.5 参照接入
+5.5.1 参照脚本执行
+5.5.2 参照规则
+5.5.3 参照前后置动作
+5.6 枚举接入
+5.6.1 系统级别枚举
+5.7 自定义项接入
+5.7.1 固定自定义项
+5.7.2 自由自定义项
+5.7.3 自定义项对外提供接口
+5.7.4 支持的扩展方式
+5.7.5 新自定义项的接入
+6. 典型业务场景介绍
+6.1 单据基本开发
+6.1.1 单据元数据建模
+6.1.2 单据UI元数据建模
+6.2 参照开发
+6.3 审批流对接
+6.3.1 关键词说明
+6.3.2 云审批数据预置
+6.3.3 MDD服务端配置
+6.3.4 MDD前端配置
+6.4 使用编码规则
+6.5 使用打印服务
+6.5.1 功能概述
+6.5.2 公共服务配置
+6.5.3 环境变量配置
+6.5.4 UI元数据配置
+6.5.5 打印预览
+6.5.6 直接打印
+6.6 隔离属性配置
+6.6.1 设计图
+6.6.2 运行期代码出处
+6.6.3 业务配置
+6.7 国际化配置
+6.7.1 功能说明
+6.7.2 脚手架配置
+6.7.3 内容多语配置
+6.7.4 资源多语配置
+6.7.5 代码出处
+6.8 cdatarule
+6.8.1 领域元数据的支持
+6.8.2 IK表达式
+6.8.3 隔离属性的支持
+6.8.4 各种案例支持
+6.8.5 代码出处
+6.9 删除引用检查
+6.9.1 场景说明
+6.9.2 业务配置
+6.9.3 核心代码运行
+6.10 唯一性检查
+6.10.1 场景说明
+6.10.2 业务配置
+6.10.3 核心代码逻辑
+6.11 逻辑删除
+6.11.1 业务适配
+6.11.2 核心代码逻辑
+6.12 权限应用
+6.12.1 场景说明
+6.12.2 功能权限
+6.12.3 主组织权限
+6.12.4 数据权限
+6.12.5 字段权限
+6.12.6 其他
+6.13 分布式事务
+6.13.1 事务配置
+6.13.2 规则开启分布式事务
+6.13.3 规则实现cancel方法
+7. 开放接口说明
+7.1 RESTful接口
+7.1.1 获取Tplid
+7.1.2 Meta请求
+7.1.3 过滤接口
+7.1.4 自定义过滤权限
+7.1.5 列表查询
+7.1.6 详情查询
+7.1.7 树查询
+7.1.8 新增空白单据
+7.1.9 复制
+7.1.10 删除
+7.1.11 保存
+7.1.12 审核
+7.1.13 弃审
+7.1.14 打开
+7.1.15 关闭
+7.1.16 获取参照Meta
+7.1.17 获取参照数据
+7.1.18 列表批改
+7.2 RPC接口
+7.2.1 RPC实现原理图
+7.2.2 对外开放接口
+7.3 SDK 工具类
+7.3.1 工具类
+7.4 MDD 插件
+7.4.1 通用插件
+文档反馈
+北京市海淀区北清路68号用友产业园
+4006-600-588
+友情链接
+用友官网用友YonHelp用友iuap平台用友云市场用友云注册协议隐私条款
+
+Copyright ©2020 用友网络科技股份有限公司版权所有京ICP备05007539号-24京公网安备11010802021935号
+
+返回顶部
+加载中...

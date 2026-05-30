@@ -1,0 +1,1611 @@
+社区文档中心
+首页
+文档导航
+开发者社区
+社区论坛
+视频教程技术博客
+更多
+张宏涛
+资料中心
+专业开发
+产品概述
+快速入门
+操作指南
+开发指南
+开发介绍
+新功能开发
+移动端开发
+扩展开发
+全球化
+组织
+权限
+特征
+基础数据
+审批流
+业务流
+规则引擎
+公式
+UI模板
+参照
+导入导出
+打印
+对象建模
+编码规则
+调度任务
+监控与预警
+日志
+消息平台
+工作台
+事件中心
+文件服务
+YonBuilder应用开发
+前端开发
+iuap-前端开发规范红皮书
+TinperNext网站导航
+原厂扩展开发脚本管理
+MDF网站导航
+YNF网站导航
+后端开发
+移动开发
+安全
+数据库
+DevOps技术
+容器云技术
+区块链云技术
+YMS开发
+智能应用开发
+专项开发
+成果迁移
+技术方案
+最佳实践
+参考手册
+常见问题
+视频教程
+专业开发/开发指南/前端开发/iuap-前端开发规范红皮书
+iuap-前端开发规范红皮书
+最后更新时间：2024-03-05
+概述
+
+本规范主要针对开发做出规范，使公司各领域产品的代码具有规范性、统一性、可读性，减少编码中不必要的错误，提高软件质量与开发效率。帮助开发养成良好的编程习惯，写出清晰易懂、易维护的代码。
+
+目的
+
+本规范主要针对开发做出规范，使公司各领域产品的代码具有规范性、统一性、可读性，减少编码中不必要的错误，提高软件质量与开发效率。帮助开发养成良好的编程习惯，写出清晰易懂、易维护的代码。
+
+阅读对象
+
+本规范适用于用友 Web 前端技术栈，主要面向用友 BIP 产品原厂应用开发、客户化定制开发，此文档将适合以下人员阅读：
+
+领域设计工程师。
+产品开发工程师。
+产品测试工程师。
+其他相关人员。
+名词解释
+React：是用于构建用户界面的 JavaScript 基础库/框架
+TinperNext ，BIP 前端 UI 组件库，主要面向 Web 端。
+MDF，基于元数据驱动的前端运行时框架，开发模式以模型驱动为主
+ynpm：是面向用友前端开发的 npm 包镜像仓库。
+UCF-Web：是一套基础性、收敛化的前端开发工程规范。
+数字化工作台：YonBIP数字化工作台服务是YonBIP的统一工作入口，目前已经集成YonBIP各领域云产品，包括财务云、营销云、制造云、供应链云、协同云、人力云、云平台等；数字化工作台提供统一的应用入口、全局菜单、个人中心、角色化工作台、智能搜索、统一代办、应用管理等基础能力。
+规范等级定义
+规范等级	实现要求
+A	强制规范，必须实现；
+AA	推荐规范，推荐实现；遵守此类规范有助于业务未来的扩展性和跨团队合作研发效率的提升。
+AAA	参考规范，根据业务场景实际诉求实现；是BIP层面鼓励的技术实现引导。
+适用范围
+
+本规范适用于用友 BIP 各领域产品开发，软件服务序列由于已有技术框架不同，可以作为技术参考，不作为强制规范。
+
+开发规范说明
+统一前端接入规范
+目的
+
+为统一对外产品技术形象，解决跨域问题、资源复用等问题，公有云和专属化的资源访问解析链路不一致等问题，BIP在实践基础上提出了一套统一前端接入的规范、以及对应的URL规则。基于这套规范，实现了BIP各领域微服务相关业务节点的有序访问规则，实现了前端静态资源和模版资源的统一管理和接入规范，并实现公有云和专属化一套配置，优化了访问链路。
+
+统一域名规范
+环境	数据中心	域名	是否对外
+测试环境	不涉及	https://bip-test.yyuap.com/	不对外
+日常环境	不涉及	https://bip-daily.yyuap.com/	不对外
+预发环境	不涉及	https://bip-pre.diwork.com/	不对外
+生产环境	Core2数据中心	https://yonbip.diwork.com/	不对外
+Core1数据中心	https://yonbip-core1.diwork.com/	不对外	
+商用开发环境	https://dbox.diwork.com/	对外访问（ISV开发者）	
+海外数据中心	https://globalbip.yonyou.com/	对外访问（海外客户）	
+生产环境		https://yonbip.yonyou.com/	对外访问（yonbip客户）
+	https://yonsuite.yonyou.com/	对外访问（yonsuite客户）	
+专属化环境	不涉及	/	不涉及
+URL解析规范
+URL 路径规范	示例	转发和解析
+/	/	工作台
+/cas	/cas/checkislogin	用户中心
+/${微服务编码}/xx	/iuap-apcom-messagecenter/todocenter/rest	各微服务
+/${微服务编码}/ucf-wh/${前端应用编码}	/iuap-apcom-workbench/ucf-wh/vendor/jDiwork.js	前端公共nginx服务
+/mdf-node	/mdf-node/option.do/AA	统一Node服务
+https://design.yonyoucloud.com/static/	https://design.yonyoucloud.com/static/ucf/iuap-apcom-workbench.app-fe/20220520-153546/js/main.js	OSS服务（阿里云、华为云等）
+
+前端微服务命名规范
+
+以后端微服务编码为前缀、以 fe 结尾，可以使用数字、字母和中划线，一对多以小数点划分，示例如下：
+
+微服务和前端微服务对应关系	前端微服务编码	对应后端微服务
+微服务与前端微服务一对一关系	iuap-devops-console-fe	iuap-devops-console
+yonbip-db-pro-fe	yonbip-db-pro	
+微服务与前端微服务一对多关系	iuap-apcom-workbench.app-fe	iuap-apcom-workbench
+iuap-apcom-workbench.portal-fe	iuap-apcom-workbench	
+接入方式
+
+详见《iuap-TinperNext前端引擎红皮书》第二章相关内容，文档链接地址：https://docs.diwork.com/l/B30768D9862e。
+
+统一前端三方包规范
+目的
+
+各领域前端页面会统一接入到数字化工作台，为了实现前端性能优化，减少公共前端资源的反复加载造成的重复引用带来的资源体积过大问题，避免相同前端三方包出现不同版本资源相互覆盖带来的异常问题，YonBIP 前端实行统一前端三方包机制。
+
+三方包清单
+序号	模块名称	模块版本	模块功能说明
+1	async-validator	4.0.7	表单校验
+2	axios	0.24.0	ajax请求
+3	bignumber.js	9.0.2	大数值
+4	classnames	2.3.1	自定义classname
+5	codemirror	5.64.0	在线代码编辑器
+6	cookies-js	1.2.3	操作cooke工具
+7	copy-to-clipboard	3.3.1	复制到剪切板
+8	crypto-js	4.1.1	加密
+9	dom-align	1.12.2	操作对齐工具
+10	dom-helpers	3.4.0	操作dom工具
+11	dom-scroll-into-view	1.2.1	滚动至可见区
+12	file-saver	2.0.5	另存为文件
+13	history	5.2.0	history工具
+14	html2canvas	1.3.3	html转绘图
+15	immutable	4.0.0	数据结构化
+16	js-base64	3.7.2	base64工具
+17	lodash	4.17.21	实用工具
+18	mirrorx	1.1.3	轻量redux
+19	moment	2.29.1	日期工具
+20	object-path	0.11.5	对象路径工具
+21	omit.js	1.0.2	对象属性工具
+22	pinyin	2.11.1	拼音工具
+23	prop-types	15.7.2	react类型定义
+24	qrcode.react	1.0.1	二维码
+25	rc-align	4.0.11	
+26	rc-calendar	9.15.11	
+27	rc-cascader	1.5.0	
+28	rc-dropdown	3.2.0	
+29	rc-field-form	1.22.0	
+30	rc-form	2.4.12	
+31	rc-menu	8.10.8	
+32	rc-motion	2.4.4	
+33	rc-progress	2.6.1	
+34	rc-rate	2.9.1	
+35	rc-resize-observer	1.1.1	
+36	rc-select	12.1.13	
+37	rc-slider	9.7.5	
+38	rc-textarea	0.3.5	
+39	rc-time-picker	3.7.3	
+40	rc-tooltip	5.1.1	
+41	rc-tree-select	4.8.0	
+42	rc-trigger	5.2.10	
+43	react	16.14.0	
+44	react-amap	1.2.8	高德地图
+45	react-beautiful-dnd	13.1.0	拖拽排序
+46	react-bmapgl	0.1.31	百度地图
+47	react-color	2.19.3	颜色选择器
+48	react-cookies	0.1.1	react版cookie工具
+49	react-copy-to-clipboard	5.0.4	react版复制到剪切板
+50	react-dnd	14.0.4	拖拽
+51	react-dnd-html5-backend	14.0.2	基于html5的拖拽
+52	react-dom	16.14.0	
+53	react-draggable	3.3.2	元素拖拽
+54	react-error-boundary	3.1.4	
+55	react-hammerjs	1.0.1	手势滑动工具
+56	react-lazy-load	3.1.13	异步组件加载
+57	react-redux	7.2.6	
+58	react-resizable	3.0.4	拖拽尺寸
+59	react-router	5.2.1	
+60	react-router-dom	5.3.0	
+61	react-router-redux	4.0.8	
+62	react-slick	0.25.2	轮播
+63	react-sortablejs	6.1.1	拖拽排序
+64	redux	4.1.2	
+65	redux-actions	2.6.5	
+66	redux-logger	3.0.6	
+67	redux-thunk	2.4.1	
+68	shortid	2.2.16	短id
+69	sortablejs	1.14.0	拖拽排序
+70	uuid	3.3.3	唯一uuid
+71	xlsx	0.15.6	excel工具
+72	braft-editor		
+73	json-bigint	1.0.0	强化JSON.parse/stringify的大数值转化
+74	react-draggable-tags	1.0.6	拖拽标签(仅mdf用)
+75	fixed-data-table-2	1.2.6	开源表格
+76	echarts	5.3.1	百度图表
+77	echarts-for-react	3.0.2	react版图表
+接入方式
+
+详见《iuap-TinperNext前端引擎红皮书》相关内容，文档链接地址：https://docs.diwork.com/l/B30768D9862e。
+
+统一前端二方包规范
+Tinper-Next基础组件版本规范和机制
+
+Tinper-Next 是BIP前端基础UI组件库，主要面向Web端。由于组件库的更新频次较高，目前的版本更新为通过BIP数字化工作台统一引入一份tinpernext的js和css资源，数字化工作台通过在不同环境引入不同的版本文件、进而动态获取组件库的具体生效版本，具体环境如下：
+
+环境	域名	动态版本文件
+日常环境	https://bip-daily.yyuap.com/	https://design.yonyoucloud.com/static/tinper-next/version/daily_version.json
+预发环境	https://bip-pre.diwork.com/	https://design.yonyoucloud.com/static/tinper-next/version/pre_version.json
+生产环境（Core2数据中心）	https://yonbip.diwork.com/	https://design.yonyoucloud.com/static/tinper-next/version/online_version.json
+生产环境（Core1数据中心）	https://yonbip-core1.diwork.com/	https://design.yonyoucloud.com/static/tinper-next/version/stage-dc-core1_version.json
+生产环境（商用开发环境）	https://dbox.diwork.com/	https://design.yonyoucloud.com/static/tinper-next/version/online-dc-commldev_version.json
+生产环境（海外数据中心）	https://globalbip.yonyou.com/	https://design.yonyoucloud.com/static/tinper-next/version/online-sg_version.json
+专属化环境	/	/iuap-tns/ucf-wh/share/static/tinper-next/version/private_version.json
+
+通过对应环境的版本文件获取到具体版本号之后，数字化工作台将会按规则统一加载指定版本文件，如：
+
+mdf框架资源版本规范和机制
+
+mdf前端模型驱动框架，由于框架内置大量业务组件、业务组件模型逻辑、抽象模版公共逻辑等，框架代码量较大、且更新频率较高，mdf 框架二方包资源采用的是jsonp接口的方案动态控制各环境的资源版本。
+
+前端SDK二方包资源版本规范和机制
+
+前端的二方包主要以组件、SDK、工具、框架等形式提供，前面两个小节说明了相关的组件和框架的版本规范和机制，这小节主要说明前端公共的SDK资源的版本控制规范和引入机制。
+
+以工作台jdiwork.js 前端SDK为例，引用方使用的资源链接为：
+
+版本	版本号	适用环境	资源链接
+开发版	snapshot	开发环境、测试环境	https://design.yonyoucloud.com/static/ucf/iuap-apcom-workbench.vendor-fe/snapshot/jDiwork.js
+内测版	alpha	测试环境、日常环境	https://design.yonyoucloud.com/static/ucf/iuap-apcom-workbench.vendor-fe/alpha/jDiwork.js
+公测版	beta	日常环境、预发环境	https://design.yonyoucloud.com/static/ucf/iuap-apcom-workbench.vendor-fe/beta/jDiwork.js
+正式版	release	预发环境、生产环境	https://design.yonyoucloud.com/static/ucf/iuap-apcom-workbench.vendor-fe/release/jDiwork.js
+
+更多详细信息和方案内容请看文档：《统一前端Nginx引擎SDKJS-CDN固定地址接入指南》，文档链接地址：https://yundoc.yonyou.com/view/l/t2wwtlv
+
+前端性能规范
+目的
+
+提升YonBIP产品整体性能，节省资源流量，优化页面访问效率。
+
+规范说明
+【强制】页面下行流量：首次加载不超过2M，非首次不超过1M；
+【推荐】页面打开效率：首次打开不超过2s，非首次不超过1s；
+【强制】单个前端文件资源大小（gzip、压缩后）不超过500K；
+【强制】公有云静态资源必须走CDN加速；
+【推荐】整站系统资源不能超过40M，尽可能的首页把所有资源下载完成；
+【强制】不影响首屏交互的接口，需要进行异步加载；
+【强制】渲染顺序上先加载样式文件、后加载js文件，避免页面错乱；
+【强制】白屏时间10ms以内；
+【推荐】服务节点在BIP数字化工作台中以非Iframe嵌入方式接入。
+UI自动化测试规范
+目的
+
+推进BIP关键业务功能操作能够基于RPA自动化脚本实现UI自动化测试，提升和保障产品稳定性，前端组件在开发过程中需要对相应的组件按规范添加 fieldid属性。
+
+规范说明
+
+具体规范请查看文档： https://yundoc.yonyou.com/view/p/1828212。fieldid 属性添加整体规则如下：
+
+节点iframe, 唯一不变, 所有环境iframe, fieldid一致
+
+表体元素, 需要增加fieldid, 可以定位到任一行
+
+resid增加, 页面元素需要增加对应资源对应编码
+
+元素fieldid 唯一不变(多环境下)
+
+NC规范已覆盖的, 不在重复定义
+
+已经添加ID的元素，ID属性不能去除
+
+元素标签添加到可操作元素层
+
+统一主题规范
+组件级主题变量
+
+业务开发中接入（BIP数字化工作台已统一加载，部分业务自定义引入）并使用前端基础组件库tinpernext，基础组件库中提供了ConfigProvider 组件实现全局基础配置，其中包括主题相关设置，具体使用请访问如下链接：https://yondesign.yonyou.com/website/#/detail/component/wui-provider/other。
+
+企业帐号级风格设置
+
+在BIP数字化工作台统一入口中，提供了企业风格设置和个性化设置两个服务节点，用户（包括租户管理员）在节点中设置主题相关信息后，主题设置相关数据将会保存在工作台上下文中，包括用户级、租户级的，各领域服务将基于这个唯一协议进行对接和实现。
+
+字段名	业务含义	字段类型	字段默认值
+tableRowSplitLine	是否开启分割线	Boolean	false
+tableRowZebraStripes	是否开启斑马线	Boolean	false
+tableRowHeight	表格高度	Number	0(紧凑),1(标准),2(宽松)
+themeColor	primary-colorprimary-color-hoverprimary-color-active	String	primary-colorprimary-color-hover：#be1b28;primary-color-active：#be1b28;
+
+调用工作台的 jDiwork.js API（资源链接地址：https://design.yonyoucloud.com/static/ucf/iuap-apcom-workbench.vendor-fe/release/jDiwork.js） 可从上下文中获取到这些信息：
+
+jDiwork.getContext((data)=>{
+
+console.log(data);
+
+});
+
+关于主题色部分主题变量，数字化工作台获取到主题设置信息后，将会在 head 中动态 append 以下全局样式代码，组件样式中使用到以下 classname 则可自动响应主题变化：
+
+<style>
+  :root{
+    --wui-primary-color: "",  
+    --wui-primary-color-active: "",
+    --wui-primary-color-hover: "",
+    --wui-primary-color-light: ""
+  }
+</style>
+
+HTML 编程规范
+代码格式
+
+(1)【强制】缩进使用 soft tab（4个空格）
+
+正例：
+
+<ul>
+    <li>first</li>
+    <li>second</li>
+</ul>
+
+<select>
+    <option value="1" selected>1</option>
+
+
+【推荐】每行不得超过120个字符。
+
+(2)【强制】嵌套的节点应该缩进；
+
+(3)【强制】在属性上，使用双引号，不要使用单引号；
+
+(4)【强制】属性名全小写，用中划线做分隔符；
+
+(5)【强制】不要在自动闭合标签结尾处使用斜线（HTML5 规范指出他们是可选的）；
+
+(6)【强制】不要忽略可选的关闭标签
+
+正例：
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Page title</title>
+    </head>
+    <body>
+        <img src="images/company_logo.png" alt="Company">
+
+        <h1 class="hello-world">Hello, world!</h1>
+    </body>
+</html>
+
+<select>
+    <option value="1" selected>1</option>
+</select>
+
+
+(7) 【强制】boolean 属性指不需要声明取值的属性，XHTML 需要每个属性声明取值，但是 HTML5 并不需要
+
+正例：
+
+<input type="text" disabled>
+
+<input type="checkbox" value="1" checked>
+
+命名风格
+
+(1)【强制】class必须单词全字母小写，单词间以-分隔。
+
+(2)【推荐】class必须代表相应模块或部件的内容或功能，不得以样式信息进行命名。
+
+正例：
+
+<div class="sidebar"></div>
+
+
+反例:
+
+<div class="left"></div>
+
+
+(3)【强制】元素 id 必须保证页面唯一。
+
+(4)【强制】同一页面，应避免使用相同的 name 与 id。
+
+HTML5 doctype
+
+(1) 【推荐】在页面开头使用这个简单地 doctype 来启用标准模式，使其在每个浏览器中尽可能一致的展现；
+
+(2) 【推荐】虽然 doctype 不区分大小写，但是按照惯例，doctype 大写
+
+正例：
+
+<!DOCTYPE html>
+<html>
+	...
+</html>
+
+lang 属性
+
+【强制】根据 HTML5 规范：应在 html 标签上加上 lang 属性。语言列表如下： zh-cn、zh-hk、zh-tw、en-us等。
+
+正例：
+
+<!DOCTYPE html>
+
+<html lang="en-us">
+
+...
+
+</html>
+
+字符编码
+
+【强制】通过声明一个明确的字符编码，让浏览器轻松、快速的确定适合网页内容的渲染方式，通常指定为 'UTF-8'。
+
+资源引入顺序
+
+【强制】根据HTML5规范, 通常在引入CSS和JS时不需要指明 type，因为 text/css 和 text/javascript 分别是他们的默认值。
+
+正例：
+
+<style> ... </style>
+
+<script src="code_guide.js"></script>
+
+<script> ... </script>
+
+IE兼容模式
+
+【推荐】用标签可以指定页面应该用什么版本的 IE 来渲染，不同doctype在不同
+
+浏览器下会触发不同的渲染模式。
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    </head>
+    ...
+</html>
+
+属性顺序
+
+【推荐】属性应该按照特定的顺序出现以保证易读性：
+
+class
+id
+name
+data-*
+src, for, type, href, value , max-length, max, min, pattern
+placeholder, title, alt
+aria-*, role
+required, readonly, disabled
+
+class是为高可复用组件设计的，所以应处在第一位；
+
+id更加具体且应该尽量少使用，所以将它放在第二位。
+
+正例：
+
+<a class="..." id="..." data-modal="toggle" href="#">Example link</a>
+
+<input class="form-control" type="text">
+
+<img src="..." alt="...">
+
+CSS及LESS 编程规范
+设计原则
+【推荐】所有选择器的样式都应写在CSS文件中，尽量少用或不用行内样式和style标签样式。
+【强制】禁止在css中使用*选择器，*选择器因为需要遍历页面的所有元素，所以编译的时候会非常消耗时间。
+【推荐】选择器要尽可能短，并且尽量限制组成选择器的元素个数，建议不要超过 3
+【推荐】表现与结构分离：尽量不用id选择器做css样式编写，因为id选择器一般用做js选择，有时可能会因为js的原因改动，那么对应的css就会失效。
+【推荐】避免使用important，使用大量!important样式会使维护变得更难，因为您打破了样式表中的自然级联。
+代码格式
+
+(1) 【强制】必须采用4个空格为一次缩进。CSS 每个代码块相对于父代码库必须有缩进。且缩进均为4个空格
+
+(2) 【推荐】声明排序单个样式内属性声明和多个样式均按照字母顺序排列
+
+正例：
+
+background: fuchsia;
+
+border: 1px solid;
+
+-moz-border-radius: 4px;
+
+-webkit-border-radius: 4px;
+
+border-radius: 4px;
+
+color: black;
+
+text-align: center;
+
+text-indent: 2em;
+
+(3) 【强制】 CSS 属性声明必须以分号结尾。
+
+(4) 【强制】CSS 属性名冒号后必须有一个空格。
+
+正例：
+
+color: #ebc;
+
+反例:
+
+color:#eebbcc;
+
+(5) 【强制】最后的选择符与 { 之间必须有一个空格。
+
+正例：
+
+#video {
+
+margin-top: 1em;
+
+}
+
+反例:
+
+#video{
+
+margin-top: 1em;
+
+}
+
+.author
+
+{
+
+margin-top: 1em;
+
+}
+
+(6) 【强制】多个并列的选择符必须换行。
+
+正例：
+
+h1,
+
+h2,
+
+h3 {
+
+font-weight: normal;
+
+line-height: 1.2;
+
+}
+
+反例:
+
+a:focus, a:active {
+
+position: relative; top: 1px;
+
+}
+
+【强制】CSS 规则之间必须以空白行分隔。
+
+(8) 【强制】CSS 属性值中所有使用到引号的位置必须使用单引号。
+
+正例：
+
+@import url('//www.google.com/css/maia.css');
+
+html {
+
+font-family: 'open sans', arial, sans-serif;
+
+}
+
+反例:
+
+@import url("//www.google.com/css/maia.css");
+
+html {
+
+font-family: "open sans", arial, sans-serif;
+
+}
+
+命名风格
+
+(1)【强制】命名格式 ID 和 class 命名中单词应该全部小写，单词之间使用 "-"中划线作为分隔符，如下所示。
+
+正例：
+
+#video-id {}
+
+.ads-sample {}
+
+反例:
+
+#videoId {}
+
+.demoimage {}
+
+.error_status {}
+
+(2)【强制】命名内容含义 ID 和 class 应该按照元素功能命名，不应该按照元素表现命名，命名应该含义清晰。
+
+(3)【推荐】简短原则ID 和 class 命名应该在保持含义清晰的前提下尽可能简短，注意前提是清晰。如下所示。
+
+正例：
+
+#nav {}
+
+.author {}
+
+反例:
+
+#navigation {}
+
+.atr {}
+
+(4)【强制】不添加冗余选择条件, 不能「MUST NOT」把 ID 和 class 选择符作为类型选择符的限定符，这样做没必要，反而还影响性能。
+
+正例：
+
+#example {}
+
+.error {}
+
+反例:
+
+ul#example {}
+
+div.error {}
+
+(5)【强制】简写原则 CSS 属性应该尽可能使用简化方式书写，需注意简写时默认值的副作用，详细参考 Shorthand properties。
+
+正例：
+
+border-top: 0;
+
+font: 100%/1.6 palatino, georgia, serif;
+
+padding: 0 1em 2em;
+
+反例:
+
+border-top-style: none;
+
+font-family: palatino, georgia, serif;
+
+font-size: 100%;
+
+line-height: 1.6;
+
+padding-bottom: 2em;
+
+padding-left: 1em;
+
+padding-right: 1em;
+
+padding-top: 0;
+
+(6)【强制】单位问题 CSS 属性中的 0 值不应该带单位。
+
+(7)【强制】CSS 属性中数值介于-1到1之间的小数应该忽略开头的 0。
+
+(8)【推荐】CSS 的色值应该尽可能使用简化写法。
+
+正例：
+
+color: #ebc;
+
+反例:
+
+color: #eebbcc;
+
+注释
+
+CSS规则段落之前应该添加注释说明。
+
+正例：
+
+/* Header */
+
+#adw-header {}
+
+/* Footer */
+
+#adw-footer {}
+
+/* Gallery */
+
+.adw-gallery {}
+
+代码组织规范
+
+（1）【推荐】不要重复写样式代码，尽量复用样式属性。
+
+.red-btn,
+.blue-btn,
+.gray-btn {
+    width: 100px;
+    height: 36px;
+    border: 0;
+}
+
+
+（2）【推荐】OOCSS “面向对象的CSS编程”，使样式的数据抽象化、模块化和继承。达到样式复用。
+
+.f12{
+    font-size:12px
+}
+.w-25{
+    width: 25%
+}
+.bg{
+    background:blue
+}
+
+<div className="f12 w-25 bg">OOCSS</div>
+<div className="f12 bg">OOCSS</div>
+
+
+（3）【推荐】遵循样式设计架构的合理分层。
+
+Base Styles 基础规范： 它的定义不会用到 class 和 ID。包含样式重置 css reset、工具样式。
+Layout Rules 布局规范：布局是一个网站的基本，SMACSS 还约定了一个前缀 l-/layout- 来标识布局的 class。
+.layout-header {}
+.layout-container {}
+.layout-sidebar {}
+.layout-content {}
+.layout-footer {}
+
+Module Rules模块规范：将样式模块化就能达到复用和可维护的目的。SMACSS中的模块具有自己的一个命名，下属类皆有同一个前缀。
+.todolist{}
+.todolist-title{}
+.todolist-image{}
+.todolist-article{}
+
+State Rules 状态规范：描述的是任一元素在特定状态下的外观。
+// html
+<div class="is-hidden">
+    ...
+</div>
+// css
+.is-hidden{
+    display: none;
+}
+
+Theme Rules 主题规范：描述了页面主题外观，一般是指颜色、背景图。Theme Rules 可以修改前面4个类别的样式，且应和前面4个类别分离开来（便于切换，也就是“换肤”）。
+Changing State 动态样式规范：我们静态 CSS 完成后，会有一些动态交互样式的覆盖行为。改变 State Rules 的样式属性。
+Less-文件导入（Importing）
+
+【强制】 使用 @import (reference) 导入其他 less 文件，避免导入的样式文件foo.less 代码重复打包到最终的 css 文件中
+
+@import (reference) "foo.less";
+
+我们用 vd 生成的项目，已经将 CSS 公共解决方案文件 rework.less 集成到node_modules 中，如下调用
+
+@import (reference) "~rework.less/rework";
+
+@import "~sprite.less";
+
+.placeholder {
+
+&-404 {
+
+h3 {
+
+.text-replace(); // 调用rework样式
+
+.sprite(@404-slogan);
+
+}
+
+}
+
+Less-混合（Mixins）
+
+【推荐】将一组可以共用的样式属性，在其他样式规则中混合调用。
+
+.bordered {
+
+border-top: dotted 1px black;
+
+border-bottom: solid 2px black;
+
+}
+
+#menu .list {
+
+color: #111;
+
+.bordered;
+
+}
+
+.post {
+
+color: red;
+
+.bordered;
+
+}
+
+Less-命名空间（Namespaces）和访问器（Accessors）
+
+【推荐】我们可以用Less中的命名空间为自己封装一些日常比较常用的类名，以便在其他组件中复用，又不产生冲突。
+
+.bundle() {
+
+.button(@bg-color) {
+
+// 本样式支持传参
+
+display: block;
+
+border: 1px solid black;
+
+background-color: @bg-color;
+
+}
+
+.tab {
+
+background-color: yellow
+
+}
+
+.citation {
+
+background-color: purple
+
+}
+
+}
+
+.header {
+
+color: orange;
+
+.bundle > .button(gray); // 也可以写作 .bundle .button(gray)
+
+}
+
+Less-嵌套
+
+【推荐】通过嵌套来实现样式隔离：保证自己组件的样式不影响其他组件的样式，注意层级不要超过3级（影响性能）。
+
+.product {
+
+padding-top: .5rem;
+
+width: e("calc(100% - 0.6rem)"); // 混合计算编译会忽略单位，解决方案1
+
+.product-list {
+
+margin-bottom: .2rem;
+
+width: calc(~"100% - 0.6rem"); // 混合计算编译会忽略单位，解决方案2
+
+&:after {
+
+content: "";
+
+display: block;
+
+visibility: hidden;
+
+clear: both;
+
+height: 0;
+
+line-height: 0;
+
+}
+
+}
+
+}
+
+JavaScript 编码规范
+代码格式
+
+（1）【推荐】缩进：使用 soft tab（4个空格）。
+
+（2）【推荐】单行长度：不要超过80，但如果编辑器开启word wrap可以不考虑单行长度。
+
+命名规范
+【强制】避免单个字符名，让你的变量名有描述意义。
+【推荐】当命名对象、函数和实例时使用驼峰命名规则
+【推荐】当命名构造函数或类时使用驼峰式大写
+【推荐】命名私有属性时前面加个下划线 _
+【推荐】当保存对 this 的引用时使用 _this.
+对象定义
+
+（1）【强制】使用字面值创建对象
+
+（2）【强制】不要使用保留字reserved words作为键
+
+数组
+
+（1）【推荐】使用字面值创建数组
+
+// bad
+
+var items = new Array();
+
+// good
+
+var items = [];
+
+（2）【强制】如果你不知道数组的长度，使用push
+
+var someStack = [];
+
+// bad
+
+someStack[someStack.length] = 'abracadabra';
+
+// good
+
+someStack.push('abracadabra');
+
+（3）【推荐】当你需要浅拷贝数组时使用slice
+
+var len = items.length;
+
+itemsCopy = [];
+
+// bad
+
+for (i = 0; i < len; i++) {
+
+itemsCopy[i] = items[i];
+
+}
+
+// good
+
+itemsCopy = items.slice();
+
+（4）【推荐】使用slice将类数组的对象转成数组.
+
+function trigger() {
+
+var args = Array.prototype.slice.call(arguments);
+
+...
+
+}
+
+字符串
+
+（1）【推荐】对字符串使用单引号''
+
+（2）【强制】超过80个字符的字符串应该使用字符串连接换行
+
+· 注: 如果过度使用，长字符串连接可能会对性能有影响.
+
+（3）【推荐】编程时使用 join 而不是字符串连接来构建字符串，特别是 IE；
+
+字符串拼接还可选择 ES6 的模版字符串 ${someVariable}.png。
+
+（4）【推荐】程序化生成字符串时，使用模板字符串代替字符串连接。
+
+函数
+【推荐】使用函数声明代替函数表达式
+
+说明：因为函数声明是可命名的，所以他们在调用栈中更容易被识别。此外，函数声明会把整个函数提升（hoisted），而函数表达式只会把函数的引用变量名提升。这条规则使得箭头函数可以取代函数表达式。
+
+正例：
+
+function foo() { }
+
+反例：
+
+const foo = function () { };
+
+【强制】永远不要在一个非函数代码块（if、while 等）中声明一个函数，把那个函数赋给一个变量。浏览器允许你这么做，但它们的解析表现不一致。
+【强制】永远不要把参数命名为 arguments。这将取代原来函数作用域内的 arguments 对象，可以选择 rest 语法 ... 替代。
+
+// bad
+
+function nope(name, options, arguments) {
+
+// ...stuff...
+
+}
+
+// good
+
+function yup(name, options, args) {
+
+// ...stuff...
+
+}
+
+属性
+
+（1）【强制】使用‘ . ’来访问对象的属性。
+
+（2）【推荐】当通过变量访问属性时使用中括号[]。
+
+变量定义
+
+（1）【推荐】使用 let或const 声明变量。
+
+（2）【参考】将所有的 const 和 let 分组。
+
+（3）【参考】在你需要的地方给变量赋值，但请把它们放在一个合理的位置。
+
+（4）【推荐】使用一个var以及新行声明多个变量，缩进4个空格。
+
+（5）【参考】最后再声明未赋值的变量，当你想引用之前已赋值变量的时候很有用。
+
+（6）【推荐】在作用域顶部声明变量，避免变量声明和赋值引起的相关问题。
+
+条件表达式和等号
+
+（1）【推荐】适当使用===和!==以及==和!=.
+
+（2）【参考】条件表达式的强制类型转换遵循以下规则：
+
+a. 对象被计算为 true
+
+b. Undefined 被计算为 false
+
+c. Null 被计算为 false
+
+d. 布尔值 被计算为 布尔的值
+
+e. 数字 如果是 +0, -0, or NaN 被计算为 false , 否则为 true
+
+f. 字符串 如果是空字符串 '' 则被计算为 false, 否则为 true
+
+代码块
+【强制】给所有多行的块使用大括号
+【推荐】使用大括号包裹所有的多行代码块。
+【参考】如果通过 if和 else 使用多行代码块，把 else 放在 if 代码块关闭括号的同一行。
+类型转换
+
+（1）【推荐】在语句的开始执行类型转换
+
+（2）【推荐】对数字使用 parseInt 并且总是带上类型转换的基数.
+
+（3）【推荐】.布尔值转换规范
+
+正例：
+
+const hasAge =!!age;
+
+const hasAge = Boolean(age);
+
+反例：
+
+const hasAge = new Boolean(age);
+
+注释
+
+（1）【强制】使用/** ... */进行多行注释，包括描述，指定类型以及参数值和返回值
+
+（2）【强制】使用//进行单行注释，在评论对象的上面进行单行注释，注释前放一个空行.
+
+（3）【推荐】使用 // FIXME: 标注问题。
+
+（4）【推荐】使用 // TODO: 标注问题的解决方式。
+
+空格
+
+（1）【推荐】在逗号、分号、冒号后加空格
+
+（2）【推荐】在操作符前后加空格
+
+（3）【推荐】在大括号开始符之前
+
+（4）【推荐】在大括号结束符和 else、while 或 catch 之间
+
+逗号
+
+（1）【强制】不要将逗号放前面
+
+（2）【强制】不要加多余的逗号，这可能会在 IE 下引起错误，同时如果多一个逗号某些 ES3 的实现会计算多数组的长度。
+
+分号
+
+（1）【推荐】语句结束一定要加分号
+
+模块
+
+（1）【强制】模块应该以 ! 开始，这保证了如果一个有问题的模块忘记包含最后的分号在合并后不会出现错误。
+
+（2）【推荐】这个文件应该以驼峰命名，并在同名文件夹下，同时导出的时候名字一致
+
+（3）【推荐】加入一个名为noConflict()的方法来设置导出的模块为之前的版本并返回它
+
+（4）【推荐】总是在模块顶部声明 'use strict';
+
+解构
+【推荐】使用解构存取和使用多属性对象。
+【推荐】对数组使用解构赋值。const arr = [1, 2, 3, 4]
+构建产物
+【强制】最终构建中将 debugger 调试类代码去掉。
+【推荐】最终构建中将开发调试类 console 代码去掉（必要信息除外）。
+组件性能优化
+【推荐】应该改写为 onClick = {this.handleClick} 形式，减少函数的构建次数及内测占用
+【强制】多利用React的key属性进行优化，减少渲染dom次数，避免错误用法一：用index做key、错误用法二:用index拼接其他的字段、正确用法：用唯一id作为key。
+【强制】 把import Button from 'xxx' 的引入方式，变成import {Button} from 'xxx' 的方式引入，以利于按需打包。
+【推荐】 图片在渲染前指定大小， img 元素是内联元素，在加载图片后会改变宽高，会导致整个页面重排，验证影响渲染性能，所以最好在渲染前就指定其大小，或者让其脱离文档流
+【强制】切换样式要提前定义好class，通过class的切换批量修改样式，避免多次重绘重排。
+【推荐】使用PureComponent代替React.component，这样React机制会自动在shouldComponentUpdate中进行浅比较(需要深度比较的则无需替换)，决定是否更新，减少渲染次数。
+React 组件编码规范
+命名规范
+【强制】props 和 state 相关属性采用小驼峰规范命名。
+【强制】组件命名采用大驼峰，每个英文单字首字母大写如 AccountModal
+注释
+【强制】单行注释使用 // 进行单行注释
+
+在评论对象的上面进行单行注释，注释前放一个空行.不同注释代码间需要进行隔行
+
+正例：
+
+// is current tab
+
+var active = true;
+
+反例:
+
+var active = true; // is current tab
+
+【强制】函数注释采用 /** ... */ 包括描述，指定类型以及参数值和返回值
+
+正例：
+
+/**
+
+Book类，代表一个书本.
+
+@constructor
+
+@description
+
+@param {string} title - 书本的标题.
+
+@param {string} author - 书本的作者.
+
+@returns {string|*}
+
+*/
+
+function make(tag) {
+
+// ...stuff...
+
+return element;
+
+}
+
+反例:
+
+// make() returns a new element
+
+// based on the passed in tag name
+
+//
+
+// @param tag
+
+// @return element
+
+function make(tag) {
+
+// ...stuff...
+
+return element;
+
+}
+
+(3) JSX 注释采用{/* ... */ }
+
+组件单一原则
+
+一般地，一个文件只暴露一个组件，一个文件不允许超过 500 行代码。
+
+遵循单一原则可以让我们的组件逻辑更简单，职责更明确，复用性更好。
+
+组件标签闭合、属性换行
+
+(1)【强制】无内容标签自闭合
+
+正例：
+
+<Button />
+<span />
+
+
+反例:
+
+<Button></Button>
+<span></span>
+
+【推荐】属性换行：一行超过三个属性则将属性换行
+组件声明
+
+(1) 无状态函数组件
+
+正例：
+
+const Button = ({ text }) => (
+    <button>{ text }</button>
+)
+
+
+反例:
+
+(2) 通过 React.Component 定义组件
+
+class Button extends React.Component{
+    render() {
+	return (
+	    <Button>{ this.props.text }</Button>
+	)
+    }
+}
+
+ref 使用
+
+(1) 【推荐】通过 ref 获取组件原生 DOM 对象。
+
+(2) 【推荐】不采用传入字符串的方式赋值 ref，需采用传入函数的方式来定义 ref。
+
+使用 propTypes 校验组件接口类型
+
+正例：
+
+import PropTypes from 'prop-types';
+const propTypes = {
+    disabled: PropTypes.bool
+}
+class Button extends React.Component{}
+Button.propTypes = propTypes;
+
+生命周期函数书写顺序
+constructor
+componentWillMount
+componentDidMount
+componentWillReceiveProps
+shouldComponentUpdate
+componentWillUpdate
+componentDidUpdate
+componentWillUnmount
+组件公共方法定义
+
+【推荐】默认采用箭头函数定义组件内的公共方法。
+
+state 更新方式
+
+【强制】采用 setState 修改 state，不允许出现类似 this.state.xx = xx；的代码
+
+组件资源引入顺序
+
+正例：
+
+//组件 （1）
+//①react组件   ② UI级组件
+import React, {Component} from 'react';
+import { Button, Message, Modal, Loading, getMarginStyle } from '@tinper/next';
+import Grid from 'bee-complex-grid';
+import CommonModal from '../CommonModal';
+import DeleteModal from "../DeleteModal";
+
+// 导入工具类（2）
+import {connect, actions} from 'mirrorx';
+import {deepClone, success, Error} from 'utils';
+
+客户端存储规范
+命名规范
+【推荐】storage：key 必须保持在页面中的唯一性，命名应该具有明确的语义。
+【推荐】storage：建议对要存储到 storage 中的东西做字数限制。
+公共规范
+【推荐】storage：不需要永久存储的东西在使用完毕之后要及时清除。
+【强制】application cache：manifest 文件放在服务器上，MIME 类型必须是 text/cache-manifest。
+【强制】application cache：每个需要缓存的页面的 html 都需要加入manifest 属性。
+【强制】application cache：不要将 manifest 文件本身加入缓存。
+【推荐】storage：建议封装公共方法，统一处理。 建议采用 WebStorage 提供的方法操作，不建议采用直接赋值的方式。
+【推荐】storage：全局使用的东西，共享的东西，永久存储的东西储存在 localstorage 中。
+cookie 规范
+【强制】BIP数字化工作台中已有的cookie字段作为保留字，不允许修改，详见下表。
+【推荐】cookie命名时建议加上微服务编码作为前缀，并使用“_”连接。
+分类	字段	类型	业务含义
+租户信息	tenantid	String	租户id【标准】
+yxyTenantid	String	租户id【兼容营销领域】	
+providerid	String	租户id【兼容技术中台】	
+用户信息	yonyou_uid	String	
+yonyou_uname	String	用户名 cas写入	
+userid			
+登录信息	yht_username_diwork	String	cas登录标识
+yht_usertoken_diwork	String	cas登录标识	
+wb_at	String	工作台会话id	
+WorkbenchCross	String	判断是否禁用cooike	
+Token信息	token	String	Token【兼容旧版iuap】
+yht_access_token	String	友户通token	
+hubble录制信息	mdd_monitor_record	String	是否开启hubble录制
+mdd_monitor_uid	String	hubble录制uid	
+安全类信息	csrf	String	
+XSRF-TOKEN	String	XSRF安全token	
+国际化信息	i18next	String	
+locale	String	登录前语种	
+theme	String	主题	
+timezone	String	时区	
+multilingualFlag	String	当前租户是否开启多语	
+组织信息	orgId	String	组织id
+defaultOrg	String	默认组织id	
+isSingleOrg	String	是否单组织	
+其他信息	systemCode	String	区分产品线【不推荐】
+身份信息	docId	String	身份id
+docType	String	身份类型	
+identityId	String	身份id(营销领域)	
+国际化规范
+多语言
+目录规范
+
+在 src 目录新增 locale 目录用于管理不同语言的文案
+
+├── README.md
+
+├── package.json
+
+├── src
+
+├── lang-tool
+
+│ ├── config
+
+│ │ ├── config.properties
+
+│ ├── logs
+
+│ ├── resources
+
+├── module.xml
+
+多语抽取工具配置
+
+config.properties文件中配置规则如下：
+
+MDF前端工程多语抽取规则配置文件
+
+replace={"java":"com.yonyou.iuap.ucf.common.i18n.MessageUtils.getMessage(\"%resid\", \"%resvalue\") /* \"%resvalue\" /","js":"cb.lang.template(\"%resid\", \"%resvalue\") / \"%resvalue\" /","jsx":"cb.lang.template(\"%resid\", \"%resvalue\") / \"%resvalue\" /","ts":"cb.lang.template(\"%resid\", \"%resvalue\") / \"%resvalue\" */"}
+
+CN 前端工程多语抽取规则配置文件
+
+replace={"java":"com.yonyou.iuap.ucf.common.i18n.MessageUtils.getMessage(\"%resid\", \"%resvalue\") /* \"%resvalue\" /","js":"lang.template(\"%resid\", \"%resvalue\") / \"%resvalue\" /","jsx":"lang.template(\"%resid\", \"%resvalue\") / \"%resvalue\" /","ts":"lang.template(\"%resid\", \"%resvalue\") / \"%resvalue\" */"}
+
+抽取规则说明如下：
+
+源文字字符串	多语抽取后的运行时代码
+"你好"	cb.lang.template('YS_PF_UCFMDF_00000***', '你好')API新增了第二个参数为词条默认值，如果后端多语资源未拉取回来，则走默认中文
+多语言录入
+
+BIP服务节点多语言录入组件采用统一的UI组件，组件UI交互参见上图，组件具体信息如下：
+
+组件名称：@mdf/inputmultilang
+组件版本：V3.0.20
+组件文档：https://package.yonyoucloud.com/package/detail/@mdf/inputmultilang
+前端兼容性规范
+国产化适配兼容范围
+操作系统兼容规范
+
+// 安可信，是否纳入兼容的范围。
+
+操作系统
+银河麒麟（Kylin V10）
+浏览器兼容规范：
+浏览器版本
+谷歌浏览器（87.0.4280.66（正式版本））
+Web浏览器兼容范围
+浏览器版本
+谷歌70.版本
+移动操作系统兼容范围
+移动操作系统	版本	说明
+IOS	V10.0及以上	
+Android	V6.0及以上	
+异常规范
+目的
+
+规范前端异常的抛出、捕获处理、异常上报等流程，提高用户对产品异常时的明确信息，帮助开发者快速高效定位和解决异常问题。
+
+异常码表
+异常码	含义	使用场景
+E00000	通用类错误	
+E00001	函数参数错误	
+E00002	语法错误(SyntaxError)	
+E00003	类型错误(TypeError)	
+E00004	引用错误(ReferenceError)	
+E00005	范围错误(RangeError)	
+E00006	异步错误(PromiseError)	
+E00007	上下文缺失错误	
+E00008	MTL调用失败	
+E00009	浏览器原生方法调用失败	indexDB，localStragecookie
+E01000	网络错误	
+E01001	请求参数错误	
+E01002	请求404	
+E01003	请求无权限401	
+E01004	请求超时	
+E01005	资源文件加载失败	
+E01006	返回数据结构错误	
+E01007	服务端处理错误	
+E01999	致命错误	
+E02000	元数据协议错误	
+E02001	显示模板协议错误	
+E02002	查询模板协议错误	
+E02003	参照模板协议错误	
+E02004	公式协议错误	
+E02005	交互规则协议错误	
+E03000	解析引擎错误	
+E04000	渲染引擎错误	
+** E04998**	** React异常渲染错误**	
+** E04999**	** React致命渲染错误**	
+E05000	组件错误	
+E06000	公共业务错误	
+E99XXX	自定义错误码	
+异常抛出
+/*** args1 错误码，详细查看码表，非必传* args2 错误信息* args3 自定义参数*/// 只传code，提示code码信息newMessageError(Error.E01001)// 不传code，默认为Error.E00000newMessageError('自定义错误信息')// 不加throw不会中断业务，new可选newMessageError(Error.E00000,'接口请求错误~')// 添加throw会中断业务thrownewMessageError(Error.E0000,'接口请求错误~')// 确认通知thrownewConfirmError(Error.E0000,'接口请求错误~', {onOk: ()=>{}})// 重写Error，设置code属性，值取用规范定义的异常码// 等价于以下简化代码实现const error = newError('接口请求错误~')error.code = Error.E01001.code;throw error// 弹出通知new NotificationError(Error.E00000, '自定义消息')
+
+类型	含义	错误码	使用场景
+MessageError	消息异常		
+NotificationError	通知异常		
+ConfirmError	确认异常		
+异常捕获和上报
+
+通过YMC 自动采集上报，需引入YMC UBA前端采集SDK，工作台环境默认已引入。
+
+自动采集错误类型包含：
+
+Error 全局抛出的Error类异常，通过监控error事件捕获收集，并匹配对应错误类型及错误码，同时支持自定义类错误通过可选的errorCode属性指定其错误码；
+console.error打印的错误，通过重写包装console.error方式捕获采集，错误码可通过第一个可选参数指定，规则/^E\d{5}$/；
+
+示例：
+
+console.error('E00007', '上下文缺失错误'); // 指定错误码方式1
+console.error(Error.E00007, '测试错误信息'); // Error.E00007为对象{code: 'E00007', text: '上下文缺失错误'} // 指定错误码方式2
+console.error('测试信息'); // 未指定错误码
+资源加载错误，如JS资源加载失败；
+接口错误异常，如请求5xx类异常；
+异常分类
+JS异常和错误
+网络异常
+接口异常
+组件异常
+Node端异常
+日志规范
+目的
+
+规范前端和Node端日志级别、日志打印和日志上报规范，实现日志信息的统一上报和管理。
+
+前端日志
+日志级别
+日志级别：7个级别，ALL < TRACE < DEBUG < INFO < WARN < ERROR < OFF
+配置项：LOG_LEVEL，默认ERROR
+日志打印规范
+// 错误日志console.error(Error.E00XXX, message, ...)// 警告日志console.warn(message, ...)// 信息日志console.info(message, ...)// 调试日志console.debug(message, ...)// 交易日志console.trace(message, ...)
+日志上报
+使用YMC上报，根据上报数据，进行分析
+根据日志等级，将日志记录到本地indexDB
+开发一个日志管理页面，可对日志进行清除、手动上传等操作（上传本地存储日志到OSS，可以指定上传日志的级别）
+Node端日志
+日志级别
+日志级别：9个级别，ALL < TRACE < DEBUG < INFO < WARN < ERROR < FATAL < MARK < OFF
+配置项：LOG_LEVEL，默认ERROR
+日志打印规范
+需要收集的Error日志使用logger.error打印
+普通的操作日志使用logger.debug打印
+不合理的警告使用logger.warn打印
+日志接入ES
+流水线配置接入ES
+文档内容是否对您有所帮助？
+为帮助文档评分：
+页内目录
+1. 概述
+1.1 目的
+1.2 阅读对象
+1.3 名词解释
+1.4 规范等级定义
+2. 适用范围
+3. 开发规范说明
+3.1 统一前端接入规范
+3.1.1 目的
+3.1.2 统一域名规范
+3.1.3 URL解析规范
+3.1.4 前端微服务命名规范
+3.1.5 接入方式
+3.2 统一前端三方包规范
+3.2.1 目的
+3.2.2 三方包清单
+3.2.3 接入方式
+3.3 统一前端二方包规范
+3.3.1 Tinper-Next基础组件版本规范和机制
+3.3.2 mdf框架资源版本规范和机制
+3.3.3 前端SDK二方包资源版本规范和机制
+3.4 前端性能规范
+3.4.1 目的
+3.4.2 规范说明
+3.5 UI自动化测试规范
+3.5.1 目的
+3.5.2 规范说明
+3.6 统一主题规范
+3.6.1 组件级主题变量
+3.6.2 企业帐号级风格设置
+3.7 HTML 编程规范
+3.7.1 代码格式
+3.7.2 命名风格
+3.7.3 HTML5 doctype
+3.7.4 lang 属性
+3.7.5 字符编码
+3.7.6 资源引入顺序
+3.7.7 IE兼容模式
+3.7.8 属性顺序
+3.8 CSS及LESS 编程规范
+3.8.1 设计原则
+3.8.2 代码格式
+3.8.3 命名风格
+3.8.4 注释
+3.8.5 代码组织规范
+3.8.6 Less-文件导入（Importing）
+3.8.7 Less-混合（Mixins）
+3.8.8 Less-命名空间（Namespaces）和访问器（Accessors）
+3.8.9 Less-嵌套
+3.9 JavaScript 编码规范
+3.9.1 代码格式
+3.9.2 命名规范
+3.9.3 对象定义
+3.9.4 数组
+3.9.5 字符串
+3.9.6 函数
+3.9.7 属性
+3.9.8 变量定义
+3.9.9 条件表达式和等号
+3.9.10 代码块
+3.9.11 类型转换
+3.9.12 注释
+3.9.13 空格
+3.9.14 逗号
+3.9.15 分号
+3.9.16 模块
+3.9.17 解构
+3.9.18 构建产物
+3.9.19 组件性能优化
+3.10 React 组件编码规范
+3.10.1 命名规范
+3.10.2 注释
+3.10.3 组件单一原则
+3.10.4 组件标签闭合、属性换行
+3.10.5 组件声明
+3.10.6 ref 使用
+3.10.7 使用 propTypes 校验组件接口类型
+3.10.8 生命周期函数书写顺序
+3.10.9 组件公共方法定义
+3.10.10 state 更新方式
+3.10.11 组件资源引入顺序
+3.11 客户端存储规范
+3.11.1 命名规范
+3.11.2 公共规范
+3.11.3 cookie 规范
+3.12 国际化规范
+3.12.1 多语言
+3.12.2 多语言录入
+3.13 前端兼容性规范
+3.13.1 国产化适配兼容范围
+3.13.2 Web浏览器兼容范围
+3.13.3 移动操作系统兼容范围
+3.14 异常规范
+3.14.1 目的
+3.14.2 异常码表
+3.14.3 异常抛出
+3.14.4 异常捕获和上报
+3.14.5 异常分类
+3.15 日志规范
+3.15.1 目的
+3.15.2 前端日志
+3.15.3 Node端日志
+文档反馈
+北京市海淀区北清路68号用友产业园
+4006-600-588
+友情链接
+用友官网用友YonHelp用友iuap平台用友云市场用友云注册协议隐私条款
+
+Copyright ©2020 用友网络科技股份有限公司版权所有京ICP备05007539号-24京公网安备11010802021935号
+
+返回顶部
+加载中...

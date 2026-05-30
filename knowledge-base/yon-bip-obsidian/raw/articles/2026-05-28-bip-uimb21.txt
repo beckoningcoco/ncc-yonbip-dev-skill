@@ -1,0 +1,704 @@
+社区文档中心
+首页
+文档导航
+开发者社区
+社区论坛
+视频教程技术博客
+更多
+张宏涛
+资料中心
+专业开发
+产品概述
+快速入门
+操作指南
+开发指南
+开发介绍
+新功能开发
+移动端开发
+扩展开发
+全球化
+组织
+权限
+特征
+基础数据
+审批流
+业务流
+规则引擎
+公式
+UI模板
+UI模板
+参照
+导入导出
+打印
+对象建模
+编码规则
+调度任务
+监控与预警
+日志
+消息平台
+工作台
+事件中心
+文件服务
+YonBuilder应用开发
+前端开发
+后端开发
+移动开发
+安全
+数据库
+DevOps技术
+容器云技术
+区块链云技术
+YMS开发
+智能应用开发
+专项开发
+成果迁移
+技术方案
+最佳实践
+参考手册
+常见问题
+视频教程
+专业开发/开发指南/UI模板/UI模板
+UI模板
+最后更新时间：2024-05-14
+本文摘要
+
+UI 模板，是原厂单据在运行态的显示扩展，UI 模板对单据 UI 元数据进行扩展配置， 通过 UI 元数据配置和高级设计器的扩展配置，依赖 MDD 和 MDF 对元数据在运行态的公式能力、参照带入能力、交互规则能力、组件显示属性自定义以及页面布局能力的支撑， 结合 UI 模板多维度的管理分配以及业务规则预置功能，满足原厂单据在不同业务场景的个性化支持。
+
+本文主要介绍了UI 模板典型使用场景，可概括为以下核心要点：
+
+1、不同角色不同模板：实现租户级不同用户打开业务单据显示字段数量不同、名称不同、布局不同等；
+
+2、不同组织不同模板：实现租户级单据不同业务组织单据显示字段数量不同、名称不同、布局不同等；
+
+3、运用公式满足个性化需求：通过模板配置公式能力，满足客户提出的业务计算、档案取数的个性化逻辑等；
+
+开发者通过对本文的学习，可了解 UI 模板对外支持的功能以及如何接入管理菜单，
+
+第一章 基本概念
+背景
+
+UI 模板管理的功能，为租户对领域出厂的 UI 模板做个性化定制的功能，相关支持的功能如下几个部分
+
+配置功能支持：简单的配置功能，可以定制租户级字段名称、显示隐藏、是否必输、宽度、tips 等功能定制
+设计查询字段功能：新增查询字段，可以在详情态展示相关的字段，或者新增公式字段，用于特定展示公式计算数据
+多模板功能支持：对于租户下不同的组织、不同的交易类型、不同的用户、不同的角色可以使用各自定义的模板
+高级设计器功能支持：对于特殊的 UI 定制场景，UI 模板服务还提供了低代码的高级设计器对模板进行定制修改，包括 pc 端和移动端的
+
+UI 模板服务的核心：为租户个性化各个领域的 UI 模板提供功能支撑。
+
+第二章 技术架构
+2.1 总体架构设计
+
+架构设计
+
+第三章 功能介绍
+功能概述
+
+UI 模板是原厂单据在运行态的显示扩展，UI 模板对单据 UI 元数据进行扩展配置， 通过 UI 元数据配置和高级设计器的扩展配置，依赖 MDD 和 MDF 对元数据在运行态的公式能力、参照带入能力、交互规则能力、组件显示属性自定义以及页面布局能力的支撑，结合 UI 模板多维度的管理分配以及业务规则预置功能，满足原厂单据在不同业务场景的个性化支持。
+
+UI 模板管理入口
+
+通过工作台菜单 UI 模板进入 UI 模板管理节点，左侧树为领域-应用-业务对象。
+
+UI 模板字段配置功能
+
+UI 模板的配置功能是模板配置的快接入口，在配置中可以对 UI 模板元数据进行字段重命名、新增显示字段、设置必填、设置默认值、设置显示顺序的基础功能。
+
+UI 模板设计功能
+
+管理用户可通过设计进入低代码单据设计器，对 UI 模板进行配置，可配置内容包括：
+
+新增显示字段；
+
+配置字段显示属性； 设置公式与函数； 配置参照带入；
+
+修改单据布局与显示顺序； 配置页面规则；
+
+交易类型模板支持
+
+支持管理用户对 UI 模板按照交易类型维度进行模板管理和配置。支持在交易类型菜单设置或原厂预置的交易类型节点显示，用户可切换当前单据的交易类型，配置相应交易类型模板。
+
+组织级模板支持
+
+支持管理用户对 UI 模板按照组织维度进行模板管理和配置，不同用户管理的组织权限不同，看到的组织数量不同，UI 模板按照组织分配的功能将组织作为全域筛选条件。
+
+用户可切换有权限的组织，配置相应组织级模板。  
+
+3.7** **分配用户和角色功能支持
+
+支持卡片类型原厂单据为了满足在同一租户下不同角色、不同人员使用不同的 UI
+
+模板的业务场景，需要通过系统模板复制出多个模板后逐个对 UI 模板进行分配，达到不同用户打开的 UI 模板不同的目的。
+
+第四章 开发示例
+
+按新版本接入描述
+
+采购云自实现接口接入
+基本说明
+
+此版本 UI 交互基本说明：先从工作台获取领域应用节点，通过注册的 UI 模板管理的应用过滤，展示一二级节点，数据为工作台提供；第二级为注册了 UI 模板功能的应用信息即 appCode 或者 systemCode
+
+再根据注册在 UI 模板关系表中使用应用-服务域关系，获取指定服务域下所有数据， 数据为领域接口提供；第四层信息为领域 bill_base 表里的相关数据。
+
+接入步骤
+
+1、注册使用老版本 UI 模板管理服务（注册应用-服务域关系）
+
+提供工作台上领域的应用编码和此应用下实现 UI 模板接口的服务域，此对应关系存储于 ui 模板管理的 mysql 库的 aa_regist_conf 表中， 主要使用 configKey 信息为old-mdf-ui-template，目前采购云注册信息参见如下 sql 样例
+
+REPLACE INTO aa_regist_conf (systemCode, configKey, servicePath, domain, serviceType, id, pubts,
+
+label, displayName, serviceCode, enginecode, isvflag, subId) VALUES
+
+('ycPurchaseSynergy', 'old-mdf-ui-template', NULL, 'cpu-pubapp', 'rpc', 2689316054913521, '2022-03-17 20:46:24', NULL, NULL, NULL, NULL, NULL, NULL);
+
+2、注册服务 domain 基本信息
+
+由于领域并不是都使用了 UI 模板管理服务，但是又有直接加入 UI 模板按钮，或通过编码规则调用领域 UI 元数据接口的情况，需要领域注册微服务域信息到 UI 模板服务中。
+
+以日常环境注册为准：
+
+如下链接复制到浏览器查看，对接 UI 模板管理的领域微服务信息：
+
+https://bip-daily.yyuap.com/mdf-node/meta/VoucherList/mdf_designdomain_list? domainKey=ucf-mdf
+
+此节点登记数据存储于 UI 模板的 mysql 数据库中，对应于 cloud_uitemplate 库中的
+
+mdf_design_domain 表
+
+3、实现 UI 模板获取三四级节点的接口并发布服务
+
+实现模板服务中的接口类 MdfBillMetaQueryService
+
+接口类：com.yonyou.ucf.mdf.api.bill.MdfBillMetaQueryService
+
+接口方法：List<Map<String, Object>> listBillByParam(Map<String, Object> paramMap) throws Exception;
+
+作用：用于展示模板管理的第一级和第二级节点（第二级节点为表单） 参数说明
+
+传递参数：Map<String, Object> 根据各个领域需要定制参数值：Map<String, Object> paramMap
+
+参数样例：paramMap.put("subid", systemCode)；
+
+样例说明：库存和采购目前使用的是同一个dubbo 服务（ustock），但是在不同的应用下，于是传递了 systemCode 给库存采购区分不同应用下模板展示的一二级节点
+
+返回值说明
+
+返回信息：List<Map<String, Object>> 通用返回信息，可根据领域需要定制返回值样例：map 中 key 目前是固定的(样例 map 转 json)：
+
+[
+
+{
+
+"cName":" 项 目 ", "menuCode":"project", "children":[
+
+{
+
+"cName":"项目模板列表", "menuCode":"1001283746",
+
+"cBillNo":"bd_projectlist", "ordernum":0, "id":1001283746,
+
+"cBillType":"ArchiveList"
+
+},
+
+{
+
+"cName":"项目管理卡片", "menuCode":"1001283504",
+
+"cBillNo":"project_card", "ordernum":0, "id":1001283504,
+
+"cBillType":"Archive"
+
+}
+
+]
+
+}
+
+]
+
+
+返回值中 key 说明：
+
+一级节点列表（List<Map<String, Object>>）
+
+|--cName：节点名称（必要）
+
+|--menuCode：节点 Code，唯一标识（必要）
+
+|--children：节点下的表单列表（二级节点的 key）（非必要）
+
+二级节点列表（List<Map<String, Object>>）
+
+|--cName：表单名称（必要）
+
+|--menuCode：表单对应的菜单节点标记（非必要）
+
+|--cBillNo：表单编码（必要）
+
+|--ordernum：表单排序（非必要）
+
+|--id：表单id（必要）
+
+|--cBillType：表单类型（必要）
+
+在 springboot 项目中注册 bean
+模板sdk 中默认注册了一个实现的bean"mdfBillMetaQueryService",返回的信息：一级节点为 subId 汇总，二级节点为 subId 下所有表单
+领域将自己的实现类在 spring 中注册 bean，不可使用已注册的默认实现名称"mdfBillMetaQueryService"
+注册 iris 服务，原有 dubbo 服务接入废弃
+服务一：MdfBillMetaQueryService，用于展示模板一二级节点。模板 sdk 有
+
+默认实现 bean"mdfBillMetaQueryService"，领域可自定义改写，注册新的 bean
+
+ *  服务二：MdfCommonDubboService，用户模板统一管理的相关服务，模板
+
+
+sdk 有默认实现 bean"mdfCommonDubboService"
+
+按领域应用登记方式接入
+基本说明
+
+此版本 UI 交互基本说明：先从工作台获取领域应用节点，通过注册的 UI 模板管理的应用过滤，展示一二级节点，数据为工作台提供
+
+第二级为注册了 UI 模板功能的应用信息即 appCode 或者 systemCode
+
+再根据工作台获取的服务节点列表，和 UI 模板登记的服务和单据的关系获取三四层数据
+
+第三层数据为工作台的注册的服务信息，第四层信息为领域 bill_base 表里的相关数据信息
+
+接入步骤
+注册应用-domain 关系
+
+提供工作台上领域的应用编码和此应用下实现 UI 模板接口的服务域，在原有公共服务的页面上添加，和原编码规则、消息模板等注册一样
+
+日常注册地址如下：
+
+https://bip-daily.yyuap.com/mdf-node/meta/voucherlist/registconflist?domainKey
+
+=ucf-mdf
+
+进入后点击新增按钮，注册一个 UI 模板的即可
+
+注册 domain 基本信息
+
+由于领域并不是都使用了 UI 模板管理服务，但是又有直接加入 UI 模板按钮，或通过编码规则调用领域 UI 元数据接口的情况，需要领域注册微服务域信息到 UI 模板服务中
+
+以日常环境注册为准：
+
+如下链接复制到浏览器查看，对接 UI 模板管理的领域微服务信息：
+
+https://bip-daily.yyuap.com/mdf-node/meta/VoucherList/mdf_designdomain_list? domainKey=ucf-mdf
+
+此节点登记数据存储于 UI 模板的 mysql 数据库中，对应于 cloud_uitemplate 库中的
+
+mdf_design_domain 表
+
+注册服务-单据关系
+
+提供工作台上领域的节点的服务编码（工作台上的 serviceCode）和此 serviceCode
+
+下使用的相关的单据信息（bill_base 表中的 billNos 信息） 注册地址如下：
+
+https://bip-daily.yyuap.com/mdf-node/meta/VoucherList/mdf_businessrelation_list?do mainKey=ucf-mdf
+
+进入后点击新增按钮，注册一个功能即可，注意，旧版本不要勾选使用 ”UI 模板
+
+New“
+
+发布 UI 模板管理的实现 bean 为 iris 接口
+
+发布方式：和发布 MDD 框架中的公共接口一样
+
+可搜索框架相关接口发布接口处
+
+com.yonyou.ucf.mdd.api.interfaces.rpc.IComOperateApi com.yonyou.ucf.mdd.api.interfaces.rpc.IComQueryApi com.yonyou.ucf.mdd.api.interfaces.rpc.IRefApi com.yonyou.ucf.mdd.api.interfaces.rpc.IRuleApi com.yonyou.ucf.mdd.api.interfaces.rpc.IUimetaApi
+
+确认微服务发布方式，新加入 UI 模板 SDK 发布
+
+com.yonyou.ucf.mdf.api.dubbo.common.MdfCommonDubboService
+
+发布样例：
+
+JAVA 代码发布样例
+
+JAVA 代码发布
+
+@Bean
+
+**public **RPCBeanFactory mddServiceRpc() {
+
+// 微服务域 rpcDomain
+
+String domain = "领域微服务 rpcDomain";
+
+List serviceFullClassNames = **new **ArrayList<>();
+
+// UI 模板通用服务
+
+serviceFullClassNames.add(MdfCommonDubboService.class.getName()); SpringExecuteTartgetLoader.registerRemoteBean(MdfCommonDubboService.class, "mdfCommonDubboService", domain);
+
+**return new **RPCBeanFactory(domain, "c87e2267-1001-4c70-bb2a-ab41f3b81aa3", serviceFullClassNames);
+
+}
+
+dubbo 配置发布样例
+
+Dubbo 服务发布样例
+
+<**dubbo:service **interface="com.yonyou.ucf.mdf.api.dubbo.common.MdfCommonDubboService" ref="mdfCommonDubboService"
+
+group="领域微服务 rpcDomain"/>
+
+按登记原子服务和单据类型方式接入
+接入要求
+后端服务要求（MDD 版本要求）
+
+后端使用 MDD 版本需要 3.1.0-SNAPSHOT 以上，样例如下：
+
+com.yonyou.iuap
+
+yonyou-mdd-starter-parent
+
+3.1.0-SNAPSHOT
+
+预发、生产、专属化版本 - > 3.1.4-RELEASE，样例如下
+
+com.yonyou.iuap
+
+yonyou-mdd-starter-parent
+
+3.1.4-RELEASE
+
+统一 Node 前端 domainKey 配置要求
+
+需要同时开启 getTplIdFirst,newBillMeta 这两个特性
+
+注意：日常、预发 newBillMeta 是公共特性，领域不需要配置，上生产需要领域开发自行开启
+
+配置方式：联系各个领域前端 domainKey 负责人开启配置样例：如低代码 domainKey:developplatform 配置
+
+接入配置
+
+由于新版本的 UI 模板前端左侧树是三层树结构，将不再根据领域的应用信息获取服务域信息，可以直接根据指定原子服务节点获取服务域 rpcDomain 信息。只需要注册domain 和服务和单据关系即可使用
+
+注册 domain 信息
+
+由于领域并不是都使用了 UI 模板管理服务，但是又有直接加入 UI 模板按钮，或通过编码规则调用领域 UI 元数据接口的情况，需要领域注册微服务域信息到 UI 模板服务中
+
+以日常环境注册为准：
+
+如下链接复制到浏览器查看，对接 UI 模板管理的领域微服务信息：
+
+https://bip-daily.yyuap.com/mdf-node/meta/VoucherList/mdf_designdomain_list? domainKey=ucf-mdf
+
+此节点登记数据存储于 UI 模板的 mysql 数据库中，对应于 cloud_uitemplate 库中的
+
+mdf_design_domain 表
+
+注册原子服务-单据信息
+
+以日常环境注册为准：
+
+如下链接复制到浏览器查看，对接 UI 模板管理的领域菜单节点对应的单据信息：
+
+https://bip-daily.yyuap.com/mdf-node/meta/VoucherList/mdf_businessrelation_list? domainKey=ucf-mdf
+
+此节点登记数据存储于 UI 模板的 mysql 数据库中，对应于 cloud_uitemplate 库中的
+
+mdf_business_relation 表
+
+发布 UI 模板管理的实现 bean 为 iris 接口
+
+发布方式：和发布 MDD 框架中的公共接口一样
+
+可搜索框架相关接口发布接口处
+
+com.yonyou.ucf.mdd.api.interfaces.rpc.IComOperateApi com.yonyou.ucf.mdd.api.interfaces.rpc.IComQueryApi com.yonyou.ucf.mdd.api.interfaces.rpc.IRefApi com.yonyou.ucf.mdd.api.interfaces.rpc.IRuleApi com.yonyou.ucf.mdd.api.interfaces.rpc.IUimetaApi
+
+确认微服务发布方式，新加入 UI 模板 SDK 发布
+
+com.yonyou.ucf.mdf.api.dubbo.common.MdfCommonDubboService
+
+发布样例：
+
+JAVA 代码发布样例
+
+JAVA 代码发布
+
+@Bean
+
+**public **RPCBeanFactory mddServiceRpc() {
+
+// 微服务域 rpcDomain
+
+String domain = "领域微服务 rpcDomain";
+
+List serviceFullClassNames = **new **ArrayList<>();
+
+// UI 模板通用服务
+
+serviceFullClassNames.add(MdfCommonDubboService.class.getName()); SpringExecuteTartgetLoader.registerRemoteBean(MdfCommonDubboService.class, "mdfCommonDubboService", domain);
+
+**return new **RPCBeanFactory(domain, "c87e2267-1001-4c70-bb2a-ab41f3b81aa3", serviceFullClassNames);
+
+}
+
+dubbo 配置发布样例
+
+Dubbo 服务发布样例
+
+<**dubbo:service **interface="com.yonyou.ucf.mdf.api.dubbo.common.MdfCommonDubboService" ref="mdfCommonDubboService"
+
+group="领域微服务 rpcDomain"/>
+
+第五章 典型业务场景介绍
+简单配置字段功能使用
+
+配置列表或卡片字段是否显示，增加查询字段。
+
+交易类型模板功能使用
+
+新增交易类型模板，切换交易类型时使用对应交易类型模板。使用前提：元数据配置了交易类型字段，可在运行时实现切换交易类型。
+
+组织级模板功能使用
+
+新增组织级模板，切换组织时使用对应组织级模板。使用前提：元数据配置了主组织字段，可在运行时实现切换主组织。
+
+用户角色分配模板功能使用
+
+新增普通模板，分配给用户或角色，当登录人为当前分配用户或角色时使用相应模板。 
+
+高级设计器功能使用
+
+通过参照配置，实现参照字段代入业务单据、参照选择内容过滤 
+
+第六章 开放接口说明
+
+UI 模板服务封装的相关 SDK 对领域 UI 模板操作的均为内部使用的，暂无对外开放的 SDK 操作领域 UI 模板接口。目前和 UI 模板接入功能并提供相关 api 的有如下几个
+
+获取模板 id 接口（MDD 框架入口和我们 SDK 的 service 调用）
+交易类型发布菜单复制 UI 模板接口
+复制模板
+注册 mdf_business_relation 3）组织模板复制功能（新上的功能）
+MDD 框架内 Service 接口
+
+使用 MDD 框架,自带 ui 元数据相应 sdk，可直接使用 bean 信息获取模板 id
+
+UI 模板服务新版本切换获取模板 id 方式后，相关的模板 id 获取分为两种：
+
+1.MDD 框架入口 com.yonyou.ucf.mdd.ext.bill.controller.BillMetaController#getTplId
+2.UI 模板 SDK 提供入口 com.yonyou.ucf.mdf.core.uitemplate.service.MdfTemplateRunTimeService#getSingleTpl
+获取运行时模板id
+
+框架入口提供的获取模板 id，有根据业务数据 id 封装 orgId 和 extTranstype 的逻辑。
+
+MDD 框架入口 com.yonyou.ucf.mdd.ext.bill.controller.BillMetaController#getTplId
+
+参数说明
+
+参数 key	数据类型	参数描述
+billno	String	单据的编码 bill_base 表中的 cBillNo
+id	Object	详情页中的业务数据 id 信息
+extTranstype	String	非发布菜单的交易类型 id 信息
+orgId	String	获取模板传递的组织 id
+transtype	String	交易类型发布的菜单节点在 url 上的交易类型 id
+businessStepCode	String	业务动作编码（流程使用）
+terminalType	String	终端类型，1：PC，3:Mobile
+designPreview	Boolean	是否设计器预览，默认 false
+serviceCode	String	领域菜单节点上的原子服务编码
+refCode	String	原自定义分配模板的分配类型
+extTypeId	String	原分配模板的分配的业务数据 id
+systemCode	String	billtemplate_base 表中的 systemCode 字段，此为原前端选择模板使用
+tplmode	Long	billtemplate_base 表中的 iTplMode 字段
+旧版组织模板获取
+
+组织级模板默认获取领域单据上的主组织属性作为组织级模板的组织加载标识，在列表跳转卡片的时候，add、detail 接口中，都会携带 masterOrgKeyField 属性来标记领域单据中哪个属性是主组织属性。
+
+开通组织级模板的单据加载时，会将原来列表跳转卡片的 tpllist 接口将切换成assignedtpllist
+
+扩展开发
+
+后端服务扩展：
+
+领域可手动改写 masterOrgKeyField 返回的属性用于标识组织级模板使用的属性字段
+领域可手动改写 assignedtpllist 方法返回值，用于过滤前端可选择的组织级模板数据
+
+相关接口描述
+获取模板列表接口
+
+接口地址：/billmeta/assignedtpllist 请求类型: GET
+
+必要参数：
+
+参数名称	说明	默认值
+billno	单据编码	无
+serviceCode	服务编码	无
+
+返回值示例：
+
+第 28 页
+
+{
+
+data: [
+
+message: "操作成功",
+
+code: 200,
+
+}
+
+]
+
+}
+
+orgId: "8234234253"
+
+iTplMode: 0,
+
+cTemplateName: "模板 3",
+
+iTplId: 37657,
+
+{
+
+},
+
+orgId: "666666"
+
+iTplMode: 0,
+
+cTemplateName: "模板 2",
+
+iTplId: 29436,
+
+{
+
+},
+
+bDefault: true,
+
+iTplMode: 0,
+
+cTemplateName: "模板 1",
+
+iTplId: 39459,
+
+{
+
+
+
+注：
+
+assignedtpllist 接口参数包含原来的 tpllist 接口的所有参数
+
+接口返回单据的所有模板，如果是组织级会附加 orgId 属性
+
+orgId 为"666666"表示定制的租户级模板，为空表示系统预制的租户级模板，为其它值表示对应的组织
+
+Iris 接口
+
+使用说明：iris 接口，需要使用 ui 元数据服务的 rpcDomain 调用的接口引入 sdk：
+
+com.yonyou.iuap
+
+iuap-metadata-ui-sdk
+
+查询领域可用UI 模板
+
+查询类：
+
+com.yonyou.ucf.mdf.iris.template.query.service.MdfTemplateQueryService#queryTplList
+
+查询参数：
+
+参数	参数类型	是否必须	说明
+domain	String	是	领域
+billNo	String	是	单据类型
+queryParam	Map	否	目前支持多条件匹配，如不设置相关参数或传空参，相应条件不生效orgId ：组织 id 如需查询企业账号级，设置值为：666666 transTypeId ：交易类型 如需查询默认交易类型，设置值为：default;terminalType ：终端类型 1:pc 3:移动
+
+返回值：
+
+参数	数据类型	参数描述
+billno	String	单据的编码 bill_base 表中的 cBillNo
+billId	String	单据编码
+extTranstype	String	非发布菜单的交易类型 id 信息
+orgId	String	获取模板传递的组织 id
+transTypeId	String	交易类型发布的菜单节点在 url 上的交易类型 id
+transTypeName	String	交易类型名称
+terminalType	String	终端类型，1：PC，3:Mobile
+sysFlag	Boolean	系统模板标记 1：系统模板 0 ：普通模板
+获取运行时模板
+
+查 询 类 ： **com.yonyou.ucf.mdf.core.uitemplate.service.MdfTemplateRunTimeService#getSingleTpl **查询参数：
+
+相关的参数为 BillTemplateQureryParamDTO 对象，此接口获取将不再做其他的数据封装，直接获取相关的数据
+
+参数 key	数据类型	参数描述
+billno	String	单据的编码 bill_base 表中的 cBillNo
+id	Object	详情页中的业务数据 id 信息
+extTranstype	String	非发布菜单的交易类型 id 信息
+orgId	String	获取模板传递的组织 id
+transtype	String	交易类型发布的菜单节点在 url 上的交易类型 id
+businessStepCode	String	业务动作编码（流程使用）
+terminalType	String	终端类型，1：PC，3:Mobile
+designPreview	Boolean	是否设计器预览，默认 false
+serviceCode	String	领域菜单节点上的原子服务编码
+refCode	String	原自定义分配模板的分配类型
+extTypeId	String	原分配模板的分配的业务数据 id
+systemCode	String	billtemplate_base 表中的 systemCode 字段，此为原前端选择模板使用
+tplmode	Long	billtemplate_base 表中的 iTplMode 字段
+
+返回值：
+
+参数	数据类型	参数描述
+tplId	String	模板 id
+branch	String	模板选择分支
+filterMsg	String	模板过滤规则
+transType	String	交易类型发布的菜单节点在 url 上的交易类型 id
+hasMultiMode	String	是否多态
+文档内容是否对您有所帮助？
+为帮助文档评分：
+页内目录
+1. 本文摘要
+2. 第一章 基本概念
+2.1 背景
+3. 第二章 技术架构
+3.1 2.1 总体架构设计
+4. 第三章 功能介绍
+4.1 功能概述
+4.2 UI 模板管理入口
+4.3 UI 模板字段配置功能
+4.4 UI 模板设计功能
+4.5 交易类型模板支持
+4.6 组织级模板支持
+5. 第四章 开发示例
+5.1 采购云自实现接口接入
+5.2 按领域应用登记方式接入
+5.3 按登记原子服务和单据类型方式接入
+5.3.1 接入要求
+5.3.2 接入配置
+6. 第五章 典型业务场景介绍
+6.1 简单配置字段功能使用
+6.2 交易类型模板功能使用
+6.3 组织级模板功能使用
+6.4 高级设计器功能使用
+7. 第六章 开放接口说明
+7.1 MDD 框架内 Service 接口
+7.1.1 获取运行时模板id
+7.1.2 旧版组织模板获取
+7.2 Iris 接口
+7.2.1 查询领域可用UI 模板
+7.2.2 获取运行时模板
+文档反馈
+北京市海淀区北清路68号用友产业园
+4006-600-588
+友情链接
+用友官网用友YonHelp用友iuap平台用友云市场用友云注册协议隐私条款
+
+Copyright ©2020 用友网络科技股份有限公司版权所有京ICP备05007539号-24京公网安备11010802021935号
+
+返回顶部
+加载中...

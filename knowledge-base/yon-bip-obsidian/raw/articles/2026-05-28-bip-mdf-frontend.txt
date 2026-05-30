@@ -1,0 +1,354 @@
+社区文档中心
+首页
+文档导航
+开发者社区
+社区论坛
+视频教程技术博客
+更多
+张宏涛
+资料中心
+专业开发
+产品概述
+快速入门
+操作指南
+开发指南
+开发介绍
+新功能开发
+新应用开发（YDS）
+后端插件开发YDS
+前端开发(MDF)
+前端典型示例开发(MDF)
+新应用开发YNF
+本地前端开发环境搭建（YNF）
+前端开发（YNF）
+前端典型示例开发（YNF）
+移动端开发
+扩展开发
+全球化
+组织
+权限
+特征
+基础数据
+审批流
+业务流
+规则引擎
+公式
+UI模板
+参照
+导入导出
+打印
+对象建模
+编码规则
+调度任务
+监控与预警
+日志
+消息平台
+工作台
+事件中心
+文件服务
+YonBuilder应用开发
+前端开发
+后端开发
+移动开发
+安全
+数据库
+DevOps技术
+容器云技术
+区块链云技术
+YMS开发
+智能应用开发
+专项开发
+成果迁移
+技术方案
+最佳实践
+参考手册
+常见问题
+视频教程
+专业开发/开发指南/新功能开发/前端开发(MDF)
+前端开发(MDF)
+最后更新时间：2025-11-10
+版权
+
+©2025用友集团版权所有。
+
+未经用友集团的书面许可，本文档描述任何整体或部分的内容不得被复制、复印、翻译或缩减以用于任何目的。本文档描述的内容在未经通知的情形下可能会发生改变，敬请留意。请注意：本文档描述的内容并不代表用友集团所做的承诺。
+
+文档修订摘要
+日期	修订号	描述	著者	审阅者
+2022-08-17	V1.0	创建	谷忠运	
+2023-01-10	V2.0	更新	钟培航	
+2023-04-07	V2.1	更新至V3 R2-2302	谷忠运	
+2023-12-10	V3.0	更新至V3 R2-2309	韦振武	
+2024-01-23	V3.0	更新至V3 R2-2309	韦振武	
+2024-08-09	V4.0	更新至V3 R6	张译帆	
+2025-04-03	V5.0	更新YDS相关内容	张译帆	
+2025-07-28	V6.0	更新至V5	张译帆	
+概述
+适用场景
+部署方案	开发类型	是否适用
+公有云	客户化定制开发	否
+私有云	客户化定制开发	是
+专属云	客户化定制开发	是
+本地部署	客户化定制开发	是
+公有云	ISV生态开发	否
+私有云	ISV生态开发	是
+专属云	ISV生态开发	是
+本地部署	ISV生态开发	是
+业务场景
+
+在本文档中，将重点讲解如何通过脚手架前端工程代码编写，完成业务功能的扩展。
+
+在“商品采购需求单”功能中添加业务处理，具体业务场景为：
+
+新增数据时，录入方式不可编辑并赋值为“手工录入”；
+编辑数据时，采购日期<=付款日期。
+关键词
+
+MDF、前端开发、事件、发布订阅模式、MVVM
+
+开发准备
+业务单据开发
+
+“商品采购需求单”的创建可参考：
+
+YonBuilder专业版-新功能开发-示例开发
+
+（出处：社区文档中心）
+
+前端、后端工程本地环境搭建
+
+前端扩展开发，必须依赖于专业版引擎前端脚手架，专业版引擎创建及部署过程可参考：
+
+YonBuilder专业版-新功能开发-本地环境搭建
+
+(出处: 社区文档中心)
+
+扩展开发核心内容
+前端扩展开发说明
+
+线上某些页面的业务逻辑非常复杂时，可以通过在自建引擎中的前端脚手架中，在创建单据页面对应的脚本文件里继续写业务逻辑。
+
+脚手架的相关内容，请参考：
+
+YonBuilder私有云开发-前端脚手架介绍
+
+(出处: 开发者社区)
+
+扩展脚本命名
+
+扩展文件名字是由应用编码（配置cSubId，如：cpurart）和当前的单据号billNo（配置cBillNo，如：kkfnProductPurchaseRequisition）以及固定扩展字符（VM.Extend.js）组成，中间用下划线（_）进行连接，例如：cpurart _kkfnProductPurchaseRequisition_VM.Extend.js 。
+
+!
+
+扩展文件放在src/business/｛应用编码｝ 中。business文件夹根据应用划分，因此在business下建立自己应用编码的文件夹，并将所有扩展脚本放置里面。这里就是cpurart文件夹。
+
+规则： 应用编码/应用编码_页面billNo_VM.Extend.js
+
+或者是查看meta接口返回结果的extendFileName 字段值
+
+扩展脚本的使用
+
+node层在生成元数据模板后，会在前端加载扩展脚本，并执行init方法，加载业务的扩展逻辑。
+
+方法说明：
+
+define：加载依赖的公共扩展脚本
+
+doAction：框架中加载扩展脚本的入口
+
+init：初始化整个扩展脚本
+
+/**
+ * 所属节点：商品采购需求单-卡片页面
+ * 创建人：ckkfn
+ * 创建时间：2025年2月22日
+ * 最后修改人：ckkfn
+ */
+cb.define(process.env.__DOMAINKEY__, [], function () {
+  const cpurart_kkfnProductPurchaseRequisition_VM = {
+      doAction: function (name, viewModel) {
+          if (this[name])
+              this[name](viewModel);
+      },
+      init: function (viewModel) {
+        
+      }
+  }
+  try {
+      module.exports = cpurart_kkfnProductPurchaseRequisition_VM;
+  } catch (error) {
+
+  }
+  return cpurart_kkfnProductPurchaseRequisition_VM;
+});
+
+
+在扩展脚本中，可以获取页面控件层面的viewModel，调用相关viewModel的API或 监听viewModel对应事件编写逻辑，实现具体的特定的交互。可以通过相关api获取当前页面UI组件所对应的 Model对象.
+
+通常扩展业务逻辑一般都写在init函数内，当单据渲染某些生命周期触发业务逻辑时可参考文档：
+
+【[专业开发][前端框架] MDF中的ViewModel单据模型】 (出处: 开发者社区)
+
+公共脚本的使用common
+
+可以在business/common/common_VM.Extend.js定义公共的方法，实现代码复用
+
+公共方法的定义
+
+公共方法的使用
+
+cb.define通过加载数组引进的公共脚本文件，在回调函数入参暴露出来(common)，就可以在init方法里调用
+
+效果如下图：
+
+前端开发本地调试
+
+YDS工具下的前端调试一般通过VSCode集成的浏览器页面进行。
+
+启动前端工程
+
+执行npm run debug执行
+当控制台显示如下面两个图的日志信息说明脚手架已经启动成功
+
+使用插件Resource Override调试
+
+YDS中集成的浏览器已自带Resource Override插件，其原理，是将浏览器中的扩展脚本，通过该插件代理到VSCode中：
+
+
+此处YDS已默认按domainKey种上了代理规则，无需我们手动配置。
+
+代理配置完毕后，会将线上压缩后的extend.min.js替换为本地源码，方便开发进行断点调试。浏览器端js资源的调试方法，请参考：
+
+开发者社区-低代码开发-前端脚本
+
+功能开发
+新增时，确认状态不可编辑并赋默认值为待确认。
+// 新增时，确认状态不可编辑并赋默认值为待确认
+viewModel.on('modeChange', (mode) => {
+if (mode.toLocaleLowerCase() == 'add') {
+viewModel.get('inputType').setValue('1');
+        viewModel.get('inputType').setDisabled(true);
+    }
+});
+
+模态枚举
+
+页面渲染的mode值，描述页面的模态信息。
+
+mode值	描述
+browse	预览态，不可编辑信息，只能查看信息
+edit	编辑态，可编辑信息，对已有数据进行更新操作
+add	新增态，新增数据信息
+编辑数据时，要求采购日期<=付款日期。
+// 采购日期<=付款日期
+viewModel.get('purDate').on('afterValueChange', (data) => {
+    let payDate = viewModel.get('payDate').getValue();
+    if (data.value && payDate && new Date(data.value) > new Date(payDate)) {
+       cb.utils.alert('采购日期不能晚于付款日期！', 'error');
+       viewModel.get('purDate').setValue('');
+       return false;
+}
+});
+viewModel.get('payDate').on('afterValueChange', (data) => {
+    let purDate = viewModel.get('purDate').getValue();
+if (data.value && purDate && new Date(data.value) < new Date(purDate)) {
+cb.utils.alert('采购日期不能晚于付款日期！', 'error');
+        viewModel.get('payDate').setValue('');
+        return false;
+    }
+});
+
+cb.utils前端工具
+cb.utils.isArray
+
+说明：判断是否为数组对象。
+
+cb.utils.extend
+
+说明：拷贝对象/数组
+
+cb.utils.getNewId
+
+说明：根据传入前缀，返回新有序id
+
+cb.utils.getCookie
+
+说明：获取cookie中的值
+
+cb.utile.isEmpty
+
+说明：判断为空
+
+cb.utile.queryString
+
+get()：获取url中的参数
+
+set()：设置url中的参数
+
+has()：判断url中是否存在此参数
+
+toStr()：获取url中参数为encode之后的字符串
+
+更多前端API函数请参考：
+
+平台公共方法及ViewModel API文档说明
+
+（出处：开发者社区）
+
+开发成果示例如图：
+
+前端工程部署
+
+前端扩展开发完成后，不需要在本地代码build，将代码上传至git，并重新拉取代码执行流水线，这样新开发的功能就会在环境中生效。这个过程为合并部署的过程，该过程的操作请参考：
+
+YonBuilder专业版-环境准备-引擎部署
+
+(出处:社区文档中心)
+
+注意: 扩展脚本中的debugger和console.log等调试语句在打包时会被自动去掉，故在环境上这些调试语句不会生效！
+
+应用效果
+新增时，确认状态不可编辑并赋默认值为待确认。
+
+编辑数据时，要求采购日期<=付款日期。
+
+常见问题
+YDS打开浏览器预览单据时，接口报401
+
+这个问题是由于缺少YDS指定领域的证书，在VSCode中通过ctrl+shift+P打开快捷命令，选择导入证书到JVM：
+
+文档内容是否对您有所帮助？
+为帮助文档评分：
+页内目录
+1. 版权
+2. 文档修订摘要
+3. 概述
+3.1 适用场景
+3.2 业务场景
+3.3 关键词
+4. 开发准备
+4.1 业务单据开发
+4.2 前端、后端工程本地环境搭建
+5. 扩展开发核心内容
+5.1 前端扩展开发说明
+5.1.1 扩展脚本命名
+5.1.2 扩展脚本的使用
+5.1.3 公共脚本的使用common
+5.2 前端开发本地调试
+5.2.1 启动前端工程
+5.2.2 使用插件Resource Override调试
+5.3 功能开发
+6. 前端工程部署
+7. 应用效果
+8. 常见问题
+8.1 YDS打开浏览器预览单据时，接口报401
+文档反馈
+北京市海淀区北清路68号用友产业园
+4006-600-588
+友情链接
+用友官网用友YonHelp用友iuap平台用友云市场用友云注册协议隐私条款
+
+Copyright ©2020 用友网络科技股份有限公司版权所有京ICP备05007539号-24京公网安备11010802021935号
+
+返回顶部
+加载中...

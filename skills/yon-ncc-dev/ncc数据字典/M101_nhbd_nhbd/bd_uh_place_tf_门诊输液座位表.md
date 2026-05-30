@@ -1,0 +1,13 @@
+# |<<
+
+**门诊输液座位表 (bd_uh_place_tf / com.yonyou.yh.nhis.bd.tf.vo.BdPlaceTfVO)**
+
+> https://community.yonyou.com/datadict/datadict-2105yiliao/ddc/1087.html
+
+| 序号 | 属性编码 | 属性名称 | 字段编码 | 字段类型 | 是否必输 | 引用模型 | 默认值 | 取值范围/枚举 |
+|------|------|------|------|------|------|------|------|------|
+| 1 | pk_tfplace | 椅位主键 | pk_tfplace | char(20) | √ | 主键 (UFID) |
+| 2 | pk_group | 所属集团 | pk_group | varchar(20) |  | 组织_集团 (group) |
+| 3 | pk_org | 所属机构 | pk_org | varchar(20) |  | 组织_业务单元_医卫 (hisorg) |
+| 4 | pk_tf | 所属输液室 | pk_tf | varchar(20) |  | 字符串 (String) |
+| 5 | eu_placetype | 座位类型 | eu_placetype | int |  | 输液座位类型 (TfSeatEnum) |  | 0=座椅; |

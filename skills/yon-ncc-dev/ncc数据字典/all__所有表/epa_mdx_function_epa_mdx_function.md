@@ -1,0 +1,19 @@
+# |<<
+
+> https://community.yonyou.com/datadict/datadict-2105yiliao/ddc/7926.html
+
+| 序号 | 属性编码 | 属性名称 | 字段编码 | 字段类型 | 是否必输 | 引用模型 | 默认值 | 取值范围/枚举 |
+|------|------|------|------|------|------|------|------|------|
+| 1 | pk_obj | pk_obj | pk_obj | char(20) | √ |
+| 2 | code | code | code | varchar2(50) |
+| 3 | funname | funname | funname | varchar2(50) |
+| 4 | name | name | name | varchar2(500) |
+| 5 | name2 | name2 | name2 | varchar2(500) |
+| 6 | name3 | name3 | name3 | varchar2(500) |
+| 7 | name4 | name4 | name4 | varchar2(500) |
+| 8 | name5 | name5 | name5 | varchar2(500) |
+| 9 | name6 | name6 | name6 | varchar2(600) |
+| 10 | opertype | opertype | opertype | varchar2(2) |
+| 11 | ord | ord | ord | varchar2(4) |
+| 12 | dr | dr | dr | number(10, 0) |  |  | 0 |
+| 13 | ts | ts | ts | char(19) |  |  | to_char(sysdate,'yyyy-mm-dd hh24:mi:ss') |

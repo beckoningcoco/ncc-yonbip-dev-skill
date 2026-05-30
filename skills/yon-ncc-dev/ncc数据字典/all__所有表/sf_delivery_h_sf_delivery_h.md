@@ -1,0 +1,77 @@
+# |<<
+
+> https://community.yonyou.com/datadict/datadict-2105yiliao/ddc/11493.html
+
+| 序号 | 属性编码 | 属性名称 | 字段编码 | 字段类型 | 是否必输 | 引用模型 | 默认值 | 取值范围/枚举 |
+|------|------|------|------|------|------|------|------|------|
+| 1 | pk_delivery_h | pk_delivery_h | pk_delivery_h | char(20) | √ |
+| 2 | acceptdate | acceptdate | acceptdate | char(19) |
+| 3 | approver | approver | approver | varchar2(20) |  |  | '~' |
+| 4 | billmaker | billmaker | billmaker | varchar2(20) |  |  | '~' |
+| 5 | billsignature | billsignature | billsignature | varchar2(20) |  |  | '~' |
+| 6 | billstatus | billstatus | billstatus | number(38, 0) |
+| 7 | businessno | businessno | businessno | varchar2(50) |
+| 8 | busitype | busitype | busitype | number(38, 0) |
+| 9 | dapprovedate | dapprovedate | dapprovedate | char(19) |
+| 10 | dapprovetime | dapprovetime | dapprovetime | char(19) |
+| 11 | dbilldate | dbilldate | dbilldate | char(19) |
+| 12 | dbilltime | dbilltime | dbilltime | char(19) |
+| 13 | decidedate | decidedate | decidedate | char(19) |
+| 14 | decidetime | decidetime | decidetime | char(19) |
+| 15 | decideuser | decideuser | decideuser | varchar2(20) |  |  | '~' |
+| 16 | glcsuccesstotal | glcsuccesstotal | glcsuccesstotal | number(28, 8) |
+| 17 | glctotalamount | glctotalamount | glctotalamount | number(28, 8) |
+| 18 | gllcsuccesstotal | gllcsuccesstotal | gllcsuccesstotal | number(28, 8) |
+| 19 | gllctotalamount | gllctotalamount | gllctotalamount | number(28, 8) |
+| 20 | ismakevoucher | ismakevoucher | ismakevoucher | char(1) |
+| 21 | ismendinfofull | ismendinfofull | ismendinfofull | char(1) |
+| 22 | isreversebusitype | isreversebusitype | isreversebusitype | char(1) |
+| 23 | makevoucherdate | makevoucherdate | makevoucherdate | char(19) |
+| 24 | makevouchertime | makevouchertime | makevouchertime | char(19) |
+| 25 | makevoucheruser | makevoucheruser | makevoucheruser | varchar2(20) |  |  | '~' |
+| 26 | memo | memo | memo | varchar2(181) |
+| 27 | olcsuccesstotal | olcsuccesstotal | olcsuccesstotal | number(28, 8) |
+| 28 | olctotalamount | olctotalamount | olctotalamount | number(28, 8) |
+| 29 | pk_billtype | pk_billtype | pk_billtype | varchar2(50) |  |  | '~' |
+| 30 | pk_billtypeid | pk_billtypeid | pk_billtypeid | varchar2(20) |  |  | '~' |
+| 31 | pk_currtype | pk_currtype | pk_currtype | varchar2(20) |  |  | '~' |
+| 32 | pk_group | pk_group | pk_group | varchar2(20) |  |  | '~' |
+| 33 | pk_org | pk_org | pk_org | varchar2(20) |  |  | '~' |
+| 34 | pk_org_v | pk_org_v | pk_org_v | varchar2(20) |  |  | '~' |
+| 35 | pk_srcbill | pk_srcbill | pk_srcbill | varchar2(20) |  |  | '~' |
+| 36 | recmodul | recmodul | recmodul | varchar2(20) |  |  | '~' |
+| 37 | retbillreason | retbillreason | retbillreason | varchar2(200) |
+| 38 | saga_btxid | saga_btxid | saga_btxid | varchar2(64) |
+| 39 | saga_frozen | saga_frozen | saga_frozen | number(38, 0) |
+| 40 | saga_gtxid | saga_gtxid | saga_gtxid | varchar2(64) |
+| 41 | saga_status | saga_status | saga_status | number(38, 0) |
+| 42 | srcbillcode | srcbillcode | srcbillcode | varchar2(50) |
+| 43 | srcbilltype | srcbilltype | srcbilltype | varchar2(20) |  |  | '~' |
+| 44 | srcbusitype | srcbusitype | srcbusitype | number(38, 0) |
+| 45 | stroke | stroke | stroke | number(38, 0) |
+| 46 | submitdate | submitdate | submitdate | char(19) |
+| 47 | submittime | submittime | submittime | char(19) |
+| 48 | submituser | submituser | submituser | varchar2(20) |  |  | '~' |
+| 49 | successtotal | successtotal | successtotal | number(28, 8) |
+| 50 | totalamount | totalamount | totalamount | number(28, 8) |
+| 51 | unitapprover | unitapprover | unitapprover | varchar2(20) |  |  | '~' |
+| 52 | unitbillmaker | unitbillmaker | unitbillmaker | varchar2(20) |  |  | '~' |
+| 53 | vapprovenote | vapprovenote | vapprovenote | varchar2(1024) |
+| 54 | vbillno | vbillno | vbillno | varchar2(50) |
+| 55 | vbillstatus | vbillstatus | vbillstatus | number(38, 0) |
+| 56 | vuserdef1 | vuserdef1 | vuserdef1 | varchar2(101) |
+| 57 | vuserdef2 | vuserdef2 | vuserdef2 | varchar2(101) |
+| 58 | vuserdef3 | vuserdef3 | vuserdef3 | varchar2(101) |
+| 59 | vuserdef4 | vuserdef4 | vuserdef4 | varchar2(101) |
+| 60 | vuserdef5 | vuserdef5 | vuserdef5 | varchar2(101) |
+| 61 | vuserdef6 | vuserdef6 | vuserdef6 | varchar2(101) |
+| 62 | vuserdef7 | vuserdef7 | vuserdef7 | varchar2(101) |
+| 63 | vuserdef8 | vuserdef8 | vuserdef8 | varchar2(101) |
+| 64 | vuserdef9 | vuserdef9 | vuserdef9 | varchar2(101) |
+| 65 | vuserdef10 | vuserdef10 | vuserdef10 | varchar2(101) |
+| 66 | creationtime | creationtime | creationtime | char(19) |
+| 67 | creator | creator | creator | varchar2(20) |  |  | '~' |
+| 68 | dr | dr | dr | number(10, 0) |  |  | 0 |
+| 69 | modifiedtime | modifiedtime | modifiedtime | char(19) |
+| 70 | modifier | modifier | modifier | varchar2(20) |  |  | '~' |
+| 71 | ts | ts | ts | char(19) |  |  | to_char(sysdate,'yyyy-mm-dd hh24:mi:ss') |

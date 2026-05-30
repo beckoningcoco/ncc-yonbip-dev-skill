@@ -1,0 +1,35 @@
+# |<<
+
+**销售合同 (ct_sale / nc.vo.ct.saledaily.entity.CtSaleVO)**
+
+> https://community.yonyou.com/datadict/datadict-2105yiliao/ddc/1674.html
+
+| 序号 | 属性编码 | 属性名称 | 字段编码 | 字段类型 | 是否必输 | 引用模型 | 默认值 | 取值范围/枚举 |
+|------|------|------|------|------|------|------|------|------|
+| 1 | pk_ct_sale | 销售合同 | pk_ct_sale | char(20) | √ | 主键 (UFID) |
+| 2 | ctname | 合同名称 | ctname | varchar(60) |  | 多语文本 (MultiLangText) |
+| 3 | pk_group | 集团 | pk_group | varchar(20) |  | 组织_集团 (group) |
+| 4 | blatest | 是否最新版本 | blatest | char(1) |  | 布尔类型 (UFBoolean) |
+| 5 | cbilltypecode | 单据类型 | cbilltypecode | varchar(20) |  | 字符串 (String) |
+| 6 | pk_org | 销售组织最新版本 | pk_org | varchar(20) |  | 组织_业务单元_销售组织 (salesorg) |
+| 7 | pk_org_v | 销售组织 | pk_org_v | varchar(20) |  | 组织_业务单元_销售组织版本信息 (salesorg_v) |
+| 8 | vbillcode | 合同编码 | vbillcode | varchar(40) |  | 字符串 (String) |
+| 9 | vtrantypecode | 合同类型编码 | vtrantypecode | varchar(20) |  | 字符串 (String) |
+| 10 | version | 版本号 | version | decimal(28, 8) |  | 数值 (UFDouble) |
+| 11 | pk_origct | 原始主键 | pk_origct | varchar(20) |  | 主键 (UFID) |
+| 12 | subscribedate | 合同签订日期 | subscribedate | char(19) |  | 日期 (UFDate) |
+| 13 | valdate | 计划生效日期 | valdate | char(19) |  | 日期(开始) (UFDateBegin) |
+| 14 | invallidate | 计划终止日期 | invallidate | char(19) |  | 日期(结束) (UFDateEnd) |
+| 15 | actualvalidate | 实际生效日期 | actualvalidate | char(19) |  | 日期(开始) (UFDateBegin) |
+| 16 | actualinvalidate | 实际终止日期 | actualinvalidate | char(19) |  | 日期(结束) (UFDateEnd) |
+| 17 | pk_customer | 客户 | pk_customer | varchar(20) | √ | 客户基本信息 (customer) |
+| 18 | custunit | 对方单位说明 | custunit | varchar(30) |  | 字符串 (String) |
+| 19 | personnelid | 人员 | personnelid | varchar(20) |  | 人员基本信息 (psndoc) |
+| 20 | depid | 部门最新版本 | depid | varchar(20) |  | 组织_部门 (dept) |
+| 21 | depid_v | 部门 | depid_v | varchar(20) |  | 组织_部门版本信息 (dept_v) |
+| 22 | deliaddr | 交货地点 | deliaddr | varchar(20) |  | 地点档案 (addressdoc) |
+| 23 | corigcurrencyid | 币种 | corigcurrencyid | varchar(20) |  | 币种 (currtype) |
+| 24 | ccurrencyid | 本位币 | ccurrencyid | varchar(20) |  | 币种 (currtype) |
+| 25 | nexchangerate | 折本汇率 | nexchangerate | decimal(28, 8) |  | 数值 (UFDouble) |
+| 26 | pk_payterm | 收款协议 | pk_payterm | varchar(20) |  | 收款协议 (income) |
+| 27 | fstatusflag | 合同状态 | fstatusflag | int |  | 单据状态 (enum) |  | 0=自由; |

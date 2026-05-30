@@ -1,0 +1,20 @@
+# |<<
+
+> https://community.yonyou.com/datadict/datadict-2105yiliao/ddc/9555.html
+
+| 序号 | 属性编码 | 属性名称 | 字段编码 | 字段类型 | 是否必输 | 引用模型 | 默认值 | 取值范围/枚举 |
+|------|------|------|------|------|------|------|------|------|
+| 1 | pk_item | pk_item | pk_item | varchar2(32) | √ |  | '~' |
+| 2 | pk_report | pk_report | pk_report | varchar2(20) | √ |
+| 3 | pk_task | pk_task | pk_task | varchar2(20) | √ |
+| 4 | receiverid | receiverid | receiverid | varchar2(20) | √ |
+| 5 | senderid | senderid | senderid | varchar2(20) | √ |
+| 6 | itemdesc | itemdesc | itemdesc | varchar2(200) |
+| 7 | lasttranstime | lasttranstime | lasttranstime | char(19) |
+| 8 | operate | operate | operate | char(3) |
+| 9 | receiptmsg | receiptmsg | receiptmsg | varchar2(400) |
+| 10 | recentmodtime | recentmodtime | recentmodtime | char(19) |
+| 11 | status | status | status | char(3) |
+| 12 | transresid | transresid | transresid | varchar2(100) |
+| 13 | dr | dr | dr | number(10, 0) |  |  | 0 |
+| 14 | ts | ts | ts | char(19) |  |  | to_char(sysdate,'yyyy-mm-dd hh24:mi:ss') |

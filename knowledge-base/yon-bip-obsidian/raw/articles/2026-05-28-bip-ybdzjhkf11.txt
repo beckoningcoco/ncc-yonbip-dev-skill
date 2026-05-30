@@ -1,0 +1,1227 @@
+社区文档中心
+首页
+文档导航
+开发者社区
+社区论坛
+视频教程技术博客
+更多
+张宏涛
+资料中心
+专业开发
+产品概述
+快速入门
+操作指南
+开发指南
+开发介绍
+新功能开发
+移动端开发
+扩展开发
+全球化
+组织
+权限
+特征
+基础数据
+审批流
+业务流
+规则引擎
+公式
+UI模板
+参照
+导入导出
+打印
+对象建模
+编码规则
+调度任务
+监控与预警
+日志
+消息平台
+工作台
+事件中心
+文件服务
+YonBuilder应用开发
+YonBuilder开发能力
+YonBuilder应用构建
+函数组件
+YonBuilder原厂扩展开发（MDD）
+YonBuilder组件化开发
+YPD专业开发
+接口开发及发布
+生态开发事务一致性
+前端开发
+后端开发
+移动开发
+安全
+数据库
+DevOps技术
+容器云技术
+区块链云技术
+YMS开发
+智能应用开发
+专项开发
+成果迁移
+技术方案
+最佳实践
+参考手册
+常见问题
+视频教程
+专业开发/开发指南/YonBuilder应用开发/YonBuilder组件化开发
+YonBuilder组件化开发
+最后更新时间：2024-03-05
+基本概念
+背景
+
+通常开发者可以通过低代码设计器中已经提供了一些默认模板进行单据页面的开发，这些单据都是由默认的内置组件拼接而成，也可以通过使用内置组件进行拖拽开发。但是这远远不能满足于复杂的业务需求，目前复杂的业务界面可以通过专业版来完成，通过默认提供的专业版脚手架对源码进行二开处理，方可满足复杂的业务组件需求，但是这种开发模式复用性较低。
+
+组件化开发，通过统一的组件化开发规范开发出业务组件，既可以在源码中自己使用，也可以上传到组件扩展中心，组件扩展中心对资源统一的管理调度，可以将组件发布到各个租户设计器，可以直接通过设计器拖拽使用，同时资源中心也开放所有前端框架使用。
+
+各领域及其开发者共同开发出的业务组件与，大家共同使用、共同发展、相互促进 ，实现真正的共创共赢。
+
+名词解释
+
+代码设计器：“0”代码拖拽式快速定制,支持根据数据创建应用的模型驱动设计、构建高度定制化应用的画布式设计、基于模板的快速构建。
+
+组件扩展中心：将各领域下的组件统一注册/收集起来管理；将组件及扩展组件数据共享起来，供运行态、设计态、展示态、开发平台等使用； 对组件进行分级运营，为后续组件大数据分析、组件生态购买等提供支撑。
+
+**专业版脚手架：**专业版除了涵盖标准版的全部设计和脚本能力之外，还可以支持开发者自建应用引擎来实现本地源码开发、独立运维部署等企业云服务高级定制能力。
+
+内置组件： 基于ArcUI或TinperNext为低代码设计器提供的一套业务组件，供给设计器进行拖拽开发。其中包含布局容器、数据容器、基础控件、表单控件、功能组件、业务组件。
+
+**Arc-UI：**简单、轻量的B端移动应用组件库；服务用友BIP生态，构建数智化移动应用新体验。
+
+**TinperNext：**是一套基于 React.js 的UI组件库，它从丰富的企业级中后台应用场景中实战沉淀而来，为复杂应用的快速开发提供一致性 UI 解决方案，也是用友BIP产品一致使用的UI设计规范实现。
+
+yonyou-cli： 组件化开发的命令行工具；开箱即用，你只需要一个 @yonyou/yon-ui-cli 启动开发即可，无需安装 react、preact、webpack、react-router、babel、jest 等等。
+
+技术架构
+总体架构设计
+
+通过统一的协议多技术栈的组件、渲染的支持
+
+架构设计
+
+通过协议来开发。不管是内置组件，还是业务组件，都是与资源无关的。你定义一套资源描述，而具体实现可以是 react 的各种资源库，而对于搭建页面，你可以在设计态用资源库组件，渲染可以是 react任意引擎，也可以是MDF或其它前端框架。
+
+特别说明：目前iuap 多以react作为主要框架，后续的实例介绍主要以react为主，该组件化整体设计是支持vue等其它框架组件接入，后续有更多vue或其它组件要接入组件化会补充相关文档。
+
+开发原则
+业务内聚
+
+组件之间拼接组装原则，将业务功能内聚到组件中，减少拼接的配置项。
+
+纯组件+协议
+
+通过配置文件加上原生的React组件进行开发即可。
+
+功能介绍
+功能概述
+
+组件化开发作为整个资源库生态最重要的一部分，组件化开发为开发者提供了命令行工具、基础组件库、统一开发方式、统一开发目录规范；提供了统一组件管理、统一组件使用方式
+
+组件化开发规范设计目标
+
+组件化开发规范有两大设计目标
+
+功能地图如下图所示
+
+组件生产者
+统一组件技术栈，统一组件工程、目录结构
+统一规范，，组件发布到组件空间（系统级和领域级），租户级
+统一组件第三方依赖，扩展资源的加载方式
+统一组件开发方式
+基础能力，统一主题、多语、原生能力调用、 MDF能力支持、数据模型使用、属性、事件、多终端布局、UI扩展的支持等开发方式
+进阶能力，公共业务能力的使用方式，如交易类型、公式、自动编码、审批等支持方式
+组件使用者
+统一组件管理，依托组件中心，统一对组件的版本、属性、事件和分享方式进行管理
+统一组件使用，规范组件的低代码设计、专业版开发、非MDF的使用场景和方式
+开发示例
+组件化开发实例
+基本规范
+统一技术栈
+
+是一套基于 React.js 的UI组件开发规范，组件由manifest 配置文件+ 纯React组件组合而成。
+
+统一目录规范
+默认目录
+locales 多语目录
+components/_style 统一样式目录
+
+├── components // 组件库源码目录
+
+│ ├── input
+
+│ │ ├── Input.js // 组件实现代码
+
+│ │ ├── README.md // 组件的描述、api说明等
+
+│ │ ├── demos // demo文件目录
+
+│ │ ├── index.js // 组件对外暴露的出口
+
+│ │ ├── manifest.js // 单个组件的配置文件、组件使用的props属性、组件code 名称等
+
+│ │ └── style // 组件样式目录
+
+│ │ ├── index.js // 样式的导入导出，无需修改
+
+│ │ └── index.less // 组件样式
+
+│ ├── _style // 公共样式目录
+
+│ │ └── index.less // 定义样式变量、编写公共样式等
+
+│ └── _utils // 公共方法目录
+
+│ │ └── mdf-ext // 全局 mdf扩展目录
+
+├── static // 静态资源目录
+
+├── locales // 多语目录
+
+├── config.json // 描述组件库在开发过程中的相关配置,如：请求后端地址、webpack配置
+
+├── manifest.json // 组件库描述文件，在此统一配置组件入口
+
+├── package.json
+
+├── README.md
+
+└── tsconfig.json
+
+组件目录
+
+默认所有组件平铺在 components 目录下。
+
+每添加一个组件，就需要在components目录中创建一个子目录，名称和组件名称保持一致。同时在组件目录中创建相应的 index.js，以及配套的样式文件等。
+
+最后，需要在顶层目录的 index.js 中导出这个组件。
+
+编译目录
+
+即：执行yonui build
+
+dist/ 整个组件库打包压缩后的代码。
+lib/ 各个组件源码经过babel转译后的资源，可在源码中引入并使用。
+demo/ 组件的demo文件打包后的代码，按组件为单元划分，用于注册中心中的组件预览页面。
+统一第三方组件
+
+统一使用Arc-UI/ TinperNext作为基础组件库，默认已经将其引入，不要引入其他组件库和其他依赖库
+
+// 当前组件包
+
+"intl": "^1.2.5",
+
+"react": "^16.14.0",
+
+"react-dom": "^16.14.0",
+
+"react-intl": "^4.7.6",
+
+"yonui-extension": "^0.7.3"
+
+基础组件库介绍
+
+移动基础组件库可以使用Arc-UI
+
+简单、轻量的B端移动应用组件库；服务用友BIP生态，构建数智化移动应用新体验。
+
+// arc-ui 依赖
+
+"classnames": "^2.2.1",
+
+"eslint-plugin-react": "^7.16.0",
+
+"mtl-js-sdk": "^5.0.6",
+
+"rc-rate": "^2.6.0",
+
+"rc-table": "^7.14.0",
+
+"react-calendar": "^2.19.2",
+
+"react-virtualized": "^9.21.2",
+
+"rmc-feedback": "^2.0.0",
+
+"validator": "^13.1.1",
+
+详情可查看Arc-UI 红皮书
+
+PC 端基础组件库TinperNext，更多介绍信息可以参加TinperNext红皮书
+
+组件扩展
+
+下面以创建一个自定义组件MyButton为例，详细讲解一个组件是如何扩展的
+
+初始状态
+
+前面讲过，执行$ yonui create MyButton会创建一个MyButton组件，组件内的文件如下
+
+组件实现代码MyButton.js
+import React, { Component } from 'react'
+export default class Mybutton extends Component {
+  render () {
+    return (
+      <div>
+        this is a demo component.
+      </div>
+    )
+  }
+}
+
+组件配置文件manifest.js
+import { FieldTypes, EditTypes, ComponentManifest, UIObject, TypeProps } from 'yonui-extension'
+const manifest: ComponentManifest = {
+  name: 'Mybutton',//组件名称
+  label: 'Mybutton',//组件中文名称
+  type: TypeProps.BasicControls,//FormControls:表单控件,BasicControls:基础控件,LayoutContainer:布局容器,DataContainer:数据容器
+  uiObject: UIObject.Controls,//Containers:容器,Controls:控件
+  props: [
+  ],
+  children: []
+}
+
+export default manifest
+
+
+组件样式文件style/index.less
+@import '../../_style/index.less';
+添加属性映射（将设计器配置的属性映射到组件props里）
+组件中props获取content属性
+import React, { Component } from 'react'
+
+export interface ButtonProps {
+	content?: string
+}
+
+export default class Mybutton extends Component<ButtonProps, any> {
+	render () {
+		const { content } = this.props
+		return <button>{content}</button>
+	}
+}
+
+设计器配置content属性，并映射到props
+
+1、在组件使用增加content属性，定义之后，在设计器右侧会开放出属性供用户编辑
+
+2、在manifest.js文件定义props属性，定义之后，在运行时会将用户在设计器中定义的content属性添加到组件的props里
+
+import { FieldTypes, EditTypes, ComponentManifest, UIObject, TypeProps } from 'yonui-extension'
+const manifest: ComponentManifest = {
+  name: 'Mybutton',//组件名称
+  label: 'Mybutton',//组件中文名称
+  type: TypeProps.BasicControls,//FormControls:表单控件,BasicControls:基础控件,LayoutContainer:布局容器,DataContainer:数据容器
+  uiObject: UIObject.Controls,//Containers:容器,Controls:控件
+  props: [
+    {
+      name: 'content',           //属性名称
+      type: FieldTypes.string,   //属性类型
+      defaultValue: '',          //属性默认值
+      showDesign: false,         //属性是否在设计器右侧展示
+      designConfig: {						 //designConfig定义此属性在设计器右侧的展示方式
+        type: EditTypes.Text,    //属性的展示方式,Text代表文本框
+        isRequired: true,				 //属性是否必填
+        props: {},               //属性的参数
+        label: '名称'				     //属性的标题
+      }
+    }
+  ],
+  children: []
+}
+
+export default manifest
+
+
+
+3、开发态如何调试
+
+在本地直接调试时，不经过设计器和运行时这个过程，用户可以在demos/mock/meta.js中模拟用户已经在设计器中配置了content属性
+
+export const meta = {
+
+"content": "自定义按钮"
+
+}
+
+添加属性后效果
+
+添加事件
+
+pc端添加事件请参考目录：更多扩展示例(pc)
+
+组件中props获取onClick事件
+import React, { Component } from 'react'
+
+export interface ButtonProps {
+  content?: string
+  onClick?: any
+}
+
+export default class Mybutton extends Component<ButtonProps, any> {
+  onClick = () => {
+    const { onClick } = this.props
+    onClick && onClick()
+  }
+
+  render() {
+  	const { content } = this.props
+    return <button onClick={this.onClick}>{content}</button>
+  }
+}
+
+
+通过设计器添加onClick事件响应
+
+1、在组件中心增加onclick事件，定义之后，在设计器右侧会开放出事件供用户编辑
+
+2、在manifest.js文件中定义 events 和 transformers 属性，可以将编辑的事件映射到props里
+
+示例如下：
+
+import { FieldTypes, EditTypes, ComponentManifest, UIObject, TypeProps } from 'yonui-extension'
+const manifest: ComponentManifest = {
+  name: 'Mybutton',//组件名称
+  label: 'Mybutton',//组件中文名称
+  type: TypeProps.BasicControls,//FormControls:表单控件,BasicControls:基础控件,LayoutContainer:布局容器,DataContainer:数据容器
+  uiObject: UIObject.Controls,//Containers:容器,Controls:控件
+  props: [
+    {
+      name: 'content',           //属性名称
+      type: FieldTypes.string,   //属性类型
+      defaultValue: '',          //属性默认值
+      showDesign: false,         //属性是否在设计器右侧展示
+      designConfig: {						 //designConfig定义此属性在设计器右侧的展示方式
+        type: EditTypes.Text,    //属性的展示方式,Text代表文本框
+        isRequired: true,				 //属性是否必填
+        props: {},               //属性的参数
+        label: '名称'				     //属性的标题
+      }
+    }
+  ],
+  events: [
+    {
+      name: 'onClick',
+      des: '单击',
+    }
+	],
+	transformers: ['inherit', ['bindEvent', { events: ['onClick'] }]],
+  children: []
+}
+
+export default manifest
+
+
+
+3、开发态如何调试
+
+在demos/mock/meta.js中模拟用户已经配置了onClick事件
+
+export const meta = {
+
+"content": "自定义按钮",
+
+"onClick": () => { alert('点击了') },
+
+}
+
+添加事件后效果
+
+快捷引用设计器公共属性
+如果想要增加的属性为公共扩展的属性，则不需要再在props里定义，直接在manifest.js文件中的定义extension属性即可（注意需要在yonui-extension多引入ExtensionProps）
+
+extension里的公共扩展的属性如下：
+
+bIsNull	是否允许为空
+bMustSelect	是否必传
+bVmExclude	数据形态
+disabled	是否禁用
+splitLine	是否有分割线
+singleLine	是否单行展示
+required	是否必填
+
+1、manifest配置
+
+import { FieldTypes, EditTypes, ComponentManifest, UIObject, TypeProps, ExtensionProps } from 'yonui-extension'
+import { transformer } from './mdf-ext'
+
+const manifest: ComponentManifest = {
+  name: 'Mybutton',//组件名称
+  label: 'Mybutton',//组件中文名称
+  type: TypeProps.BasicControls,//FormControls:表单控件,BasicControls:基础控件,LayoutContainer:布局容器,DataContainer:数据容器
+  uiObject: UIObject.Controls,//Containers:容器,Controls:控件
+  props: [
+    {
+      name: 'content',           //属性名称
+      type: FieldTypes.string,   //属性类型
+      defaultValue: '',          //属性默认值
+      showDesign: false,         //属性是否在设计器右侧展示
+      designConfig: {						 //designConfig定义此属性在设计器右侧的展示方式
+        type: EditTypes.Text,    //属性的展示方式,Text代表文本框
+        isRequired: true,				 //属性是否必填
+        props: {},               //属性的参数
+        label: '名称'				     //属性的标题
+      }
+    }
+  ],
+  extension: [
+    ExtensionProps.disabled
+  ],
+  events: [
+    {
+      name: 'onClick',
+      des: '单击',
+    }
+	],
+	transformers: ['inherit', transformer, ['bindEvent', { events: ['onClick'] }]],
+  children: []
+}
+
+export default manifest
+
+
+
+2、在组件中接收props里的属性，并在组件中使用实现该逻辑即可
+
+import React, { Component } from 'react'
+
+export interface ButtonProps {
+  content?: string
+  onClick?: any
+  disabled?: boolean
+}
+
+export default class Mybutton extends Component<ButtonProps, any> {
+  onClick = () => {
+    const { onClick, disabled } = this.props
+    if (disabled) {
+      alert('禁用')
+    } else {
+      onClick && onClick()
+    } 
+  }
+
+  render() {
+  	const { content } = this.props
+    return <button onClick={this.onClick}>{content}</button>
+  }
+}
+
+
+
+3、本地测试demos/mock/meta.js中模拟用户已经配置了disabled属性
+
+export const meta = {
+
+"content": "自定义按钮",
+
+"onClick": () => { alert('点击了') },
+
+"disabled": true
+
+}
+
+添加后效果
+
+组件通信
+事件发布与订阅（PC和移动都适用）
+
+我们在window上挂载一个cb.events对象实现事件的订阅与发布
+
+组件A可以订阅组件B的某事件，当组件B的某事件被触发时，通过发布订阅机制，组件A会接收到组件B触发的事件，然后执行某些操作
+
+订阅
+
+组件A中可以使用window.cb.events.on(eventName: string, callback: function)方式来订阅一个事件，eventName为订阅的事件的名称，callback为订阅的事件被触发时执行的方法，一个组件可以订阅多个事件
+
+// 订阅事件clickA
+
+const callback = (e) => {
+
+// 回调
+
+console.log(e.info)
+
+}
+
+// 订阅
+
+window.cb.events.on('clickA', callback)
+
+// 取消订阅
+
+window.cb.events.un('clickA', callback)
+
+发布
+
+组件B可以使用window.cb.events.execute(eventName: string, args: any)方式来发布一个事件，eventName为发布的事件的名称，args为参数
+
+// 发布事件clickA 参数 {info: 'click-a'}window.cb.events.execute('clickA', {info: 'click-a'})// 订阅了该事件的组件，会接收到{info: 'click-a'}，执行对应回调函数
+组件之间通信
+getState
+
+如果想要获取某个组件的某个属性，可以使用viewModel.get()方法获取组件model，之后调用model的getState方法。
+
+var comp = viewModel.get('组件编码')// 获取想要控制的组件的model模型，不存在的话返回undefined// 判断模型是否存在，存在的话再调用setStateif (comp) {comp.getState('title') // 获取组件的title属性}
+setState
+
+如果想要修改某个组件的某个属性，可以使用viewModel.get()方法获取组件model，之后调用model的setState方法。setState调用之后，对应的组件会刷新。
+
+var comp = viewModel.get('组件编码')// 获取想要控制的组件的model模型，不存在的话返回undefined// 判断模型是否存在，存在的话再调用setStateif (comp) {comp.setState('title', '新标题')// 设置组件的title属性}
+更多扩展示例
+PC端扩展事件
+
+用户在组件中心配置xxxaction事件，定义之后，在设计器右侧会开放出事件供用户编辑
+
+在组件中定义以下两个方法用来触发事件，直接复制即可
+
+/**
+   * 获取属性
+   * @param {*} attrKey 属性名
+   */
+   getAttr = (attrKey) =>{
+    const { meta = {} } = this.props;
+    let attr = meta[attrKey] || this.props[attrKey]
+    if(!attr){
+      let cExtProps = meta.cExtProps || this.props.cExtProps
+      if(cExtProps){
+        let cExtPropsObj = JSON.parse(cExtProps)
+        attr = cExtPropsObj[attrKey]
+      }
+    }
+    return attr
+  }
+
+  /**
+   * 执行命令
+   * @param {*} actionKey  命令编码
+   */
+  execute = (actionKey, params) =>{
+    // 依赖设计器需要设置actionKey对应的属性记录mdf框架的命令名称
+    const { viewModel, pageModel, model} = this.props;
+    let nowModel = viewModel || pageModel
+    if(!nowModel){
+      nowModel = model && model.__data &&  model.__data.cache &&  model.__data.cache.parent
+    }
+    return nowModel && nowModel.execute(this.getAttr(actionKey), params)
+  }
+
+
+
+之后在想要触发事件的位置定义如下方法触发定义的xxxaction即可
+
+execute('xxxaction')
+开发技巧
+移动端 全局主题样式适配方案
+
+设计目标
+
+组件开发者按照统一的开发规范开发组件，使用者(各企业开发人员)根据自己的品牌色可以设置默认主题，用户可以再使用中根据喜好随意切换整体主题。
+
+主题配置
+
+在移动工作创建应用，配置多个支持的主题色，可以选择默认的主题色
+
+生成
+
+{
+
+"theme":{
+
+"color":['#ffeeff','#f45322'],
+
+"primary":"#ffeeff",
+
+"font":"/xxxx/xxxx",
+
+}
+
+}
+
+主题修改
+
+如果需要把默认的主题样式变量修改成自定义的颜色，有以下两种方式
+
+在自己工程的公共样式component/_style/index.less里定义主题样式变量，覆盖已定义的主题样式变量
+
+:root{
+
+--yb-color-primary: green;
+
+}
+
+mtl里提供了主题切换的api，让开发者可以通过api修改主题
+
+mtl.setTheme('color','#ffe')
+
+mtl.setTheme('font','/ddd/xxxx')
+
+mtl.setThemeColor('#fff')
+
+mtl.setTheme({})
+
+mtl.getTheme()
+
+组件样式复写
+
+主题颜色之外，如果需要对基础组件的其他样式（比如说按钮的高度，圆角）需要修改，可以在自己工程的公共样式component/_style/index.less里手动写css进行覆盖
+
+确定要修改的页面元素的样式
+
+打开html里的检查，选取要修改的元素，这里选取了button，可以看见右侧控制按钮的高度和圆角的是.mdf-button-small这个样式
+
+在自己工程的公共样式component/_style/index.less里定义新的.mdf-button-small样式去覆盖上一步找到的样式
+
+.mdf-button-small {
+
+height: 1rem;
+
+line-height: 1rem;
+
+border-radius: 0.1rem;
+
+}
+
+.mdf-button-toolbar-primary.mdf-button-active {
+
+background: var(--yb-color-primary);
+
+}
+
+可以看到自己写的样式已经将第一步的样式覆盖了
+
+组件样式引用主题
+主题样式变量
+
+在基础组件的公共样式文件会有css颜色变量的定义
+
+:root {
+
+--yb-color-primary: #EE2233;
+
+...
+
+}
+
+组件引用主题样式变量
+
+基础组件里会引用定义的主题样式变量
+
+mdf-button-toolbar-primary, mdf-button-primary {
+
+background: var(--yb-color-primary);
+
+}
+
+组件样式修改前效果
+
+Mock和多语
+mock
+
+mock目录目的是在本地调试的时候模拟设计器/运行时中组件接收的属性，目前可以在meta.js中添加属性，模拟设计器中组件接收的属性，在组件工程根目录执行npm run start启动本地调试，在mock目录下更改模拟数据
+
+|-- components
+
+│ |-- input
+
+│ │ |-- demos // demo文件目录
+
+| | | |-- demo.less
+
+| | | |-- demo.js
+
+| | | |-- mock
+
+| | | | |-- index.js
+
+| | | | |-- meta.js // 模拟设计器中组件接收的属性
+
+...
+
+meta.js
+
+export const meta = {
+
+"testProp": "myValueTest111",
+
+"onClick": () => alert('点击了我')
+
+}
+
+多语
+实现一个多语组件
+
+多语的实现基于react-intl，引入 IntlProvider包裹需要实现多语的组件，被包裹的组件中即可使用react-intl提供的接口以及传入 IntlProvider的配置信息，以FormattedMessage为例，示例代码如下
+
+component.jsx
+
+import React, { Component } from 'react'
+import {IntlProvider, FormattedMessage} from 'react-intl'
+import { chooseLocale, chooseMessage } from '../_utils'
+export default class Testinput extends Component {
+  render () {
+    return (
+    <IntlProvider
+      locale={chooseLocale()} // 浏览器语言信息
+      messages={chooseMessage()} // 配置的多语文本
+    >
+      <FormattedMessage
+        id='superHello'
+        defaultMessage='defaultMSG'
+        values={{someone: 'yonbuilder'}}
+      />
+    </IntlProvider>
+    )
+  }
+}
+
+
+
+react-intl提供的功能以组件的形式使用，FormattedMessage可以根据传入intlProvider的配置显示不同的语种, 在多语组件中显示文本的地方都可以用该组件替换，默认将多语文本以span标签包裹返回，也可以通过传入tagName属性改变包裹的标签，上述例子中，返回结果为你好，yonbuilder !
+
+启动本地调试预览结果如下
+
+浏览器语言设置为中文
+
+浏览器语言设置为英文
+
+多语详细配置
+
+多语基于react-intl，初始化组件项目工程时预置的多语相关文件如下
+
+|-- my-project
+
+| |-- components
+
+| | |-- utils
+
+| | | |-- index.jsx // 公共方法，包含获取浏览器当前语言的方法和根据语言选择locales中多语文件的方法
+
+| |-- locales // 多语文件目录
+
+| | |-- index.js // 新增语种时需要在此处导出
+
+| | |-- zh_CN.js // 中文
+
+| | |-- en_US.js // 英文
+
+...
+
+locales/index.js
+
+// 所有语种在此处导出
+import en_US from './en_US'
+import zh_CN from './zh_CN'
+
+const messages = {
+  en_US,
+  zh_CN
+}
+
+export default messages
+
+
+zh_CN.js
+
+// 结构为{id: '多语文本<{变量}>'}，根据id显示不同的文本
+const zh_CN = {
+  hello: '你好 !',
+  superHello: '你好，{ someone } !'
+}
+export default zh_CN
+
+
+en_US.js
+
+const en_US = {
+  hello: 'Hello !',
+  superHello: 'Hello, { someone } !'
+}
+export default en_US
+
+
+utils/index.js
+
+import Messages from '../../locales'
+// 根据浏览器预览设置信息判断显示哪个语种，新增语种需要在此处新增判断
+export const chooseMessage = () => {
+  switch(navigator.language.split('_')[0]){
+      case 'en':
+          return Messages['en_US'];
+          break;
+      case 'zh':
+          return Messages['zh_CN'];
+          break;
+      default:
+          return Messages['zh_CN'];
+          break;
+  }
+}
+// 返回浏览器语言设置信息
+export const chooseLocale = () => {
+  return window?.navigator?.language || 'zh'
+}
+
+原生能力
+
+泛终端mtl
+
+引入方式
+
+推荐 cdn 地址
+
+",
+
+"css": "<link href="./index.css" rel="stylesheet">"
+
+}
+
+buildImport
+
+"buildImport": {
+
+"js":["import * as AntdMobile from 'antd-mobile'"],
+
+"css":["@import '~antd-mobile/dist/antd-mobile.css'"],
+
+"export":[
+
+"AntdMobile"
+
+]
+
+}
+
+staticPropsMap
+
+"staticPropsMap": {
+
+"ListView": "DataSource"
+
+}
+
+可将ListView的DataSource属性挂载到经过ReactWrapper包裹后的组件上。
+
+manifes.json 全局配置说明
+
+描述了组件库整体的信息
+
+{"name":"Libra","version": "0.0.1","keyword": "demo library libra","description": "这是一个示例的组件库","isvKey":"",//可选,供应商密钥KEY"components": {"basic": {"Col": "./components/Col","Row": "./components/Row"},"other": {"Button": "./components/Button",}}}
+字段名称	说明
+name	开发的组件库的名称，且在组件打包后可以通过[name]注入到全局对象中
+version	组件库的版本
+keyword	组件库的关键字
+description	对组件库的描述、介绍
+components	描述了组件库中打包后组件的结构。可通过此属性灵活配置需要打包的组件、组件的结构关系。
+manifes.json 单组件配置说明
+
+组件描述文件为每个组件目录下的manifest.js文件，与根目录下的manifest.json文件不同
+
+module.exports = {name: 'Input',label: '文本输入',type: 'DataEntry',props: [{name: 'value',type: FieldTypes.string,showDesign: true,designConfig: {type: EditTypes.Text,isRequired: true,props: {},label: '值'}},{name: 'onChange',type: FieldTypes.action,showDesign: true,designConfig: {type: EditTypes.Text,isRequired: false,props: {},label: 'onChange'}}],}
+ComponentManifest
+分类	字段	类型	描述
+基本信息	name	string	组件名称
+label	string	组件文本	
+type	string	组件分组类型	
+description	string	组件相关描述	
+设计器接入适配(后续可通过配置页面维护)	props	[AdapterPropObject]	设计器适配层(Adapter)Props
+children	[]	依赖组件	
+parent	[]	父组件	
+Model业务模型对象	model	Object	Model类型，GridModel、TreeModel等
+事件	events	[EventObject]	设计器事件列表
+transformers	[string	function]	运行时渲染引擎transformers
+props说明(ComponentManifest.props: [AdapterPropObject])
+
+AdapterPropObject
+
+字段	类型	描述
+name	string	名称
+type	FieldTypes	数据类型,枚举值可选范围---[string,number,boolean,object,date,action,child,array]如果是方法，则设置为action;如果是react node节点，则设置为child;如果是数组，则设置为array;
+defaultValue	any	默认值
+value	string	值
+showDesign	boolean	是否展示在适配层 当showDesign为false,需要配置designConfig字段
+designConfig	designConfigProps	适配层相关配置属性对象查看
+onChange	(props: Props[], propsName: string, value: string) => Props[]	当值改变时,触发事件联动的方法,可改变其它配置字段的值
+
+AdapterPropObject.designConfig
+
+字段	类型	描述
+type	EditTypes	适配层的可选视图类型(枚举项)
+label	string	在适配层页面显示的文本
+labelStyle	string	在适配层页面显示的文本的样式
+isRequired	boolean	是否必填
+help	string	提示信息
+props	object	根据适配器中MetaTypes配置不同的props
+disabled	boolean	是否禁用
+events说明(ComponentManifest.props: [EventObject])
+字段	类型	描述
+name	string	事件名称
+des	string	事件描述
+典型业务场景介绍
+
+通过快速上手，创建组件库工程(my-project)，创建一个新的组件(Ybcomponent)，并将该组件上传到组件扩展中心，使其能够在YonBuilder低代码设计器中使用。
+
+环境准备
+
+全局安装node
+
+$ npm install ynpm-tool -g全局安装ynpm-tool，安装之后才可以执行ynpm相关指令
+
+$ ynpm install @yonyou/yon-ui-cli -g全局安装打包工具yon-ui-cli
+
+创建工程
+
+$ yonui init指令进入组件工程初始化的交互界面，按步骤操作后可以在当前目录下创建一个组件库工程，默认名称为my-project，目录如下
+
+|-- my-project | |-- components // 组件目录 | |-- locales // 多语目录 | |-- static // 静态资源 | |-- config.json // 配置文件 | |-- manifest.json //组件打包文件 | |-- package.json ...
+
+$ cd ./my-project进入组件库目录
+
+$ ynpm install安装依赖
+
+创建组件
+
+$ yonui create ，在根目录的 ./components目录下创建名为name的组件
+
+例如，执行$ yonui create Ybcomponent，则创建的组件如下
+
+├── components // 组件库源码目录 │ ├── ybcomponent │ │ ├── ybcomponent.js // 组件实现代码 │ │ ├── README.md // 组件的描述、api说明等 │ │ ├── demos // demo文件目录 │ │ ├── index.js // 组件对外暴露的出口 │ │ ├── manifest.js //组件的配置文件、使用的props属性、组件code 名称等 │ │ └── style // 组件样式目录 │ │ ├── index.js // 样式的导入导出，无需修改 │ │ └── index.less // 组件样式 │ ├── _style // 公共样式目录 │ │ └── index.less // 定义样式变量、编写公共样式等 │ └── _utils // 公共方法目录
+
+$ npm run start即可查看刚创建的组件
+
+编写组件代码
+
+从零开始或者引用基础组件库
+
+使用yon-ui-cli创建的工程，默认引入了基础组件库（样式全量引用，js配置了按需引用），
+
+**import { Button } from 'arc-ui'**引入需要的组件
+
+可以将以下代码复制到ybcomponent/ybcomponent.js，$ npm run start预览查看效果
+
+import React, { Component } from 'react'
+import { Button } from 'arc-ui';
+
+export default class Ybcomponent extends Component {
+
+  render() {
+    const { testProp='', onClick } = this.props
+    return (
+      <div>
+        <Button onClick={onClick} >按钮</Button>
+        {testProp}
+      </div>
+    )
+  }
+}
+
+
+
+ybcomponent/manifest.js为组件描述文件，控制组件在设计器和运行时的属性，可在发布到设计器时再进行编写
+
+import { FieldTypes, UIObject, TypeProps } from 'yonui-extension'
+const manifest = {
+  name: 'Ybcomponent',
+  label: '测试组件',
+  uiObject: UIObject.Controls,
+  label: '文本框',
+  type: TypeProps.FormControls,
+  icon: 'text',
+  props: [
+    {
+      name: 'testProp',
+      type: FieldTypes.string,
+      showDesign: true
+    }
+  ],
+  events: [
+      {
+          name: 'onClick',
+          des: '点击'
+      }
+  ],
+  transformers: [
+      'inherit',
+      ['bindEvent', {events: ['onClick']}]
+  ]
+}
+
+export default manifest
+
+
+预览和调试组件
+
+$ npm run start/ $ yonui start
+
+启动失败？
+
+默认在http://localhost:8090预览，启动时败时可先检查下端口是否被占用
+
+添加的组件没有展示？
+
+新增组件后需要重新$ npm run start, 如果依旧没有展示，可查看根目录下的manifest.json文件配置的组件路径是否正确**（该文件在组件库根目录下，与组件的设计器描述文件manifest.js不是同一个文件）**
+
+使用命令yonui create创建组件时会自动添加到components对象下，如果没有，手动添加即可
+
+{
+
+"name": "MyProject", // 开发的组件库的名称，且在组件打包后可以通过[name]的形式注入到全局对象中
+
+"version": "0.0.1", // 组件库的版本
+
+// ...
+
+"components": {
+
+"Input": "components/input" // 组件路径
+
+}
+
+}
+
+组件打包
+
+多个组件全部打包
+
+$ npm run build / $ yonui build 打包产物如下
+
+├── my-project
+
+│ ├── dist //打包产物
+
+│ │ ├── index.js
+
+│ │ ├── index.js.map
+
+│ │ ├── index.css
+
+│ │ ├── index.css.map
+
+│ │ ├── manifest.json
+
+│ ├── lib //babel编译后的components
+
+...
+
+单个组件打包
+
+$ **yonui build name=**打包单个组件
+
+打包配置文件：根目录的config.jsonconfig.json配置说明
+
+组件发布
+
+将打包产物上传到组件扩展中心(如何使用组件扩展中心)
+
+线上调试
+启动命令
+
+$npm run debug首次打包发布后，可以使用该命令启动debug，会在http://localhost:7890/index.js监听dist目录下的index.js文件，并在修改保存代码后重新打包
+
+线上调试
+
+使用自定义组件的单据页面，f12/右键-> 检查 打开浏览器的调试模式，选择网络/network页签，可以找到/getFileIdByLibraryCode 接口， 如下图所示，重定向的第三个接口为加载自定义组件js的接口
+
+使用Resource Override或其他调试工具，将该接口转发到本地http://localhost:7890/index.js，即可在本地修改代码后实时查看调试，debug端口号可在config.json中配置 debugPort
+
+这里以Resource Override为例
+
+配置如下所示，添加一条url->url的规则并且打开
+
+成功转发后可以看到该接口已经被重定向到本地
+
+Chrome浏览器安装ResourceOverride？
+
+如果可以代理上外网，可以直接到chrome网络应用商店安装该扩展
+
+如果无法访问外网，可以下载ResourceOverride.crx文件，在chrome浏览器中打开chrome://extensions/，打开右上角的开发者模式，将crx文件拖入该页面，即可安装该扩展
+
+附录
+yonyou-cli 更新使用规范
+
+全局安装yonui-cli命令行工具
+
+$ npm install yonui-cli -g
+
+安装成功后，在命令行中输入yonui -v可以查看版本。如下：
+
+$ yonui -v
+
+0.0.1
+
+命令
+
+yonui-cli命令行工具支持以下命令：
+
+yonui init
+
+在当前目录创建一个新的工程。在输入该命令后，将进入一个交互状态，提示输入工程名称等信息。
+
+yonui create
+
+进入工程目录，输入该命令可在./components目录下创建一个新的组件，组件名称为必填项。
+
+yonui start
+
+在工程目录，输入该命令可将编写的demo打包并在浏览器中预览。
+
+yonui build
+
+在工程目录，输入该命令可将组件代码打包成以下资源：
+
+dist/ 整个组件库打包压缩后的代码。
+
+lib/ 各个组件源码经过babel转译后的资源，可在源码中引入并使用。
+
+demo/ 组件的demo文件打包后的代码，按组件为单元划分，用于注册中心中的组件预览页面。
+
+其他如 package.json readme.md等文件
+
+文档内容是否对您有所帮助？
+为帮助文档评分：
+页内目录
+1. 基本概念
+1.1 背景
+1.2 名词解释
+2. 技术架构
+2.1 总体架构设计
+2.2 开发原则
+2.2.1 业务内聚
+2.2.2 纯组件+协议
+3. 功能介绍
+3.1 功能概述
+3.2 组件化开发规范设计目标
+3.2.1 组件生产者
+3.2.2 组件使用者
+4. 开发示例
+4.1 组件化开发实例
+4.1.1 基本规范
+4.1.2 组件扩展
+4.1.3 组件通信
+4.2 更多扩展示例
+4.2.1 PC端扩展事件
+4.2.2 开发技巧
+4.2.3 manifes.json 全局配置说明
+4.2.4 manifes.json 单组件配置说明
+5. 典型业务场景介绍
+5.1 环境准备
+5.2 创建工程
+5.3 创建组件
+5.4 编写组件代码
+5.5 预览和调试组件
+5.6 组件打包
+5.7 组件发布
+5.8 线上调试
+5.8.1 启动命令
+5.8.2 线上调试
+6. 附录
+6.1 yonyou-cli 更新使用规范
+文档反馈
+北京市海淀区北清路68号用友产业园
+4006-600-588
+友情链接
+用友官网用友YonHelp用友iuap平台用友云市场用友云注册协议隐私条款
+
+Copyright ©2020 用友网络科技股份有限公司版权所有京ICP备05007539号-24京公网安备11010802021935号
+
+返回顶部
+加载中...

@@ -1,0 +1,23 @@
+# === yon-ncc-dev 生成数据 ===
+skills/yon-ncc-dev/class_index_*.json
+skills/yon-ncc-dev/decompiled/
+skills/yon-ncc-dev/cfr-*.jar
+skills/yon-ncc-dev/ncc_home_path.json
+
+# === baoyu-url-to-markdown 依赖 ===
+skills/baoyu-url-to-markdown/scripts/node_modules/
+skills/baoyu-url-to-markdown/scripts/url-to-markdown/
+
+# === Obsidian 本地配置 ===
+.knowledge-base/yon-bip-obsidian/.obsidian/workspace*.json
+
+# === 知识库临时文件 ===
+knowledge-base/yon-bip-obsidian/_bc.txt
+knowledge-base/yon-bip-obsidian/_pdf_analysis.txt
+knowledge-base/yon-bip-obsidian/_titles*.txt
+
+# === OS 文件 ===
+.DS_Store
+Thumbs.db
+*.swp
+*.swo

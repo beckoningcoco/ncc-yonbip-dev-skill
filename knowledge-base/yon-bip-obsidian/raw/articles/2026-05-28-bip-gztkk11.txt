@@ -1,0 +1,412 @@
+社区文档中心
+首页
+文档导航
+开发者社区
+社区论坛
+视频教程技术博客
+更多
+张宏涛
+资料中心
+专业开发
+产品概述
+快速入门
+操作指南
+开发指南
+开发介绍
+新功能开发
+移动端开发
+扩展开发
+全球化
+组织
+权限
+特征
+基础数据
+审批流
+业务流
+规则引擎
+公式
+UI模板
+参照
+导入导出
+打印
+对象建模
+编码规则
+调度任务
+监控与预警
+日志
+消息平台
+工作台
+数字化工作台
+数字化工作台开发
+事件中心
+文件服务
+YonBuilder应用开发
+前端开发
+后端开发
+移动开发
+安全
+数据库
+DevOps技术
+容器云技术
+区块链云技术
+YMS开发
+智能应用开发
+专项开发
+成果迁移
+技术方案
+最佳实践
+参考手册
+常见问题
+视频教程
+专业开发/开发指南/工作台/数字化工作台开发
+数字化工作台开发
+最后更新时间：2025-07-09
+概述
+适用场景
+部署方案	开发类型	是否适用
+公有云	客户化定制开发	否
+私有云	客户化定制开发	是
+专属云	客户化定制开发	是
+公有云	ISV生态开发	否
+私有云	ISV生态开发	是
+专属云	ISV生态开发	是
+业务场景
+
+在原厂数字化工作台不满足客户要求的场景下，对工作台各个部分做二次配置和开发，包括磁贴组件、个性化样式配置、修改平台的logo和登录页背景等
+
+关键词
+
+工作台、磁贴、菜单、自定义组件
+
+专业名词术语
+**分析卡⽚：**磁贴的⼀种卡⽚是显示在⼯作台上的⼀种⾮⼊⼝分析类磁贴，可以直接看到分析数据，其数据权限受分析卡⽚对应服务的数据和功能权限控制。
+**应用：**可独立使用的最小产品集合。可以理解为原来ERP中的模块，比如假勤管理、公文、应收管理、总账、库存管理则为一个应用。
+**原子服务：**原子服务是构成应用的不可再分解的最小能力单元，也是权限管理可以进行管控、权限分配的最小单元。
+**磁贴：**常用的功能可将功能入口贴到个人工作桌面，方便使用；每个应用的磁贴样式支持大小和样式自定义，在个人工作桌面就能看到业务实时数据。
+**菜单：**页面顶级菜单，可对应后台配置各领域。菜单下包含多级菜单项，最多包括3级菜单项。菜单项：从属于菜单。菜单项分为两类：一种只包含子菜单项，没有对应服务；另一种只有对应服务，没有子菜单项。
+开发核心内容
+磁贴开发
+
+工作台组件有YNF组件和React组件两种开发模式，本文介绍第二种
+
+代码构建
+
+在基于React的原生组件开发工程中，编写前端代码，实现我们自定义的样式及功能，开发步骤如下：
+
+获取脚⼿架，脚⼿架地址：【友空间云⽂档】iuap-apcom-widget-master.zip (opens new window)进⾏下载。
+使用VSCode编译器打开widget-master的前端工程。
+使用npm install或ynpm install安装工程依赖包。
+终端中输入增加磁贴组件的命令：npm run create staff_type ,后可看到src目录下增加了一个staff_type目录，包含main.js和index.css两个文件
+在src\staff_type\main.js文件中编写磁贴的前端页面，在同级目录中index.css文件中写磁贴样式。下面以【员工类别】磁贴为例，先编写磁贴的框架，main.js示例代码如下。
+import React, { Component } from 'react';
+	import  {
+wrapper, approveTileContent,upuApproveTileNum, upuApproveTileText,
+dynamicTitleContent,dynamicContent ,dynamicTitle }  from './index.css';
+	import axios from 'axios';
+	class Widget extends Component {
+	  constructor(props) {    
+	    super(props)
+	   this.state = {  
+	       message: '员工类别',
+	       num: 0,
+	       text: '类'
+	   }
+}
+	getPurchaseNum = () => {
+	    axios({
+	        method: 'post',
+	        url: 'https://bip-new15.yyuap.com/mdf-node/uniform/bill/querytree',  // URL是模拟的请求，实际开发中以具体项目为准
+	        params: {
+	            serviceCode: 'GZTBDM010',
+	            terminalType:1,
+	            extend:true,
+	            locale:'zh_CN'
+	        },
+	        data: {
+	            billnum: "bd_psnl_catg",
+	            query:{serviceCode: "GZTBDM010"},
+	            treename: "bd.staff.PsnlCatg"
+	        },
+	        headers: {'Domain-Key': 'staffcenter'},
+	        timeout: 1000
+	    }).then( (response)=> {
+	        // 请求成功后，设置代码的数据
+	        if (response.data.code == 200) {
+	          this.setState({ num:response.data.data.length });
+	        }
+	    });
+	}
+render() {
+	    const { message, num, text } = this.state
+	    return (
+	        <div className={wrapper}>
+	            <h4 className={dynamicTitle}>
+	               <span className={dynamicTitleContent}>{message}</span>
+	            </h4>
+              <div className={dynamicContent}>
+                  <div className={approveTileContent}>
+                    <span 
+className={upuApproveTileNum}
+onClick={this.jumpToPage}>{num}</span>
+                    <span className={upuApproveTileText}>{text}</span>
+                </div>
+	            </div>
+	        </div>
+	    )
+}
+jumpToPage = (key) => {
+	    window.jDiwork && window.jDiwork.openService('GZTBDM010');
+	}
+		componentDidMount(){
+	    this.getPurchaseNum()
+	}
+
+}
+	export default Widget;
+
+再写磁贴的样式，index.css中的示例代码如下。
+.wrapper {
+  font-size: 12px;
+  color: #555;
+  height: 100%;
+}
+.dynamicTitle{
+  padding: 16px;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-bottom: 0;
+  background: rgb(248, 248, 248);
+}
+.dynamicContent {
+  padding: 0 16px 16px;
+}
+.upuApproveTileText{
+  height: 52px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.approveTileContent {
+  display: -ms-flexbox;
+  display: flex;
+}
+.dynamicTitleContent {
+  -ms-flex: 1 1;
+  flex: 1 1;
+  height: 14px;
+  font-size: 14px;
+  font-weight: 400;
+line-height: 14px;
+  color: rgb(17, 17, 17);
+}
+.upuApproveTileNum {
+  color: #000;
+  font-size: 52px;
+  line-height: 60px;
+  font-weight: 300;
+  cursor: pointer;
+}
+
+更新打包配置，在config/entry.js中维护组件路径和打包后的文件名称：
+module.exports = {
+    StaffType: path.resolve(__dirname,'../src/staff_type/main.js'),   
+}
+
+在VSCode编译器中，打开控制台，使用npm run build的命令，对项目进行编译，工程中会自动生成lib文件夹，文件夹中包含编译后StaffType.js的文件。
+完成打包后，在业务中台的【组件管理】节点，点击新增组件，在弹出的页面中，上传打包后的StaffType.js文件， ServiceUrl字段将自动回填。
+
+在工作台管理页签，找到对应的工作台，点击【设计】，进入到工作台设计页面
+
+在左侧企业组件库中，将刚才上传好的组件拖拽至设计器画布中，点击保存
+
+打开对应工作台，看到该组件正常显示
+组件上下文渲染参数
+widgetContext（⼯作台⼀些上下⽂信息）
+参数	类型	参数说明
+profile	String	当前⼯作台的环境：test-测试环境，combine-⽇常环境，pre-预发环境，online-⽣产环境。
+tenantid	String	当前租户id
+userid	String	当前用户id
+username	String	用户名
+locale	String	语种信息
+timezone	String	时区信息
+themeConfig	Object	磁贴的⼀些样式配置信息。由于企业管理员可以在友空间⾥配置不同的显示主题，所以开发者需要通过此参数处理响应的显示样式；
+multilist	String	多语信息
+productLine	String	产品线
+
+引入方式：
+
+import { locale, profile, themeConfig } from "widgetContext";
+
+widgetInstance（当前磁贴的⼀些属性配置信息）
+
+引入方式：
+
+import { serviceCode, widgetName, cardEdit , widgettemplateId } from "widgetInstance";
+
+widgetTool（⼯作台提供的⼯具）
+import { dispatch }from 'widgetTool';
+dispatch('openService', {
+serviceCode: "xxx",
+})
+
+工作台样式配置
+如何更改菜单名
+修改末级非节点：
+菜单管理节点，打开多语言设置，修改多语信息
+
+修改末级节点或未绑定菜单的服务节点：
+进入“我的应用”节点，找到对应服务，修改服务名称即可。
+如何隐藏菜单
+
+需求：在大菜单里不显示某些菜单，即不想在下图中显示 
+
+这里展示的菜单树是通过菜单+服务的方式综合体现的。
+
+菜单按照“菜单管理”节点的路径进行配置，末级菜单的功能是通过绑定的服务实现的；服务未被菜单绑定的，将按照“领域-应用-服务“的菜单路径展示。
+
+故此需求需要细分：
+
+仅在大菜单里不展示，功能节点仍可用
+
+描述 在大菜单里不展示，但是在右上角的搜索中可以按服务搜索出来
+
+解决方案一： 在“菜单管理”节点，找到对应的菜单，停用菜单
+
+在“菜单管理”节点，找不到对应的菜单，即此节点实际是个未被菜单绑定的服务，可以在“菜单管理”中末级节点绑定此服务，然后再停用菜单
+
+解决方案二： 通过数据库脚本修改服务属性(仅专属化适用)
+
+查询工作台的表, schema: iuap_apcom_benchservice, 相关表是 wb_service，租户服务表。
+
+select service\_id,hide\_in\_menu from wb\_service where tenant\_id='' and service\_name='菜单名称';
+
+
+修改查询结果中的hide_in_menu为1
+
+在大菜单不展示，功能节点不再使用
+
+需求描述：
+在大菜单里不展示，在右上角的搜索中也搜索不出来。
+解决方案：
+使用管理员账号登录，在“我的应用”节点里，按名称查询服务，停用此服务。
+
+如何修改业务平台的Logo
+
+要修改这里：
+
+路径：数字化建模-我的企业-企业信息-编辑
+
+如何修改登录页
+
+路径：数字化建模-我的企业-自定义登录页
+
+定义后发布，按发布的地址作为自定义的登录页即可。
+
+常见问题
+工作台磁贴和组件是什么关系？
+
+磁贴是⼯作台⾸⻚上展现的⼩部件，⽀持简单的导航磁贴，或⾃定义的复杂磁贴。组件是针对⼯作台设计态来说的，⼀个组件可以设计出多个磁贴。例如公告组件，按设计时设置的不同属性，可以将通知类公告做成⼀个磁贴，同时将发⽂类公告做成另⼀个磁贴。
+
+停用菜单报：菜单名称重复(仅专属化适用)
+
+停用菜单时，后台校验同级目录下是否有重名的节点
+例如：
+
+专属化环境中，如果可以确认客户没有英文和繁体使用场景，可以手动将数据清空或修改。 首先查询工作台的表, schema: iuap_apcom_benchservice
+
+select service_id,service_name,service_Name_ext2,service_Name_ext3,change_name from wb_service where tenant_id='' and service_name='菜单名称';
+
+
+同时，为防止产品形态升级后，名称再次恢复预制数据，请将记录的change_name置为1。修改后，可以在页面进行菜单节点停用。以下为示例：
+
+停用菜单的：
+select \* from wb\_menuitem where tenant\_id='' and (menu\_item\_name ='timesheet' or menu\_item\_Name\_ext2 ='timesheet' or menu\_item\_Name\_ext3 ='timesheet' or menu\_item\_Name\_ext4 ='timesheet' or menu\_item\_Name\_ext5 ='timesheet' or menu\_item\_Name\_ext6 ='timesheet')
+
+停用服务的：
+select \* from wb\_service where tenant\_id='' and (service\_name='菜单名称' or service\_Name\_ext2='菜单名称' or service\_Name\_ext3='菜单名称' or service\_Name\_ext4='菜单名称' or service\_Name\_ext5='菜单名称' or service\_Name\_ext6='菜单名称
+
+常见问题
+工作台磁贴开发可以使用哪些前端API？
+
+前端相关API可参考： 【友空间云文档】工作台 jDiwork JSSDK 开发指导文档.pdf
+
+工作台如何整体置灰？
+
+业务场景：
+网站页面变灰是互联网服务商在一些全国性或世界性哀悼纪念日自发进行的一种网络纪念活动。例如某某地震哀悼日全国大部分网站都会将页面设置为灰色，以示哀悼。当天很多网站也将网页设置为灰色。
+
+实现思路：通过在css文件中增加filter滤镜样式代码，将网页整体置灰
+
+核心代码：
+
+html {
+     filter:grayscale(.95);
+    -webkit-filter:grayscale(.95);
+}
+
+
+示例方案链接(仅私有化项目使用)：
+iKMYonBIP旗舰版开发赋能蓝皮书-开发方案-专业版自建应用-初级-整体置灰（黑白）方案
+
+登录页常见问题
+copyright区域为用友专用，项目上想修改为定制化内容
+
+答： 可以通过将Copyright的显示设置为否，然后在自定义内容中进行输入。自定义内容支持HTML片段，例如想要对于元素进行定位和更改颜色，或者有需要加入链接的元素。例：
+
+<div style="">自定义内容<a href="">跳转链接</a></div>
+
+私有化项目就是想要域名直接访问，不要带访问标志
+
+答：通过系统管理租户打开定制登录页进行配置即可。
+
+登录前想要进行对于浏览器页签位置进行定制，例如浏览器的favicon和title
+
+答：定制登录页浏览器页签配置即可。
+
+背景位置居左和居中有什么不同
+
+答： 背景位置设置居左为将背景图片以左对齐，适合图片设计为左侧为主要内容，右侧可被遮挡情况， 设置为居中则将图片针对于登录框左侧区域进行居中显示，适合于图片中间区域为主要内容，两侧可被遮挡情况
+
+文档内容是否对您有所帮助？
+为帮助文档评分：
+页内目录
+1. 概述
+1.1 适用场景
+1.2 业务场景
+1.3 关键词
+1.4 专业名词术语
+2. 开发核心内容
+2.1 磁贴开发
+2.1.1 代码构建
+2.1.2 组件上下文渲染参数
+2.2 工作台样式配置
+2.2.1 如何更改菜单名
+2.2.2 如何隐藏菜单
+2.2.3 如何修改业务平台的Logo
+2.2.4 如何修改登录页
+3. 常见问题
+3.1 工作台磁贴和组件是什么关系？
+3.2 停用菜单报：菜单名称重复(仅专属化适用)
+4. 常见问题
+4.1 工作台磁贴开发可以使用哪些前端API？
+4.2 工作台如何整体置灰？
+4.3 登录页常见问题
+4.3.1 copyright区域为用友专用，项目上想修改为定制化内容
+4.3.2 私有化项目就是想要域名直接访问，不要带访问标志
+4.3.3 登录前想要进行对于浏览器页签位置进行定制，例如浏览器的favicon和title
+4.3.4 背景位置居左和居中有什么不同
+文档反馈
+北京市海淀区北清路68号用友产业园
+4006-600-588
+友情链接
+用友官网用友YonHelp用友iuap平台用友云市场用友云注册协议隐私条款
+
+Copyright ©2020 用友网络科技股份有限公司版权所有京ICP备05007539号-24京公网安备11010802021935号
+
+返回顶部
+加载中...

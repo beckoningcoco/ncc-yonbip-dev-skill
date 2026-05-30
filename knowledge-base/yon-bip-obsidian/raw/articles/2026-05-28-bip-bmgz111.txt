@@ -1,0 +1,963 @@
+社区文档中心
+首页
+文档导航
+开发者社区
+社区论坛
+视频教程技术博客
+更多
+张宏涛
+资料中心
+专业开发
+产品概述
+快速入门
+操作指南
+开发指南
+开发介绍
+新功能开发
+移动端开发
+扩展开发
+全球化
+组织
+权限
+特征
+基础数据
+审批流
+业务流
+规则引擎
+公式
+UI模板
+参照
+导入导出
+打印
+对象建模
+编码规则
+编码规则
+编码规则开发
+调度任务
+监控与预警
+日志
+消息平台
+工作台
+事件中心
+文件服务
+YonBuilder应用开发
+前端开发
+后端开发
+移动开发
+安全
+数据库
+DevOps技术
+容器云技术
+区块链云技术
+YMS开发
+智能应用开发
+专项开发
+成果迁移
+技术方案
+最佳实践
+参考手册
+常见问题
+视频教程
+专业开发/开发指南/编码规则/编码规则
+编码规则
+最后更新时间：2024-02-20
+基本概念
+背景
+
+在业务系统中，业务对象通常会有一个业务对象编号，业务对象编号作为业务对象具有业务意义的标识，一般由时间、序列号、常量等子段按照一定的规则拼接而成，这个规则我们称为“编码规则”，各个子段我们称之为“编码元素”。考虑如下的业务对象编号：'TT-20150615-0001'，编码规则为:（常量'TT-'+yyyyMMdd类型的时间'20150615'+常量'-'+序列号'0001'），如果时间变为'20150616'，序列号重新从'0001'开始流水，那么我们称此时间编码元素是“流水依据元素”，所有的流水依据元素合起来叫做本编码规则的“流水依据”。
+
+目前比较少编码规则的开源组件，网上能找到的也只是一些简单的实现类或者设计思路，要么将规则写死在代码中，缺乏通用性和灵活性，要么缺少全面的考虑，本组件提供了一种通用的编码规则解决方案。
+
+本组件的核心是根据编码规则和一些必要信息，生成业务对象编码。本组件提供了存储在数据库中一种实现，提供了基本的增加，删除，修改编码规则的服务方法，用户可以在此调用此服务，开发出自己的编码规则设计工具，也可以直接设计符合自己要求的编码规则数据库结构和服务，编码规则VO符合组件的模型即可（实现组件的规则接口）。
+
+名词解释
+
+业务对象：此处指软件中业务主体，可以是基础数据、单据类型。例如：凭证、人员、采购订单、销售订单等。
+
+编码对象：此处指业务对象中需要进行编码规则定义的主体，可以对应基础数据、单据类型。
+
+**映射对象：**此处指可以定义编码规则主体的具体字段对应的实体。例如人员的所属部门，采购订单的物料。
+
+**编码映射：**指为编码对象定义在编码规则中使用的属性值。
+
+**编码规则：**此处指通过对需要进行分类管理的业务对象进行一系列规则设置，使其在创建时根据定义的规则自动生成档案、单据的编码。
+
+产品亮点
+
+编码规则采取组件方式，部署在业务服务之内，避免了编码规则作为一个单点服务，因为生成编码会是一个非常频繁的，对业务影响很大的场景，如果编码规则作为独立服务，一旦出现问题，将影响范围很大。同时业务服务专属化时也需要把编码规则也专属化。
+
+编码规则使用redis作为预取流水号使用，如果redis出现问题，也可以降级为直接从数据库生成流水号。
+
+技术架构
+总体架构设计
+
+编码规则功能架构：
+
+架构设计
+
+支持的特性：
+
+支持使用元数据/UI元数据/以及不使用元数据为基础的编码规则制订。
+支持前编码、后编码模式，支持引用对象属性值、时间、流水号、常量、随机数等定义编码规则。
+支持多种段类型并作为流水依据。
+支持全局级/租户级编码规则。
+支持手工修改流水号。
+支持断号补号。
+支持离散型映射。
+支持数字流水、字母数字流水。
+编码生成模式
+
+为了提高生成流水号的性能，当用户不启用断号补号时，使用redis做流水号的预取缓存，可以提前预取一定数量的流水号放在缓存里，不用每次去数据库里取，提高生成流水号的效率。
+
+当启用断号补号时，为了保证取号不重复，使用zk锁进行并发的控制。
+
+生成模式
+
+功能介绍
+功能概述
+
+编码规则组件对系统中使用的单据编码、档案编码等自动编码进行统一管理，具有实现按照编码规则定义自动生成编码的功能。通过编码规则定义，可以根据属性、常量、系统时间、流水号等类别的属性按照一定的规则组织自动生成对象编码。通过流水依据、断码补码、流水号管理等功能，使得编码规则管理的更加系统和完善。
+
+编码规则组件包含规则定义、查看流水号、退号查询和编码映射四部分。
+
+规则定义
+
+如下图所示，编码规则定义页面包含编码预览和编码规则设置：
+
+编码规则定义页面
+
+编码规则定义包含如下几项：
+
+编码规则：可选自动编码、手动编码。自动编码走编码规则相当于开启编码规则；手动编码相当于关闭编码规则业务编码需由业务方生成。同时选择自动编码时可以选择是否勾选手工可改，勾选手工可改表示生成编码以后可以对编码进行修改，保存时编码规则会对修改值进行校验如果不重复会使用此值，如果重复则按编码规则进行取值；如果不勾选表示编码不允许修改直接按照编码规则进行取值。
+前缀规则：对编码前缀进行设置，可选类型有常量、属性、系统时间；长度项设置此因子取值长度，流水依据项勾选后生成流水会以此为依据，流水依据变化流水值会重取初始值。
+
+前缀规则
+
+常量：可输入大写字母生成编码
+
+属性：取预制的单据属性生成编码
+
+系统时间：取当前系统时间生成编码
+
+流水号：设置流水号初始值及流水号长度；
+超长截断方式：当设置的编码前缀取值超过所设定的长度时会进行截断，可选左侧截断或右侧截断；
+断码补码：开启断码补码表示一个单据删除时会对编码进行回收复用以保障流水号的连续性，开启断码补码后性能会降低，非必要可不开启；
+补位：与超长截断相反，当设置的编码前缀取值未达到所设定的长度时会进行补位，可设置左侧补位或者右侧补位及补位符。
+查看流水号
+
+查看流水号主要是查看每个流水依据当前的流水值。每个流水依据后有编辑按钮，可对当前流水值进行编辑。编辑流水号可在某些特定场景下使用：比如需要跳过某些流水号生成编码、业务单据出现重码时重置编码等情况。
+
+查看流水号
+
+退号查询
+
+开启断码补码以后，可在此页面查询已经产生的退号数据。
+
+编码映射
+
+有些编码业务场景比如部门为编码属性，生产部门的编码为dep01，但是实际业务场景需要将现有的部分部门编码改成其自定义depcs的进行编码。此时可使用编码映射功能。
+
+比如在填写表单时部门参照里选择部门为“部门1”时，单据号中对应“dep01”，编码组件中生成编码“20180101dep01001”，设置编码映射之后就会编码成20180101depcs001。编码映射节点就负责相关值的配置。
+
+默认映射值：如果部门设置了默认映射值，当表单里选择的具体某个部门未设置映射值就会取默认映射值。
+
+编码映射
+
+开发示例
+编码规则数据预制
+预置表单中需要参与编码的字段
+
+因为每个表单中的字段很多，为了在设置编码规则时方便用户选择字段只显示参与编码的字段，需要在aa_billprefabricate表里添加表单里需要参与编码的字段。
+
+字段说明：
+
+列	中文名	备注
+autoid	主键	数据库自增主键
+cbillnum	表单号	表单模式填表单编码
+cprefix	前缀名	预制字段的中文名称或多语key
+cprefixid	前缀ID	使用UUID
+cprefixtype	前缀类型（2列填一样的）	0=字符串 1=时间
+iprefixtype	0=字符串 1=时间	
+ipurpose	是否取值	设置为0
+csourcename	取billitem_base里的cdatasourceName	必填
+cfieldname	取billitem_base里的cFieldNameCname	必填
+carchname		不需要填
+carchfieldname		不需要填
+carchclsfieldname		不需要填
+ckeyword		不需要填
+ckeywordnamefield		不需要填
+tenant_id	租户	营销云租户模式填写，系统租户填0
+yhtTenantId		友户通模式填写
+bMain	是否主表字段	填1，必填
+refPropType	字段是参照时，存入该字段的值类型	值类型：0=id，1=code，2=name ，目前只能填0；当不使用该字段作为条件属性时，可不填
+refDomain	字段是参照时，参照所属领域	当不使用该字段作为条件属性时，可不填
+refCode	字段是参照时，参照编码	当不使用该字段作为条件属性时，可不填
+ytenant_id	统一租户字段	
+
+aa_billprefabricate预制数据的效果图如下：
+
+属性预制
+
+预置编码规则数据
+
+需要预置编码规则数据请按以下说明在对应表中填写数据，不需要请忽略。
+
+预置主表数据aa_billnumber
+
+aa_billnumber		
+列	中文名	备注
+autoid	主键	自增列
+tenant_id	租户ID	营销云租户模式填写，系统租户填0
+orgId	组织ID	默认为填-1，必填
+cbillnum	表单号	表单模式下是表单编码，元数据模式下是元数据uri
+cbillname	表单名称	必填
+csubid	subid	使用bill_base表中的cSub_id字段
+ballowhandwork	根据billnumMode备注填写	手动可改=1，非手动可改=0
+brepeatredo	根据billnumMode备注填写	自动编码=1 非自动编码=0
+istartnumber	流水号初始值	和billnumInit保持一致
+iseriallen	流水号长度	和billnumLen保持一致
+billnumLen	流水号长度	填1-10的数字
+billnumInit	流水号初始值	一般填1，表示从1开始
+billnumTruncatType	截断类型0 = 左截断 1 = 右截断	填0即可
+billnumFillType	补位类型0=不补位 1=左补位 2=右补位	填1即可
+billnumFillMark	补位符	可不填
+billnumMode	0=手工编号 1=自动编号 2=自动编号 手工可改	billnumMode=0时，ballowhandwork=1、brepeatredo=0；billnumMode=1时，ballowhandwork=0、brepeatredo=1；billnumMode=2时，ballowhandwork=1、brepeatredo=1；
+billnumRule	使用规则 0 企业默认 1 自定义规则	0租户预制，填0
+isReuse	是否开启退号补号	默认不开启，填0
+sysid	系统ID	默认填写 diwork
+datatype	编码实体类型，1：表单，2：元数据，3：自定义实体	填1即可，使用mdd-ext框架默认是表单类型
+rulecode	规则编码，编码规则服务关联查询	与cbillnum字段保持一致即可
+rulename	规则名称	自定义
+dr	删除标记 1：已删除，0：未删除	可不填，目前不支持逻辑删除，请使用物理删除
+pubts	时间戳	可不填，默认会获取当前时间戳
+yhtTenantId	友户通租户	友户通模式填写
+sntype	流水类型	填0即可
+isDefualt	是否默认	填1即可，必填，不可为空！
+code	规则编码，编码规则组件关联查询	预制数据时，保持和cbillnum一致即可，必填，不可为空！
+ytenant_id	统一租户字段	
+
+预置子表（前缀）数据aa_billprefix
+
+aa_billprefix		
+列名	中文名	备注
+autoid	主键	自增列
+tenant_id	租户ID	营销云租户模式填写，系统租户填0
+orgId	组织ID	默认填-1，必填
+cprefix	前缀名称	和预置表aa_billprefabricate里的cprefix字段保持一致
+iprefixlen	前缀长度	如果前缀是常量时，长度必须是
+cprefixrule	取值规则（例如yyyyMMdd，yyMMdd，yyyyMM，yyMM，yyyy，yy）	前缀类型为日期时会用到；前缀类型为常量时，填写常量值（大写字母）；其他类型为空
+cprefixseed	依据参数：如y，yM，yMd	前缀类型是日期的时候会用到，其他类型为空
+iorder	排序字段	前缀的排序顺序号
+bfix	是否依据	是否作为流水依据
+cprefixid	前缀id	和预置表aa_billprefabricate里的cprefixid字段保持一致
+cprefixtype	属性：【字符型：0，日期型：1】，常量：2，系统时间：3	属性时，和预置表aa_billprefabricate里的cprefixtype字段保持一致
+cprefixsep	关联前缀预设的id	前缀间的分隔符， 没有的话为空
+cfieldname		和预置表aa_billprefabricate里的cfieldname字段保持一致
+csourcename		和预置表aa_billprefabricate里的csourcename字段保持一致
+ipurpose		和预置表aa_billprefabricate里的ipurpose字段保持一致
+fillstyle	补位类型	和表aa_billnumber表中的billnumFillType字段保持一致
+fillsign	补位符	和表aa_billnumber表中的billnumFillMark字段保持一致
+billnumberid		对应aa_billnumber表中的主键id
+dr	删除标记 1：已删除，0：未删除	可不填
+pubts	时间戳	可不填
+cbillnum		和预置表aa_billprefabricate里的cbillnum字段保持一致
+yhtTenantId		友户通模式填写
+formula	公式	没有公式可不填
+formuladisplay	公式显示	没有公式可不填
+bMain	是否主表字段	填1即可，必填
+billnumberCode	规则编码，关联外键	aa_billnumber表的code字段，必填，不可为空！
+ytenant_id	统一租户字段	
+
+aa_billprefix预制数据的效果图如下：
+
+编码前缀预制
+
+编码规则定义
+注册领域应用
+
+在公共服务中注册领域应用，控制编码规则左侧领域业务树第一级和第二级能否展示。
+
+注意：
+
+（1）第一级和第二级数据来源于工作台，注册表只用来过滤数据的。确认aa_regist_conf表有节点注册信息。
+
+（2）第三级数据来源于领域数据库中bill_base表里isCoded=1的单据数据。
+
+注意：isCoded设为1后如果没有显示第三节点，请检查第二节点是否注册在公共服务里。
+
+设置需要使用编码的表单
+
+bill_base表里增加字段 isCoded BIT（1） NOT NULL DEFAULT b'0'， 需要使用编码规则服务的表单 ，就标成1（若元数据code 上未打【编码】标签，需在对应的元数据实体code字段上打标签）。
+
+配置文件
+redis配置
+
+spring.redis.database=0
+
+spring.redis.host= //redis的url
+
+spring.redis.password= //redis的密码
+
+spring.redis.port= //端口
+
+spring.redis.ssl=false
+
+spring.redis.timeout=5000
+
+spring.redis.jedis.pool.max-active=@pom.redis.poolSize@
+
+zk配置
+
+zklock.url=@pom.zklock.url@
+
+#锁存活最大时间，单位秒，默认60
+
+zklock.maxlocktime=60
+
+元数据APi
+
+#元数据
+
+metadata.api.url=@pom.metadata.api.url@
+
+metadata.cache.timeout=6000
+
+metadata.cache.maximumsize=100000
+
+编码缓存功能设置
+
+在非断码补码模式下，编码规则服务有缓存流水号功能可以提高获取流水号的性能，在application.properties文件中增加以下2个配置项可以配置缓存功能
+
+#设置是否启用流水号缓存，默认启用
+
+A45.cacheenable=true
+
+billcode.cacheenable=true（过时）
+
+#表示缓存的最大数据量，默认10
+
+A45.cachemax=10
+
+billcode.cachemax=10（过时）
+
+#表示缓存的最小数据量，默认1
+
+A45.cachemin=1
+
+billcode.cachemin=1（过时）
+
+#设置租户模式，1：友户通 2：营销云（默认）
+
+A45.tenantmode=1
+
+billcode.tenantmode=1（过时）
+
+备注：编码规则配置项，以billcode.开头的配置项全部更换成以A45.开头。
+
+编码缓存设置风险说明
+
+缓存的最大数据量，自定义修改后
+
+如4.2.4章节A45.cachemax=10 ，该项被修改后，当业务单据对应的编码规则配置是自动编码手工可改时，以下场景将出现跳号现象，随着缓存值越大跳号范围越明显
+
+批量导入单据，单据号手工修改
+单据新增时手工修改流水号
+删除单据，且未打开断码补码
+误删除编码规则缓存redis key
+
+所以建议开发人员和项目实施人员根据业务场景合理评估是否启用缓存、缓存大小值。
+
+Redis Key清理时，注意编码规则key保护
+
+编码规则启用流水缓存后，新增单据编号走的是预取模式，会直接从redis获取提前生成的编号使用，所以开发人员/运维人员在上线功能和迁移环境时，特别要注意redis缓存key清理的黑名单控制，如：
+
+Keys=’MddExtbillrule_* billcode action_* actionAuth_*’ 是严格控制不能清理的
+
+因为清理后，系统会认为预先生产的编码已被使用，需要继续新生产下一批新号。
+
+这样常出现的业务场景问题如下：
+
+单据新增时提示“没有多余的单据号可供分配”
+单据列表出现单据编码断号情况
+编码规则接入
+组件式
+maven依赖
+
+com.yonyou.iuap
+
+iuap-billcode-component
+
+API说明
+
+接口：com.yonyou.uap.billcode.service.IBillCodeComponentService
+
+接口说明：运行态组件生成编码提供的一系列方法
+
+getBillCodeContext 获取编码规则的上下文
+
+BillCodeContext getBillCodeContext（BillCodeComponentParam billCodeParam） throws BillCodeException
+
+使用如下构造方法：
+
+public BillCodeComponentParam（String bizObjCode， String cbillnum， String tenantId， String orgId）
+
+参数说明： |:---|:---|:---|:---| |参数名称|参数类型|参数说明|是否必填||bizObjCode|String|业务对象编码|是||cbillnum|String|aa_billnumber表cbillnum字段值|是||tenantId|String|租户id|是||orgId|String|组织id|是|
+
+响应参数： |:---|:---|:---| |返回参数|参数类型|参数说明||BillCodeContext|BillCodeContext|编码规则的上下文信息|
+
+响应示例：
+
+{
+
+"isEditable": "true"， //是否可编辑
+
+"billnumMode": 0 //0=手工编号 1=自动编号 2=自动编号 手工可改
+
+}
+
+异常示例：
+
+{
+
+"errorCode": "1010800000021"，
+
+"message":"查询编码配置发生异常"
+
+}
+
+错误码解释： |:---|:---|:---| |错误码|错误消息|解决方案||1010800000021|查询编码配置发生异常|检查是否当前租户是否配置了编码规则（aa_billnumber表）|
+
+注意：
+
+（1）0=手工编号：指关闭了编码规则，则不要再调用获取编码的方法，此时需要校验单据编码字段是否为空，如果为空抛异常提示用户输入编码；
+
+（2）1=自动编号：指开启纯自动编码，不管单据编码字段是否有值，直接调用获取编码的方法，然后将生成的编码赋值到编码字段入库。
+
+（3）2=自动编号 手工可改：指混合模式，先判断单据中前端传入的编码是否重复，如果编码重复或者为空，则调用获取编码的方法，如果编码不重复，则直接使用且不需调用取号的方法。
+
+getBatchBillCodes 批量获取编码
+
+String[] getBatchBillCodes（BillCodeComponentParam billCodeParam） throws BillCodeException
+
+使用如下构造方法：
+
+public BillCodeComponentParam（String bizObjCode， String cbillnum， String tenantId， String orgId， String mdUri， BillCodeObj[] bills）
+
+参数说明： |:---|:---|:---|:---| |参数名称|参数类型|参数说明|是否必填||bizObjCode|String|业务对象编码|是||cbillnum|String|aa_billnumber表cbillnum字段值|是||tenantId|String|租户id|是||orgId|String|组织id|是 无orgId写默认值-1||mdUri|String|元数据uri|是||bills|String|表单数据，使用BillCodeObj进行包装后组成数组，生成编码的个数就是数组长度|是|
+
+响应参数： |:---|:---|:---| |参数名称|参数类型|参数说明||code|String[]|编码规则批量生成的编码|
+
+响应示例：
+
+{
+
+"CGD201909100001"，"CGD201909100002"，"CGD201909100003"
+
+}
+
+异常示例：
+
+}
+
+"errorCode": "1010800000021"，
+
+"message":"查询编码配置发生异常"
+
+}
+
+错误码解释： |:---|:---|:---| |错误码|错误消息|解决方案||1010800000014|没有多余的单据号可供分配|加大流水号长度或者修改流水依据||1010800000017|未能查到前缀{0}对应的数据|检查前缀中用到的属性是否在表单中传了||1010800000028|加锁失败|检查代码中配置的zk锁地址是否可用|
+
+注意：由于从编码规则的配置页面上可以将流水号改小，所以通过此方法获取到编码后，需要校验该编码在业务表中是否重复，如果重复需要重新取号。
+
+commitBatchBillCodes 批量提交单据编码，获取到的编码在业务方保存后，提交当前使用的编码
+
+void commitBatchBillCodes（BillCodeComponentParam billCodeParam） throws BillCodeException
+
+使用如下构造方法：
+
+public BillCodeComponentParam（String bizObjCode， String cbillnum， String tenantId， String orgId， String[] billCodes）
+
+参数说明： |:---|:---|:---|:---| |参数名称|参数类型|参数说明|是否必填||bizObjCode|String|业务对象编码|是||cbillnum|String|aa_billnumber表cbillnum字段值|是||tenantId|String|租户id|是||orgId|String|组织id|是||billCodes|String[]|需要提交的编码|是|
+
+响应参数：无
+
+异常示例：
+
+{
+
+"errorCode": "1010800000021"，
+
+"message":"查询编码配置发生异常"
+
+}
+
+错误码解释： |:---|:---|:---| |错误码|错误消息|解决方案||1010800000011|传入的编码与规则不匹配|查看提交的编码和配置的规则是否匹配||1010800000012|传入的编码为空|检查参数billcode是否为空|
+
+rollbackBatchBillCode批量回滚编码，当保存失败时，事务回滚时调用方法
+
+void rollbackBatchBillCodes（BillCodeComponentParam billCodeParam） throws BillCodeException
+
+使用如下构造方法：
+
+public BillCodeComponentParam（String bizObjCode， String cbillnum， String tenantId， String orgId， String[] billCodes）
+
+参数说明：同上提交编码时的参数
+
+响应参数：无
+
+异常示例：
+
+{
+
+"errorCode": "1010800000021"，
+
+"message":"查询编码配置发生异常"
+
+}
+
+错误码解释： |:---|:---|:---| |错误码|错误消息|解决方案||1010800000019|回退的编码和编码规则长度不匹配|只有固定长度的规则才可以回退号码，请检查规则配置|
+
+提交和回滚编码的方法使用实例：
+
+if （TransactionSynchronizationManager.isActualTransactionActive（）） {
+
+TransactionSynchronizationManager.registerSynchronization（new TransactionSynchronizationAdapter（） {
+
+@Override
+
+public void afterCommit（） {
+
+try {
+
+billCodeComponentService.commitBatchBillCodes（billCodeComponentParam）;
+
+} catch （Exception e） {
+
+}
+
+}
+
+@Override
+
+public void afterCompletion（int status） {
+
+if （status == STATUS_ROLLED_BACK） {
+
+try {
+
+billCodeComponentService.rollbackBatchBillCodes（billCodeComponentParam）;
+
+} catch （Exception e） {
+
+}
+
+}
+
+}
+
+}
+
+}
+
+returnBatchBillCode批量退号，单据删除（或批量删除）
+
+void returnBatchBillCodes（BillCodeComponentParam billCodeParam） throws BillCodeException
+
+使用如下构造方法：
+
+public BillCodeComponentParam（String bizObjCode， String cbillnum， String tenantId， String orgId， String[] billCodes）
+
+参数说明：同上提交编码时的参数
+
+响应参数：无
+
+异常示例：
+
+{
+
+"errorCode": "1010800000021"，
+
+"message":"查询编码配置发生异常"
+
+}
+
+错误码解释： |:---|:---|:---| |错误码|错误消息|解决方案||1010800000019|回退的编码和编码规则长度不匹配|只有固定长度的规则才可以回退号码，请检查规则配置|
+
+服务式
+
+接口：com.yonyou.uap.billcode.service.IBillCodeService。
+
+服务式提供的接口与组件式提供接口类似，只是调用方式不同，可参照4.3.1.2使用。
+
+典型业务场景介绍
+编码规则定义
+
+进入编码规则定义节点，进行编码规则编辑或新增。
+
+图 13
+
+编码规则：可选自动编码、手动编码。自动编码走编码规则相当于开启编码规则；手动编码相当于关闭编码规则业务编码需由业务方生成。同时选择自动编码时可以选择是否勾选手工可改，勾选手工可改表示生成编码以后可以对编码进行修改，保存时编码规则会对修改值进行校验如果不重复会使用此值，如果重复则按编码规则进行取值；如果不勾选表示编码不允许修改直接按照编码规则进行取值。
+前缀规则：对编码前缀进行设置，可选类型有常量、属性、系统时间；长度项设置此因子取值长度，流水依据项勾选后生成流水会以此为依据，流水依据变化流水值会重取初始值。
+
+前缀规则
+
+常量：可输入大写字母生成编码
+
+属性：取预制的单据属性生成编码
+
+系统时间：取当前系统时间生成编码
+
+流水号：设置流水号初始值及流水号长度；
+超长截断方式：当设置的编码前缀取值超过所设定的长度时会进行截断，可选左侧截断或右侧截断；
+断码补码：开启断码补码表示一个单据删除时会对编码进行回收复用以保障流水号的连续性，开启断码补码后性能会降低，非必要可不开启；
+补位：与超长截断相反，当设置的编码前缀取值未达到所设定的长度时会进行补位，可设置左侧补位或者右侧补位及补位符。
+编码映射
+
+有些编码业务场景比如部门为编码属性，生产部门的编码为dep01，但是实际业务场景需要将现有的部分部门编码改成其自定义depcs的进行编码。此时可使用编码映射功能。
+
+比如在填写表单时部门参照里选择部门为“部门1”时，单据号中对应“dep01”，编码组件中生成编码“20180101dep01001”，设置编码映射之后就会编码成20180101depcs001。编码映射节点就负责相关值的配置。
+
+默认映射值：如果部门设置了默认映射值，当表单里选择的具体某个部门未设置映射值就会取默认映射值。
+
+点击管理中心主界面左上角搜索编码映射，进入编码映射界面，如下图所示。鼠标放到每行的操作处，出现编辑按钮。
+
+编码映射主界面
+
+点击编辑，进入编码映射编辑界面，如下图所示：
+
+编码映射编辑页面
+
+点击增行，新增编码映射。鼠标放到每行的操作处，出现删行按钮。点击〖保存〗保存当前编码规则映射。
+
+修改编码流水
+
+查看流水号可以直接修改不同流水依据的编码的流水数值，常见于业务单据出现重码时重置编码用。
+
+修改流水号
+
+断码补码
+
+如果在定义编码规则时开启“断码补码”，则编码规则会将删除的业务单据中的编码重新利用，断码可以在退号查询中查看。
+
+退号查询
+
+开放接口说明
+
+编码组件对外提供RESTful和加签两种调用方式，RESTful方式通过上下文中的用户登录信息验证请求合法性，加签调用方式通过加签文件验证。
+
+RESTful接口
+
+任何系统通过API网关可以调用的接口。
+
+接口：com.yonyou.ucf.mdd.ext.bill.controller.BillNumberController；
+
+生成编码
+
+新增页面或页面编码元素有变化时调用此接口生成编码。
+
+（1）请求体：
+
+	
+URl	${A45.component.context-path:}/billNumber/createCode
+Method	POST
+
+（3）请求参数说明：
+
+			
+参数	参数类型	是否必须	说明
+bizObject	Json	否	业务对象
+bizObjCode	String	否	业务对象编码
+billNum	String	与bizObjCode不同时为空	单据编码
+orgId	String	否	机构id 默认-1
+triggerField	String	否	编码属性有变化时表单中的编码属性
+
+（4）返回值
+
+获取编码成功：
+
+{
+
+"code": 200，
+
+"message": "map"，
+
+"data": {
+
+"result": {
+
+"code": {
+
+"billnumMode": 2，
+
+"cbillnum": "duty"，
+
+"autoid": "1431397082353110899"，
+
+"ruleName": "职务列表模板"，
+
+"bizObjCode": null，
+
+"value": "00000001"，
+
+"orgId": "-1"
+
+}
+
+}，
+
+"resultType": "map"
+
+}
+
+}
+
+
+（5）返回参数说明
+
+		
+参数	参数类型	说明
+billnumMode	String	编码模式 0=手工编号 1=自动编号 2=自动编号 手工可改
+value	String	编码值
+cbillnum	String	编码code
+ruleName	String	规则名称
+bizObjCode	String	业务对象名称
+orgId	String	机构id
+autoid	String	编码规则id
+根据code查询编码规则对象
+
+（1）请求体：
+
+	
+URl	${A45.component.context-path:}/billNumber/findByBillNum
+Method	GET
+
+（3）请求参数说明：
+
+			
+参数	参数类型	是否必须	说明
+bizObject	Json	否	业务对象
+bizObjCode	String	否	业务对象编码
+billNum	String	与bizObjCode不同时为空	单据编码
+orgId	String	否	机构id 默认-1
+
+（4）返回值
+
+获取编码成功：
+
+{
+
+"cbillnum": "duty"，
+
+"cbillname": "职务列表模板"，
+
+"csubid": "bd"，
+
+"ballowhandwork": 1，
+
+"brepeatredo": 1，
+
+"istartnumber": 1，
+
+"iseriallen": 8，
+
+"autoid": "1431397082353110899"，
+
+"orgId": "-1"，
+
+"billnumLen": 8，
+
+"billnumInit": 1，
+
+"billnumTruncatType": 0，
+
+"billnumFillType": 1，
+
+"billnumFillMark": "0"，
+
+"billnumMode": 2，
+
+"billnumRule": 0，
+
+"tenantId": "0000KZQKCKBEDOLAFK0000"，
+
+"yhtTenantId": "0000KZQKCKBEDOLAFK0000"，
+
+"isReuse": false，
+
+"metaId": null，
+
+"dataType": 1，
+
+"sysId": "diwork"，
+
+"ruleCode": "duty"，
+
+"ruleName": "职务列表模板"，
+
+"codeMode": null，
+
+"snType": 0，
+
+"isDefault": true，
+
+"code": "duty"，
+
+"pubts": "2022-04-13T07:57:40.000+00:00"，
+
+"isSystem": false，
+
+"ytenantId": "0000KZQKCKBEDOLAFK0000"，
+
+"isvTag": null，
+
+"billPrefabricate": [
+
+{
+
+"autoid": "1431397082353109499"，
+
+"cbillnum": "duty"，
+
+"cprefix": "职务类别"，
+
+"cprefixresid": "P_YS_PF_GZTSYS_0000012645"，
+
+"cprefixid": "d8522a4d-c50d-4b22-a1d2-e9d4626f6474"，
+
+"cprefixtype": 0，
+
+"iprefixtype": 0，
+
+"ipurpose": 0，
+
+"csourcename": "bd.duty.Duty"，
+
+"cfieldname": "jobtype_id"，
+
+"carchname": null，
+
+"carchfieldname": null，
+
+"carchclsfieldname": null，
+
+"ckeyword": null，
+
+"ckeywordnamefield": null，
+
+"tenantId": "default-from-mdd"，
+
+"editpro": null，
+
+"cmdId": "b2f08443-e693-453c-a005-3c1dcc11af06"，
+
+"yhtTenantId": "0000KZQKCKBEDOLAFK0000"，
+
+"bMain": 1，
+
+"refDomain": null，
+
+"refCode": null，
+
+"refMdId": "b2f08443-e693-453c-a005-3c1dcc11af06"，
+
+"refPropType": null，
+
+"ytenantId": "0000KZQKCKBEDOLAFK0000"，
+
+"isvTag": null，
+
+"cfieldsrctype": 0
+
+}
+
+]，
+
+"billPrefix": []，
+
+"billCondition": null，
+
+"hmBillPrefabricate": null，
+
+"reuse": false
+
+}
+
+
+（5）返回参数说明
+
+参照4.1.2关于aa_billnumber表说明。
+
+RPC调用接口
+接入
+
+引入编码规则sdk
+
+<dependency>
+
+<groupId>com.yonyou.iuap</groupId>
+
+<artifactId>iuap-billcode-sdk</artifactId>
+
+</dependency>
+
+
+编码规则提供的rpc接口在如下类:
+
+com.yonyou.uap.billcode.service.IBillCodeService
+
+主要接口说明
+
+参照4.3.2
+
+文档内容是否对您有所帮助？
+为帮助文档评分：
+页内目录
+1. 基本概念
+1.1 背景
+1.2 名词解释
+1.3 产品亮点
+2. 技术架构
+2.1 总体架构设计
+2.2 编码生成模式
+3. 功能介绍
+3.1 功能概述
+3.2 规则定义
+3.3 查看流水号
+3.4 退号查询
+3.5 编码映射
+4. 开发示例
+4.1 编码规则数据预制
+4.1.1 预置表单中需要参与编码的字段
+4.1.2 预置编码规则数据
+4.1.3 编码规则定义
+4.2 配置文件
+4.2.1 redis配置
+4.2.2 zk配置
+4.2.3 元数据APi
+4.2.4 编码缓存功能设置
+4.2.5 编码缓存设置风险说明
+4.3 编码规则接入
+4.3.1 组件式
+4.3.2 服务式
+5. 典型业务场景介绍
+5.1 编码规则定义
+5.2 编码映射
+5.3 修改编码流水
+5.4 断码补码
+6. 开放接口说明
+6.1 RESTful接口
+6.1.1 生成编码
+6.1.2 根据code查询编码规则对象
+6.2 RPC调用接口
+6.2.1 接入
+6.2.2 主要接口说明
+文档反馈
+北京市海淀区北清路68号用友产业园
+4006-600-588
+友情链接
+用友官网用友YonHelp用友iuap平台用友云市场用友云注册协议隐私条款
+
+Copyright ©2020 用友网络科技股份有限公司版权所有京ICP备05007539号-24京公网安备11010802021935号
+
+返回顶部
+加载中...

@@ -1,0 +1,423 @@
+社区文档中心
+首页
+文档导航
+开发者社区
+社区论坛
+视频教程技术博客
+更多
+张宏涛
+资料中心
+专业开发
+产品概述
+快速入门
+操作指南
+开发指南
+开发介绍
+新功能开发
+移动端开发
+扩展开发
+全球化
+组织
+权限
+权限管理
+字段权限开发
+数据权限开发
+组织权限开发
+特征
+基础数据
+审批流
+业务流
+规则引擎
+公式
+UI模板
+参照
+导入导出
+打印
+对象建模
+编码规则
+调度任务
+监控与预警
+日志
+消息平台
+工作台
+事件中心
+文件服务
+YonBuilder应用开发
+前端开发
+后端开发
+移动开发
+安全
+数据库
+DevOps技术
+容器云技术
+区块链云技术
+YMS开发
+智能应用开发
+专项开发
+成果迁移
+技术方案
+最佳实践
+参考手册
+常见问题
+视频教程
+专业开发/开发指南/权限/组织权限开发
+组织权限开发
+最后更新时间：2025-04-27
+概述
+适用场景
+部署方案	开发类型	是否适用
+公有云	客户化定制开发	否
+私有云	客户化定制开发	是
+专属云	客户化定制开发	是
+公有云	ISV生态开发	否
+私有云	ISV生态开发	是
+专属云	ISV生态开发	是
+业务场景
+
+在业务过程中，业务系统经常需要根据组织对数据进行筛选，以实现不同用户对不同数据行进行权限的区分。大多业务系统中已经创建了基于组织的数据记录，并对数据进行了主组织的设定。本质上，主组织权限是一种特化的数据权限。
+
+由于此类业务的广泛使用，BIP权限中心独立对主组织权限进行支持。BIP权限中心能够通过对主组织权限的设定与查询来实现业务系统的主组织权限诉求。
+
+关键词
+
+专业版、开发、角色、组织、主组织、权限、授权
+
+名词解释
+
+角色：与RBAC模型中的角色概念相同。允许用户与角色关联，通过角色关联具体功能权限、数据权限、敏感权限等具体权限内容。角色必然属于组织，默认隶属于租户的顶级组织。值得说明的是，现有模型下，角色的组织仅用于角色的分类，与主组织权限没有联系。
+
+授权：将用户和角色相关联的动作称为授权。
+
+主组织：针对涉及组织的业务数据，至少会与一个组织相关。如果与不止一个组织相关，也一定会有唯一一个组织与本业务核心业务相关，成为主组织。主组织将影响该业务数据的数据权限。
+
+主组织权限：又称组织权限。可以理解为一种特殊处理的数据权限。主组织权限的判定逻辑是业务方案具体的需求规定的，用户将由授权（即用户-角色关联关系）中的组织权限确定其组织列表，来决定业务数据的权限。
+
+分配组织：分配组织是在一个用户-角色授权的基础上，设定多个组织，用于主组织权限相关判定。
+
+组织：是一个租户下的概念。对于单组织租户，仅有一个默认组织；对于多组织租户，租户中的组织可以呈树形。单组织可以单向切换为多组织模式，不可反向切换。
+
+快速上手
+
+本小节介绍如何在YonBIP旗舰版当中配置主组织权限。主组织权限依赖于用户和角色，首先需要将角色授权给用户，然后在此授权的基础之上进行主组织的分配工作。
+
+应用构建时，在业务对象上勾选主组织，以使业务对象支持主组织的功能。
+
+主组织权限的配置需要有角色作为主体，也就是数字化建模->权限管理->角色管理->角色管理节点当中新建对应的角色。
+
+用户和角色的关联（授权）是进行主组织权限赋予的前提条件。关联的角色的要包含已经授权的服务，否则该角色下的用户将失去所有组织权限。
+
+通过数字化建模->权限管理->授权->授权节点功能，在授权关联完成后，在最右侧数据上的按钮“分配组织”进行主组织权限的设定。通过勾选组织树上的组织，保存后即可设置完毕。
+
+深入理解
+
+主组织权限会根据授权当中给当前用户分配的主组织进行数据上的过滤操作。例如主组织的参照，在对应的业务节点进行数据的查询操作等。
+
+存储结构
+
+主组织授权以后会在后台数据库当中进行存储，存储库表为在iuap_apcom_auth.role_user_orgauth。在该数据库表单当中存在以下几个比较关键的列：
+
+resourceid: 对应的组织的主键，也就是iuap_apdoc_basedoc.org_orgs表的主键字段。
+
+role_id: 角色主键
+
+user_id: 用户主键
+
+运行逻辑
+
+每次我们做依赖于主组织权限的操作的时候都需要调用权限中心服务的相关接口获取到当前登录用户的主组织权限。下面我们以列表查询为例展示获取主组织权限的过程，为我们排查问题提供相关的解决思路。
+
+所有列表查询的操作都是走到了com.yonyou.ypd.bill.controller.YpdBillController#list，这个是YPD框架前端通用列表查询的controller，在该方法当中封装了查询逻辑、扩展点的逻辑、前端扩展脚本以及权限相关的逻辑。每个通用类型的操作，例如新增、保存、提交等都对应于后端的一个com.yonyou.ypd.bill.action.AbsCommonBillAction实现类，在列表查询操作当中就是com.yonyou.ypd.bill.action.AbsBillQueryAction的实现类，以该类的queryBillData为例，在该类的查询方法中调用了数据查询类的分页查询方法，即为com.yonyou.ucf.mdd.ext.dao.meta.MetaDaoHelper#queryByPage(com.yonyou.ucf.mdd.ext.model.BillContext, org.imeta.orm.schema.QuerySchema, java.util.List<org.imeta.orm.schema.QueryField>)方法，该方法中调用了查询执行器的分页查询方法，即执行了com.yonyou.ucf.mdd.ext.dao.meta.crud.QuerySchemaExecutor#executeByPage(java.lang.String, org.imeta.orm.schema.QuerySchema, java.util.List<org.imeta.orm.schema.QueryField>, java.util.List<java.lang.String>)方法，在该方法中存在数据权限处理模块的调用，即com.yonyou.ucf.mdd.ext.dao.meta.crud.QuerySchemaExecutor#handleDataPermission方法的调用，并且最终通过com.yonyou.permission.util.AuthSdkFacadeUtils#handleAuthPermission(java.lang.Object, java.lang.Object) 调用了权限服务，获取到对应的用户主组织权限。
+
+主组织权限的调用我们可以通过arthas线上调式的方式查看目标权限服务上com.yonyou.permission.itf.bill.IBillAuthOrgPermission#remoteCallMasterOrgPermissionByRole实现类相应的处理过程及返回数据。
+
+API服务
+
+主组织权限对应的服务名称是权限中心，可以在技术中台的微服务管理当中查找到对应的微服务。 权限服务通过RPC接口的方式提供了若干操作主组织权限的方法，如下列所示：
+
+新增用户主组织权限（RPC）
+
+接口名称：IRoleUserDataPermissionService
+
+方法名称：addUserDataPermissions
+
+方法说明：新增用户主组织权限
+
+参数列表：
+
+返回值：
+
+List（com.yonyou.uap.tenantauth.entity.RoleUserDataPermissionVO ）
+
+说明：主组织权限List集合
+
+通过资源id删除用户的主组织权限（RPC）
+
+接口名称：IRoleUserDataPermissionService
+
+方法名称：deleteByResourceId
+
+方法说明：通过资源id、角色id、用户id删除指定用户的主组织权限
+
+参数列表：
+
+返回值：void
+
+通过资源类型删除用户的主组织权限(RPC)
+
+接口名称：IRoleUserDataPermissionService
+
+方法名称：deleteByUserIdAndResourceTypeCode
+
+方法说明：通过角色id列表、资源类型、用户id删除指定用户的主组织权限
+
+参数列表：
+
+返回值：void
+
+保存用户主组织权限(RPC)
+
+接口名称：IRoleUserDataPermissionService
+
+方法名称：saveUserDataPermissions
+
+方法说明：保存用户主组织权限
+
+参数列表：
+
+返回值：
+
+List（com.yonyou.uap.tenantauth.entity.RoleUserDataPermissionVO ）
+
+说明：主组织权限List集合
+
+查询指定用户的组织权限列表（RPC）
+
+接口名称：IServiceIsolateService
+
+方法名称：findMainOrgPermissionGroupByRole
+
+方法说明：根据服务编码、用户ID查的组织权限列表（出参的组织权限是按照角色进行分组的）
+
+参数列表：
+
+返回值： List data
+
+形如：
+
+[{"source":"role",---->"role/org/ncc/duty""roleId":"1221233ddd","resourceIds": ["1232","123333333"]}]
+根据停用状态筛选，查询主组织权限列表
+
+接口名称：IServiceIsolateService
+
+方法名称：findMainOrgPermission
+
+方法说明：根据给定的服务编码、停用状态、用户ID查询组织权限
+
+参数列表：
+
+返回值：List
+
+说明：组织编码List集合
+
+查询指定用户的组织权限列表(RPC)
+
+接口名称：IServiceIsolateService
+
+方法名称：findUserDataPermission
+
+方法说明：根据用户ID、隔离维度编码、服务编码查询组织权限列表。（此接口在隔离维度的通用性强）
+
+参数列表：
+
+返回值：List
+
+说明：组织编码List集合
+
+查询指定用户的组织权限列表（网关调用,针对部分项目RPC不能使用情况）
+
+接口URL：[域名]/service-adapter/rpc-adapter/gateway/
+
+方法：POST
+
+接口说明：根据用户ID、隔离维度编码、服务编码查询组织权限列表。
+
+参数列表：
+
+返回值：JSON（基于com.yonyou.ucf.mdd.ext.dto.ResponseDto）
+
+说明：组织编码List集合 data
+
+形如：["1","2"]
+
+根据角色ID列表，查询指定用户的资源ID列表(RPC)
+
+接口名称：IRoleUserDataPermissionService
+
+方法名称：findResourceIdByRoleIds
+
+方法说明：根据角色ID列表、用户ID、资源类型查询资源Map
+
+参数列表：
+
+返回值：Map<String, List>
+
+说明：RoleId，ResourceId的map集合
+
+根据角色ID、用户ID查询主组织权限列表（RPC）
+
+接口名称：IRoleUserDataPermissionService
+
+方法名称：findUserDataPermissionByRoleId
+
+方法说明：根据角色ID、用户ID查询主组织权限列表
+
+参数列表：
+
+返回值：
+
+List（com.yonyou.uap.tenantauth.entity.RoleUserDataPermissionVO ）
+
+说明：主组织权限List集合
+
+根据角色ID、组织ID查询主组织权限（RPC）
+
+接口名称：IRoleUserDataPermissionService
+
+方法名称：getUserDataPermission
+
+方法说明：根据角色ID、资源类型、组织ID获取主组织权限
+
+参数列表：
+
+返回值：
+
+List（com.yonyou.uap.tenantauth.entity.RoleUserDataPermissionVO ）
+
+说明：主组织权限List集合
+
+根据资源类型查询主组织权限列表（RPC）
+
+接口名称：IRoleUserDataPermissionService
+
+方法名称：getUserDataPermissionByResourceTypeCode
+
+方法说明：根据资源类型查询主组织权限
+
+参数列表：
+
+返回值：
+
+List（com.yonyou.uap.tenantauth.entity.RoleUserDataPermissionVO ）
+
+说明：主组织权限List集合
+
+根据资源类型、用户ID查询主组织权限（RPC）
+
+接口名称：IRoleUserDataPermissionService
+
+方法名称：getUserDataPermissionByUserId
+
+方法说明：根据资源类型、用户ID查询主组织权限
+
+参数列表：
+
+返回值： List
+
+说明：resourceId（资源id）
+
+根据资源ID，查询指定用户的组织权限列表（RPC）
+
+接口名称：IRoleUserDataPermissionService
+
+方法名称：findUserDataPermission
+
+方法说明：根据用户ID、资源类型、资源ID查询组织权限列表。
+
+参数列表：
+
+返回值：
+
+List（com.yonyou.uap.tenantauth.entity.RoleUserDataPermissionVO ）
+
+说明：主组织权限List集合
+
+问题1
+
+主组织权限不生效如何处理？
+
+答案：按照以下思路进行排查：
+
+授权节点检查对应的档案是否授权过组织。
+
+检查业务对象上是否勾选了主组织。
+
+检查对应的角色是否授权了对应的业务节点。
+
+检查单据模板上是否勾选了数据权限。
+
+问题2
+
+查看sql,发现sql里拼接了orgid = -1的逻辑。导致相关问题？
+
+答案：此原因是由于没有查到组织权限，注意authid的值。确保其被授权了组织权限。 查看类：com.yonyou.permission.mdd.services.AbstractMddBaseBillPermissionService#handleMasterOrgCondition 通过如下arthas命令进行检查： watch com.yonyou.permission.mdd.services.MddDefBillOrgPermissionService getAuthId '{params,returnObj,throwExp}' -n 5 -x 3
+
+问题3
+
+openApi仓库保存接口，调用后，返回 ‘导入的库存组织无权限’ 。接口url地址：digitalModel/warehouse/save？
+
+答案：openapi绑定用户组织权限不足，重新分配权限。
+
+问题4
+
+角色管理，角色的组织不受组织权限控制，给用户授权分配的组织权限只有腾势事业部，但是该用户可以看见所有的角色？
+
+答案：权限下节点不能受主组织权限控制，推荐使用组织权限管理员特性，分级管控角色和用户数据。
+
+问题5
+
+组织预算节点，没有按照组织权限控制。账号只有中外运及其下级组织的权限，进入组织预算节点，能看到所有组织的预算数据？
+
+答案：薪酬预算各管控模式支持组织权限需要排期迭代开发。可搜索补丁或咨询对应的研发获取匹配的补丁信息。
+
+文档内容是否对您有所帮助？
+为帮助文档评分：
+页内目录
+1. 概述
+1.1 适用场景
+1.2 业务场景
+1.3 关键词
+1.4 名词解释
+2. 快速上手
+3. 深入理解
+3.1 存储结构
+3.2 运行逻辑
+4. API服务
+4.1 新增用户主组织权限（RPC）
+4.2 通过资源id删除用户的主组织权限（RPC）
+4.3 通过资源类型删除用户的主组织权限(RPC)
+4.4 保存用户主组织权限(RPC)
+4.5 查询指定用户的组织权限列表（RPC）
+4.6 根据停用状态筛选，查询主组织权限列表
+4.7 查询指定用户的组织权限列表(RPC)
+4.8 查询指定用户的组织权限列表（网关调用,针对部分项目RPC不能使用情况）
+4.9 根据角色ID列表，查询指定用户的资源ID列表(RPC)
+4.10 根据角色ID、用户ID查询主组织权限列表（RPC）
+4.11 根据角色ID、组织ID查询主组织权限（RPC）
+4.12 根据资源类型查询主组织权限列表（RPC）
+4.13 根据资源类型、用户ID查询主组织权限（RPC）
+4.14 根据资源ID，查询指定用户的组织权限列表（RPC）
+4.15 问题1
+4.16 问题2
+4.17 问题3
+4.18 问题4
+4.19 问题5
+文档反馈
+北京市海淀区北清路68号用友产业园
+4006-600-588
+友情链接
+用友官网用友YonHelp用友iuap平台用友云市场用友云注册协议隐私条款
+
+Copyright ©2020 用友网络科技股份有限公司版权所有京ICP备05007539号-24京公网安备11010802021935号
+
+返回顶部
+加载中...

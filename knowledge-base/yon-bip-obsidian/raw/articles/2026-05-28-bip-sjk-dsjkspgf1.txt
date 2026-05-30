@@ -1,0 +1,360 @@
+社区文档中心
+首页
+文档导航
+开发者社区
+社区论坛
+视频教程技术博客
+更多
+张宏涛
+资料中心
+专业开发
+产品概述
+快速入门
+操作指南
+开发指南
+开发介绍
+新功能开发
+移动端开发
+扩展开发
+全球化
+组织
+权限
+特征
+基础数据
+审批流
+业务流
+规则引擎
+公式
+UI模板
+参照
+导入导出
+打印
+对象建模
+编码规则
+调度任务
+监控与预警
+日志
+消息平台
+工作台
+事件中心
+文件服务
+YonBuilder应用开发
+前端开发
+后端开发
+移动开发
+安全
+数据库
+iuap-数据库规范红皮书
+分布式事务
+多数据库编程模型
+ISV原生产品多数据库适配规范
+DevOps技术
+容器云技术
+区块链云技术
+YMS开发
+智能应用开发
+专项开发
+成果迁移
+技术方案
+最佳实践
+参考手册
+常见问题
+视频教程
+专业开发/开发指南/数据库/ISV原生产品多数据库适配规范
+ISV原生产品多数据库适配规范
+最后更新时间：2024-11-02
+文档修订摘要
+日期	修订号	描述	审阅者
+2024-10-18	V2024101801	新建	
+概述
+适用场景
+部署方案	开发类型	是否适用
+公有云	客户化定制开发	否
+私有云	客户化定制开发	否
+专属云	客户化定制开发	否
+公有云	ISV生态开发	否
+私有云	ISV生态开发	是
+专属云	ISV生态开发	是
+业务场景
+
+ISV原生产品盘在私有云环境安装时，需要在不同数据库执行SQL脚本，安装器和SQL翻译器会根据不同的数据库类型对SQL脚本进行选择或者翻译后执行，在设计开发数据库脚本及制盘时，需要遵循一定的脚本存放目录规范和脚本开发规范。本文档主要描述SQL脚本的目录规范以及不同数据库的开发规范。
+
+关键词
+
+多数据库适配、基准库、补丁脚本目录规范、文件命名规范、SQL编程规范。
+
+多数据库技术架构
+
+多数据库技术架构主要体现在JDBC翻译器和基准库，以MySQL为基准库，进行不同数据库的翻译与执行。
+
+JDBC翻译器
+
+当前端业务发起调用时，在数据库中间件JDBC层，YMS翻译器根据不同的数据库进行SQL的翻译和转化，执行数据库操作后返回执行结果。
+
+MySQL基准库
+
+多数据库适配是指以MySQL脚本为基准，通过SQL翻译器把MySQL的脚本翻译为其它数据库类型的脚本。
+
+目前支持的数据库有MySQL、Oracle、Oscar、PostgreSQL、达梦（DM）、GaussDB和YonMatrix。
+
+脚本目录规范
+
+脚本目录规范是指设计好目录结构，规范不同的脚本，使安装器能够正确识别脚本，执行到正确的数据库中。
+
+ISV原生产品盘的脚本主要包括产品包下载的脚本以及在后端脚手架bootstrap模块中的脚本，产品包中的脚本目录是下载产品包时自动生成的，无需修改，了解即可（这部分也是公有云制品上线各个数据中心的脚本），bootstrap模块中的脚本是ISV原生产品盘数据库结构初始化、业务数据初始化或者表结构变动的脚本，需要满足补丁脚本目录规范。
+
+通用脚本目录概述
+
+脚本按照不同的划分方式有不同的分类：
+
+从脚本类型上区分包括不同数据库类型的SQL文件，Mongodb脚本文件（zip格式）。
+
+从执行库不同区分，存在三种脚本：框架公共脚本、公共服务脚本、ISV原生产品脚本。
+
+从场景上区分，脚本分为：init（初始化）脚本，upgrade（升级）脚本，patch（补丁）脚本。（注：init脚本是每逢大版本发盘时，需要重新抽取初始化的脚本，upgrade脚本存放本版本对某一历史版本的数据库升级脚本，如针对YonBIP202305的升级，或者针对YonBIP202311的升级等，对于ISV原生产品来说，只需要补丁脚本）
+
+所有脚本均需支持幂等（幂等的特点是任意多次执行所产生的影响与一次执行的影响相同）。
+
+通用目录规范：
+
+db目录下区分init、upgrade、patch目录，作为不同场景的脚本区分（ISV只需要patch目录）。
+
+目录结构说明：
+
+根据不同的数据库类型：rdb（关系型数据库）、mongodb作为目录区分这两种类型的数据库脚本。其中rdb下脚本主要以mysql作为语法标准。
+
+脚本按照模块管理，可以用0001_模块1、0002_模块2这样的目录来区分。
+
+模块内脚本进一步区分为两类：公共服务的预制数据脚本（只有DML）、本服务自己的预制脚本（DDL和DML）。FIN代表DDL和DML目录下执行完之后才会执行，里面既可以放DDL建库表语句，也可以放DML预制数据语句。
+
+通用规范：
+
+1、脚本执行顺序为：同一个目录下本层所有的文件+子目录，按照名称进行自然排序（升序），所以文件名和目录名要求是4位数字序号_服务名-时间戳.数据库类型.sql。
+
+2、上文提到的三种脚本：框架公共脚本、公共服务脚本、ISV原生产品服务本身的脚本，分别有固定的目录：0000_iuap_component、xxxx_模块名/0010_iuap_common、xxxx_模块名/0020_self。
+
+其中：xxxx_模块名是为了方便按照模块管理脚本而设置的一层目录，如果不需要区分多个模块，可以定义为：0001_微服务编码。
+
+3、上图所示的目录结构是固定的，必须按照此结构定义目录。
+
+补丁脚本目录规范
+
+补丁脚本目录是ISV原生产品脚本的主要目录，补丁脚本要求做到幂等，以下分别对产品包脚本目录和脚手架目录及文件规范进行说明。
+
+产品包脚本目录
+
+产品包目录内的脚本是公共服务的脚本，无法修改，但需要了解其规范要求。
+
+平台主版本号：V6；领域主版本号：V3。例如，R6发版时，平台发版里程碑版本号：V6_R6_2407 。领域发版里程碑版本号：V3_R6_2407。
+
+R6里程碑发版时，需要在patch的rdb或mongodb目录下要增加一层目录：平台是：V6_R6_2407 。领域是：V3_R6_2407。
+
+R6基线到R7基线之间的增量脚本放在此目录下。
+
+注：mongodb的目录规范与rdb的一致，如果不一致，安装产品盘会报错。
+
+下图为产品包的脚本目录：
+
+脚手架脚本目录及文件规范
+
+脚手架脚本是插入ISV原生产品服务自身库的脚本，脚本根目录scripts需要放在后端脚手架bootstrap模块中，与src同级，确保脚本与代码一样打包到war包中。
+
+脚手架脚本的目录规范为：
+
+scripts/db/patch/rdb/xxxx_模块名/0020_self
+
+0020_self目录下为DDL和DML目录，存放ISV原生产品相应脚本。
+
+其中：xxxx_模块名是为方便进行脚本按照模块管理而设置的一层目录，如果不需要区分多个模块，可以定义为：0001_微服务编码，0020_self是固定目录，不可修改。
+
+上图所示的目录结构是固定的，必须按照此结构定义自己的目录。
+
+文件规范： 1、文件管理规范：在同一私有云环境，已执行的脚本不允许修改，脚本采用滚动增加的策略（即在目录新增脚本，历史脚本不动）。 2、文件名规范：支持自动翻译的脚本文件名按照规范：4位数字序号_表名或服务名-时间戳.sql。 rdb下如果有特殊语法的脚本（如不支持翻译），需要针对不同数据库分别准备脚本，文件名规范为：4位数字序号_服务名-时间戳.数据库类型.sql（必须携带数据库类型标识），如：0001_abc.oscar.sql、0001_abc. postgresql.sql、0001_abc. gauss.sql、0001_abc. dm.sql、0001_abc. yonmatrix.sql。 如果有同名的.sql/.mysql.sql/.oscar.sql，如： 0001_abc.sql | 0001_abc.mysql.sql | 0001_abc.oscar.sql，安装器逻辑为： 如果当前数据库类型是oscar，则拿到0001_abc.sql和0001_abc.oscar.sql，先判断0001_abc.sql是否在本目录有一个同名的.oscar.sql文件，有则不翻译跳过0001_abc.sql，如果没有，则翻译。 如果当前数据库类型是mysql，则拿到0001_abc.sql和0001_abc.mysql.sql，先判断0001_abc.sql是否在本目录有一个同名的.mysql.sql文件，有则跳过不执行0001_abc.sql，只执行0001_abc.mysql.sql，如果没有，则执行0001_abc.sql。
+
+多数据库开发规范
+
+目前平台已支持多种数据库，由于不同数据库语法有一些差异，在ISV原生产品开发时需要遵循一定的SQL编程规范和开发规范。
+
+SQL编程规范
+
+在进行数据库表开发设计及业务逻辑SQL实现时，除遵循基本的数据库规范外，还需要符合以下规范：
+
+1、引用字符时用单引号，如：select name1 from t2_uniq where name1 = 'xxx';，使用双引号时，PostgreSQL会报错；2、避免类型转换；例如select col_a from table_a where col_a = x; x的数据类型必须和col_a一致，当col_a为varchar，x为数字时，MySQL会有性能问题，PostgreSQL则会直接报错；当col_a为数字，x为字符时，MySQL中会转换为 col_a = 0，PostgreSQL则会直接报错； 2、达梦数据库不支持大字段：如text转化为 varchar类型； 3、MySQL使用bit(1)表示布尔，并且代码使用1/0判断，禁止布尔判断； （目前PG、Oscar、Oracle中把bit翻译成number(1)类型，翻译器针对bit(1)类型做了兼容）；
+
+4、禁止对整数类型做布尔运算，MySQL支持该操作，PostgreSQL、Oscar等数据库会直接报错；
+
+5、业务上禁止使用SELECT INTO 语法，SELECT c1, c2, c3, ... INTO @v1, @v2, @v3,... FROM table_name WHERE condition；
+
+6、group by，group by HAVING后面不能使用列的别名，MySQL数据库支持别名，Oracle/PG不支持；
+
+7、对于GROUP BY聚合操作，如果在SELECT中的列，没有在GROUP BY中出现，那么这个SQL是不合法的，MySQL支持该语法，Oracle、PG等数据库不支持；后续MySQL设置 sql_mode来限制语法；
+
+8、时间列禁止插入值 '0000-00-00 00:00:00'，禁止作为时间戳的默认值，MySQL支持该格式，其他数据库不支持； 设置MySQL 参数 set explicit_defaults_for_timestamp=on; 建议时间戳列修改为create_time datatime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间' ； 修改不合法数据，例如 2022-02-31 15:28:27； NOT NULL属性的时间戳，不准许设置NULL(pubts字段翻译器目前通过触发器解决，其他字段需要修改代码)；
+
+9、in的元素建议控制在500以内，Oracle、Oscar数据库对in的参数有强限制；
+
+10、连接使用INNER JOIN/ LEFT JOIN /RIGHT JOIN写法，禁止使用=(+)， 类如p.project_type_id (+) = pt.project_type_id；
+
+11、ALTER TABLE 不允许使用FIRST 和 AFTER关键字；MySQL目前支持了快速加列特性，使用FIRST 和 AFTER关键字会导致快速加列特性失效，Oracle不支持FIRST 和 AFTER关键字；
+
+12、所有唯一索引必须设置NOT NULL属性，唯一索引默认值无业务含义的使用“~”，有业务含义的由业务决定默认值，Oracle NULL无法使用索引；在唯一索引中，不同数据库对NULL的唯一性判断是不同的；
+
+13、不要将Null与空串""视为相同，在不同的数据库中对这两者的理解是不相同的，同时Oracle null无法使用索引，建议的非空默认值为“~”；需要在业务上保证使用正确； 14、禁止使用 ON DUPLICATE KEY UPDATE语法；
+
+15、INSERT IGNORE VALUES/REPLACE INTO VALUES语句的适配(注意不是子查询)，必须有主键或者唯一索引，多个唯一索引的话，随机选择一个；values内数据禁止主键冲突（VALUES(1, 'm'),(1, 'n'),(4, 'm')，1为主键冲突）
+
+16、不允许使用MySQL的zerofill特性；
+
+17、MySQL禁止使用 limit ? offset ?，使用limit ?,?；适配多数据库过程中，druid翻译器在语法解析时，会将limit ? offset ?自动解析为limit ?,?，业务上按照limit ? offset ?顺序赋值时，limit ?,?语义是反的；
+
+18、避免使用数据库关键字及系统变量；
+
+19、多表关联更新/删除语法，Oracle不支持此语法，需要改写为子查询方式；子查询方式更新删除语法，MySQL存在性能问题；
+
+20、PG中强类型限制，在使用PrepareStatement向bigint中插入值，加了引号如'123'，PG驱动会报错；(目前翻译器已经完成部分兼容，取不到元信息时，翻译器不兼容，需要业务修改；如果向bigint插入/查询'abc'字符，翻译器会转成数字0，兼容MySQL方式)；PG命令行中向bigint中插入加了引号如'123'的值，不报错；
+
+21、UPDATE语句禁止对同一字段重复SET，类似 UPDATE TABLE_A SET X = 'A',SET X='A'；MySQL支持，PG会直接报错；
+
+22、禁止使用CLOB/BLOB类型 ；
+
+23、对于查询列中使用了max()和min()函数的场景，mysql整数会返回Integer和Long，对应Oracle的类型都是BigDecimal无法区分，所以针对整数类型的这两个函数翻译器会统一返回Long类型接收；
+
+24、MySQL中如果有对字段做布尔操作，需要在列上添加注释 ALTER TABLE TABLE_A MODIFY COLUMN FIELD_NAME tinyint(1) COMMENT ' oracle:bool';(语法仅供参考，根据实际情况编写，关键只是注释内的oracle:bool；不要完全复制语句！！不要完全复制语句！！不要完全复制语句！！) ；翻译器会查询列的注释，遇到关键字oracle:bool会针对不同数据库做不同的特殊处理；典型场景tenant.isOpen 字段；
+
+25、在preparestatement 中select a from table_a where 1 = ？，代码需要自己保持?类型相同，1='1'，pg会报错；
+
+26、目前翻译器只处理 preparestatement 中 insert into table_a(x,y,z) values (?,?,?); 变量?的类型转换；其他列名作为变量传递，insert into table_a(x,y,z) select x,y,z from table_b;，select * from table_a where x = 1; 等类型不准确的，目前翻译器不负责处理中间类型转换，由业务保证数据类型正确；
+
+27、PG数据库DDL并不会自动提交事务；事务中如果有SQL报错，PG会回滚整个事务，开发代码时需要注意；由于翻译器在翻译DML语句时，会查询数据库元信息，类型不正确的会做类型转换，当DDL与DML在同一个事务时，会导致翻译器查询元信息报错，禁止DDL与DML在同一个事务；
+
+28、A LEFT JOIN B ON A.ID = B.ID,A.ID = B.ID，关联字段类型必须一致；（MySQL有性能问题，PG会报错）；
+
+29、禁止使用MySQL数字自增特性，统一使用OID算法；（临时表可以使用数字自增，翻译器会做ddl语法翻译，其他多数据库问题业务自行决定）；
+
+30、针对数字自增列，业务代码上禁止一部分插入指定值，一部分依赖自增插入值；(PG中数字自增是靠序列来实现的，插入指定值的时候，并不会自动增大序列的值，会造成后续业务数据主键冲突)；
+
+31、禁止使用列计算之后做布尔运算， (smallint -1) is true；
+
+32、禁止对char(1)/varchar(1)做布尔运算，目前翻译器只处理 preparestatement 中类型转换，其他需要业务修改（插入需要修改为数字1/0）；
+
+33、SELECT XX FROM TABLE_A WHERE vendor.id = ? order by ? ?,禁止对desc/asc做变量传递，翻译器解析SQL会报错；
+
+34、truncate table dispatch_tasklog_?，在preparestatement中禁止变量拼接表名，翻译器解析SQL会报错；
+
+35、禁止使用MySQL的SQL_CALC_FOUND_ROWS的特性，其他数据库无法兼容；
+
+36、WHERE 语句中不要出现：? <= tl.starttime <= ? 写法，修改为 tl.starttime <= ? AND tl.starttime >= ?；
+
+37、MySQL中禁止在相同列上创建索引，比如index_a(col_a)/idx_a(col_a)，索引列相同，索引名字不相同，MySQL虽然不会报错，但是会影响性能，其他数据库相同列创建索引会报错；创建联合索引时，注意是否和当前索引功能重复复，比如已经存在idx_a_b(col_a,col_b)，在添加索引idx_a_b_c(col_a,col_b,col_c),索引idx_a_b_c基本包含了索引idx_a_b的全部功能，添加索引idx_a_b_c后应该删掉索引idx_a_b；
+
+38、pg数据库，数字类型禁止like操作；
+
+39、如果在脚本SQL中，一条SQL数据里存在 ;/n 或者 ;/r/n这样的数据，需要在SQL语句前后添加注释 -- sqlStart/-- sqlEnd，让翻译器正确识别SQL语句的开始与结束 （-- sqlStart SQL语句 -- sqlEnd）；
+
+40、不支持：utc_timestamp() 函数，需要业务自己修改；
+
+41、UUID函数已经禁用；需要改成OID；
+
+42、date_sub与datediff禁止嵌套使用；
+
+43、建议case when 与判断型函数， 判断型函数与判断型函数最好不混合使用；
+
+44、使用substring_index函数时，函数内的参数不要使用占位符?，不要做变量传递，翻译器运行时翻译会多翻译出占位符；
+
+45、ytenant_id固定长度 varchar(36)。
+
+注意：不同数据库类型映射、函数支持列表、语法对照表、数据库关键字请参考文档：http://pan.yonyou.com/s/fqjJcmHRQU 密码：gded
+
+Java程序使用不兼容语法方式
+
+由于各种数据库特性不同。无法避免同一业务需求，在不同数据库上SQL写法完全兼容。例如MySQL多表关联更新、删除的语法，使用子查询会存在性能问题，但是Oracle不支持多表关联更新、删除的语法。不同数据库SQL不同在java中的处理方法参考如下：
+
+// 为SQL添加HINT sql_no_translate，翻译器遇到该HINT跳过翻译过程
+String DBType = DatabaseUtil.getDbType(getConnection().getMetaData());
+if (DBType.equalsIgnoreCase(DBTypeConstant.DB_OSCAR)) {
+    // OSCAR SQL语法
+    String oscarSql = "SELECT /*+ sql_no_translate */ NAME FROM TABLE_A";
+    //...其他逻辑
+}else if (DBType.equalsIgnoreCase(DBTypeConstant.POSTGRESQL)) {
+    // POSTGRESQL SQL语法
+    String pgSql = "SELECT /*+ sql_no_translate */ NAME FROM TABLE_A";
+    //...其他逻辑
+}else {
+    // 其他
+    String sql = "SELECT NAME FROM TABLE_A";
+    //... 其他逻辑
+}
+
+
+常见问题
+such column list already indexed
+
+问题：已经建了一个不同名相同列的索引，检查库里当前表存在的索引名是哪个脚本建进去的或者写的脚本不对，Alter脚本名称和建表语句中的索引名称不一致，如：建表语句中索引名称是idx_tenant，在Alter时却写成i_tenant。
+
+答案：将两个脚本的索引名改为一致，或者在后执行的脚本里，增加删除前面所创建索引名的语句。
+
+Violate unique constraint on [xxx]
+
+问题：是唯一索引冲突，replace into 脚本中：数据中有主键不一样，唯一索引相同的数据。
+
+答案：建议将replace into的脚本改成with_uc的脚本。可避免这个问题。with_uc脚本是根据唯一索引查询主键，然后根据主键进行更新，未查询到主键的脚本则执行插入。
+
+case when与 isnull函数的使用
+
+错误案例：
+
+CASE WHEN isnull(CNAME) = 1 THEN '1111' else 'xxx' END
+
+多数据库中，isnull会被翻译为case when 的形式。但是多层嵌套case when 时，其他数据库会产生错误。 建议case when 中不要嵌套返回数值或者true/false 的函数如isnull，可以使用 CNAME is null 进行判断。
+
+常见日期函数嵌套问题
+
+日期函数中常常涉及字符串与日期无法相互转换。尤其是多个日期函数嵌套的情况，
+
+Mysql有隐式转换，字符串和日期可以平滑转换，多数据库要求严格，无隐式转换。
+
+函数	参数	作用	规范	返回值
+date_format	(DATE,FORMAT)	将参数date转化为FORMAT目标格式	DATE是标准时间格式，FORMAT是标准时间格式	字符串
+date_sub/date_add	(Date,INTERVAL EXPR TYPE)	函数从日期减去指定的时间间隔。SELECT DATE_SUB(date,INTERVAL '2' DAY)	保证参数Date是日期类型	日期
+DATEDIFF	(DATE1,DATE2)	函数返回两个日期之间的天数	保证DATE1,DATE2是日期类型	数值
+last_day	(Date)	返回给定⽇期的那⼀⽉份的最后⼀天	保证参数是日期	日期
+str_to_date	(Str,FORMAT)	将标准时间字符串转化为数据库支持的标准日期格式	保证str是字符串，并且FORMAT是标准时间格式	日期
+多层嵌套case when的翻译问题
+
+此问题是substring_index(substring_index(acc_amount, '.', 1), '.', -1) 嵌套导致的翻译问题。翻译器暂不支持此类函数的翻译。单层可以，但是多层在多数据库中容易产生误解。尤其这种substring_index(acc_amount, '.', 1) 需要翻译为case when的语句。两个case when嵌套是不被允许的。
+
+文档内容是否对您有所帮助？
+为帮助文档评分：
+页内目录
+1. 文档修订摘要
+2. 概述
+2.1 适用场景
+2.2 业务场景
+2.3 关键词
+3. 多数据库技术架构
+3.1 JDBC翻译器
+3.2 MySQL基准库
+4. 脚本目录规范
+4.1 通用脚本目录概述
+4.2 补丁脚本目录规范
+4.2.1 产品包脚本目录
+4.2.2 脚手架脚本目录及文件规范
+5. 多数据库开发规范
+5.1 SQL编程规范
+5.2 Java程序使用不兼容语法方式
+6. 常见问题
+6.1 such column list already indexed
+6.2 Violate unique constraint on [xxx]
+6.3 case when与 isnull函数的使用
+6.4 常见日期函数嵌套问题
+6.5 多层嵌套case when的翻译问题
+文档反馈
+北京市海淀区北清路68号用友产业园
+4006-600-588
+友情链接
+用友官网用友YonHelp用友iuap平台用友云市场用友云注册协议隐私条款
+
+Copyright ©2020 用友网络科技股份有限公司版权所有京ICP备05007539号-24京公网安备11010802021935号
+
+返回顶部
+加载中...

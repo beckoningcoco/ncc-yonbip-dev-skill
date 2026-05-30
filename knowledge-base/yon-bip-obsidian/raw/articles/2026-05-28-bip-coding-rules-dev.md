@@ -1,0 +1,223 @@
+编码规则开发
+最后更新时间：2025-09-24
+概述
+适应场景
+部署方案	开发类型	是否适用
+公有云	客户化定制开发	部分适用
+私有云	客户化定制开发	是
+专属云	客户化定制开发	是
+本地部署	客户化定制开发	是
+公有云	ISV生态开发	部分适用
+私有云	ISV生态开发	是
+专属云	ISV生态开发	是
+本地部署	ISV生态开发	是
+业务场景
+
+在业务系统中，业务对象通常会有一个业务对象编号，业务对象编号作为业务对象具有业务意义的标识，一般由时间、序列号、常量等子段按照一定的规则拼接而成，这个规则我们称为“ 编码规则”，各个子段我们称之为“编码元素”。
+
+平台提供了标准的编码规则功能，但有些场景需要客开自己去对接编码规则。如预生成编码、多个单据共用同一套编码规则等。
+
+该文档将使用后端SDK的方式进行演示，方便客开人员能够快速对接编码规则，提升交付效率。
+
+关键词
+
+编码规则、业务对象、编码对象、断码补码
+
+专业名词术语
+
+**编码规则：**此处指通过对需要进行分类管理的业务对象进行一系列规则设置，使其在创建时根据定义的规则自动生成档案、单据的编码。
+
+**业务对象：**此处指软件中业务主体，可以是基础数据、单据类型。例如：凭证、人员、采购订单、销售订单等。
+
+**编码对象：**此处指业务对象中需要进行编码规则定义的主体，可以对应基础数据、
+单据类型
+
+断码补码：打开断码补码开关后，才会进行退号记录，可在退号查询中查看。新增时优先使用已退编号。
+
+**真号、假号：**真号表示该编码中的流水号已经被占用；假号指的是流水号并不被占用的编码
+
+编码规则开发
+
+单据需要支持编码规则，可以基于平台标准的编码规则开发流程进行开发。
+
+编码规则接入
+
+平台提供了标准的编码规则功能，但有些场景需要客开自己去对接编码规则。如下章节进行后端脚手架接入编码规则
+
+Maven依赖
+
+mdd框架或ypd框架会自动引入iuap-billcode-component包，不需单独引用
+
+接口开发
+
+API 说明
+
+接口： com.yonyou.uap.billcode.service.IBillCodeComponentService
+
+接口说明：运行态组件生成编码提供的一系列方法
+
+批量获取编码
+
+**使用场景：**基于编码规则生成编码
+
+接口方法：
+
+String[] getBatchBillCodes (BillCodeComponentParam billCodeParam) throws
+
+BillCodeException
+
+使用如下构造方法：
+
+public BillCodeComponentParam(String bizObjCode,String cbillnum,String
+
+tenantId,String orgId,String mdUri,BillCodeObj[] bills);
+
+参数说明：
+
+参数名称	参数类型	参数说明	是否必填
+bizObjCode	String	业务对象编码	是
+cbillnum	String	aa_billnumber表 cbillnum 字段值	是
+tenantId	String	租户 id	是
+orgId	String	组织 id	是 无 orgId 写默认值-1
+mdUri	String	元数据 uri	是
+bills	String	表单数据，使用 BillCodeObj 进行包装后组成数组，生成编码的个数就是数组长度	是
+
+响应参数：
+
+参数名称	参数类型	参数说明
+code	String[]	编码规则批量生成的编码
+
+响应示例：
+
+[
+"CGD201909100001","CGD201909100002", "CGD201909100003"
+]
+
+
+核心代码示例
+
+@Resource
+private IBillCodeComponentService billCodeComponentService;
+
+@Override
+public String[] getBillCodes(String billNum, String mdUri, String orgId, String busiObj, int size) {
+if (size < 1) {
+throw new BizException("批量获取编码数量异常");
+}
+List<BillCodeObj> billCodeObjList = new ArrayList<>();
+for (int i = 0; i < size; i++) {
+// 构建单据参数，项目上以真实业务数据传参
+IBillDO billDO = new Test0516();
+BillCodeObj codeObj = new BillCodeObj(billDO.toMap());
+billCodeObjList.add(codeObj);
+}
+
+// 构建单据编码组件参数BillCodeComponentParam
+BillCodeComponentParam billCodeParam = new BillCodeComponentParam(busiObj, billNum, InvocationInfoProxy.getTenantid(), orgId, mdUri, billCodeObjList.toArray(new BillCodeObj[billCodeObjList.size()]));
+// 调用编码规则组件的API获取编码
+String[] billCodes = billCodeComponentService.getBatchBillCodes(billCodeParam);
+log.info("通过编码规则组件API获取编码成功");
+return billCodes;
+}
+
+批量退号
+
+**使用场景：**单据删除或新增单据保存失败回滚时调用
+
+接口方法：
+
+void returnBatchBillCodes(BillCodeComponentParam billCodeParam) throws
+
+BillCodeException
+
+使用如下构造方法：
+
+public BillCodeComponentParam(String bizObjCode, String cbillnum, String
+
+tenantId, String orgId, String[] billCodes)
+
+参数说明：
+
+参数名称	参数类型	参数说明	是否必填
+bizObjCode	String	业务对象编码	是
+cbillnum	String	aa_billnumber 表 cbillnum 字段值	是
+tenantId	String	租户 id	是
+orgId	String	组织 id	是
+billCodes	String[]	需要回退的编码	是
+
+**响应参数：**无
+
+核心代码示例
+
+@Resource
+private IBillCodeComponentService billCodeComponentService;
+
+@Override
+public void returnBatchBillCodes(String billNum, List<String> billcodes, String orgId, String busiObj) {
+if (CollectionUtils.isEmpty(billcodes)) {
+throw new BizException("回退的编码不能为空");
+}
+// 构建单据编码组件参数BillCodeComponentParam
+BillCodeComponentParam billCodeComponentParam = new BillCodeComponentParam(busiObj, billNum, InvocationInfoProxy.getTenantid(), orgId, billcodes.toArray(new String[billcodes.size()]));
+// 调用编码规则组件的API回退编码
+billCodeComponentService.returnBatchBillCodes(billCodeComponentParam);
+}
+
+常见问题
+查询其他领域的编码规则生成的编码不正确
+
+现象：没有按照领域的编码规则生成编码
+
+**原因：**编码规则组件是集成到当前业务服务，查询的是当前领域对应的schema，不能支持跨领域查询。即A服务无法直接使用B服务的编码规则生成编码
+
+**解决方案：**找领域提供查询接口或使用其他方案替代。
+
+退号不生效
+
+**现象：**调用退号的接口，但是没有生成退号记录
+
+**原因：**打开断码补码开关后，才会进行退号记录，可在退号查询中查看。
+
+**解决方案：**打开断码补码开关。开启断码补码表示一个单据删除时会对编码进行回收复用以保障流水号的连续性。
+
+应用构建：创建完应用，编码规则三级节点处看不到自己的节点
+
+原因：场景支持需要勾选编码规则
+
+createCode接口返回的编码和业务单据实际保存的编码不一致
+
+新增页面createCode接口返回的是假号，保存时后端会重新生成真号入库。
+
+如何对外提供编码规则的RPC接口
+
+1、提供者: @RemoteCall("应用名称@租户id") 。应用名称和租户id在注册中心中查找
+
+2、消费者: 使用Spring注入, 如:
+
+@Autowired
+
+private IBillCodeExtService billCodeExtService;
+
+客开脚手架YPD升级之后发现编码规则相关表字段缺失
+
+升级后新版本有字段的变动，需要按照升级文档执行编码规则相关脚本。脚本可以联系刘董提供。
+
+流水依据和流水号的含义是什么
+
+1、流水号是属于流水依据的，不同的流水依据会使用独立的流水号。
+
+我们在编码元素中会看到一个流水依据的复选框，以系统时间为例，假设：
+
+不勾选流水依据时，20230325生成的编码是：20230325000001，20230325000002，20230325000003。 20230326生成的编码是：20230326000004，20230326000005，20230326000006。
+
+勾选流水依据时，20230325生成的编码是：20230325000001，20230325000002，20230325000003。 20230326生成的编码是：20230326000001，20230326000002，20230326000003。
+
+2、不管因为任何原因导致现在生成的编码流水号不对，可以在查看流水号页签修改对应流水依据的流水号
+
+3、假设您以部门为流水依据， 希望 不同的部门设置不同的流水号（以便对接已有的历史数据），此时不要修改 规则定义 中 数字流水 编码元素的初始值，而应该在查看流水号页签修改不同流水依据的流水号
+
+4、查看流水号页签展示的流水号是已经被使用的流水号，下一个编码的流水号为当前值+1。如果一个流水依据尚未生成过编码，在查看流水号处不会显示该流水依据的数据
+
+5、除新增单据后，在查看流水号处会增加该流水依据的数据外， 在规则定义里 勾选 手动可改 的配置下，编辑单据也会添加数据
+
+6、 ~（波浪号）表示空白的流水依据，即所有编码元素都没有勾选流水依据，则会使用~的流水生成编码

@@ -1,0 +1,808 @@
+社区文档中心
+首页
+文档导航
+开发者社区
+社区论坛
+视频教程技术博客
+更多
+张宏涛
+资料中心
+专业开发
+产品概述
+快速入门
+操作指南
+开发指南
+开发介绍
+新功能开发
+移动端开发
+扩展开发
+全球化
+组织
+权限
+特征
+基础数据
+审批流
+业务流
+规则引擎
+公式
+UI模板
+参照
+导入导出
+打印
+对象建模
+元数据及业务对象
+自定义档案
+交易类型
+编码规则
+调度任务
+监控与预警
+日志
+消息平台
+工作台
+事件中心
+文件服务
+YonBuilder应用开发
+前端开发
+后端开发
+移动开发
+安全
+数据库
+DevOps技术
+容器云技术
+区块链云技术
+YMS开发
+智能应用开发
+专项开发
+成果迁移
+技术方案
+最佳实践
+参考手册
+常见问题
+视频教程
+专业开发/开发指南/对象建模/自定义档案
+自定义档案
+最后更新时间：2024-05-15
+本文摘要
+
+该红皮书旨在描述自定义档案相关节点的技术原理、设计架构以及业务流程相关的技术内容。同时，也提供了自定义档案的具体使用场景以及对外提供的相关接口（具体的使用方式以及参数说明）。
+
+如果在业务开发过程中使用到了自定义档案相关的内容，但是又不了解具体的使用方式以及场景，则可以通过该文档来详细了解。
+
+具体的使用场景包括：自定义项节点引用自定义档案，开发平台参照项引用自定义档案，数据集成平台的跨平台自定义档案数据同步等。
+
+对外开放的接口包括：REST 接口，RPC 接口。
+
+第一章 基本概念
+背景
+
+自定义档案组件，是一个可以管理自己定义的档案的组件。该组件当前包括两大功能模块：即自定义档案定义和自定义档案维护。
+
+自定义档案定义：允许用户通过页面操作，创建自定义档案，每一个自定义档案数据模型下对应一个数据实体模型（对应到数据库中的表），用户可以自定义数据实体模型的表名、字段名称、字段类型和长度等信息；自定义档案模型的分类目录、数据模型、实体模型支持常规的增、删、查、改；在自定义档案定义模块中，用户需要在建模时，在这个模块中，可以对维护页面的显示样式和风格进行配置，支持列表、树卡显示方式；通过自定义档案建模的一些基本配置，整个自定义档案模型就建立完成，此时，用户可以执行发布操作，发布后，在左侧的自定义档案菜单中可以看到， 这里的菜单主要是给业务人员使用的（通过权限分配实现），同时也支持反发布操作，即将数据维护 页面从左侧菜单中移除，如果不发布，则无法在左侧菜单看到，只能到管理中心的自定义档案维护菜单中查看和维护数据；在数据模型发布以后，如果需要更改模型的属性等信息，需要重新发布。自定义档案维护：在这个模块中，用户可以添加自定义的档案数据，例如全国省市区的基本档
+
+案，同时也可以管理这些数据，包括对数据的新增、编辑、修改和查询。经过自定义档案建模、自定义档案维护两个过程，用户自定义的基本档案信息就创建完成了，对于这些数据，组件支持通过加签接口调用的方式，供其他组件使用。
+
+自定义档案组件，可以管理基本的档案信息，例如常用的月份、日期、星期、性别等，也可以管理用户自定义的基础数据，例如产品种类、产品类型、产品的颜色等，解决了零碎数据难于集中管理的问题，降低了零碎数据的管理成本，提高了零碎数据的管理效率，同时也提升了零碎数据的使用率和价值，不仅为用户减轻了负担，也为用户增加了效益。
+
+在企业业务中，自定义档案定义后最核心的应用场景是在业务单据中引用作为数据选择，也就是参照使用。
+
+产品亮点
+
+通过自定义档案节点可以快速实现业务单据中需要的个性化档案模型。同时，也可以将某一组具体的档案发布成节点来使用，而无需在自定义档案相关节点来查看和维护数据，提高用户体验度，增强用户操作某一档案的便利性。
+
+第二章 技术架构
+总体架构设计
+
+自定义档案数据逻辑结构图
+
+不同的场景，使用同一套元数据和 UI 模板，自定义档案元数据和 UI 模板通过租户进行隔离；自定义档案定义数据通过编码、租户确定唯一自定义档案定义数据；自定义档案维护数据通过自定义档案定义主键、编码、租户确定唯一自定义档案档案维护数据。
+
+业务流程设计
+
+业务流程设计主要包括自定义档案定义和自定义档案维护两个流程。
+
+档案定义流程
+
+自定义档案定义业务流程图
+
+自定义档案定义节点具备如下能力：
+
+支持自定义档案定义启用分级（树型）能力
+支持自定义档案定义启用分级管理能力
+支持自定义档案定义发布为菜单节点的能力
+档案维护流程
+
+ 自定义档案维护业务流程图
+
+对于支持分级管理的档案，用户可见的自定义档案维护数据是当前用户在该节点有权限的组织私有数据，以及有权限组织的上级组织共享的数据。
+
+界面上也有所区分，其中：上级组织的数据可见不可维护，只能查询和使用；只有用户对当前节点有权限的组织数据可以维护（修改、删除、启用、停用）。
+
+自定义档案保存时，需要在当前租户下做唯一性校验。自定义档案维护数据同时也具备启用、停用的能力，即支持已启的自定义档案停用；已停用的自定义档案可以在查
+
+询时使用，但在新增业务规则、业务单据时不能被引用。数据所属组织被停用或者被取消了基础数据管理职能，则自动将该组织的基础数据全部停用。已停用的自定义档案可以被再次启用。启用按钮是否可用取决于当前数据所属组织是否已停用或者组织已经没有了基础数据管理职能，否则不能被再次启用。
+
+第三章 功能介绍
+功能概述
+
+自定义档案主要功能包含两部分。
+
+第一部分是自定义档案定义的相关能力：
+
+支持租户级用户自定义档案；
+支持自定义项档案定义的维护；
+支持自定义档案发布到菜单，即需要支持权限管理的自定义档案，发布菜单之后不同的人员进入各自 菜单，来维护管理不同的自定义档案；
+支持分级管控的自定义档案，需在基础数据分级管控中展示该档案；
+
+第二部分是自定义档案维护的相关能力：
+
+支持自定义档案内容的维护；
+自定义档案内容支持增删改查；
+自定义档案内容支持 excel 导入；
+支持批量（支持多选、全选）删除、启用、停用；
+支持分级管控的自定义档案的维护数据根据组织权限和管控权限进行控制；
+档案定义
+
+如下图所示,就是自定义档案定义的页面，通过该页面可以进行档案定义相关的业务操作。例如：档案定义新增，档案发布，档案分级管控等
+
+自定义档案定义 
+
+对自定义档案定义分级管控
+
+档案维护
+
+如下图所示,就是自定义档案维护的页面，通过该页面可以进行档案维护相关的业务操作。例如：档案数据新增，停用，导入等
+
+自定义档案维护
+
+第四章 典型业务场景介绍
+自定义项引用
+
+自定义档案最常用的场景就是通过自定义项进行引用自定义档案到某一个单据上来为业务提供数据支撑。例如，员工信息中的政治面貌，婚姻状况等。
+
+ 员工信息（引用自定义档案） 具体引用步骤如下：
+
+首先我们要在自定义项的功能节点新建一个自定义项，然后在该自定义项上做数据引用为自定义档案中的某一个定义，最后将该自定义项分配给相关的单据即可。
+
+如下图（关键）：
+
+自定义项设置（引用自定义档案）
+
+分配自定义项到具体单据（引用自定义档案）
+
+低代码开发引用
+
+该应用场景主要是在 UI 模板设计器上通过增加参照组件的方式对自定义档案进行引用。例如，我们在新建了一个客户档案的 UI 模板，然后在 UI 模板上增加了客户的政治面貌字段，这个时候我们可以把该字段设置为参照类型，然后对其进行参照配置引用自定义档案中对应的定义即可。如下图（关键）：
+
+低代码设计器增加参照项
+
+具体的引用配置
+
+数据集成同步
+
+该应用场景主要解决将不同产品线中的自定义档案数据通过数据集成特性进行同步为 BIP 云平台下的自定义档案（定义数据，维护数据）。
+
+具体的操作步骤如下：
+
+1、在 ERP 连接配置节点选中对应的产品，然后按操作步骤进行配置。
+
+可选产品线
+
+2、安装网关后进行同步自定义档案定义数据（新建或覆盖）并初始化 ERP 任务
+
+自定义档案定义数据配置
+
+3、进入数据同步任务节点选中自定义档案任务即可进行档案维护数据的同步
+
+自定义档案维护数据同步
+
+4、待任务同步结束后即可在自定义档案节点查询并使用相关档案。
+
+上述步骤简述了数据集成同步的内容。详细的操作内容可参见友企连数据集成同步相关的红皮书内容。
+
+第五章 开放接口说明
+
+自定义档案对外开放的接口包括 Rest 接口、OpenAPI 接口以及 RPC 接口，下面我们来具体介绍相关的接口。
+
+REST 接口
+
+com.yonyou.ucf
+
+mdd-customerdoc-sdk
+
+在使用 REST 接口时，要增加以下 Maven 依赖配置：
+
+如果项目中引入了二方包 iuap-2nd-party 则无需指定版本即可使用，否则增加版本信息（当前最新版本 4.1.8-RELEASE）。
+
+关于 SDK 的其他附属配置项，如果使用该 SDK 的项目（SpringBoot）适配了 YMS， 则可以实现零配置使用，如果使用该 SDK 的项目（SpringBoot）未适配 YMS，则需要在application.properties 文件中增加如下配置，具体参数根据不同的环境通过认证中心处
+
+customerdoc.accessKey= 访 问 key customerdoc.accessSecret=访问秘钥customerdoc.domain=http://环境域名/iuap-apdoc-basedoc
+
+申请。
+
+档案定义REST 接口
+通过 ID 获取档案定义数据
+类名	com.yonyou.iuap.bd.customerdoc.service.itf.DefDocListService
+方法	getById(String id)
+参数说明	档案定义主键
+返回说明	档案定义
+使用示例	@AutowiredDefDocListServiceImpl defDocListService;public void testDefDocListService4GetById() throws BaseDocRestException { BdRestParam bdRestParam = new BdRestParam(); bdRestParam.setSysId("diwork"); bdRestParam.setTenantId("czqne4bp"); bdRestParam.setUserId("99ea7655-00a2-4bda-b23c-19ade37ea574"); defDocListService.setBdRestParam(bdRestParam);DefDocList defDoc = defDocListService.getById("2415658922447104"); Assert.assertEquals(defDoc.getId(), "2415658922447104");}
+通过 ID 集合,状态集合获取档案定义数据
+类名	com.yonyou.iuap.bd.customerdoc.service.itf.DefDocListService
+方法	listByIds(List ids, List statusList)
+参数说明	档案定义主键集合，档案状态集合
+返回说明	档案定义集合
+使用示例	@AutowiredDefDocListServiceImpl defDocListService;public void testDefDocListService4ListByIds() throws BaseDocRestException { BdRestParam bdRestParam = new BdRestParam(); bdRestParam.setSysId("diwork"); bdRestParam.setTenantId("czqne4bp"); bdRestParam.setUserId("99ea7655-00a2-4bda-b23c-19ade37ea574"); defDocListService.setBdRestParam(bdRestParam);List ids = Arrays.asList("2415658922447104"); List status = Arrays.asList(0, 1, 2, 3, 4);List defDocLists = defDocListService.listByIds(ids,status); Assert.assertNotNull(defDocLists); Assert.assertNotNull(defDocLists.get(0)); Assert.assertEquals(defDocLists.get(0).getId(), "2415658922447104");}
+通过给定的参数获取档案定义数据集合
+类名	com.yonyou.iuap.bd.customerdoc.service.itf.DefDocListService
+方法	list(Condition condition, Sorter sorter)
+参数说明	查询条件，排序条件
+返回说明	档案定义集合
+使用示例	@AutowiredDefDocListServiceImpl defDocListService;public void testDefDocListService4List () throws BaseDocRestException { BdRestParam bdRestParam = new BdRestParam(); bdRestParam.setSysId("diwork"); bdRestParam.setTenantId("czqne4bp"); bdRestParam.setUserId("99ea7655-00a2-4bda-b23c-19ade37ea574"); defDocListService.setBdRestParam(bdRestParam);Condition condition = new Condition(); ConditionVO conditionVO = new ConditionVO(); conditionVO.setField("id"); conditionVO.setValue("2415658922447104"); condition.addCondition(conditionVO);Sorter sorter = new Sorter(); sorter.addOrder("id","DESC");List list = defDocListService.list(condition, sorter); Assert.assertNotNull(list); Assert.assertEquals(list.get(0).getId(),"2415658922447104");}
+通过给定的参数进行分页获取档案定义数据集合
+类名	com.yonyou.iuap.bd.customerdoc.service.itf.DefDocListService
+方法	pagination(Condition condition, Sorter sorter, int pageIndex, int pageSize)
+参数说明	查询条件，排序条件，页码，分页大小
+返回说明	带有档案定义集合数据的分页对象
+使用示例	@AutowiredDefDocListServiceImpl defDocListService;public void testDefDocListService4Pagination () throws BaseDocRestException { BdRestParam bdRestParam = new BdRestParam(); bdRestParam.setSysId("diwork");bdRestParam.setTenantId("czqne4bp"); bdRestParam.setUserId("99ea7655-00a2-4bda-b23c-19ade37ea574"); defDocListService.setBdRestParam(bdRestParam);Condition condition = new Condition(); condition.setPageIndex(1); condition.setPageSize(5);Sorter sorter = new Sorter(); sorter.addOrder("id","DESC");Page pagination=defDocListService.pagination(condition, sorter,1, 5); Assert.assertNotNull(pagination.getContent());}
+通过元数据 ID 获取档案定义数据
+类名	com.yonyou.iuap.bd.customerdoc.service.itf.DefDocListService
+方法	getByEntityid(String entityid)
+参数说明	档案定义对应的元数据 ID
+返回说明	档案定义数据
+使用示例	@AutowiredDefDocListServiceImpl defDocListService;public void testDefDocListService4GetByEntityid () throws BaseDocRestException { BdRestParam bdRestParam = new BdRestParam(); bdRestParam.setSysId("diwork");bdRestParam.setTenantId("czqne4bp"); bdRestParam.setUserId("99ea7655-00a2-4bda-b23c-19ade37ea574"); defDocListService.setBdRestParam(bdRestParam);String entityId="f2f434fe-3e49-47ec-a6f5-510229afc5af"; DefDocList entity = defDocListService.getByEntityid(entityId); Assert.assertNotNull(entity.getId());}
+档案维护REST 接口
+通过 ID 获取档案维护数据
+类名	com.yonyou.iuap.bd.customerdoc.service.itf.DefDocService
+方法	getById(String id)
+参数说明	档案维护主键
+返回说明	档案维护实体
+使用示例	@AutowiredDefDocServiceImpl defDocService;public void test DefDocServiceImpl4GetById() throws BaseDocRestException { BdRestParam bdRestParam = new BdRestParam(); bdRestParam.setSysId("diwork"); bdRestParam.setTenantId("czqne4bp"); bdRestParam.setUserId("99ea7655-00a2-4bda-b23c-19ade37ea574"); defDocService.setBdRestParam(bdRestParam);DefDoc defDoc = defDocService.getById("2421232860926215"); Assert.assertEquals(defDoc.getId(), "2421232860926215");}
+通过档案定义 ID 和数据状态获取档案维护数据
+类名	com.yonyou.iuap.bd.customerdoc.service.itf.DefDocService
+方法	listByDefDocListId(String id, List statusList)
+参数说明	档案定义主键，数据状态集合
+返回说明	档案维护实体集合
+使用示例	@AutowiredDefDocServiceImpl defDocService;public void test defDocServiceImpl4ListByDefDocListId() throws BaseDocRestException{BdRestParam bdRestParam = new BdRestParam(); bdRestParam.setSysId("diwork"); bdRestParam.setTenantId("czqne4bp"); bdRestParam.setUserId("99ea7655-00a2-4bda-b23c-19ade37ea574"); defDocService.setBdRestParam(bdRestParam);String custdocdefid = "2421232860926215"; List status = Arrays.asList(0, 1, 2, 3, 4);List defDocs = defDocService.listByDefDocListId(custdocdefid, status); Assert.assertNotNull(defDocs);Assert.assertNotNull(defDocs.get(0)); Assert.assertEquals(defDocs.get(0).getCustdocdefid(), "2421232860926215");}
+通过 ID 集合,状态集合获取档案维护数据
+类名	com.yonyou.iuap.bd.customerdoc.service.itf.DefDocService
+方法	listByIds(List ids, List statusList)
+参数说明	档案维护主键集合，档案状态集合
+返回说明	档案维护集合
+使用示例	@AutowiredDefDocServiceImpl defDocService;public void test defDocServiceImpl4ListByIds() throws BaseDocRestException { BdRestParam bdRestParam = new BdRestParam(); bdRestParam.setSysId("diwork");bdRestParam.setTenantId("czqne4bp"); bdRestParam.setUserId("99ea7655-00a2-4bda-b23c-19ade37ea574"); defDocService.setBdRestParam(bdRestParam);List ids = Arrays.asList("2421232860926215"); List status = Arrays.asList(0, 1, 2, 3, 4); List defDocs = defDocService.listByIds(ids, status); Assert.assertNotNull(defDocs); Assert.assertNotNull(defDocs.get(0));Assert.assertEquals(defDocs.get(0).getId(), "2421232860926215");}
+通过给定的参数获取档案维护数据集合
+类名	com.yonyou.iuap.bd.customerdoc.service.itf.DefDocService
+方法	list(Condition condition, Sorter sorter)
+参数说明	查询条件，排序条件
+返回说明	档案维护集合
+使用示例	@AutowiredDefDocServiceImpl defDocService;public void test defDocServiceImpl4List() throws BaseDocRestException { BdRestParam bdRestParam = new BdRestParam(); bdRestParam.setSysId("diwork"); bdRestParam.setTenantId("czqne4bp"); bdRestParam.setUserId("99ea7655-00a2-4bda-b23c-19ade37ea574"); defDocService.setBdRestParam(bdRestParam);Condition condition = new Condition(); ConditionVO conditionVO = new ConditionVO(); conditionVO.setField("id"); conditionVO.setValue("2421232860926215"); condition.addCondition(conditionVO);Sorter sorter = new Sorter(); sorter.addOrder("id","DESC");List defDocs = defDocService.list(condition, sorter); System.out.println(JSON.toJSONString(defDocs)); Assert.assertNotNull(defDocs); Assert.assertNotNull(defDocs.get(0)); Assert.assertEquals(defDocs.get(0).getId(),"2421232860926215");}
+通过给定的参数进行分页获取档案定义数据集合
+类名	com.yonyou.iuap.bd.customerdoc.service.itf.DefDocService
+方法	pagination(Condition condition, Sorter sorter, int pageIndex, int pageSize)
+参数说明	查询条件，排序条件，页码，分页大小
+返回说明	带有档案维护集合数据的分页对象
+使用示例	@AutowiredDefDocServiceImpl defDocService;public void test defDocServiceImpl4Pagination () throws BaseDocRestException { BdRestParam bdRestParam = new BdRestParam(); bdRestParam.setSysId("diwork");bdRestParam.setTenantId("czqne4bp"); bdRestParam.setUserId("99ea7655-00a2-4bda-b23c-19ade37ea574"); defDocService.setBdRestParam(bdRestParam);Condition condition = new Condition(); condition.setPageIndex(1); condition.setPageSize(5);Sorter sorter = new Sorter(); sorter.addOrder("id","DESC");Page pagination = defDocService.pagination(condition, sorter, 1, 5); Assert.assertNotNull(pagination.getContent());}
+OpenApi 接口
+
+OpenApi 接口主要是通过集团开放平台对外提供的数据接口，本章节描述为开放平台 OpenApi 发布的自定义档案相关接口。
+
+档案定义OpenApi 接口
+自定义档案定义详情查询
+请求说明	
+请求域名	动态域名，获取方式详见 获取租户所在数据中心域名
+请求地址	/yonbip/digitalModel/custdocdef/detail
+请求方式	GET
+ContentType	application/json
+事务/幂等性	无
+请求参数				
+名称	类型	参数位置	必填	描述
+access_token	string	query	是	应用鉴权 token
+id	string	query	是	业务数据 ID
+参数示例				
+id=HRDIWORK030000000003				
+返回值参数				
+名称	类型	描述		
+code	String	返回码，调用成功时返回 200		
+message	String	调用失败时的错误信息		
+data	creator	String	创建人主键	
+modifier	String	修改人主键		
+code	String	编码		
+name	Object	名称，多语对象		
+classify	int	是否分级档案（树型）		
+mcflag	int	是否分级管控		
+ispreset	boolean	是否预制		
+description	Object	描述，多语对象		
+id	String	主键		
+pubts	String	时间戳		
+creator_userName	String	创建人名称		
+creationtime	String	创建时间		
+modifiedtime	String	修改时间		
+enable	int	启用状态		
+dr	int	逻辑删除标识		
+releasestatus	int	是否发布		
+serviceCode	String	发布后的服务编码		
+自定义档案定义列表查询
+请求说明				
+请求域名	动态域名，获取方式详见 获取租户所在数据中心域名			
+请求地址	/yonbip/digitalModel/custdocdef/list			
+请求方式	GET			
+ContentType	application/json			
+事务/幂等性	POST			
+请求参数				
+名称	类型	参数位置	必填	描述
+access_token	string	query	是	应用鉴权 token
+pageSize	int	body	是	分页大小 默认值：10
+pageIndex	int	body	是	页码 默认值：1
+code	String	body	否	编码
+name	String	body	否	名称
+参数示例				
+Url: /yonbip/digitalModel/custdocdef/list?access_token=访问令牌Body: {"pageSize": 10,"pageIndex": 1,"code": "001","name": "婚姻"}				
+返回值参数				
+名称	类型	描述		
+code	String	返回码，调用成功时返回 200		
+message	String	调用失败时的错误信息		
+Data	pageIndex	int	当前页码	
+pageSize	int	当前页大小		
+pageCount	int	页总数		
+beginPageIndex	int	开始页码		
+endPageIndex	int	结束页码		
+recordCount	int	记录总数		
+pubts	String	时间戳		
+recordList数组对象	creator	String	创建人主键	
+modifier	String	修改人主键		
+code	String	编码		
+name	Object	名称，多语对象		
+classify	int	是否分级档案（树型）		
+mcflag	int	是否分级管控		
+ispreset	boolean	是否预制		
+description	Object	描述，多语对象		
+id	String	主键		
+pubts	String	时间戳		
+creator_userName	String	创建人名称		
+creationtime	String	创建时间		
+modifier_userName	String	修改人名称		
+modifiedtime	String	修改时间		
+enable	int	启用状态		
+dr	int	逻辑删除标识		
+releasestatus	int	是否发布		
+serviceCode	String	发布后的服务编码		
+自定义档案定义增删改
+请求说明				
+请求域名	动态域名，获取方式详见 获取租户所在数据中心域名			
+请求地址	/yonbip/digitalModel/custdocdef/save			
+请求方式	POST			
+ContentType	application/json			
+事务/幂等性	无			
+请求参数				
+名称	类型	参数位置	必填	描述
+access_token	string	query	是	应用鉴权 token
+Body 参数				
+名称	类型	描述		
+Data	code	String	档案编码 示例：123	
+name	String	档案名称 示例：婚姻状况		
+classify	long	0: 非树形档案 1：树形档案 示例：0		
+mcflag	long	0: 非分级管控 1：分级管控 示例：0		
+ispreset	boolean	0: 非系统预置 1：系统预置 示例：true		
+enable	long	0: 停用 1:启用 示例：1		
+dr	long	0: 未删除 1：逻辑删除 示例：0		
+releasestatus	long	0: 未发布 1：已发布 示例：0		
+_status	String	保存 示例：Insert		
+参数示例				
+{"data": {"code": "123","name": "婚姻状况", "classify": 0,"mcflag": 0, "ispreset": true, "enable": 1,"dr": 0,"releasestatus": 0, "_status": "Insert"}}				
+返回值参数				
+名称	类型	描述		
+code	String	返回码，调用成功时返回 200		
+message	String	调用失败时的错误信息		
+data	creator	String	创建人主键	
+modifier	String	修改人主键		
+sysid	String	系统标识符		
+tenant_id	String	租户标识		
+entityid	String	元数据 ID		
+resId	String	多语资源 ID		
+code	String	编码		
+name	Object	名称，多语对象		
+classify	int	是否分级档案（树型）		
+mcflag	int	是否分级管控		
+ispreset	boolean	是否预制		
+description	Object	描述，多语对象		
+id	String	主键		
+pubts	String	时间戳		
+creator_userName	String	创建人名称		
+creationtime	String	创建时间		
+modifier_userName	String	修改人名称		
+modifiedtime	String	修改时间		
+enable	int	启用状态		
+dr	int	逻辑删除标识		
+releasestatus	int	是否发布		
+serviceCode	String	发布后的服务编码		
+
+返回值示例
+
+{
+	"code": "200",
+	"message": "操作成功",
+	"data": {
+		"code": "qewrew2",
+		"name": {
+			"zh_CN": "档案 2"
+		},
+		"classify": true,
+		"mcflag": true,
+		"ispreset": false,
+		"description": {
+			"zh_CN": "档案 1 描述"
+		},
+		"id": "9a7a7f6d592d4095985b6fd0edb33422",
+		"pubts": "2020-08-29 15:20:50",
+		"enable": 1,
+		"dr": 0,
+		"releasestatus": false,
+		"resId": "R_YS_PF_GZTBDM_0000096032",
+		"entityid": "515fff00-569a-42dc-af93-629722c369ab",
+		"sysid": "diwork",
+		"creator": "00001951-7ca3-47ac-a462-d5a66e3e6724",
+		"creationtime": "2020-08-29 15:20:49",
+		"tenant_id": "umwz7rz7"
+	}
+}
+
+档案维护OpenApi 接口
+自定义档案维护详情查询
+请求说明				
+请求域名	动态域名，获取方式详见 获取租户所在数据中心域名			
+请求地址	/yonbip/digitalModel/customerdoc/detail			
+请求方式	GET			
+ContentType	application/json			
+事务/幂等性	无			
+请求参数				
+名称	类型	参数位置	必填	描述
+access_token	string	query	是	应用鉴权 token
+id	string	query	是	业务数据 ID
+参数示例				
+id=HRDIWORK030000000003				
+返回值参数				
+名称	类型	描述		
+code	String	返回码，调用成功时返回 200		
+message	String	调用失败时的错误信息		
+data	creator	String	创建人主键	
+modifier	String	修改人主键		
+code	String	编码		
+name	Object	名称，多语对象		
+orgid	String	所属组织 ID		
+orgid_name	String	所属组织名称		
+custdocdefid	String	自定义档案定义主键		
+description	Object	描述，多语对象		
+id	String	主键		
+pubts	String	时间戳		
+creator_userName	String	创建人名称		
+creationtime	String	创建时间		
+modifier_userName	String	修改人名称		
+modifiedtime	String	修改时间		
+ispreset	boolean	是否预制		
+dr	int	逻辑删除标识		
+releasestatus	int	是否发布		
+serviceCode	String	发布后的服务编码		
+
+返回值示例
+
+{
+
+"code": 200,
+
+"message": "操作成功", "data": {
+
+"orgid_name": "企业账号级", "code": "1",
+
+"description": {},
+
+"orgid": "666666",
+
+"dr": 0,
+
+"ispreset": true, "enable": 1,
+
+"name": {
+
+"zh_CN": "社会招聘"
+
+},
+
+"custdocdefid": "HRDIWORK030000000007", "id": "HRDIWORK030000000344",
+
+"creationtime": "2020-06-03 16:14:08",
+
+"pubts": "2020-06-03 16:18:06"
+
+}
+}
+
+自定义档案维护列表查询
+请求说明				
+请求域名	动态域名，获取方式详见 获取租户所在数据中心域名			
+请求地址	/yonbip/digitalModel/customerdoc/list			
+请求方式	POST			
+ContentType	application/json			
+事务/幂等性	POST			
+请求参数				
+名称	类型	参数位置	必填	描述
+access_token	string	query	是	应用鉴权 token
+pageSize	int	body	是	分页大小 默认值：10
+pageIndex	int	body	是	页码 默认值：1
+code	string	body	否	编码
+name	string	body	否	名称
+custdocdefid	string	body	否	自定义档案设置主键与编码二选一必填
+custdocdefcode	string	body	否	自定义档案设置编码与主键二选一必填
+参数示例				
+Url: /yonbip/digitalModel/customerdoc/list?access_token=访问令牌Body: {"pageIndex": 1,"pageSize": 10,"custdocdefid": "HRDIWORK030000000003", "custdocdefcode": "0003","name": "测试","code": "abc"}				
+返回值参数				
+---				
+名称	类型	描述		
+code	String	返回码，调用成功时返回 200		
+message	String	调用失败时的错误信息		
+Data	pageIndex	int	当前页码	
+pageSize	int	当前页大小		
+pageCount	int	页总数		
+beginPageIndex	int	开始页码		
+endPageIndex	int	结束页码		
+recordCount	int	记录总数		
+pubts	String	时间戳		
+recordList数组对象	orgid_code	String	所属组织编码	
+orgid_name	String	所属组织名称		
+orgid	String	所属组织主键		
+name	Object	名称，多语对象		
+code	String	编码		
+mcflag	int	是否分级管控		
+ispreset	boolean	是否预制		
+description	Object	描述，多语对象		
+id	String	主键		
+pubts	String	时间戳		
+creator_userName	String	创建人名称		
+creationtime	String	创建时间		
+modifier_userName	String	修改人名称		
+modifiedtime	String	修改时间		
+enable	int	启用状态		
+dr	int	逻辑删除标识		
+shortname	String	简称		
+custdocdefid	String	档案定义主键		
+
+返回值示例
+
+{
+	"code": 200,
+	"message": "操作成功",
+	"data": {
+		"pageIndex": 0,
+		"pageSize": 10,
+		"recordCount": 0,
+		"recordList": [{
+				"orgid_name": "企业账号级",
+				"mcflag": 0,
+				"code": "001",
+				"description": {
+					"zh_CN": "中文",
+					"en_US": "英文",
+					"zh_TW": "繁体"
+
+				},
+
+				"orgid_code": "global00",
+				"shortname": "001",
+
+				"orgid": "666666",
+
+				"dr": 0,
+
+				"ispreset": false,
+				"enable": 1,
+
+				"name": {
+
+					"zh_CN": "中文",
+
+					"en_US": "英文",
+
+					"zh_TW": "繁体"
+
+				},
+
+				"custdocdefid": "HRDIWORK030000000003",
+				"id": "4164b6837a784ae9af3b3228b930a5b0",
+				"pubts": "2020-07-13 15:55:30"
+
+			}
+
+		],
+
+		"pageCount": 0,
+
+		"beginPageIndex": 1,
+
+		"endPageIndex": 0
+	}
+}
+
+自定义档案维护增删改
+请求说明				
+请求域名	动态域名，获取方式详见 获取租户所在数据中心域名			
+请求地址	/yonbip/digitalModel/customerdoc/saveOrUpdate			
+请求方式	POST			
+ContentType	application/json			
+事务/幂等性	无			
+请求参数				
+---				
+名称	类型	参数位置	必填	描述
+access_token	string	query	是	应用鉴权 token
+custdocdefid	String	query	否	编码主键二选一
+custdocdecode	String	query	否	编码主键二选一
+Body 参数				
+名称	类型	描述		
+billnum	String	单据编码 默认：customerdoc_listcard		
+data	code	String	档案编码 示例：123	
+name	多语对象	档案名称 示例：婚姻状况		
+orgid	String	所属组织主键		
+orgCode	String	所属组织编码		
+parentCode	String	所属上级编码		
+parent	String	所属上级主键		
+id	String	档案主键		
+enable	long	0: 停用 1:启用 示例：1		
+shortname	string	简称		
+description	多语对象	描述		
+_status	String	保存 示例：Insert		
+参数示例				
+Url: /yonbip/digitalModel/customerdoc/saveOrUpdate?access_token=访问令牌&custdocdefid=HRDIWORK030000000003&custdocdefcode=0003 Body: {"billnum": "customerdoc_listcard", "data": {"orgid": "666666","orgCode": "global00", "code": "101","name": { "zh_CN": "101" }, "shortname": "101","description": { "zh_CN": "s3423231" }, "enable": 1,"id": "","parent": "123456789","parentCode": "123", "_status": "Insert"}}				
+返回值参数				
+名称	类型	描述		
+code	String	返回码，调用成功时返回 200		
+message	String	调用失败时的错误信息		
+data	creator	String	创建人主键	
+modifier	String	修改人主键		
+sysid	String	系统标识符		
+tenant_id	String	租户标识		
+	code	String	编码
+name	Object	名称，多语对象	
+custdocdefid	String	档案定义主键	
+ispreset	boolean	是否预制	
+description	Object	描述，多语对象	
+id	String	主键	
+pubts	String	时间戳	
+creator_userName	String	创建人名称	
+creationtime	String	创建时间	
+modifier_userName	String	修改人名称	
+modifiedtime	String	修改时间	
+enable	int	启用状态	
+dr	int	逻辑删除标识	
+level	int	档案层级	
+serviceCode	String	发布后的服务编码	
+返回值示例			
+{"code": "200","message": "操作成功", "data": {"orgid": "666666","dr": 0,"ispreset": false, "code": "54235900","name": { "zh_CN": " 测 试 " }, "shortname": " 测 试 ", "description": { "zh_CN": "测试" }, "enable": 1,"parentCode": "54234","custdocdefcode": "0011","custdocdefid": "HRDIWORK030000000011", "parent": "2653388924654080","id": "2653439157589504","parentid": "2653388924654080","sysid": "diwork","creator": "00001951-7ca3-47ac-a462-d5a66e3e6724", "creationtime": "2022-02-18 10:57:53","pubts": "2022-02-18 10:57:53","tenant": "ahh7etbi", "yTenantId": "ahh7etbi", "level": 2}}			
+RPC 接口
+
+该类型接口主要提供相关领域通过 iris 进行调用。
+
+该 RPC 能力包已经加入到平台公共二方包（ iuap-2nd-party）中，在使用时直接加入以下依
+
+<dependency>
+<groupId>com.yonyou.ucf</groupId>
+<artifactId>mdd-customerdoc-sdk</artifactId>
+</dependency>
+
+
+赖包即可，无需指定版本。具体的调用示例如下：
+
+档案定义RPC 接口
+
+public class CustomerDocApiServiceImplTest { public void queryByParams() throws Exception {
+
+// 树型档案 定义ID，查询验证 CustDocDTO custDocDTO = new CustDocDTO(); custDocDTO.setCustDocDefId("HRDIWORK030000000011"); custDocDTO.setPageIndex(1); custDocDTO.setPageSize(20); Pager pager = iCustomerDocApiService.queryByCondition(custDocDTO); Assert.assertEquals(81, pager.getRecordCount());
+
+// 树型档案 定义ID，parentId 查询验证 custDocDTO.setParentId("2086068637127424"); Pager pager1 = iCustomerDocApiService.queryByCondition(custDocDTO); Assert.assertEquals(4, pager1.getRecordCount());
+
+// 列表档案 定义ID，模糊查询验证（模糊值有） custDocDTO.setLikeValue("婚育证明"); Pager pager4 = iCustomerDocApiService.queryByCondition(custDocDTO); Assert.assertEquals(1, pager4.getRecordCount());
+
+// 断言异常 定义ID 和编码不匹配custDocDTO.setCustDocDefCode("AAAA"); Assert.assertThrows(BusinessException.class, () -> { iCustomerDocApiService.queryByCondition(custDocDTO)
+
+}); } }
+
+通过编码或名称查询档案设置数据
+
+com.yonyou.iuap.customerdoc.service.itf.ICustomerDocDefApiService
+
+接口
+
+方法名	queryByCodeAndName(String tenantId, String code, String name)	
+参数描述		
+参数	类型	说明
+tenantId	String	租户标识
+code	String	自定义档案设置编码
+name	String	自定义档案设置名称
+返回说明		
+属性	类型	说明
+id	String	主键
+code	String	编码
+name	String	名称
+classify	Integer	是否树型档案，1：是 0：否
+ispreset	Integer	是否预制数据，1：是 0：否
+mcflag	Integer	是否分级管控，1：是 0：否
+releasestatus	Integer	是否已经发布，1：是 0：否
+enable	Integer	启用状态，0：初始化 1：启用 2：停用
+dr	Integer	删除状态，0：未删除 1：已删除
+tenantid	String	租户标识
+档案维护RPC 接口
+按档案定义ID 以及层级查询
+接口	com.yonyou.iuap.customerdoc.service.itf.ICustomerDocApiService	
+方法名	queryByLevel(String tenantId, String customerDocDefId, Integer level)	
+参数描述		
+参数	类型	说明
+tenantId	String	租户标识
+customerDocDefId	String	所属自定义档案设置主键
+level	Integer	层级（范围：0-8）
+返回值说明		
+属性	类型	说明
+id	String	主键
+code	String	编码
+name	String	名称
+custdocdefid	String	所属自定义档案设置主键
+parentid	String	父节点主键
+level	Integer	层级标识
+path	String	层级路径
+isEnd	Integer	是否末级，1：是 0：否
+ispreset	Integer	是否预制数据 1：是 0：否
+orgid	String	所属组织主键
+enable	Integer	启用状态，0：初始化 1：启用 2：停用
+dr	Integer	删除状态，0：未删除 1：已删除
+tenantid	String	租户标识
+按条件分页查询
+接口	com.yonyou.iuap.customerdoc.service.itf.ICustomerDocApiService				
+方法名	queryByLevel(String tenantId, String customerDocDefId, Integer level)				
+参数说明					
+参数类型	属性	类型	是否必填	默认值	说明
+CustDocDTO	id	String	非必填	null	主键
+code	String	非必填	null	编码	
+name	String	非必填	null	名称	
+custDocDefId	String	两者二选一必填	null	两者二选一必填，都为空或者主键与编码不匹配则抛出异常信息。	
+custDocDefCode	String		null		
+parentId	String	非必填	null	该参数主要是在查询树型档案时生效，即代表当前查询档案的层级	
+likeValue	String	非必填	null	编码或名称模糊查询	
+pageSize	Integer	非必填	10	默认分页大小是 10，最大值为1000；	
+pageIndex	Integer	非必填	1	默认初始页是 1	
+返回说明					
+Pager	该对象是引用自 MDD 框架的分页对象，具体请参阅 MDD 框架说明。				
+文档内容是否对您有所帮助？
+为帮助文档评分：
+页内目录
+1. 本文摘要
+2. 第一章 基本概念
+2.1 背景
+2.2 产品亮点
+3. 第二章 技术架构
+3.1 总体架构设计
+3.2 业务流程设计
+3.2.1 档案定义流程
+3.2.2 档案维护流程
+4. 第三章 功能介绍
+4.1 功能概述
+4.1.1 档案定义
+4.1.2 档案维护
+5. 第四章 典型业务场景介绍
+5.1 自定义项引用
+5.2 低代码开发引用
+5.3 数据集成同步
+6. 第五章 开放接口说明
+6.1 REST 接口
+6.1.1 档案定义REST 接口
+6.1.2 档案维护REST 接口
+6.2 OpenApi 接口
+6.2.1 档案定义OpenApi 接口
+6.2.2 档案维护OpenApi 接口
+6.3 RPC 接口
+6.3.1 档案定义RPC 接口
+6.3.2 档案维护RPC 接口
+文档反馈
+北京市海淀区北清路68号用友产业园
+4006-600-588
+友情链接
+用友官网用友YonHelp用友iuap平台用友云市场用友云注册协议隐私条款
+
+Copyright ©2020 用友网络科技股份有限公司版权所有京ICP备05007539号-24京公网安备11010802021935号
+
+返回顶部
+加载中...

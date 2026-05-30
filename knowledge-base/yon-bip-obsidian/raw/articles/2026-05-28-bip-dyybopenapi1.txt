@@ -1,0 +1,818 @@
+社区文档中心
+首页
+文档导航
+开发者社区
+社区论坛
+视频教程技术博客
+更多
+张宏涛
+资料中心
+专业开发
+产品概述
+快速入门
+操作指南
+开发指南
+开发介绍
+新功能开发
+移动端开发
+扩展开发
+全球化
+组织
+权限
+特征
+基础数据
+审批流
+业务流
+规则引擎
+公式
+UI模板
+参照
+导入导出
+打印
+对象建模
+编码规则
+调度任务
+监控与预警
+日志
+消息平台
+工作台
+事件中心
+文件服务
+YonBuilder应用开发
+YonBuilder开发能力
+YonBuilder应用构建
+函数组件
+YonBuilder原厂扩展开发（MDD）
+YonBuilder组件化开发
+YPD专业开发
+接口开发及发布
+生态开发事务一致性
+前端开发
+后端开发
+移动开发
+安全
+数据库
+DevOps技术
+容器云技术
+区块链云技术
+YMS开发
+智能应用开发
+专项开发
+成果迁移
+技术方案
+最佳实践
+参考手册
+常见问题
+视频教程
+专业开发/开发指南/YonBuilder应用开发/生态开发事务一致性
+生态开发事务一致性
+最后更新时间：2025-11-28
+概述
+适用场景
+部署方案	开发类型	是否适用
+公有云	客户化定制开发	是
+私有云	客户化定制开发	否
+专属云	客户化定制开发	否
+公有云	ISV生态开发	是
+私有云	ISV生态开发	否
+专属云	ISV生态开发	否
+业务场景
+
+生态开发过程中，涉及4种场景，然后会针对这4种场景进行分别解析：
+
+1、低代码：脚本调用第三方API
+
+2、低代码：脚本调用YonBIP的OpenAPI
+
+3、专业开发：后端脚手架调用第三方API
+
+4、专业开发：后端脚手架调用YonBIP的OpenAPI
+
+关键词
+
+公有云、客开、生态、后端脚本、脚手架、OpenAPI、YonBIP、三方API
+
+低代码事务一致性方案
+
+生态调用接口分为两种情况，一种是调用三方API，一种是调用YonBIP OpenAPI。在实现的角度上有两种方案，一种是通过低代码调用，另一种是通过专业开发调用。
+
+大多数项目倾向于使用低代码方式实现，这种情况是通过脚本去调用接口。生态开发使用专业开发服务通过后端脚手架调用接口。
+
+请开发者仔细阅读下面的场景，在实际开发中根据不同的场景，选择不同的实现方案。
+
+调OpenAPI
+场景
+
+最常见的场景之一：很多项目需要将三方系统的数据写入BIP，低代码平台支持通过编写脚本调用保存更新类的OpenAPI实现上述功能。
+
+保存和更新类OpenAPI分两种，一种是支持幂等的接口（API文档说明中显示支持幂等），推荐使用支持幂等的接口。另一种是非幂等接口，正常情况下保存前先需要做一次查询操作，数据不存在时再调用保存类接口。查询类接口都不涉及幂等，可以正常调用。
+
+接口的API说明文档上有限流说明，调用时需要关注接口的限流次数，避免每分钟调用太频繁，出现触发限流的情况。如果项目应用场景必须做接口的高频调用，请客户购买API加速服务，限流次数会整体翻倍。
+
+调用接口的时候需要考虑子表数据信息量，不宜过大，子表调用量较大的情况，需要考虑将子表进行拆单，避免调用数据量太大。
+
+BIP的OpenAPI的链路总时长是30秒，这在开发的时候需要额外注意。
+
+实现思路
+不同场景	处理方案	备注
+调用OpenAPI执行时长小于30秒	低代码脚本同步/异步调用，参考2.2.3/2.2.4章节	
+OpenAPI执行时长偶尔大于30秒	1. API提供幂等接口，低代码调用2.2.2/2.2.3；2. 不支持幂等接口，采用专业版脚手架调用	提供方API幂等方案：重试时计算好结果后返回所有数据。
+OpenAPI每次回执大于30秒	采用专业版脚手架异步调用，参考2.4章节	
+同步调用方案
+
+1、在应用构建单据中添加一个字段，记录回执结果；
+
+2、优先选择支持幂等的OpenAPI接口进行调用，保障不会出现数据重复进入BIP系统；
+
+3、非幂等的OpenAPI保存接口，调用前需要先进行查询数据，避免保存的时候数据已经写入，数据没有写入的话，可以继续调用OpenAPI进行保存。
+
+4、调用BIP的OpenAPI支持幂等的接口，如果第一调用接口超时，一个小时之内再次用同样的幂等key调用接口时，如果上次调用是成功的，会直接返回首次调用的完整的结果，超过一个小时再次用同样的幂等key调用时只返回ID， 超过一个月之后幂等key失效，数据会被认定为全新调用。
+
+5、默认OpenAPI的调用链路执行时长不能大于30秒，超过30秒的调用会报超时错误，需要根据业务场景进行拆单处理。
+
+时序图如下：
+
+实现步骤
+
+在后端函数中，需要用openlinker调用OpenAPI函数，实现示例如下:
+
+et AbstractTrigger = require('AbstractTrigger');
+  class MyTrigger extends AbstractTrigger {
+    execute(context,param){
+       let url = "{动态获取}/iuap-api-gateway/yonbip/digitalModel/orgunit/querytree"; 
+       let body = {};  //请求参数
+       let apiResponse = openLinker("POST", url, "应用编码",JSON.stringify(body));  
+       let apiResponseData = JSON.parse(apiResponse);
+        if(apiResponseData.code!=200){
+            //TODO 其他处理
+            throw new Error("...");
+        }
+     return {apiResponse};
+    }
+  }
+exports({"entryPoint":MyTrigger});
+
+异步调用方案
+
+1、在应用构建单据中添加一个字段（callStatus，整数，null表示未执行【默认】，0执行中，1执行失败 2执行完成）；单据上增加按钮，操作当前单据进入异步执行范围，点击按钮时将callStatus值改为0。
+
+2、创建调度任务，读取自建单据callStatus值为0的单据，直接调用第三方接口，调度任务定时规则的最小时间间隔为5分钟，如果数据量大（如处理B2C电商数据），可以添加多个调度任务，通过传入不同的条件参数来分片实现。
+
+3、调用返回成功或失败，记录到对应的单据字段；调用失败时将callStatus改为1，调用成功时将callStatus改为2。当callStatus值为1时，按钮名称可改为重试，重试操作需要将callStatus再次改为0。
+
+实现步骤
+
+创建调度任务，在后端脚本中调用脚手架方法对业务对照进行循环处理。
+
+相关示例代码片段为：
+
+let AbstractTrigger = require('AbstractTrigger');
+class MyTrigger extends AbstractTrigger {
+  execute(context, param) {
+   
+    let header = {
+      'Content-Type': 'application/json; charset=utf-8'
+    };
+     
+    function sendLog(orderCode, message, state, saveBody) {
+      let proofLogBody = {
+        businessScenario: '拉取销售订单',
+        type: '销售订单',
+        code: orderCode,
+        time: timestampToTime(new Date()),
+        message: message,
+        success: state,
+        saveBody: saveBody
+      }
+      let url = yuming + '/sdyaojek/withCRM/crmlog/insertCrmLog';
+      let res = openLinker('POST', url, 'AT19FB35B03EC0000B', JSON.stringify(proofLogBody));
+      let test = '';
+    }
+
+    let zhangHaoSheBeiBody = { };
+
+    let zhangHaoSheBeiResult = JSON.parse(postman("post", "https://WWW.XXX.COM/cgi/crm/custom/v2/data/query",
+      JSON.stringify(header),
+      JSON.stringify(zhangHaoSheBeiBody)));
+
+    let errorDescription = zhangHaoSheBeiResult.errorDescription;
+    if (errorDescription != "success" || zhangHaoSheBeiResult.errorMessage != "OK") {
+      sendLog("获取列表错误", errorDescription, "否", JSON.stringify(zhangHaoSheBeiResult.traceId));
+    } else {
+      let data = zhangHaoSheBeiResult.data;
+      let dataList = data.dataList;
+      
+
+          if (childs.length != 0 && errorMessage == "") {
+            let saveBody = {
+              "data": {
+                "resubmitCheckKey": replace(uuid(), "-", ""),
+                "salesOrgId": salesOrgId,
+                "transactionTypeId": "SO002",
+                "vouchdate": vouchdate,
+                "agentId": agentId,
+                "settlementOrgId": salesOrgId,
+                "orderPrices!currency": "1842544020465123359",
+                "orderPrices!exchRate": 1,
+                "orderPrices!exchangeRateType": "sdyaojek",
+                "orderPrices!natCurrency": "1842544020465123359",
+                "orderPrices!taxInclusive": true,
+                "invoiceAgentId": agentId,
+                "payMoney": 1,
+                "orderDetails": childs,
+                "code": name,
+                "createSource": 5,
+                "source": 0,
+                "memo": "试用-样机",//存放crm付费类型
+                "_status": "Insert"
+              }
+            }
+
+            let saveResult = JSON.parse(openLinker('POST', yuming + '/yonbip/sd/voucherorder/singleSave', 'AT19FB35B03EC0000B',
+              JSON.stringify(saveBody)));
+            if (saveResult.code == '200') {
+               //… 调用三方接口回写订单拉取成功信息
+              sendLog(name, "是", "是", "");
+            } else {
+              errorMessage = errorMessage + JSON.stringify(saveResult);
+              sendLog(name, errorMessage, "否", JSON.stringify(saveBody));
+            }
+          }
+        }
+      }
+    }
+    return {};
+  }
+}
+exports({ "entryPoint": MyTrigger });
+
+调用三方API
+场景
+
+项目上经常遇到需要使用低代码调用三方API的场景。针对这种场景，我们总结了几种不同的处理方法，来满足项目上的需求。项目上根据自己的情况选择同步或异步实现方案。
+
+实现思路
+不同场景	处理方案	备注
+API执行时长小于60秒	低代码脚本同步/异步调用，参考2.1.3/2.1.4章节	
+API执行时长偶尔大于60秒	
+API提供方重试时返回所有结果，低代码调用方案2.1.3/2.1.4
+采用专业版脚手架调用
+	提供方API幂等方案：重试时计算好结果后返回所有数据。
+API每次回执大于60秒	采用专业版脚手架调用，参考第3章节	
+同步调用方案
+
+1、在应用构建单据中添加一个字段（callStatus，整数，null表示没有调用，0调用失败，1调用成功），记录回执的结果，按照项目需要（非必要）；
+
+2、编写后端脚本，实现调用三方接口。实现细节后端脚本会通过j2v8引擎调用到应用构建平台的后台服务，然后后台服务再调用三方接口。因为是公有云，后台服务不允许大量的调用三方请求，60秒之后直接关闭线程，程序停止；
+
+3、调用返回成功或失败，记录到对应的单据字段；
+
+4、失败后可以通过界面上的触发节点重新出发接口的调用。
+
+时序图如下：
+
+实现步骤
+
+1、如在审核动作中增加自定义规则，放在规则链最下端；
+
+2、在函数中调用第三方接口，可根据接口响应结果判断是否调用成功，失败则throw new Error()，审核动作会回滚，并返回失败，如以下实现。
+
+let AbstractTrigger = require('AbstractTrigger');
+class MyTrigger extends AbstractTrigger {
+  execute(context, param) {
+    let header = {
+      'Content-Type': 'application/json;charset=UTF-8',
+    };
+    let body = {
+      key: 'value',
+      …
+    };
+    let url = "https://xxxxxx";
+    let infoString = ObjectStore.postman('post', url, header, body);
+    let infoObject = JSON.parse(infoString);
+if (infoObject.code != 200) {
+  //更新单据调用第三方接口响应字段
+  //… TODO
+      throw new Error("三方接口调用失败")
+    }
+    return {};
+  }
+}
+exports({ entryPoint: MyTrigger });
+
+异步调用方案
+
+1、在应用构建单据中添加一个字段（callStatus，整数，null表示未执行，0执行中，1执行失败，2执行成功）记录回执的结果；新增按钮点击后将callStatus改为0。 2、创建调度任务，获取自建单据callStatus为0的单据，直接调用第三方接口，调度任务定时规则的最小时间间隔为5分钟，如果数据量大（如处理B2C电商数据），可以添加多个调度任务，通过传入不同的条件参数来分片实现。 3. 调用返回成功或失败，记录到对应的单据字段；调用失败callStatus改为1，调用成功callStatus改为2。callStatus为0时，按钮名称改为重试，点击时callStatus再次改为0。注意在不同callStatus状态下的调整按钮的名称变化及可点击性的控制。
+
+实现步骤
+
+创建调度任务，在后端脚本中调用脚手架方法对业务对照进行循环处理。
+
+相关示例代码片段为：
+
+let AbstractTrigger = require('AbstractTrigger');
+class MyTrigger extends AbstractTrigger {
+  execute(context, param) {
+    let header = {
+      'Content-Type': 'application/json;charset=UTF-8',
+    };
+    let body = {
+      key: 'value',
+      …
+    };
+    let url = "https://xxxxxx";
+    let infoString = ObjectStore.postman('post', url, header, body);
+    let infoObject = JSON.parse(infoString);
+if (infoObject.code != 200) {
+  //更新单据调用第三方接口响应字段
+  //… TODO
+    }
+    return {};
+  }
+}
+exports({ entryPoint: MyTrigger });
+
+专业开发事务一致性方案与实现
+
+针对业务场景里的异常信息，进行如下设计：
+
+调用OpenAPI
+场景
+
+客户需要调用BIP的OpenAPI，低代码调用无法满足，需要采用专业版调用，比如调用数量比较大，超过了限流的标准，此时有两种思路去解决，一种思路是购买API服务，解决限流。再就是通过代码实现，控制速率，防止调用的时候出现限流。
+
+还有一种情况，需要获取外边的数据，进行数据运算（如查询BIP的数据，进行加工处理），然后将结果再次调用OpenAPI生成BIP的业务数据。
+
+调用接口的时候需要考虑子表数据信息量，不宜过大，子表调用量较大的情况，需要考虑将子表进行拆单，避免调用数据量太大。
+
+BIP的OpenAPI的链路总时长是30秒，这在开发的时候需要额外注意。
+
+实现思路
+不同场景	处理方案	备注
+OpenAPI执行时长小于30秒	这种情况不建议使用专业吧，低代码脚本同步/异步调用，参考2.1.3/2.1.4章节	
+OpenAPI执行时长偶尔大于30秒	1. API提供方重试时返回所有结果，低代码调用方案2.1.3/2.1.4;2. 专业版脚手架异步调用参考2.3.4章节	提供方API做好幂等方案
+OpenAPI每次回执大于30秒	采用专业版脚手架异步调用，参考2.3.4章节	
+同步调用方案
+
+1、在单据中添加相关字段，数据库中同步创建该字段，可以根据业务自行添加额外字段；
+
+2、单据信息到应用构建侧，然后再到后端脚手架；
+
+3、后端脚手架先进行OpenAPI接口查询，看是否有数据，如果有数据直接结束；
+
+4、没有数据的话，后端脚手架整合、运算、加工数据好之后，然后调用OpenAPI。
+
+时序图如下：
+
+实现步骤
+
+配置可以参考2.3.3.1的前三步，最后一步代码，可参考如下示例：
+
+public Object execute(RulCtxVO rulCtxVO, Map<String, Object> params) {
+  YmsHttpHeader ymsHttpHeader = new YmsHttpHeader();
+  ymsHttpHeader.add(CONTENT_TYPE_NAME, "application/json;charset=utf-8");
+  YmsHttpRequest request = new YmsHttpRequestBuilder().method(YmsHttpMethod.POST)
+        .addHeader(ymsHttpHeader)
+        .url("${apigatewayurl}/yonbip/scm/stockstatuschange/single/save")
+        .addQueryParam("Key", "Value")
+        .build();
+  try {
+     YmsHttpResponse response = ytsYmsHttpClient.execute(request);
+     if (200 != response.getStatusCode()) {
+        //TODO 业务逻辑处理
+        throw new BusinessException("500", "调用三方接口异常", new Throwable());
+     }
+  } catch (Exception e) {
+     //TODO 业务逻辑处理
+     throw new BusinessException("500", "调用三方接口异常", new Throwable());
+  }
+  return null;
+}
+
+异步调用方案
+异步 OpenAPI业务流程概览
+
+数据库字段与结构设计
+
+1、数据库字段与结构设计
+
+为记录业务操作失败的异常信息及后续补偿操作，需对业务表进行字段扩展设计。
+
+ALTER TABLE your_table_name
+
+ADD COLUMN error_message TEXT COMMENT '记录支付失败的错误信息';
+
+2、字段说明：
+
+error_message:记录支付失败的错误信息;
+
+*补充字段设计建议： 如果需要，可以同时记录失败时间或重试状态，以便更精细地控制补偿流程：
+
+error_time： 记录失败发生的时间。
+
+retry_status： 标记当前操作是否正在进行补偿，如 WAITING_RETRY、RETRYING 等。
+
+注： 具体新增字段需根据实际业务场景决定。
+
+页面功能与交互设计
+前端界面设计说明
+这里注意是进行前端按钮设计，添加按钮，修改按钮名称为立即重试
+
+描述页面中按钮的功能、样式和状态。
+
+按钮名称:“立即重试”
+
+按钮位置： 位于订单每条记录的卡片详情右上角中，每一条失败记录后都有对应的“立即重试”按钮。
+
+按钮状态：
+
+正常状态： 按钮可点击，用于触发重试操作。
+
+隐藏状态： 当重试操作正在进行或订单不可重试时，按钮应隐藏。
+
+按钮样式 使用醒目的颜色（如红色或绿色）标识按钮
+
+异步 OpenAPI实现详解
+前端按钮与交互逻辑
+
+交互逻辑包括 立即重试按钮的显示/隐藏逻辑、点击操作逻辑 及 页面状态刷新逻辑，具体说明如下：
+
+1、 按钮的显示与隐藏逻辑
+
+根据支付状态 (paymenstatus) 和校验状态 (verifyState) 动态调整按钮的可见性及相关字段的显示状态。
+
+在数据加载完成后，通过 afterLoadData 事件动态调整按钮显示状态。
+确保按钮状态与实际支付状态保持一致，避免产生误导性操作。
+
+2、点击“重新支付”按钮的操作逻辑
+
+判空处理：
+点击按钮时，优先验证业务ID（payment_id）是否存在。如果为空，则直接提示用户“支付ID不能为空”，阻止后续操作。
+请求参数构建：
+
+根据业务需求，构建重新支付所需的固定请求参数（如：支付金额、支付账户、失败原因等）。请求参数中包括用户输入的关键数据（如 payment_id）以及系统固定信息（如 currency、trans_time 等），调用后端接口，通过 POST 请求完成重新请求操作。
+
+成功与失败处理：
+
+成功时：
+
+提示用户“恭喜！重试成功”；
+刷新页面数据，并隐藏“重新支付”按钮。
+
+失败时：
+
+捕获后端返回的错误信息，提示用户具体错误原因；
+页面数据保持不变，方便用户再次重试。
+
+页面刷新：
+
+每次操作完成后，调用 viewModel.execute('refresh')，刷新页面数据状态，确保前端与后端数据同步。
+重试请求结构示例
+
+示例：
+
+{
+    "currency": "2103734183673724956", // 货币编码，唯一标识某种货币（例如：人民币）
+    "currency_name": "人民币",         // 货币名称，表示具体的货币种类
+    "receiver_account": "463646427184757489", // 接收方账户号
+    "sender_account": "46465869274645758",    // 发起方账户号
+    "sender_bank": "招商银行",          // 发起方银行名称
+    "sender_name": "淘宝",             // 发起方名称
+    "amount": 122,                    // 金额（单位：元）
+    "action_type": "33",              // 动作类型（自定义业务场景编码，例如：33可能表示某种业务动作）
+    "request_source": "2",            // 请求来源（1-前端请求，2-后端服务发起，具体含义根据业务定义）
+    "trans_status": "2",              // 处理状态（1-处理中，2-成功，3-失败，具体状态码需参见业务定义）
+    "trans_time": "2024-11-11 16:39:49", // 处理发生时间
+    "pubts": "2024-11-11 16:29:51",       // 发布时间戳（通常用于记录事件的发生时间）
+    "createTime": "2024-11-11 16:28:57",  // 数据创建时间
+    "verifyState": "0",               // 验证状态（0-未验证，1-验证通过，2-验证失败）
+    "failure_reason": "错误码：1001，描述：非法订单状态", // 失败原因说明，包含错误码和描述信息
+    "transId": "20241112220013232595999", // 流水号，唯一标识一笔处理请求
+    "creator_userName": "21212121211323" // 创建者用户名，用于记录操作用户
+}
+
+前端代码详细说明
+
+前端代码结构说明
+
+伪代码如下：
+
+// 按钮点击事件
+if (button18vb exists) {
+    button18vb.on('click', function() {
+        debug;
+
+        // 获取支付ID，判空处理
+        payment_id = getValue('payment_id');
+        if (!payment_id) {
+            alert('支付ID不能为空', 'error');
+            return;
+        }
+
+        // 构建请求数据
+        requestData = { transId: payment_id, failure_reason: getValue('errormessage'), creator_userName: getValue('creator_userName') };
+
+        // 发起重试支付请求
+        sendPostRequest('/api/v1/orders/retryPayment', requestData, function(err, result) {
+            alert(err ? `失败：${err.message}` : '重试成功', err ? 'error' : 'success');
+            refreshPage();
+        });
+    });
+}
+
+// 页面加载后逻辑
+on('afterLoadData', function() {
+    debug;
+    status = getValue('paymenstatus');
+    verifyState = getValue('verifyState');
+
+    // 控制按钮显示
+    setVisibility('button18vb', status !== 'SUCCESS' && status);
+    setVisibility('button34oa', verifyState == 2 && status !== 'SUCCESS');
+    setVisibility('errormessage', status !== 'SUCCESS');
+});
+
+后端代码详细说明
+
+伪代码展示：
+
+// 定义线程安全的锁对象映射，锁粒度为 transId
+locks = ConcurrentHashMap()
+
+// 判空处理
+if (request.getTransId() == null || request.getTransId().trim().isEmpty()) {
+    return ResultVO.serverErr("FAILURE", "支付ID不能为空")
+}
+
+// 获取 transId 并生成锁对象
+transId = request.getTransId()
+lock = locks.computeIfAbsent(transId, key -> new Object())
+
+// 加锁处理
+synchronized (lock) {
+    try {
+        // 查询调用记录
+        result = paymentRetryService.getRecordByPaymentId(transId)
+        if (result == null || result.get("status") != "FAILURE") {
+            // 订单不可重试
+            return updateRecordAndReturn(transId, "372561", "订单不可重试", "订单不可重试")
+        }
+
+        // 调用接口重试
+        request.setResubmitCheckKey(transId)
+        response = paymentService.retryPaymentTo(request)
+
+        // 处理接口返回结果
+        if (response.get("code") == "200") {
+            return updateRecordAndReturn(transId, "200", "调用成功", "调用成功")
+        } else {
+            return ResultVO.serverErr("FAILURE", "调用失败")
+        }
+    } finally {
+        // 清理锁对象
+        locks.remove(transId, lock)
+    }
+}
+
+异步 OpenAPI 实际应用与效果验证
+
+1、发现有失败的单据时，打开单据，点击立即重试按钮，进行重试
+
+点击后，等待返回成功，本次手工补偿事务成功。
+
+调用三方API
+场景
+
+低代码脚本调用三方API实现不了的能力，都需要在后端脚手架实现。脚手架实现的能力需要单独购买PaaS资源（公有云），专业开发服务，功能有很大提升，但是项目需要考虑成本，综合评定。
+
+对于三方API，要求三方API实现幂等机制，即：传入幂等key后，调用多次结果还可以正常返回。
+
+对于调用API不复杂的需求, 建议使用低代码脚本实现，可以参考2.1章节解决问题。
+
+实现思路
+不同场景	处理方案	备注
+API执行时长小于60秒	这种情况不建议使用专业版，低代码脚本同步/异步调用，参考2.1.3/2.1.4章节	
+API执行时长偶尔大于60秒	1. API提供方重试时返回所有结果，低代码调用方案2.1.3/2.1.4;2. 如果专业版脚手架，需要异步调用参考2.3.4章节	提供方API做好幂等方案
+API每次回执大于60秒	采用专业版脚手架异步调用，参考2.3.4章节	
+同步调用方案
+
+1、在单据中添加一个字段（callStatus，整数，null表示没有调用，0调用失败，1调用成功），记录回执的结果，按照项目需要（非必要）；
+
+2、BIP单据通过编写规则链，实现代码逻辑；
+
+3、专业版脚手架进行运算，处理和加工数据；
+
+4、调用三方API，然后将结果返回到后端脚手架后记录结果到对应字段；
+
+5、所有结果按原链路同步返回前端。
+
+时序图如下：
+
+实现步骤
+规则链扩展配置
+
+单据直接新增规则，原厂单据规则扩展需要添加【服务域】及选中【分布式事务】。
+
+YMS配置
+
+在脚手架中应用YTS框架，需要在YMS中添加YTS配置：
+
+脚手架AOP配置
+
+在YPD脚手架相应项目applicationContext-db.xml文件中增加AOP配置：
+
+execution(* com.yonyou.ucf.mdf.app.extend.rule..*.*(..)))。
+
+规则扩展代码片段示例
+
+在扩展规则中使用Sagas模式实现分布式事务，规则内定义execute和cancel方法；
+
+@Component("sagaDemoRule")
+public class SagaDemoRule implements IYpdCommonRul, ISagaRule {
+    private static Logger logger = LoggerFactory.getLogger(SagaDemoRule.class);
+
+    @Resource
+    private YmsHttpClient ytsYmsHttpClient;
+
+    public SagaDemoRule() {
+    }
+
+    @Override
+    public Object execute(RulCtxVO rulCtxVO, Map<String, Object> params) {
+       YmsHttpHeader ymsHttpHeader = new YmsHttpHeader();
+       ymsHttpHeader.add(CONTENT_TYPE_NAME, "application/json;charset=utf-8");
+       YmsHttpRequest request = new YmsHttpRequestBuilder().method(YmsHttpMethod.POST)
+             .addHeader(ymsHttpHeader)
+             .url("http://xxxx/test1")
+             .addQueryParam("queryKey", "queryValue")
+             .build();
+       try {
+          YmsHttpResponse response = ytsYmsHttpClient.execute(request);
+          if (200 != response.getStatusCode()) {
+             throw new BusinessException("500", "调用三方接口异常", new Throwable());
+          }
+       } catch (Exception e) {
+          throw new BusinessException("500", "调用三方接口异常", new Throwable());
+       }
+
+       return null;
+    }
+
+    /**
+     * cancel方法中执行调用反向逻辑接口
+     *
+     * @param billContext
+     * @param map
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public RuleExecuteResult cancel(BillContext billContext, Map<String, Object> map) throws Exception {
+       YmsHttpHeader ymsHttpHeader = new YmsHttpHeader();
+       ymsHttpHeader.add(CONTENT_TYPE_NAME, "application/json;charset=utf-8");
+       YmsHttpRequest request = new YmsHttpRequestBuilder().method(YmsHttpMethod.POST)
+             .addHeader(ymsHttpHeader)
+             .url("http://xxxx/test1back")
+             .addQueryParam("queryKey", "queryValue")
+             .build();
+       try {
+          YmsHttpResponse response = ytsYmsHttpClient.execute(request);
+          if (200 != response.getStatusCode()) {
+             throw new BusinessException("500", "调用callback接口异常", new Throwable());
+          }
+       } catch (Exception e) {
+          throw new BusinessException("500", "调用callback接口异常", new Throwable());
+       }
+       return null;
+    }
+}
+
+异步调用方案
+
+1、在单据中添加一个字段（callStatus，整数，null表示没有调用，0调用失败，1调用成功），记录回执的结果；
+
+2、添加调度任务；
+
+3、调度任务调用低代码脚本，低代码脚本调用脚手架接口；
+
+4、然后脚手架调用三方API，然后将结果返回到后端脚手架后记录结果到对应字段；
+
+实现步骤
+
+1、创建调度任务，在后端脚本中调用脚手架方法对业务对照进行循环处理。
+
+任务调度后端脚本：
+
+let AbstractTrigger = require('AbstractTrigger');
+class MyTrigger extends AbstractTrigger {
+    execute(context,param){
+        let url=AppYmsValue('domain.url')+"/mdf-node/uniform/purchaseOrder/orderSaveWmsMonitor?domainKey=p-mfc-dmm-p00s-isvplm";
+        let header = {
+                "Referer": url
+  };
+        let infoString = ObjectStore.postman("get", url, header, null);
+        throw new Error(infoString);
+        return {};
+    }
+}
+exports({"entryPoint":MyTrigger});
+
+
+脚手架Restful的Controller实现：
+
+try {
+    List<Map<String, Object>> list = ymsJdbcApi.queryForList("select id,bill_id, body,status,count from t_l74sj81x_stockBill where status = '500'", new MapListProcessor());
+    //根据实际情况 每次处理几条
+    for (Map<String, Object> item : list) {
+        int count = (Integer) item.get("count");
+        String body = (String) item.get("body");
+        String status = (String) item.get("status");
+        YmsHttpHeader ymsHttpHeader = new YmsHttpHeader();
+        ymsHttpHeader.add(CONTENT_TYPE_NAME, "application/json;charset=utf-8");
+//只执行运行次数小于5（可在页面修改），且失败的任务
+        if (count < 5 && !status.equals("200")) {
+            try  {
+                //TODO 对具体业务进行查询、对照、补偿操作
+                SQLParameter parameter = new SQLParameter();
+                parameter.addParam("200");
+                parameter.addParam(item.get("id"));
+                //修改任务状态为成功后，则不会再继续执行
+                ymsJdbcApi.update("update t_l74sj81x_stockBill set status=? where id=?", parameter);
+
+            } catch (Exception e) {
+                //任务失败次数+1
+                logger.error("The YmsHttp call 'execute' method failed because of the Exception!", e);
+            }
+        }
+    }
+} catch (Exception e) {
+    //任务失败次数+1
+    logger.error("error", e);
+}
+
+常见问题
+什么是异步调用OpenAPI？
+
+异步调用OpenAPI是一种在分布式系统中使用的技术，通过异步方式调用外部API，避免长时间阻塞操作。当某个操作失败时，系统或人工会通过补偿机制执行恢复步骤，确保整个业务流程的最终一致性。这种方式可以提高系统性能，尤其在处理长时间事务时，通过补偿逻辑保证操作的安全性**。**
+
+异步调用OpenAPI适用于哪些场景？
+
+异步调用OpenAPI适用于需要处理跨服务、跨系统事务的场景，例如支付、订单处理、物流等操作。当涉及到多个子系统或服务之间的协作时，异步调用可以减少等待时间，提高系统的响应速度。而补偿机制确保在操作失败时，系统能够恢复一致性，特别适合处理长时间运行的流程。
+
+手工重试机制在异步调用中的作用是什么？
+
+手工重试在异步调用中用于恢复失败的业务。由于异步调用不会立即得到结果，可能在之后某些步骤中发生失败或异常，补偿操作负责撤销或修复这些失败的操作，确保最终数据的一致性。这种补偿机制是异步流程中维护一致性的重要组成部分，可以避免系统在失败情况下出现不一致问题。
+
+如何设计异步调用的补偿机制？
+
+设计异步调用的补偿机制时，需要为每个API调用的操作设计相应的补偿逻辑。每个步骤的调用状态应被详细记录，一旦发生失败或异常，系统可以根据这些状态决定是重试还是执行补偿操作。补偿逻辑需要能够撤销或修复已完成的部分操作，此外还应设计监控和告警机制，以便在必要时进行人工干预**。**
+
+如何保证补偿操作的正确性？
+
+保证补偿操作正确性的关键是充分的补偿逻辑设计和状态管理。首先，每个API调用的补偿措施需要与原操作保持一致，以确保可以完全撤销或修复。其次，日志和状态记录应确保补偿操作在正确的状态下执行。通过对不同的异常场景进行充分测试，验证补偿操作的有效性，以确保其在各种失败条件下都能发挥作用。
+
+文档内容是否对您有所帮助？
+为帮助文档评分：
+页内目录
+1. 概述
+1.1 适用场景
+1.2 业务场景
+1.3 关键词
+2. 低代码事务一致性方案
+2.1 调OpenAPI
+2.1.1 场景
+2.1.2 实现思路
+2.1.3 同步调用方案
+2.1.4 异步调用方案
+2.2 调用三方API
+2.2.1 场景
+2.2.2 实现思路
+2.2.3 同步调用方案
+2.2.4 异步调用方案
+3. 专业开发事务一致性方案与实现
+3.1 调用OpenAPI
+3.1.1 场景
+3.1.2 实现思路
+3.1.3 同步调用方案
+3.1.4 异步调用方案
+3.2 调用三方API
+3.2.1 场景
+3.2.2 实现思路
+3.2.3 同步调用方案
+3.2.4 异步调用方案
+4. 常见问题
+4.1 什么是异步调用OpenAPI？
+4.2 异步调用OpenAPI适用于哪些场景？
+4.3 手工重试机制在异步调用中的作用是什么？
+4.4 如何设计异步调用的补偿机制？
+4.5 如何保证补偿操作的正确性？
+文档反馈
+北京市海淀区北清路68号用友产业园
+4006-600-588
+友情链接
+用友官网用友YonHelp用友iuap平台用友云市场用友云注册协议隐私条款
+
+Copyright ©2020 用友网络科技股份有限公司版权所有京ICP备05007539号-24京公网安备11010802021935号
+
+返回顶部
+加载中...

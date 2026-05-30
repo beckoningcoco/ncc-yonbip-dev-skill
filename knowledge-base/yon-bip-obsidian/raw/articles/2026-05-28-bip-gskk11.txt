@@ -1,0 +1,446 @@
+社区文档中心
+首页
+文档导航
+开发者社区
+社区论坛
+视频教程技术博客
+更多
+张宏涛
+资料中心
+专业开发
+产品概述
+快速入门
+操作指南
+开发指南
+开发介绍
+新功能开发
+移动端开发
+扩展开发
+全球化
+组织
+权限
+特征
+基础数据
+审批流
+业务流
+规则引擎
+公式
+公式组件
+公式开发
+UI模板
+参照
+导入导出
+打印
+对象建模
+编码规则
+调度任务
+监控与预警
+日志
+消息平台
+工作台
+事件中心
+文件服务
+YonBuilder应用开发
+前端开发
+后端开发
+移动开发
+安全
+数据库
+DevOps技术
+容器云技术
+区块链云技术
+YMS开发
+智能应用开发
+专项开发
+成果迁移
+技术方案
+最佳实践
+参考手册
+常见问题
+视频教程
+专业开发/开发指南/公式/公式开发
+公式开发
+最后更新时间：2025-06-07
+概述
+业务场景
+
+公式指在各种场景中定义的四则计算表达式，或者逻辑表达式，以及其他表达式，由统一的公式解析器进行表达式解析，公式计算引擎进行公式计算。公式是提供给用户动态进行计算逻辑扩展的重要手段，用户可以基于公式组件的扩展规则去扩写自定义的算法，来实现自己内部的复杂场景。
+
+关键词
+
+公式，函数，脚手架，公式引擎，formula
+
+架构
+2.1 总体架构
+
+公式使用配置文件的方式将场景的公式变量常量等注册起来，同时结合前端展示页面，可以形成一个轻量级服务。将其封装成一个 sdk 形式对外发布对目标服务无侵入，同时留有足够的扩展可以让目标服务在原 sdk 的基础上扩展自己的公式;
+
+2.2 名词解释
+
+公式基于 springEl 引擎进行封装，可以直接使用 java语法进行公式编写，针对公式组件会使用到以下名词：
+
+设计态：指在设计公式时使用的场景，是新建公式的准备配置场景。设计态扫描所有 resource 下的公式目录下的公式配置文件，形成公式自定义的前端展示协议；前端可以直接展示相关的函数、变量、常量等，配合前端可视化页面可以设计符合业务需求的公式。
+
+运行态：指公式在实际运算当中所需上下文以及计算过程 。运行态公式采用服务式调用和组件式调用两种，可以让调用方决定使用 java 后端直接调用还是将其暴露成一个服务供 web 端或者别的服务端进行远程调用。入口参数采用公式+数据的形式。可以让公式引擎负责底层的数据计算，数据来源则有调用方获取，最大程度解耦与调用方的取数逻辑。
+
+公式：指在各种场景中定义的四则计算表达式，或者逻辑表达式，以及其他表达式。
+
+变量：指公式在设计的时候无法确认数据指，先使用占位符进行替代，与常规程序里的变量意义类似。
+
+常量：指在公式设计的时候就可以确定的数据，通常是字符（引号引起来）或者数字。
+
+2.3 示例代码
+2.3.1 前端使用
+安装与导入
+安装
+npm i -S yyuap-formula
+
+导入
+const Formula = React.lazy(() => import(/* formula */ 'yyuap-formula'));// import Formula from 'yyuap-formula'import 'yyuap-formula/dist/main.css'
+
+
+使用代码
+
+function FormulaWrap(props){ const [formulaExpression,setFormulaExpression] = useState('') const [formulaExpressionDisplay,setFormulaExpressionDisplay] = useState('') return ( <Formula userVar={true} //是否需要自定义变量 disabled // 是否禁用 confirm={(formulaExpression:any,formulaExpressionDisplay:any,formulaList:any)=>{ setFormulaExpression(formulaExpression); setFormulaExpressionDisplay(formulaExpressionDisplay); } } formula={formulaExpression ||''} formuladisplay = {formulaExpressionDisplay || ''} contextData={[{code:'case1',name:'c1 测试',paramType:'STRING'}]} // 上下文 ></Formula> )}function FormulaWrap(props){ const [case1,setCase1] = useState(2); const [formulaExpression,setFormulaExpression] = useState('') const [formulaExpressionDisplay,setFormulaExpressionDisplay] = useState('') return ( <> <input value={case1} onChange={ e => setCase1(e.target.value) } /> <Formula autoCalc //基于 paramList 的前端自动计算 userVar={true} *//是否需要自定义变量* formula={formulaExpression} formuladisplay={formulaExpressionDisplay||''} confirm={ (formulaExpression:any,formulaExpressionDisplay:any,formu  laList:any,value:any) => { setFormulaExpression(formulaExpression); setFormulaExpressionDisplay(formulaExpressionDisplay); } } contextData={[{code:'case1',name:'c1 测试',paramType:'STRING'},]} paramList = {{case1:case1}} /> </> )}
+
+2.3.2 后端使用
+maven 依赖
+<dependency> <groupId>com.yonyou.iuap</groupId> <artifactId>bPaaS_formula</artifactId> <version>0.0.1-SNAPSHOT</version> </dependency>
+
+注入服务接口
+@Resourceprivate FormulaService formulaService;
+
+典型场景
+3.1 接口调用
+@Autowired public FormulaService formulaService; /** * 公式翻译测试 */@SpringBootTestpublic class FormulaTest { @Test public void test(){ FormulaExcuteDTO formulaExcuteDTO = new FormulaExcuteDTO(); formulaExcuteDTO.setFormulaExpression("a/100");//设置公式 Map<String, Object> paramMap = new LinkedHashMap<>();//设置公式需要的参数值 paramMap.put("a", 150); formulaExcuteDTO.setParamValue(paramMap); FormulaExcuteResultDTO formulaResult = formulaService.executeFormula(formulaExcuteDTO); if (!formulaResult.getIsSuccess()) { System.out.println("公式执行失败:" + formulaResult.getErrorMessage()); } else { System.out.println("公式执行成功:" + formulaResult.getExcuteResult()); } }}
+
+3.2 自定义函数扩展
+3.2.1 注册自定义函数
+
+在后端脚手架bootstrap模块下的resources/formulaconfig 文件夹下添加 xml 文件，一个 xml 中可以注册多个函数， 以注册 getValue 函数为例，xml 格式如下
+
+<?xml version="1.0" encoding="utf-8"?><formula-array > <formula> <customType>0</customType><!--0 自定义函数， 1：数学函数 ， 2：字符串函数--> <functionName>getValue</functionName> <methodName>getValue(,,,)</methodName> <description> <!--函数功能的描述--> <![CDATA[ getValue(fullName,selectFiled,conditionField,conditionValue) 功能: 根据条件查询元数据的值 参数:fullName--元数据的 uri selectFiled--要查询的字段 比如 code conditionField--条件字段 比如 id conditionValue -- 条件值]]> </description> <functionClass>com.yonyou.iuap.formula.engine.formulaset.CustomFunction </functionClass> </formula></formula-array>
+
+3.2.2 函数实现
+
+在3.2.1.章节里 functionClass 类即为自定义函数的类名，functionName 即为自定义函数的方法名，需要一一对应。示例代码如下：
+
+package com.yonyou.iuap.formula.engine.formulaset;/*** 自定义函数实现类，示例** */public class CustomFunction {/** * 查询表单数据 * * @param fullName * @param selectFiled * @param conditionField * @param conditionValue * @return */public static Object getValue(String fullName, String selectFiled, String conditionField, Object conditionValue) { //TODO 此处实现自定函数业务逻辑 return null;}
+
+3.3 自定义变量扩展
+3.3.1注册自定义变量
+
+在后端脚手架bootstrap模块下的resources/formulavariableconfig 文件夹下 添加 xml 文件，一个 xml 中可以注册多个自定义变量集，xml 格式如下：
+
+<?xml version="1.0" encoding="utf-8"?><varibleset-array > <varibleset> <varibleSetName>自定义变量集1</varibleSetName> //变量集的显示名称 <varibleSetCode>DefVariableSet1</varibleSetCode> //变量集的编码 <queryClass>com.yonyou.iuap.formula.engine.formulaset.DemoVariableSetImpl</queryClass>//变量集的实现类 </varibleset></varibleset-array>
+
+3.3.2 实现接口变量
+
+需要实现注册变量接口 com.yonyou.iuap.formula.engine.VariableSet如下：
+
+/*** 自定义结果集 demo*/public class DemoVariableSetImpl implements VariableSet { /** * 获取结果集 * * @return 结果集 */ @Override public Set<VariableDTO> getVariables() { Set<VariableDTO> voSet = new HashSet<>(); voSet.add(new VariableDTO("code1", "国籍地区", ParamTypeEnum.CHAR, 1)); voSet.add(new VariableDTO("code2", "所属组织", ParamTypeEnum.FLOAT, 2)); voSet.add(new VariableDTO("code3", "出生日期", ParamTypeEnum.DOUBLE, 3)); voSet.add(new VariableDTO("code4", "婚姻状况", ParamTypeEnum.DOUBLE, 4)); return voSet; }}
+
+深入理解
+4.1 流程和存储
+
+前端发起请求和公式执行的整体流程，如下图：
+
+通过前端公式设计器，给单据上的字段2赋值公式，如下图：
+
+自建应用单据公式对应字段会存储在iuap_metadata_service库uimeta_tpl_item表中，如下图：
+
+扩展应用单据公式对应字段会存储在领域scheme对应的billitem_base表中，如费控扩展字段公式如下图：
+
+cExtProps上配置的关键字段解释，如下表格：
+
+属性名	默认值	例子	描述
+iFromula	1	1	配置1 代表该字段是公式字段
+formula	无	price*strToNum(sum)	公式表示式
+iFormulaFuns	无	strToNum	公式中对应的函数
+iFormulaTriggers	无	price,sum	公式中对应的变量
+
+通过字段模型上的iFromulaFuns和iFormulaTriggers属性判断公式是否需要后端进行计算；
+
+在浏览器控制台，用以下命令可快速查看单据中所有的公式：
+
+yya.getCache('formulaRules'); // 查看所有公式__reBuildFormula(yya); // 查看精简结构后的公式__triggerForTargets(yya); // 查看字段作为因子对应触发的公式集合
+
+4.2 公式触发时机
+公式触发时机	备注
+字段值变化	公式B = A + 1，修改单据上A字段，触发公式计算，会给B字段进行赋值。
+表格单元格值变化	公式A.a = A.b + 1，修改表体A上的b字段，触发公式计算，会给表体A上的a字段进行赋值。
+进入新增态/推单	单据进入新增态/推单，运行时会进行公式计算。为了性能考虑，会排除因子为空的公式（有对应需求改用配页面初始化的交互规则进行实现）。
+进入编辑态/浏览态	单据进入编辑态/浏览态，运行时不会进行公式计算。单据正常调用bill/detail接口展现数据，想要bill/details也返回公式计算结果，可以把公式字段配置成非持久化字段，字段配置bVmExclude=2。
+列表页/生单界面	列表页打开，运行时不会进行公式计，单据正常调用bill/list接口展现数据，想要bill/list也返回公式计算结果，可以把公式字段配置成非持久化字段，字段配置bVmExclude=2。
+切换主组织调用add接口后	和进入新增态一样会触发公式给页面赋默认值
+表体参照多选	会给整个表格重新计算公式，不区分是新增了哪几行
+增行	新增那一行会触发公式，如果表头字段配置了sum类的合计公式也会触发
+删行	如果表头字段配置了sum类的合计公式会触发
+更新行	判断当前行赋值前后是否有单元格发生值变化，如果有，触发对应的公式
+批量增行	直接触发整个表体的公式
+check回调	check回调更新行时，判断当前行单元格是否有值发生变化，如果有触发对应的公式
+公式计算导致的值变化	公式计算值，发生的值变化，会触发该值作为因子的公式进行计算
+扩展脚本赋值触发值变更事件	触发值变更就会触发该字段作为因子的公式进行计算，赋值不触发值变更事件就不会触发公式
+参照携带值	公式的因子字段都会被加上needCheck属性，参照携带值也会触发值变更，进而触发公式
+生单工作台切换	生单工单台相当于新增态，切换数据会触发公式
+excel批量粘贴	表体批量粘贴会触发公式，表体整列进行计算
+批改	表体批改字段，字段作为因子的公式字段整列都会进行公式计算
+4.3 公式计算方式
+
+通过字段模型上的iFromulaFuns和iFormulaTriggers属性判断公式是否需要后端进行计算。
+
+4.3.1 前端公式
+
+非特征字段的简单的四则运算和常见的数学函数会进行前端计算，不调用公式接口，这样的好处是性能高不用请求后端接口。
+
+计算逻辑在： /mdf-cube/src/staterule/parse.js中
+
+公式比如：
+
+price 等于另一个字段
+
+price*log(new1) 数学函数四则运算
+
+new1+new2 字段串拼接
+
+4.3.2 后端公式
+
+公式支持丰富的函数可供计算，会调用/bill/executeFormulaCalculate
+
+公式比如：
+
+getValue("bd.adminOrg.AdminOrgVo","name",id,1935289466272874498)
+
+
+API请求参数：
+
+参数名	例子	备注
+billnum	testObj03	单据编码
+data	{"virtualVariable":null}	参与计算参数
+externalData	{new2: "getValue("bd.adminOrg.AdminOrgVo","name",id,1935289466272874498)"}	key： 需要计算的公式字段 value: 对应的公式
+
+前端页面发起后端公式函数请求，具体字段会传已配置的公式，如下图：
+
+接口入口com.yonyou.ypd.bill.controller.YpdBillController#executeFormula
+
+@PostMapping("/executeFormulaCalculate")public JsonResult executeFormula(HttpServletRequest request) throws Exception { BillActionDTO billActionDto = billDTOCreator.createBillDataDTO(request, BillActionEnum.ACTIONCODE_EXECFORMULA); IBillDO billDO = ArrayUtils.isEmpty(billActionDto.getBillDOs()) ? null : billActionDto.getBillDOs()[0]; Object result = billActionService.executeFormulaAction(billActionDto.getBaseBillContext(), billDO, billActionDto.getFormulaMap()); JsonResult jsonResult = new JsonResult(result); if (FormularLogUtils.switchEnable()){ jsonResult.setErrorDetail(FormularLogUtils.getRecordFormularLogReturn()); } return jsonResult;}
+
+
+真实案例执行，如下图：
+
+核心方法com.yonyou.iuap.formula.engine.FormulaEngine#batchExecute
+
+系统会根据上下文解析出待执行的函数，然后到系统已注册的函数里去遍历，最后执行对应的函数；
+
+//获取系统注册的函数StandardEvaluationContext context = FormulaRegister.getInstance().getContext();
+
+
+执行过程，如下图：
+
+API
+5.1 后端API接口
+5.1.1 执行公式接口
+
+接口：com.yonyou.iuap.formula.service.FormulaService
+
+方法：FormulaExcuteResultDTO executeFormula(FormulaExcuteDTO formulaExcuteDTO)
+
+参数 FormulaExcuteDTO 结构如下:
+
+/*** 公式表达式 */ private String formulaExpression; /** * 公式计算需要的数据 Map 格式，子表是 List<Map> */ private Map<String,Object> paramValue;
+
+
+返回值 FormulaExcuteResultDTO结构如下：
+
+/** * 公式表达式 */ private String formulaExpression; /** * 执行成功标志 */ private Boolean isSuccess = true; /** * 公式执行结果 */ private Object excuteResult; /** * 错误信息 */ private String errorMessage = "";
+
+5.1.2 批量执行公式接口
+
+接口：com.yonyou.iuap.formula.service.FormulaService
+
+方法 ：
+
+List<FormulaExcuteResultDTO> batchExecuteFormula(List<FormulaExcuteDTO>
+
+formulaExcuteDTOList);
+
+
+参数以及返回结果同上；
+
+5.1.3 公式校验接口
+
+接口：com.yonyou.iuap.formula.service.FormulaService
+
+方法：FormulaValidateResultDTO validateFormula(FormulaValidateDTO
+
+formulaValidateDTO)
+
+参数 FormulaValidateDTO 结构如下:
+
+/** * 公式表达式 */ private String formulaExpression;
+
+返回值 FormulaValidateResultDTO 结构如下：
+
+/** * 公式表达式 */ private String formulaExpression; /** * 校验成功标志 */ private Boolean isSuccess = true; /** * 错误信息 */ private String errorMessage = "";
+
+5.1.3 公式批量校验接口
+
+接口：com.yonyou.iuap.formula.service.FormulaService
+
+方法：
+
+List<FormulaValidateResultDTO> batchValidateFormula(List<FormulaValidateDTO> formulaValidateDTOList)
+
+
+参数以及返回结果同上；
+
+5.2前端端API接口
+5.2.1 直接触发
+
+viewmodel.execute('formulaRules', targets, noClear,noDebounce);
+
+属性名	默认值	例子	描述
+targets	[]	[{target: 'new1'}]	可传数组，不传默认所有公式，target支持传1、childrenField.field 子表某个字段2、childrenField 整个子表3、field 主表单个字段
+noClear	false	false	是否不清除公式计算临时属性
+noDebounce	false	false	是否不防抖，连续多次触发防抖属性
+// 例子 触发单据字段2的公式viewModel.execute('formulaRules', [{target: new2}]);
+
+
+5.2.2 赋值触发
+
+扩展脚本赋值默认不触发公式，想要触发公式需要触发字段的值变更事件
+
+// 例子viewModel.get('new1').setValue('hello world'); // 不触发公式和交互规则viewModel.get('new1').setValue('hello world', true); // 触发公式和交互规则viewModel.get('child').setCellValue(0, 'new1', 'hello world'); // 不触发公式和交互规则viewModel.get('child').setCellValue(0, 'new1', 'hello world', true); // 触发公式和交互规则 // 组合方式viewModel.get('new1').setValue('hello world'); // 只写这个不触发公式和交互规则viewModel.get('new1').execute('afterValueChange', {}); // 用来触发公式和交互规则
+
+5.2.3. 动态绑定
+表头M字段配置公式 = 子表C的a字段合计，需要传下面协议consr rules = [{ exprType: 0, // 默认0 target: 'M', // 配了公式的字段cItemName，如果是子表，为[childrenField].[cItemName] scrExprType: 0, // 默认0 iFormulaTriggers: 'C,C.a', // 公式编辑器生成 iFormulaFuns: 'sum' // 公式编辑器生成 srcExpression: 'sum(C,"C.a")' // 公式编辑器生成}]//绑定事件cb.staterule.runRule(viewmodel, rules, 'listener') //执行事件cb.staterule.runRule(viewmodel, rules, 'execute')
+
+5.2.4 编辑态或复制时触发公式
+
+编辑态和复制默认不触发公式，想要触发可以在扩展脚本添加如下代码实现
+
+// 复制时想触发添加如下viewModel.on('afterLoadData', ()=>{ viewModel.on('afterRule', ()=>{ if (viewModel.getParams().action=='copy') { viewModel.execute('formulaRules'); } })})viewModel.on('afterCopy', ()=>{ viewModel.execute('formulaRules');}) // 编辑时想触发添加如下viewModel.on('afterLoadData', ()=>{ viewModel.on('afterRule', ()=>{ if (viewModel.getParams().mode=='edit') { viewModel.execute('formulaRules'); } })})viewModel.on('afterEdit', ()=>{ viewModel.execute('formulaRules');})
+
+5.2.5 非voucher页面适配公式
+
+目前只有voucher页默认支持前端解析公式然后进行计算，其他类型单据相加支持添加如下脚本。
+
+总共2步： 1、脚本init时触发，写在扩展脚本最上面
+
+cb.biz.common.voucher.do('formularule', viewModel)
+
+
+2、必要时机手动触发
+
+gridModel.on('afterSetDataSource', function(){ viewModel.execute('formulaRules', [{target: gridModel.getCache('name')}]); // 子表的childrenField})
+
+5.2.6 组件传参定义
+locale(新)	语种信息
+serviceName(新)	应用名(上线文路径,可带域名)
+iMaxLength(新)	确认时最大值控制
+disableDrag(新)	禁用拖拽(防止拖拽事件冲突)
+uiMode	是否以 UI 组件形式提供(min 提供较小的面板)
+useBusiness(新)	是否使用业务对象
+onChange(新)	是 UI 组件实时数据变化
+leftPannel	左侧面板项
+rightPannel	右侧面板项
+disabled	禁用
+confirm	确认回掉
+formula	公式表达式
+formuladisplay	公式显示式
+autoCalc	自动计算
+contextData	上下文变量(新增对树支持 节点需 children 属性节点可增加 disabld 属性)
+paramList	自定计算时变量值(需 autoCalc) 支持提供前端函数
+requestParams(新增)	提供请求时参数
+onFocus\onBlur(新增)	input 框事件
+onTextFocus\onTextBlur(新增)	textarea 框事件
+beforeVerify(新增)	校验前调整参数(26 加方法)
+funcFilter(新增)	前端函数过滤(字符串数组
+refEnv	参照对应环境地址(不传感知 url)
+verifyBeforeConfirm	保存前校验
+leftDefaultOpenKey	左侧默认展开
+rightDefaultOpenKey	右侧默认展开
+inputOpen	点击 input 弹窗
+beforeOpenHook	打开公式弹窗前 hook 函数
+allowEmpty	校验支持空值
+className, mask, destory 等	支持 modal 参数与 class 名
+CompatibleMode	是否做格式兼容
+customShowFn	自定义变量显示值
+showMetaCode	是否显示属性编码
+extend	自定义模块
+multiBillNo	是否多单据
+5.2.7 组件解析方法
+import { core } from 'yyuap-formula'//接受 表达式串(组) 生成 包含 公式数据结构core.parse()//异步请求 接受公式参数 与 表达式串(组) 生成 包含 公式、翻译公式、含数据的数据结构 的对象(对象数组))core.ajaxToParse() //前端校验 参数为 confirm、onChange 参数中获得的 formulaList 或 对公式表达式做解析(功能 1)core.validate()//前端异步校验 参数为 confirm、onChange 参数中获得的 formulaList 与expressListcore.validateAsync ()//异步校验 参数为 confirm、onChange 参数中获得的 formulaList 与 expressListcore.getFormulaInfo ()//公式计算 参数 1:confirm、onChange 参数中获得的 formulaList 或 core.parse 的返回值 参数 2: paramList 见项目配置项core.calculate()
+
+迁移部署
+
+目前制盘时，组件配置的公式，是同步迁移到目标环境的。
+
+项目实践
+
+自定义yonyou()公式函数，然后通过接口模拟，如下图：
+
+注意事项
+
+如果是自建应用，制盘迁移后，一定要重启下引擎服务
+
+平台配置了公式想简单了解下公式运行原理
+配置的公式，R5之前版本，设计器会在billitem_base表中增加一条这个租户的数据，当前公式内容会保存在字段cExtProps里，R5版本则存储在iuap_metadata_service.iumeta_tpl_item表的extend_props字段中；
+平台会调用/bill/executeFormulaCalculate 方法计算，所以要在marketingbill的BillController里实现该接口；
+在iuap_metadata_service库billruleregister表里，首先注册一个action= 'recalculate',ruleId = 'mddExtFormulaCalcRule'的rule，这样该公式即可生效，平台会计算后赋值；
+需要公式计算生效，还要在billruleregister注册ruleId = 'mddExtFormulaRule'的rule，action范围: add detail query querytree writeBackSave；
+前端函数，如何手动执行函数
+
+viewModel.execute('formulaRules');
+
+客开接口函数，如何在公式编辑器中添加使用
+
+通过函数publicScriptFormula调用客开api脚本，具体使用如下publicScriptFormula(extScriptId,params,debugCode)
+
+功能: 通过公式函数调用租户级API脚本进行业务逻辑运算，通过脚本处理后返回结果；
+参数: extScriptId--脚本id，在[脚本服务]节点获取 params--变量值，是使用{}括起来的对象，多个值可以使用英文分隔 debugCode--调试编码，默认可传空；
+参数: extScriptId--脚本id params--变量值 debugCode--调试编码 返回值: 脚本计算结果，在脚本中定义，可以为字符、对象、数组；
+示例: publicScriptFormula('6e159e47588a46cf91cf4218a893e50d',{orgId, staffId},"")
+计算公式，配置没问题，看接口也请求了，但是结果返回不正确
+
+需要排查下，公式传参是否为null，要做非空判断，是否类型不是数值型的，需要通过strToNum进行转换；
+
+getValue和getValueMore中fullName档案uri怎么查找
+
+在业务中台，搜索业务对象，在打开的业务对象里，搜索档案的名称，搜索出来的实体里的URI，即档案uri;
+
+员工单据详情页配置了公式，但是没生效，怎么排查？
+
+可以在技术中台的员工服务下，执行以下语句，该方法可以看到公式以及执行结果
+
+watch com.yonyou.iuap.formula.service.impl.FormulaServiceImpl batchExecuteFormula {params,returnObj,throwExp} -x 3
+
+文档内容是否对您有所帮助？
+为帮助文档评分：
+页内目录
+1. 概述
+1.1 业务场景
+1.2 关键词
+2. 架构
+3. 典型场景
+4. 深入理解
+5. API
+6. 迁移部署
+7. 项目实践
+8. 注意事项
+8.1 平台配置了公式想简单了解下公式运行原理
+8.2 前端函数，如何手动执行函数
+8.3 客开接口函数，如何在公式编辑器中添加使用
+8.4 计算公式，配置没问题，看接口也请求了，但是结果返回不正确
+8.5 getValue和getValueMore中fullName档案uri怎么查找
+8.6 员工单据详情页配置了公式，但是没生效，怎么排查？
+文档反馈
+北京市海淀区北清路68号用友产业园
+4006-600-588
+友情链接
+用友官网用友YonHelp用友iuap平台用友云市场用友云注册协议隐私条款
+
+Copyright ©2020 用友网络科技股份有限公司版权所有京ICP备05007539号-24京公网安备11010802021935号
+
+返回顶部
+加载中...

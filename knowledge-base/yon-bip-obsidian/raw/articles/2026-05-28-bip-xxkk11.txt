@@ -1,0 +1,308 @@
+社区文档中心
+首页
+文档导航
+开发者社区
+社区论坛
+视频教程技术博客
+更多
+张宏涛
+资料中心
+专业开发
+产品概述
+快速入门
+操作指南
+开发指南
+开发介绍
+新功能开发
+移动端开发
+扩展开发
+全球化
+组织
+权限
+特征
+基础数据
+审批流
+业务流
+规则引擎
+公式
+UI模板
+参照
+导入导出
+打印
+对象建模
+编码规则
+调度任务
+监控与预警
+日志
+消息平台
+消息开发
+跨租户工作通知
+消息集成开发
+工作台
+事件中心
+文件服务
+YonBuilder应用开发
+前端开发
+后端开发
+移动开发
+安全
+数据库
+DevOps技术
+容器云技术
+区块链云技术
+YMS开发
+智能应用开发
+专项开发
+成果迁移
+技术方案
+最佳实践
+参考手册
+常见问题
+视频教程
+专业开发/开发指南/消息平台/消息集成开发
+消息集成开发
+最后更新时间：2024-10-10
+应用场景
+
+在三方系统打开YonBIP/YonSuite公有云页面，进行审批相关操作。
+
+注意该方案不支持费控的移动端和消息待办。
+
+准备工作
+
+提交工单给指定租户开通接收待办事件; 工单说明如下:
+
+
+需要开通接收待办事件
+租户id: ******
+租户名称:******
+标注是哪个数据中心
+
+
+对接流程
+
+1、三方系统注册监听待办事件订阅
+
+2、YonBIP/YonSuite发送待办事件，三方系统接收到待办事件后根据事件编码确定走不同的逻辑（新增/更新待办）。
+
+3、事件订阅返回的新增/更新待办中的businessKey是成对出现的，也就是说根据businessKey可以判断将哪条待办数据更新为已办。
+
+4、三方在接收道待办信息后建议将businessKey和待办动作信息存储入库，原因事件订阅方式可能会存在消费失败的情况，如果配置了重试可能会造成接收到的更新待办早于新增待办。 从而三方可能会有一条无法删除的待办记录。所以在处理逻辑的时候需要判断数据库中是否存在对应的businessKey+动作，区分多种情况。
+
+     1)、新增事件逻辑：首先判断businessKey是否在系统中存在，如果存在，直接结束执行；如果不存在， 则正常走逻辑
+     2)、更新事件逻辑：首先判断businessKey是否在系统中存在，如果不存在说明消息顺序反了。需要存储入库。标记为更新动作；如果存在相同更新动作的businessKey，则不需要做后续执行操作；如果存在且不是更新动作，说明是新增动作。那就需要正常处理更新逻辑；
+
+
+5、确定好逻辑后，需确定发送给哪个三方用户，建议三方系统和YonBIP/YonSuite的用户编码/手机号/邮箱一致。待办信息会返回yhtUserId。可以根据 yhtUserId调用开放平台接口（详见五章节）获取用户编码/手机号/邮箱。三方系统根据用户编码/手机号/邮箱获取三方的唯一标识。然后就可以发送给指定三方用户。
+
+6、三方用户在三方系统中点击待办开始走单点登录相关逻辑
+
+操作步骤
+订阅待办事件
+
+请点击链接查看:
+
+事件订阅
+
+添加以下两个事件，
+
+待办数据格式
+
+以下举例上一步订阅的待办事件传递给三方系统的数据格式。（方便客户根据此格式解析数据）
+
+businessKey是成对出现的，一个新增待办对应一个更新待办
+
+创建待办接收数据格式
+
+{
+	"msgTsLong": 1635583234094,
+	"resendable": true,
+	"omitNotify": false,
+	"todoType": "approve",
+	"srcMsgId": "20211030202110307d0f6df7-d4d6-4f0e-ad11-76f26aa8819d:ubpm20200520",
+	"typeName": "待办消息",
+	"approveSource": "PU",
+	"richText": "来自倪帅臣于10-30 15:48提交的采购订单CGDD0000211030000002,请处理。 ",
+	"title": "待办提醒",
+	"content": "来自倪帅臣于10-30 15:48提交的采购订单CGDD0000211030000002,请处理。 ",
+	"mUrl": "https://c2.yonyoucloud.com/meta/voucher/st_purchaseorder/2496594306814208?domainKey=upu&apptype=mdf&taskFlag=todo&typecode=approve&tenantId=aen06kxy&qzId=278401&code=${esncode}&isReturnNative=true&source=PU,u8c,UIT&yssource=PU,u8c,UIT",
+	"yyUserIds": ["0f059088-9c92-*******-8f1a341cc3df"],
+	"webUrl": "https://c2.yonyoucloud.com/meta/voucher/st_purchaseorder/2496594306814208?domainKey=upu&bipCasTag&taskFlag=todo&typecode=approve&tenantId=aen06kxy&qzId=278401&source=PU,u8c,UIT&code=${esncode}&uSpaceOpenType=_blank",
+	"appId": "59bcd8c644594106bf0",
+	"businessKey": "51938770-395c-11ec-80f7-3e3f15ddd04c",
+	"tenantId": "aen**kxy",
+	"srcAppId": "msgplatform",
+	"labelCode": "bizProcessGeneralDomain"
+}
+
+
+结束待办接收数据格式
+
+{
+	"msgTsLong": 1635583194664,
+	"yyUserId": "0f059088-9c92-*******-8f1a341cc3df",
+	"businessKey": "51938770-395c-11ec-80f7-3e3f15ddd04c",
+	"srcMsgId": "20211030202110306c3f383b-7f73-469a-9eb3-6c5d2b95d222:ubpm20200520",
+	"tenantId": "aen**kxy",
+	"srcAppId": "msgplatform",
+	"validApp": false
+}
+
+
+三方系统单点YonBIP
+背景
+
+一般情况，【客开方】收到用友待办信息后，需要再调用三方消息接口，将该待办信息发送给三方系统。 这种情况存在一个问题：生成的单点登录地址只能使用一次，发送待办信息给三方系统时一般就会直接带上该地址。 这就造成使用者如果打开后未审批，或者想再次查看都会报错。
+
+解决方案
+
+【客开方】发送待办信息给三方系统时不要直接发送用友待办的mUrl或者webUrl,建议【客开方】发布一个接口作为地址信息，使用者点击后， 请求【客开方】服务然后重定向到单点地址。
+
+可参考如下格式：
+
+http://localhost:8080/yonsuite/sso?userId=200043&targetUrl=https%3A%2F%2Fdbox.yonyoucloud.com%2Flogin 示例截图
+
+单点实现
+
+请点击链接操作:
+
+单点登录
+
+示例Demo
+
+按照reademe看自建接入模式配置即可
+
+JAVA示例代码
+
+测试
+
+最基础的调通流程，不包含复杂判断逻辑,具体逻辑建议按照一章节描述编写代码
+
+提交采购订单单据
+
+代码接收到待办事件，示例中解析出了webUrl
+
+取出webUrl拼装为ssoController的请求参数。
+
+举例：
+
+http://localhost:8080/yonsuite/sso?userId=200043&targetUrl=https%3A%2F%2Fc2.yonyoucloud.com%2Fmdf-node%2Fmeta%2Fvoucher%2Fvoucher_order%2F1817314874847920139%3FdomainKey%3Dudinghuo%26businessStepCode%3D%26tenantId%3Dx73uqmdb%26apptype%3Dmdf%26serviceCode%3DorderList%26taskId%3D48847e63-56a1-11ee-a46a-361c0689b650%26from_mc_workflow%3D1%26from_service%3Diuap-apcom-messagecenter%26url_actual_build_source%3Diuap-apcom-messageplatform
+
+
+
+可以将这个地址发送给三方。三方用户点击这个地址就会请求到本服务。然后走单点相关的逻辑， 最后重定向至targetUrl.
+
+批量审批待办
+应用场景
+
+适用于三方需要批量审批待办的情况，不单点打开用友的单据页面，直接批量审批操作。
+
+批量审批接口
+
+通过开放平台事件订阅接收新增待办的事件内容
+
+
+
+{
+	"msgTsLong": 1685330026101,
+	"resendable": false,
+	"title": "采购订单CGDD0000230529000002",
+	"preAuditUserId": "0f059088-9c92-************-8f1a341cc3df",
+	"content": "发起人：倪帅臣\n发起时间：05-29 11:13\n发起人部门：产品运营部",
+	"systemSource": "1082",
+	"yyUserIds": ["0f059088-9c92-************-8f1a341cc3df"],
+	"appId": "1082",
+	"callbackTemplateId": "60fa598106d7a7abe3f3cb8d",
+	"commitUserId": "0f059088-9c92-************-8f1a341cc3df",
+	"formId": "PU.st_purchaseorder",
+	"todoTemplateVars": {
+		"mobileBillNo": "st_purchaseorderMobileArchive",
+		"processDefinitionId": "processcenter_c1092888:1:a25b35b0-fdce-11ed-b82e-c267e16777eb",
+		"processInstanceId": "d2bf0e4d-fdce-11ed-9fd4-8e662e7b1624",
+		"mddServiceCode": "st_purchaseorderlist",
+		"apptype": "mdf",
+		"u8cFormId": "1736283565128155143",
+		"eventType": "create",
+		"source": "PU",
+		"activityId": "approveUserTask_05e6c810b78441629f5901462c33ca7a",
+		"documentQuery": "false",
+		"fromEsnDocument": "false",
+		"u8cForm": "st_purchaseorder",
+		"executionBusinessKey": "st_purchaseorder_1736283565128155143",
+		"u8cSource": "PU",
+		"domainKey": "upu",
+		"taskId": "d2d666ae-fdce-11ed-9fd4-8e662e7b1624"
+	},
+	"omitNotify": false,
+	"todoType": "approve",
+	"srcMsgId": "2023052920230529bb3ee10f-1bbf-473c-8df5-734dcedf90dd:ubpm20200520_zh_CN",
+	"approveSource": "PU",
+	"processParam": "{\"processType\":\"YS\",\"serverUrl\":\"\"
+}","processServer":"approve_process","richText":"<p>发起人：倪帅臣</p><p>发起时间：05-2911: 13</p><p>发起人部门：产品运营部</p>","userToItemId":{},"mUrl":"https://c2.yonyoucloud.com/mdf-node/meta/voucher/st_purchaseorder/1736283565128155143?domainKey=upu&apptype=mdf&businessStepCode=&tenantId=x73**mdb&serviceCode=st_purchaseorderlist&taskId=d2d666ae-fdce-11ed-9fd4-8e662e7b1624&systemCode=&url_actual_build_source=iuap-apcom-messageplatform&adt=wf","commitTsLong":1685330026071,"todoTemplateId":"60dd7457b1a50765ebfb3692","webUrl":"https: //c2.yonyoucloud.com/mdf-node/meta/voucher/st_purchaseorder/1736283565128155143?domainKey=upu&businessStepCode=&taskId=d2d666ae-fdce-11ed-9fd4-8e662e7b1624&appSource=PU&taskFlag=${
+	doneStatusStr
+}&tenantId=x73**mdb&apptype=mdf&code=${
+	esncode
+}&from_mc_workflow=1&isMobile=false&serviceCode=st_purchaseorderlist&url_actual_build_source=iuap-apcom-messageplatform&adt=wf","businessKey":"d2d666ae-fdce-11ed-9fd4-8e662e7b1624","tenantId":"x73uqmdb","files":[],"buttonDisplay":3,"srcAppId":"msgplatform","labelCode":"bizProcessGeneralDomain","todoTmpRelationId":"60fa598106d7a7abe3f3cb8d"}
+
+
+
+
+
+开放平台接口【批量审批】接口，需要有两个必填项字段， appSource和taskId
+
+批量审批接口参数	接收待办事件参数
+appSource	approveSource
+taskId	todoTemplateVars下的taskId
+
+示例：
+
+
+{
+    "appSource": "PU",   //必填
+    "bpmTaskActions": [
+        {
+            "bpmTaskActionRequest": {
+                "action": "complete",
+                "returnExecutions": false,
+                "returnHistoricProcessInstance": false,
+                "returnHistoricTasks": false,
+                "returnVariables": false,
+                "returnTasks": false
+            },
+            "taskId": "d2d666ae-fdce-11ed-9fd4-8e662e7b1624",   //必填
+            "view": "同意"
+        }
+    ]
+
+
+
+文档内容是否对您有所帮助？
+为帮助文档评分：
+页内目录
+1. 应用场景
+2. 准备工作
+3. 对接流程
+4. 操作步骤
+4.1 订阅待办事件
+4.2 待办数据格式
+4.2.1 创建待办接收数据格式
+4.2.2 结束待办接收数据格式
+4.3 三方系统单点YonBIP
+4.3.1 背景
+4.3.2 解决方案
+4.3.3 单点实现
+4.3.4 示例Demo
+5. 测试
+6. 批量审批待办
+6.1 应用场景
+6.2 批量审批接口
+文档反馈
+北京市海淀区北清路68号用友产业园
+4006-600-588
+友情链接
+用友官网用友YonHelp用友iuap平台用友云市场用友云注册协议隐私条款
+
+Copyright ©2020 用友网络科技股份有限公司版权所有京ICP备05007539号-24京公网安备11010802021935号
+
+返回顶部
+加载中...

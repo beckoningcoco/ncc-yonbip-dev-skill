@@ -1,0 +1,27 @@
+# |<<
+
+**租入费用单子表 (ali_expense_b / nc.vo.ali.rent.expense.LeaseInExpenseBodyVO)**
+
+> https://community.yonyou.com/datadict/datadict-2105yiliao/ddc/54.html
+
+| 序号 | 属性编码 | 属性名称 | 字段编码 | 字段类型 | 是否必输 | 引用模型 | 默认值 | 取值范围/枚举 |
+|------|------|------|------|------|------|------|------|------|
+| 1 | pk_expense_b | 租入费用单子表主键 | pk_expense_b | char(20) | √ | 主键 (UFID) |
+| 2 | pk_group | 集团 | pk_group | varchar(20) |  | 组织_集团 (group) |
+| 3 | pk_org | 资产组织最新版本 | pk_org | varchar(20) |  | 组织_业务单元_资产组织 (assetorg) |
+| 4 | pk_org_v | 资产组织 | pk_org_v | varchar(20) |  | 组织_业务单元_资产组织版本信息 (assetorg_v) |
+| 5 | rowno | 行号 | rowno | varchar(50) |  | 字符串 (String) |
+| 6 | pk_equip | 设备 | pk_equip | varchar(20) |  | 设备卡片 (EquipHeadVO) |
+| 7 | equip_code | 设备编码 | equip_code | varchar(40) |  | 字符串 (String) |
+| 8 | equip_name | 设备名称 | equip_name | varchar(600) |  | 多语文本 (MultiLangText) |
+| 9 | pk_category | 设备类别 | pk_category | varchar(20) |  | 设备类别 (CategoryVO) |
+| 10 | spec | 规格 | spec | varchar(400) |  | 字符串 (String) |
+| 11 | model | 型号 | model | varchar(400) |  | 字符串 (String) |
+| 12 | pk_material | 物料编码最新版本 | pk_material | varchar(20) |  | 物料基本信息 (material_v) |
+| 13 | pk_material_v | 物料编码 | pk_material_v | varchar(20) |  | 物料基本信息（多版本） (material) |
+| 14 | exp_jobmngfil | 费用项目 | exp_jobmngfil | varchar(20) |  | 费用项目 (ExpenseTypeVO) |
+| 15 | exp_rent | 费用金额 | exp_rent | decimal(28, 8) |  | 金额 (UFMoney) |  | [0 , ] |
+| 16 | exp_rent_org | 费用金额（本币） | exp_rent_org | decimal(28, 8) |  | 金额 (UFMoney) |
+| 17 | exp_rent_group | 费用金额（集团本币） | exp_rent_group | decimal(28, 8) |  | 金额 (UFMoney) |
+| 18 | exp_rent_global | 费用金额（全局本币） | exp_rent_global | decimal(28, 8) |  | 金额 (UFMoney) |
+| 19 | pk_customer | 费用出资方 | pk_customer | int |  | 租赁对象 (LeaseInObjectEnum) |  | 1=出租方; |

@@ -1,0 +1,1907 @@
+社区文档中心
+首页
+文档导航
+开发者社区
+社区论坛
+视频教程技术博客
+更多
+张宏涛
+资料中心
+专业开发
+产品概述
+快速入门
+操作指南
+开发指南
+开发介绍
+新功能开发
+移动端开发
+扩展开发
+全球化
+组织
+权限
+特征
+基础数据
+审批流
+业务流
+规则引擎
+公式
+UI模板
+参照
+导入导出
+打印
+对象建模
+编码规则
+调度任务
+监控与预警
+日志
+消息平台
+工作台
+事件中心
+文件服务
+YonBuilder应用开发
+YonBuilder开发能力
+YonBuilder应用构建
+函数组件
+YonBuilder原厂扩展开发（MDD）
+YonBuilder组件化开发
+YPD专业开发
+接口开发及发布
+生态开发事务一致性
+前端开发
+后端开发
+移动开发
+安全
+数据库
+DevOps技术
+容器云技术
+区块链云技术
+YMS开发
+智能应用开发
+专项开发
+成果迁移
+技术方案
+最佳实践
+参考手册
+常见问题
+视频教程
+专业开发/开发指南/YonBuilder应用开发/YonBuilder应用构建
+YonBuilder应用构建
+最后更新时间：2024-05-15
+概述
+
+YonBuilder可视化应用构建服务为提供企业级全能基础设施，帮助用户通过“零安装，低编码，可视化”来构建适用于不同场景的应用；拖拽式开发web应用、移动应用、小程序，加速业务创新转化。并提供向导和大量应用模板，快速轻松构建企业应用程序，满足用户想象力，激活更多商业潜能。
+
+应用构建服务提供开发、测试、运维一体化的产品解决方案，支持云原生、流程化等多类应用的快速开发及交付。 应用构建平台建设目标是通过丰富的研发资产复用、简单便捷的可视化操作、专业的开发能力支持，为开发者提供具备快速、简单、专业特性的应用构建平台。
+
+名词术语
+
+组件库:一套组件集合统成为一个组件库,一般以UI库为特征进行划分,比如:PC组件库、移动组件库、大屏组件库等
+
+组件:组件一般指我们定义在页面中的UI单元，一个UI单元可以被解析为界面元素,组件本身可以包含解析逻辑,也可以包含交互逻辑,有些业务类组件还包含与服务端的配套封装逻辑.
+
+属性:组件一般都有自己的属性,通过配置属性的值来决定组件的一些行为方式,组件的属性配置录入方式有很多种.
+
+适配器:设计器自身有一套标准协议,外部协议集成进来后,需要进行适配,外部UI组件库集成进来后,需要对组件的属性进行适配,而这些适配的过程都是在适配器里面编写代码逻辑来完成的.
+
+预览器:设计器设计后的效果需要预览,设计到协议转换为视图的过程,这个过程是通过预览器来完成转换的.
+
+基础设计
+界面布局
+
+综合各种场景可视化的设计工具,抽象出主布局结构,进行统一规范,划分成:头部栏、左面板、中画布、右面板.
+
+头部栏:提供主要信息,包括应用信息、页面信息、LOGO标题、主页签及保存、预览等主按钮操作.
+
+左面板:提供主要操作,如:控件箱、模板层级、数据结构等,支持从主要操作区域拖拽组件/控件到中间画布区域.
+
+右面板:提供辅助操作,如:支持属性的配置面板、样式的配置面板、事件/动作的配置面板等.
+
+中画布:提供主要的可视化效果,中间画布区域支持元素的拖拽调整,支持一些辅助性的快捷操作等.
+
+适配转换
+
+首先需要支持UI元数据的配置,通过属性配置页面中的输入交互来进行更新UI元数据.而每个组件的属性都存在差异,需要提供一套适配框架来适配差异性.UI元数据需要进行渲染解析为可视化元素,可视化元素主要通过UI控件来进行呈现,因此需要提供一套渲染框架支持多套库之间的渲染效果适配.
+
+数据存储
+
+一个应用层模型下可以存储多个模板模型,应用层的业务信息主要存放一些业务相关的配置,例如场景、租户、分组等.模板层要考虑多种模板形态的协议信息存储,所以提供JSON数据对象存储,而不同类型的模板需要指定明确的适配库,一个模板只能有一个适配库,适配库对象有一些影响到适配逻辑的配置信息.由于存在需要存储到第三方服务的场景,所以需要针对第三方服务对象进行服务配置的信息存储,每个模板可以自定义存储给一个指定的第三方存储服务.
+
+使用应用构建平台
+
+在业务中台注册开发租户后，登录业务中台，选择全局导航即可搜索应用构建并进入。或在云平台中选择应用构建服务中的构建平台，选择应用构建进入。
+
+进入应用构建后，即可进行新建应用操作或对已建立的应用进行编辑．
+
+新建应用
+
+点击新建应用后，选择模板中的空白模板选择下一步并填入应用名称，选择所属领域及应用引擎和图标后，即可新建应用.
+
+其中所属领域指按照不同业务进行划分的应用集合.比如:协同服务、人力服务、会计服务、销售服务、采购供应等.应用引擎为YonBuilder开发者提供了所构建的服务中使用到的各种能力.新建的应用图标会出现在所属的领域分类下方，将鼠标悬停在新建应用图标上时，会出现四个按钮．分别为页面建模、编辑、成员管理、删除．选择页面建模或直接点击图标进入内容创建．
+
+数据建模
+
+数据建模主要负责构建数据资源的维护,包括实体、查询、枚举等的管理.数据建模提供应用中数据存储的基本服务,可根据业务数据特征快速引用审批、业务流、交易类型、自动编码、档案状态、主组织等系统属性.同时提供基于数据实体的关联及合并查询定义.为综合的数据应用提供基础.
+
+关键特性: 通过实体、查询、API数据建模工具为应用提供数据模型支持.
+
+实体:存储应用数据的对象,可以理解为关系型数据库中表的概念.
+
+查询:基于实体或其他查询,通过关联、过滤等一系列描述返回的数据集合和显示方式.
+
+枚举:枚举是列出有穷序列集的所有成员.比如季节的枚举值有春夏秋冬四个值.此处提供美剧数据,是供实体中的单选和多选进行引用.使用枚举一方面可以对变量值规定范围.保证数据内容的统一.另一方面方便维护.起到解耦的作用.
+
+数据建模主要是新建实体或复制已有和导入excel．此处以新增实体为例:
+
+数据建模本质上类似于数据库中的建表工具,但相比建表工具,数据建模在功能上有两部分的提升;第一:在数据建模过程中无需关心业务属性字段的具体类型,只需在创建业务属性时选择对应的功能需求即可.第二:在引用接口部分,若实体需要应用流程或其他结构功能,则直接勾选引用接口中对应的功能,则在新增实体时就会自动添加所需的字段内容,无需关心业务字段.
+
+点击新增实体,进入新增实体弹窗后填入名称、编码等信息后即可新增实体.实体支持业务属性、系统属性、唯一性校验及索引功能.点击保存后选择发布或直接选择右下角保存并发布即可发布实体.需要注意的是已发布的实体是不能对原有的属性字段进行修改的
+
+应用场景:
+
+提供实体元数据有效性校验能力、确保自建应用和扩展应用的后台数据按业务要求的规则存储;
+
+提供基于元数据再次建立关联关系和结果集的设计工具、为查询结果使用者降低数据关联和数据逻辑的知识门槛;
+
+提供三方数据查询模型匹配工具,为开发者降低使用API获取数据的难度.并为开发者提供实时数据和物化数据的应用引导;
+
+页面建模
+
+页面建模的功能主要包括页面、参照、打印模板.
+
+页面是信息组织展现的一种形式;可以将经常用的页面作为参照模板进行保存,就可以在其他业务逻辑以及页面当中引入参照,从而可以提高复用性和效率;而经常打印的页面也可以制作成为模板进行保存.
+
+创建页面
+
+实体新增完毕后,选择页面建模中的新建页面即可新增web及移动端页面.页面建模中支持不同类型页面的多种布局包含单据、分析及第三方页面,可以根据客户对于快速构建页面所不同的需求进行选择性的使用.
+
+单据是将数据库已经存在的字段,根据实际需要汇聚在一起,最终形成具有业务逻辑的单据页面;分析是为数据的智能分析与展示提供了便利,可选择的模板有仪表板、报表、分析卡片和引用已有,可以直接从这个入口创建智能分析页面;第三方则是可以在应用中引入第三方的链接页面.通过URL直接引入即可。
+
+页面创建
+
+实体新增完毕后,选择页面建模中的新建页面即可新增web及移动端页面.页面建模中支持不同类型页面的多种布局包含单据、分析及第三方页面,可以根据客户对于快速构建页面所不同的需求进行选择性的使用.
+
+页面创建的模板类型主要分为三大类：单据、分析、第三方。
+
+单据模板类型：单卡（SingleCard）、左树右表（TreeTable）、左树右卡（TreeCard）、一主多子（CardTables）、主子孙（CardTableTable）、树形表（TableTree）、行编辑表（EditSingleTable）、空白页（Blank）、列表（SingleTable）。
+
+分析模板类型：仪表板（ZXAnalysis）、报表（ZXReport）、分析卡片（ZXAnalysisCard）、引用已有（ZXAnalysisCard）
+
+第三方模板类型：空白页（ThirdPage）
+
+参照创建
+
+参照模板：表参照（RefTable）、树参照（RefTree）、树表参照（RefTreeTable）、穿梭表参照（TransferTable）
+
+参照发布：普通发布和权限发布，权限发布主要是发布数据权限，发布数据权限需要添加数据权限标签，同时实体需要有name字段属性，name字段属性是在数据权限界面勾选之后前端展示使用。发布数据权限会校验name属性和数据权限标记。
+
+应用构建设计器
+
+应用构建设计器支持创建并维护页面功能，并对编辑完毕的页面进行预览.当代码工程的前后端正常部署后，通过设计器可以实现设计态下的页面即时维护，同时运行态下的前端列表和卡片页面刷新后能快速同步更新。
+
+新建功能成功后，进入设计器,显示的页面如图所示：
+
+设计器中包含多种内置组件、设计器公共组件包及自定义组件扩展能力.其中自定义组件功能基于组件扩展中心实现.组件可通过拖拉拽的方式按需自行配置设计,实现自己的个性化需求.
+
+页面配置
+
+通过页面配置功能，可以添加页面状态，针对不同的状态可以设置按钮的是否显示及是否可用状态。当匹配多个页面状态时，如果配置了前端特性mergeAllConditionStates为true则会按照顺序后面的页面状态生效。如果没有配置前端特性则匹配多个页面状态时所有页面状态都不生效。
+
+页面规则
+
+页面规则包含两部分功能：交互规则为页面操作过程中通过满足前置条件的情况下执行对应的动作；校验规则为页面保存、提交等动作时满足前置条件的情况下给出提示或者阻止下一步动作。
+
+交互规则可以在对应的页面状态下进行配置，内置的页面状态分为新增、编辑、浏览。触发时机包含：界面初始化、值发生改变、页面状态改变。当触发时机为值发生改变的时候，需要配置变化的字段/组件来触发动作。
+
+配置前置条件时首先选择字段，操作符为等于、不等于、包含、不包含等，对应的值可以是常量、字段和公式，根据不同的值类型，后面的值显示为不同的输入控件。
+
+满足条件时的可以配置不同的字段/组件进行显示、修改、赋值、必填项的控制。
+
+校验规则配置时触发时机为：保存、审核、提交及工作流。可以配置前置条件，前置条件逻辑和交互规则一直。满足前置条件的情况下可以执行对应操作，操作分为仅提示和禁止下一步。仅提示的情况下可以配置提示信息，不影响触发时机的进行。禁止下一步的话会阻止触发时机的执行。
+
+参照配置
+
+在设计器中可以通过参照配置功能，实现参照增补、参照带入、参照过滤的功能。
+
+参照增补：设计器在画布区拖入一个参照组件，然后通过参照配置可以关联已经预置的参照，这样运行时就可以使用此参照进行选择。
+
+参照带入：选择参照之后，可以调整参照显示字段以及增删改参照带入字段将参照中的字段带入界面字段。运行时选择参照的时候会将参照显示字段显示在参照框中，将参照带入字段反填到对应的界面字段中
+
+参照过滤：通过参照过滤可以打开参照是配置条件以达到过滤数据的目的。选择字段之后可以选择操作符，操作符包含在列表中、不在列表中、等于、不等于等，根据不同的字段类型操作符不同。值类型可以选择常量、公式表达式、字段，根据不同的值类型，右侧值可以选择不同的内容以实现对应效果。
+
+自定义项组
+
+自定义项被分配到当前单据之后，需要设计器中将对应的自定义项组增补到设计器，关联了对应的元数据中的特征组之后保存一下，刷新页面之后后端会在当前自定义项组的协议中增补属性：UI#defaultChildren，该属性放的是当前自定义项组中包含的所有启用的自定义项，自定义项组如果存在UI#defaultChildren，在设计器中是无感的，看不到对应的字段，只会将UI#defaultChildren中的字段平铺出来，如果改了平铺出来的字段的属性或者调整了顺序会将自定义项字段固化，固化之后当前字段UI#hasExist为true。
+
+如果后端没有查询到对应在自定义项，会在画布区显示出自定义项组字段：
+
+特征
+
+特征会有特征分组，多个特征分组会整合到特征组里面。特征组会有四种类型：物料属性特征组（MaterialPropCT）、sku属性特征组（SkuPropCT）、自由项特征组（FreeCT）、和选配特征组（OptionCT），在设计器协议中会有type 属性来执行对应特征组类型。特征组可以放在表单和表格中，可以配置特征组的显示隐藏、只读等属性，也可以设置特征组的敏感域，协议中设置sensitive执行敏感域类型： sku敏感（skuSens）、批次敏感（batchSens）、序列号敏感（SNSens）、现存量敏感(stockSens)、成本敏感(costAffec)、BOM敏感(BOMAffec)、工艺敏感(manuAffec)、销售/采购价格敏感(PriceAffec）。设置敏感敏之后需要同时设置对应的自由项特征组depend。
+
+在数据容器的字段设置属性中，可以设置特征组中的特征作为外显字段。可以设置外显特征字段的隐藏显示、是否必填等属性
+
+在设计器的画布区第二个页签中可以，选中画布区对应的特征组，可以再画布区看到当前特征组下的所有特征分组和特征分组下的特征，也可以设置特征的各种类型的基础属性。
+
+特征的参照带入，物料参照可以设置参照带入，在左侧下拉选择树中可以选择到对应的特征组下的特征，可以将属性值带入当前页面的其他字段。
+
+流程&自动化
+
+主要包含四个部分:工作流、业务流、机器人和函数.其中工作流主要针对单据在创建流程审批服务时,提供流程模型的新增、编辑、删除、设计、启用等功能,例如离职办理需要交接并且需要不同领导进行审批时,就可以使用工作流针对该流程进行设计;业务流可以把各种类型的能力、服务、APP组装编排起来,为应用和其他应用的业务单据创建数据流转服务,提供流程的管理和日志功能,例如当需要多个单据之间进行相互作用关联时,可以进行多个单据相互映射.机器人则是全面集成智多星RPA机器人,及模板的创建、机器人的创建和部署于一体,机器人可以在流程、定时调度任务启动运行,帮助自动完成重复耗时的任务,提高工作效率.函数部分则是基于应用构建平台的脚本引擎,支持用户完成自定义逻辑的脚本编写;类型分为前端脚本和后端脚本,无论前端还是后端脚本都是以JS为语言规范,其中操作元数据是以平台提供的YonSQL对数据进行操作，YonSQL支持SQL95标准规范与绝大部分SQL编写方式。
+
+集成配置
+
+集成配置主要是通过接口的形式与外部的系统、业务的对象等进行通信.也可设置业务对象通用接口的关联关系等功能
+
+API授权:通过appKey和appSecret两个值确认用户身份,包括用友开放API、服务商开放API以及内部API,通过集成授权的方式,我们所创建的应用就可以与第三方接口进行关联.
+
+API发布:我们所创建的应用也可以创建自己所属的API供其他应用或者第三方接口进行调用.
+
+发布管理
+
+对于所创建好的应用进行发布,此处可以创建应用名称,选择发布到工作台还是移动端,其中工作台可以配置一级菜单,而移动端可以配置应用类别、应用主页、发布终端等信息,点击确定之后就可以将应用发布到菜单和工作台。
+
+应用发布
+
+发布管理界面，可先建立分组，并把相应单据挂在对应分组下，这里可选单据是列表单据，点发布确认之后，会注册对应服务节点到ui模板对应应用节点下，同时注册服务、按钮信息到工作台。
+
+应用发布报【发布报错：名称不能重复，投标新建列表】
+
+类似这样报错，可以先检查下菜单管理是否已经存在和报错名字相同的服务节点，如果有可以试着在菜单管理把报错的节点删除再发布。报错原因可能是因为环境升级或者迁移等原因导致工作台存的菜单id和应用构建存的菜单id不一致，导致再次发布默认是新增态数据，工作台会校验是否有同名服务节点。
+
+应用发布管理界面应用名字、菜单不显示的问题
+
+这个主要是因为进入应用调的getApp接口报错了，导致应用信息获取不到。接口报错基本上是因为之前应用发布过移动端服务，移动端服务在工作台被删除了，导致再去获取服务信息报错。
+
+组件扩展中心
+
+组件扩展中心可以通过创建资源库并引用资源库中创建的组件至组件包创建自定义组件.同时可以在创建资源库时上传js文件,供组件使用.资源库详情中可以编辑组件的基础信息及属性动作,也可复制已有动作供组件使用.目前资源库支持上传mainfest.json文件进行组件导入,及资源库的整体导入导出功能.
+
+开发设计
+架构设计
+总架构图
+
+集成套件
+集成中心	描述说明
+工具箱	管理设计器中工具箱的组件名称、分组、顺序等。
+属性面板	管理设计器中组件单元对应的属性面板的属性集合、配置、顺序等。
+拖放关系	管理从工具箱内拖拽组件到画布区域后组件之间允许放置的关系逻辑配置等
+扩展页面	维护自定义扩展页面的配置信息。
+扩展面板	维护左右两侧自定义扩展面板的配置信息。
+扩展按钮	维护主页面上扩展自定义按钮的配置信息
+环境配置	管理环境信息，如dev开发环境、daily日常环境。
+发布/回滚配置	发布：将集成中心的配置应用到该环境下的设计器。回滚：将该环境中的组件和属性等配置回滚至指定版本记录。
+导入/导出配置	导入：快速将配置从其他环境导入到当前环境。导出：快速生成当前组件库和环境相关数据的sql脚本文件。
+适配套件
+全局适配器
+全局适配器	描述/说明
+注册库	通过适配代码可以动态创建/注册一个组件库
+注册组件	通过适配代码可以动态在组件库中注册对应的组件
+定制工具箱	可对集成中心注册的工具箱数据,通过适配代码方式进行定制逻辑处理，也可根据需求动态维护工具箱中的组件.
+定制拖放关系	可对集成中心每个组件之间的放置关系,通过适配代码方式进行定制处理，可以设置允许放置组件、不允许放置组件、全部可放置、全部不可放置
+定制缺省配置	可对全局的一些默认配置项目进行定制逻辑处理
+定制页面类型	通过适配代码可以动态注册页面类型及其初始化的UI元数据
+定制扩展面板	通过适配代码可以动态注册自定义的扩展面板
+定制扩展按钮	通过适配代码可以动态注册自定义的扩展按钮
+组件适配器
+组件适配器	描述/说明
+适配属性	对集成中心的组件属性，可进行逻辑处理、映射转换、初始值变化等处理,在代码中根据实际情况适配处理.
+适配协议	将UI中的json数据进行转换或补充外部协议相关的信息,如uiObject、uiTable等协议转化需要的关键属性等,为运行时能解析的协议类型和模型提供依据.
+适配数据	将组件属性及协议信息进行转换处理,以生成属性值等数据
+视图适配器
+视图适配器	描述/说明
+定制校验提示	当拖放组件时,进行一些定制的校验逻辑,比如:只允许放一个表格、数据源类型不一致不允许放置等1. 在index.js 中使用addViewAdapter注册对应组件的视图适配文件，2. 在适配文件中的 onDataValid 方法中可以根据需求做对应的判断，返回对应的校验提示。例如：{ uititle: '当前页面类型为列表页面, 仅允许添加一个表格', uitype: 'message', type: 'error'}
+定制状态图标	可依据数据的属性配置来动态控制层级视图中节点元素辅助显示的图标状态.1. 在index.js 中使用addViewAdapter注册对应组件的视图适配文件，2. 在适配文件中的 onDataView 方法中可以根据控件的不同状态返回不同的状态图标例如：onDataView(options){ let{tplNode,tplTree} = options;let nodeViews= [];if(tplNode.bHidden){ nodeViews.push({ uititle:'被隐藏', uitype:'icon', type:'eye-o' })}return nodeViews;}
+定制快捷操作	可对画布中被选中的元素上定制快捷的操作按钮,比如“添加页签”等
+视图套件
+画布预览器	描述/说明
+传输协议能力	画布层和外层通过postMessage进行协议通信
+解析协议能力	根据MDF运行态协议规范，将设计态的协议转换为运行态的协议 ,以便将协议解析为画布中的视图
+默认拖放能力	拖拽层会根据组件元素DOM的nid和uitype来控制拖拽行为，其中提供了拖放前后、选中、是否可拖拽等钩子函数及默认的拖拽放置关系逻辑处理.
+开发API能力	集成过程中需要使用定制化的一些处理,提供了一套标准的API供集成者对属性配置、扩展面板、扩展组件等通过API方式扩展业务逻辑
+显示插件能力	开发的自定义插件视图、通过yonbuilder-cli发布扩展的组件等进行显示
+协议套件
+协议套件	描述/说明
+团队管理	管理设计器独立的团队管理体系，主要用于团队间数据隔离
+成员管理	管理设计器独立的成员管理体系，主要用于数据权限控制；可以与第三方用户体系作集成映射
+应用管理	管理设计器核心模型-应用
+页面管理	管理设计器核心模型-页面
+数据发布服务	包括应用及页面的发布，管理发布的数据、版本等信息
+第三方存储服务	管理三方服务的配置，通过对第三方存储服务做定制化接口实现，支持设计器后端对接多方存储服务
+协议设计
+层级描述协议
+
+一个可视化的界面模板其最终形态都可体现在一个层级关系下,而层级关系里面包含着各种协议/配置/属性信息等,由于外部协议各种不确定性,而到达设计器内部后,需要对其进行统一,但又不能丢失其外部协议的特征,所以此协议标准不能过于复杂,但又必须具有合并外部协议特征的能力.
+
+可视效果如下图:
+
+一个的json协议示例如下
+
+协议规范
+
+{
+
+"nid":"nid_1000",
+
+"uititle": "工具栏",
+
+"uitype": "Toolbar",
+
+"children": [
+
+{
+
+"nid":"nid_1001",
+
+"uititle": "刷新", //可选，标题
+
+"uikey": "reloadBtn", //可选，键值
+
+"uitype": "Button", //必填，解析器/组件名
+
+//---可补充自己的协议/属性/配置----
+
+"color": "red" //示例:解析器的二级协议/组件的属性
+
+},
+
+{
+
+"nid":"nid_1002",
+
+"uikey": "delBtn",
+
+"uititle": "删除",
+
+"uitype": "Button",
+
+"children": "删除",
+
+//---可补充自己的协议/属性/配置----
+
+"icon": "plus" //示例:解析器的二级协议/组件属性
+
+}
+
+]
+
+//---可补充自己的协议/属性/配置----
+
+}
+
+nid	唯一标识(自动生成)	
+uitype	组件名/解析器名	
+uikey	键值	
+uititle	名称描述	
+children	嵌套子集内容	
+(uiisview)	(可选)指是否为可视化元素	默认true,当为false时表示不是可视化到元素,所以不能从工具箱拖入到画布区域.
+(uiplugin)	(可选)指是否为自定义扩展元素	解决不可预测的场景,目前只在特定库下使用.
+基本原理图
+
+属性描述协议
+
+可视化工具主要的配置方式就是类似右侧的属性面板,而不同组件/控件对应的属性面板都是动态变化的,因此需要通过一个协议规范来进行描述,以便于动态协议内容,属性面板解析器再依据协议内容动态渲染成最终的属性面板视图形态.
+
+区域说明
+
+右侧区域称为“属性面板”,面板区域又分为以下几个小区域(见上图):
+
+1 - 标签区,显示当前属性的描述名
+
+2 - 控件区,显示当前属性的输入控件
+
+3 - 提示区,显示当前属性的使用说明
+
+协议规范
+约定名	必要性	说明
+key	否	唯一性标识(一般设置值为: name+nid),可解决一些特定控件下的缓存问题,例如:MetaType.IframeModal
+name	是	描述属性名
+label	是	描述属性中文
+type	是	定义属性值的输入控件类型,见:MetaType控件定义
+defaultValue	否	定义属性值的默认值
+labelCol	否	取0～24的值，24代表占用整行，0代表不显示，默认值：8。
+labelStyle	否	通过css语法定义label区域的样式
+inputCol		取0～24的值，默认值：24-labelCol。
+help	否	对定义的属性进行详细说明
+icon	否	描述属性微缩图标的样式名
+props	否	对属性值的输入控件类型进行配置,见:MetaType控件定义
+readOnly	否	是否为只读模式
+disabled	否	是否为禁用模式
+tags	否	当前属性打上标签的编码集合,例如:"tag1,tag2,tag3"
+规范示例
+
+属性项是通过一套规范进行描述的,例如(以下描述了3个属性):
+
+消息事件协议
+
+[
+
+{
+
+name: 'cCode',
+
+label: '编码',
+
+type: MetaType.Text,
+
+labelStyle:{color:'BlueViolet'},
+
+readOnly:true,
+
+props: {},
+
+defaultValue: ''
+
+}
+
+,{
+
+name: 'bMain',
+
+label: '主表',
+
+type: MetaType.Bool,
+
+props: {
+
+},
+
+defaultValue: true
+
+}
+
+,{
+
+name: 'cModelType',
+
+label: '模型类型',
+
+help:'当单据类型为FreeView时，用于指定本实体对应的ViewModel类型.',
+
+type: MetaType.Text,
+
+props: {
+
+},
+
+defaultValue: ''
+
+}
+
+//... 定义更多属性描述
+
+]
+
+设计器内部与外部存在跨窗口的集成关系,而这个关系的下还需要保障各种服务之间的连接调用,因此需要提供消息通道,而消息通道中需要有一个标准的协议来描述消息事件的内容,所以需要此消息事件协议.
+
+前端设计
+适配层设计
+package.json
+
+前端工程配置项目依赖如下:
+
+GlobalAdapter:全局适配
+
+针对设计器的全局公共的特征进行统一全局适配
+
+{
+
+//...
+
+"dependencies": {
+
+"ide-sdk-adapter": "latest"
+
+}
+
+//...
+
+}
+
+class GlobalAdapter{
+/**
+* 构建组件的分组选择菜单列表
+* @param options
+* {
+*     currDataSource:[],//当前数据源
+*		 sceneData //当前场景数据
+* }
+* @return array 返回数据格式要求如下：
+* [
+* {
+*   uititle:"基础",  //分组名称
+*   uiicon: 'tag',  //分组图标
+*   children: [//本分组下的组件集合
+*     {
+*       uitype:'Button',  //组件标识
+*       uititle:'按钮',   //组件名称
+*       uiicon:'',       //组件图标
+*       uidefault:''     //组件缺省配置
+*     },
+*     ...//本分组下的更多其它组件
+*   ]
+* },
+* ...  //更多其它分组
+* ]
+*/
+onViewMenus(options){}
+/**
+* 构建自定义配置面板
+* @param options
+* {
+*	 sceneData //当前场景数据
+* }
+* @return array 返回数据格式要求如下：
+* [
+* {
+*   key:"",          //面板编码
+*   title:"基础",     //面板名称
+*   url:''           //面板页面地址
+*   type:''          //面板类型，"left"-左面板、"right"-右面板(默认)、"center"-中间面板
+* },
+* ...  //更多其它分组
+* ]
+*/
+onViewPanes(options){}
+/**
+* @deprecated
+* 以后将废弃
+* 解析需要显示的源码内容
+* @param options
+* {
+*     data:object //需要解析的json数据对象
+* }
+* @return string //返回生成的源码字符串
+*/
+onSourceCodes(options){}
+/**
+* 获取当前组件可用的子组件类型
+* @param options
+* {
+*  tplNode,//当前父组件
+*  tplChildNode,//当前子组件
+*  currDataSource,//当前配置数据
+*  sceneData,//当前场景数据
+*  isPart,//是否ui部件
+*  isExt, //是否ui扩展
+* }
+* @return array
+* 格式要求：
+* ['uiTypeSub1','uiTypeSub2',...]
+*/
+onUiSubset(options){
+let {currDataSource} = options||{};
+return currDataSource;
+}
+/**
+* 构建页面类型的可选列表
+* @param options
+* {
+*     currApp:object, //当前应用信息
+* }
+* @return array
+* 格式要求：
+* [
+*  {
+*      name: '自定义页面',//页面类型名称
+*      code: 'FreeView',//页面类型编码
+*      isDefault:true  //是否默认选择
+*  }
+*  //更多页面类型
+* ]
+*/
+onPageTypes(options){}
+/**
+* 新建页面时的触发的生命周期,主要用于处理缺省的页面节点数据
+* @param options
+* {
+*		sceneData //当前场景数据
+* }
+*/
+onDefaultPageData(options){}
+/**
+* 页面数据保存时触发的生命周期
+* @param options {
+*	tplTree
+*	sceneData //当前场景数据
+* }
+*/
+onSaveData(options){}
+/**
+*  @desc 新数据节点创建完成后触发
+*  @param options:{
+*      tplTree,        //当前数据树
+*      tplNode,        //当前添加的数据节点对象
+*      tplParentNode,   //当前对应的父节点对象
+*      isPart,          //是否为部件
+*      isExt,					 //是否扩展组件
+*		  sceneData 			 //当前场景数据
+*   }
+*   @return {无}
+*/
+onCreateDataComplete(options){}
+/**
+* 获取页面可用的扩展按钮
+* @param options:{
+*     currApp,//当前应用
+*     currPage,//当前页面
+*		 sceneData //当前场景数据
+* }
+* @return 要求返回的结果格式如下：
+* [
+*      {
+*          key:''  //按钮唯一值
+*          text:'',//按钮文本
+*          disabled:false,//按钮是否禁用
+*          onClick:function(info){//按钮点击事件
+*			    let {tplTree,tplNode} = info;
+*              console.log("当前树数据：",info.tplTree);
+*              console.log("当前选中节点数据：",info.tplNode);
+*          }
+*      }
+* ]
+*/
+onPageButtons(options){}
+/**
+* 获取当前的配置信息
+* @param options:{
+*     sceneData,//当前场景数据
+*     tplTree, //当前树数据
+*     tplNode, //当前选中节点
+*     config,  //当前全部配置项的默认值
+*     configKey//当前配置项
+* }
+*/
+onConfig(options){}
+}
+
+
+PropAdapter:逻辑适配
+
+对某个或多个组件适配/协议转换/特殊逻辑处理的基础类,使用方式:继承此类.
+
+class PropAdapter{ 
+//--------------生命周期方法--------------------
+/**
+* @desc 构建适配页面(元数据)
+* @param options
+* {
+*     tplNode,     //当前数据节点值
+*     tplTree,     //当前数据树
+*     productType, //所属产品类型
+*     currApp,     //所属应用信息
+*     currPage,    //所属页面信息
+*     pageList,     //所属应用下的全部页面信息
+*  	 sceneData,//当前场景数据
+*     currDataSource //当前属性数据源
+* }
+* @return {Array} 元数据数组集合 @link 请参考PageMeta说明
+*/
+onPageMetas(options) {}
+/**
+*  @desc 新建数据节点时触发
+*  @param options:{
+*  		sceneData,//当前场景数据
+*      tplTree,        //当前数据树
+*      tplNode,        //当前添加的数据节点对象
+*      tplParentNode,   //当前对应的父节点对象
+*      isPart,          //是否为部件
+*      targetParams,   //拖拽创建时目标dom节点的uiparams属性值
+*      forTargetParams,//拖拽创建时目标dom节点为fornid属性的uiparams属性值
+*   }
+*   @return {无}
+*/
+onCreateData(options) {}
+/**
+* @desc 数据节点位置变更时触发
+* @param options
+* {
+*  	 sceneData,//当前场景数据
+*     tplTree, //移动后的数据树
+*     tplNode, //移动后的节点
+*     tplParentNode,//移动后的父节点
+*     tplSourceNode,//移动前的节点
+*     tplSourceParentNode,//移动前的父节点
+*     tplTargetNode,//移动相对的目标节点
+*     position,     //移动相对目标节点的位置 "before|left|top"移动到目标节点前、"after|right|top"移动到目标节点后、"insert"插入目标节点里面
+*     targetParams,   //拖拽创建时目标dom节点的uiparams属性值
+*     forTargetParams//拖拽创建时目标dom节点为fornid属性的uiparams属性值
+* }
+*/
+onMoveData(options){}
+/**
+* @desc 数据节点被删除/移除时触发
+* @param options
+* {
+*  	 sceneData,//当前场景数据
+*     tplSourceTree,//节点删除前的数据树
+*     tplTree, //节点删除后的数据树
+*     tplNode, //被删除的节点
+* }
+*/
+onDeleteData(options){}
+/**
+* @desc 将数据转换为配置值
+* @param options {
+*  	 sceneData,//当前场景数据
+*     formMeta,    //元数据，即 @link onPageMetas 返回的数据
+*     tplNode,     //当前数据节点对象
+*     tplTree,     //当前数据树
+*     productType, //所属产品类型
+*     currApp,     //所属应用信息
+*     currPage,    //所属页面信息
+*     pageList     //所属应用下的全部页面信息
+* }
+* @return {object} 适配页面的表单值
+*/
+onDataToValue(options) {}
+/**
+* @desc 将配置值转换为数据
+* @param options {
+*  	 sceneData,//当前场景数据
+*     formMeta,    //元数据，即 @link onPageMetas 返回的数据
+*     formData,    //变更后的配置值
+*     tplPreNode,  //上一次的数据值
+*     tplNode,     //当前数据节点对象
+*     tplTree,     //当前数据树
+*     productType, //所属产品类型
+*     currApp,     //所属应用信息
+*     currPage,    //所属页面信息
+*     pageList     //所属应用下的全部页面信息
+* }
+* @return {无}
+*/
+onValueToData(options) {}
+}
+
+ViewAdapter:视图适配
+
+对设计器中一些特定元素视图的行为/视图/校验等进行适配的基础类,使用方式:继承此类.
+
+class ViewAdapter{
+//--------------生命周期方法--------------------
+/**
+* @desc 构建数据节点的显示视图
+* @param options
+* {
+*     tplNode,     //当前数据节点对象
+*     tplTree,     //当前数据树
+*  	 sceneData,//当前场景数据
+* }
+* @return {Array} 视图元数据集合 @link 请参考ViewMeta说明如下：
+* [
+* {
+*   uititle: '消息内容',
+*   uitype: 'message',
+*   type: 'error|warning|info|success'
+* }
+* ]
+*/
+onDataView(options){}
+/**
+*  @desc 当前数据节点下添加子数据节点时的校验
+*  @param options:{
+*      tplTree,     //当前数据树
+*      tplNode,     //当前数据节点对象
+*      tplChildNode, //即将添加的子数据节点对象
+*  		sceneData,//当前场景数据
+*      isPart, //UI部件
+*      isExt   //UI扩展
+*   }
+*  @return
+* {
+*   uititle: '消息提示内容',
+*   uitype: 'message',
+*   type: 'error|warning|info|success'
+* }
+*/
+onDataValid(options){}
+/**
+* 当数据节点被移除时的校验
+* @param options:{
+*  	 sceneData,//当前场景数据
+*     tplTree, //当前数据树
+*     tplNode, //当前删除的节点
+* }
+* @return
+* {
+*   uititle: '消息内容',
+*   uitype: 'message',
+*   type: 'error|warning|info|success'
+* }
+*/
+onRemoveDataValid(options){}
+/**
+*  @desc 当前数据节点下添加子数据节点时的校验
+*  @param options:{
+*  	 sceneData,//当前场景数据
+*     tplTree, //当前数据树
+*     tplNode, //当前移动的节点
+*     tplParentNode,//移动前的父节点
+*     tplTargetParentNode,//移动后的父节点
+*     tplTargetNode,//移动相对的目标节点
+*     position,     //移动相对目标节点的位置 "before|left|top"目标节点前、"after|right|top"目标节点后、"insert"目标节点里面
+*   }
+* @return
+* {
+*   uititle: '消息内容',
+*   uitype: 'message',
+*   type: 'error|warning|info|success'
+* }
+*/
+onMoveDataValid(options){}
+/**
+* 当数据节点被选择时构建拖拽相关的视图
+*  @param options:{
+*  	  sceneData,//当前场景数据
+*      tplTree,     //当前数据树
+*      tplNode,     //当前数据节点对象
+*      tplParentNode //当前数据节点父对象
+*   }
+*
+*  @return  [
+*      {
+*          key:'addTab',               //按钮键值
+*          text:'添加页签',             //按钮名称
+*          icon:'uidesign uitianjia'   //按钮图标（使用阿里字体图标库iconfont）
+*      }
+*      ,... //其它扩展按钮
+*  ]
+*/
+onDataDndView(options){}
+/**
+* 当数据节点触发动作事件时（例如：扩展按钮点击时）
+* @param options
+* {
+*  	 sceneData,//当前场景数据
+*     tplTree,     //当前数据树
+*     tplNode,     //当前数据节点对象
+*     actionType,  //动作类型
+*     actionKey,   //动作标识
+*     openApi      //开发的API能力
+* }
+* @return 无
+*/
+onActionHandler(options){}
+}
+
+
+视图层设计
+package.json
+
+前端工程配置项目依赖如下:
+
+{//..."dependencies": {"ide-sdk-viewer": "latest"}//...}
+入口文件
+
+例如:AppViewer.js
+
+import React from 'react';import {connectReactViewer} from 'ide-sdk-viewer';import RuntimeView from "./RuntimeView";const WrappedCreateView = connectReactViewer(RuntimeView,React);class AppViewer extends React.Component {constructor(props) {super(props);}componentDidMount() {/window.addEventListener("error",function(){var containerDom = window.document.getElementById("container");containerDom.innerHTML = <div style="padding: 30px;font-size:12px;line-height:22px;text-align: center;"><div>页面生成失败，脚本执行异常</div><div>您可以刷新页面或者<a style="color: dodgerblue" onclick="javascript:window.location.reload()">重试加载</a></div><div>您可联系开发人员或系统管理员</div></div>;});/}render() {return }}export default AppViewer;
+视图文件
+
+例如:RuntimeView.js
+
+import React, { Component } from 'react';class RuntimeView extends Component {static defaultProps = {uiMeta:null //设计器的ui元数据将写入此属性}constructor(props) {super(props);this.state = {uiMetaJson:props.uiMeta,lastStr:'',lastVer:0}}componentWillReceiveProps(nextProps){if("uiMeta" in nextProps){this.refreshUiMeta(nextProps);}}componentDidMount() {this.refreshUiMeta(this.props);}//刷新界面元数据内容refreshUiMeta(props){const { uiMeta } = props;const self = this;let nextStr = JSON.stringify(uiMeta);if(nextStr !== this.state.lastStr){let nextVer = this.state.lastVer+1;console.log('协议版本已更新---RuntimeView--->version:'+nextVer);this.setState({ uiMetaJson:uiMeta,lastStr:nextStr,lastVer:nextVer});}}render() {let {uiMetaJson} = this.state;//-------依据协议内容，解析渲染成自己的视图------return
+{uiMetaJson}
+}}export default RuntimeView;
+控件层设计
+
+属性面板中可使用的控件类型
+
+MetaType.Text
+
+描述:文本输入
+
+示例配置:
+
+{name: 'text',label: '按钮文本',type: MetaType.Text,defaultValue: '按钮',props:{//autoTrim:true, //选填，默认true，是否清除文本内容的前后多余空格//maxLength:null //选填，默认无值，最大输入长度}}
+MetaType.Textarea
+
+描述:多行文本输入
+
+示例配置:
+
+{name: 'dataSource',label: '数据源名称',type: MetaType.Texteara,defaultValue: ''}
+MetaType.Bool
+
+描述:开关按钮
+
+{name: 'isNull',label: '允许为空',type: MetaType.Bool,props: {//checkedChildren: "是" //选填,true时显示的文本//unCheckedChildren: "否"//选填,false时显示的文本},defaultValue: true}
+MetaType.Date
+
+描述:日期/日期时间选择
+
+{name: 'defaultDate',label: '缺省日期',type: MetaType.Date,props: {/*** 选填，日期格式：* yyyy-MM-dd(年月日)|yyyy-MM(年月)* yyyy-MM-dd HH:mm(年月日时分)|yyyy-MM-dd HH:mm:ss(年月日时分秒)*///format:'yyyy-MM-dd'},defaultValue:null //或者类似：'2015-12-05'}
+
+MetaType.Time
+
+描述:时间选择
+
+{name: 'defaultTime',label: '缺省时间',type: MetaType.Time,props: {/*** 选填，时间格式：* HH:mm:ss|HH:mm|mm:ss*///format:'HH:mm:ss'},defaultValue:null //或者类似：'12:30:25'}
+
+MetaType.Select
+
+描述:下拉选择列表
+
+示例配置:
+
+{name: 'type',label: '颜色',type: MetaType.Select,help:'按钮的填充颜色',props: {options:[ //定义下拉列表中的可选项{text:'默认',value:''},{text:'蓝色',value:'primary'},{text:'绿色',value:'success'},{text:'红色',value:'error'},{text:'黄色',value:'warning'}]//以下为可选配置：//,multiple:false //是否多选//,placeholder: '' //提示文本//,showSearch:true //在选择框中显示搜索框//,allowClear:false //是否允许清除//,dataurl:null //远程数据源请求地址(get请求)//,dataparams:null //远程请求数据源时携带的参数//,method:'get' //远程获取数据时的请求的方式'get'|'post'//,withCookies:false //远程请求时是否携带cookies//,notFoundContent:null //当下拉列表为空时显示的文本//,valueType:'string' //下拉项带回的值类型"string"|"object"//,valueKey:'value' //值的键名称//,textKey:'text' //文本的键名称/,onShowFilter:(options)=>{//自定义过滤下拉数据//只显示a开头的下拉项let showOptions = options.filter(function(option){return option.value.startsWith('a');});if(showOptions[0]){//显示的第一个禁止选择showOptions[0].props.disabled = true;}return showOptions;}/},defaultValue: '' //注意：当multiple:true时，默认值应该为数组形态[]。}
+
+注意：如果使用远程数据源，即dataurl指向的服务要求返回的数据结构如下：
+
+{"success" : true,"backMsg" : null,"backData" : [{"text":"选项一","value":"001"},{"text":"选项二","value":"002"},{"text":"选项三","value":"003","disabled":"true"},{"text":"选项四","value":"004","style":{"color":"red"}}]}
+MetaType.SelectTree
+
+描述:下拉选择树形结构
+
+示例配置:
+
+{name: 'refFields',label: '关联字段',type: MetaType.SelectTree,props: {treeData:[ //定义下拉树列表中的可选项{label: '对象一',value: '0-0',key: '0-0',children: [{label: '字段一',value: '0-0-1',key: '0-0-1',}, {label: '字段二',value: '0-0-2',key: '0-0-2',}],}, {label: '对象二',value: '0-1',key: '0-1',}]//以下为可选配置：//,treeCheckable: false //显示多选框//,placeholder: '' //选择框默认文字//,dropdownStyle: {minWidth: 150} //下拉菜单的样式//,showSearch: false //在下拉中显示搜索框(仅在单选模式下生效)//,searchPlaceholder: '请选择' //搜索框默认文字},defaultValue: ''}
+MetaType.Number
+
+描述:数字输入,有三种形态:纯输入、滑条输入、带单位输入.
+
+示例配置1:(纯输入)
+
+{name: 'decimal',label: '保留小数',type: MetaType.Number,help:'计算或存储的精度小数位',props: {//min: 0, //选填,限制输入最小值//max: 10, //选填,限制输入最大值//decimalNum:0, //选填,限制可输入的小数位//minus:false //选填,是否允许输入负数},defaultValue: 0}
+
+示例配置2:(滑条输入)
+
+{name: 'decimal',label: '保留小数',type: MetaType.Number,help:'计算或存储的精度小数位',props: {enableNumber: false, //禁用数字输入框enableSlider: true, //启用滑动条min: 0, //滑动条最小值max: 10, //滑动条最大值//step:1 //选填,滑动时数字增量},defaultValue: 2}
+
+示例配置3:(数字输入带单位)
+
+{name: 'width',label: '宽度',type: MetaType.Number,props: {enableSelect: true, //启用下拉单位selectValue:'px', //下拉框的默认值selectOptions:['px','%'], //下拉框的可选单位列表selectWidth:50 //下拉框的宽度值，例如：50、'50px'、'50%'。},defaultValue: 0}
+常用MetaType.Json
+
+描述:Json格式文本输入
+
+示例配置:
+
+{name: 'config',label: '扩展配置',type: MetaType.Json,props:{//addText: "新建JSON",//选填//editText: "调整JSON"//选填}defaultValue: ''}
+MetaType.MultiLang
+
+描述:多语言文本输入
+
+示例配置:
+
+{name: 'multilang',label: '多语言',type: MetaType.MultiLang,props:{//各语言的标签文本localeLable: {zh_CN: "简体中文",en_US: "英文",zh_TW: "繁体中文",fr_FR: "法语",de_DE: "德语",ja_JP: "日语"},//maxLength:null //选填，默认无值-即不限制长度，最大输入长度}defaultValue: {zh_CN:"这是中文",en_US:"it‘s english",//...}}
+MetaType.Link
+
+描述:打开一个链接地址,通常用于链接打开第三方的页面.
+
+示例配置:
+
+{name: 'linkprint',label: '打印模板',type: MetaType.Link,props:{linkUrl: 'www.baidu.com', //打开的链接地址//linkText: '开始设计', //选填,按钮显示的文本//linkColor:'blue' //选填,按钮显示的颜色blue|red|yellow|green|gray.}defaultValue: ''}
+
+MetaType.IframeModal
+
+描述：自定义弹窗插件，可自行实现弹窗里面的页面，以满足特殊场景下的属性配置输入。
+
+示例配置:
+
+{key: 'cEnumType_'+tplNode.nid, //唯一KEY，以确保同一控件的此属性值配置数据不会串。name: 'cEnumType',label: '枚举编码',type: MetaType.IframeModal,props: {caption:"枚举档案库", //弹窗标题iframeUrl: ADDR+'/enumtype', //加载的页面地址,对应document下的iframe的src属性iframeId: 'inputIframeModal', //唯一ID,对应document下的iframe的id属性iframeContext:null, //可选,需要提供给iframe内嵌页面使用的上下文数据//iframeWidth:'100%', //可选,iframe的宽度//iframeHeight:'100%', //可选,iframe的高度//addText:'新建配置', //可选,defaultValue存在值时按钮显示的文本//editText:'调整配置', //可选,defaultValue不存在值时按钮显示的文本message:true, //是否启用与设计器的消息通信//width:1000, //可选,弹窗宽度//height:600, //可选,弹窗高度//bodyStyle:{}, //可选,自定义弹窗内部css样式footer:false, //是否启用弹窗自带的底部栏//okText:'确定', //底部栏确定按钮的文本,当footer=true时才生效//cancelText:'取消'//底部栏取消按钮的文本,当footer=true时才生效},defaultValue: null}
+MetaType.Button
+
+描述:显示成一个按钮.
+
+示例配置:
+
+{name: 'addOne',label: '显示按钮',labelCol:0',type: MetaType.Button,props:{buttonText:'新增一行',buttonClick:function(){console.log('按钮被点击...')}}defaultValue: null}
+后端设计
+项目结构
+[-] icop-front├──[-] icop-front-api├──[-] icop-front-impl // 工程代码├──[-] controller // 控制器├──[-] service // 服务层├──[-] repository // 数据访问层├──[-] entity // 模型层├──[-] uilibrary // 独立功能模块-组件中心&集成中心├──[-] iuap // 独立功能模块-业务中台├──[-] utils // 全局工具类├──[-] performance // 性能监控测试├──[-] filter // 拦截器├──[-] icop-front-web // 配置信息
+主包关系
+
+页面模板
+读取过程
+
+保存过程
+
+统一存储
+接口定义
+
+第三方存储服务接入方式
+
+第三方提供新增/修改/读取API（Restful风格）
+设计器后端针对该第三方服务，实现适配接口，如下
+
+第三方存储服务适配接口
+
+public interface IdeModuleDataServerTransService {/*** 设置给第三方存储的写入操作的配置* @param serverUrl* @param request*/void setWriteConfig(IdeServerUrl serverUrl,HttpServletRequest request);/*** 执行给第三方存储的写入操作* @param ideModule*/IdeServerTransWriteResult doWriteToServerData(IdeModule ideModule);/*** 设置给第三方存储的读取操作的配置* @param serverUrl* @param request*/void setReadConfig(IdeServerUrl serverUrl,HttpServletRequest request);/*** 执行从第三方存储的读取操作* @param ideModule*/IdeServerTransReadResult doReadFromServerData(IdeModule ideModule);}
+
+模板调用方式
+
+接口实现-UI元数据存储
+流程
+
+详细介绍
+控件绑定事件
+
+解析json节点中UI#eventInfo节点，进行后续动作规则保存API调用
+
+{"nid": "nid_1589424964980_0","uiTable": "BillToolbarItem","uiObject": "controls","uititle": "按钮","uitype": "button","uikey": "button5i","UI#eventInfo": [ // 事件信息列表{"operationCode": "onClick","operationName": "单击","operationType": "fun", // fun link event"isEdit": false,"params": {"cmdId": "","billNo": "cf086edeList","cItemName": "button5i","action": "openpage","paramFunc": "","openType": "meta","selectedBillNo": "31307087SingleCard","selectedBillType": "Voucher",// === 函数/事件 ===="cmdId": "","billNo": "cf086edeList","scriptIds": ["398d391f0f5448feb8ecc919ac88f19c"]，// eventType === 1||2ruleList: [{id:"", name: ""}], // eventType === 4"eventType": 1, // 1.前端 2. 后端 3. 初始化 4. 规则"appCode": "AX001161","cItemName": "button5i"}}]}
+
+补充节点状态
+
+ModuleJsonCompareUtil#compareAndFillJson
+
+json遍历拉平——nid为主键对比——打标
+
+模型协议转换
+MDD BO结构
+{
+	"viewApplication": {
+		"cBillName": "项目模板列表",
+		"cSubId": "AA",
+		"view": {
+			"iTplId": 1337972,
+			"cTemplateName": "项目模板显示模板",
+			"cTemplateTitle": "项目模板",
+			"iWidth": 10000,
+			"cTitle": "模板页面",
+			"iTplMode": 0,
+			"cName": "模板页面",
+			"containers": [{
+				"cCode": "st_storeout_sn",
+				"controls": [],
+				"cGroupCode": "st_storeout_body_page_sn_data",
+				"cDataSourceName": "st.storeout.StoreOutDetailSN",
+				"childrenField": "storeOutDetailSNs",
+				"bMain": false,
+				"cAlign": "top",
+				"cControlType": "Table",
+				"cName": "序列号数据区",
+				"containers": [{
+					"controls": [{
+						"iMaxLength": 100,
+						"cShowCaption": "状态",
+						"bHidden": false,
+						"cEnumString": "{\"0\":\"未启用\",\"1\":\"启用\",\"2\":\"停用\"}",
+						"cItemName": "enable",
+						"cCaption": "状态"
+					}],
+					"containers": []
+				}],
+				"iCols": 0
+			}]
+		},
+		"billid": 1001282423,
+		"cBillNo": "projectlist",
+		"cBillType": "ArchiveList",
+		"bAllowMultiTpl": false,
+		"cCardKey": "project"
+	}
+}
+
+设计器JSON结构
+{
+	"cBillName": "项目模板列表",
+	"cSubId": "AA",
+	"cBillNo": "projectlist",
+	"nid": "nid_1582858393588_0",
+	"uiTable": "BillBase",
+	"uikey": "projectlist",
+	"uitype": "Bill",
+	"bAllowMultiTpl": false,
+	"uiObject": "viewApplication",
+	"uiisview": false,
+	"children": [{
+		"iTplId": 1337972,
+		"nid": "nid_1582858394412_1",
+		"uiTable": "BillTemplateBase",
+		"uitype": "BillTemplate",
+		"uiObject": "view",
+		"cTemplateName": "项目模板显示模板",
+		"cTemplateTitle": "项目模板",
+		"uiisview": false,
+		"iWidth": 10000,
+		"cTitle": "模板页面",
+		"children": [{
+			"cCode": "st_storeout_sn",
+			"cGroupCode": "st_storeout_body_page_sn_data",
+			"nid": "nid_1582858480545_2",
+			"uiTable": "BillTplGroupBase",
+			"uikey": "st_storeout_sn",
+			"uitype": "Table",
+			"cDataSourceName": "st.storeout.StoreOutDetailSN",
+			"childrenField": "storeOutDetailSNs",
+			"uiObject": "containers",
+			"bMain": false,
+			"uiisview": true,
+			"cAlign": "top",
+			"cControlType": "Table",
+			"children": [{
+				"uiisview": true,
+				"children": [{
+					"iMaxLength": 100,
+					"nid": "nid_1582858589259_4",
+					"cShowCaption": "状态",
+					"uiTable": "BillItemBase",
+					"uiObject": "controls",
+					"uiisview": true,
+					"bHidden": false,
+					"cEnumString": "{\"0\":\"未启用\",\"1\":\"启用\",\"2\":\"停用\"}",
+					"cItemName": "enable",
+					"uititle": "状态",
+					"cCaption": "状态"
+				}],
+				"nid": "nid_1582858583819_3",
+				"uiTable": "BillTplGroupBase",
+				"uiObject": "containers"
+			}],
+			"cName": "序列号数据区",
+			"iCols": 0,
+			"uititle": "序列号数据区"
+		}],
+		"iTplMode": 0,
+		"cName": "模板页面",
+		"uititle": "模板页面"
+	}],
+	"billid": 1001282423,
+	"cBillType": "ArchiveList",
+	"cCardKey": "project"
+}
+
+接口实现-打印数据存储
+流程
+
+打印存储服务与设计器采用相同json协议，因此无需做模型间协议转换
+
+集成设计
+概述
+
+设计态中的数据为一个大的 json 数据，运行态展示是需要转化为一个统一存储的UI协议数据。每个设计器中的节点都会有uiTable 和 uiObject 属性，他们之间会有对应关系。转化统一协议主要是根据 uiObject 类型判断。
+
+uiObject 和 uiTable 的对应关系为：
+
+uiTable 主要的值会有：BillBase、BillEntityBaseList、BillEntityBase、BillTemplateBase、BillTplGroupBase、BillToolbar、BillToolbarItem、BillItemBase，uiObject 主要的值会有：viewApplication、view、containers、controls、entityList、entities；
+
+数据整体结构
+ui元数据结构：
+{ ..., "cBillNo": "9907c8d8", "nid": "nid_1601186872730_0", "uiObject": "viewApplication", "uiTable": "BillBase", "uikey": "9907c8d8", "children": [{ ...,
+		"nid": "nid_1601186872730_1",
+		"uiObject": "view",
+		"uiTable": "BillTemplateBase",
+		"children": [{ ...,
+			"uiObject": "containers",
+			"uiTable": "BillTplGroupBase",
+			"children": [{ ...,
+				"uiObject": "containers",
+				"uiTable": "BillTplGroupBase",
+			}]
+		}],
+		...
+	}, { ...,
+		"uiTable": "BillEntityBaseList",
+		"uitype": "BillEntityList",
+		"uiObject": "entityList",
+		"uititle": "实体清单"
+	}], ...
+}
+
+运行态模型整体结构：
+{
+	"viewmodel": {
+		"entities": [{
+			"fields": []
+		}],
+		"actions": [],
+		"states": [{
+			"items": []
+		}]
+	},
+	"viewApplication": { ... // 单据属性略"view": {... // 模板属性略"containers": [{... // 容器属性略"containers": [{}],"controls": [{}]}]}，"viewres": [// 只用于运行时，元数据存储，运行时协议返回，meta接口{"xResUrl": ["b.com/a-combine/v2.5/index.js"],"xType": "library", // 计算后提供，无需用户选择类型"xLibName": "TinperBee", // 组件库打包出来的顶级对象，可选参数，用户注册时录入"xComponents": ['a', 'b', 'c']},{"xResId": "88884444","xResUrl": ["/a-combine/v2.5/index.js"],"xType": "component","xComponents": ["xExtButton"],},{ // 原厂开发者维护的，但分拆出来。"xResUrl": ["/a-Echart/v2.5/index.js"],"xType": "component","xComponents": ["xExtEchart"],},{ // 多资源"xResUrl": ["a.com/a-combine/v2.5/index.js", "/a-combine/v2.5/index.css"],"xType": "component","xComponents": ["xExtButton"]}]}}
+
+实现思路
+
+核心：UI元数据中的 children 去递归调用，根据uiObject 去做协议转化
+
+viewApplication （view 模型）
+
+根据运行态模型机构层级由外到内依次处理：
+
+viewApplication
+
+直接将单据根节点赋值给viewApplication，
+
+view
+
+对应的是 viewApplication.children 中的页面模板，也可以直接筛选出来直接复制，
+
+containers、controls
+
+需要特殊处理的是container 和 controls，这两者都是数组，直接递归循环页面模板的children 属性，根据 uiObject 分别将对应的将 containers 和 controls 筛选出来返回。
+
+contorls 中需要区分 toolbarItem 和 billItem 两种，这两种类型的属性区别较大，所以需要区分处理。
+
+containers 中需要管理处理 groupId ，如果当前节点不存在需要手动补充，否则在页面中可能会选不到当前节点。
+
+最后将 viewApplication 中的 children 删除
+
+在 viewApplication 中对于实体清单中的处理不需要做任何处理，但是因为要做loopCallback 回调，所以也需要进行遍历
+
+viewmodel （数据模型）
+
+在 viewModel 中主要处理的是实体数据和将关联实体的controls 对应拉平放在fields 中，这里需要注意，toolbar 也需要单独处理成一个实体，对应的fields 就是当前 toolbar 中的 toolbarItem
+
+viewres（扩展组件）
+
+viewres 是对应到扩展组件，并且扩展组件也有containers组件和controls 组件，每个扩展组件，扩展组件中会有 xControlType、xResUrl、xLibName、xResUrl。如果 vieweres 的 cControlType 和 x_res_url || xLibName 存在就代表当前组件为扩展组件，需要根据xControlType 去配置不同的属性
+
+MDF运行集成设计
+整体架构说明
+
+基于元数据的模型驱动解决方案是由以下几个方面组成：
+
+存储层的统一元数据、业务数据
+在业务服务层，有基于业务服务的相关后台SDK，包括UIMeta SDK、Rule SDK、Meta SDK等，通过这层会输出前后端交互的统一多端协议（标准JSON格式）。
+在Web渲染层，中间加有基于 Node.js 的 BFF 服务，生成模板单据对应的通用CRUD逻辑代码，并实现一些基本的服务代理、验证等工作。
+在前端展现层，则是完成基于UI元数据的解析渲染，并组装对应的React UI组件，最终在浏览器上呈现。
+
+MDF由Node层和Client两部分组成。
+
+Client设计原则
+MVVM+模型驱动开发
+viewModel为编程模型，所有可编程操作的对象均为viewmodel。小到一个组件、大到一个UI模板均为一个viewModel对象。
+XX_xx_xxx.VM.extend.js为扩展页面UI模板的扩展文件，即写扩展代码的地方。
+在extend文件里只能通过当前页面的viewModel对象来获取和操作页面UI交互（View）和业务数据（Model）
+Web和Mobile采用同一套ViewModel，故此Web、移动、大屏等多端的编程模型相同。
+Node层设计原则
+koa+middlewares，每一个middleware为一个相对独立职责的模块。
+请求转发，解决跨域请求，对应koa-router各子路由
+路由转发和数据处理，承担BFF职责，对应koa-router各子路由
+代码生成（页面UI模板viewmodel代码+extend代码）
+认证校验，对应Auth中间件
+日志记录，对应log4js、koa-logger中间件
+多端协议
+
+一套协议多端运行，后端（Java端）返回一套协议可以在PC端、移动端，多端渲染。由元数据生成的页面，在渲染时会请求meta接口，将协议返回。
+
+协议一级节点
+属性	含义	类型	说明
+viewApplication	模板视图（view）对象，即模板的UI元数据对象	JSONObject	如果有node转译后原数据不改变，标签改为viewmete，供client使用
+viewmodel	1、UI视图模型，模板中涉及绑定字段、动作、状态等UI元数据描述。2、node端转译成前端可执行的ViewModel对象并发送给起那段，前端执行从而生成MVVM框架中的ViewModel对象，承担前端编程模型的角色3、前端对所有UI组件的操作都通过对ViewModel操作来实现，体现MVVM思想	JSONObject	
+模型数据 viewmodel
+属性	类型	含义	说明
+iBillId	Integer	单据ID	1001282423
+cBillName	String	名称	项目模板列表，开发者起名，前端多用于页面的Title显示
+cBillNo	String	单据编号	单据编码，前后端接口等多场景要使用的参数，非常重要。例如：projectlist
+cFilterId	Integer	过滤器ID	例如：3450016
+cBillType	String	类型	ArchiveList
+cSubId	String	子产品ID	AA
+bBatchOperate	Boolean		默认为true，开发者可不关注
+entities	JsonArray	实体列表	JsonArray
+actions	JsonArray	动作列表	JsonArray
+states	JsonArray	状态列表	JsonArray
+模板数据 viewApplication
+属性	类型	含义	说明
+billid	Integer	单据ID	1001282423
+cBillName	String	名称	项目模板列表
+cBillType	String	类型	ArchiveList，详细值请查看这里
+cBillNo	String	单据编号	projectlist; 可以理解为name
+bAllowMultiTpl	Boolean	是否允许多模版	false; 如果为true，则有可选模板，数据会重新获取
+cSubId	String	子产品ID （业务含义）	AA; AA_billno=xxx?extend 扩展
+cCardKey	String	单据类型	跳转目标表单的单据编号(对于列表来说，此字段代表列表所对应的单据详情的cBillNo）其值为要跳转目标表单的cBillNo
+batchoperate	Boolean	是否多选	通常用于参照，标记参照是否支持多选
+view	JSONObject	视图	JOSN
+extscripturls	JSONArray	扩展脚本地址	JSONArray
+view 字段说明
+
+view字段描述了当前页面元素，一个页面是由容器（containers）组成的,容器由很多控件（controls）组成，渲染时会递归渲染containers的内容，来实现页面的渲染
+
+属性	类型	含义	说明
+iTplId	Integer	单据模板ID	1337972
+cTemplateName	String	模板名称	项目模板显示模板
+iTplMode	Integer	模板类型	0； 终端类型对应的模板，0和2是pc，3是移动
+iWidth	Integer	画布宽度	10000；auto100%的含义
+cTemplateTitle	String	模板标题	项目模板
+containers	JSONArray	布局	Array
+渲染机制
+
+我们在url输入元数据地址：https://mdf-server-daily.yyuap.com/meta/VoucherList/1442d684List?domainKey=developplatform 页面是如何渲染出来的？
+
+首先会经过node层其中包括：日志处理、权限处理、 页面生成、gzip 压缩、参数解析、路由处理、静态资源路径处理。node端会返回一个index.html页面，加载相关资源。元数据页面都会加载一个meta接口，将多端协议返回，并在node层生成相关的模型、事件处理。client端根据viewApplication将页面内容解析处理，其中两个核心的方法为parseControls和parseContainer.
+
+检查Container的cControlType，可能会是undefined
+
+根据cControlType返回同名组件
+
+根据container的containers或controls分别调用parseContainer或parseControls
+
+container.containers 递归遍历
+
+遍历，每一个子container调用parseContainer
+根据子container的cAlign是否是left来处理
+将每一个子container生成的组件加载leftComs或ortherComs
+
+container.controls
+
+调用parseControls
+将生成的组件加入ortherComs
+
+根据leftComs来走不同的渲染
+
+部署设计
+
+登陆拦截
+
+基于注解、灵活配置的登陆拦截
+
+spring-mvc.xml中添加interceptor配置
+mvc:interceptorsmvc:interceptor<mvc:mapping path="/**" /></mvc:interceptor></mvc:interceptors>
+定义注解接口
+@Documented@Target({ElementType.TYPE, ElementType.METHOD})@Retention(RetentionPolicy.RUNTIME)public @interface LoginControl {boolean required() default true;Class<? extends LoginValidator> validateClass() default YhtLoginValidator.class;}
+定义LoginValidator接口
+/*** @author haomiaosong* @date 2020/6/3 2:35 PM*/public interface LoginValidator {boolean validate(HttpServletRequest request);}
+实现LoginValidator接口
+/*** @author haomiaosong* @date 2020/6/3 2:36 PM*/public class YhtLoginValidator implements LoginValidator {@Overridepublic boolean validate(HttpServletRequest request) {// TODO 校验逻辑}}
+接口
+设计器模型介绍
+
+设计器主表【ide_module】
+名称	类型	说明
+id	varchar(32)	主键id
+data	longtext	页面数据
+app_id	varchar(255)	关联应用
+code	varchar(255)	页面编码
+name	varchar(255)	页面名称
+tenant_page_code	varchar(255)	租户级唯一的页面编码
+page_type	varchar(255)	页面状态
+page_business_type	varchar(255)	页面业务数据
+library_code	varchar(255)	所属库编码
+present_type	int(11)	当前状态
+from_id	varchar(255)	复制来源页面ID
+from_name	varchar(255)	复制来源页面名称
+create_id	varchar(50)	创建人
+create_date	datetime(0)	创建时间
+modify_id	varchar(50)	修改人
+modify_date	datetime(0)	修改时间
+ts	bigint(20)	时间戳
+is_delete	tinyint(1)	是否删除
+version	int(11)	版本号
+group_id	varchar(32)	分组id
+tenant_id	varchar(100)	租户ID
+business_type	varchar(100)	业务来源类型
+business_id	varchar(100)	业务来源ID
+business_json	longtext	业务来源数据
+data_server_code	varchar(255)	数据服务编码
+entity_uri	varchar(255)	元数据uri
+name_res_id	varchar(64)	多语资源id
+ytenant_id	varchar(64)	租户管理id
+设计器应用【ide_app】
+名称	类型	说明
+code	varchar(255)	全局唯一编码
+name	varchar(255)	名称
+app_tenant_code	varchar(255)	租户唯一编码
+appType	varchar(100)	应用类型（例：iuap-mdd, yylib-react）
+isOpen	int(11)	是否公开（1.公开，0.不公开）
+teamId	varchar(32)	组织ID（ide_team主键）
+groupId	varchar(255)	应用分组ID（ide_app_group主键）
+tenantId	varchar(100)	租户ID
+presentType	tinyint(1)	显示端（例：1-桌面端, 2-移动端Mobile）
+businessType	varchar(100)	业务来源类型（例：yshpa, hpapaas）
+businessId	varchar(100)	业务来源ID
+businessJson	varchar(100)	业务来源信息
+productId	varchar(50)	第三方产品（例：iuap-hpa-paas, iuap-yshpa）
+moduleId	varchar(50)	原有的product下级模块的概念，当前版本无用
+resourceData	longtext	业务含义（目前没用）？数据库中全null
+billTypeCode	varchar(255)	单据类型编码，单据类型概念跟原先的功能接近
+billTypeName	varchar(255)	单据类型名称（例：混凝土对账单, 商砼对账单）
+设计器应用分组【ide_app_group】
+名称	类型	说明
+code	varchar(255)	编码
+name	varchar(255)	名称
+teamId	varchar(255)	组织ID（ide_team主键）
+productId	varchar(50)	第三方产品（例：iuap-hpa-paas, iuap-yshpa）
+设计器领域【ide_ui_domain】
+名称	类型	说明
+code	varchar(100)	编码
+name	varchar(255)	名称
+设计器组织【ide_team】
+名称	类型	说明
+name	varchar(100)	名称
+code	varchar(100)	编码
+memberCount	int(10)	成员数量
+appCount	int(11)	应用数量
+prodType	int(11)	设计器类型
+serverUrls	varchar(2000)	服务器地址列表
+设计器组织用户关系【ide_team_user】
+名称	类型	说明
+teamId	varchar(32)	组织ID
+userId	varchar(32)	用户ID
+joinStatus	int(1)	状态（0.待审批, 1.已加入, 2.已拒绝）
+roleType	int(11)	角色（0.普通成员, 1.普通管理员, 2.超级管理员）
+设计器用户【ide_user】
+名称	类型	说明
+code	varchar(255)	账号
+name	varchar(50)	姓名
+sex	int(11)	性别
+phone	varchar(255)	手机号
+email	varchar(255)	邮箱
+password	varchar(100)	登陆密码
+expireDate	datetime(0)	过期时间
+loginDate	datetime(0)	上次登录时间
+qqOpenId	varchar(255)	实体字段属性名:QQ的openid
+qqAccessToken	varchar(255)	实体字段属性名:QQ的accessToken
+qqAvatarUrl	varchar(255)	实体字段属性名:QQ的url
+组件扩展中心模型介绍
+
+资源库【ide_ui_library】
+名称	类型	说明
+id	varchar(32)	主键id
+Name	varchar(255)	资源库名称
+Code	varchar(100)	资源库编码
+is_delete	tinyint(1)	是否删除
+create_date	datetime(0)	创建时间
+modify_date	datetime(0)	修改时间
+create_id	varchar(50)	创建人
+modify_id	varchar(50)	修改人
+framework	varchar(255)	基础框架
+dev_framework	varchar(255)	开发框架
+terminal_type	varchar(255)	可使用端
+library_type	varchar(255)	库类型：ext为扩展库；null为系统库
+isv_id	varchar(50)	开发服务商身份id
+file_id	varchar(50)	上传资源后协同服务返回的id
+is_quote	varchar(50)	是否被组件包引用
+library_profile	varchar(64)	关联配置文件
+des	varchar(255)	资源库备注信息
+ytenant_id	varchar(64)	租户管理id
+ext_props	text	保留字段
+version	int(11)	版本
+create_user	varchar(255)	创建人
+json_file	varchar(255)	资源库json
+资源库分组【ide_ui_library_group】
+名称	类型	说明
+id	varchar(32)	主键id
+library_id	varchar(50)	资源库id
+name	varchar(255)	分组名称
+iorder	int(8)	分组排序
+is_delete	tinyint(1)	是否删除
+create_date	datetime(0)	创建时间
+modify_date	datetime(0)	修改时间
+create_id	varchar(50)	创建人
+modify_id	varchar(50)	修改人
+资源库组件【ide_ui_define】
+名称	类型	说明
+id	varchar(32)	
+library_id	varchar(255)	资源库id
+code	varchar(255)	组件编码
+name	varchar(255)	组件名称
+icon	varchar(255)	组件对应图标
+domain_type	varchar(255)	领域列表
+data_type	varchar(255)	属性数据类型
+library_group_id	varchar(255)	分组id
+business_type	varchar(32)	业务类型
+create_date	datetime(0)	创建时间
+is_delete	tinyint(1)	是否删除
+modifier_id	varchar(255)	编辑者id
+modify_date	datetime(0)	修改时间
+parser	varchar(255)	组件在对应设计器中对应的编码
+defaults	text	组件初始值
+folder_id	varchar(255)	文件夹id
+create_id	varchar(50)	创建人
+modify_id	varchar(50)	修改人
+include_contents	text	包含子集的所有code
+include_type	varchar(255)	包含子集的类型
+row_state	varchar(255)	行状态
+iorder	int(8)	排序
+res_url	varchar(255)	资源url
+parent_define_id	varchar(32)	父组件id
+isv_id	varchar(50)	租户id
+description	varchar(255)	备注
+ui_ext_class	varchar(50)	控件类型：控件/容器/按钮
+ytenant_id	varchar(64)	租户管理id
+资源库组件动作【ide_ui_define_action】
+名称	类型	说明
+id	varchar(32)	主键Id
+operation_code	varchar(64)	动作编码
+operation_name	varchar(256)	动作名称
+operation_type	varchar(256)	动作类型
+no_parent_ui_types	varchar(256)	
+operation_type_list	varchar(256)	
+uitypes	varchar(256)	Ui状态集合
+ui_library_id	varchar(64)	资源库Id
+ui_define_id	varchar(64)	组件id
+iorder	int(11)	排序
+ts	mediumtext	时间戳
+create_date	datetime(0)	创建时间
+version	int(11)	版本号
+create_id	varchar(50)	创建人
+modify_id	varchar(50)	修改人
+is_delete	tinyint(1)	是否删除
+modify_date	datetime(0)	修改时间
+资源库组件属性【ide_ui_define_props】
+名称	类型	说明
+id	varchar(32)	主键ID
+ui_define_id	varchar(255)	所属组件
+library_id	varchar(255)	所属库
+code	varchar(255)	属性编码
+name	varchar(255)	属性描述名
+prop_type	varchar(32)	属性级别（公共/普通）
+value_type	int(11)	属性值数据类型(number/...)
+default_value	varchar(255)	属性默认值
+tag_code	varchar(255)	组件属性tag
+create_date	datetime(0)	创建时间
+is_delete	tinyint(1)	是否删除
+modifier_id	varchar(255)	编辑人
+modify_date	datetime(0)	修改时间
+data_type	varchar(255)	属性数据类型
+meta_type	varchar(255)	属性元数据类型
+meta_props	text	属性元数据的配置
+label_col	int(11)	显示占比
+create_id	varchar(50)	创建人
+modify_id	varchar(50)	修改人
+disabled	tinyint(1)	是否允许修改
+组件库【ide_config_tool】
+名称	类型	说明
+id	varchar(32)	主键id
+ui_library_id	varchar(50)	资源库id
+code	varchar(100)	组件库编码
+name	varchar(255)	组件库名称
+isv_id	varchar(50)	租户
+iorder	int(8)	排序
+is_delete	tinyint(1)	是否删除
+create_date	datetime(0)	创建时间
+modify_date	datetime(0)	修改时间
+create_id	varchar(50)	创建人
+modify_id	varchar(50)	修改人
+ts	bigint(20)	时间戳
+ytenant_id	varchar(64)	租户管理id
+组件库分组【ide_config_toolcase】
+名称	类型	说明
+id	varchar(32)	主键ID
+ui_library_id	varchar(50)	资源库id
+tool_id	varchar(32)	组件库id
+tool_case_name	varchar(50)	组件库分组名称
+iorder	int(8)	排序
+env_code	varchar(50)	环境编码
+is_delete	tinyint(1)	是否删除
+create_date	datetime(0)	创建时间
+modify_date	datetime(0)	修改时间
+create_id	varchar(50)	创建人
+modify_id	varchar(50)	修改人
+ts	bigint(20)	时间戳
+tool_case_id	varchar(32)	对应资源库分组id
+组件库组件【ide_config_toolcase_define】
+名称	类型	说明
+id	varchar(32)	主键Id
+ui_library_id	varchar(50)	资源库id
+tool_case_id	varchar(50)	分组id
+tool_id	varchar(32)	所属组件库id
+ui_define_id	varchar(50)	来源组件id
+ui_define_name	varchar(50)	组件名称
+relation_type	varchar(32)	关系逻辑（包含、all、exclude）
+env_code	varchar(50)	环境标识
+is_view	tinyint(1)	是否为视图类
+is_visible	tinyint(1)	是否在工具箱可见
+ui_defaults	longtext	默认值
+iorder	int(8)	排序
+is_delete	tinyint(1)	是否删除
+create_date	datetime(0)	创建时间
+modify_date	datetime(0)	修改时间
+create_id	varchar(50)	创建人
+modify_id	varchar(50)	修改人
+ts	bigint(20)	时间戳
+isv_id	varchar(50)	租户Id
+parent_define_id	varchar(32)	父组件id
+tag_code	varchar(50)	组件的标签code
+ui_ext_class	varchar(50)	空间类型
+data_type	varchar(50)	数据类型
+icon	varchar(50)	组件图标
+ytenant_id	varchar(64)	租户管理id
+组件打包版本记录【ide_config_package】
+名称	类型	说明
+id	varchar(32)	主键id
+ui_library_id	varchar(50)	资源库id
+tool_id	varchar(100)	组件库id
+data	varchar(255)	数据信息
+file_id	varchar(50)	文件id
+version	varchar(255)	版本号
+description	varchar(255)	备注
+is_delete	tinyint(1)	是否删除
+create_date	datetime(0)	创建时间
+modify_date	datetime(0)	修改时间
+create_id	varchar(50)	创建人
+modify_id	varchar(50)	修改人
+组件打包数据【ide_config_online】
+名称	类型	说明
+id	varchar(32)	主键id
+ui_library_id	varchar(64)	资源库id
+tool_id	varchar(32)	组件库id
+tenant_id	varchar(32)	租户id
+env_code	varchar(50)	环境标识
+data	longtext	数据信息
+is_expire	bit(1)	0-未过期、1-已过期
+description	varchar(255)	备注
+is_delete	tinyint(1)	是否删除
+create_date	datetime(0)	创建时间
+modify_date	datetime(0)	修改时间
+create_id	varchar(50)	创建人
+modify_id	varchar(50)	修改人
+ytenant_id	varchar(64)	租户管理id
+公共属性【ide_config_proppanel】
+名称	类型	说明
+id	varchar(32)	主键id
+ui_library_id	varchar(50)	公共资源库id
+ui_define_id	varchar(50)	公共组件id
+prop_code	varchar(50)	
+prop_name	varchar(255)	
+orig_prop_id	varchar(50)	
+control_type	varchar(32)	
+default_value	varchar(255)	
+params	longtext	
+memo	varchar(255)	
+env_code	varchar(50)	
+iorder	int(8)	
+is_delete	tinyint(1)	
+create_date	datetime(0)	
+modify_date	datetime(0)	
+create_id	varchar(50)	
+modify_id	varchar(50)	
+orig_prop_name	varchar(255)	
+ts	bigint(20)	
+disabled	tinyint(1)	
+is_read_only	tinyint(1)	
+label_col	int(8)	
+tag_code	varchar(50)	
+group_id	varchar(32)	
+应用构建常用接口
+资源库查询
+接口地址	library/pageList
+返回格式	Json
+请求方式	Get
+请求示例	https://bip-daily.yyuap.com/iuap-yonbuilder-designer/iuap-front/ide/extcenter/library/pageList?pageNo=0&pageSize=50
+请求参数	
+名称	必填
+terminalType	N
+searchText	N
+domainKey	N
+pageNo	Y
+pageSize	Y
+withDesignExtend	N
+onlyUser	N
+返回参数	
+名称	类型
+success	Boolean
+backMsg	String
+backData	Json
+返回示例	
+{"success": true,"backMsg": null,"backData": {"data": {"content": [{...}],"pageable": {...},"totalPages": 1,"last": true,"totalElements": 1,"numberOfElements": 1,"sort": {...},"first": true,"size": 50,"number": 0,"empty": false},"currentEnv": "combine"}}	
+组件库查询
+接口地址	tool/pageList
+返回格式	Json
+请求方式	Get
+请求示例	https://bip-daily.yyuap.com/iuap-yonbuilder-designer/iuap-front/ide/extcenter/tool/pageList?pageNo=0&pageSize=20
+请求参数	
+名称	必填
+terminalType	N
+searchText	N
+searchCode	N
+pageNo	Y
+pageSize	Y
+withDesignExtend	N
+返回参数	
+名称	类型
+success	Boolean
+backMsg	String
+backData	Json
+返回示例	
+{"success": true,"backMsg": null,"backData": {"data": {"content": [{...}],"pageable": {...},"totalPages": 1,"last": true,"totalElements": 1,"numberOfElements": 1,"sort": {...},"first": true,"size": 50,"number": 0,"empty": false},"currentEnv": "combine"}}	
+设计器组件查询
+接口地址	/libraryConfig
+返回格式	Json
+请求方式	Get
+请求示例	https://bip-daily.yyuap.com/iuap-yonbuilder-designer/iuap-front/uiconfig/open/libraryConfig?uiLibraryCode=iuap-mdd&type=pc&envCode=ys2daily
+请求参数	
+名称	必填
+uiLibraryCode	Y
+envCode	Y
+type	N
+返回参数	
+名称	类型
+success	Boolean
+backMsg	String
+backData	Json
+返回示例	
+{"success": true,"backMsg": "获取组件库下所有集成中心数据成功","backData": {"id": "40287b3872a14b920172a161a72c0028","name": "YonBuilder组件库(不要删)","code": "iuap-mdd","framework": "React16","devFramework": "MDF,Tinper,Antd","terminalType": "1","adapterUrl": null,"viewerUrl": null,"fileId": null,"extProps": null,"envConfig": {...},"toolCase": [...],"propPanel": {...},"defineRelation": {...},"defineList": [...],"extUiLibrary": [...]}}	
+设计器数据查询
+接口地址	module/findcode
+返回格式	Json
+请求方式	Get
+请求示例	https://bip-daily.yyuap.com/iuap-yonbuilder-designer/iuap-front/ide/module/findcode?code=GT47153PT3129&pageCodes=&sceneData=
+请求参数	
+名称	必填
+code	Y
+pageCodes	N
+systemLv	N
+返回参数	
+名称	类型
+success	Boolean
+backMsg	String
+backData	Json
+
+返回示例
+
+{
+	"success": true,
+	"backMsg": "成功",
+	"backData": {
+		"id": "2c8f361f80be16b90180be27a650000c",
+		"createId": null,
+		"createDate": "2022-05-13T16:01:51.000+00:00",
+		"modifyId": null,
+		"modifyDate": null,
+		"isDelete": false,
+		"ts": 1652457711180,
+		"code": "PX51425",
+		"tenantPageCode": "GT47153PT3129",
+		"name": "fasdfasd",
+		"appId": "2c8fe62c80b7a8860180bbef2d910190",
+		"groupId": null,
+		"data": "{...}",
+		"appCode": null,
+		"extAppCode": null,
+		"appName": null,
+		"tenantAppCode": null,
+		"appResourceData": null,
+		"pageType": "VoucherList",
+		"fromId": null,
+		"fromName": null,
+		"billTypeCode": null,
+		"sceneData": null,
+		"dataServerCode": "mdd-server",
+		"tenantId": "pvh5ii43",
+		"ytenantId": "pvh5ii43",
+		"businessType": "ysmdd",
+		"businessId": null,
+		"businessJson": "{...}",
+		"presentType": 1,
+		"pageBusinessType": null,
+		"libraryCode": null,
+		"entityUri": "GT47053AT226.GT47053AT226.test0513",
+		"relatedOthers": null,
+		"originalData": null,
+		"userId": "b8c5f51c-1b07-44ca-a243-a61692b81f53",
+		"tplTreeRootNode": null,
+		"changeData": null,
+		"languages": null,
+		"token": null,
+		"saveLogIds": null,
+		"serviceCode": null,
+		"firstCreate": false,
+		"nameResId": null,
+		"uimodulename": null,
+		"uiappname": null,
+		"globalUpdate": false,
+		"httpHeaderFlag": false,
+		"headerMap": null,
+		"multilingualInfo": null
+	}
+}
+
+文档内容是否对您有所帮助？
+为帮助文档评分：
+页内目录
+1. 概述
+2. 名词术语
+3. 基础设计
+3.1 界面布局
+3.2 适配转换
+3.3 数据存储
+4. 使用应用构建平台
+4.1 新建应用
+4.2 数据建模
+4.3 页面建模
+4.3.1 创建页面
+4.3.2 应用构建设计器
+4.4 流程&自动化
+4.5 集成配置
+4.6 发布管理
+4.6.1 应用发布
+4.7 组件扩展中心
+5. 开发设计
+5.1 架构设计
+5.1.1 总架构图
+5.1.2 集成套件
+5.1.3 适配套件
+5.1.4 视图套件
+5.1.5 协议套件
+5.2 协议设计
+5.2.1 层级描述协议
+5.2.2 属性描述协议
+5.3 消息事件协议
+6. 前端设计
+6.1 适配层设计
+6.1.1 package.json
+6.1.2 全局适配
+6.1.3 逻辑适配
+6.1.4 视图适配
+6.2 视图层设计
+6.2.1 package.json
+6.2.2 入口文件
+6.2.3 视图文件
+6.3 控件层设计
+6.3.1 MetaType.Text
+6.3.2 MetaType.Textarea
+6.3.3 MetaType.Bool
+6.3.4 MetaType.Date
+6.3.5 MetaType.Time
+6.3.6 MetaType.Select
+6.3.7 MetaType.SelectTree
+6.3.8 MetaType.Number
+6.3.9 常用MetaType.Json
+6.3.10 MetaType.MultiLang
+6.3.11 MetaType.Link
+6.3.12 MetaType.IframeModal
+6.3.13 MetaType.Button
+7. 后端设计
+7.1 项目结构
+7.2 主包关系
+7.3 页面模板
+7.3.1 读取过程
+7.3.2 保存过程
+7.4 统一存储
+7.4.1 接口定义
+7.5 接口实现-UI元数据存储
+7.5.1 流程
+7.6 详细介绍
+7.6.1 控件绑定事件
+7.6.2 补充节点状态
+7.6.3 模型协议转换
+7.7 接口实现-打印数据存储
+7.7.1 流程
+8. 集成设计
+8.1 概述
+8.1.1 uiObject 和 uiTable 的对应关系为：
+8.2 数据整体结构
+8.2.1 ui元数据结构：
+8.2.2 运行态模型整体结构：
+8.3 实现思路
+8.3.1 viewApplication （view 模型）
+8.3.2 viewmodel （数据模型）
+8.3.3 viewres（扩展组件）
+8.4 MDF运行集成设计
+8.4.1 整体架构说明
+8.4.2 多端协议
+9. 部署设计
+10. 登陆拦截
+10.1 spring-mvc.xml中添加interceptor配置
+10.2 定义注解接口
+10.3 定义LoginValidator接口
+10.4 实现LoginValidator接口
+11. 接口
+11.1 设计器模型介绍
+11.1.1 设计器主表【ide_module】
+11.1.2 设计器应用【ide_app】
+11.1.3 设计器应用分组【ide_app_group】
+11.1.4 设计器领域【ide_ui_domain】
+11.1.5 设计器组织【ide_team】
+11.1.6 设计器组织用户关系【ide_team_user】
+11.1.7 设计器用户【ide_user】
+11.2 组件扩展中心模型介绍
+11.2.1 资源库【ide_ui_library】
+11.2.2 资源库分组【ide_ui_library_group】
+11.2.3 资源库组件【ide_ui_define】
+11.2.4 资源库组件动作【ide_ui_define_action】
+11.2.5 资源库组件属性【ide_ui_define_props】
+11.2.6 组件库【ide_config_tool】
+11.2.7 组件库分组【ide_config_toolcase】
+11.2.8 组件库组件【ide_config_toolcase_define】
+11.2.9 组件打包版本记录【ide_config_package】
+11.2.10 组件打包数据【ide_config_online】
+11.2.11 公共属性【ide_config_proppanel】
+11.3 应用构建常用接口
+11.3.1 资源库查询
+11.3.2 组件库查询
+11.3.3 设计器组件查询
+11.3.4 设计器数据查询
+文档反馈
+北京市海淀区北清路68号用友产业园
+4006-600-588
+友情链接
+用友官网用友YonHelp用友iuap平台用友云市场用友云注册协议隐私条款
+
+Copyright ©2020 用友网络科技股份有限公司版权所有京ICP备05007539号-24京公网安备11010802021935号
+
+返回顶部
+加载中...

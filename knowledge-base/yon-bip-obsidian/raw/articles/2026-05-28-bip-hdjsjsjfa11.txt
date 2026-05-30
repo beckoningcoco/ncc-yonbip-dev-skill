@@ -1,0 +1,256 @@
+社区文档中心
+首页
+文档导航
+开发者社区
+社区论坛
+视频教程技术博客
+更多
+张宏涛
+资料中心
+专业开发
+产品概述
+快速入门
+操作指南
+开发指南
+开发介绍
+新功能开发
+移动端开发
+扩展开发
+全球化
+组织
+权限
+特征
+基础数据
+审批流
+业务流
+规则引擎
+公式
+UI模板
+参照
+导入导出
+打印
+对象建模
+编码规则
+调度任务
+监控与预警
+日志
+消息平台
+工作台
+事件中心
+文件服务
+YonBuilder应用开发
+前端开发
+后端开发
+iuap-开发规范红皮书
+后端编程模型
+R6后端脚手架升级方案
+R6后端脚手架升级操作指南
+R6后端脚手架二方包坐标变更清单
+分布式锁 yms-lock 实践
+RPC接口开发与调用（iris）
+数据库操作 yms-jdbc 实践
+HTTP请求 yms-http 实践
+上下文开发实践
+线程池 yms-executors 实践
+移动开发
+安全
+数据库
+DevOps技术
+容器云技术
+区块链云技术
+YMS开发
+智能应用开发
+专项开发
+成果迁移
+技术方案
+最佳实践
+参考手册
+常见问题
+视频教程
+专业开发/开发指南/后端开发/R6后端脚手架升级方案
+R6后端脚手架升级方案
+最后更新时间：2024-10-10
+概述
+适用场景
+部署方案	开发类型	是否适用
+公有云	客户化定制开发	否
+私有云	客户化定制开发	是
+专属云	客户化定制开发	否
+公有云	ISV生态开发	否
+私有云	ISV生态开发	是
+专属云	ISV生态开发	否
+业务场景
+
+客开脚手架，非必要可以不升级。
+
+简强架构下，平台对二方包进行了精简治理，二方包坐标产生了变化。
+
+如果遇到以下场景，需要对客开脚手架工程进行升级，具体操作参考第二章内容。
+
+如项目上的目标环境为Standalone安装模式，脚手架需要升级；
+如需要新特性新功能，脚手架需要升级。
+
+R6向下兼容低版本（MDD>6.0.2-RELEASE,YPD>2.0.0-RELEASE）。
+
+脚手架工程可以从低版本（MDD>6.0.2-RELEASE,YPD>2.0.0-RELEASE）升级到R6版本，R6发版对应版本为8.2.100-RELEASE。
+
+com.yonyou.iuapyonbip-2nd-parent8.2.100-RELEASE
+
+检查当前脚手架MDD版本和YPD版本的方法，检查脚手架父Pom文件，如下图：
+
+关键词
+
+脚手架升级
+
+简强架构
+
+YonBIP-2nd-8脚手架升级适配
+
+yonbip-2nd-parent
+
+MDD脚手架
+
+YPD脚手架
+
+脚手架工程升级
+YonBuilder专业版脚手架工程分类
+
+项目组升级专业版脚手架前，应有能力分辨使用的是哪种类型的专业版脚手架，然后根据对应的脚手架类型进行升级操作。
+
+YPD脚手架工程
+
+在父pom.xml里查看对应的版本，如下所示类型为YPD脚手架。
+
+com.yonyou.ypdypd-starter-parentX.X.X-RELEASE
+** MDD脚手架工程**
+
+在父pom.xml里查看对应的版本，如下所示类型为MDD脚手架。
+
+com.yonyou.iuapyonyou-mdd-starter-parentX.X.X-RELEASE
+YonBuilder专业版脚手架工程升级前准备
+
+由于本次升级涉及二方包坐标变化，涉及脚手架改造内容较多，影响范围较广，所以改造前请做好代码仓库备份管理，建议切出新分支进行脚手架工程改造，方便快速回滚。
+
+同时在脚手架升级完成后，请在开发环境进行充分验证，覆盖全场景业务。
+
+** **YonBuilder专业版脚手架工程升级
+
+客开脚手架工程升级，推荐使用新脚手架Merge客开代码的方式。
+
+YPD脚手架工程升级步骤
+
+YPD脚手架工程作为开发平台目前的主要框架，升级可以有两种模式如下，可根据实际情况选择。
+
+新建引擎，以该引擎的脚手架为模板，把老脚手架中的代码合并到新脚手架中。
+直接修改脚手架pom.xml及脚手架相关代码。
+
+项目在开发环境升级到R6后，可以从应用引擎里新建一个工程（具体方法参考[YonBIP社区文档中心-专业开发-环境准备-引擎部署](https://c2.yonyoucloud.com/iuap-hc-client/ucf-wh/client/index.html" \l "/detail/YQBS11?nodeId24c6b903-112c-4a49-a17f-4aa7aba93758&productlineCommunityDoc&shareHrefId0_%E4%B8%9A%E5%8A%A1%E5%9C%BA%E6%99%AF)）进行代码Merge，也可以使用手工修改工程的方式进行升级。
+
+YPD脚手架yonbip-2nd-parent，8.2.100-RELEASE示例工程地址如下，如果需要请通过第四章的方法进行申请。
+
+http://kkgit.yyrd.com/YONBIP/KKFN/KKSLDM/ypd82100demo.git
+
+下面简单介绍YPD脚手架工程两种升级模式的步骤
+
+** 新下载脚手架模式**
+下载新版本脚手架
+合并客开代码
+合并非二三方Jar包引用
+合并参数配置
+** 手工修改工程模式**
+pom修改
+框架代码修改
+mobile工程目录删除
+客开代码适配
+bootstrap模块scripts脚本适配
+** **MDD脚手架工程升级步骤
+
+MDD脚手架工程在R5版本开始，已不随平台更新带入到应用引擎内，所以无法在项目环境内下载最新的脚手架工程。
+
+目前只能使用手工修改工程的方式进行升级。
+
+我们提供一个新版本的MDD脚手架样例工程，项目可申请样例工程，进行MDD脚手架工程的比对升级操作。
+
+MDD脚手架yonbip-2nd-parent，8.2.100-RELEASE示例工程地址如下，如果需要请通过第四章的方法进行申请。
+
+http://kkgit.yyrd.com/YONBIP/KKFN/KKSLDM/mdd82100demo.git
+
+手工修改工程模式
+pom修改
+框架代码修改
+mobile工程目录删除
+客开代码适配
+bootstrap模块scripts脚本适配
+客开代码适配关键技术方案
+YPD去掉MDD引用后，MetaDaoHelper使用的替换
+
+将MetaDaoHelper替换为YPD框架的接口类，支持跨Domain查询 com.yonyou.ypd.bill.infrastructure.service.api.IBillQueryRepository
+
+** **SqlHelper废弃，建议替换使用IYmsJdbcAPI
+SqlHelper	IYmsJdbcApi
+selectOne(String statement)	queryForObject(String sql, ResultSetProcessor processor)
+selectOne(String statement, Object parameter)	queryForObject(String sql, SQLParameter parameter, ResultSetProcessor processor)
+selectFirst(String statement)	queryForList(String sql, ResultSetProcessor processor) //自行取0下标数据
+selectFirst(String statement, Object parameter)	queryForList(String sql, SQLParameter parameter, ResultSetProcessor processor)//自行取0下标数据
+selectList(String statement)	queryForList(String sql, ResultSetProcessor processor)
+selectList(String statement, Object parameter)	queryForList(String sql, SQLParameter parameter, ResultSetProcessor processor)
+insert(String statement)	insert(T vo)
+insert(String statement, Object parameter)	insert(T vo)
+update(String statement)	int update(String sql)
+update(String statement, Object parameter)	int update(String sql, SQLParameter parameter)
+delete(String statement)	remove(T vo)
+delete(String statement, Object parameter)	removeByClause(BaseEntity baseEntity, String clauseSql, boolean isLogic)
+** **非框架二三方包引入处理
+
+平台使用经过验证能持续维护的二三方包，一般情况下正常开发无需引入其他jar包，如果项目有特殊性需要引入，可以配置bootstrap模块的pom文件，在打包插件的configuration里开启自定义工程属性。
+
+** **Mybatis改造成YMS-JDBC
+
+具体内容可以参考以下社区文档:
+
+YonBIP社区文档中心-专业开发-最佳实践-后端开发-持久化（yms-jdbc）
+
+** **二方包精简坐标改造
+
+具体改造内容请参考YonBIP旗舰版专业开发服务-最佳实践-后端开发-脚手架(YonBIP-2nd-8)二方包坐标变更清单
+
+客开赋能资源申请
+
+源码申请 和 培训赋能申请 请参考在线最新信息：
+
+【客开赋能资源申请使用说明】
+
+https://community.yonyou.com/article/detail/8486
+
+文档内容是否对您有所帮助？
+为帮助文档评分：
+页内目录
+1. 概述
+1.1 适用场景
+1.2 业务场景
+1.3 关键词
+2. 脚手架工程升级
+2.1 YonBuilder专业版脚手架工程分类
+2.1.1 YPD脚手架工程
+2.1.2 MDD脚手架工程
+2.2 YonBuilder专业版脚手架工程升级前准备
+2.3 YonBuilder专业版脚手架工程升级
+2.3.1 YPD脚手架工程升级步骤
+2.3.2 MDD脚手架工程升级步骤
+3. 客开代码适配关键技术方案
+3.1 YPD去掉MDD引用后，MetaDaoHelper使用的替换
+3.2 SqlHelper废弃，建议替换使用IYmsJdbcAPI
+3.3 非框架二三方包引入处理
+3.4 Mybatis改造成YMS-JDBC
+3.5 二方包精简坐标改造
+4. 客开赋能资源申请
+文档反馈
+北京市海淀区北清路68号用友产业园
+4006-600-588
+友情链接
+用友官网用友YonHelp用友iuap平台用友云市场用友云注册协议隐私条款
+
+Copyright ©2020 用友网络科技股份有限公司版权所有京ICP备05007539号-24京公网安备11010802021935号
+
+返回顶部
+加载中...

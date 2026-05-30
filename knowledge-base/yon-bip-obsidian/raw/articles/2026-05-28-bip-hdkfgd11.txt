@@ -1,0 +1,1871 @@
+社区文档中心
+首页
+文档导航
+开发者社区
+社区论坛
+视频教程技术博客
+更多
+张宏涛
+资料中心
+专业开发
+产品概述
+快速入门
+操作指南
+开发指南
+开发介绍
+新功能开发
+移动端开发
+扩展开发
+全球化
+组织
+权限
+特征
+基础数据
+审批流
+业务流
+规则引擎
+公式
+UI模板
+参照
+导入导出
+打印
+对象建模
+编码规则
+调度任务
+监控与预警
+日志
+消息平台
+工作台
+事件中心
+文件服务
+YonBuilder应用开发
+前端开发
+后端开发
+iuap-开发规范红皮书
+后端编程模型
+R6后端脚手架升级方案
+R6后端脚手架升级操作指南
+R6后端脚手架二方包坐标变更清单
+分布式锁 yms-lock 实践
+RPC接口开发与调用（iris）
+数据库操作 yms-jdbc 实践
+HTTP请求 yms-http 实践
+上下文开发实践
+线程池 yms-executors 实践
+移动开发
+安全
+数据库
+DevOps技术
+容器云技术
+区块链云技术
+YMS开发
+智能应用开发
+专项开发
+成果迁移
+技术方案
+最佳实践
+参考手册
+常见问题
+视频教程
+专业开发/开发指南/后端开发/iuap-开发规范红皮书
+iuap-开发规范红皮书
+最后更新时间：2024-10-23
+第一章 概述
+
+本规范主要针对开发做出规范，使公司各领域产品的代码具有规范性、统一性、可读性，减少编码中不必要的错误，提高软件质量与开发效率。帮助开发养成良好的编程习惯，写出清晰易懂、易维护的代码。
+
+第二章 适用范围
+
+本规范适用于用友云产品开发，软件服务序列由于已有技术框架不同，可以作为技术参考，不作为强制规范。
+
+第三章 开发规范说明
+微服务工程规范
+iuap 后端微服务标准工程分层（xxx：大领域名称 yyy：服务名称）
+项目
+微服务编码（iuap- apcom- xxx）
+com.yonyou.xxx.yyy.dto
+领服务实现
+com.yonyou.xxx.yyy.impl
+com.yonyou.xxx.yyy.po
+com.yonyou.xxx.yyy.dao
+src/main/resource
+i18n/xxx_yyy_语种.properties
+应用层
+com.yonyou.xxx.yyy.dto
+com.yonyou.xxx.yyy.controller
+启动层
+src/main/resource
+scripts/db
+ *           1. 统一规划微服务编码；
+2. 统一包命名规范： com.yonyou. {domain}.{app}.xxxx；
+3. 基本分层分为领域层、应用层、启动器三层；领域层实现各个领域服务定义及实现、应用层是基于领域服务实现的应用服务定义及实现、启动器内定义工程运行相关的配置（包括 rpc、数据库、缓存等本应用公共配置）
+4. 领域层分为领域对外服务定义、领域服务实现两个模块，外部对于领域的依赖只需依赖领域对外服务定义模块
+5. 领域对外服务定义模块统一命名规范为 xxx-yyy-api 6.领域服务实现模块统一命名规范为 xxx-yyy-domain 7.应用层统一命名规范为 xxx-yyy-app
+
+启动器统一命名规范为 xxx-bootstrap
+各模块依赖：xxx-yyy-bootstrap-> xxx-yyy-app-> xxx-yyy-domain-> xxx-yyy-api； 10.领域服务定义模块，划分为服务定义和实体定义两个包，分别实现对外领域
+
+服务的定义和服务中引用的实体定义， 服务定义包名统一命名规范为
+
+com.yonyou.xxx.yyy.api，实体定义包名统一命名规范为 com.yonyou.xxx.yyy.dto
+
+领域服务实现模块，代码目录主要包括
+
+对内领域服务定义（com.yonyou.xxx.yyy.service）
+内外领域服务的统一实现（com.yonyou.xxx.yyy.impl） c)领域服务的持久化实体定义（com.yonyou.xxx.yyy.po） d)领域持久化服务实现（com.yonyou.xxx.yyy.dao）
+
+领域服务实现模块，资源文件目录包括
+
+领域的 mapper 文件，固定在 resource 下的 mybatis 目录，且按数据源类型分目录，如 mybatis/mysql/*.xml
+多语资源文件，固定在 resource 下的 i18n 目录，且分语种配置对应多语文件，如 i18n/xxx-yyy_语种.properties
+初始化 SQL 脚本，固定在目录 scripts/db/init 下
+升级 SQL 脚本，固定在目录 scripts/db/update 下
+补丁 SQL 脚本，固定在目录 scripts/db/patch 下
+
+应用层代码目录划分为
+
+应用服务实现（com.yonyou.xxx.yyy.service） b)应用服务实体定义（com.yonyou.xxx.yyy.dto）
+
+c)rest 接 口 定 义 ， rest 接 口 url 以 /xxx/yyy/*** 格 式 定 义
+
+（com.yonyou.xxx.yyy.controller）
+
+启动器模块下的代码及配置文件
+
+spring boot 启动引导程序，后续考虑提供统一实现（com.yonyou.xxx）
+统一应用配置(application.properties)
+统一三方包规范
+
+通过 yms 统一管理可引入的第三方包及三方包的版本号。统一三方包是对各领域开发中使用的开源框架、及对应的版本的统一管理，其主要目标包括：
+
+开源协议问题，避免开发中使用协议有问题的三方包；
+引用其他业务组开发的组件时，避免产生包冲突；
+安装盘合包问题，避免安装盘合包出现版本冲突；
+安全问题，避免使用的三方包版本存在严重漏洞；
+常见开源协议
+**类型 **	**协议 **	**使用说明 **
+可使用	EPL：Eclipse Public License	
+	ASL：The Apache Software License	允许代码修改，再发布（作为开源或商业软件）
+	MIT：The MIT License	作者只保留版权,而无任何其他了限制， 必须在你的发行版里包含原许可协议的声明
+	MPL：The Mozilla Public License	类似 BSD 和 GPL，主要针对源代码的发布要实现 MPL 条款
+	BSD：original BSD license、FreeBSD license 、 Original BSD license	可以自由的使用，修改源代码，也可以将修改后的代码作为开源或者专有软件再发布
+	CDDL：Common Development and Distribution License	
+	CC0：Universal、Public Domain Dedication	放弃著作权
+谨慎使用	GPLv2+CE：GPLv2 with classpath exception	类似于 LGPL，使用支编译后的文件的使用不需要 GPL 许可。
+	CDDL/GPLv2+CE、CDDL + GPLv2with classpath exception	组合方式的协议
+不可使用	GPL：The GNU General Public License	开源/免费使用和引用/修改/衍生代码的开源/免费使用，但不允许修改后和衍生的代码做为闭源的商业软件发布和销售。
+**类型 **	**协议 **	**使用说明 **
+	GPL FOSS：The GNU General Public License, v2 with FOSS exception	GPL 协议，对开源项目可以使用自己的开源协议。
+	AGPL：GNU Affero General Public License	增强 GPL：如果使用 AGPL 许可的软件与用户通过网络进行交互，也需要提供源代码给用户，所有的修改也要给用户（针对 saas 服务）
+	LGPL ： GNU Library or Lesser General Public License	允许商业软件通过类库引用方式使用LGPL 类库而不需要开源商业软件的代码，LGPL 最初是为 C、C++语言设计，协议中关于动态引用的说明，在 java 、javaScript、Python 等语言中不明确，可能存在风险。
+三方包清单
+
+便于企业服务合并及专属化的需求，iuap 通过提供统一的三方包管理机制来减少包冲突、第三方包的兼容性引入问题，通过 iuap-3rd-party.pom 统一管理可引入的第三方包及三方包的版本号。
+
+组件使用说明
+
+在 maven 代码工程中作以 parent 方式引用，
+
+com.yonyou.iuap
+
+iuap-3rd-party
+
+5.3.1-RELEASE
+
+三方包依赖规范
+ *           *                1. 【强制】不允许使用 GPL、LGPL 等相关协议的第三方包，如果一定要使用， 已 provide 的方式引入，在客户使用时自己添加。
+   2. 【推荐】碰到新的第三方包依赖，可先自行引入（需进行检查），然后联系yms 统一组件开发部，验证后加入统一三方包管理中。
+
+检查工具
+
+为了检测三方包的规范，开发了 maven 插件 ucfrule-maven-plugin，依赖的配置如下： 
+
+其中 reportFile 为结果需要输出的文件路径，可以不设置，默认结果会打印到控制
+
+台。
+
+绑定到 compile 阶段之后，执行 maven 的 package, install, deploy 等生命周期目标， 都可以进行三方包版本的检查。
+
+统一二方包规范
+
+二方包管理是把 iuap 平台各支撑类的服务提供的 sdk 版本做了统一管理。由统一二方包父 pom 来管理和发布所有二方包。
+
+统一二方包父 pom 中已经引用了统一三方包。所以使用统一二方包作为 parent
+
+时可以不用再引用统一三方包。
+
+3.3.1 组件使用说明
+
+在 maven 代码工程中作以 parent 方式引用，
+
+com.yonyou.iuap
+
+iuap-2nd-party
+
+6.3.0-RELEASE
+
+建议遵循 ucf 代码工程规范的项目，一般会在 git 工程下建立 parent 项目及多个子项目，可以在 parent 项目中引入统一二方包。
+
+服务在自己的 pom 中引入二方和三方依赖包时，不用指定版本。
+
+Java 开发规范
+命名风格
+ *           *                1. 【强制*】代码中的命名均不能以下划线或美元符号开始，也不能以下划线或美元符号结束。
+
+
+反例：name / name / $Object / name / name$ / Object$
+
+ *           *                1. 【推荐】代码中的命名严禁使用拼音与英文混合的方式
+
+
+说明：正确的英文拼写和语法可以让阅读者易于理解，避免歧义。注意，即使纯拼音命名方式也要避免采用。
+
+正例：alibaba / taobao / youku / hangzhou 等国际通用的名称，可视同英文。
+
+反例：DaZhePromotion [打折] / getPingfenByName() [评分]
+
+ *           *                1. 【强制】不允许直接使用中文的方式。
+
+
+说明：正确的英文拼写和语法可以让阅读者易于理解，避免歧义。注意，即使纯拼音命名方式也要避免采用。
+
+反例：int 某变量 = 3
+
+ *           *                1. 【强制】类名使用 UpperCamelCase 风格，必须遵从驼峰形式，但以下情形例外： DO / BO / DTO / VO / AO
+
+
+正例：MarcoPolo / UserDO / XmlService / TcpUdpDeal / TaPromotion
+
+反例：macroPolo / UserDo / XMLService / TCPUDPDeal / TAPromotion
+
+ *           *                1. 【强制】方法名、参数名、成员变量、局部变量都统一使用 lowerCamelCase 风格， 必须遵从驼峰形式。
+
+
+正例： localValue / getHttpMessage() / inputUserId
+
+ *           *                1. 【强制】常量命名全部大写，单词间用下划线隔开，力求语义表达完整清楚，不要嫌名字长。
+
+
+正例：MAX_STOCK_COUNT 反例：MAX_COUNT
+
+ *           *                1. 【推荐】抽象类命名使用 Abstract 或 Base 开头；异常类命名使用 Exception 结尾；测试类命名以它要测试的类的名称开始，以 Test结尾。
+   2. 【强制】中括号是数组类型的一部分，数组定义如下：String[] args; 反例：使用 String args[]的方式来定义。
+   3. 【强制】POJO类化错误。
+
+
+中布尔类型的变量，都不要加 is，否则部分框架解析会引起序列
+
+反例：定义为基本数据类型 Boolean isDeleted；的属性，它的方法也是isDeleted()，RPC框架在反向解析的时候，“以为”对应的属性名称是deleted，导致属性获取不到，进而抛出异常。
+
+ *           *                1. 【强制】包名统一使用小写，点分隔符之间有且仅有一个自然语义的英语单词。包名统一使用单数形式，但是类名如果有复数含义，类名可以使用复数形式。
+
+
+正例： 应用工具类包名为 com.common.util、类名为 MessageUtils（此规则参考 spring的框架结构）
+
+ *           *                1. 【推荐】为了达到代码自解释的目标，任何自定义编程元素在命名时，使用尽量完整的单词组合来表达其意。
+
+
+正例：从远程仓库拉取代码的类命名为
+
+PullCodeFromRemoteRepository 。 反例：变量 int a; 的随意命名方式。
+
+ *           *                1. 【推荐】如果模块、接口、类、方法使用了设计模式，在命名时体现出具体模式。说明：将设计模式体现在名字中，有利于阅读者快速理解架构设计理念。
+
+
+正例：
+
+public class OrderFactory; public class LoginProxy;
+
+public class ResourceObserver;public class ResourceObserver;
+
+ *           *                1. 【推荐】接口类中的方法和属性不要加任何修饰符号（public 也不要加），保持代码的简洁性，并加上有效的 Javadoc注释。尽量不要在接口里定义变量，如果一定要定义变量，肯定是与接口方法相关，并且是整个应用的基础常量。
+
+
+正例：接口方法签名：void f();
+
+接口基础常量表示：String COMPANY = "alibaba"; 反例：接口方法定义：public abstract void f();
+
+说明：JDK8 中接口允许有默认实现，那么这个 default 方法，是对所有实现类都有价值的默认实现。
+
+ *           *                1. 接口和实现类的命名有两套规则：
+
+
+1）【推荐】对于 Service和 DAO类，基于 SOA的理念，暴露出来的服务一定是
+
+接口，内部的实现类用 Impl的 后缀与接口区别。
+
+正例：CacheServiceImpl实 现 CacheService接口。
+
+2）【推荐】如果是形容能力的接口名称，取对应的形容词做接口名（通常是– able的形式）。
+
+正例：AbstractTranslator实现 Translatable。
+
+ *           *                1. 【推荐】枚举类名建议带上 Enum后缀，枚举成员名称需要全大写，单词间用下划
+
+
+线隔开。
+
+说明：枚举其实就是特殊的常量类，且构造方法被默认强制是私有。
+
+正例： 枚举名字为 ProcessStatusEnum 的 成员名称： SUCCESS / UNKOWN_REASON。
+
+ *           1. []()**常量定义**     
+   1. 【强制*】不允许任何魔法值（即未经定义的常量）直接出现在代码中。反例：
+
+
+String key = "TRADE_ID_" + tradeId; cache.put(key, value);
+
+ *           *                1. 【推荐】不要使用一个常量类维护所有常量，按常量功能进行归类，分开维护。说明：大而全的常量类，非得使用查找功能才能定位到修改的常量，不利于
+
+
+理解和维护。
+
+正例：缓存相关常量放在类 CacheConsts 下；系统配置相关常量放在类ConfigConsts下。
+
+ *           *                1. 【推荐】常量的复用层次有五层：跨应用共享常量、应用内共享常量、子工程内共享常量、包内共享常量、类内共享常量。 
+ 
+      1. 跨应用共享常量：放置在二方库中，通常是 client.jar中的 constant目录下。
+      2. 应用内共享常量：放置在一方库中，通常是 modules中 的 constant目录下。
+
+
+反例：易懂变量也要统一定义成应用内共享常量，两位攻城师在两个类中分别定义了表示“是”的变量：
+
+类 A中：public static final String YES = "yes";
+
+类 B 中 ：public static final String YES = "y";
+
+A.YES.equals(B.YES)，
+
+预期是 true，但实际返回为 false，导致线上问题。
+
+ *           *                *                     1. 子工程内部共享常量：即在当前子工程的 constant目录下。
+      2. 包内共享常量：即在当前包下单独的 constant目
+
+
+录下。
+
+ *           *                *                     1. 类内共享常量：直接在类内部 private static final定义。
+        
+   1. 【推荐】如果变量值仅在一个范围内变化，且带有名称之外的延伸属性，定义为枚举类。下面正例中的数字就是延伸信息，表示星期几。
+
+
+正 例 ： public Enum { MONDAY(1), TUESDAY(2), WEDNESDAY(3), THURSDAY(4), FRIDAY(5), SATURDAY(6),SUNDAY(7);}
+
+ *           1. []()**代码格式**     
+   1. 【推荐】大括号的使用约定。如果是大括号内为空，则简洁地写成{}即可，不需要换行；如果是非空代码块则：
+
+
+左大括号前不换行。
+
+左大括号后换行。
+
+右大括号前换行。
+
+右大括号后还有 else 等代码则不换行；表示终止的右大括号后必须换行。
+
+      *                1. 【推荐】 左小括号和字符之间不出现空格；同样，右小括号和字符之间也不出现空格。详见第 5条下方正例提示。
+
+
+反例：if (空格 a == b 空格)
+
+ *           *                1. 【推荐】if/for/while/switch/do等保留字与括号之间都必须加空格。
+   2. 【推荐】任何二目、三目运算符的左右两边都需要加一个空格。
+
+
+说明：运算符包括赋值运算符=、逻辑运算符&&、加减乘除符号等。
+
+ *           *                1. 【推荐】采用 4 个空格缩进，禁止使用 tab字符。
+
+
+说明：如果使用 tab缩进，必须设置 1 个 tab为 4个空格。IDEA设置
+
+tab为 4个空格时， 请勿勾选 Use tab character；而在 eclipse中，
+
+必须勾选 insert spaces for tabs。
+
+正例： （涉及 1-5点）
+
+public static void main(String[] args) {
+
+// 缩进 4 个空格
+
+String say = "hello";
+
+// 运算符的左右必须有一个空格
+
+int flag = 0;
+
+// 关键词 if 与括号之间必须有一个空格，括号内的 f 与左括号，0 与右括号不需要空格
+
+if(flag == 0) {
+
+System.out.println(say);
+
+}
+
+// 左大括号前加空格且不换行；左大括号后换行
+
+if(flag == 1) {
+
+System.out.println("world");
+
+// 右大括号前换行，右大括号后有 else，不用换行
+
+} else {
+
+System.out.println("ok");
+
+// 在右大括号后直接结束，则必须换行
+
+}
+
+}
+
+ *           *                1. 【推荐】注释的双斜线与注释内容之间有且仅有一个空格。
+
+
+正例：// 注释内容，注意在//和注释内容之间有一个空格。
+
+ *           *                1. 【推荐】单行字符数限制不超过 120 个，超出需要换行，换行时遵循如下原则： 1） 第二行相对第一行缩进 4 个空格，从第三行开始，不再继续缩进，参考示例。
+
+运算符与下文一起换行。
+方法调用的点符号与下文一起换行。
+方法调用时，多个参数，需要换行时，在逗号后进行。
+在括号前不要换行，见反例。正例：
+
+StringBuffer sb = new StringBuffer();
+
+// 超过 120 个字符的情况下，换行缩进 4 个空格，点号和方法名称一起换行sb.append("zi").append("xin")...
+
+.append("huang")...
+
+.append("huang")...
+
+.append("huang");
+
+反例：
+
+StringBuffer sb = new StringBuffer();
+
+// 超过 120 个字符的情况下，不要在括号前换行sb.append("zi").append("xin")...append ("huang");
+
+// 参数很多的方法调用可能超过 120 个字符，不要在逗号前换行method(args1, args2, args3,
+
+, argsX);
+
+ *           *                1. 【推荐】方法体内的执行语句组、变量的定义语句组、不同的业务逻辑之间或者不同的语义之间插入一个空行。相同业务逻辑和语义之间不需要插入空行。
+
+
+说明：没有必要插入多个空行进行隔开。
+
+ *           1. []()**OOP 规约**     
+   1. 【强制】避免通过一个类的对象引用访问此类的静态变量或静态方法，无谓增加编译器解析成本，直接用类名来访问即可。
+   2. 【强制*】外部正在调用或者二方库依赖的接口，不允许修改方法签名，避免对接口调用方产生影响。接口过时必须加@Deprecated 注解，并清晰地说明采用的新接口或者新服务是什么。
+   3. 【推荐】不能使用过时的类或方法。
+
+
+说明：java.net.URLDecoder 中的方法 decode(String encodeStr) 这个方法已经过时，应该使用双参数 decode(String source, String encode)。接口提供方既然明确是过时接口， 那么有义务同时提供新的接口；作为调用方来说， 有义务去考证过时方法的新实现是什么。
+
+ *           *                1. 【强制】Object 的 equals 方法容易抛空指针异常，应使用常量或确定有值的对象来调用
+
+
+equals。
+
+正 例 ："test".equals(object); 反例：object.equals("test");
+
+说明：推荐使用 java.util.Objects#equals（JDK7引入的工具类）
+
+ *           *                1. 【强制】所有的相同类型的包装类对象之间值的比较，全部使用 equals 方法
+
+
+比较。
+
+说明：对于 Integer var = ?在-128 至 127 范围内的赋值，Integer 对象是在IntegerCache.cache 产生，会复用已有对象，这个区间内的 Integer 值可以直接使用==进行判断，但是这个区间之外的所有数据，都会在堆上产生，并不会复用已有对象，这是一个大坑， 推荐使用 equals 方法进行判断。
+
+ *           *                1. 关于基本数据类型与包装数据类型的使用标准如下：
+
+【强制】所有的 POJO类
+
+属性必须使用包装数据类型。
+
+【强制】RPC方法的返回值和参数必须使用包装数据类型。
+【推荐】所有的局部变量使用基本数据类型。
+
+说明：POJO类属性没有初值是提醒使用者在需要使用时，必须自己显式地进行赋值，任何 NPE问题，或者入库检查，都由使用者来保证。
+
+正例：数据库的查询结果可能是 null，因为自动拆箱，用基本数据类型接收有NPE风险。
+
+反例：比如显示成交总额涨跌情况，即正负 x%，x为基本数据类型，调用的 RPC 服务，调用不成功时，返回的是默认值，页面显示为 0%，这是不合理的，应该显示成中划线。所以包装数据类型的 null值，能够表示额外的信息，如：远程调用失败，异常退出。
+
+ *           *                1. 【推荐】定义 DO/DTO/VO等 POJO类
+
+
+时，不要设定任何属性默认值。
+
+反例：POJO类的 gmtCreate默认值为 new Date();但是这个属性在数据提取时并没有置入具体值，在更新其它字段时又附带更新了此字段，导致创建时间被修改成当前时间。
+
+ *           *                1. 【强制*】序列化类新增属性时，请不要修改 serialVersionUID 字段，避免反序列失败；如 果完全不兼容升级， 避免反序列化混乱， 那么请修改serialVersionUID值。
+
+
+说明：注意 serialVersionUID不一致会抛出序列化运行时异常。
+
+ *           *                1. 【强制】构造方法里面禁止加入任何业务逻辑，如果有初始化逻辑，请放在 init 方法中。
+   2. 【推荐】使用索引访问用 String的 split方
+
+
+法得到的数组时，需做最后一个分隔
+
+符后有无内容的检查，否则会有抛 IndexOutOfBoundsException的风险。说明：
+
+String str = "a,b,c,,"; String[] ary = str.split(",");
+
+// 预 期 大 于 3， 结 果 是 3 System.out.println(ary.length);
+
+ *           *                1. 【推荐】当一个类有多个构造方法，或者多个同名方法，这些方法应该按顺序放置在一起， 便于阅读，此条规则优先于第 15 条规则。
+   2. 【推荐】 类内方法定义顺序依次是：
+
+
+公有方法或保护方法 > 私有方法 > getter/setter方法。
+
+说明：公有方法是类的调用者和维护者最关心的方法，首屏展示最好；保护方法虽然只是子类关心，也可能是“模板设计模式”下的核心方法；而私有方法外部一般不需要特别关心，是一个黑盒实现；因为承载的信息价值较低，所有 Service和 DAO的 getter/setter方法放在类体最后。
+
+ *           *                1. 【推荐】循环体内，字符串的连接方式，使用 StringBuilder 的 append 方法进行扩展。
+
+
+说明：反编译出的字节码文件显示每次循环都会 new 出一个 StringBuilder 对象，然后进行 append操作，最后通过 toString方 法返回 String对象，造成内存资源浪费。
+
+反例：
+
+String str = "start";
+
+for (int i = 0; i < 100; i++) { str = str + "hello";
+
+}
+
+ *           *                1. 【推荐】final 可以声明类、成员变量、方法、以及本地变量，下列情况使用 final 关键字：
+
+
+不允许被继承的类，如：String类。
+
+不允许修改引用的域对象，如：POJO类的域变量。
+
+不允许被重写的方法，如：POJO类的 setter方法。
+
+不允许运行过程中重新赋值的局部变量。
+
+避免上下文重复使用一个变量，使用 final 描述可以强制重新定义一个变量，方便更好地进行重构。
+
+      *                1. 【推荐*】慎用 Object的 clone方法来拷贝对象。
+
+
+说明：对象的 clone 方法默认是浅拷贝，若想实现深拷贝需要重写 clone 方法实现属性对象的拷贝。
+
+ *           *                1. 【推荐】类成员与方法访问控制从严：
+
+如果不允许外部直接通过 new 来创建对象，那么构造方法必须是 private。
+工具类不允许有 public或 default构造方法。
+类非 static 成员变量并且与子类共享，必须是 protected。4） 类非 static成员变量并且仅在本类使用，必须是 private。5） 类 static 成员变量如果仅在本类使用，必须是 private。
+若是 static成
+
+员变量，必须考虑是否为 final。
+
+类成员方法只供类内部调用，必须是 private。
+类成员方法只对继承类公开，那么限制为 protected。
+
+说明：任何类、方法、参数、变量，严控访问范围。过于宽泛的访问范 围，不利于模块解耦。思考：如果是一个 private的方法，想删除就删除，可是一个 public 的 service 方法，或者一个 public 的成员变量，删除一下，不得手心冒点汗吗？变量像自己的小孩，尽量在自己的视线内，变量作用域太大，无限制的到处跑，那么你会担心的。
+
+ *           1. []()**集合处理**     
+   1. 【强制】关于 hashCode 和 equals的处理，遵循如下规则：
+
+只要重写 equals，就必须重写 hashCode。
+因为 Set 存储的是不重复的对象，依据 hashCode 和 equals进行判断，所以 Set 存储的对象必须重写这两个方法。
+如果自定义对象做为 Map的键，那么必须重写 hashCode和 equals。
+
+说明：String 重写了 hashCode 和 equals 方法，所以我们可以非常愉快地使用
+
+String对象作为 key来使用。
+
+ *           *                1. 【强制】 ArrayList 的 subList 结果不可强转成ArrayList ，否则会抛出ClassCastException异常，即 java.util.RandomAccessSubList cannot be cast to java.util.ArrayList.
+
+
+说明：subList 返回的是 ArrayList 的内部类 SubList，并不是
+
+ArrayList ，而是ArrayList 的一个视图，对于 SubList子列表的所有操作最终会反映到原列表上。
+
+ *           *                1. 【强制*】在 subList 场景中，高度注意对原集合元素个数的修改，会导致子列表的遍历、增加、删除均会产生 ConcurrentModificationException 异常。
+   2. 【强制】使用集合转数组的方法，必须使用集合的 toArray(T[] array)，传入的是类型完全一样的数组，大小就是 list.size()。
+
+
+说明：使用 toArray带 参方法，入参分配的数组空间不够大时，toArray 方法内
+
+部将重新分配内存空间，并返回新数组地址；如果数组元素大于实际所需，下标为[ list.size() ]的数组元素将被置为 null，其它数组元素保持原值，因此最好将方法入参数组大小定义与集合元素个数一致。
+
+正例：
+
+List list = new ArrayList(2); list.add("guan"); list.add("bao");
+
+String[] array = new String[list.size()]; array = list.toArray(array);
+
+反例：直接使用 toArray 无参方法存在问题，此方法返回值只能是 Object[] 类，若强转其它类型数组将出现 ClassCastException错误。
+
+ *           *                1. 【强制*】使用工具类 Arrays.asList()把数组转换成集合时，不能使用其修改集合 相 关 的 方 法 ， 它 的 add/remove/clear 方 法 会 抛 出UnsupportedOperationException异常。
+
+
+说明 ：asList 的返回对象是一个 Arrays 内部类，并没有实现集合的修改方法。Arrays.asList 体现的是适配器模式，只是转换接口，后台的数据仍是数组。
+
+String[] str = new String[] { "you", "wu" }; List list = Arrays.asList(str);
+
+第一种情况：list.add("yangguanbao"); 运行时异常。
+
+第二种情况：str[0] = "gujin"; 那么 list.get(0)也会随之修改。
+
+ *           *                1. 【强制】泛型通配符<? extends T>来接收返回的数据，此写法的泛型集合不能使用 add 方法，而<? super T>不能使用 get 方法，做为接口调用赋值时易出错。
+
+
+说明：扩展说一下 PECS(Producer Extends Consumer Super)原则： 第一、 频繁往外读取内容的，适合用<? extends T>。
+
+第二、第二、经常往里插入的，适合用<? super T>。
+
+ *           *                1. 【强制】不要在 foreach 循环里进行元素的 remove/add 操作。remove 元素请使用Iterator方式，如果并发操作，需要对 Iterator对象加锁。
+
+
+正例：
+
+Iterator iterator = list.iterator();
+
+while (iterator.hasNext()) {
+
+String item = iterator.next(); if (删除元素的条件) {
+
+iterator.remove();
+
+}
+
+}
+
+反例：
+
+List a = new ArrayList(); list.add("1");
+
+list.add("2");
+
+for (String item : list) {
+
+if ("1".equals(item)) {
+
+list.remove(item);
+
+}
+
+}
+
+说明：以上代码的执行结果肯定会出乎大家的意料，那么试一下把“1”换
+
+成“2”，会是同样的结果吗？
+
+ *           *                1. 【强制】 在 JDK7 版本及以上， Comparator 要满足如下三个条件，不然Arrays.sort，Collections.sort会报 IllegalArgumentException异常。
+
+
+说明：三个条件如下
+
+x，y的比较结果和 y，x的比较结果相反。
+
+x>y，y>z，则 x>z。
+x=y，则 x，z比较结果和 y，z比较结果相同。
+
+反例：下例中没有处理相等的情况，实际使用中可能会出现异常：
+
+new Comparator() {
+
+@Override
+
+public int compare(Student o1, Student o2) {
+
+return o1.getId() > o2.getId() ? 1 : -1;
+
+}
+
+};
+
+ *           *                1. 【推荐】高度注意 Map 类集合 K/V能 不能存储 null值的情况，如下表格：
+
+集合类	Key	Value	Super	说明
+Hashtable	不 允 许 为null	不 允 许 为null	Dictionary	线程安全
+ConcurrentHashMap	不 允 许 为null	不 允 许 为null	AbstractMap	锁分段技术（JDK8:CAS）
+TreeMap	不 允 许 为null	允许为 null	AbstractMap	线程不安全
+HashMap	允 许 为null	允许为 null	AbstractMap	线程不安全
+
+反例： 由于 HashMap的 干扰，很多人认为 ConcurrentHashMap是可以置入 null
+
+值，而事实上， 存储 null值时会抛出 NPE异常。
+
+ *           *                1. 【推荐】合理利用好集合的有序性(sort)和稳定性(order)，避免集合的无序性(unsort)和不稳定性(unorder)带来的负面影响。
+
+
+说明：有序性是指遍历的结果是按某种比较规则依次排列的。稳定性指集合每次遍历的元素次序是一定的。如： ArrayList 是 order/unsort ； HashMap 是
+
+unorder/unsort；TreeSet是order/sort。
+
+ *           *                1. 【推荐】利用 Set 元素唯一的特性，可以快速对一个集合进行去重操作，避免使用 List的contains方法进行遍历、对比、去重操作。
+   
+1. []()**并发处理**     
+   1. 【强制*】获取单例对象需要保证线程安全，其中的方法也要保证线程安全。
+
+
+说明：资源驱动类、工具类、单例工厂类都需要注意。
+
+ *           *                1. 【推荐】创建线程或线程池时请指定有意义的线程名称，方便出错时回溯。正例：
+
+
+public class TimerTaskThread extends Thread {
+
+public TimerTaskThread() {
+
+super.setName("TimerTaskThread");
+
+...
+
+}
+
+}
+
+ *           *                1. 【推荐】线程资源必须通过线程池提供，不允许在应用中自行显式创建线程。说明：使用线程池的好处是减少在创建和销毁线程上所花的时间以及系统资源的开销，解决资源不足的问题。如果不使用线程池，有可能造成系统创建大量同类线
+
+
+程而导致消耗完内存或者“过度切换”的问题。
+
+ *           *                1. 【强制】线程池不允许使用Executors 去创建，而是通过 ThreadPoolExecutor 的方式，这样的处理方式让写的同学更加明确线程池的运行规则，规避资源耗尽的风险。
+
+
+说明：Executors返回的线程池对象的弊端如下：
+
+FixedThreadPool和 SingleThreadPool:
+
+允许的请求队列长度为 Integer.MAX_VALUE，可能会堆积大量的请求， 从而导致 OOM。
+
+CachedThreadPool和 ScheduledThreadPool:
+
+允许的创建线程数量为 Integer.MAX_VALUE，可能会创建大量的线程， 从而导致 OOM。
+
+ *           *                1. 【强制】SimpleDateFormat 是线程不安全的类，一般不要定义为 static 变量，
+
+
+如果定义为static，必须加锁，或者使用 DateUtils工具类。
+
+正例：注意线程安全，使用 DateUtils。亦推荐如下处理：
+
+private static final ThreadLocal df = new ThreadLocal() {
+
+@Override
+
+protected DateFormat initialValue() {
+
+return new SimpleDateFormat("yyyy-MM-dd");
+
+}
+
+};
+
+}
+
+说明：如果是 JDK8的 应用，可以使用 Instant 代替 Date，LocalDateTime代 替
+
+Calendar，DateTimeFormatter代替 SimpleDateFormat，官方给出的解释： simple beautiful strong immutable thread-safe。
+
+ *           *                1. 【强制*】高并发时，同步调用应该去考量锁的性能损耗。能用无锁数据结构，就不要用锁；能锁区块，就不要锁整个方法体；能用对象锁，就不要用类锁。
+
+
+说明：尽可能使加锁的代码块工作量尽可能的小，避免在锁代码块中调用 RPC 方法。
+
+ *           *                1. 【强制*】对多个资源、数据库表、对象同时加锁时，需要保持一致的加锁顺序，否则可能会造成死锁。
+
+
+说明：线程一需要对表 A、B、C依次全部加锁后才可以进行更新操作，那么线程二的加锁顺序也必须是 A、B、C，否则可能出现死锁。
+
+ *           *                1. 【强制*】并发修改同一记录时，避免更新丢失，需要加锁。要么在应用层加锁，要么
+
+
+在缓存加锁，要么在数据库层使用乐观锁，使用 version作 为更新依据。
+
+说明：如果每次访问冲突概率小于 20%，推荐使用乐观锁，否则使用悲观锁。乐观锁的重试次数不得小于 3 次。
+
+ *           *                1. 【强制】多线程并行处理定时任务时，Timer运行多个 TimeTask时，只要其中之一没有捕获抛出的异常，其它任务便会自动终止运行，使用 ScheduledExecutorService
+
+
+则没有这个问题。
+
+ *           *                1. 【推荐】使用 CountDownLatch 进行异步转同步操作，每个线程退出前必须调用countDown 方法，线程执行代码注意 catch 异常，确保 countDown方法被执行到，
+
+
+避免主线程无法执行至 await方 法，直到超时才返回结果。
+
+说明：注意，子线程抛出异常堆栈，不能在主线程 try-catch到。
+
+ *           *                1. 【推荐】避免 Random实
+
+
+例被多线程使用，虽然共享该实例是线程安全的，但会
+
+因竞争同一seed 导致的性能下降。
+
+说明：Random实例包括 java.util.Random 的实例或者 Math.random()的方式。
+
+正例：在 JDK7之后，可以直接使用 API ThreadLocalRandom，而在 JDK7之前， 需要编码保证每个线程持有一个实例。
+
+ *           *                1. 【推荐】在并发场景下，通过双重检查锁（double-checked locking）实现延迟初始化的优化问题隐患(可参考 The "Double-Checked Locking is Broken" Declaration)，推荐解决方案中较为简单一种（适用于 JDK5及以上版本），将目
+
+
+标属性声明为 volatile型 。
+
+反例：
+
+class Singleton {
+
+private Helper helper = null; public Helper getHelper() {
+
+if (helper == null) synchronized(this) {
+
+if (helper == null)
+
+helper = new Helper();
+
+}
+
+return helper;
+
+}
+
+// other methods and fields...
+
+}
+
+ *           *                1. 【推荐】volatile 解决多线程内存不可见问题。对于一写多读，是可以解决变量同步问题， 但是如果多写，同样无法解决线程安全问题。如果是 count++操作， 使 用 如 下 类 实 现 ： AtomicInteger count = new AtomicInteger();
+
+
+count.addAndGet(1); 如果是 JDK8，推荐使用 LongAdder 对象，比 AtomicLong 性能更好（减少乐观锁的重试次数）。
+
+ *           *                1. 【推荐】 HashMap在容量不够进行 resize时由于高并发可能出现死链，导致 CPU 飙升，在开发过程中可以使用其它数据结构或加锁来规避此风险。
+   2. 【推荐】ThreadLocal 无法解决共享对象的更新问题，ThreadLocal 对象建议使用 static 修饰。这个变量是针对一个线程内所有操作共享的，所以设置为静态变量，所有此类实例共享此静态变量 ，也就是说在类第一次被使用时装载，只分配一块存储空间，所有此类的对象(只要是这个线程内定义的)都可以操控这个变量。
+   
+1. []()**控制语句**     
+   1. 【强制】在一个 switch 块内，每个 case 要么通过 break/return 等来终止，要么注释说明程序将继续执行到哪一个 case 为止；在一个 switch 块内，都必须包含一个default语句并且放在最后，即使它什么代码也没有。
+   2. 【强制】在 if/else/for/while/do 语句中必须使用大括号。即使只有一行代码， 避免采用单行的编码方式：if (condition) statements;
+   3. 【推荐】表达异常的分支时，少用 if-else方式，这种方式可以改写成：
+
+
+if (condition) {
+
+...
+
+return obj;
+
+}
+
+// 接着写 else 的业务逻辑代码;
+
+说明：如果非得使用 if()...else if()...else...方式表达逻辑，【强制】避免后续代码维护困难，请勿超过 3 层。
+
+正 例 ：超过 3层的 if-else 的逻辑判断代码可以使用卫语句、策略模式、状态模式等来实现， 其中卫语句示例如下：
+
+public void today() {
+
+if (isBusy()) {
+
+System.out.println(“change time.”); return;
+
+}
+
+if (isFree()) {
+
+System.out.println(“go to travel.”); return;
+
+}
+
+System.out.println(“XXXXX”);
+
+return;
+
+}
+
+ *           *                1. 【推荐】除常用方法（如 getXxx/isXxx）等外，不要在条件判断中执行其它复杂的语句，将复杂逻辑判断的结果赋值给一个有意义的布尔变量名，以提高可读性。
+
+
+说明：很多 if 语句内的逻辑相当复杂，阅读者需要分析条件表达式的最终结果， 才能明确什么样的条件执行什么样的语句，那么，如果阅读者分析逻辑表达式错误呢？
+
+正例：
+
+// 伪代码如下
+
+final boolean existed = (file.open(fileName, "w") != null) && (...) || (...); if (existed) {
+
+...
+
+}
+
+反例：
+
+if ((file.open(fileName, "w") != null) && (...) || (...)) {
+
+...
+
+}
+
+ *           *                1. 【推荐】接口入参保护，这种场景常见的是用于做批量操作的接口。
+   2. 【推荐】下列情形，需要进行参数校验：
+
+调用频次低的方法。
+执行时间开销很大的方法。此情形中，参数校验时间几乎可以忽略不计， 但如果
+
+因为参数错误导致中间执行回退，或者错误，那得不偿失。 3） 需要极高稳定性和可用性的方法。
+
+对外提供的开放接口，不管是 RPC/API/HTTP接口。
+
+敏感权限入口。
+
+      *                1. 【推荐】下列情形，不需要进行参数校验：
+
+
+极有可能被循环调用的方法。但在方法说明里必须注明外部参数检查要求。
+
+底层调用频度比较高的方法。毕竟是像纯净水过滤的最后一道，参数错误不太可能到底层才会暴露问题。一般 DAO 层与 Service 层都在同一个应用中，部署在同一台服务器中，所以 DAO的参数校验，可以省略。被声明成 private只会被自己代码所调用的方法，如果能够确定调用方法的代码传入参数已经做过检查或者肯定不会有问题，此时可以不校验参数。
+
+      1. []()**注释规约**     
+1. 【强制】类、类属性、类方法的注释必须使用 Javadoc 规范，使用/**内容*/格式， 不得使用
+
+
+// xxx方式。
+
+说明：在 IDE 编辑窗口中，Javadoc 方式会提示相关注释，生成 Javadoc 可以正确输出相应注释；在 IDE 中，工程调用方法时，不进入方法即可悬浮提示方法、参数、返回值的意义，提高阅读效率。
+
+ *           *                1. 【强制】所有的抽象方法（包括接口中的方法）必须要用 Javadoc 注释、除了返回值、参数、异常说明外，还必须指出该方法做什么事情，实现什么功能。
+
+
+说明：对子类的实现要求，或者调用注意事项，请一并说明。
+
+ *           *                1. 【强制】所有的类都必须添加创建者和创建日期。
+   2. 【强制】方法内部单行注释，在被注释语句上方另起一行，使用//注释。方法内部多行注释使用/* */注释，注意与代码对齐。
+   3. 【强制】所有的枚举类型字段必须要有注释，说明每个数据项的用途。
+   4. 【推荐】与其“半吊子”英文来注释，不如用中文注释把问题说清楚。专有名词与关键字保持英文原文即可。
+
+
+反例：“TCP连接超时”解释成“传输控制协议连接超时”，理解反而费脑筋。
+
+ *           *                1. 【推荐】代码修改的同时，注释也要进行相应的修改，尤其是参数、返回值、异常、
+
+
+核心逻辑等的修改。
+
+说明：代码与注释更新不同步，就像路网与导航软件更新不同步一样，如果导航软件严重滞后， 就失去了导航的意义。
+
+ *           *                1. 【推荐*】谨慎注释掉代码。在上方详细说明，而不是简单的注释掉。如果无用， 则删除。
+
+
+说明：代码被注释掉有两种可能性：
+
+1）后续会恢复此段代码逻辑。
+
+2）永久不用。
+
+前者如果没有备注信息，难以知晓注释动机。
+
+后者建议直接删掉（代码仓库保存了历史代码）。
+
+ *           *                1. 【推荐】对于注释的要求：第一、能够准确反应设计思想和代码逻辑；第二、能够描述业务含义，使别的程序员能够迅速了解到代码背后的信息。完全没有注释的大段代码对于阅读者形同天书，注释是给自己看的，即使隔很长时间，也能清晰理解当时的思路；注释也是给继任者看的，使其能够快速接替自己的工作。
+   2. 【推荐】好的命名、代码结构是自解释的，注释力求精简准确、表达到位。避免出现注释的一个极端：过多过滥的注释，代码的逻辑一旦修改，修改注释是相当大的负担。
+
+
+反例：
+
+// put elephant into fridge put(elephant, fridge)
+
+方法名 put，加上两个有意义的变量名 elephant 和 fridge，已经说明了这是在干什么，语义清晰的代码不需要额外的注释。
+
+ *           *                1. 【推荐】特殊注释标记，请注明标记人与标记时间。注意及时处理这些标记，通过标记扫描， 经常清理此类标记。线上故障有时候就是来源于这些标记处的代码。
+
+待办事宜（TODO）:（ 标记人，标记时间，[预计处理时间]）
+
+表示需要实现，但目前还未实现的功能。这实际上是一个 Javadoc的标签，目前的Javadoc 还没有实现，但已经被广泛使用。只能应用于类，接口和方法（因为它是一个 Javadoc标签）。
+
+错误，不能工作（FIXME）:（标记人，标记时间，[预计处理时间]）在注
+
+释中用 FIXME标 记某代码是错误的，而且不能工作，需要及时纠正的情况。
+
+ *           1. []()**其他**     
+   1. 【强制】在使用正则表达式时，利用好其预编译功能，可以有效加快正则匹配速度。
+
+
+说明：不要在方法体内定义：Pattern pattern = Pattern.compile(规则);
+
+ *           *                1. 【强制】注意 Math.random() 这个方法返回是 double 类型，注意取值的范围 0≤x<1（能够取到零值，注意除零异常），如果想获取整数类型的随机数，不要将 x放大 10的若干倍然后取整，直接使用 Random对象的 nextInt
+
+
+或者 nextLong方 法。
+
+ *           *                1. 【强制*】获取当前毫秒数 System.currentTimeMillis(); 而不是 new Date().getTime();
+
+
+说明：如果想获取更加精确的纳秒级时间值，使用 System.nanoTime() 的方式。在 JDK8中， 针对统计时间等场景，推荐使用 Instant类。
+
+ *           *                1. 【推荐】不要在视图模板中加入任何复杂的逻辑。
+
+
+说明：根据 MVC 理论，视图的职责是展示，不要抢模型和控制器的活。
+
+异常规范
+异常开发
+
+平台提供基础异常 BusinessException 继承自 RuntimeException，属于非受查异常，领域可以只针对要处理的异常进行捕获，不需要全部处理。
+
+ *           *                1. 目前绝大部分领域原厂开发时使用的都是 BusinessException，这类异常不强迫各层严格捕获并上跑，只在框架最外层进行处理。建议领域开发时使用此类异常，仅在需要处理时对异常进行捕获和处理；
+   2. 对第三方提供的 Open API，或者期望调用方特定异常并处理时，请明确方法抛出指定异常。
+
+
+所有领域的业务异常均需要继承 BusinessException，完整的异常信息包括异常编码、错误提示、异常堆栈、以及异常类型。
+
+其中错误提示需要支持多语展示，平台已经支持对代码中的词条进行扫描和多语翻译，不开启多语的话走默认显示简体中文。领域在增加新的异常信息后需要使用平台工具完成多语词条抽取；
+异常类型在异常码中进行体现，用于在错误中心内对异常信息进行分析和归类通知； 
+异常堆栈需要记录异常发生时完整的初始异常原因；
+异常编码规范见 2.2。
+
+错误信息返回前端时，按实际的异常编码返回，放到错误详情中，不要统一包装成999。领域内部的异常码和 OpenAPI 的异常码也保持一致，由开放平台/帮助中心维护各领域 API 的异常码信息列表（同时含错误原因和修复动作）。
+
+异常编码
+
+异常编码由领域前缀和异常序号来组成，格式为“领域前缀-异常序号”，通过“-”连接，具体规则如下：
+
+ *           *                1. 领域前缀由领域编码和子领域/服务编码组成，格式为“领域编码-子领域/
+
+
+服务编码”，具体的编码值和 yms 微服务编码中的后两段保持一致；
+
+ *           *                *                     1. 原厂开发已有的微服务在抛异常时可以通过 yms 框架来获取，新的微服务编码在开发前统一向总体架构部提出申请；
+      2. 行业以及 ISV/伙伴的领域编码和子领域/服务编码需要向产品管理部申请分配；
+        
+   1. 异常序号：六位数字，第一位代表具体的异常类别，0xxxxx-4xxxxx 为公共
+
+
+类异常，5xxxxx-9xxxxx 为业务类异常。
+
+ *           *                *                     1. 发生异常的时候可以根据不同的异常类别向设置的人员发送邮件或信息，同一个 traceid 的异常只发送一次。
+
+
+ *           *                1. 在表示业务异常时，5、6、7 开头的异常表示遇到该异常不需要再进行重试，8 开头的异常则表示遇到该异常可以发起重试，见下表。
+
+类型	异常序****号	描述
+公共类异常	0xxxxx	DBException（数据库异常）
+1xxxxx	FrameworkException（框架异常）	
+2xxxxx	MiddlewareException（中间件异常）	
+3xxxxx	NetworkException（网络异常）	
+	4xxxxx	公共异常预留
+业务类异常	5xxxxx、6xxxxx、7xxxxx	表示不需要再进行重试的异常
+8xxxxx	可以发起重试的异常	
+9xxxxx	业务异常预留	
+其他要求
+ *           *                1. 产品模块的所有子异常都需要来自基本异常 BusinessException，业务在抛出异常时须定义明确的异常编码。
+   2. 所有的异常名称必须以 Exception 结尾，所有的异常定义都必须包含异常链， 提供对原始异常的跟踪，在日志里输出异常信息时遵循日志规范。
+   3. 在多语资源文件中增加异常编码对应的多语消息。
+   4. 异常定义时区分 unchecked/checked 异常，避免直接抛出 new RuntimeException()，更不允许抛出 Exception 或者 Throwable，应使用有业务含义的自定义异常，如 DAOException、ServiceException 等。
+   5. 抛出的异常必须具备一定的描述该异常发生的原因的信息，以便定位错误业务代码不能直接抛出没有任何业务意义的异常如 throw new Exception(“msg”)。
+   6. 异常捕捉时，最一般的异常永远放在最后的 catch 部分，捕捉异常应该尽量的精确，这样对各个异常的处理才能按照不同的异常进行更好的业务处理。
+   7. 控制 try/catch 的规模，通常代码中由多个位置抛出多种异常，针对每一类异常单独的进行捕捉。如果代码中涉及到敏感的资源如 Connection、Socket,文件等，一定要加上 finally 处理块，释放资源。若资源类实现了AutoCloseable 接口，则可以在 JDK 8 里使用 try-with-resources 方式。
+   8. 不要吃掉可能导致业务问题的异常，NullPointException、ArrayIndexOutofBOundException、DbException、IllegalArgumentException 等异常通常是业务相关的，需要按照业务逻辑进行捕捉处理。
+   9. 如果异常需要抛出给前端应用，出于安全的考虑可能不希望前端程序保留异常的链，这时候需要首先日志改异常，然后把该异常转化为业务异常，去掉异常链抛出。
+   10. 如果捕捉到的异常处理抛出后去掉了异常链，对原始异常应该首先进行日志。如果异常抛出后保持了异常链，在抛出之前对原始的异常不需要进行日志工 作。
+   11. 应用程序一般不需要关心运行时刻异常(RuntimeException 及子类)或者错误
+
+
+（Error 或者子类）。
+
+ *           *                1. DBException 和 SQLException 都是受查异常，业务系统在捕捉异常后，如果不能按照逻辑正常地进行处理，需要直接转化为产品模块的业务异常再进行抛 出，不需要保持异常链，但注意在抛出异常之前需要进行日志工作。
+   2. 如果异常已经在 throws 语句中抛出，一般不需要进行捕捉和处理。
+   3. 如果捕捉到异常后不把异常再次抛出，则需要对异常进行日志工作，日志的级别根据业务逻辑可以选用 debug 或者 warn。对于对系统的表现有一定影响的采用 warn，而几乎没有影响的采用 debug。
+   4. 如果捕捉了 InvokeTragetException，不能把该异常直接抛出，而是需要对其中的目标异常进行处理(getTargetException())。
+   5. Java 类库中定义的一类 RuntimeException 可以通过预先检查进行规避，而不 应 该 通 过 catch 来 处 理 ， 比 如 IndexOutOfBoundsException， NullPointerException 等。
+
+
+正例：if (obj != null) {...} 反例：try { obj.method() }
+
+catch (NullPointerException e) {...}
+
+无法通过预检查的异常除外，如在解析一个外部传来的字符串形式数字时，通过 catch NumberFormatException 来实现。
+
+ *           *                1. 异常不要用来做流程控制，条件控制，因为异常的处理效率比条件分支低。
+   2. try 块放到了事务代码中，catch 异常后，如果需要回滚事务，一定要注意手动回滚事务。
+   3. 不能在 finally 块中使用 return，finally 块中的 return 返回后方法结束执行，不会再执行 try 块中的 return 语句。
+   4. 捕获异常与抛异常，必须是完全匹配，或者捕获异常是抛异常的父类。
+   5. 方法的返回值可以为 null，不强制返回空集合，或者空对象等，必须添加注释充分说明什么情况下会返回 null 值，调用方也同时需要进行非空判断防止NPE 问题。
+   6. 注意 NPE 产生的场景： 
+ 
+      1. 返回类型为基本数据类型，return 包装数据类型的对象时，自动拆箱有可能产生 NPE。反例：public int f() { return Integer obj}， 如果为null，自动解箱时会抛 NPE；
+      2. 数据库的查询结果可能为 null；
+      3. 集合里的元素即使 isNotEmpty，取出的数据元素也可能为 null；
+      4. 远程调用返回对象时，一律要求进行空指针判断，防止 NPE；
+      5. 对于 Session 中获取的数据，建议 NPE 检查，避免空指针；
+      6. 级联调用 obj.getA().getB().getC() 一连串调用，易产生 NPE。可以使用 JDK8 的 Optional 类来防止 NPE 问题。
+
+日志规范
+日志级别
+
+目前规定日志支持四种日志级别 DEBUG、INFO、WARN、ERROR，顺序为 DEBUG<INFO
+
+<WARN<ERROR，如果日志级别调的较高，低级别的日志就不能输出。例如设置为 WARN， 那么 DEBUG 与 INFO 的信息就不能输出。对这四个级别的选择如下：
+
+ *           *                1. DEBUG: 对调试（debug）有帮助的信息、事件，默认情况下不打开日志记录，主要用于开发环境的信息输出；
+   2. INFO: 在正常运行状态中，粗粒度的、关键流程/事件、业务软件重要的配置和参数信息，以及可用来表示业务软件健康度的信息，如程序运行所花费的时间等；
+   3. WARN:有潜在风险的、不会造成大危害的错误，需要开发人员给予足够关注，往往表示有校验问题或者程序逻辑缺陷，如系统对用户输入参数校验时发生错误， 输出警告信息；
+   4. ERROR: 业务软件发生错误，后续流程还能继续进行，但也已经影响了用户的正常访问。该级别的错误需要马上被处理，如服务端抛出了一个NullPointException,导致系统不能正常运行，进行错误信息记录。
+
+
+在使用日志等级时要有严格的等级评估意识，科学使用 WARN、INFO 等级别，后续可以针对日志级别出现次数进行统计监控预警以及优化代码，提升应用健壮性。
+
+日志输出目录和格式
+ *           *                1. 统一输出目录： 
+ 
+      1. 应用输出的日志统一输出目录为：/data/logs/app
+      2. UCF 框架及中间件的日志统一输出目录为：/data/logs/mw
+      3. 文件命名规范： logging.file=ucf-${spring.application.name}.log ，
+
+
+${spring.application.name}取自于配置文件中的微服务名称，ucf-作为文件前缀，标明是基于 ucf 规范开发的应用，日志解析也会按照日志统一输出格式来解析，便于后期全链路日志追踪。
+
+spring.domain.name 需 要 在 配 置 文 件 中 配 置 ：
+
+spring.domain.name=gpass
+
+spring.application.name 需 要 在 配 置 文 件 中 配 置 ： spring.application.name=log
+
+ *           *                1. 统一输出格式：
+
+
+%date{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] [%logger{36}] [%X{traceId}] [%X{spanId}] [%X{pSpanId}] [%X{rpcOccurrence}] [%X{code}] [%X{req.requestURL}] [%X{req.queryString}] [${spring.domain.name},${spring.application.name},
+
+%X{sysId},%X{tenantId},%X{userId},%X{profile},%X{agentId}] - %msg %ex%n
+
+yyy-MM-ddHH:mm:ss.SSS	日志记录时间，一般精确到毫秒。
+traceId	调用链的源头，调用其他服务时要传递
+spanId	调用请求当前处理的微服务的 ID
+pSpanId	用请求处理的父 spanId
+sysId	产品线 id
+tenantId	当前上下文中的租户 id
+userId	当前上下文中的登录用户 id
+profile	当前请求处理的环境信息，如：dev、test 等
+agentId	当前请求处理的容器实例 id
+日志组件
+ *           *                1. Maven 依赖引入：
+
+
+com.yonyou.iuap
+
+ucf-log
+
+1.0.9-RELEASE
+
+根据统一版本控制，建议不指定具体版本，而是引入 iuap-pom-with-ucf- parent 统一控制二方包及三方包的版本。
+
+com.yonyou.iuap
+
+iuap-pom-with-ucf-parent
+
+2.0.7-SNAPSHOT
+
+ *           *                1. 配置 MDCLogFilter 过滤器
+
+
+com.yonyou.iuap.ucf.log.filter.MDCLogFilter 负责设置 MDC 中的各个参数，包括traceid，spanId，userid，tenantId 等。每个应用服务应该配置此过滤器,位置在登陆filter 之后(因为需要登陆用户和租户)。
+
+Spring MVC 在 web.xml 中配置如下（filter 顺序放最后）：
+
+mdcLogFilter
+
+com.yonyou.iuap.ucf.log.filter.MDCLogFilter
+
+mdcLogFilter
+
+/*
+
+ *           *                1. 日志配置示例
+
+
+滚动日志后缀禁止使用.log，影响日志收集，推荐使用.log.bak 或者.bak。
+
+ *           *                1. 日志上下文支撑工具 
+ 
+      1. RPC 框架生成 spanId 并传递上下文信息
+
+
+com.yonyou.cloud.middleware
+
+middleware
+
+5.1.10-RELEASE
+
+com.yonyou.cloud.middleware
+
+iris-springboot-support
+
+5.1.10-RELEASE
+
+ *           *                *                     1. AuthSDKClient 作为 http 请求工具负责传递上下文信息
+
+
+com.yonyou.cloud
+
+auth-sdk-client
+
+ *           *                *                     1. ucf-log 中提供 InheritableRunnable 和 UcfThreadPoolTaskExecutor 支持在线程及线程池传递上下文
+      2. Dubbo 中通过 filter 传递上下文
+
+
+服 务 提 供 方 ： 在 src\main\resources\META-
+
+INF\dubbo\com.alibaba.dubbo.rpc.Filter 中配置
+
+dubboLogFilter=com.yonyou.iuap.ucf.log.filter.MDCLogDubboProviderFilter
+
+服 务 消 费 方 ： 在 src\main\resources\META-
+
+INF\dubbo\com.alibaba.dubbo.rpc.Filter 中配置
+
+dubboLogFilter=com.yonyou.iuap.ucf.log.filter.MDCLogDubboConsumerFilt er
+
+规范要求
+ *           *                1. 系统运行时默认日志输出级别为 ERROR，此级别只记录系统逻辑出错、异常或者重要的错误信息。异常日志输出时需要包含明确的异常编码，这样就可以在日志中按租户 ID、用户 ID、异常编码进行检索。平台在调研运行中时遇到异常后再对调用链中的入参进行日志记录，这样既可不用输出过多日志，又可快速定位解决用户因输入参数校验错误投诉的场景，而不需要用户打开 Hubble 重试；
+   2. 在所有业务组的代码中严禁出现 System.out.println()代码，需要输出信息的地方都使用日志代替；
+   3. 统一日志处理方式，应用中不可直接使用日志组件（Log4j、Logback）中的 API， 使用 MDD 框架的应用程序统一采用 com.yonyou.ucf.mdd.ext.util.Logger 进行日志输出，未使用 MDD 框架的统一使用 ucf-log 组件进行日志输出；
+   4. 日志输出以文件为主，生产环境禁止将任何级别的日志直接输出到控制台；
+   5. 使用 MDD 框架的业务操作会自动记录业务日志，可以在业务日志界面查询到实体数据的变化情况，同时可以在开发者中心统一的日志文件查询界面针对异常编码和异常信息进行查询；
+   6. 统一接入层生成 traceId、spanId 并向下游传递，如果没有使用统一接入层可在网关添加脚本实现；
+   7. 日志记录可采用分级记录，不同级别的日志信息记录到不同的日志文件中。同时也可对日志进行分类，将不同类型的日志分开存放，如访问日志 access log， 可单独使用一个文件。分开存放既便于开发人员查看，也便于通过日志对系统进行及时监控；
+   8. 对 trace/debug/info/warn 级别的日志输出，必须使用条件输出形式或者使用占位符的方式。说明：logger.debug("Processing trade with id: " + id + " and symbol: " + symbol); 如果日志级别是 warn，上述日志不会打印，但是会执行字符串拼接操作，如果 symbol 是对象，会执行 toString()方法，浪费系统资源，最终日志却没有打印。 
+ 
+      1. 条件输出形式：
+
+
+if (logger.isDebugEnabled()) {
+
+logger.debug("Processing trade with id: " + id + " and symbol: " + symbol);
+
+}
+
+ *           *                *                     1. 占位符方式：
+
+
+logger.debug("Processing trade with id: {} and symbol : {} ", id, symbol);
+
+ *           *                1. 避免重复打印日志， 浪费磁盘空间，务必在配置文件中针对 logger 设置additivity=false；
+   2. 所有的异常都必须写在日志中，异常信息应该包括当时的操作参数信息和异常堆栈信息。如果不处理，那么通过关键字 throws 往上抛出。如
+
+
+logger.error(各类参数或者对象 + "_" + e.getMessage(), e);
+
+ *           *                1. 对于“敏感”的业务信息，如客户密码、余额等，禁止使用日志方法明文记录， 需要脱敏。在开发过程中，也应减少日志中对该类信息的记录；
+   2. 大量地输出无效日志，不利于系统性能提升，也不利于快速定位错误点。记录日志时请明确思考所输出日志的用途；
+   3. 一定要注意日志输出量的问题，避免把服务器磁盘撑爆，当需要临时开启大量日志时，需要记得及时删除这些日志。日志文件大小等于 100M，须日志滚动。若日志大小设置较低，日志量较大时将会产生大量滚动文件，造成 Linux Inodes 报警；
+   4. 当应用对并发性能要求很高时， 可以添加基于异步写日志的 appender
+
+
+（ch.qos.logback.classic.AsyncAppender），采用异步写的方式降低磁盘 IO，从而降低不必要的性能损耗。但如果阻塞队列增长过快，如果设置为不丢失日志，则线程仍然会被阻塞。
+
+<!—设置为 0 代表不丢失日志，阻塞队列满了不丢弃，阻塞线程 -->
+
+0
+
+256
+
+分布式缓存规范
+
+适用范围**:**本规范主要面向用友云的 Redis 开发规范，从键值设计、命令使用、客户端使用、相关工具等方面进行说明，遵循此规范可以减少使用 Redis 过程带来的问题。
+
+缓存设计
+【推荐】避免缓存穿透
+
+数据库中未查询到的数据，可在 Redis 中设置特殊标识，以避免因缓存中无数据而导致每次请求均达到数据库。
+
+【推荐】避免缓存雪崩
+
+当大量缓存集中在某一个时间段失效，这样在失效的时候也会给数据库带来很大压力。
+
+【推荐】避免缓存击穿
+
+某个 key 的缓存过期后，同一时间内有大量的请求均访问该 key，由于缓存过期， 大量的请求均会访问数据库，并重建缓存；重建缓存的过程加锁，保证只有一个人执行，其他人等待。
+
+【推荐】可以进行适当的缓存预热
+
+对于上线后可能会有大量读请求的应用，在上线之前可预先将数据写入缓存中
+
+【推荐】数据一致性问题
+
+数据源发生变更时可能导致缓存中数据与数据源中数据不一致，应根据实际业务需求来选择适当的缓存更新策略：
+
+ 1. 主动更新：在数据源发生变更时同步更新缓存数据或将缓存数据过期。一致性高，维护成本较高。
+
+被动删除：根据缓存设置的过期时间有 Redis 负责数据的过期删除。一致性较低，维护成本较低。
+推荐策略：主动更新，数据源发生变更时将缓存数据过期。缓存和 DB 的更新不在同一个事务问题：
+
+利用 Spring 的事务管理机制，在事务管理器上注册一个事务提交后回调，在回调方法中进行缓存清理；
+
+使用异步消息队列，并且支持重试补偿机制。（如果缓存里数据时间与数据库时间不能匹配，意味着另外一个服务更新了该数据，那么就先从 DB 里读取最新数据版本， 然后在新版本上提交数据）
+
+键值设计
+【强制】key 值不要包含特殊字符
+
+Redis 以“\n”作为命令结束符，以空格作为命令和参数分隔符。反例：包含空格、换行、单双引号以及其他转义字符
+
+【强制】拒绝 bigkey(防止网卡流量、慢查询)
+
+反例：一个包含 200 万个元素的 list。非字符串的 bigkey，不要使用 del 删除， 使用 hscan、sscan、zscan 方式渐进式删除，同时要注意防止 bigkey 过期时间自动删除问题(例如一个 200 万的 zset 设置 1 小时过期，会触发 del 操作，造成阻塞，而且该操作不会出现在慢查询中(latency 可查))
+
+【推荐】key 值可读性和可管理性
+
+以业务名(或数据库名)为前缀(防止 key 冲突)，用冒号分隔，比如[模块名]:[业务描述]:[ID]
+
+【推荐】key 值简洁性
+
+保证语义的前提下，控制 key 的长度，当 key 较多时，内存占用也不容忽视。
+
+【推荐】根据业务场景合理使用不同数据结构类型
+
+目前 Redis 支持的数据库结构类型较多：字符串（String），哈希（Hash），列表
+
+（List），集合（Set），有序集合（Sorted Set）, Bitmap, HyperLogLog 和地理空间索引（geospatial）等,需要根据业务场景选择合适的类型，常见的如： String 可以用作普通的 K-V、计数类；Hash 可以用作对象如商品、经纪人等，包含较多属性的信息；List 可以用作消息队列等；Set 可以用于推荐；Sorted Set 可以用于排行榜等。
+
+【推荐】控制 key 的生命周期
+
+redis 不是垃圾桶，建议使用 expire 设置过期时间(条件允许可以打散过期时间， 防止集中过期)，不过期的数据重点关注 idletime。
+
+【推荐】冷热数据分离，不要将所有数据全部都放到 Redis 中
+
+虽然 Redis 支持持久化，但是 Redis 的数据存储全部都是在内存中的，成本昂贵， 建议根据业务只将高频热数据存储到 Redis 中。
+
+命令使用
+【强制】线上禁止使用 keys 命令
+
+Redis 是单线程处理，在线上 KEY 数量较多时，操作效率极低【时间复杂度为O(N)】，该命令一旦执行会严重阻塞线上其它命令的正常请求，而且在高 QPS 情况下会直接造成 Redis 服务崩溃。如果有类似需求，请使用 scan 命令代替。
+
+【强制】禁用命令
+
+禁止线上使用 flushall、flushdb 等，flushall、flushdb 会清空 redis 数据。通过 redis 的 rename 机制禁掉命令，或者使用 scan 的方式渐进式处理。
+
+【推荐】O(N)命令关注 N 的数量
+
+例如 hgetall、lrange、smembers、zrange、sinter 等并非不能使用，但是需要明确 N 的值。有遍历的需求可以使用 hscan、sscan、zscan 代替。
+
+【推荐】合理使用 select
+
+redis 的多数据库较弱，使用数字进行区分，很多客户端支持较差，同时多业务用多数据库实际还是单线程处理，会有干扰。
+
+【推荐】使用批量操作提高效率
+
+原生命令 mset、mget，非原生命令 pipline；但要注意控制一次批量操作的元素个数(例如 500 以内，实际也和元素字节数有关)
+
+【推荐】Redis 事务功能较弱，不建议过多使用
+
+Redis 的事务功能较弱(不支持回滚)，而且集群版本(自研和官方)要求一次事务操作的 key 必须在一个 slot 上(可以使用 hashtag 功能解决)
+
+【推荐】Redis 集群版本在使用 Lua 上有特殊要求：
+ *  Redis 从 2.6 版本开始引入对 Lua 脚本的支持
+
+所有 key 都应该由 KEYS 数组来传递，redis.call/pcall 里面调用的 redis命令，key 的位置，必须是 KEYS array, 否则直接返回 error
+Redis 集群对多 key 操作有限制，要求命令中所有的 key 都属于一个 slot， 才可以被执行。
+【推荐】必要情况下使用 monitor 命令时，要注意不要长时间使用
+
+monitor 命令在开启的情况下会降低 redis 的吞吐量，根据压测结果大概会降低redis50%的吞吐量，越多客户端开启该命令，吞吐量下降会越多。
+
+客户端使用
+【推荐】避免多个应用使用一个实例
+
+避免多个应用使用一个 Redis 实例。不要将不相关的业务数据都放到一个实例中， 建议新业务申请新的单独实例。因为 Redis 为单线程处理，独立存储会减少不同业务相互操作的影响，提高请求响应速度；同时也避免单个实例内存数据量膨胀过 大，在出现异常情况时可以更快恢复服务，公共数据做服务化。
+
+【推荐】使用连接池
+
+使用带有连接池的数据库，可以有效控制连接，同时提高效率
+
+【推荐】添加熔断功能
+
+高并发下建议客户端添加熔断功能(例如 netflix hystrix)
+
+【强制】设置合理的密码
+
+设置合理的密码，如有必要可以使用 SSL 加密访问（阿里云 Redis 支持）
+
+【推荐】根据业务类型选择淘汰策略
+ *  根据自身业务类型，选好 maxmemory-policy(最大内存淘汰策略)，设置好过期时间。默认策略是 volatile-lru，即超过最大内存后，在过期键中使用 lru 算法进行 key 的剔除，保证不过期数据不被删除，但是可能会出现 OOM 问题。
+
+其他策略如下：
+allkeys-lru：根据 LRU 算法删除键，不管数据有没有设置超时属性，直到腾出足够空间为止。
+allkeys-random：随机删除所有键，直到腾出足够空间为止。
+volatile-random:随机删除过期键，直到腾出足够空间为止。
+volatile-ttl：根据键值对象的 ttl 属性，删除最近将要过期数据。如果没有，回退到 noeviction 策略。
+noeviction：不会剔除任何数据，拒绝所有写入操作并返回客户端错误信息"(error) OOM command not allowed when used memory"，此时 Redis 只响应读操作。
+【强制】设置连接池时，如果非默认 database，直接在 URI 中指定，不能每次查询 selectDb
+
+如 ：new JedisPool(config,new URI("http://redis:password@host:port/database)
+
+相关工具推荐
+【推荐】数据同步
+
+redis 间数据同步可以使用：redis-port
+
+【推荐】big key 搜索redis 大 key 搜索工具
+【推荐】热点 key 寻找
+
+内部实现使用 monitor，建议短时间使用；facebook 的 redis-faina 。
+
+分布式锁规范
+
+适用范围：本规范主要面使用业务上用于控制并发的场景下，使用分布式锁组件组件时的注意事项，避免发生问题。
+
+分布式锁使用场景
+
+分布式锁的主要作用是用于控制业务并发，原理是生成一个字符串，向分布式锁服务申请，如果其他的服务或线程申请相同字符串时，返回锁已存在，提示加锁失 败。
+
+分布式锁的使用场景有两个：
+ *  **效率：**使用分布式锁可以避免不同节点重复相同的工作，这些工作会浪费资源。例如缓存初始化。
+
+**正确性：**加分布式锁可以避免破坏数据正确性的发生。微服务场景下，业务扩多个应用时，其他人操作数据会导致数据发生问题。
+不推荐使用分布式锁的场景：
+ *  单一服务内的可以使用数据库乐观锁保证数据并发修改的场景。
+
+redis 和 zookeeper 等框架存在独立的事务处理方案，建议使用本事的事务来保证数据的并非修改问题，不建议使用分布式锁。
+业务执行时间过长，导致锁超时失效的场景（建议通过数据级别的锁机制保障，例如建立单独的锁表，增加记录，数据库锁控制）** **
+分布式锁使用规范
+【推荐】指定合理的超时时间， 不建议设置超时时间为空（即不超时）。
+ *  对于现有的微服务的运行环境，应用发生宕机、或者运维人员或系统对应用进行缩容时，可能都会导致当前服务的中断。在出现此类异常时，锁不会被释放。如果设置锁的超时时间为空，会导致下次服务重启后，业务重新运行
+
+
+时，加锁失败，导致业务无法执行。为避免该问题，需要为锁指定超时的时间。
+
+ *  超时时间，建议根据业务系统的加锁场景确定，要超过所有加锁场景下的最长业务执行时间。建议可以把超时时间尽量设置长一些，例如 30 分钟以上， 但不建议设置过长，例如超过 1 天。
+
+【推荐】对于 web 服务建议配置过滤器，防止忘记解锁。
+ *  通过过滤器，确保业务开发忘记解锁时，在调用完成后，通过拦截器对线程中加锁的锁键值进行解锁。在响应式编程时，此方案不推荐，建议有发起应用自己控制解锁。
+
+【强制】有数据库事物的情况下，使用 spring 事务拦截器进行解锁。
+ *  在部分场景下，非跨服务的数据库保存操作时，可以考虑使用 spring 的事物拦截器进行解锁。示例代码如下：
+
+
+public static void requireAutoReleaseLockInTransaction(final String... lockpaths) throws LockException {
+
+if(lockpaths == null || lockpaths.length == 0){ return;
+
+}
+
+if (!TransactionSynchronizationManager.isSynchronizationActive()) { throw new LockException("only support in Transaction");
+
+}
+
+if (DistributedLock.lock(lockpaths)) {
+
+// 注册事务后解锁
+
+TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronizationAdapter() {
+
+@Override
+
+public void afterCompletion(int status) { DistributedLock.unlock(lockpaths);
+
+}
+
+});
+
+} else {
+
+throw new LockException("您操作的数据正在被其他人修改，请稍后再试");
+
+}
+
+}
+
+}
+
+【强制】无数据库事务的情况下，增加 try-catch-finally，并在 finally 中进行解锁。
+ *  在业务代码中加锁和解锁时，要使用如下方式编写代码，避免因为异常导致锁未被释放。
+
+
+public void saveStaff(StaffBasicInfo staff) { boolean islocked = false;
+
+try {
+
+islocked = DistributedLock.lock(staff.getId());
+
+} catch (Exception e) { logger.error(e.getMessage()); throw e;
+
+} finally {
+
+if (islocked) { DistributedLock.unlock(lockpath);
+
+}
+
+}
+
+}
+
+国际化规范
+多语
+接入规约
+【强制】多语资源文件：固定在 resource 下的 i18n 目录，且分语种配置对应多语文件，如 i18n/${domain}-${service}_语种.properties
+【强制】多语资源文件内编码命名为${domain}.${service}.不重复的顺序数
+【推荐】多语字段设置 6 个字段，支持 6 种常用语言，分别为：name、name2、name3、name4、name5、name6，其中 name 是中文，name2 是英文，name3 是繁体， name4 是法文，name5\name6 不固定语种，可以根据租户自定义。
+多时区
+接入规约
+【推荐】后台统一默认时区-东八区
+【推荐】时间戳数据库字段类型为 char(23)
+【推荐】实体对象中时间戳的字段类型定义为 Date
+【推荐】依赖 ucf-cn 提供的统一持久层组件实现多时区持久化
+统一集成规范
+
+适用范围：随着业务的发展，领域间融合程度越来越高；本规范定义了如何快速实现各产品进行集成。
+
+目的
+ *           *                *  在开发、测试、预发、生产等多环境下把相关的服务无缝的集成起来。
+   *  协调一致、减少沟通
+   *  内建质量、自动化
+   *  统一资源申请、管理
+   *  统一中间件安装、维护
+   *  统一发布流程，节奏控制
+
+环境定义
+ *           *                *  【建议】开发环境——定义：用于开发人员进行测试。管理：由开发人员管理，开发人员进行功能调试
+   *  【强制】测试环境——定义：用于开发完成后的联调自测。管理：由开发人员启动代码提交-构建-部署。要求：自测完成有需求和测试确认后，允许开发提交下一环境（测试环境）
+   *  【强制】日常环境——定义：用于提交集成测试。管理：由测试人员管理，经测试批准，开发负责人合并代码完成构建部署，接受测试。要求：测试发现问题，要求开发在特性分支重新修改后，再次请求合并代码至测试环境；通过全面测试后，由测试发起上日常请求
+   *  【强制】预发环境——定义：用于上线前的预发布测试，与生产环境连接同一套生产数据。管理：由发布负责人管理，响应测试人员请求，合并代码完成构建部署。要求：测试发现问题，要求开发重新修改并再次经过测试环境的测试后，再由测试通知运维重新合并代码上预发；完成主流程回归和新特性测试 后，由测试及研发负责人审核上生产
+   *  【强制】生产环境——定义：线上正式发布环境。管理：由发布负责人负责部署上线要求：由预发布环境测试通过的部署包推向生产环境部署。特别：灰度环境对应灰度发布，指部分产品特性为部分用户开放，没有用户问题后再逐步平滑过渡到全部用户开放
+
+代码版本管理
+ *           *                *  【强制】分支分类—— 特性分支、develop 分支、release 分支、master 分支
+   *  【强制】开发环境：develop，新特征开发建议创建 Feature 分支，待特性分支开发完成后合并到 develop 分支进行测试
+   *  【强制】测试环境：develop，测试环境上发现问题创建 bugfix 分支进行开发，修改完毕后合并到 develop 分支继续测试
+   *  【强制】日常环境：develop，测试环境上发现问题创建 bugfix 分支进行开发，修改完毕后合并到 develop 分支继续测试
+   *  【强制】预发环境：release，待 develop 分支功能测试完毕后合并代码到release 分支，如果合并失败进行回滚
+   *  【强制】生产环境：release，基于新合并的 release 分支进行部署验证，验证后合并到代码基准分支 Master
+
+中间件管理
+ *           *                *  【建议】mysql：主从＋vip 模式
+   *  【建议】redis：主从模式
+   *  【建议】zookeeper：至少 3 个节点分布式集群
+   *  【建议】postgresql：单点
+   *  【建议】memcached：单点
+   *  【建议】rabbitmq：2 节点集群镜像模式
+
+发布流程
+ *           *                *  【建议】开发环境——下载代码——》编译代码——》生成部署单元——》执行部署
+   *  【建议】测试环境——下载代码——》编译代码——》生成部署单元——》执行部署
+   *  【建议】日常环境——下载代码——》编译代码——》生成部署单元——》请求部署——》审核——》执行部署
+   *  【建议】预发环境——下载代码——》编译代码——》生成部署单元——》请求部署——》审核——》执行部署——》自动化测试
+   *  【建议】生产环境——已测试包进行部署——》审核——》执行部署
+
+代码质量
+ *           *                *  【强制】代码扫描：按照相关的代码质量编写规范约定的执行，基于开源sonar 扫描，扫描规则由测试部统一规定。
+   *  【强制】安全扫描：按照统一安全规范进行，基于 fortify，绿盟等软件进行。
+   *  【强制】领域间接口自动化测试：基于 postman、selenium 等框架进行
+   *  【建议】自动化测试
+   *  【建议】UI 测试
+   *  【建议】冒烟测试
+   *  【建议】单元测试
+
+访问链路
+ *           *                *  【强制】提供统一访问入口
+   *  【建议】各领域独立访问配置
+   *  【建议】内外网独立拆分，根据需要进行配置
+
+日志链路
+ *           *                *  【强制】统一的日志采集管理机制，统一的日志查询面板
+   *  【强制】遵守统一的日志输出规范
+   *  【强制】基于统一的日志输出规范进行业务全链路管理
+
+资源&监控
+ *           *                *  【强制】统一的资源规划、申请、管理
+   *  【强制】统一的资源监控和报警：如 内存、CPU、IO、网络等
+   *  【强制】统一的中间件监控、报警
+   *  【强制】统一的应用监控、报警 
+ 
+      *  【强制】统一报警规则、策略
+
+SQL 脚本规范
+初始化脚本
+
+专属化需要预置初始化脚本，包括 DDL 建库脚本和 DML 预置数据脚本。
+
+准备脚本目录
+脚本的分类
+
+专属化脚本指所有数据库 sql 脚本。
+
+从脚本类型上区分包括不同数据库类型的 sql 文件，mongodb 的脚本文件（zip 格式），groovy 脚本（通过程序处理 sql），目前存在以上这几种脚本。
+
+从执行库不同区分的话，存在三种脚本：mdd 框架的公共脚本（基于 mdd 开发的服务会涉及到）、插入到公共服务的脚本、插入到业务服务自身库的脚本。
+
+原则
+
+脚本目录规范就是设计好目录结构，能规范好以上这些不同的脚本，使安装器能够正确识别脚本，执行到正确的库里。
+
+脚本的原则：
+
+ *  每个脚本都需要有所有者，所有者管理自己的所有脚本。预置在公共服务里的数据，需要抽取出来 dml 脚本放在业务服务里。
+
+脚本根目录 scripts 放在微服务打包工程里，与 src 同级，确保脚本与代码一样打包到 war 包。
+所有脚本应该是支持幂等。 
+脚本目录结构
+
+初始化脚本放在 init 目录下，init 目录下区分不同的数据库类型：mongodb、rdb
+
+（代表关系型数据库），在不同的数据库类型目录下要放对应数据库语法的脚本。以下以 rdb 为例，mongodb 的目录结构同 rdb。
+
+rdb 目录下区分了两个子目录： 0000_iuap_component 和 0001_ 模块。其中0000_iuap_component 是指基于 mdd 框架脚手架开发的服务中，mdd 框架的公共脚本目
+
+录；而 0001_模块是指除了 mdd 框架脚本之外其他的所有脚本，可以按照模块来区分命名，比如如果服务中有多个模块，那么可以命名为：0001_模块 1；0002_模块 2.
+
+0000_iuap_componen 目录下脚本
+
+制品中 mdd 框架脚本放在 0000_iuap_component 下，在业务服务的工程 git 中不需要放框架脚本，这些脚本是由后端框架开发部负责统一维护的（有统一的公共git）。只需要业务服务在自己 git 工程中该目录下放配置文件，生成制品时可以自动拉取。
+
+需要在这个目录下放一个配置文件：version.xml  version.xml 的内容：
+
+目前这部分脚本区分了两种风格：yht 和 u8c 所以必须要先确定自己是哪种风格，两种风格对应的 git 分支是不一样的，所以需要在 version 文件中指定分支。yht 风格对应的分支：mdddev、mddrelease u8c 风格对应的分支：u8cdev、u8crelease
+
+模块下脚本
+
+模块下脚本又区分了两个子目录：0010_iuap_common 和 0020_self。0010_iuap_common 下放的是所有公共服务预置脚本（只有 DML），下一层目录
+
+必须是规定的预先分配好的目录名称：
+
+3.11.1.
+
+0020_self 下是服务自身的脚本。
+
+2 脚本导出工具  导出脚本的工具
+
+脚本描述文件
+
+脚本描述文件是指在 scrits/db 目录下的 DBDscribe.xml 文件，该文件用来对数据库脚本以及数据源的关系进行描述，对初始化安装、升级安装、补丁安装进行配置。
+
+描述文件的主要结构为：
+
+其中：
+
+1.serviceName 必须填微服务编码
+
+dbScripts 配置各种场景的描述信息
+
+当初始化安装时，最典型的 dbScript 配置如下：
+
+ *  不指定 type 标签，默认代表 type=init
+
+
+rdb
+
+iuap-apcom-prewarning_dataSource1
+
+ *           *                *                     *  dbType 配置脚本对应的数据库类型：rdb 还是 mongodb
+
+
+ *           *                *                     *  logicDataSource 对应 yms 上的逻辑数据源编码
+
+
+如果是 mongo 数据源的，配置的是 mongodb 对应的 mongo template 上的数据源编
+
+码
+
+ *           *                *                     *  如果一个微服务存在多个数据源，脚本要区分在哪个数据源执行时，可以配置多套数据源配置：
+
+
+rdb
+
+iuap-apcom-prewarning_dataSource2
+
+init/rdb/0001_模块名/0020_self/DDL/
+
+init/rdb/0001_模块名/0020_self/DML/
+
+rdb
+
+iuap-apcom-prewarning_dataSource3
+
+init/rdb/0002_模块名/0020_self/DDL/
+
+init/rdb/0002_模块名/0020_self/DML/
+
+![](https://ncc-pub-ublim.oss-cn-beijing.aliyuncs.com/help/photo/0131e39c-e75f-4ca0-84f3-0053ab09782e.png) 请注意：
+ *           *                *                     *  通过 ddl 和 dml 标签来指定要执行的脚本目录。
+      *  建议通过模块目录来区分脚本，不同模块目录指定到不同的数据源上。
+      *  ddl 和 dml 必须指定到目录，不要到具体文件。（避免频繁修改）
+      *  如果在一个标签里要指定多个目录的，用分号隔开，如
+
+
+init/rdb/0002_模块名/0020_self/DDL/;init/rdb/0003_模块名
+
+/0020_self/DDL/
+
+补丁脚本
+准备脚本目录
+
+patch 放的是从金盘发布时间点之后增量维护的幂等脚本。
+
+公有云脚本流水线也会执行此目录下脚本，当需要做补丁盘时，直接从制品库做盘，安装执行的就是 patch 目录下脚本。
+
+patch 中的脚本要求做到幂等。patch 的目录结构如图：
+
+其中，特殊不能支持自动翻译的脚本，需要如图上所示，针对各类型数据库提供单独的脚本，在文件名上如图所示规范命名。  规范：
+
+支持自动翻译的脚本文件名按照以前的规范：4 位数字序号_表名或服务名-时间戳.sql 此为建议，不强制，因为有历史脚本的原因
+
+rdb 下如果有特殊语法的脚本不支持翻译的，需要针对不同数据库分别准备脚本， 文件名规范：4 位数字序号_服务名-时间戳.数据库类型.sql 必须携带数据库类型
+
+标识
+
+关于patch 中文件数量比较多不好管理怎么办？
+
+可以按照阶段性的子目录来管理文件，子目录的命名规范是：yyyymm，如 202205
+
+5 月份的增量脚本放在 202205 目录下，6 月开始的增量脚本就放在 202206 目录下。如图：
+
+脚本导出工具
+
+导出脚本的工具
+
+脚本描述文件
+
+补丁的场景分为通用补丁和专项补丁两种，如下是典型的通用补丁配置： type=patch 代表是补丁配置
+
+<dbScript>
+
+<dbType>rdb</dbType>
+
+<type>patch</type>
+
+<logicDataSource>iuap-apcom- prewarning_dataSource1</logicDataSource>
+
+<ddl></ddl>
+
+<dml></dml>
+
+</dbScript>
+
+dbType：代表脚本对应的数据库类型
+
+同样的如果是多个数据源，那么需要配置多套。
+
+rdb
+
+patch
+
+iuap-apcom- prewarning_dataSource1
+
+专项补丁配置：
+
+<dbScript>
+
+<code>QDG</code>
+
+<name>青岛港专项补丁</name>
+
+code：必须录入规范的项目编码，咨询 ypr 为准path：执行专项补丁的脚本目录
+
+专项补丁的脚本必须放在 patch_special 目录中，以项目编码作为子目录同样的如果是多个数据源，需要配置多套。
+
+升级脚本
+
+准备脚本目录
+
+upgrade 放的是金盘发布的本版本对某一历史版本的数据库升级脚本，如针对YonBIP202105 的升级，或者针对 YonBIP202111 的升级等。
+
+脚本要求幂等，升级脚本都是每次大版本发布时从 patch 脚本中迁移过来的。通过 DBDescribe.xml 来描述升级目录。
+
+脚本导出工具
+
+upgrade 脚本没有专门的导出脚本工具。
+
+每个大版本整理升级脚本，是通过把从上一版积累下来的 patch 中脚本迁移到升级目录中而来的。
+
+脚本描述文件
+
+描述文件中关于升级的描述如下：  fromVersion：指的是从哪个版本升级
+
+path：是升级要执行哪几个目录，配置的是 upgrade 直接下层目录名，多个用分号隔开
+
+安装器的逻辑：
+
+当发现目标版本是 YonBIP202105 时，那么找 fromversion=YonBIP202105 的配置， 依次执行 path 中配置的目录脚本，最后执行 patch。
+
+针对每一个大版本，都需要配置一个升级描述（同时有升级目录）。
+
+小版本不需要，比如 202203 是小版本，没有整理升级目录，同时没有配置描述文件。 那么：
+
+ *           *                *                     1. 针对目标是 202105 版，执行 YonBIP202105-YonBIP202111 目录，同时执行patch
+      2. 针对目标是 202111 版，只执行 patch
+
+公有云脚本流水线
+
+公有云执行脚本必须通过配置脚本流水线的方式，不允许手工执行脚本到数据库中。公有云脚本流水线只执行 patch 目录下的脚本。
+
+公有云脚本流水线由运维创建。
+
+使用限制
+**【强制】**sql 都是执行幂等性的，可以多次执行
+
+**【强制】**sql 文件编码都是 UTF8，大部分数据库都是 utf8
+
+文档内容是否对您有所帮助？
+为帮助文档评分：
+页内目录
+1. 第一章 概述
+2. 第二章 适用范围
+3. 第三章 开发规范说明
+3.1 微服务工程规范
+3.2 统一三方包规范
+3.2.1 常见开源协议
+3.2.2 三方包清单
+3.2.3 组件使用说明
+3.2.4 三方包依赖规范
+3.2.5 检查工具
+3.3 统一二方包规范
+3.3.1 3.3.1 组件使用说明
+3.4 Java 开发规范
+3.4.1 命名风格
+3.5 异常规范
+3.5.1 异常开发
+3.5.2 异常编码
+3.5.3 其他要求
+3.6 日志规范
+3.6.1 日志级别
+3.6.2 日志输出目录和格式
+3.6.3 日志组件
+3.6.4 规范要求
+3.7 分布式缓存规范
+3.7.1 缓存设计
+3.7.2 键值设计
+3.7.3 命令使用
+3.7.4 客户端使用
+3.7.5 相关工具推荐
+3.8 分布式锁规范
+3.8.1 分布式锁使用场景
+3.8.2 分布式锁使用规范
+3.9 国际化规范
+3.9.1 多语
+3.9.2 多时区
+3.10 统一集成规范
+3.10.1 目的
+3.10.2 环境定义
+3.10.3 代码版本管理
+3.10.4 中间件管理
+3.10.5 发布流程
+3.10.6 代码质量
+3.10.7 访问链路
+3.10.8 日志链路
+3.10.9 资源&监控
+3.11 SQL 脚本规范
+3.11.1 初始化脚本
+3.11.2 补丁脚本
+3.11.3 升级脚本
+3.11.4 公有云脚本流水线
+3.11.5 使用限制
+文档反馈
+北京市海淀区北清路68号用友产业园
+4006-600-588
+友情链接
+用友官网用友YonHelp用友iuap平台用友云市场用友云注册协议隐私条款
+
+Copyright ©2020 用友网络科技股份有限公司版权所有京ICP备05007539号-24京公网安备11010802021935号
+
+返回顶部
+加载中...

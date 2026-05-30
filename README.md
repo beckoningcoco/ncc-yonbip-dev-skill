@@ -13,21 +13,36 @@
 
 ## 快速安装
 
+> **重要：请在 CMD 或 PowerShell 原生终端中运行，不要从 Git Bash 运行。**
+
 ```bash
-git clone https://github.com/beckoningcoco/ncc-yonbip-dev-skill.git
+git clone git@github.com:beckoningcoco/ncc-yonbip-dev-skill.git
 cd ncc-yonbip-dev-skill
-setup.bat      # Windows
-# 或
-bash setup.sh  # Mac/Linux
+setup.bat                 # 交互式安装（推荐）
 ```
 
 安装脚本会：
-1. 将技能链接到 Claude Code 的 skills 目录
+1. 创建目录联结（junction）将技能安装到 Claude Code 的 skills 目录
 2. 安装 baoyu-url-to-markdown 的 npm 依赖
 3. 提示输入 NCHOME 路径，建立源码索引
 
+### 参数
+
+```bash
+setup.bat --quiet         # 跳过所有交互提示，不建索引
+setup.bat --skip-ncc      # 跳过 NCC 索引构建步骤
+setup.bat -q --skip-ncc   # 组合使用
+```
+
+### 手动配置 NCC
+
+```bash
+python skills\yon-ncc-dev\scripts\build_index.py E:\path\to\ncc\home 2111
+```
+
 ## 使用前提
 
+- **Windows CMD 或 PowerShell** 终端（不要用 Git Bash）
 - Claude Code CLI 已安装
 - Node.js（baoyu-url-to-markdown 需要）
 - Python 3（源码索引构建需要）
@@ -37,5 +52,5 @@ bash setup.sh  # Mac/Linux
 
 ```bash
 git pull
-# 如果 ncc_home_path.json 有新增版本字段，手动合并
+# 如果使用 junction 安装，技能会自动同步最新版本
 ```

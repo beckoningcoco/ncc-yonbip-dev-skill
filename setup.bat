@@ -2,122 +2,177 @@
 setlocal enabledelayedexpansion
 title NCC YonBIP Dev Skill - Setup
 
+:: Force UTF-8 codepage to avoid garbled text in non-Chinese environments
+chcp 65001 >nul 2>&1
+
 echo ============================================
-echo   NCC YonBIP Dev Skill Toolkit - 安装程序
+echo   NCC YonBIP Dev Skill Toolkit - Setup
 echo ============================================
 echo.
 
-:: === 1. 检测前提条件 ===
-echo [1/5] 检测环境...
+:: === Parse arguments ===
+set QUIET=0
+set SKIP_NCC=0
+:parse_args
+if "%~1"=="" goto :end_parse
+if /i "%~1"=="--quiet" set QUIET=1
+if /i "%~1"=="-q" set QUIET=1
+if /i "%~1"=="--skip-ncc" set SKIP_NCC=1
+shift
+goto :parse_args
+:end_parse
+
+:: Detect non-interactive mode (stdin is not a terminal)
+set NON_INTERACTIVE=0
+echo %PROMPT% 2>nul | findstr /r "." >nul 2>&1 || set NON_INTERACTIVE=1
+
+:: ============================================================
+:: Helper: install a skill with symlink, fallback to copy
+:: ============================================================
+goto :skip_helper
+:install_skill
+:: %1 = skill name, %2 = source dir (relative to script dir)
+set "SKILL_NAME=%~1"
+set "SKILL_SRC=%~dp0skills\%~2"
+set "SKILL_DST=%SKILLS_DIR%\!SKILL_NAME!"
+
+if exist "!SKILL_DST!" (
+    echo   !SKILL_NAME!: already exists, skipped
+    goto :eof
+)
+
+:: Try mklink /J first (fast, auto-sync with git pull)
+mklink /J "!SKILL_DST!" "!SKILL_SRC!" >nul 2>&1
+:: Verify the junction was actually created
+if exist "!SKILL_DST!\SKILL.md" (
+    echo   !SKILL_NAME!: installed ^(junction^)
+    goto :eof
+)
+
+:: Also check without SKILL.md (some skills might not have it)
+if exist "!SKILL_DST!" (
+    echo   !SKILL_NAME!: installed ^(junction^)
+    goto :eof
+)
+
+:: Fallback to xcopy
+echo   !SKILL_NAME!: junction failed, copying...
+xcopy "!SKILL_SRC!" "!SKILL_DST!" /E /I /Q >nul
+if exist "!SKILL_DST!" (
+    echo   !SKILL_NAME!: installed ^(copy^)
+) else (
+    echo   !SKILL_NAME!: [ERROR] installation failed
+)
+goto :eof
+:skip_helper
+
+:: === 1. Check prerequisites ===
+echo [1/5] Checking environment...
 
 where node >nul 2>nul
 if %errorlevel% neq 0 (
-    echo [警告] 未找到 Node.js，baoyu-url-to-markdown 技能将无法使用
-    echo        请从 https://nodejs.org 下载安装
+    echo   [WARN] Node.js not found - baoyu-url-to-markdown will not work
+    echo          Download from https://nodejs.org
 ) else (
-    echo   Node.js: 已安装
+    echo   Node.js: OK
 )
 
 where python >nul 2>nul
 if %errorlevel% neq 0 (
-    echo [警告] 未找到 Python，源码索引功能将无法使用
+    echo   [WARN] Python not found - source index builder will not work
 ) else (
-    echo   Python: 已安装
+    echo   Python: OK
 )
 
-echo   Claude Code: 请确认已安装
+echo   Claude Code: please verify it is installed
 
-:: === 2. 安装技能 ===
+:: === 2. Install skills ===
 echo.
-echo [2/5] 安装技能到 Claude Code...
+echo [2/5] Installing skills...
 
-set SKILLS_DIR=%USERPROFILE%\.claude\skills
+set "SKILLS_DIR=%USERPROFILE%\.claude\skills"
 if not exist "%SKILLS_DIR%" mkdir "%SKILLS_DIR%"
 
-:: yon-ncc-dev
-if exist "%SKILLS_DIR%\yon-ncc-dev" (
-    echo   yon-ncc-dev: 已存在，跳过
-) else (
-    mklink /J "%SKILLS_DIR%\yon-ncc-dev" "%~dp0skills\yon-ncc-dev" >nul 2>&1
-    if %errorlevel% equ 0 (
-        echo   yon-ncc-dev: 安装成功
-    ) else (
-        echo   yon-ncc-dev: 链接失败，尝试复制...
-        xcopy "%~dp0skills\yon-ncc-dev" "%SKILLS_DIR%\yon-ncc-dev" /E /I /Q
-    )
-)
+call :install_skill yon-ncc-dev yon-ncc-dev
+call :install_skill yonyou-bip-dev yonyou-bip-dev
+call :install_skill baoyu-url-to-markdown baoyu-url-to-markdown
+call :install_skill llm-wiki llm-wiki
 
-:: yonyou-bip-dev
-if exist "%SKILLS_DIR%\yonyou-bip-dev" (
-    echo   yonyou-bip-dev: 已存在，跳过
-) else (
-    mklink /J "%SKILLS_DIR%\yonyou-bip-dev" "%~dp0skills\yonyou-bip-dev" >nul 2>&1
-    if %errorlevel% equ 0 (
-        echo   yonyou-bip-dev: 安装成功
-    ) else (
-        xcopy "%~dp0skills\yonyou-bip-dev" "%SKILLS_DIR%\yonyou-bip-dev" /E /I /Q
-    )
-)
-
-:: baoyu-url-to-markdown
-if exist "%SKILLS_DIR%\baoyu-url-to-markdown" (
-    echo   baoyu-url-to-markdown: 已存在，跳过
-) else (
-    mklink /J "%SKILLS_DIR%\baoyu-url-to-markdown" "%~dp0skills\baoyu-url-to-markdown" >nul 2>&1
-    if %errorlevel% equ 0 (
-        echo   baoyu-url-to-markdown: 安装成功
-    ) else (
-        xcopy "%~dp0skills\baoyu-url-to-markdown" "%SKILLS_DIR%\baoyu-url-to-markdown" /E /I /Q
-    )
-)
-
-:: llm-wiki
-if exist "%SKILLS_DIR%\llm-wiki" (
-    echo   llm-wiki: 已存在，跳过
-) else (
-    mklink /J "%SKILLS_DIR%\llm-wiki" "%~dp0skills\llm-wiki" >nul 2>&1
-    if %errorlevel% equ 0 (
-        echo   llm-wiki: 安装成功
-    ) else (
-        xcopy "%~dp0skills\llm-wiki" "%SKILLS_DIR%\llm-wiki" /E /I /Q
-    )
-)
-
-:: === 3. 安装 npm 依赖 ===
+:: === 3. Install npm dependencies ===
 echo.
-echo [3/5] 安装 baoyu-url-to-markdown 依赖...
-cd /d "%~dp0skills\baoyu-url-to-markdown\scripts"
-if exist "package.json" (
+echo [3/5] Installing npm dependencies...
+
+set "NPM_DIR=%~dp0skills\baoyu-url-to-markdown\scripts"
+if exist "%NPM_DIR%\package.json" (
+    pushd "%NPM_DIR%"
     call npm install
-    echo   npm 依赖安装完成
+    popd
+    echo   npm: OK
 ) else (
-    echo   [跳过] 未找到 package.json
+    echo   [WARN] baoyu-url-to-markdown/scripts/package.json not found
+    echo          The skill may not work. Run 'npm install' manually in that directory.
 )
-cd /d "%~dp0"
 
-:: === 4. 配置 NCHOME ===
+:: === 4. Configure NCHOME ===
 echo.
-echo [4/5] 配置 NCC 开发环境...
-set /p NCC_VERSION="请输入 NCC 版本号 (如 2111, 2312，直接回车跳过): "
-if not "%NCC_VERSION%"=="" (
-    set /p NCC_HOME="请输入 NCC %NCC_VERSION% 的 home 全路径: "
-    if not "!NCC_HOME!"=="" (
-        echo 正在构建源码索引（可能需要几分钟）...
-        python "%~dp0skills\yon-ncc-dev\scripts\build_index.py" "!NCC_HOME!" "!NCC_VERSION!"
+echo [4/5] Configuring NCC dev environment...
+
+if "%SKIP_NCC%"=="1" (
+    echo   [SKIP] --skip-ncc flag set
+    goto :done_ncc
+)
+
+if "%NON_INTERACTIVE%"=="1" (
+    if "%QUIET%"=="0" (
+        echo   [SKIP] Non-interactive mode detected. To configure later, run:
+        echo         python skills\yon-ncc-dev\scripts\build_index.py ^<NCHOME_PATH^> ^<VERSION^>
+    )
+    goto :done_ncc
+)
+
+set /p NCC_VERSION="Enter NCC version (e.g. 2111, 2312), or press Enter to skip: "
+if "%NCC_VERSION%"=="" (
+    echo   [SKIP] No version entered. Run build_index.py later to configure.
+    goto :done_ncc
+)
+
+set /p NCC_HOME="Enter full path to NCC %NCC_VERSION% home directory: "
+if "!NCC_HOME!"=="" (
+    echo   [SKIP] No path entered.
+    goto :done_ncc
+)
+
+echo   Building source index (this may take several minutes)...
+python "%~dp0skills\yon-ncc-dev\scripts\build_index.py" "!NCC_HOME!" "!NCC_VERSION!"
+if !errorlevel! equ 0 (
+    echo   Index built successfully
+) else (
+    echo   [WARN] Index build failed. Check the path and try again manually.
+)
+
+:done_ncc
+
+:: === 5. Done ===
+echo.
+echo [5/5] Setup complete!
+echo.
+echo ============================================
+echo   Skills installed to: %SKILLS_DIR%
+echo   Knowledge base at:   %~dp0knowledge-base\yon-bip-obsidian
+echo.
+echo   Available skills:
+echo     - yon-ncc-dev       (NCC development)
+echo     - yonyou-bip-dev    (BIP development)
+echo     - baoyu-url-to-markdown
+echo     - llm-wiki          (knowledge base)
+echo.
+echo   Usage:
+echo     setup.bat --quiet     # skip all prompts
+echo     setup.bat --skip-ncc  # skip NCC index building
+echo ============================================
+
+if "%NON_INTERACTIVE%"=="0" (
+    if "%QUIET%"=="0" (
+        pause
     )
 )
-
-:: === 5. 完成 ===
-echo.
-echo [5/5] 安装完成！
-echo.
-echo ============================================
-echo   技能已安装到: %SKILLS_DIR%
-echo   知识库存放于: %~dp0knowledge-base\yon-bip-obsidian
-echo.
-echo   现在可以在 Claude Code 中使用以下技能：
-echo     - yon-ncc-dev    (NCC 开发)
-echo     - yonyou-bip-dev (BIP 开发)
-echo     - llm-wiki       (知识库)
-echo ============================================
-pause

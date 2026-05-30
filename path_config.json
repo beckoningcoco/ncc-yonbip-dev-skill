@@ -51,5 +51,18 @@
     "路径": "C:\\Users\\99558\\AppData\\Roaming\\Typora\\typora-user-images",
     "_用途": "文档中的图片引用路径。其他用户用不到 Typora 图片，可忽略此项。",
     "_影响": "仅视觉影响——文档中引用的 Typora 本地图片在其他电脑上无法显示，不影响技能功能。"
+  },
+
+  "Claude_Code权限配置": {
+    "_说明": "为了让 Claude Code 读取技能文件、执行技能脚本时不弹窗询问，需要在 ~/.claude/settings.json 中配置以下权限。参考下面的 JSON 片段，把路径改成你自己的。",
+    "_配置方法": "打开 %USERPROFILE%\\.claude\\settings.json，添加或合并以下内容",
+    "_配置内容": {
+      "permissions": {
+        "allow": ["Read"],
+        "additionalDirectories": ["C:\\Users\\你的用户名\\.claude\\skills"]
+      }
+    },
+    "_说明2": "allow: [\"Read\"] 表示读取任何文件都不弹窗。additionalDirectories 把技能目录加入信任范围，执行里面的脚本也不弹窗。",
+    "_注意": "如果你的 settings.json 已有其他配置（如 env），不要覆盖，只合并 permissions 部分。"
   }
 }

@@ -98,6 +98,46 @@ call :install_skill yonyou-bip-dev yonyou-bip-dev
 call :install_skill baoyu-url-to-markdown baoyu-url-to-markdown
 call :install_skill llm-wiki llm-wiki
 
+:: === Auto-configure Claude Code permissions ===
+echo.
+echo [*] Configuring Claude Code permissions (no prompts for skill files)...
+
+set "SETTINGS_FILE=%USERPROFILE%\.claude\settings.json"
+set "SKILLS_DIR_FWD=%SKILLS_DIR:\=/%"
+
+python -c "
+import json, os
+settings_file = os.environ['SETTINGS_FILE']
+skills_dir = os.environ['SKILLS_DIR']
+
+cfg = {}
+if os.path.exists(settings_file):
+    with open(settings_file, 'r', encoding='utf-8') as f:
+        cfg = json.load(f)
+
+# Add Read permission
+cfg.setdefault('permissions', {})
+cfg['permissions'].setdefault('allow', [])
+if 'Read' not in cfg['permissions']['allow']:
+    cfg['permissions']['allow'].append('Read')
+
+# Add skills directory as trusted
+cfg['permissions'].setdefault('additionalDirectories', [])
+if skills_dir not in cfg['permissions']['additionalDirectories']:
+    cfg['permissions']['additionalDirectories'].append(skills_dir)
+
+with open(settings_file, 'w', encoding='utf-8') as f:
+    json.dump(cfg, f, ensure_ascii=False, indent=2)
+print('   Permissions configured: Read + skills directory trusted')
+" 2>&1
+
+if %errorlevel% equ 0 (
+    echo   Done.
+) else (
+    echo   [WARN] Failed to auto-configure. Manually add to %SETTINGS_FILE%:
+    echo     "permissions": { "allow": ["Read"], "additionalDirectories": ["%SKILLS_DIR%"] }
+)
+
 :: === 3. Configure llm-wiki knowledge base ===
 echo.
 echo [3/6] Configuring llm-wiki knowledge base...

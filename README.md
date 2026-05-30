@@ -74,6 +74,9 @@ npx skills add tw93/waza@think -g -y
 
 # 自我进化 — 从反馈中学习优化
 npx skills add charon-fan/agent-playbook@self-improving-agent -g -y
+
+# 浏览器操控 — AI 直接打开网页、点击、填表、截图（326K installs）
+npx skills add vercel-labs/agent-browser@agent-browser -g -y
 ```
 
 ## 更新

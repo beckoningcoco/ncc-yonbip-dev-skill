@@ -32,6 +32,13 @@
     "_如何获取": "找你的 NCC 2312 项目负责人要 home 目录的路径"
   },
 
+  "BIP_Home_V5": {
+    "_说明": "BIP 旗舰版 V5 的 home 目录（服务器模块 + external + pre 合并后的完整目录）",
+    "路径": "E:\\download2",
+    "_用途": "反编译 BIP 旗舰版 V5 的 jar 包、构建类名索引",
+    "_如何获取": "从服务器下载 yms-home 下的 modules/、external/、pre/ 三个目录，合并到一个本地目录"
+  },
+
   "知识库目录": {
     "_说明": "Obsidian 知识库存放位置（llm-wiki 技能使用）",
     "路径": "D:\\yon-bip-obsidian\\yon-bip-obsidian",

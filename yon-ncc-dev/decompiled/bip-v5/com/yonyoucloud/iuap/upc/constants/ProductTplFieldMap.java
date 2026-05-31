@@ -1,0 +1,127 @@
+/*
+ * Decompiled with CFR 0.152.
+ */
+package com.yonyoucloud.iuap.upc.constants;
+
+import java.util.HashMap;
+import java.util.HashSet;
+
+public class ProductTplFieldMap {
+    public static HashSet<String> productTplFieldType = new HashSet(32);
+    public static HashMap<String, String> productTplFieldRenameMap = new HashMap(256);
+    public static HashSet<String> productTplVOFieldType = new HashSet(32);
+    public static HashMap<String, String> productTplVOFieldRenameMap = new HashMap(256);
+    public static final String API_PACKAGE = "com.yonyoucloud.iuap.upc.productTpl.dto";
+    public static final String ProductTplDTO = "com.yonyoucloud.iuap.upc.productTpl.dto.ProductTplDTO";
+    public static final String BrandDTO = "com.yonyoucloud.iuap.upc.productTpl.dto.BrandDTO";
+    public static final String ProductTplOrderPropertyDTO = "com.yonyoucloud.iuap.upc.productTpl.dto.ProductTplOrderPropertyDTO";
+    public static final String ProductTplParameterDTO = "com.yonyoucloud.iuap.upc.productTpl.dto.ProductTplParameterDTO";
+    public static final String UnitDTO = "com.yonyoucloud.iuap.upc.productTpl.dto.UnitDTO";
+    public static final String ProductTplAssistUnitExchangeDTO = "com.yonyoucloud.iuap.upc.productTpl.dto.ProductTplAssistUnitExchangeDTO";
+    public static final String FreeCTCharacterDTO = "com.yonyoucloud.iuap.upc.productTpl.dto.FreeCTCharacterDTO";
+    public static final String MaterialPropCharacterDTO = "com.yonyoucloud.iuap.upc.productTpl.dto.MaterialPropCharacterDTO";
+    public static final String SkuPropCTCharacterDTO = "com.yonyoucloud.iuap.upc.productTpl.dto.SkuPropCTCharacterDTO";
+    public static final String OptionCTCharacterDTO = "com.yonyoucloud.iuap.upc.productTpl.dto.OptionCTCharacterDTO";
+    public static final String API_VO_PACKAGE = "com.yonyoucloud.iuap.upc.vo.productTpl.vo";
+    public static final String ProductTplVO = "com.yonyoucloud.iuap.upc.vo.productTpl.vo.ProductTplVO";
+    public static final String BrandVO = "com.yonyoucloud.iuap.upc.vo.productTpl.vo.BrandVO";
+    public static final String ProductTplOrderPropertyVO = "com.yonyoucloud.iuap.upc.vo.productTpl.vo.ProductTplOrderPropertyVO";
+    public static final String ProductTplParameterVO = "com.yonyoucloud.iuap.upc.vo.productTpl.vo.ProductTplParameterVO";
+    public static final String UnitVO = "com.yonyoucloud.iuap.upc.vo.productTpl.vo.UnitVO";
+    public static final String ProductTplAssistUnitExchangeVO = "com.yonyoucloud.iuap.upc.vo.productTpl.vo.ProductTplAssistUnitExchangeVO";
+    public static final String FreeCTCharacterVO = "com.yonyoucloud.iuap.upc.vo.productTpl.vo.FreeCTCharacterVO";
+    public static final String MaterialPropCharacterVO = "com.yonyoucloud.iuap.upc.vo.productTpl.vo.MaterialPropCharacterVO";
+
+    static {
+        productTplFieldType.add(ProductTplDTO);
+        productTplFieldType.add(BrandDTO);
+        productTplFieldType.add(ProductTplOrderPropertyDTO);
+        productTplFieldType.add(ProductTplParameterDTO);
+        productTplFieldType.add(UnitDTO);
+        productTplFieldType.add(FreeCTCharacterDTO);
+        productTplFieldType.add(MaterialPropCharacterDTO);
+        productTplFieldType.add(SkuPropCTCharacterDTO);
+        productTplFieldType.add(OptionCTCharacterDTO);
+        productTplFieldType.add(ProductTplAssistUnitExchangeDTO);
+        productTplFieldRenameMap.put("com.yonyoucloud.iuap.upc.productTpl.dto.ProductTplDTO.name", "name");
+        productTplFieldRenameMap.put("com.yonyoucloud.iuap.upc.productTpl.dto.ProductTplDTO.freightRule", "FreightRule");
+        productTplFieldRenameMap.put("com.yonyoucloud.iuap.upc.productTpl.dto.ProductTplDTO.nameSpacer", "nameSpacer");
+        productTplFieldRenameMap.put("com.yonyoucloud.iuap.upc.productTpl.dto.ProductTplDTO.stopStatus", "stopstatus");
+        productTplFieldRenameMap.put("com.yonyoucloud.iuap.upc.productTpl.dto.ProductTplDTO.units", "Units");
+        productTplFieldRenameMap.put("com.yonyoucloud.iuap.upc.productTpl.dto.ProductTplDTO.productTplAssistUnitExchangesList", "productTplAssistUnitExchanges");
+        productTplFieldRenameMap.put("com.yonyoucloud.iuap.upc.productTpl.dto.ProductTplDTO.productTplParameter", "Parameters");
+        productTplFieldRenameMap.put("com.yonyoucloud.iuap.upc.productTpl.dto.ProductTplDTO.orderProperties", "OrderProperties");
+        productTplFieldRenameMap.put("com.yonyoucloud.iuap.upc.productTpl.dto.ProductTplDTO.brands", "Brands");
+        productTplFieldRenameMap.put("com.yonyoucloud.iuap.upc.productTpl.dto.ProductTplDTO.orderPropertySums", "OrderPropertySums");
+        productTplFieldRenameMap.put("com.yonyoucloud.iuap.upc.productTpl.dto.BrandDTO.brandName", "brand_name");
+        productTplFieldRenameMap.put("com.yonyoucloud.iuap.upc.productTpl.dto.UnitDTO.unitName", "unit_Name");
+        productTplFieldRenameMap.put("com.yonyoucloud.iuap.upc.productTpl.dto.UnitDTO.purchaseUnitName", "purchaseUnit_Name");
+        productTplFieldRenameMap.put("com.yonyoucloud.iuap.upc.productTpl.dto.UnitDTO.stockUnitName", "stockUnit_Name");
+        productTplFieldRenameMap.put("com.yonyoucloud.iuap.upc.productTpl.dto.UnitDTO.batchUnitName", "batchUnit_Name");
+        productTplFieldRenameMap.put("com.yonyoucloud.iuap.upc.productTpl.dto.UnitDTO.onlineUnitName", "onlineUnit_Name");
+        productTplFieldRenameMap.put("com.yonyoucloud.iuap.upc.productTpl.dto.UnitDTO.offlineUnitName", "offlineUnit_Name");
+        productTplFieldRenameMap.put("com.yonyoucloud.iuap.upc.productTpl.dto.UnitDTO.requireUnitName", "requireUnit_Name");
+        productTplFieldRenameMap.put("com.yonyoucloud.iuap.upc.productTpl.dto.UnitDTO.purchasePriceUnitName", "purchasePriceUnit_Name");
+        productTplFieldRenameMap.put("com.yonyoucloud.iuap.upc.productTpl.dto.UnitDTO.batchPriceUnitName", "batchPriceUnit_Name");
+        productTplFieldRenameMap.put("com.yonyoucloud.iuap.upc.productTpl.dto.UnitDTO.inspectionUnitName", "inspectionUnit_Name");
+        productTplFieldRenameMap.put("com.yonyoucloud.iuap.upc.productTpl.dto.UnitDTO.produceUnitName", "produceUnit_Name");
+        productTplFieldRenameMap.put("com.yonyoucloud.iuap.upc.productTpl.dto.ProductTplAssistUnitExchangeDTO.assistUnitName", "assistUnit_Name");
+        productTplFieldRenameMap.put("com.yonyoucloud.iuap.upc.productTpl.dto.ProductTplAssistUnitExchangeDTO.order", "iOrder");
+        productTplFieldRenameMap.put("com.yonyoucloud.iuap.upc.productTpl.dto.ProductTplOrderPropertyDTO.name", "propertyType_showItem");
+        productTplFieldRenameMap.put("com.yonyoucloud.iuap.upc.productTpl.dto.FreeCTCharacterDTO.characterName", "character_name");
+        productTplFieldRenameMap.put("com.yonyoucloud.iuap.upc.productTpl.dto.MaterialPropCharacterDTO.characterName", "character_name");
+        productTplFieldRenameMap.put("com.yonyoucloud.iuap.upc.productTpl.dto.SkuPropCTCharacterDTO.characterName", "character_name");
+        productTplFieldRenameMap.put("com.yonyoucloud.iuap.upc.productTpl.dto.OptionCTCharacterDTO.characterName", "character_name");
+        productTplVOFieldType.add(ProductTplVO);
+        productTplVOFieldType.add(BrandVO);
+        productTplVOFieldType.add(ProductTplOrderPropertyVO);
+        productTplVOFieldType.add(ProductTplParameterVO);
+        productTplVOFieldType.add(UnitVO);
+        productTplVOFieldType.add(FreeCTCharacterVO);
+        productTplVOFieldType.add(ProductTplAssistUnitExchangeVO);
+        productTplVOFieldType.add("com.yonyoucloud.iuap.upc.vo.MultilingualVO");
+        productTplVOFieldRenameMap.put("com.yonyoucloud.iuap.upc.vo.productTpl.vo.ProductTplVO.name", "name");
+        productTplVOFieldRenameMap.put("com.yonyoucloud.iuap.upc.vo.productTpl.vo.ProductTplVO.freightRule", "FreightRule");
+        productTplVOFieldRenameMap.put("com.yonyoucloud.iuap.upc.vo.productTpl.vo.ProductTplVO.nameSpacer", "nameSpacer");
+        productTplVOFieldRenameMap.put("com.yonyoucloud.iuap.upc.vo.productTpl.vo.ProductTplVO.stopStatus", "stopstatus");
+        productTplVOFieldRenameMap.put("com.yonyoucloud.iuap.upc.vo.productTpl.vo.ProductTplVO.orderPropertySums", "OrderPropertySums");
+        productTplVOFieldRenameMap.put("com.yonyoucloud.iuap.upc.vo.productTpl.vo.ProductTplVO.parameters", "Parameters");
+        productTplVOFieldRenameMap.put("com.yonyoucloud.iuap.upc.vo.productTpl.vo.ProductTplVO.units", "Units");
+        productTplVOFieldRenameMap.put("com.yonyoucloud.iuap.upc.vo.productTpl.vo.ProductTplVO.productTplAssistUnitExchangesList", "productTplAssistUnitExchanges");
+        productTplVOFieldRenameMap.put("com.yonyoucloud.iuap.upc.vo.productTpl.vo.ProductTplVO.productTplParameter", "Parameters");
+        productTplVOFieldRenameMap.put("com.yonyoucloud.iuap.upc.vo.productTpl.vo.ProductTplVO.orderProperties", "OrderProperties");
+        productTplVOFieldRenameMap.put("com.yonyoucloud.iuap.upc.vo.productTpl.vo.ProductTplVO.brands", "Brands");
+        productTplVOFieldRenameMap.put("com.yonyoucloud.iuap.upc.vo.productTpl.vo.BrandVO.brandName", "brand_name");
+        productTplVOFieldRenameMap.put("com.yonyoucloud.iuap.upc.vo.productTpl.vo.BrandVO.brandCode", "brand_code");
+        productTplVOFieldRenameMap.put("com.yonyoucloud.iuap.upc.vo.productTpl.vo.UnitVO.unitName", "unit_Name");
+        productTplVOFieldRenameMap.put("com.yonyoucloud.iuap.upc.vo.productTpl.vo.UnitVO.purchaseUnitName", "purchaseUnit_Name");
+        productTplVOFieldRenameMap.put("com.yonyoucloud.iuap.upc.vo.productTpl.vo.UnitVO.stockUnitName", "stockUnit_Name");
+        productTplVOFieldRenameMap.put("com.yonyoucloud.iuap.upc.vo.productTpl.vo.UnitVO.batchUnitName", "batchUnit_Name");
+        productTplVOFieldRenameMap.put("com.yonyoucloud.iuap.upc.vo.productTpl.vo.UnitVO.onlineUnitName", "onlineUnit_Name");
+        productTplVOFieldRenameMap.put("com.yonyoucloud.iuap.upc.vo.productTpl.vo.UnitVO.offlineUnitName", "offlineUnit_Name");
+        productTplVOFieldRenameMap.put("com.yonyoucloud.iuap.upc.vo.productTpl.vo.UnitVO.requireUnitName", "requireUnit_Name");
+        productTplVOFieldRenameMap.put("com.yonyoucloud.iuap.upc.vo.productTpl.vo.UnitVO.purchasePriceUnitName", "purchasePriceUnit_Name");
+        productTplVOFieldRenameMap.put("com.yonyoucloud.iuap.upc.vo.productTpl.vo.UnitVO.batchPriceUnitName", "batchPriceUnit_Name");
+        productTplVOFieldRenameMap.put("com.yonyoucloud.iuap.upc.vo.productTpl.vo.UnitVO.inspectionUnitName", "inspectionUnit_Name");
+        productTplVOFieldRenameMap.put("com.yonyoucloud.iuap.upc.vo.productTpl.vo.UnitVO.produceUnitName", "produceUnit_Name");
+        productTplVOFieldRenameMap.put("com.yonyoucloud.iuap.upc.vo.productTpl.vo.UnitVO.unitCode", "unit_Code");
+        productTplVOFieldRenameMap.put("com.yonyoucloud.iuap.upc.vo.productTpl.vo.UnitVO.purchaseUnitCode", "purchaseUnit_Code");
+        productTplVOFieldRenameMap.put("com.yonyoucloud.iuap.upc.vo.productTpl.vo.UnitVO.stockUnitCode", "stockUnit_Code");
+        productTplVOFieldRenameMap.put("com.yonyoucloud.iuap.upc.vo.productTpl.vo.UnitVO.batchUnitCode", "batchUnit_Code");
+        productTplVOFieldRenameMap.put("com.yonyoucloud.iuap.upc.vo.productTpl.vo.UnitVO.onlineUnitCode", "onlineUnit_Code");
+        productTplVOFieldRenameMap.put("com.yonyoucloud.iuap.upc.vo.productTpl.vo.UnitVO.offlineUnitCode", "offlineUnit_Code");
+        productTplVOFieldRenameMap.put("com.yonyoucloud.iuap.upc.vo.productTpl.vo.UnitVO.requireUnitCode", "requireUnit_Code");
+        productTplVOFieldRenameMap.put("com.yonyoucloud.iuap.upc.vo.productTpl.vo.UnitVO.purchasePriceUnitCode", "purchasePriceUnit_Code");
+        productTplVOFieldRenameMap.put("com.yonyoucloud.iuap.upc.vo.productTpl.vo.UnitVO.batchPriceUnitCode", "batchPriceUnit_Code");
+        productTplVOFieldRenameMap.put("com.yonyoucloud.iuap.upc.vo.productTpl.vo.UnitVO.inspectionUnitCode", "inspectionUnit_Code");
+        productTplVOFieldRenameMap.put("com.yonyoucloud.iuap.upc.vo.productTpl.vo.UnitVO.produceUnitCode", "produceUnit_Code");
+        productTplVOFieldRenameMap.put("com.yonyoucloud.iuap.upc.vo.productTpl.vo.ProductTplAssistUnitExchangeVO.assistUnitCode", "assistUnit_Code");
+        productTplVOFieldRenameMap.put("com.yonyoucloud.iuap.upc.vo.productTpl.vo.ProductTplAssistUnitExchangeVO.assistUnitName", "assistUnit_Name");
+        productTplVOFieldRenameMap.put("com.yonyoucloud.iuap.upc.vo.productTpl.vo.ProductTplAssistUnitExchangeVO.order", "iOrder");
+        productTplVOFieldRenameMap.put("com.yonyoucloud.iuap.upc.vo.productTpl.vo.ProductTplOrderPropertyVO.propertyTypeShowItem", "propertyType_showItem");
+        productTplVOFieldRenameMap.put("com.yonyoucloud.iuap.upc.vo.productTpl.vo.FreeCTCharacterVO.characterOrder", "iOrder");
+        productTplVOFieldRenameMap.put("com.yonyoucloud.iuap.upc.vo.productTpl.vo.FreeCTCharacterVO.snSens", "SNSens");
+        productTplVOFieldRenameMap.put("com.yonyoucloud.iuap.upc.vo.productTpl.vo.FreeCTCharacterVO.bomAffec", "BOMAffec");
+    }
+}
+

@@ -1,0 +1,22 @@
+/*
+ * Decompiled with CFR 0.152.
+ * 
+ * Could not load the following classes:
+ *  nc.pub.smart.context.SmartContext
+ *  nc.pub.smart.data.DataSet
+ *  nc.pub.smart.exception.SmartException
+ *  nc.vo.fipub.report.ReportQueryCondVO
+ */
+package nc.itf.arap.report;
+
+import nc.pub.smart.context.SmartContext;
+import nc.pub.smart.data.DataSet;
+import nc.pub.smart.exception.SmartException;
+import nc.vo.fipub.report.ReportQueryCondVO;
+
+public interface IRecAndGathBO {
+    public DataSet queryRecAndGath(ReportQueryCondVO var1, SmartContext var2) throws SmartException;
+
+    public DataSet queryPayableAndPay(ReportQueryCondVO var1, SmartContext var2) throws SmartException;
+}
+

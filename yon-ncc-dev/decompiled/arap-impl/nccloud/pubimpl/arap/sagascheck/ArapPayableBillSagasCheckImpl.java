@@ -1,0 +1,48 @@
+/*
+ * Decompiled with CFR 0.152.
+ * 
+ * Could not load the following classes:
+ *  nccloud.pubitf.arap.sagascheck.IArapPayableBillSagasCheck
+ */
+package nccloud.pubimpl.arap.sagascheck;
+
+import nccloud.pubitf.arap.sagascheck.IArapPayableBillSagasCheck;
+
+public class ArapPayableBillSagasCheckImpl
+implements IArapPayableBillSagasCheck {
+    public void addInsertValidate() {
+        super.addInsertValidate();
+        validatorCode.add(8);
+        validatorCode.add(19);
+        validatorCode.add(29);
+        validatorCode.add(15);
+        validatorCode.add(5);
+        validatorCode.add(26);
+        validatorCode.add(28);
+        validatorCode.add(46);
+        validatorCode.add(44);
+        validatorCode.add(31);
+        validatorCode.add(36);
+        validatorCode.add(23);
+        validatorCode.add(24);
+        validatorCode.add(48);
+        validatorCode.add(49);
+        validatorCode.add(60);
+        validatorCode.add(63);
+        validatorCode.add(75);
+    }
+
+    public void addDeleteValidate() {
+        super.addDeleteValidate();
+        validatorCode.add(11);
+        validatorCode.add(12);
+        validatorCode.add(27);
+        validatorCode.add(32);
+        validatorCode.add(75);
+    }
+
+    public String getBillType() {
+        return "F1";
+    }
+}
+

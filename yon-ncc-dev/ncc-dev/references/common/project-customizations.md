@@ -4,6 +4,17 @@
 
 ---
 
+## 天九 NCC 2312 测试环境
+
+| 配置项 | 值 |
+|--------|-----|
+| **地址** | http://172.16.26.10:8099/yonbip/resources/workbench/public/common/main/index.html#/ |
+| **版本** | NCC 2312 |
+| **环境** | 测试环境 |
+| **Home 路径** | E:\\NCProject\\NCC2312\\tianjiu\\biphome_20260331 |
+
+---
+
 ## 一、项目模块结构
 
 | 模块 | 说明 | 路径 |

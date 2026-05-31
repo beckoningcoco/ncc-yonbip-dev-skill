@@ -15,6 +15,9 @@ yon-ncc-dev/decompiled/
 yon-ncc-dev/cfr-*.jar
 yon-ncc-dev/ncc_home_path.json
 
+# === yonyou-bip-dev 生成数据 ===
+yonyou-bip-dev/decompiled/
+
 # === baoyu-url-to-markdown 依赖 ===
 baoyu-url-to-markdown/scripts/node_modules/
 baoyu-url-to-markdown/scripts/url-to-markdown/

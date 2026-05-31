@@ -1,31 +1,40 @@
-# === 第三方技能（非本仓库维护） ===
-agent-browser/
-check/
-hunt/
-think/
-self-improving-agent/
-find-skills/
-skill-creator/
-youtube-transcript/
-llm-wiki-upgrade/
-
 # === yon-ncc-dev 生成数据 ===
-yon-ncc-dev/class_index_*.json
-yon-ncc-dev/decompiled/
-yon-ncc-dev/cfr-*.jar
-yon-ncc-dev/ncc_home_path.json
+skills/yon-ncc-dev/class_index_*.json
+skills/yon-ncc-dev/decompiled/
+skills/yon-ncc-dev/cfr-*.jar
+skills/yon-ncc-dev/ncc_home_path.json
 
 # === yonyou-bip-dev 生成数据 ===
-yonyou-bip-dev/decompiled/
+skills/yonyou-bip-dev/bip_home_path.json
+skills/yonyou-bip-dev/class_index_*.json
+skills/yonyou-bip-dev/decompiled/
+skills/yonyou-bip-dev/cfr-*.jar
 
 # === baoyu-url-to-markdown 依赖 ===
-baoyu-url-to-markdown/scripts/node_modules/
-baoyu-url-to-markdown/scripts/url-to-markdown/
+skills/baoyu-url-to-markdown/scripts/node_modules/
+skills/baoyu-url-to-markdown/scripts/url-to-markdown/
 
 # === Obsidian 本地配置 ===
-knowledge-base/yon-bip-obsidian/.obsidian/workspace*.json
+.knowledge-base/yon-bip-obsidian/.obsidian/workspace*.json
+
+# === 知识库临时文件 ===
+knowledge-base/yon-bip-obsidian/_bc.txt
+knowledge-base/yon-bip-obsidian/_pdf_analysis.txt
+knowledge-base/yon-bip-obsidian/_titles*.txt
 
 # === OS 文件 ===
 .DS_Store
 Thumbs.db
 *.swp
+*.swo
+/yonyou-bip-dev/decompiled
+/yon-ncc-dev/decompiled
+/skill-creator
+/check
+/self-improving-agent
+/hunt
+/youtube-transcript
+/think
+/agent-browser
+/find-skills
+/llm-wiki-upgrade

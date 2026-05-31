@@ -1,13 +1,9 @@
 ---
 name: yonyou-bip-dev
 description: >
-  用友 BIP 客开技能。当用户提到用友、YonBIP、BIP、客开、或者咨询用友 BIP 平台开发相关问题时，使用此技能。
+  用友 BIP 旗舰版客开技能。当用户提到用友、YonBIP、BIP、旗舰版、客开、或者咨询用友 BIP 平台开发相关问题时，使用此技能。
   即使用户没有明确说"用友"，只要描述了用友 BIP 特有的开发模式（如 SuperDO 继承、单据扩展、
   YMS 异步执行、平台回调等），也应该使用此技能，或者其他和JAVA后端开发相关的内容也可以参考该文档，也包括数据库问题，linux服务器问题等
-permissions:
-  - description: CFR Java decompiler - auto-approved for BIP source code analysis
-    command: java -jar cfr
-    auto_approve: true
 ---
 
 # 用友 BIP 客开技能
@@ -21,19 +17,6 @@ permissions:
 > - **NCC（NC Cloud）** → 对应技能 `yon-ncc-dev`（与本技能同级目录）
 >
 > 收到问题时务必先判断版本，再使用对应技能及其参考资料。不确定时主动询问用户。
-
-## BIP V5 源码分析
-
-> **触发条件**：用户提到 BIP 旗舰版 Java 类名或要求看某个 BIP 类源码时，按以下流程执行。
-
-| 工具 | 位置 |
-|------|------|
-| 类名索引 | `yon-ncc-dev/class_index_BIP_V5.json` |
-| CFR 反编译器 | `yon-ncc-dev/cfr-0.152.jar` |
-| 反编译缓存 | `yonyou-bip-dev/decompiled/bip-v5/` |
-| BIP Home 路径 | `path_config.json` → `BIP_Home_V5` |
-
-**流程**：查缓存 → 查索引定位 jar → 反编译到 `decompiled/bip-v5/` → 分析源码输出
 
 ### 问题记录路由
 
@@ -71,22 +54,61 @@ permissions:
 
 如果用户主动提出，想记录一个问题，或者登记一个问题等等，也请参照 `问题记录规范.md`
 
+## 参考资料查找方式（自动扫描，无需手写索引）
+
+> **重要**：查找参考资料时，**直接扫描对应目录**，根据文件名匹配用户问题，不要依赖手写索引文件。
+> 文件名均为中文、描述性强，AI 可直接匹配。
+
+| 问题类型 | 扫描目录 | 说明 |
+|----------|----------|------|
+| 便捷帮助类（SQL/API/脚本/模板等） | `references/旗舰版/` | `ls` 列出文件名 → 按关键词匹配 → 读取匹配的文档 |
+| 问题处理类（报错/异常/故障） | `references/问题处理/` | `ls` 列出文件名 → 按报错关键词匹配 → 读取匹配的文档 |
+| 通用开发规范/事件码/单据类型 | `references/common/` | 按需检索 |
+
+
 ## 接收到用户的提问，处理流程
 
 1. 当用户提出问题后，首先判断是否是 和 用友旗舰版/用友BIP/用友框架/NCC等用友产品相关的问题。如果是和代码，数据库，服务器操作等后端程序员开发相关的问题，则一律视为 旗舰版开发问题，如果是，则做下列判断 判断问题的类型 
    - 是否是用户提出报错，需要我来根据现有知识，回答客户的报错如何解决。
-     - 是此类问题请参考文档 `问题处理.md`
+     - 是此类问题 → **扫描 `references/问题处理/` 目录**，根据报错关键词匹配已有文档。
    - 是否是 需要便捷协助，例如 生成SQL语句，生成阿尔萨斯命令，生成模板代码等便捷协助类问题。
-     - 是此类问题请参考文档 `便捷帮助.md`
+     - 是此类问题 → **扫描 `references/旗舰版/` 目录**，根据场景关键词匹配已有文档。
 
 
 
 2. 如果是非 用友旗舰版/用友BIP/用友框架/NCC等用友产品相关的问题 ，无需参考skill中的文档资料，自行作答即可。
+
+## 源码索引配置
+
+旗舰版 home 目录的源码索引由以下文件管理：
+
+| 文件 | 作用 |
+|------|------|
+| `bip_home_path.json` | 本机 BIP home 路径 + 默认版本 |
+| `class_index_<version>.json` | 每个版本独立的类名→jar 索引 |
+
+**`bip_home_path.json` 结构**：
+
+```json
+{
+  "default_version": "V5",
+  "versions": {
+    "V5": {
+      "path": "E:/download2",
+      "description": "BIP 旗舰版 V5",
+      "index_file": "class_index_BIP_V5.json",
+      "indexed": true
+    }
+  }
+}
+```
+
+> **关于 `bip_home_path.json` 的生成**：该文件记录的是本机 BIP home 路径，每台机器不同，因此被 `.gitignore` 排除，不会入库。仓库中提供了 `bip_home_path.json.template`（空模板）作为格式参考。**首次运行 `build_index.py` 时会自动创建该文件**，后续再跑其他版本会追加到已有配置中，无需手动编辑。
 
 ## 工具脚本
 
 | 脚本 | 路径 | 用途 |
 |------|------|------|
 | Chrome 调试端口 | `scripts/open_chrome_debug.bat` | 杀旧进程后以 `--remote-debugging-port=9222` 启动 Chrome |
-| Oracle 查询工具 | `C:\Users\99558\Desktop\db_query.py` | 通用 Oracle 数据库查询，支持多项目多环境 |
+| Oracle 查询工具 | `C:\Users\<你的用户名>\Desktop\db_query.py` | 通用 Oracle 数据库查询，支持多项目多环境 |
 

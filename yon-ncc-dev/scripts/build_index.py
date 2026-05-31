@@ -1,11 +1,16 @@
 """
-NCC Class Index Builder
-用法: python build_index.py <NCHOME路径> <版本号>
-示例: python build_index.py E:/NCProject/NCC2111/home 2111
+NCC / BIP Class Index Builder
+用法: python build_index.py <HOME路径> <版本号> [--bip]
+示例:
+  python build_index.py E:/NCProject/NCC2111/home 2111           # NCC 版本
+  python build_index.py E:/download2 BIP_V5 --bip                 # BIP 旗舰版
 """
 import json, os, sys, zipfile
 
-def build_index(home_path, version):
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+
+
+def build_index(home_path, version, is_bip=False):
     index = {}
     jar_count = 0
     class_count = 0
@@ -36,9 +41,21 @@ def build_index(home_path, version):
             if jar_count % 200 == 0:
                 print(f"  已扫描 {jar_count} 个 jar, {class_count} 个类...")
 
-    # 保存索引（相对路径）
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-    output = os.path.join(script_dir, "..", f"class_index_{version}.json")
+    # 确定输出目录
+    if is_bip:
+        # BIP: 输出到 skills/yonyou-bip-dev/
+        output_dir = os.path.join(SCRIPT_DIR, "..", "..", "yonyou-bip-dev")
+        config_name = "bip_home_path.json"
+    else:
+        # NCC: 输出到 skills/yon-ncc-dev/
+        output_dir = os.path.join(SCRIPT_DIR, "..")
+        config_name = "ncc_home_path.json"
+
+    output_dir = os.path.abspath(output_dir)
+
+    # 保存索引
+    index_filename = f"class_index_{version}.json"
+    output = os.path.join(output_dir, index_filename)
     result = {
         "version": version,
         "total_jars": jar_count,
@@ -51,8 +68,8 @@ def build_index(home_path, version):
     print(f"\n完成！{jar_count} 个 jar, {class_count} 个类")
     print(f"索引文件: {output}")
 
-    # 更新 ncc_home_path.json
-    config_path = os.path.join(script_dir, "..", "ncc_home_path.json")
+    # 更新 home 路径配置
+    config_path = os.path.join(output_dir, config_name)
     cfg = {"default_version": version, "versions": {}}
     if os.path.exists(config_path):
         with open(config_path, 'r', encoding='utf-8') as f:
@@ -60,8 +77,8 @@ def build_index(home_path, version):
 
     cfg["versions"][version] = {
         "path": home_path,
-        "description": f"NCC {version}",
-        "index_file": f"class_index_{version}.json",
+        "description": "BIP 旗舰版" if is_bip else f"NCC {version}",
+        "index_file": index_filename,
         "jdk_version": "?",
         "indexed": True
     }
@@ -73,8 +90,13 @@ def build_index(home_path, version):
 
     print(f"配置已更新: {config_path}")
 
+
 if __name__ == "__main__":
-    if len(sys.argv) < 3:
+    is_bip = "--bip" in sys.argv
+    args = [a for a in sys.argv[1:] if a != "--bip"]
+
+    if len(args) < 2:
         print(__doc__)
         sys.exit(1)
-    build_index(sys.argv[1], sys.argv[2])
+
+    build_index(args[0], args[1], is_bip)

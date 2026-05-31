@@ -1,28 +1,4 @@
 {
-  "default_version": "2111",
-  "versions": {
-    "2111": {
-      "path": "E:/NCProject/NCC/jixieyuan/home20260302_newHome/home",
-      "description": "NCC 2111",
-      "index_file": "class_index_2111.json",
-      "indexed": true,
-      "last_verified": "2026-05-30",
-      "jdk_version": "8"
-    },
-    "2312": {
-      "path": "E:/NCProject/NCC2312/tianjiu/biphome_20260331",
-      "description": "NCC 2312",
-      "index_file": "class_index_2312.json",
-      "jdk_version": "17",
-      "indexed": true,
-      "last_verified": "2026-05-30"
-    },
-    "BIP_V5": {
-      "path": "E:/download2",
-      "description": "NCC BIP_V5",
-      "index_file": "class_index_BIP_V5.json",
-      "jdk_version": "?",
-      "indexed": true
-    }
-  }
+  "default_version": "",
+  "versions": {}
 }

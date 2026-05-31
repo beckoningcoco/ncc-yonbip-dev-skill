@@ -25,7 +25,7 @@ permissions:
 本技能服务于 **用友 NCC（NC Cloud）**。
 
 > **版本区分**：用友有两个主要产品线——
-> - **旗舰版（BIP / YonBIP）** → 对应技能 `yon-bip-dev`（`C:\Users\99558\.claude\skills\yonyou-bip-dev\`）
+> - **旗舰版（BIP / YonBIP）** → 对应技能 `yonyou-bip-dev`（与本技能同级目录）
 > - **NCC（NC Cloud）** ← 本技能
 >
 > 收到问题时务必先判断版本，再使用对应技能及其参考资料。不确定时主动询问用户。
@@ -68,6 +68,8 @@ permissions:
 |------|------|
 | `ncc_home_path.json` | 多版本 home 路径 + 默认版本 |
 | `class_index_<version>.json` | 每个版本独立的类名→jar 索引 |
+
+> **关于 `ncc_home_path.json` 的生成**：该文件记录的是本机 NCC home 路径，每台机器不同，因此被 `.gitignore` 排除，不会入库。仓库中提供了 `ncc_home_path.json.template`（空模板）作为格式参考。**首次运行 `build_index.py` 时会自动创建该文件**，后续再跑其他版本会追加到已有配置中，无需手动编辑。
 
 **`ncc_home_path.json` 结构**：
 

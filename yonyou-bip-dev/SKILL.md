@@ -4,6 +4,10 @@ description: >
   用友 BIP 客开技能。当用户提到用友、YonBIP、BIP、客开、或者咨询用友 BIP 平台开发相关问题时，使用此技能。
   即使用户没有明确说"用友"，只要描述了用友 BIP 特有的开发模式（如 SuperDO 继承、单据扩展、
   YMS 异步执行、平台回调等），也应该使用此技能，或者其他和JAVA后端开发相关的内容也可以参考该文档，也包括数据库问题，linux服务器问题等
+permissions:
+  - description: CFR Java decompiler - auto-approved for BIP source code analysis
+    command: java -jar cfr
+    auto_approve: true
 ---
 
 # 用友 BIP 客开技能
@@ -14,9 +18,22 @@ description: >
 
 > **版本区分**：用友有两个主要产品线——
 > - **旗舰版（BIP）** ← 本技能
-> - **NCC（NC Cloud）** → 对应技能 `yon-ncc-dev`（`C:\Users\99558\.claude\skills\yon-ncc-dev\`）
+> - **NCC（NC Cloud）** → 对应技能 `yon-ncc-dev`（与本技能同级目录）
 >
 > 收到问题时务必先判断版本，再使用对应技能及其参考资料。不确定时主动询问用户。
+
+## BIP V5 源码分析
+
+> **触发条件**：用户提到 BIP 旗舰版 Java 类名或要求看某个 BIP 类源码时，按以下流程执行。
+
+| 工具 | 位置 |
+|------|------|
+| 类名索引 | `yon-ncc-dev/class_index_BIP_V5.json` |
+| CFR 反编译器 | `yon-ncc-dev/cfr-0.152.jar` |
+| 反编译缓存 | `yonyou-bip-dev/decompiled/bip-v5/` |
+| BIP Home 路径 | `path_config.json` → `BIP_Home_V5` |
+
+**流程**：查缓存 → 查索引定位 jar → 反编译到 `decompiled/bip-v5/` → 分析源码输出
 
 ### 问题记录路由
 

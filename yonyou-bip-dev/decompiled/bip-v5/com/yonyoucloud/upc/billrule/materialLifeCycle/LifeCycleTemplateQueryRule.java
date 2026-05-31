@@ -1,0 +1,102 @@
+/*
+ * Decompiled with CFR 0.152.
+ * 
+ * Could not load the following classes:
+ *  com.yonyou.iuap.ucf.common.i18n.InternationalUtils
+ *  com.yonyou.ucf.mdd.common.model.rule.RuleExecuteResult
+ *  com.yonyou.ucf.mdd.ext.bill.rule.base.AbstractCommonRule
+ *  com.yonyou.ucf.mdd.ext.core.AppContext
+ *  com.yonyou.ucf.mdd.ext.dao.meta.MetaDaoHelper
+ *  com.yonyou.ucf.mdd.ext.dao.sql.SqlHelper
+ *  com.yonyou.ucf.mdd.ext.model.BillContext
+ *  org.imeta.orm.schema.ConditionExpression
+ *  org.imeta.orm.schema.QueryCondition
+ *  org.imeta.orm.schema.QueryConditionGroup
+ *  org.imeta.orm.schema.QuerySchema
+ *  org.springframework.stereotype.Component
+ */
+package com.yonyoucloud.upc.billrule.materialLifeCycle;
+
+import com.yonyou.iuap.ucf.common.i18n.InternationalUtils;
+import com.yonyou.ucf.mdd.common.model.rule.RuleExecuteResult;
+import com.yonyou.ucf.mdd.ext.bill.rule.base.AbstractCommonRule;
+import com.yonyou.ucf.mdd.ext.core.AppContext;
+import com.yonyou.ucf.mdd.ext.dao.meta.MetaDaoHelper;
+import com.yonyou.ucf.mdd.ext.dao.sql.SqlHelper;
+import com.yonyou.ucf.mdd.ext.model.BillContext;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import org.imeta.orm.schema.ConditionExpression;
+import org.imeta.orm.schema.QueryCondition;
+import org.imeta.orm.schema.QueryConditionGroup;
+import org.imeta.orm.schema.QuerySchema;
+import org.springframework.stereotype.Component;
+
+@Component(value="lifeCycleTemplateQueryRule")
+public class LifeCycleTemplateQueryRule
+extends AbstractCommonRule {
+    public RuleExecuteResult execute(BillContext billContext, Map<String, Object> paramMap) throws Exception {
+        if (null == paramMap.get("return")) {
+            return new RuleExecuteResult();
+        }
+        Map lifeCycleTemplate = (Map)paramMap.get("return");
+        if (!lifeCycleTemplate.isEmpty()) {
+            this.addMaterialStatusDetail(lifeCycleTemplate);
+            this.addMaterialStatusDetailAction(lifeCycleTemplate);
+        }
+        return new RuleExecuteResult();
+    }
+
+    private void addMaterialStatusDetail(Map lifeCycleTemplate) throws Exception {
+        String lifeCycleTemplateId = String.valueOf(lifeCycleTemplate.get("id"));
+        QueryConditionGroup condition = QueryConditionGroup.and((ConditionExpression[])new ConditionExpression[]{QueryCondition.name((String)"lifeCycleTemplateId").eq((Object)lifeCycleTemplateId)});
+        QuerySchema querySchema = QuerySchema.create().addSelect("materialStatusId.id as materialStatusId ,materialStatusId.code as materialStatusId!code,materialStatusId.name as materialStatusId!name,isDefault as isDefault").appendQueryCondition(new ConditionExpression[]{condition});
+        List materialStatusDetailList = MetaDaoHelper.query((String)"pc.manage.LifeCycleDetail", (QuerySchema)querySchema);
+        if (null != materialStatusDetailList) {
+            lifeCycleTemplate.put("lifeCycleDetail", materialStatusDetailList);
+        }
+    }
+
+    private void addMaterialStatusDetailAction(Map lifeCycleTemplate) throws Exception {
+        ArrayList ids = new ArrayList();
+        List lifeCycleDetaillist = (List)lifeCycleTemplate.get("lifeCycleDetail");
+        if (null == lifeCycleDetaillist || lifeCycleDetaillist.size() == 0) {
+            return;
+        }
+        lifeCycleDetaillist.stream().forEach(record -> {
+            Map map = (Map)record;
+            if (null != map.get("materialStatusId!materialStatusDetail!id")) {
+                ids.add(Long.valueOf(map.get("materialStatusId!materialStatusDetail!id").toString()));
+            }
+        });
+        if (ids.isEmpty()) {
+            return;
+        }
+        HashMap<String, Object> param = new HashMap<String, Object>();
+        param.put("materialStatusDetailIds", ids);
+        param.put("tenantId", AppContext.getTenantId());
+        param.put("ytenantId", AppContext.getYTenantId());
+        List materialStatusDetailActionNames = SqlHelper.selectList((String)"com.yonyoucloud.upc.manage.dao.materialLifeCycle.queryActionNamesByMaterialStatusDetailIds", param);
+        if (materialStatusDetailActionNames.isEmpty()) {
+            return;
+        }
+        lifeCycleDetaillist.stream().forEach(record -> {
+            Map map = (Map)record;
+            List detailActionNames = materialStatusDetailActionNames.stream().filter(actionNames -> actionNames.get("materialStatusDetailId").equals(map.get("materialStatusId!materialStatusDetail!id"))).collect(Collectors.toList());
+            if (detailActionNames.size() > 0) {
+                StringBuffer actionNames2 = new StringBuffer();
+                for (int i = 0; i < detailActionNames.size(); ++i) {
+                    if (null == ((Map)detailActionNames.get(i)).get("actionName")) continue;
+                    actionNames2.append(((Map)detailActionNames.get(i)).get("actionName").toString());
+                    if (i >= detailActionNames.size() - 1) continue;
+                    actionNames2.append(InternationalUtils.getMessageWithDefault((String)"UID:P_COREDOC-BE_179F6286040801D8", (String)"\u3001"));
+                }
+                map.put("materialStatusId!materialStatusDetail!action", new String(actionNames2));
+            }
+        });
+    }
+}
+

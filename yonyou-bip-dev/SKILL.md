@@ -35,6 +35,22 @@ description: >
 
 > **本地配置文件**：`path_config.json`、`db_config.json` 已 `.gitignore`，每人从 `.template` 复制后自定义，不会产生 git 冲突。
 
+### 模板配置缺失检查
+
+> **强制规则**：以下文件由用户从 `.template` 复制后填写，仓库只提供模板。**AI 必须在每次对话开始时检查这些文件是否存在，如果缺失则主动提醒用户创建，不要静默跳过。**
+
+| 模板文件 | 目标文件 | 说明 |
+|----------|----------|------|
+| `db_config.json.template` | `db_config.json` | 各项目数据库连接信息 |
+| `bip_home_path.json.template` | `bip_home_path.json` | 本机 BIP home 路径和版本 |
+| `../path_config.json.template` | `../path_config.json` | 集中路径配置（用户目录、NCC/BIP Home、知识库、Chrome 调试等），仓库根目录 |
+| `../yon-ncc-dev/ncc_home_path.json.template` | `../yon-ncc-dev/ncc_home_path.json` | 本机 NCC home 路径和版本 |
+
+检查时机：收到用户第一条消息后，在查找资料之前执行。如果目标文件不存在：
+1. 告知用户缺少哪个配置文件
+2. 说明用途
+3. 询问是否现在创建（从 template 复制后让用户填写）
+
 在回答用户提出的问题时，需要标注问题的类型
 
 - 问题处理类 

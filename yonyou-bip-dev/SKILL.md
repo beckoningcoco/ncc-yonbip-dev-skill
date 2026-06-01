@@ -30,8 +30,10 @@ description: >
 
 `skill约束.md`
 `数据库查询约束.md`
-`project-config.md`
-`db_config.json`
+`project-config.md`（入口索引，具体项目在 `references/projects/` 下）
+`db_config.json`（本地配置，从 `db_config.json.template` 复制后填写）
+
+> **本地配置文件**：`path_config.json`、`db_config.json` 已 `.gitignore`，每人从 `.template` 复制后自定义，不会产生 git 冲突。
 
 在回答用户提出的问题时，需要标注问题的类型
 
@@ -62,7 +64,9 @@ description: >
 | 问题类型 | 扫描目录 | 说明 |
 |----------|----------|------|
 | 便捷帮助类（SQL/API/脚本/模板等） | `references/旗舰版/` | `ls` 列出文件名 → 按关键词匹配 → 读取匹配的文档 |
+| SQL 模板 | `references/SQL/` | 每条 SQL 独立一个文件，扫描匹配 |
 | 问题处理类（报错/异常/故障） | `references/问题处理/` | `ls` 列出文件名 → 按报错关键词匹配 → 读取匹配的文档 |
+| 项目配置（环境/账号/数据库等） | `references/projects/` | 每个项目独立一个文件 |
 | 通用开发规范/事件码/单据类型 | `references/common/` | 按需检索 |
 
 

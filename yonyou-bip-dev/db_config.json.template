@@ -1,0 +1,15 @@
+{
+  "_说明": "本文件记录各项目数据库连接信息。复制 db_config.json.template 为 db_config.json，然后填入你的数据库连接信息。此文件已被 .gitignore 忽略，不会入库。",
+  "projects": {
+    "示例项目": {
+      "test": {
+        "host": "",
+        "port": 0,
+        "service_name": "",
+        "users": {
+          "用户名": "密码"
+        }
+      }
+    }
+  }
+}

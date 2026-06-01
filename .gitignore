@@ -10,6 +10,10 @@ skills/yonyou-bip-dev/class_index_*.json
 skills/yonyou-bip-dev/decompiled/
 skills/yonyou-bip-dev/cfr-*.jar
 
+# === 本地配置文件（每人独立，不入库） ===
+path_config.json
+skills/yonyou-bip-dev/db_config.json
+
 # === baoyu-url-to-markdown 依赖 ===
 skills/baoyu-url-to-markdown/scripts/node_modules/
 skills/baoyu-url-to-markdown/scripts/url-to-markdown/
@@ -38,3 +42,4 @@ Thumbs.db
 /agent-browser
 /find-skills
 /llm-wiki-upgrade
+knowledge-base/yon-bip-obsidian/scripts/digest-sync.sh

@@ -131,4 +131,79 @@ description: >
 |------|------|------|
 | Chrome 调试端口 | `scripts/open_chrome_debug.bat` | 杀旧进程后以 `--remote-debugging-port=9222` 启动 Chrome |
 | Oracle 查询工具 | `C:\Users\<你的用户名>\Desktop\db_query.py` | 通用 Oracle 数据库查询，支持多项目多环境 |
+| 元数据查询 | `scripts/bip_metadata_query.py` | 通过 BIP OpenAPI 查询任意实体完整元数据，支持批量拉取所有子表 |
+| 实体排重 | `scripts/check_entity_dedup.py` | 扫描 wiki 判断实体是否已消化，避免重复拉取 |
+
+## 元数据/字典查询规则
+
+> **触发条件**：当用户提到"元数据"、"字典"、"字段名"、"数据库列"、"查XX的元数据"、"XX有哪些字段"、"XX子表"等涉及 BIP 实体结构的问题时，按以下流程处理：
+
+### 查询流程
+
+```
+用户提问"查XX的元数据"
+    ↓
+1. 先查知识库（D:\yon-bip-obsidian\yon-bip-obsidian\wiki\entities\）
+   从每个 .md 的标题行 `# 实体名 (`uri`)` 提取 URI，精确匹配
+   是否有对应实体页？
+    ↓ 有 → 直接引用知识库页面回答（标注 [已验证]）
+    ↓ 无 ↓
+2. 调用元数据查询脚本
+    python C:\Users\99558\.claude\skills\yonyou-bip-dev\scripts\bip_metadata_query.py <entityUri>
+    ↓
+3. 解析返回的 JSON，提取字段→列名映射，回答用户
+    ↓
+4. 询问用户：是否需要将此实体消化到知识库？
+```
+
+> **排重规则**：判断一个实体是否已消化，**以知识库 wiki/entities/ 为准，不依赖桌面 JSON 文件**。
+> 每个实体页的标题行格式为 `# 显示名 (`voucher.order.OrderDetail`)`，提取括号内的 URI 即可做精确排重。
+
+### 脚本用法
+
+```bash
+# 单个实体查询
+python scripts/bip_metadata_query.py voucher.order.Order
+
+# 批量拉取（查某个实体的所有子表）
+python scripts/bip_metadata_query.py --all
+
+# 仅保存 JSON，不打印摘要
+python scripts/bip_metadata_query.py <uri> --json-only
+```
+
+### 已知实体 URI 速查（销售订单体系）
+
+| 实体 | URI | 知识库页面 |
+|------|-----|-----------|
+| 销售订单主表 | `voucher.order.Order` | [[销售订单元数据]] |
+| 订单明细 | `voucher.order.OrderDetail` | [[销售订单-OrderDetail]] |
+| 订单明细组 | `voucher.order.OrderDetailGroup` | [[销售订单-OrderDetailGroup]] |
+| 订单状态 | `voucher.order.OrderStatus` | [[销售订单-OrderStatus]] |
+| 订单支付状态 | `voucher.order.OrderPaymentStatus` | [[销售订单-OrderPaymentStatus]] |
+| 支付核验 | `voucher.order.PaymentVerification` | [[销售订单-PaymentVerification]] |
+| 收款计划 | `voucher.order.PaymentSchedules` | [[销售订单-PaymentSchedules]] |
+| 收款执行明细 | `voucher.order.PaymentExeDetail` | [[销售订单-PaymentExeDetail]] |
+| 订单多价格 | `voucher.order.OrderPrice` | [[销售订单-OrderPrice]] |
+| 返利汇总 | `voucher.order.RebateSum` | [[销售订单-RebateSum]] |
+| 返利明细 | `voucher.order.RebateDetail` | [[销售订单-RebateDetail]] |
+| 返利记录 | `voucher.order.RebateRecord` | [[销售订单-RebateRecord]] |
+| 产品返利记录 | `voucher.order.ProductRebateRecord` | [[销售订单-ProductRebateRecord]] |
+| 签署主体 | `voucher.order.SignSubject` | [[销售订单-SignSubject]] |
+| 附件 | `voucher.order.OrderAttachment` | [[销售订单-OrderAttachment]] |
+| 当前审批人 | `voucher.order.IBpmCurrentAuditorOrder` | [[销售订单-IBpmCurrentAuditorOrder]] |
+| 业务阶段 | `voucher.order.OrderIBpmStep` | [[销售订单-OrderIBpmStep]] |
+| 线索参与人 | `voucher.order.ClueParticipant` | [[销售订单-ClueParticipant]] |
+| 头自定义项 | `voucher.order.OrderDefine` | [[销售订单-OrderDefine]] ⚠️ |
+| 头自由定义 | `voucher.order.OrderFreeDefine` | [[销售订单-OrderFreeDefine]] ⚠️ |
+
+### 脚本配置
+
+脚本内置了以下配置（来自 `project-config.md` 国投中鲁/泸州老窖项目）：
+- **API 网关**: `https://c3.yonyoucloud.com/iuap-api-gateway/`
+- **元数据接口**: `/nfkwaryp/current_yonbip_default_sys/GDBG/queryByUri`
+- **租户**: `nfkwaryp`
+- **AppKey/Secret**: 已内置在脚本中
+
+> 如果切换项目/环境，需修改脚本中的 `APP_KEY`、`APP_SECRET`、`TENANT_ID`、`BASE_DOMAIN` 四个变量。
 

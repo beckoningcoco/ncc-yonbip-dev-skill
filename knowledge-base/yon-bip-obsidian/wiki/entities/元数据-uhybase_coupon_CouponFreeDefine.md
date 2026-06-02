@@ -1,0 +1,91 @@
+---
+tags: [BIP, 元数据, 数据字典, uhybase.coupon.CouponFreeDefine]
+created: 2026-06-03
+updated: 2026-06-03
+sources: [元数据API queryByUri]
+platform_version: "BIP V5"
+project: ""
+last_verified: 2026-06-03
+status: verified
+source_type: api_response
+---
+
+# 优惠券自由自定义项 (`uhybase.coupon.CouponFreeDefine`)
+
+> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
+> 物理表: `mp_couponfreedefine` | 应用: `SDMB` | 类型: `Class`
+
+## 属性（64 个）
+
+| # | 字段名 | 显示名 | 列 | 类型 | biztype |
+|---|--------|--------|-----|------|---------|
+| 1 | `cAppID` | cAppID | `cAppID` | 4556b717-b77c-4631-8314-70fc8d5ac99d | `quote` |
+| 2 | `define1` | define1 | `define1` | String | `text` |
+| 3 | `define10` | define10 | `define10` | String | `text` |
+| 4 | `define11` | define11 | `define11` | String | `text` |
+| 5 | `define12` | define12 | `define12` | String | `text` |
+| 6 | `define13` | define13 | `define13` | String | `text` |
+| 7 | `define14` | define14 | `define14` | String | `text` |
+| 8 | `define15` | define15 | `define15` | String | `text` |
+| 9 | `define16` | define16 | `define16` | String | `text` |
+| 10 | `define17` | define17 | `define17` | String | `text` |
+| 11 | `define18` | define18 | `define18` | String | `text` |
+| 12 | `define19` | define19 | `define19` | String | `text` |
+| 13 | `define2` | define2 | `define2` | String | `text` |
+| 14 | `define20` | define20 | `define20` | String | `text` |
+| 15 | `define21` | define21 | `define21` | String | `text` |
+| 16 | `define22` | define22 | `define22` | String | `text` |
+| 17 | `define23` | define23 | `define23` | String | `text` |
+| 18 | `define24` | define24 | `define24` | String | `text` |
+| 19 | `define25` | define25 | `define25` | String | `text` |
+| 20 | `define26` | define26 | `define26` | String | `text` |
+| 21 | `define27` | define27 | `define27` | String | `text` |
+| 22 | `define28` | define28 | `define28` | String | `text` |
+| 23 | `define29` | define29 | `define29` | String | `text` |
+| 24 | `define3` | define3 | `define3` | String | `text` |
+| 25 | `define30` | define30 | `define30` | String | `text` |
+| 26 | `define31` | define31 | `define31` | String | `text` |
+| 27 | `define32` | define32 | `define32` | String | `text` |
+| 28 | `define33` | define33 | `define33` | String | `text` |
+| 29 | `define34` | define34 | `define34` | String | `text` |
+| 30 | `define35` | define35 | `define35` | String | `text` |
+| 31 | `define36` | define36 | `define36` | String | `text` |
+| 32 | `define37` | define37 | `define37` | String | `text` |
+| 33 | `define38` | define38 | `define38` | String | `text` |
+| 34 | `define39` | define39 | `define39` | String | `text` |
+| 35 | `define4` | define4 | `define4` | String | `text` |
+| 36 | `define40` | define40 | `define40` | String | `text` |
+| 37 | `define41` | define41 | `define41` | String | `text` |
+| 38 | `define42` | define42 | `define42` | String | `text` |
+| 39 | `define43` | define43 | `define43` | String | `text` |
+| 40 | `define44` | define44 | `define44` | String | `text` |
+| 41 | `define45` | define45 | `define45` | String | `text` |
+| 42 | `define46` | define46 | `define46` | String | `text` |
+| 43 | `define47` | define47 | `define47` | String | `text` |
+| 44 | `define48` | define48 | `define48` | String | `text` |
+| 45 | `define49` | define49 | `define49` | String | `text` |
+| 46 | `define5` | define5 | `define5` | String | `text` |
+| 47 | `define50` | define50 | `define50` | String | `text` |
+| 48 | `define51` | define51 | `define51` | String | `text` |
+| 49 | `define52` | define52 | `define52` | String | `text` |
+| 50 | `define53` | define53 | `define53` | String | `text` |
+| 51 | `define54` | define54 | `define54` | String | `text` |
+| 52 | `define55` | define55 | `define55` | String | `text` |
+| 53 | `define56` | define56 | `define56` | String | `text` |
+| 54 | `define57` | define57 | `define57` | String | `text` |
+| 55 | `define58` | define58 | `define58` | String | `text` |
+| 56 | `define59` | define59 | `define59` | String | `text` |
+| 57 | `define6` | define6 | `define6` | String | `text` |
+| 58 | `define60` | define60 | `define60` | String | `text` |
+| 59 | `define7` | define7 | `define7` | String | `text` |
+| 60 | `define8` | define8 | `define8` | String | `text` |
+| 61 | `define9` | define9 | `define9` | String | `text` |
+| 62 | `id` | ID | `id` | 01269572-184b-47c7-ad59-d4125d0f8cce | `quote` |
+| 63 | `membercorp` | membercorp | `iCorpId` | Long | `long` |
+| 64 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+
+## 关联（3 个）
+
+- `cAppID` -> `uhybase.basic.CorpHierarchyTemp` ()
+- `ytenant` -> `yht.tenant.YhtTenant` ()
+- `id` -> `uhybase.coupon.Coupon` (1)

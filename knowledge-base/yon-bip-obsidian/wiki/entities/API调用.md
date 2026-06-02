@@ -3,6 +3,11 @@ tags: [API调用, DynamicProxy, invokeFunction, AbstractAPIHandler, AbstractTrig
 created: 2026-05-27
 updated: 2026-05-28
 sources: [2026-05-27-bip-api-call, 2026-05-28-bip-backend-script-intro, 2026-05-28-bip-backend-script-advanced]
+platform_version: "BIP V5"
+project: ""
+last_verified: 2026-05-31
+status: verified
+source_type: practice
 ---
 
 # API调用

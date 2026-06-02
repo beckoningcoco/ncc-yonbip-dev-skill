@@ -3,6 +3,11 @@ tags: [Token, 用户认证, Redis, CAS]
 created: 2026-05-27
 updated: 2026-05-27
 sources: [raw/notes/2026-05-27-yht-access-token.md]
+platform_version: "BIP V5"
+project: ""
+last_verified: 2026-05-31
+status: verified
+source_type: practice
 ---
 
 # yht_access_token

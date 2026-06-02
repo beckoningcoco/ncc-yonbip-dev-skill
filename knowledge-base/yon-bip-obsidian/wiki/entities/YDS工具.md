@@ -3,6 +3,11 @@ tags: [YDS, IDE, 环境搭建, 脚手架, 调试, RDBGA, BIP5]
 created: 2026-05-28
 updated: 2026-05-28
 sources: [2026-05-28-bip-yds-setup, 2026-05-28-bip-upgrade-yds, 2026-05-28-bip-dev-system]
+platform_version: "BIP V5"
+project: ""
+last_verified: 2026-05-31
+status: verified
+source_type: doc
 ---
 
 # YDS工具

@@ -3,6 +3,11 @@ tags: [BIP, OpenAPI, 工具类, 后端]
 created: 2026-05-28
 updated: 2026-05-28
 sources: [2026-05-28-maogeping-bip-v5-code-reference]
+platform_version: "BIP V5"
+project: ""
+last_verified: 2026-05-31
+status: verified
+source_type: source_code
 ---
 
 # YonbipUtil

@@ -1,0 +1,45 @@
+---
+tags: [BIP, 元数据, 数据字典, pc.product.ProductSkuOrderProperty]
+created: 2026-06-03
+updated: 2026-06-03
+sources: [元数据API queryByUri]
+platform_version: "BIP V5"
+project: ""
+last_verified: 2026-06-03
+status: verified
+source_type: api_response
+---
+
+# 物料订单属性(整合) (`pc.product.ProductSkuOrderProperty`)
+
+> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
+> 物理表: `productskuorderproperty` | 应用: `GZTBDM` | 类型: `Class`
+
+## 属性（15 个）
+
+| # | 字段名 | 显示名 | 列 | 类型 | biztype |
+|---|--------|--------|-----|------|---------|
+| 1 | `id` | ID | `id` | Long | `long` |
+| 2 | `productId` | productID | `productId` | 89f3b06e-23df-4403-b4a7-19f99eeeae72 | `quote` |
+| 3 | `skuId` | skuID | `skuId` | 3e9ddc6d-edd0-4508-afcc-e4a20535f2f9 | `quote` |
+| 4 | `isShow` | 是否Show | `isShow` | Boolean | `switch` |
+| 5 | `isRequired` | 是否Required | `isRequired` | Boolean | `switch` |
+| 6 | `iLimitNum` | iLimitNum | `iLimitNum` | Integer | `int` |
+| 7 | `iOrder` | iOrder | `iOrder` | Integer | `int` |
+| 8 | `promptMessage` | promptMessage | `promptMessage` | String | `text` |
+| 9 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 10 | `isCreator` | 是否Creator | `isCreator` | Boolean | `switch` |
+| 11 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
+| 12 | `productApplyRangeId` | productApplyRangeID | `productApplyRangeId` | ed1f55f2-a3f7-4617-8bd2-7f2f404843ab | `quote` |
+| 13 | `productDetailId` | productDetailID | `productDetailId` | 04616b02-47f8-4821-8c02-2e7a6d3264a8 | `quote` |
+| 14 | `skuPropertyTypeId` | skuPropertyTypeID | `skuPropertyTypeId` | 8ce8fd53-c231-4a19-953d-5081a4c9bf20 | `quote` |
+| 15 | `tenant` | tenant | `tenant_id` | Long | `long` |
+
+## 关联（6 个）
+
+- `productApplyRangeId` -> `pc.product.ProductApplyRange` (0..n)
+- `productId` -> `pc.product.Product` ()
+- `ytenant` -> `yht.tenant.YhtTenant` ()
+- `skuPropertyTypeId` -> `pc.tpl.ProductTplOrderProperty` ()
+- `productDetailId` -> `pc.product.ProductDetail` (0..n)
+- `skuId` -> `pc.product.ProductSKU` (0..n)

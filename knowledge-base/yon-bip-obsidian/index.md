@@ -1,6 +1,9 @@
 # 知识库索引
 
-> 最后更新：2026-05-30 | 素材：303 篇 | 摘要：311 | 实体：26 | 主题：6
+> 最后更新：2026-06-03 | 素材：848 篇 | 摘要：311 | 实体：570 | 主题：6
+> 主要平台版本：BIP V5（旗舰版）、NCC 2111 / 2312
+> 
+> 所有页面已按 `platform_version` 字段标注适用版本。查阅时注意版本差异——不同版本的同名 API 行为可能不同。
 
 ---
 
@@ -39,6 +42,130 @@
 - [[yht_access_token]] — 友互通访问令牌及其获取方式
 - [[环境搭建]] — BIP IDEA/YDS 环境搭建方案
 - [[客开赋能工作台]] — 客开知识文档+视频快捷通道
+
+### 数据字典 ⚡ BIP 旗舰版 V5
+
+> 以下所有实体元数据均来源于 BIP 旗舰版（YonBIP）API，**不适用于 NCC / NC Cloud**。
+
+#### 销售订单主表
+- [[销售订单元数据]] — `voucher.order.Order` 主表 `orders`：212 字段 + 52 关联 + 16 接口
+
+#### 订单明细
+- [[销售订单-OrderDetail]] — `voucher.order.OrderDetail` 明细表 `orderdetail`：324 字段 + 50 关联（最大子表）
+- [[销售订单-OrderDetailGroup]] — `voucher.order.OrderDetailGroup` 明细组 `orderdetailgroup`：34 字段 + 2 关联
+
+#### 订单价格
+- [[销售订单-OrderPrice]] — `voucher.order.OrderPrice` 多价格表 `orders_price`：86 字段 + 10 关联
+
+#### 状态与审批
+- [[销售订单-OrderStatus]] — `voucher.order.OrderStatus` 状态历史 `orderstatus`：17 字段 + 2 关联
+- [[销售订单-OrderPaymentStatus]] — `voucher.order.OrderPaymentStatus` 支付状态 `orderpaymentstatus`：15 字段 + 2 关联
+- [[销售订单-OrderIBpmStep]] — `voucher.order.OrderIBpmStep` 业务阶段 `order_ibpmstep`：12 字段 + 3 关联
+- [[销售订单-IBpmCurrentAuditorOrder]] — `voucher.order.IBpmCurrentAuditorOrder` 当前审批人 `order_ibpmcurauditor`：17 字段 + 3 关联
+
+#### 收款与核销
+- [[销售订单-PaymentSchedules]] — `voucher.order.PaymentSchedules` 收款计划 `paymentschedules`：45 字段 + 6 关联
+- [[销售订单-PaymentExeDetail]] — `voucher.order.PaymentExeDetail` 收款执行明细 `paymentexedetail`：72 字段 + 7 关联
+- [[销售订单-PaymentVerification]] — `voucher.order.PaymentVerification` 支付核验 `paymentverification`：37 字段 + 8 关联
+
+#### 返利
+- [[销售订单-RebateSum]] — `voucher.order.RebateSum` 返利汇总 `orderrebatesum`：8 字段 + 2 关联
+- [[销售订单-RebateDetail]] — `voucher.order.RebateDetail` 返利明细 `orderrebatedetail`：20 字段 + 4 关联
+- [[销售订单-RebateRecord]] — `voucher.order.RebateRecord` 返利记录 `orderrebaterecord`：10 字段 + 4 关联
+- [[销售订单-ProductRebateRecord]] — `voucher.order.ProductRebateRecord` 产品返利记录 `orderproductrebaterecord`：20 字段 + 11 关联
+
+#### 合同与签署
+- [[销售订单-SignSubject]] — `voucher.order.SignSubject` 签署主体 `order_signsubject`：18 字段 + 5 关联
+
+#### 附件与线索
+- [[销售订单-OrderAttachment]] — `voucher.order.OrderAttachment` 附件 `orderattachment`：20 字段 + 2 关联
+- [[销售订单-ClueParticipant]] — `voucher.order.ClueParticipant` 线索参与人 `cust_relateperson`：14 字段 + 6 关联
+
+#### 自定义项（已废弃）
+- [[销售订单-OrderDefine]] — `voucher.order.OrderDefine` 头自定义 ⚠️ 已废弃：66 字段 + 2 关联
+- [[销售订单-OrderFreeDefine]] — `voucher.order.OrderFreeDefine` 头自由定义 ⚠️ 已废弃：64 字段 + 2 关联
+
+### 基础数据字典 ⚡ BIP 旗舰版 V5
+
+> 从销售订单元数据外部引用追踪到的关联实体，共 64 个，分布于 18 个模块。**仅适用于旗舰版，不适用于 NCC。**
+
+#### 客户/门店/结算/发运 (aa)
+- [[元数据-aa_merchant_Merchant]] — `aa.merchant.Merchant` | 客户 `merchant` | 132 字段 + 52 关联
+- [[元数据-aa_merchant_Contacter]] — `aa.merchant.Contacter` | 联系人 `contacter` | 27 字段 + 5 关联
+- [[元数据-aa_merchant_AddressInfo]] — `aa.merchant.AddressInfo` | 地址 `addressinfo` | 34 字段 + 8 关联
+- [[元数据-aa_merchant_MerchantApplyRange]] — `aa.merchant.MerchantApplyRange` | 适用范围 `merchantapplyrange` | 28 字段 + 12 关联
+- [[元数据-aa_store_Store]] — `aa.store.Store` | 门店 `mp_store` | 102 字段 + 31 关联
+- [[元数据-aa_warehouse_Warehouse]] — `aa.warehouse.Warehouse` | 仓库 `aa_warehouse` | 52 字段 + 16 关联
+- [[元数据-aa_salearea_SaleArea]] — `aa.salearea.SaleArea` | 销售区域 `aa_salearea` | 32 字段 + 9 关联
+- [[元数据-aa_settlemethod_SettleMethod]] — `aa.settlemethod.SettleMethod` | 结算方式 `settle_method` | 30 字段 + 7 关联
+- [[元数据-aa_sendtrans_SendTransWay]] — `aa.sendtrans.SendTransWay` | 发运方式 `aa_sendtransway` | 22 字段 + 5 关联
+
+#### 产品/品牌/单位/分类 (pc)
+- [[元数据-pc_product_Product]] — `pc.product.Product` | 产品 `product` | 116 字段 + 55 关联
+- [[元数据-pc_product_ProductSKU]] — `pc.product.ProductSKU` | SKU `productsku` | 70 字段 + 25 关联
+- [[元数据-pc_unit_Unit]] — `pc.unit.Unit` | 计量单位 `unit` | 31 字段 + 6 关联
+- [[元数据-pc_brand_Brand]] — `pc.brand.Brand` | 品牌 `brand` | 40 字段 + 9 关联
+- [[元数据-pc_productline_ProductLine]] — `pc.productline.ProductLine` | 产品线 `productline` | 13 字段 + 4 关联
+- [[元数据-pc_cls_PresentationClass]] — `pc.cls.PresentationClass` | 产品分类 `product_presentation_class` | 51 字段 + 12 关联
+
+#### 组织架构 (org.func)
+- [[元数据-org_func_BaseOrg]] — `org.func.BaseOrg` | 基础组织 `org_orgs` | 125 字段 + 50 关联
+- [[元数据-org_func_SalesOrg]] — `org.func.SalesOrg` | 销售组织 `org_sales` | 78 字段 + 14 关联
+- [[元数据-org_func_FinanceOrg]] — `org.func.FinanceOrg` | 财务组织 `org_fin` | 86 字段 + 15 关联
+- [[元数据-org_func_PurchaseOrg]] — `org.func.PurchaseOrg` | 采购组织 `org_purchase` | 80 字段 + 15 关联
+- [[元数据-org_func_InventoryOrg]] — `org.func.InventoryOrg` | 库存组织 `org_inventory` | 78 字段 + 15 关联
+- [[元数据-org_func_LogisticsOrg]] — `org.func.LogisticsOrg` | 物流组织 `org_logistics` | 78 字段 + 14 关联
+
+#### 基础数据 (bd)
+- [[元数据-bd_staff_Staff]] — `bd.staff.Staff` | 员工 `bd_staff` | 80 字段 + 31 关联
+- [[元数据-bd_project_ProjectVO]] — `bd.project.ProjectVO` | 项目 `bd_project` | 44 字段 + 14 关联
+- [[元数据-bd_bill_TransType]] — `bd.bill.TransType` | 交易类型 `bd_transtype` | 38 字段 + 4 关联
+- [[元数据-bd_adminOrg_DeptOrgVO]] — `bd.adminOrg.DeptOrgVO` | 部门 `org_admin` | 83 字段 + 18 关联
+- [[元数据-bd_invoice_InvoiceTypeVO]] — `bd.invoice.InvoiceTypeVO` | 发票类型 `bd_invoice_type` | 19 字段 + 4 关联
+- [[元数据-bd_receivables_ReceiveAgreement]] — `bd.receivables.ReceiveAgreement` | 收款协议 `bd_receiveagreement` | 31 字段 + 8 关联
+- [[元数据-bd_receivables_ReceiveStartBase]] — `bd.receivables.ReceiveStartBase` | 收款起始基准 `bd_receivestartbase` | 19 字段 + 3 关联
+- [[元数据-bd_receivables_AccountType]] — `bd.receivables.AccountType` | 账户类型 无物理表 | 0 字段
+- [[元数据-bd_receivables_DateUnit]] — `bd.receivables.DateUnit` | 日期单位 无物理表 | 0 字段
+- [[元数据-bd_receivables_PreReceiveType]] — `bd.receivables.PreReceiveType` | 预收款类型 无物理表 | 0 字段
+- [[元数据-bd_currencytenant_CurrencyTenantVO]] — `bd.currencytenant.CurrencyTenantVO` | 币种 `bd_currency_tenant` | 28 字段 + 3 关联
+- [[元数据-bd_exchangeRate_ExchangeRateTypeVO]] — `bd.exchangeRate.ExchangeRateTypeVO` | 汇率类型 `bd_exchangerate_type` | 28 字段 + 4 关联
+- [[元数据-bd_costcenter_CostCenter]] — `bd.costcenter.CostCenter` | 成本中心 `bd_costcenter` | 47 字段 + 20 关联
+- [[元数据-bd_businessstep_BusinessStep]] — `bd.businessstep.BusinessStep` | 业务步骤 `bd_business_step` | 26 字段 + 6 关联
+- [[元数据-bd_virtualaccbody_VirtualAccbody]] — `bd.virtualaccbody.VirtualAccbody` | 虚拟核算主体 `bd_virtualaccbody` | 49 字段 + 18 关联
+
+#### 平台基础 (base)
+- [[元数据-base_user_User]] — `base.user.User` | 用户 `user` | 64 字段 + 10 关联
+- [[元数据-base_user_BipUser]] — `base.user.BipUser` | BIP用户 `ba_user` | 17 字段 + 5 关联
+- [[元数据-base_tenant_Tenant]] — `base.tenant.Tenant` | 租户 `tenant` | 36 字段 + 1 关联
+- [[元数据-base_shipregion_ShipRegion]] — `base.shipregion.ShipRegion` | 发货区域 `base_shipregion` | 20 字段 + 6 关联
+- [[元数据-base_loadway_LoadWay]] — `base.loadway.LoadWay` | 装载方式 `base_loadway` | 19 字段 + 5 关联
+
+#### 返利/付款 (voucher)
+- [[元数据-voucher_rebate_Rebate]] — `voucher.rebate.Rebate` | 返利 `rebate` | 93 字段 + 18 关联
+- [[元数据-voucher_rebate_RebateReturnProduct]] — `voucher.rebate.RebateReturnProduct` | 返利退货 `rebateReturnProduct` | 43 字段 + 15 关联
+- [[元数据-voucher_rebate_RebateShareSetting]] — `voucher.rebate.RebateShareSetting` | 返利分摊 `udh_rebatesharesetting` | 30 字段 + 9 关联
+- [[元数据-voucher_upaymentvoucher_PaymentVoucher]] — `voucher.upaymentvoucher.PaymentVoucher` | 付款单 `paymentvoucher` | 78 字段 + 3 关联
+- [[元数据-voucher_upaymentvoucher_PaymentVoucherDetail]] — `voucher.upaymentvoucher.PaymentVoucherDetail` | 付款明细 `paymentvoucherdetail` | 33 字段 + 3 关联
+
+#### 物流/库存/其他 (usp/st/sccs/...)
+- [[元数据-usp_deliverymethod_Deliverymethod]] — `usp.deliverymethod.Deliverymethod` | 交货方式 `usp_deliverymethod` | 19 字段 + 5 关联
+- [[元数据-usp_plantransportroute_PlanTransportRoute]] — `usp.plantransportroute.PlanTransportRoute` | 运输路线 `usp_plantransportroute` | 28 字段 + 7 关联
+- [[元数据-usp_sendAndReceiveSite_SendAndReceiveSite]] — `usp.sendAndReceiveSite.SendAndReceiveSite` | 收发站点 `usp_sendandreceivesite` | 23 字段 + 5 关联
+- [[元数据-st_batchno_Batchno]] — `st.batchno.Batchno` | 批次 `batchno` | 72 字段 + 17 关联
+- [[元数据-st_reservation_Reservation]] — `st.reservation.Reservation` | 预约 `st_reservation` | 34 字段 + 14 关联
+- [[元数据-sccs_multitrade_TradeRoute]] — `sccs.multitrade.TradeRoute` | 贸易路线 `scmmp_traderoute` | 33 字段 + 5 关联
+- [[元数据-archive_taxArchives_TaxRateArchive]] — `archive.taxArchives.TaxRateArchive` | 税率档案 `bd_taxrate` | 44 字段 + 10 关联
+- [[元数据-ec_suiteGoodsInfo_EcSuiteGoods]] — `ec.suiteGoodsInfo.EcSuiteGoods` | 套件商品 `ec_suite_goods` | 20 字段 + 9 关联
+- [[元数据-sa_agent_AgentProductRelation]] — `sa.agent.AgentProductRelation` | 客户产品关系 `agentproductrelation` | 46 字段 + 20 关联
+- [[元数据-vc_variantConfiguration_VariantConfiguration]] — `vc.variantConfiguration.VariantConfiguration` | 变体配置 `vc_variant_configuration` | 39 字段 + 12 关联
+- [[元数据-bf_bizflow_BusinessFlow]] — `bf.bizflow.BusinessFlow` | 业务流程 `business_flow` | 5 字段 + 1 关联
+- [[元数据-pgrm_projecttask_ProjectScheduleTask]] — `pgrm.projecttask.ProjectScheduleTask` | 项目任务 `pgrm_activity` | 81 字段 + 22 关联
+- [[元数据-yht_tenant_YhtTenant]] — `yht.tenant.YhtTenant` | 友互通租户 `pub_tenant` | 1 字段
+- [[元数据-BGDM_wbs_doc]] — `BGDM.wbs.wbs.doc` | WBS文档 `bgdm_wbs_doc` | 62 字段 + 15 关联
+- [[元数据-BGDM_milestones_milepost]] — `BGDM.milestones.project.milepost` | 里程碑 `bgdm_project_milepost` | 29 字段 + 9 关联
+- [[元数据-BGDM_wbs_projectStructureProperties]] — `BGDM.wbs.projectStructureProperties` | 项目结构属性 | 2 字段
+- [[元数据-pb_dataauth_MerchantAuthDataAuth]] — `pb.dataauth.MerchantAuthDataAuth` | 客户数据权限 | 1 字段
+- [[元数据-pb_dataauth_ProductDataAuth]] — `pb.dataauth.ProductDataAuth` | 产品数据权限 | 1 字段
 
 ---
 

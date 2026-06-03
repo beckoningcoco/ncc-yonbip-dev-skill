@@ -1,6 +1,6 @@
 # 知识库索引
 
-> 最后更新：2026-06-03 | 素材：848 篇 | 摘要：311 | 实体：570 | 主题：6
+> 最后更新：2026-06-03 | 素材：848 篇 | 摘要：311 | 实体：802 | 主题：6
 > 主要平台版本：BIP V5（旗舰版）、NCC 2111 / 2312
 > 
 > 所有页面已按 `platform_version` 字段标注适用版本。查阅时注意版本差异——不同版本的同名 API 行为可能不同。
@@ -76,6 +76,59 @@
 
 #### 合同与签署
 - [[销售订单-SignSubject]] — `voucher.order.SignSubject` 签署主体 `order_signsubject`：18 字段 + 5 关联
+
+#### 合同管理 (CLM) 🆕
+- [[合同登记元数据]] — `CLM.clmContract.clm_contract` 主表 `clm_contract`：143 字段 + 11 子表
+  - [[contract-clm_contract_item]] — 合同标的物 `clm_contract_item`：46 字段
+  - [[contract-clm_contract_counterpart]] — 合同相对方 `clm_contract_counterpart`：32 字段
+  - [[contract-clm_contract_payterm]] — 付款协议 `clm_contract_payterm`：41 字段
+  - [[contract-clm_contract_recterm]] — 收款协议 `clm_contract_recterm`：42 字段
+  - [[contract-clm_appointment]] — 履约事项 `clm_appointment`：29 字段
+  - [[contract-clm_contract_status_flow]] — 合同状态流水 `clm_contract_status_flow`：16 字段
+  - [[contract-clmContractRiskRecord]] — 合同风险记录 `clm_contract_riskrecord`：14 字段
+  - [[contract-clmEventRecord]] — 大事记信息 `clm_event_record`：26 字段
+  - [[contract-clmContractBpmStep]] — 合同审批业务阶段 `clm_contract_bpmstep`：15 字段
+  - [[contract-clmContractWorkflow]] — 合同审批任务 `clm_contract_workflow`：25 字段
+  - [[contract-foodList]] — 食物清单 `clm_foodlist`：10 字段
+  - [[contract-clmContractIntegrateConfig]] — 合同集成配置 `clm_contract_integrate_config`：16 字段
+    - [[contract-clmContractIntegrateOption]] — 集成选项 `clm_contract_integrate_option`：11 字段
+  - [[contract-clmAuditSchemaResult]] — 审批结果 `clm_audit_schema_result`：20 字段
+    - [[contract-clmAuditSchemaResultDetail]] — 审批结果明细 `clm_audit_schema_result_detail`：19 字段
+  - [[contract-clmContractConfiguration]] — 合同项配置 `clm_contract_configuration`：20 字段
+    - [[contract-clmContractConfiguration_transTypeId]] — 配置交易类型 `clm_contract_configuration_transtype`：10 字段
+
+#### 库存管理 (ST) 🆕
+- [[st_stockConfigMsg_StockConfigMsg]] — 库存配置消息 `st_stockconfigmsg`：6 字段
+- [[st_availablerule_AvailableCalcRule]] — 可用量计算规则 `st_availablecalcrules`：50 字段
+- [[st_morphologyConversion_MorphologyConversion]] — 形态转换 `st_morphology_conversion`：57 字段
+- [[stock_currentstock_CurrentStock]] — 现存量 `stock_currentstock`：110 字段
+- [[st_standingbookdetail_StandingBookDetailReport]] — 台账明细报表 `st_standingbookdetail`：7 字段
+- [[sn_serialnumber_SNstateReport]] — 序列号状态报表 `sn_serialnumber`：65 字段
+- [[st_wareandinv_WareLook]] — 仓库查询 `st_ware_look`：22 字段
+- [[st_wareandinv_WareGroupLook]] — 仓库组查询 `st_ware_group_look`：13 字段
+- [[st_storein_StoreIn]] — 入库单 `st_storein`：95 字段
+- [[st_storeout_StoreOut]] — 出库单 `st_storeout`：**已有**
+- [[st_materialout_MaterialOut]] — 材料出库 `st_materialout`：92 字段
+- [[st_salesout_SalesOut]] — 销售出库 `st_salesout`：**已有**
+- [[st_osminrecord_OsmInRecord]] — 其他入库 `st_osm_in_record`：117 字段
+- [[st_othoutrecord_OthOutRecord]] — 其他出库 `st_oth_out_record`：92 字段
+- [[st_storetrans_StoreTrans]] — 库存调拨 `st_store_trans`：54 字段
+- [[st_transferapply_TransferApply]] — 调拨申请 `st_transfer_apply`：93 字段
+- [[st_demandapply_DemandApply]] — 需求申请 `st_demand_apply`：75 字段
+- [[st_pickingrequisition_PickingRequisition]] — 领料申请 `st_picking_requisition`：57 字段
+- [[st_returnapply_ReturnApply]] — 退货申请 `st_return_apply`：35 字段
+- [[st_storenotice_StoreNotice]] — 库存通知 `st_storenotice`：62 字段
+- [[st_storeprorecord_StoreProRecord]] — 库存加工记录 `st_store_pro_record`：83 字段
+- [[st_stockstatuschange_StockStatusChange]] — 库存状态变更 `st_stock_status_change`：45 字段
+- [[st_goodchange_GoodChange]] — 货物变更 `st_good_change`：41 字段
+- [[st_storescrapped_StoreScrapped]] — 库存报废 `st_store_scrapped`：43 字段
+- [[st_storecheck_StoreCheck]] — 库存盘点 `st_storecheck`：4 字段
+- [[st_storecheckplan_StoreCheckPlan]] — 盘点计划 `st_storecheckplan`：54 字段
+- [[st_storecheckprepare_StoreCheckPrepare]] — 盘点准备 `st_storecheckprepare`：3 字段
+- [[st_storecheckreality_StoreCheckReality]] — 盘点实盘 `st_storecheckreality`：55 字段
+- [[st_storecheckdifference_StoreCheckDifference]] — 盘点差异 `st_storecheckdifference`：49 字段
+- [[st_inventoryclosing_InventoryClosing]] — 库存关账 `st_inventoryclosing`：15 字段
+- [[uscmf_lendrecord_LendRecord]] — 借出记录 `uscmf_lend_record`：56 字段
 
 #### 附件与线索
 - [[销售订单-OrderAttachment]] — `voucher.order.OrderAttachment` 附件 `orderattachment`：20 字段 + 2 关联

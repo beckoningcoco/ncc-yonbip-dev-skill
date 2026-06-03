@@ -1,0 +1,245 @@
+{
+  "main": {
+    "id": "9686b309450bd3b2",
+    "type": "split",
+    "children": [
+      {
+        "id": "4d8a179644a75f6a",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "5a4c3d3a62f9190a",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "raw/articles/2026-05-28-bip-refer-ext-intro.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "2026-05-28-bip-refer-ext-intro"
+            }
+          }
+        ]
+      },
+      {
+        "id": "c51e4f00f7405dbc",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "98db07e377ec6652",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "wiki/topics/问题处理.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "问题处理"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "978c86bbb5a6db6c",
+    "type": "split",
+    "children": [
+      {
+        "id": "d9a10ae1903a4f0a",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "667862239e1cd3f0",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "文件列表"
+            }
+          },
+          {
+            "id": "9dacc11d72660db7",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "搜索"
+            }
+          },
+          {
+            "id": "e94c774e4e78daf9",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "书签"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "50025fe52a1dd762",
+    "type": "split",
+    "children": [
+      {
+        "id": "f897abdd2b02197e",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "96dc9279fe756dd6",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "raw/articles/2026-05-28-bip-backend-script-intro.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "2026-05-28-bip-backend-script-intro 的反向链接列表"
+            }
+          },
+          {
+            "id": "482f74c4c90246c7",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "raw/articles/2026-05-28-bip-backend-script-intro.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "2026-05-28-bip-backend-script-intro 的出链列表"
+            }
+          },
+          {
+            "id": "e4e1f2acfbee05d7",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "标签"
+            }
+          },
+          {
+            "id": "d4321628eba54951",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "添加笔记属性"
+            }
+          },
+          {
+            "id": "63a1fb5d91e5fe70",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "raw/articles/2026-05-28-bip-backend-script-intro.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "2026-05-28-bip-backend-script-intro 的大纲"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false,
+      "bases:新建数据库": false
+    }
+  },
+  "active": "5a4c3d3a62f9190a",
+  "lastOpenFiles": [
+    "index.md",
+    "log.md",
+    "purpose.md",
+    "YMS 配置.md",
+    "wiki/topics/旗舰版开发基础.md",
+    "wiki/topics/页面脚本.md",
+    "wiki/topics/BIP核心概念术语.md",
+    "wiki/topics/BIP后端开发模板.md",
+    "Maven 离线仓库.md",
+    "欢迎.md",
+    "wiki/overview.md",
+    "wiki/sources/2026-05-27-api-issues.md",
+    "raw/notes/2026-05-27-yht-access-token.md",
+    "raw/notes/2026-05-27-env-setup.md",
+    "raw/notes/2026-05-27-bip-log.md",
+    "raw/articles/2026-05-28-bip-zzqxkk11.md",
+    "raw/articles/2026-05-28-bip-workflow-dev.md",
+    "raw/articles/2026-05-28-bip-sjzxkf11.md",
+    "raw/articles/2026-05-28-bip-metadata-bizobj.md",
+    "raw/articles/2026-05-28-bip-kfxgqyyds1.md",
+    "raw/articles/2026-05-28-bip-backend-script-intro.md",
+    "raw/articles/2026-05-28-bip-backend-script-advanced.md",
+    "raw/articles/2026-05-28-bip-api-publish.md",
+    "raw/articles/2026-05-28-bip-entity-operations.md",
+    "raw/articles/2026-05-28-bip-frontend-script-mdf.md",
+    "raw/articles/2026-05-28-bip-config-migration.md",
+    "log.md.tmp.48352.0d978b0bf4ef",
+    "index.md.tmp.48352.c1fe53fbf1bd",
+    "index.md.tmp.48352.d7575d5788b9",
+    "wiki/sources/2026-05-28-bip-config-migration.md.tmp.2002",
+    "raw/articles/2026-05-28-bip-config-migration.md.tmp.48352.89893e411e18",
+    "log.md.tmp.48352.f57f626e10c6",
+    "index.md.tmp.48352.90a9e885fc55",
+    "index.md.tmp.48352.64108b17cf27",
+    "index.md.tmp.48352.01bf9b23280a",
+    "wiki/topics/页面脚本.md.tmp.48352.c0647db75bd2"
+  ]
+}

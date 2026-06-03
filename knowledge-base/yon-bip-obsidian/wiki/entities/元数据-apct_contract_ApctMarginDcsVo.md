@@ -1,5 +1,5 @@
 ---
-tags: [BIP, 元数据, 数据字典, apct.contract.ApctDcsVo]
+tags: [BIP, 元数据, 数据字典, apct.contract.ApctMarginDcsVo]
 created: 2026-06-03
 updated: 2026-06-03
 sources: [元数据API queryByUri]
@@ -10,33 +10,31 @@ status: verified
 source_type: api_response
 ---
 
-# 合同自定义项 (`apct.contract.ApctDcsVo`)
+# 履约保证金自定义项 (`apct.contract.ApctMarginDcsVo`)
 
 > **平台版本：BIP 旗舰版 V5**
-> 物理表：`apct_apct_dcs` | domain：`apct` | 应用：`APCT` | 业务对象ID：`3f46ec59-3cf3-4621-ac0d-5dd32fd573bb`
+> 物理表：`apct_apct_margin_dcs` | domain：`apct` | 应用：`APCT` | 业务对象ID：`fa6537dd-b637-4191-a5e3-99d2b09b9b4a`
 
 ## 基本信息
 
 | 属性 | 值 |
 |------|-----|
-| 显示名 | 合同自定义项 |
-| 物理表 | `apct_apct_dcs` |
+| 显示名 | 履约保证金自定义项 |
+| 物理表 | `apct_apct_margin_dcs` |
 | 数据库 schema | `apct` |
 | 所属应用 | `APCT` |
-| 直连字段 | 12 个 |
+| 直连字段 | 9 个 |
 | 子表 | 0 个 |
-| 关联引用 | 6 个 |
+| 关联引用 | 4 个 |
 
-## 关联引用 (6个)
+## 关联引用 (4个)
 
 | 字段名 | 引用类型 |
 |--------|---------|
-| `vcol1` | `ucfbasedoc.09991` |
 | `lcol1` | `apct.apct_apctref` |
-| `vcol4` | `ucfbasedoc.ydzbl` |
+| `vcol1` | `ucfbasedoc.ydzbl` |
 | `ytenant_id` | `` |
-| `vcol5` | `ucfbasedoc.bd_projectcardref` |
-| `vcol3` | `iuap-apcom-contract.contractTypeTreeRef` |
+| `vcol2` | `ucfbasedoc.bd_projectcardref` |
 
 ## 继承接口 (2个, 1字段)
 
@@ -46,25 +44,22 @@ source_type: api_response
 
 ## 字段列表（按类型分组）
 
-> 共 12 个直连字段
+> 共 9 个直连字段
 
-### 文本字段 (3个)
+### 文本字段 (2个)
 
 | 字段名 | 数据库列 | 字段编码 | 显示名 |
 |--------|---------|---------|--------|
-| `vcol2` | `vcol2` | `CXCX` | 测试中测试 |
 | `vcol55` | `vcol55` | `NBXTHTH` | 内部协同合同号 |
 | `id` | `id` | `id` | ID |
 
-### 引用字段 (6个)
+### 引用字段 (4个)
 
 | 字段名 | 数据库列 | 字段编码 | 显示名 |
 |--------|---------|---------|--------|
-| `vcol3` | `vcol3` | `HTLXTZ` | 合同类型电子标签 |
-| `vcol1` | `vcol1` | `HTTZ` | 合同台账测试 |
-| `vcol5` | `vcol5` | `marassistant2` | 项目 |
+| `vcol2` | `vcol2` | `marassistant2` | 项目 |
 | `lcol1` | `lcol1` | `xthth` | 协同合同号 |
-| `vcol4` | `vcol4` | `ydzbl` | 溢短装比例 |
+| `vcol1` | `vcol1` | `ydzbl` | 溢短装比例 |
 | `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
 
 ### 日期字段 (1个)

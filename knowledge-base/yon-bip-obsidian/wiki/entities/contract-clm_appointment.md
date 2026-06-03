@@ -1,0 +1,113 @@
+---
+tags: [BIP, metadata, CLM, contract, clm_appointment]
+created: 2026-06-03
+updated: 2026-06-03
+sources: [metadata-api]
+platform_version: BIP V5
+project: ""
+last_verified: 2026-06-03
+status: verified
+source_type: api_response
+---
+
+# 履约事项 (CLM.clmContract.clm_appointment)
+
+> Platform: BIP V5 | CLM | Table: clm_appointment | Schema: yonbip-ec-contract
+> Parent: CLM.clmContract.clm_contract
+
+## Basic Info
+
+| Property | Value |
+|----------|-------|
+| displayName | 履约事项 |
+| uri | CLM.clmContract.clm_appointment |
+| tableName | clm_appointment |
+| domain | yonbip-ec-contract |
+| applicationCode | CLM |
+| superUri | iuap.busiObj.BizObject |
+| isBusinessObject | true |
+| isExtend | true |
+| description | 业务流多来源 |
+
+## Key/Code/Name
+
+| Role | Column |
+|------|--------|
+| key | id |
+
+## Suppliers (5)
+
+| # | Name | URI |
+|---|------|-----|
+| 1 | 逻辑删除 (LogicDelete) | iuap.busiObj.LogicDelete |
+| 2 | 统一租户接口 (IYTenant) | iuap.busiObj.IYTenant |
+| 3 | 业务流多来源 (BusinessFlowSourcesItf) | iuap.busiObj.BusinessFlowSourcesItf |
+| 4 | 业务流基础 (BusinessFlowItf) | iuap.busiObj.BusinessFlowItf |
+| 5 | 审计信息 (IAuditInfo) | iuap.busiObj.IAuditInfo |
+
+---
+
+## All Fields (29)
+
+| # | name | displayName | columnName | biztype | typeUri | required | partition | terms |
+|---|------|-------------|------------|---------|---------|----------|-----------|-------|
+| 1 | accomRemark | 完成情况说明 | accom_remark | text | String |  |  | changeFromBusinessPage,isExtenal,nullable |
+| 2 | accomState | 是否完成 | accom_state | switch | Boolean |  |  | changeFromBusinessPage,isExtenal,nullable |
+| 3 | bizFlowInstanceId | 业务流实例id | bizflowinstance_id | text | String |  |  | nullable,uiHide |
+| 4 | bizFlowMakeBillCode | 单据转换规则编码 | bizflow_makebillcode | text | String |  |  | nullable,uiHide |
+| 5 | bizflowId | 业务流id | bizflow_id | text | String |  |  | nullable,uiHide |
+| 6 | bizflowName | 流程名称 | bizflowname | text | String |  |  | nullable,uiHide |
+| 7 | contractId | 合同信息 | clm_contract_id | quote | CLM.clmContract.clm_contract |  |  | isExtenal,isFk,nullable |
+| 8 | createTime | 创建时间 | create_time | dateTime | Timestamp |  |  | nullable |
+| 9 | creator | 创建人 | creator | quote | base.user.BipUser |  |  | nullable |
+| 10 | dr | 逻辑删除 | dr | short | Short |  | Y | notGenerate,nullable,uiHide |
+| 11 | endDate | 完成时间 | end_date | date | String |  |  | changeFromBusinessPage,isExtenal,nullable |
+| 12 | feature | 自定义特征 | feature | UserDefine | CLM.clmContract.clm_appointmentfeatureUserDefine |  |  | changeFromBusinessPage,generateElasticEntity,isExtenal,nullable,senvitiveType |
+| 13 | firstBusiObj | 来源业务对象 | firstbusiobj | text | String |  |  | nullable,uiHide |
+| 14 | firstChildId | 来源单据子表id | firstchild_id | text | String |  |  | nullable,uiHide |
+| 15 | firstCode | 来源单据号 | firstcode | text | String |  |  | nullable,uiHide |
+| 16 | firstId | 来源单据主表id | first_id | text | String |  |  | nullable,uiHide |
+| 17 | id | 主键 | id | text | String |  |  | nullable,REF.ID,uiHide |
+| 18 | memo | 备注 | memo | text | String |  |  | changeFromBusinessPage,isExtenal,nullable |
+| 19 | modifier | 修改人 | modifier | quote | base.user.BipUser |  |  | nullable |
+| 20 | modifyTime | 修改时间 | modify_time | dateTime | Timestamp |  |  | nullable |
+| 21 | name | 名称 | name | text | String |  |  | changeFromBusinessPage,isExtenal,nullable |
+| 22 | planEndDate | 计划完成时间 | plan_end_date | date | String |  |  | changeFromBusinessPage,isExtenal,nullable |
+| 23 | pubts | 时间戳 | pubts | dateTime | Timestamp |  |  | isSyncKey,nullable,uiHide |
+| 24 | sourceBusiObj | 上游业务对象 | sourcebusiobj | text | String |  |  | nullable,uiHide |
+| 25 | sourceChildId | 上游单据子表id | sourcechild_id | text | String |  |  | nullable,uiHide |
+| 26 | sourceCode | 上游单据号 | sourcecode | text | String |  |  | nullable,uiHide |
+| 27 | sourceGrandId | 来源孙表id | sourcegrand_id | text | String |  |  | nullable,uiHide |
+| 28 | sourceId | 上游单据主表id | source_id | text | String |  |  | nullable,uiHide |
+| 29 | ytenantId | 租户id | ytenant_id | quote | yht.tenant.YhtTenant |  | Y | notGenerate,nullable,uiHide |
+
+---
+
+## Reference Fields (4)
+
+| # | name | displayName | columnName | typeUri |
+|---|------|-------------|------------|---------|
+| 1 | contractId | 合同信息 | clm_contract_id | CLM.clmContract.clm_contract |
+| 2 | creator | 创建人 | creator | base.user.BipUser |
+| 3 | modifier | 修改人 | modifier | base.user.BipUser |
+| 4 | ytenantId | 租户id | ytenant_id | yht.tenant.YhtTenant |
+
+---
+
+## Number Fields (1)
+
+| # | name | displayName | columnName | biztype |
+|---|------|-------------|------------|---------|
+| 1 | dr | 逻辑删除 | dr | short |
+
+---
+
+## Date Fields (5)
+
+| # | name | displayName | columnName | biztype |
+|---|------|-------------|------------|---------|
+| 1 | createTime | 创建时间 | create_time | dateTime |
+| 2 | endDate | 完成时间 | end_date | date |
+| 3 | modifyTime | 修改时间 | modify_time | dateTime |
+| 4 | planEndDate | 计划完成时间 | plan_end_date | date |
+| 5 | pubts | 时间戳 | pubts | dateTime |

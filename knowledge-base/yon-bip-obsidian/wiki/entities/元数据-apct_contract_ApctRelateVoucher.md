@@ -9,72 +9,143 @@ last_verified: 2026-06-03
 status: verified
 source_type: api_response
 ---
+
 # 下游关联单据 (`apct.contract.ApctRelateVoucher`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBip），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `apct_apct_relate_voucher` | 应用: `APCT`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`apct_apct_relate_voucher` | domain：`apct` | 应用：`APCT` | 业务对象ID：``
 
-## 属性（44 个）
+## 基本信息
 
-| # | 字段 | 显示名 | 列 | 类型 | biztype |
-|---|------|--------|-----|------|---------|
-| 1 | `billDate` | billDate | `bill_date` | Date | `date` |
-| 2 | `billNum` | billNum | `bill_num` | String | `text` |
-| 3 | `billStatus` | billStatus | `bill_status` | String | `text` |
-| 4 | `billType` | billType | `bill_type` | String | `text` |
-| 5 | `planCode` | plan编码 | `plan_code` | String | `text` |
-| 6 | `outbillRowId` | outbillRowID | `outbillrow_id` | Long | `long` |
-| 7 | `outbillType` | outbillType | `out_bill_type` | String | `text` |
-| 8 | `outbustype` | outbustype | `out_bustype` | 19f9264d-28d1-4b47-9d28-f2e82654f3a9 | `quote` |
-| 9 | `outbillNo` | outbillNo | `outbill_no` | String | `text` |
-| 10 | `outbillDate` | outbillDate | `outbill_date` | Date | `date` |
-| 11 | `outbillStatus` | outbillStatus | `out_bill_status` | Short | `short` |
-| 12 | `outsettleStatus` | outsettleStatus | `out_settle_status` | Short | `short` |
-| 13 | `outoriginalAmt` | outoriginalAmt | `out_original_amt` | Decimal | `number` |
-| 14 | `outProject` | outProject | `out_project` | b1e7cbf6-094a-4200-b451-36bfa3ac3ff4 | `quote` |
-| 15 | `outBusimemo` | outBusimemo | `out_busimemo` | d78cdbfa-0424-4dc3-a995-5c8624e1a560 | `quote` |
-| 16 | `outMaterial` | outMaterial | `out_material` | 89f3b06e-23df-4403-b4a7-19f99eeeae72 | `quote` |
-| 17 | `localAmt` | localAmt | `local_amt` | Decimal | `number` |
-| 18 | `contractDirection` | contractDirection | `contract_direction` | Short | `short` |
-| 19 | `nsummny` | nsummny | `nsummny` | Decimal | `number` |
-| 20 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 21 | `bustype` | bustype | `bustype` | 19f9264d-28d1-4b47-9d28-f2e82654f3a9 | `quote` |
-| 22 | `createDate` | createDate | `create_date` | Date | `date` |
-| 23 | `createTime` | 创建时间 | `create_time` | DateTime | `timestamp` |
-| 24 | `creator` | 创建人 | `creator` | String | `text` |
-| 25 | `creatorId` | 创建人ID | `creatorId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 26 | `ctCode` | ct编码 | `ct_code` | String | `text` |
-| 27 | `ctId` | ctID | `ct_id` | 84a309b9-2fd0-48d8-9b75-8251a20928c2 | `quote` |
-| 28 | `currencyId` | currencyID | `currency_id` | 02b45339-eb4a-4a31-a8b5-d32f494f4e8e | `quote` |
-| 29 | `domain` | domain | `domain` | String | `text` |
-| 30 | `id` | ID | `id` | Long | `long` |
-| 31 | `isDeleted` | 是否Deleted | `iDeleted` | Boolean | `switch` |
-| 32 | `location` | location | `location` | String | `text` |
-| 33 | `marginId` | marginID | `margin_id` | 9b101166-8c8d-46f3-ba77-8b8b92992aaf | `quote` |
-| 34 | `modifier` | 修改人 | `modifier` | String | `text` |
-| 35 | `modifierId` | 修改人ID | `modifierId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 36 | `modifyDate` | modifyDate | `modify_date` | Date | `date` |
-| 37 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `timestamp` |
-| 38 | `originalAmt` | originalAmt | `original_amt` | Decimal | `number` |
-| 39 | `outbillId` | outbillID | `outbill_id` | Long | `long` |
-| 40 | `planId` | planID | `plan_id` | f6f2aec8-fae4-49c4-83cd-0399d152fa6f | `quote` |
-| 41 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 42 | `settleStatus` | settleStatus | `settle_status` | String | `text` |
-| 43 | `tenant` | tenant | `tenant_id` | c213cd56-d5de-421f-bae7-d77455b557cd | `quote` |
-| 44 | `beforeUpdateAmt` | beforeUpdateAmt | `before_update_amt` | Decimal | `number` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 下游关联单据 |
+| 物理表 | `apct_apct_relate_voucher` |
+| 数据库 schema | `apct` |
+| 所属应用 | `APCT` |
+| 直连字段 | 44 个 |
+| 子表 | 0 个 |
+| 关联引用 | 13 个 |
 
-## 关联（13 个）
+## 关联引用 (13个)
 
-- `ctId` -> `apct.contract.Apct` (0..n) 
-- `outProject` -> `bd.project.ProjectVO` () 
-- `ytenant` -> `yht.tenant.YhtTenant` () 
-- `marginId` -> `apct.contract.ApctMargin` () 
-- `creatorId` -> `base.user.User` () 
-- `modifierId` -> `base.user.User` () 
-- `outBusimemo` -> `bd.expenseitem.ExpenseItem` () 
-- `bustype` -> `bd.bill.TransType` () 
-- `outbustype` -> `bd.bill.TransType` () 
-- `planId` -> `apct.contract.ApctPlan` () 
-- `currencyId` -> `bd.currencytenant.CurrencyTenantVO` () 
-- `tenant` -> `base.tenant.Tenant` () 
-- `outMaterial` -> `pc.product.Product` () 
+| 字段名 | 引用类型 |
+|--------|---------|
+| `ct_id` | `` |
+| `out_project` | `` |
+| `ytenant_id` | `` |
+| `margin_id` | `` |
+| `` | `` |
+| `out_busimemo` | `` |
+| `bustype` | `` |
+| `out_bustype` | `` |
+| `plan_id` | `` |
+| `currency_id` | `` |
+| `tenant_id` | `` |
+| `out_material` | `` |
+
+## 继承接口 (4个, 11字段)
+
+- **租户相关** (`base.itf.ITenant`)
+  - `tenant_id` → `tenant_id`
+- **统一租户接口(扩展)** (`ucfbase.ucfbaseItf.IYTenantExt`)
+  - `ytenant_id` → `ytenant_id`
+- **审计信息** (`base.itf.IAuditInfo`)
+  - `create_date` → `create_date`
+  - `create_time` → `create_time`
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `modify_date` → `modify_date`
+  - `modify_time` → `modify_time`
+- **逻辑删除相关** (`base.itf.Deletable`)
+  - `iDeleted` → `iDeleted`
+
+## 字段列表（按类型分组）
+
+> 共 44 个直连字段
+
+### 文本字段 (12个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `bill_num` | `bill_num` | `billNum` | 单据编码 |
+| `bill_status` | `bill_status` | `billStatus` | 单据状态 |
+| `bill_type` | `bill_type` | `billType` | 单据类型 |
+| `plan_code` | `plan_code` | `planCode` | 计划编码 |
+| `out_bill_type` | `out_bill_type` | `outbillType` | 外部单据类型 |
+| `outbill_no` | `outbill_no` | `outbillNo` | 外部单据编码 |
+| `` | `creator` | `creator` | 创建人名称 |
+| `ct_code` | `ct_code` | `ctCode` | 合同号 |
+| `domain` | `domain` | `domain` | 所属领域 |
+| `location` | `location` | `location` | 单据归属表体位置 |
+| `` | `modifier` | `modifier` | 修改人名称 |
+| `settle_status` | `settle_status` | `settleStatus` | 结算状态 |
+
+### 引用字段 (13个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `out_bustype` | `out_bustype` | `outbustype` | 外部交易类型 |
+| `out_project` | `out_project` | `outProject` | 外部项目 |
+| `out_busimemo` | `out_busimemo` | `outBusimemo` | 外部费用项目 |
+| `out_material` | `out_material` | `outMaterial` | 外部物料 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+| `bustype` | `bustype` | `bustype` | 交易类型 |
+| `` | `creatorId` | `creatorId` | 创建人 |
+| `ct_id` | `ct_id` | `ctId` | 合同 |
+| `currency_id` | `currency_id` | `currencyId` | 币种 |
+| `margin_id` | `margin_id` | `marginId` | 履约保证金 |
+| `` | `modifierId` | `modifierId` | 修改人 |
+| `plan_id` | `plan_id` | `planId` | 付款计划 |
+| `tenant_id` | `tenant_id` | `tenant` | 租户 |
+
+### 日期字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `bill_date` | `bill_date` | `billDate` | 单据日期 |
+| `outbill_date` | `outbill_date` | `outbillDate` | 外部单据日期 |
+| `create_date` | `create_date` | `createDate` | 创建日期 |
+| `modify_date` | `modify_date` | `modifyDate` | 修改日期 |
+
+### 布尔字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iDeleted` | `iDeleted` | `isDeleted` | 逻辑删除标记 |
+
+### 短整数 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `out_bill_status` | `out_bill_status` | `outbillStatus` | 外部单据状态 |
+| `out_settle_status` | `out_settle_status` | `outsettleStatus` | 外部结算状态 |
+| `contract_direction` | `contract_direction` | `contractDirection` | 收支方向 |
+
+### 长整数 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `outbillrow_id` | `outbillrow_id` | `outbillRowId` | 外部单据行 |
+| `id` | `id` | `id` | ID |
+| `outbill_id` | `outbill_id` | `outbillId` | 外部单据id |
+
+### 数值字段 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `out_original_amt` | `out_original_amt` | `outoriginalAmt` | 外部原币金额 |
+| `local_amt` | `local_amt` | `localAmt` | 本币金额 |
+| `nsummny` | `nsummny` | `nsummny` | 价税合计 |
+| `original_amt` | `original_amt` | `originalAmt` | 原币金额 |
+| `before_update_amt` | `before_update_amt` | `beforeUpdateAmt` | 更新前原币金额 |
+
+### timestamp (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |

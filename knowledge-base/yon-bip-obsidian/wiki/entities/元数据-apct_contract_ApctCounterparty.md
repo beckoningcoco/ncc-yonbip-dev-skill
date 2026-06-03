@@ -9,46 +9,112 @@ last_verified: 2026-06-03
 status: verified
 source_type: api_response
 ---
+
 # 合同相对方 (`apct.contract.ApctCounterparty`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBip），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `apct_apct_counterparty` | 应用: `APCT`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`apct_apct_counterparty` | domain：`apct` | 应用：`APCT` | 业务对象ID：``
 
-## 属性（22 个）
+## 基本信息
 
-| # | 字段 | 显示名 | 列 | 类型 | biztype |
-|---|------|--------|-----|------|---------|
-| 1 | `creator` | 创建人 | `creator` | String | `text` |
-| 2 | `ctId` | ctID | `ct_id` | 84a309b9-2fd0-48d8-9b75-8251a20928c2 | `quote` |
-| 3 | `apctCounterpartyDcs` | apctCounterpartyDcs | `apctCounterpartyDcs` | bc5cf9c6-3ccb-4ad0-b0e8-00df2f3f3efb | `UserDefine` |
-| 4 | `payAccountId` | payAccountID | `pay_account_id` | 4b6dcfa2-1d07-407d-a35a-9b219fadf37c | `quote` |
-| 5 | `sourceautoid` | sourceautoid | `sourceautoid` | Long | `long` |
-| 6 | `supplierId` | supplierID | `supplier_id` | 89bf026e-cc49-4fe7-9a7b-3e8fdcc77c1e | `quote` |
-| 7 | `modifyDate` | modifyDate | `modify_date` | Date | `date` |
-| 8 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 9 | `modifier` | 修改人 | `modifier` | String | `text` |
-| 10 | `creatorId` | 创建人ID | `creatorId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 11 | `modifierId` | 修改人ID | `modifierId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 12 | `mailAddress` | mailAddress | `mail_address` | String | `text` |
-| 13 | `counterpartyType` | counterpartyType | `counterparty_type` | String | `text` |
-| 14 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `timestamp` |
-| 15 | `isDeleted` | 是否Deleted | `iDeleted` | Boolean | `switch` |
-| 16 | `createTime` | 创建时间 | `create_time` | DateTime | `timestamp` |
-| 17 | `customerId` | customerID | `customer_id` | 94b3280a-27a4-485a-b90b-b7bce57c6df2 | `quote` |
-| 18 | `contactNumber` | contactNumber | `contact_number` | String | `text` |
-| 19 | `id` | ID | `id` | Long | `long` |
-| 20 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 21 | `tenant` | tenant | `tenant_id` | c213cd56-d5de-421f-bae7-d77455b557cd | `quote` |
-| 22 | `createDate` | createDate | `create_date` | Date | `date` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 合同相对方 |
+| 物理表 | `apct_apct_counterparty` |
+| 数据库 schema | `apct` |
+| 所属应用 | `APCT` |
+| 直连字段 | 22 个 |
+| 子表 | 0 个 |
+| 关联引用 | 9 个 |
 
-## 关联（9 个）
+## 关联引用 (9个)
 
-- `ctId` -> `apct.contract.Apct` (0..n) 
-- `payAccountId` -> `aa.vendor.VendorBank` () 
-- `supplierId` -> `aa.vendor.Vendor` () 
-- `ytenant` -> `yht.tenant.YhtTenant` () 
-- `customerId` -> `aa.merchant.Merchant` () 
-- `creatorId` -> `base.user.User` () 
-- `modifierId` -> `base.user.User` () 
-- `apctCounterpartyDcs` -> `apct.contract.ApctCounterpartyDcsVo` () 
-- `tenant` -> `base.tenant.Tenant` () 
+| 字段名 | 引用类型 |
+|--------|---------|
+| `ct_id` | `` |
+| `pay_account_id` | `` |
+| `supplier_id` | `` |
+| `ytenant_id` | `` |
+| `customer_id` | `` |
+| `` | `` |
+| `apctCounterpartyDcs` | `` |
+| `tenant_id` | `` |
+
+## 继承接口 (4个, 11字段)
+
+- **租户相关** (`base.itf.ITenant`)
+  - `tenant_id` → `tenant_id`
+- **统一租户接口(扩展)** (`ucfbase.ucfbaseItf.IYTenantExt`)
+  - `ytenant_id` → `ytenant_id`
+- **审计信息** (`base.itf.IAuditInfo`)
+  - `create_date` → `create_date`
+  - `create_time` → `create_time`
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `modify_date` → `modify_date`
+  - `modify_time` → `modify_time`
+- **逻辑删除相关** (`base.itf.Deletable`)
+  - `iDeleted` → `iDeleted`
+
+## 字段列表（按类型分组）
+
+> 共 22 个直连字段
+
+### 文本字段 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `creator` | `creator` | 创建人名称 |
+| `` | `modifier` | `modifier` | 修改人名称 |
+| `mail_address` | `mail_address` | `mailAddress` | 通信地址 |
+| `counterparty_type` | `counterparty_type` | `counterpartyType` | 相对方类型 |
+| `contact_number` | `contact_number` | `contactNumber` | 联系电话 |
+
+### 引用字段 (8个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `ct_id` | `ct_id` | `ctId` | 合同 |
+| `pay_account_id` | `pay_account_id` | `payAccountId` | 银行账户id |
+| `supplier_id` | `supplier_id` | `supplierId` | 供应商 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+| `` | `creatorId` | `creatorId` | 创建人 |
+| `` | `modifierId` | `modifierId` | 修改人 |
+| `customer_id` | `customer_id` | `customerId` | 客户 |
+| `tenant_id` | `tenant_id` | `tenant` | 租户 |
+
+### 日期字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `modify_date` | `modify_date` | `modifyDate` | 修改日期 |
+| `create_date` | `create_date` | `createDate` | 创建日期 |
+
+### 布尔字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iDeleted` | `iDeleted` | `isDeleted` | 逻辑删除标记 |
+
+### 长整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `sourceautoid` | `sourceautoid` | `sourceautoid` | 上游单据子表id |
+| `id` | `id` | `id` | ID |
+
+### UserDefine (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `apctCounterpartyDcs` | `apctCounterpartyDcs` | `apctCounterpartyDcs` | 合同相对方自定义项 |
+
+### timestamp (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |

@@ -9,133 +9,227 @@ last_verified: 2026-06-03
 status: verified
 source_type: api_response
 ---
+
 # 收款计划 (`apct.contract.ApctReceiptplan`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBip），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `apct_apct_receiptplan` | 应用: `APCT`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`apct_apct_receiptplan` | domain：`apct` | 应用：`APCT` | 业务对象ID：``
 
-## 属性（104 个）
+## 基本信息
 
-| # | 字段 | 显示名 | 列 | 类型 | biztype |
-|---|------|--------|-----|------|---------|
-| 1 | `accountComfirmWay` | accountComfirmWay | `account_comfirm_way` | String | `singleOption` |
-| 2 | `accountDays` | accountDays | `account_days` | Integer | `int` |
-| 3 | `accountPeriod` | accountPeriod | `account_period` | Decimal | `number` |
-| 4 | `accountPeriodUnitId` | accountPeriodUnitID | `account_period_unit_id` | String | `text` |
-| 5 | `acctEntityId` | acctEntityID | `acct_entity_id` | 4928db62-a46d-4829-a26a-1de4bb3bf98c | `quote` |
-| 6 | `advanceFlag` | advanceFlag | `advance_flag` | Short | `short` |
-| 7 | `amtTypeId` | amtTypeID | `amt_type_id` | 14b092f3-5d27-4a47-82a0-d6bad074c9f1 | `quote` |
-| 8 | `apctApctReceiptplanDcs` | apctApctReceiptplanDcs | `apctApctReceiptplanDcs` | 9a056779-158d-4d02-9551-55c92c6d813a | `UserDefine` |
-| 9 | `apprAmt` | apprAmt | `appr_amt` | Decimal | `number` |
-| 10 | `apprAmtBak` | apprAmtBak | `appr_amt_bak` | Decimal | `number` |
-| 11 | `apprPlanRefundAmt` | apprPlanRefundAmt | `appr_plan_refund_amt` | Decimal | `number` |
-| 12 | `apprPlanRefundAmtBak` | apprPlanRefundAmtBak | `appr_plan_refund_amt_bak` | Decimal | `number` |
-| 13 | `apprSubjectAmt` | apprSubjectAmt | `appr_subject_amt` | Decimal | `number` |
-| 14 | `apprSubjectAmtBak` | apprSubjectAmtBak | `appr_subject_amt_bak` | Decimal | `number` |
-| 15 | `availableAmt` | availableAmt | `available_amt` | Decimal | `number` |
-| 16 | `beginBase` | beginBase | `begin_base` | a4a03d83-ea92-422d-9f64-b5f18f26a4a9 | `quote` |
-| 17 | `beginDate` | beginDate | `begin_date` | Date | `date` |
-| 18 | `code` | 编码 | `code` | String | `text` |
-| 19 | `condition` | condition | `condition` | String | `text` |
-| 20 | `createDate` | createDate | `create_date` | Date | `date` |
-| 21 | `createTime` | 创建时间 | `create_time` | DateTime | `timestamp` |
-| 22 | `creator` | 创建人 | `creator` | String | `text` |
-| 23 | `creatorId` | 创建人ID | `creatorId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 24 | `ctId` | ctID | `ct_id` | 84a309b9-2fd0-48d8-9b75-8251a20928c2 | `quote` |
-| 25 | `customer` | customer | `customer_id` | 94b3280a-27a4-485a-b90b-b7bce57c6df2 | `quote` |
-| 26 | `deloyDays` | deloyDays | `deloy_days` | Decimal | `number` |
-| 27 | `deloyMonth` | deloyMonth | `deloy_month` | Decimal | `number` |
-| 28 | `expenseitemId` | expenseitemID | `expenseitem_id` | d78cdbfa-0424-4dc3-a995-5c8624e1a560 | `quote` |
-| 29 | `expireComfirmWay` | expireComfirmWay | `expire_comfirm_way` | String | `singleOption` |
-| 30 | `fixedAccountDate` | fixedAccountDate | `fixed_account_date` | String | `singleOption` |
-| 31 | `fixedAccountDate1` | fixedAccountDate1 | `fixed_account_date1` | String | `singleOption` |
-| 32 | `fixedAccountDate2` | fixedAccountDate2 | `fixed_account_date2` | String | `singleOption` |
-| 33 | `fixedAccountDate3` | fixedAccountDate3 | `fixed_account_date3` | String | `singleOption` |
-| 34 | `fixedAccountDate4` | fixedAccountDate4 | `fixed_account_date4` | String | `singleOption` |
-| 35 | `fixedExpireDate` | fixedExpireDate | `fixed_expire_date` | String | `singleOption` |
-| 36 | `fixedExpireDate1` | fixedExpireDate1 | `fixed_expire_date1` | String | `singleOption` |
-| 37 | `fixedExpireDate2` | fixedExpireDate2 | `fixed_expire_date2` | String | `singleOption` |
-| 38 | `fixedExpireDate3` | fixedExpireDate3 | `fixed_expire_date3` | String | `singleOption` |
-| 39 | `fixedExpireDate4` | fixedExpireDate4 | `fixed_expire_date4` | String | `singleOption` |
-| 40 | `groupTaskKey` | groupTaskKey | `groupTaskKey` | String | `text` |
-| 41 | `id` | ID | `id` | Long | `long` |
-| 42 | `isDeleted` | 是否Deleted | `iDeleted` | Boolean | `switch` |
-| 43 | `issueNo` | 是否sueNo | `issue_no` | Integer | `int` |
-| 44 | `localApprAmt` | localApprAmt | `local_appr_amt` | Decimal | `number` |
-| 45 | `localApprAmtBak` | localApprAmtBak | `local_appr_amt_bak` | Decimal | `number` |
-| 46 | `localApprPlanRefundAmt` | localApprPlanRefundAmt | `local_appr_plan_refund_amt` | Decimal | `number` |
-| 47 | `localApprPlanRefundAmtBak` | localApprPlanRefundAmtBak | `local_appr_plan_refund_amt_bak` | Decimal | `number` |
-| 48 | `localInvoiceTotal` | localInvoiceTotal | `local_invoice_total` | Decimal | `number` |
-| 49 | `localInvoiceTotalBak` | localInvoiceTotalBak | `local_invoice_total_bak` | Decimal | `number` |
-| 50 | `localPaidAmt` | localPaidAmt | `local_paid_amt` | Decimal | `number` |
-| 51 | `localPaidAmtBak` | localPaidAmtBak | `local_paid_amt_bak` | Decimal | `number` |
-| 52 | `localPlanAmt` | localPlanAmt | `local_plan_amt` | Decimal | `number` |
-| 53 | `localPlanAmtBak` | localPlanAmtBak | `local_plan_amt_bak` | Decimal | `number` |
-| 54 | `localUnapprAmt` | localUnapprAmt | `local_unappr_amt` | Decimal | `number` |
-| 55 | `localUnapprAmtBak` | localUnapprAmtBak | `local_unappr_amt_bak` | Decimal | `number` |
-| 56 | `makeRuleCode` | makeRule编码 | `makerule_code` | String | `text` |
-| 57 | `marginFlag` | marginFlag | `margin_flag` | Short | `short` |
-| 58 | `materialId` | materialID | `material_id` | Long | `long` |
-| 59 | `modifier` | 修改人 | `modifier` | String | `text` |
-| 60 | `modifierId` | 修改人ID | `modifierId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 61 | `modifyDate` | modifyDate | `modify_date` | Date | `date` |
-| 62 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `timestamp` |
-| 63 | `originalInvoiceTotal` | originalInvoiceTotal | `original_invoice_total` | Decimal | `number` |
-| 64 | `originalInvoiceTotalBak` | originalInvoiceTotalBak | `original_invoice_total_bak` | Decimal | `number` |
-| 65 | `paidAmt` | paidAmt | `paid_amt` | Decimal | `number` |
-| 66 | `paidAmtBak` | paidAmtBak | `paid_amt_bak` | Decimal | `number` |
-| 67 | `payEndDate` | payEndDate | `pay_end_date` | Date | `date` |
-| 68 | `planAmt` | planAmt | `plan_amt` | Decimal | `number` |
-| 69 | `planAmtBak` | planAmtBak | `plan_amt_bak` | Decimal | `number` |
-| 70 | `planName` | plan名称 | `plan_name` | String | `text` |
-| 71 | `planRatio` | planRatio | `plan_ratio` | Decimal | `number` |
-| 72 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 73 | `rapprSubjectLocalAmt` | rapprSubjectLocalAmt | `rappr_subject_local_amt` | Decimal | `number` |
-| 74 | `rapprSubjectLocalAmtBak` | rapprSubjectLocalAmtBak | `rappr_subject_local_amt_bak` | Decimal | `number` |
-| 75 | `receiveAgreementId` | receiveAgreementID | `receive_agreement_id` | e336f779-f1e5-4530-b6d5-fa2e5ed1c302 | `quote` |
-| 76 | `rowNo` | rowNo | `row_no` | String | `text` |
-| 77 | `runapprSubjectLocalAmt` | runapprSubjectLocalAmt | `runappr_subject_local_amt` | Decimal | `number` |
-| 78 | `runapprSubjectLocalAmtBak` | runapprSubjectLocalAmtBak | `runappr_subject_local_amt_bak` | Decimal | `number` |
-| 79 | `rverifiedSubjectLocalAmt` | rverifiedSubjectLocalAmt | `rverified_subject_local_amt` | Decimal | `number` |
-| 80 | `rverifiedSubjectLocalAmtBak` | rverifiedSubjectLocalAmtBak | `rverified_subject_local_amt_bak` | Decimal | `number` |
-| 81 | `rverifiedSubjectOriginalAmt` | rverifiedSubjectOriginalAmt | `rverified_subject_original_amt` | Decimal | `number` |
-| 82 | `rverifiedSubjectOriginalAmtBak` | rverifiedSubjectOriginalAmtBak | `rverified_subject_original_amt_bak` | Decimal | `number` |
-| 83 | `settleModeId` | settleModeID | `settle_mode_id` | 95f34e90-897c-4bf5-958c-b1c2deaa8aff | `quote` |
-| 84 | `source` | source | `source` | String | `text` |
-| 85 | `sourceMainPubts` | sourceMainPubts | `sourceMainPubts` | DateTime | `timestamp` |
-| 86 | `sourceautoid` | sourceautoid | `sourceautoid` | Long | `long` |
-| 87 | `sourceautorowid` | sourceautorowid | `sourceautorowid` | Long | `long` |
-| 88 | `sourceid` | sourceid | `sourceid` | Long | `long` |
-| 89 | `startDate` | startDate | `start_date` | String | `date` |
-| 90 | `startTimeId` | startTimeID | `start_time_id` | String | `text` |
-| 91 | `supplierId` | supplierID | `supplier_id` | 89bf026e-cc49-4fe7-9a7b-3e8fdcc77c1e | `quote` |
-| 92 | `tenant` | tenant | `tenant_id` | c213cd56-d5de-421f-bae7-d77455b557cd | `quote` |
-| 93 | `unapprAmt` | unapprAmt | `unappr_amt` | Decimal | `number` |
-| 94 | `unapprAmtBak` | unapprAmtBak | `unappr_amt_bak` | Decimal | `number` |
-| 95 | `unapprPlanRefundAmt` | unapprPlanRefundAmt | `unappr_plan_refund_amt` | Decimal | `number` |
-| 96 | `unapprPlanRefundAmtBak` | unapprPlanRefundAmtBak | `unappr_plan_refund_amt_bak` | Decimal | `number` |
-| 97 | `unapprSubjectAmt` | unapprSubjectAmt | `unappr_subject_amt` | Decimal | `number` |
-| 98 | `unapprSubjectAmtBak` | unapprSubjectAmtBak | `unappr_subject_amt_bak` | Decimal | `number` |
-| 99 | `unlocalApprPlanRefundAmt` | unlocalApprPlanRefundAmt | `unlocal_appr_plan_refund_amt` | Decimal | `number` |
-| 100 | `unlocalApprPlanRefundAmtBak` | unlocalApprPlanRefundAmtBak | `unlocal_appr_plan_refund_amt_bak` | Decimal | `number` |
-| 101 | `upcode` | upcode | `upcode` | String | `text` |
-| 102 | `verfitySubjectAmt` | verfitySubjectAmt | `verfity_subject_amt` | Decimal | `number` |
-| 103 | `verfitySubjectAmtBak` | verfitySubjectAmtBak | `verfity_subject_amt_bak` | Decimal | `number` |
-| 104 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 收款计划 |
+| 物理表 | `apct_apct_receiptplan` |
+| 数据库 schema | `apct` |
+| 所属应用 | `APCT` |
+| 直连字段 | 104 个 |
+| 子表 | 0 个 |
+| 关联引用 | 14 个 |
 
-## 关联（14 个）
+## 关联引用 (14个)
 
-- `ctId` -> `apct.contract.Apct` (0..n) 
-- `supplierId` -> `aa.vendor.Vendor` () 
-- `expenseitemId` -> `bd.expenseitem.ExpenseItem` () 
-- `ytenant` -> `yht.tenant.YhtTenant` () 
-- `amtTypeId` -> `bd.paymenttype.PaymentTypeVO` () 
-- `creatorId` -> `base.user.User` () 
-- `modifierId` -> `base.user.User` () 
-- `acctEntityId` -> `bd.adminOrg.FinanceOrgVO` () 
-- `receiveAgreementId` -> `bd.receivables.ReceiveAgreement` () 
-- `apctApctReceiptplanDcs` -> `apct.contract.ApctReceiptplanDcsVo` () 
-- `settleModeId` -> `aa.settlemethod.SettleMethod` () 
-- `tenant` -> `base.tenant.Tenant` () 
-- `beginBase` -> `bd.payments.PayStartBase` () 
-- `customer` -> `aa.merchant.Merchant` () 
+| 字段名 | 引用类型 |
+|--------|---------|
+| `ct_id` | `` |
+| `supplier_id` | `` |
+| `expenseitem_id` | `` |
+| `ytenant_id` | `` |
+| `amt_type_id` | `` |
+| `` | `` |
+| `acct_entity_id` | `` |
+| `receive_agreement_id` | `` |
+| `apctApctReceiptplanDcs` | `` |
+| `settle_mode_id` | `` |
+| `tenant_id` | `` |
+| `begin_base` | `` |
+| `customer_id` | `` |
+
+## 继承接口 (5个, 18字段)
+
+- **租户相关** (`base.itf.ITenant`)
+  - `tenant_id` → `tenant_id`
+- **统一租户接口(扩展)** (`ucfbase.ucfbaseItf.IYTenantExt`)
+  - `ytenant_id` → `ytenant_id`
+- **审计信息** (`base.itf.IAuditInfo`)
+  - `create_date` → `create_date`
+  - `create_time` → `create_time`
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `modify_date` → `modify_date`
+  - `modify_time` → `modify_time`
+- **逻辑删除相关** (`base.itf.Deletable`)
+  - `iDeleted` → `iDeleted`
+- **生单回写** (`base.itf.IBackWrite`)
+  - `groupTaskKey` → `groupTaskKey`
+  - `makerule_code` → `makerule_code`
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `sourceMainPubts` → `sourceMainPubts`
+  - `` → ``
+
+## 字段列表（按类型分组）
+
+> 共 104 个直连字段
+
+### 文本字段 (12个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `account_period_unit_id` | `account_period_unit_id` | `accountPeriodUnitId` | 账期单位 |
+| `code` | `code` | `code` | 计划编码 |
+| `condition` | `condition` | `condition` | 收款条件 |
+| `` | `creator` | `creator` | 创建人名称 |
+| `groupTaskKey` | `groupTaskKey` | `groupTaskKey` | 分组任务KEY |
+| `makerule_code` | `makerule_code` | `makeRuleCode` | 生单规则编号 |
+| `` | `modifier` | `modifier` | 修改人名称 |
+| `plan_name` | `plan_name` | `planName` | 计划名称 |
+| `row_no` | `row_no` | `rowNo` | 标的物行号 |
+| `source` | `source` | `source` | 上游单据类型 |
+| `start_time_id` | `start_time_id` | `startTimeId` | 起算时点 |
+| `upcode` | `upcode` | `upcode` | 上游单据号 |
+
+### 引用字段 (13个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `acct_entity_id` | `acct_entity_id` | `acctEntityId` | 会计主体 |
+| `amt_type_id` | `amt_type_id` | `amtTypeId` | 款项类型 |
+| `begin_base` | `begin_base` | `beginBase` | 起算时点 |
+| `` | `creatorId` | `creatorId` | 创建人 |
+| `ct_id` | `ct_id` | `ctId` | 合同 |
+| `customer_id` | `customer_id` | `customer` | 客户 |
+| `expenseitem_id` | `expenseitem_id` | `expenseitemId` | 费用项目 |
+| `` | `modifierId` | `modifierId` | 修改人 |
+| `receive_agreement_id` | `receive_agreement_id` | `receiveAgreementId` | 收款协议名称 |
+| `settle_mode_id` | `settle_mode_id` | `settleModeId` | 结算方式 |
+| `supplier_id` | `supplier_id` | `supplierId` | 供应商 |
+| `tenant_id` | `tenant_id` | `tenant` | 租户 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 日期字段 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `begin_date` | `begin_date` | `beginDate` | 起算日期 |
+| `create_date` | `create_date` | `createDate` | 创建日期 |
+| `modify_date` | `modify_date` | `modifyDate` | 修改日期 |
+| `pay_end_date` | `pay_end_date` | `payEndDate` | 收款到期日 |
+| `start_date` | `start_date` | `startDate` | 起算日期 |
+
+### 布尔字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iDeleted` | `iDeleted` | `isDeleted` | 逻辑删除标记 |
+
+### 枚举字段 (12个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `account_comfirm_way` | `account_comfirm_way` | `accountComfirmWay` | 出账日确认方式 |
+| `expire_comfirm_way` | `expire_comfirm_way` | `expireComfirmWay` | 到期日确认方式 |
+| `fixed_account_date` | `fixed_account_date` | `fixedAccountDate` | 固定出账日 |
+| `fixed_account_date1` | `fixed_account_date1` | `fixedAccountDate1` | 固定出账日1 |
+| `fixed_account_date2` | `fixed_account_date2` | `fixedAccountDate2` | 固定出账日2 |
+| `fixed_account_date3` | `fixed_account_date3` | `fixedAccountDate3` | 固定出账日3 |
+| `fixed_account_date4` | `fixed_account_date4` | `fixedAccountDate4` | 固定出账日4 |
+| `fixed_expire_date` | `fixed_expire_date` | `fixedExpireDate` | 固定到期日 |
+| `fixed_expire_date1` | `fixed_expire_date1` | `fixedExpireDate1` | 固定到期日1 |
+| `fixed_expire_date2` | `fixed_expire_date2` | `fixedExpireDate2` | 固定到期日2 |
+| `fixed_expire_date3` | `fixed_expire_date3` | `fixedExpireDate3` | 固定到期日3 |
+| `fixed_expire_date4` | `fixed_expire_date4` | `fixedExpireDate4` | 固定到期日4 |
+
+### 整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `account_days` | `account_days` | `accountDays` | 账期天数 |
+| `issue_no` | `issue_no` | `issueNo` | 期号 |
+
+### 短整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `advance_flag` | `advance_flag` | `advanceFlag` | 预收款 |
+| `margin_flag` | `margin_flag` | `marginFlag` | 质保金 |
+
+### 长整数 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+| `material_id` | `material_id` | `materialId` | 标的物ID |
+| `sourceautoid` | `sourceautoid` | `sourceautoid` | 上游单据子表id |
+| `sourceautorowid` | `sourceautorowid` | `sourceautorowid` | 上游单据子表行id |
+| `sourceid` | `sourceid` | `sourceid` | 上游单据主表id |
+
+### 数值字段 (47个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `account_period` | `account_period` | `accountPeriod` | 账期 |
+| `appr_amt` | `appr_amt` | `apprAmt` | 已审批原币收款金额 |
+| `appr_amt_bak` | `appr_amt_bak` | `apprAmtBak` | 已审批原币收款金额备份 |
+| `appr_plan_refund_amt` | `appr_plan_refund_amt` | `apprPlanRefundAmt` | 已审批原币退款金额 |
+| `appr_plan_refund_amt_bak` | `appr_plan_refund_amt_bak` | `apprPlanRefundAmtBak` | 已审批原币退款金额备份 |
+| `appr_subject_amt` | `appr_subject_amt` | `apprSubjectAmt` | 已审批原币应收金额 |
+| `appr_subject_amt_bak` | `appr_subject_amt_bak` | `apprSubjectAmtBak` | 已审批原币应收金额备份 |
+| `available_amt` | `available_amt` | `availableAmt` | 原币收款计划可用金额 |
+| `deloy_days` | `deloy_days` | `deloyDays` | 延迟天数 |
+| `deloy_month` | `deloy_month` | `deloyMonth` | 延迟月份 |
+| `local_appr_amt` | `local_appr_amt` | `localApprAmt` | 已审批本币收款金额 |
+| `local_appr_amt_bak` | `local_appr_amt_bak` | `localApprAmtBak` | 已审批本币收款金额备份 |
+| `local_appr_plan_refund_amt` | `local_appr_plan_refund_amt` | `localApprPlanRefundAmt` | 已审批本币退款金额 |
+| `local_appr_plan_refund_amt_bak` | `local_appr_plan_refund_amt_bak` | `localApprPlanRefundAmtBak` | 已审批本币退款金额备份 |
+| `local_invoice_total` | `local_invoice_total` | `localInvoiceTotal` | 累计本币开票金额 |
+| `local_invoice_total_bak` | `local_invoice_total_bak` | `localInvoiceTotalBak` | 累计本币开票金额备份 |
+| `local_paid_amt` | `local_paid_amt` | `localPaidAmt` | 本币已收款金额 |
+| `local_paid_amt_bak` | `local_paid_amt_bak` | `localPaidAmtBak` | 本币已收款金额备份 |
+| `local_plan_amt` | `local_plan_amt` | `localPlanAmt` | 本币计划金额 |
+| `local_plan_amt_bak` | `local_plan_amt_bak` | `localPlanAmtBak` | 本币计划金额备份 |
+| `local_unappr_amt` | `local_unappr_amt` | `localUnapprAmt` | 未审批本币收款金额 |
+| `local_unappr_amt_bak` | `local_unappr_amt_bak` | `localUnapprAmtBak` | 未审批本币收款金额备份 |
+| `original_invoice_total` | `original_invoice_total` | `originalInvoiceTotal` | 累计原币开票金额 |
+| `original_invoice_total_bak` | `original_invoice_total_bak` | `originalInvoiceTotalBak` | 累计原币开票金额备份 |
+| `paid_amt` | `paid_amt` | `paidAmt` | 原币已收款金额 |
+| `paid_amt_bak` | `paid_amt_bak` | `paidAmtBak` | 原币已收款金额备份 |
+| `plan_amt` | `plan_amt` | `planAmt` | 计划金额 |
+| `plan_amt_bak` | `plan_amt_bak` | `planAmtBak` | 计划金额备份 |
+| `plan_ratio` | `plan_ratio` | `planRatio` | 计划比例 |
+| `rappr_subject_local_amt` | `rappr_subject_local_amt` | `rapprSubjectLocalAmt` | 已审批本币应收金额 |
+| `rappr_subject_local_amt_bak` | `rappr_subject_local_amt_bak` | `rapprSubjectLocalAmtBak` | 已审批本币应收金额备份 |
+| `runappr_subject_local_amt` | `runappr_subject_local_amt` | `runapprSubjectLocalAmt` | 未审批本币应收金额 |
+| `runappr_subject_local_amt_bak` | `runappr_subject_local_amt_bak` | `runapprSubjectLocalAmtBak` | 未审批本币应收金额备份 |
+| `rverified_subject_local_amt` | `rverified_subject_local_amt` | `rverifiedSubjectLocalAmt` | 已核销本币应收金额 |
+| `rverified_subject_local_amt_bak` | `rverified_subject_local_amt_bak` | `rverifiedSubjectLocalAmtBak` | 已核销本币应收金额备份 |
+| `rverified_subject_original_amt` | `rverified_subject_original_amt` | `rverifiedSubjectOriginalAmt` | 已核销原币应收金额 |
+| `rverified_subject_original_amt_bak` | `rverified_subject_original_amt_bak` | `rverifiedSubjectOriginalAmtBak` | 已核销原币应收金额备份 |
+| `unappr_amt` | `unappr_amt` | `unapprAmt` | 未审批原币收款金额 |
+| `unappr_amt_bak` | `unappr_amt_bak` | `unapprAmtBak` | 未审批原币收款金额备份 |
+| `unappr_plan_refund_amt` | `unappr_plan_refund_amt` | `unapprPlanRefundAmt` | 未审批原币退款金额 |
+| `unappr_plan_refund_amt_bak` | `unappr_plan_refund_amt_bak` | `unapprPlanRefundAmtBak` | 未审批原币退款金额备份 |
+| `unappr_subject_amt` | `unappr_subject_amt` | `unapprSubjectAmt` | 未审批原币应收金额 |
+| `unappr_subject_amt_bak` | `unappr_subject_amt_bak` | `unapprSubjectAmtBak` | 未审批原币应收金额备份 |
+| `unlocal_appr_plan_refund_amt` | `unlocal_appr_plan_refund_amt` | `unlocalApprPlanRefundAmt` | 未审批本币退款金额 |
+| `unlocal_appr_plan_refund_amt_bak` | `unlocal_appr_plan_refund_amt_bak` | `unlocalApprPlanRefundAmtBak` | 未审批本币退款金额备份 |
+| `verfity_subject_amt` | `verfity_subject_amt` | `verfitySubjectAmt` | 已核销原币应收金额 |
+| `verfity_subject_amt_bak` | `verfity_subject_amt_bak` | `verfitySubjectAmtBak` | 已核销原币应收金额备份 |
+
+### UserDefine (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `apctApctReceiptplanDcs` | `apctApctReceiptplanDcs` | `apctApctReceiptplanDcs` | 收款计划自定义项 |
+
+### timestamp (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+| `sourceMainPubts` | `sourceMainPubts` | `sourceMainPubts` | 时间戳 |

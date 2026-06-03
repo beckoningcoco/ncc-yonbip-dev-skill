@@ -9,37 +9,98 @@ last_verified: 2026-06-03
 status: verified
 source_type: api_response
 ---
+
 # 执行过程 (`apct.contract.ApctProcess`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBip），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `apct_apct_process` | 应用: `APCT`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`apct_apct_process` | domain：`apct` | 应用：`APCT` | 业务对象ID：``
 
-## 属性（17 个）
+## 基本信息
 
-| # | 字段 | 显示名 | 列 | 类型 | biztype |
-|---|------|--------|-----|------|---------|
-| 1 | `createDate` | createDate | `create_date` | Date | `date` |
-| 2 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 3 | `createTime` | 创建时间 | `create_time` | DateTime | `timestamp` |
-| 4 | `creator` | 创建人 | `creator` | String | `text` |
-| 5 | `creatorId` | 创建人ID | `creatorId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 6 | `ctId` | ctID | `ct_id` | 84a309b9-2fd0-48d8-9b75-8251a20928c2 | `quote` |
-| 7 | `executeDate` | executeDate | `execute_date` | DateTime | `timestamp` |
-| 8 | `executeFlow` | executeFlow | `execute_flow` | String | `text` |
-| 9 | `id` | ID | `id` | Long | `long` |
-| 10 | `isDeleted` | 是否Deleted | `iDeleted` | Boolean | `switch` |
-| 11 | `modifier` | 修改人 | `modifier` | String | `text` |
-| 12 | `modifierId` | 修改人ID | `modifierId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 13 | `modifyDate` | modifyDate | `modify_date` | Date | `date` |
-| 14 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `timestamp` |
-| 15 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 16 | `reason` | reason | `reason` | String | `text` |
-| 17 | `tenant` | tenant | `tenant_id` | c213cd56-d5de-421f-bae7-d77455b557cd | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 执行过程 |
+| 物理表 | `apct_apct_process` |
+| 数据库 schema | `apct` |
+| 所属应用 | `APCT` |
+| 直连字段 | 17 个 |
+| 子表 | 0 个 |
+| 关联引用 | 5 个 |
 
-## 关联（5 个）
+## 关联引用 (5个)
 
-- `ctId` -> `apct.contract.Apct` (0..n) 
-- `ytenant` -> `yht.tenant.YhtTenant` () 
-- `creatorId` -> `base.user.User` () 
-- `modifierId` -> `base.user.User` () 
-- `tenant` -> `base.tenant.Tenant` () 
+| 字段名 | 引用类型 |
+|--------|---------|
+| `ct_id` | `` |
+| `ytenant_id` | `` |
+| `` | `` |
+| `tenant_id` | `` |
+
+## 继承接口 (4个, 11字段)
+
+- **租户相关** (`base.itf.ITenant`)
+  - `tenant_id` → `tenant_id`
+- **统一租户接口(扩展)** (`ucfbase.ucfbaseItf.IYTenantExt`)
+  - `ytenant_id` → `ytenant_id`
+- **审计信息** (`base.itf.IAuditInfo`)
+  - `create_date` → `create_date`
+  - `create_time` → `create_time`
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `modify_date` → `modify_date`
+  - `modify_time` → `modify_time`
+- **逻辑删除相关** (`base.itf.Deletable`)
+  - `iDeleted` → `iDeleted`
+
+## 字段列表（按类型分组）
+
+> 共 17 个直连字段
+
+### 文本字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `creator` | `creator` | 创建人名称 |
+| `execute_flow` | `execute_flow` | `executeFlow` | 执行流程 |
+| `` | `modifier` | `modifier` | 修改人名称 |
+| `reason` | `reason` | `reason` | 原因 |
+
+### 引用字段 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+| `` | `creatorId` | `creatorId` | 创建人 |
+| `ct_id` | `ct_id` | `ctId` | 合同主表id |
+| `` | `modifierId` | `modifierId` | 修改人 |
+| `tenant_id` | `tenant_id` | `tenant` | 租户 |
+
+### 日期字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_date` | `create_date` | `createDate` | 创建日期 |
+| `modify_date` | `modify_date` | `modifyDate` | 修改日期 |
+
+### 布尔字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iDeleted` | `iDeleted` | `isDeleted` | 逻辑删除标记 |
+
+### 长整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+
+### timestamp (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `execute_date` | `execute_date` | `executeDate` | 执行日期 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |

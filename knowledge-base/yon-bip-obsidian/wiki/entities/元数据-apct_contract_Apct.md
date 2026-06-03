@@ -9,365 +9,477 @@ last_verified: 2026-06-03
 status: verified
 source_type: api_response
 ---
+
 # 合同单据表 (`apct.contract.Apct`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBip），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `apct_apct` | 应用: `APCT`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`apct_apct` | domain：`apct` | 应用：`APCT` | 业务对象ID：`7474fc16-45d2-47b5-b2ed-84fe62cac46d`
 
-## 属性（305 个）
+## 基本信息
 
-| # | 字段 | 显示名 | 列 | 类型 | biztype |
-|---|------|--------|-----|------|---------|
-| 1 | `groupTaskKey` | groupTaskKey | `groupTaskKey` | String | `text` |
-| 2 | `isprojectapply` | 是否projectapply | `isprojectapply` | Boolean | `switch` |
-| 3 | `makeRuleCode` | makeRule编码 | `makerule_code` | String | `text` |
-| 4 | `source` | source | `source` | String | `text` |
-| 5 | `sourceMainPubts` | sourceMainPubts | `sourceMainPubts` | DateTime | `timestamp` |
-| 6 | `sourceautoid` | sourceautoid | `sourceautoid` | Long | `long` |
-| 7 | `sourceid` | sourceid | `sourceid` | Long | `long` |
-| 8 | `upcode` | upcode | `upcode` | String | `text` |
-| 9 | `acctEntityId` | acctEntityID | `acct_entity_id` | 4928db62-a46d-4829-a26a-1de4bb3bf98c | `quote` |
-| 10 | `contractLedgerId` | contractLedgerID | `contract_ledgerId` | a2b72a3c-8c65-4b56-8e8f-35821ac27556 | `quote` |
-| 11 | `contractType` | contractType | `contract_type` | b23c8bcc-9978-44fb-a5d5-b54d687b59bb | `quote` |
-| 12 | `contractClass` | contractClass | `contract_class` | Short | `short` |
-| 13 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 14 | `applyBillId` | applyBillID | `apply_bill_id` | c89a2b73-7637-4642-abc1-c49bf1a5c460 | `quote` |
-| 15 | `apprAdvanceAmt` | apprAdvanceAmt | `appr_advance_amt` | Decimal | `number` |
-| 16 | `apprAmt` | apprAmt | `appr_amt` | Decimal | `number` |
-| 17 | `apprMarginAmt` | apprMarginAmt | `appr_margin_amt` | Decimal | `number` |
-| 18 | `apprPlanRefundAmt` | apprPlanRefundAmt | `appr_plan_refund_amt` | Decimal | `number` |
-| 19 | `contractDirection` | contractDirection | `contract_direction` | Short | `short` |
-| 20 | `localCurrency` | localCurrency | `local_currency` | 02b45339-eb4a-4a31-a8b5-d32f494f4e8e | `quote` |
-| 21 | `parentId` | parentID | `parent_id` | 84a309b9-2fd0-48d8-9b75-8251a20928c2 | `quote` |
-| 22 | `customer` | customer | `customer_id` | 94b3280a-27a4-485a-b90b-b7bce57c6df2 | `quote` |
-| 23 | `pushBillSystem` | pushBillSystem | `push_bill_system` | String | `text` |
-| 24 | `originalMoneyAmt` | originalMoneyAmt | `original_money_amt` | Decimal | `number` |
-| 25 | `originalTaxAmt` | originalTaxAmt | `original_tax_amt` | Decimal | `number` |
-| 26 | `noTaxOriginalMoneyAmt` | noTaxOriginalMoneyAmt | `no_tax_original_money_amt` | Decimal | `number` |
-| 27 | `localMoneyAmt` | localMoneyAmt | `local_money_amt` | Decimal | `number` |
-| 28 | `localTaxAmt` | localTaxAmt | `local_tax_amt` | Decimal | `number` |
-| 29 | `nexchangeRateOps` | nexchangeRateOps | `nexchange_rateOps` | ExchangeRateMethod | `` |
-| 30 | `bizFlow` | bizFlow | `bizFlow` | String | `text` |
-| 31 | `contractAmountControl` | contractAmountControl | `contract_amount_control` | Short | `short` |
-| 32 | `expenseReferenceAmt` | expenseReferenceAmt | `expense_reference_amt` | Decimal | `number` |
-| 33 | `apprAdvanceAmtBak` | apprAdvanceAmtBak | `appr_advance_amt_bak` | Decimal | `number` |
-| 34 | `apprAmtBak` | apprAmtBak | `appr_amt_bak` | Decimal | `number` |
-| 35 | `apprMarginAmtBak` | apprMarginAmtBak | `appr_margin_amt_bak` | Decimal | `number` |
-| 36 | `apprPlanRefundAmtBak` | apprPlanRefundAmtBak | `appr_plan_refund_amt_bak` | Decimal | `number` |
-| 37 | `originalTaxAmtBak` | originalTaxAmtBak | `original_tax_amt_bak` | Decimal | `number` |
-| 38 | `noTaxOriginalMoneyAmtBak` | noTaxOriginalMoneyAmtBak | `no_tax_original_money_amt_bak` | Decimal | `number` |
-| 39 | `localMoneyAmtBak` | localMoneyAmtBak | `local_money_amt_bak` | Decimal | `number` |
-| 40 | `localTaxAmtBak` | localTaxAmtBak | `local_tax_amt_bak` | Decimal | `number` |
-| 41 | `noTaxLocalMoneyAmtBak` | noTaxLocalMoneyAmtBak | `no_tax_local_money_amt_bak` | Decimal | `number` |
-| 42 | `localPlanAmtBak` | localPlanAmtBak | `local_plan_amt_bak` | Decimal | `number` |
-| 43 | `retentionApprPlanRefundAmtBak` | retentionApprPlanRefundAmtBak | `retention_appr_plan_refund_amt_bak` | Decimal | `number` |
-| 44 | `advanceApprPlanRefundAmtBak` | advanceApprPlanRefundAmtBak | `advance_appr_plan_refund_amt_bak` | Decimal | `number` |
-| 45 | `localRetentionApprPlanRefundAmtBak` | localRetentionApprPlanRefundAmtBak | `local_retention_appr_plan_refund_amt_bak` | Decimal | `number` |
-| 46 | `localAdvanceApprPlanRefundAmtBak` | localAdvanceApprPlanRefundAmtBak | `local_advance_appr_plan_refund_amt_bak` | Decimal | `number` |
-| 47 | `localAvailableAmtBak` | localAvailableAmtBak | `local_available_amt_bak` | Decimal | `number` |
-| 48 | `localUsedAmtBak` | localUsedAmtBak | `local_used_amt_bak` | Decimal | `number` |
-| 49 | `localOriginalReceiptAmtBak` | localOriginalReceiptAmtBak | `local_original_receipt_amt_bak` | Decimal | `number` |
-| 50 | `localUnapprAmtBak` | localUnapprAmtBak | `local_unappr_amt_bak` | Decimal | `number` |
-| 51 | `localApprAmtBak` | localApprAmtBak | `local_appr_amt_bak` | Decimal | `number` |
-| 52 | `localPaidAmtBak` | localPaidAmtBak | `local_paid_amt_bak` | Decimal | `number` |
-| 53 | `localApprPlanRefundAmtBak` | localApprPlanRefundAmtBak | `local_appr_plan_refund_amt_bak` | Decimal | `number` |
-| 54 | `unlocalApprPlanRefundAmtBak` | unlocalApprPlanRefundAmtBak | `unlocal_appr_plan_refund_amt_bak` | Decimal | `number` |
-| 55 | `localUnapprAdvanceAmtBak` | localUnapprAdvanceAmtBak | `local_unappr_advance_amt_bak` | Decimal | `number` |
-| 56 | `localApprAdvanceAmtBak` | localApprAdvanceAmtBak | `local_appr_advance_amt_bak` | Decimal | `number` |
-| 57 | `localPaidAdvanceAmtBak` | localPaidAdvanceAmtBak | `local_paid_advance_amt_bak` | Decimal | `number` |
-| 58 | `localUnapprRetentionAmtBak` | localUnapprRetentionAmtBak | `local_unappr_retention_amt_bak` | Decimal | `number` |
-| 59 | `localApprRetentionAmtBak` | localApprRetentionAmtBak | `local_appr_retention_amt_bak` | Decimal | `number` |
-| 60 | `localPaidRetentionAmtBak` | localPaidRetentionAmtBak | `local_paid_retention_amt_bak` | Decimal | `number` |
-| 61 | `localMarginAmtBak` | localMarginAmtBak | `local_margin_amt_bak` | Decimal | `number` |
-| 62 | `localUnapprMarginAmtBak` | localUnapprMarginAmtBak | `local_unappr_margin_amt_bak` | Decimal | `number` |
-| 63 | `localApprMarginAmtBak` | localApprMarginAmtBak | `local_appr_margin_amt_bak` | Decimal | `number` |
-| 64 | `localMarginRefundAmtBak` | localMarginRefundAmtBak | `local_margin_refund_amt_bak` | Decimal | `number` |
-| 65 | `unapprPlanRefundAmtBak` | unapprPlanRefundAmtBak | `unappr_plan_refund_amt_bak` | Decimal | `number` |
-| 66 | `unapprSubjectLocalAmtBak` | unapprSubjectLocalAmtBak | `unappr_subject_local_amt_bak` | Decimal | `number` |
-| 67 | `apprSubjectLocalAmtBak` | apprSubjectLocalAmtBak | `appr_subject_local_amt_bak` | Decimal | `number` |
-| 68 | `verifiedSubjectLocalAmtBak` | verifiedSubjectLocalAmtBak | `verified_subject_local_amt_bak` | Decimal | `number` |
-| 69 | `roriginalTotalAmtBak` | roriginalTotalAmtBak | `roriginal_total_amt_bak` | Decimal | `number` |
-| 70 | `rlocalPlanAmtBak` | rlocalPlanAmtBak | `rlocal_plan_amt_bak` | Decimal | `number` |
-| 71 | `ravailableAmtBak` | ravailableAmtBak | `ravailable_amt_bak` | Decimal | `number` |
-| 72 | `rusedAmtBak` | rusedAmtBak | `rused_amt_bak` | Decimal | `number` |
-| 73 | `rlocalAvailableAmtBak` | rlocalAvailableAmtBak | `rlocal_available_amt_bak` | Decimal | `number` |
-| 74 | `rlocalUsedAmtBak` | rlocalUsedAmtBak | `rlocal_used_amt_bak` | Decimal | `number` |
-| 75 | `rretentionApprPlanRefundAmtBak` | rretentionApprPlanRefundAmtBak | `rretention_appr_plan_refund_amt_bak` | Decimal | `number` |
-| 76 | `radvanceApprPlanRefundAmtBak` | radvanceApprPlanRefundAmtBak | `radvance_appr_plan_refund_amt_bak` | Decimal | `number` |
-| 77 | `rlocalRetentionApprPlanRefundAmtBak` | rlocalRetentionApprPlanRefundAmtBak | `rlocal_retention_appr_plan_refund_amt_bak` | Decimal | `number` |
-| 78 | `rlocalAdvanceApprPlanRefundAmtBak` | rlocalAdvanceApprPlanRefundAmtBak | `rlocal_advance_appr_plan_refund_amt_bak` | Decimal | `number` |
-| 79 | `roriginalReceiptAmtBak` | roriginalReceiptAmtBak | `roriginal_receipt_amt_bak` | Decimal | `number` |
-| 80 | `runapprAmtBak` | runapprAmtBak | `runappr_amt_bak` | Decimal | `number` |
-| 81 | `rapprAmtBak` | rapprAmtBak | `rappr_amt_bak` | Decimal | `number` |
-| 82 | `rpaidAmtBak` | rpaidAmtBak | `rpaid_amt_bak` | Decimal | `number` |
-| 83 | `rapprPlanRefundAmtBak` | rapprPlanRefundAmtBak | `rappr_plan_refund_amt_bak` | Decimal | `number` |
-| 84 | `unrapprPlanRefundAmtBak` | unrapprPlanRefundAmtBak | `unrappr_plan_refund_amt_bak` | Decimal | `number` |
-| 85 | `runapprAdvanceAmtBak` | runapprAdvanceAmtBak | `runappr_advance_amt_bak` | Decimal | `number` |
-| 86 | `rapprAdvanceAmtBak` | rapprAdvanceAmtBak | `rappr_advance_amt_bak` | Decimal | `number` |
-| 87 | `rpaidAdvanceAmtBak` | rpaidAdvanceAmtBak | `rpaid_advance_amt_bak` | Decimal | `number` |
-| 88 | `runapprRetentionAmtBak` | runapprRetentionAmtBak | `runappr_retention_amt_bak` | Decimal | `number` |
-| 89 | `rapprRetentionAmtBak` | rapprRetentionAmtBak | `rappr_retention_amt_bak` | Decimal | `number` |
-| 90 | `rpaidRetentionAmtBak` | rpaidRetentionAmtBak | `rpaid_retention_amt_bak` | Decimal | `number` |
-| 91 | `rmarginAmtBak` | rmarginAmtBak | `rmargin_amt_bak` | Decimal | `number` |
-| 92 | `runapprMarginAmtBak` | runapprMarginAmtBak | `runappr_margin_amt_bak` | Decimal | `number` |
-| 93 | `rapprMarginAmtBak` | rapprMarginAmtBak | `rappr_margin_amt_bak` | Decimal | `number` |
-| 94 | `rmarginRefundAmtBak` | rmarginRefundAmtBak | `rmargin_refund_amt_bak` | Decimal | `number` |
-| 95 | `rlocalOriginalReceiptAmtBak` | rlocalOriginalReceiptAmtBak | `rlocal_original_receipt_amt_bak` | Decimal | `number` |
-| 96 | `rlocalUnapprAmtBak` | rlocalUnapprAmtBak | `rlocal_unappr_amt_bak` | Decimal | `number` |
-| 97 | `rlocalApprAmtBak` | rlocalApprAmtBak | `rlocal_appr_amt_bak` | Decimal | `number` |
-| 98 | `rlocalPaidAmtBak` | rlocalPaidAmtBak | `rlocal_paid_amt_bak` | Decimal | `number` |
-| 99 | `rlocalApprPlanRefundAmtBak` | rlocalApprPlanRefundAmtBak | `rlocal_appr_plan_refund_amt_bak` | Decimal | `number` |
-| 100 | `unrlocalApprPlanRefundAmtBak` | unrlocalApprPlanRefundAmtBak | `unrlocal_appr_plan_refund_amt_bak` | Decimal | `number` |
-| 101 | `rlocalUnapprAdvanceAmtBak` | rlocalUnapprAdvanceAmtBak | `rlocal_unappr_advance_amt_bak` | Decimal | `number` |
-| 102 | `rlocalApprAdvanceAmtBak` | rlocalApprAdvanceAmtBak | `rlocal_appr_advance_amt_bak` | Decimal | `number` |
-| 103 | `rlocalPaidAdvanceAmtBak` | rlocalPaidAdvanceAmtBak | `rlocal_paid_advance_amt_bak` | Decimal | `number` |
-| 104 | `rlocalUnapprRetentionAmtBak` | rlocalUnapprRetentionAmtBak | `rlocal_unappr_retention_amt_bak` | Decimal | `number` |
-| 105 | `rlocalApprRetentionAmtBak` | rlocalApprRetentionAmtBak | `rlocal_appr_retention_amt_bak` | Decimal | `number` |
-| 106 | `rlocalPaidRetentionAmtBak` | rlocalPaidRetentionAmtBak | `rlocal_paid_retention_amt_bak` | Decimal | `number` |
-| 107 | `rlocalMarginAmtBak` | rlocalMarginAmtBak | `rlocal_margin_amt_bak` | Decimal | `number` |
-| 108 | `rlocalUnapprMarginAmtBak` | rlocalUnapprMarginAmtBak | `rlocal_unappr_margin_amt_bak` | Decimal | `number` |
-| 109 | `rlocalApprMarginAmtBak` | rlocalApprMarginAmtBak | `rlocal_appr_margin_amt_bak` | Decimal | `number` |
-| 110 | `rlocalMarginRefundAmtBak` | rlocalMarginRefundAmtBak | `rlocal_margin_refund_amt_bak` | Decimal | `number` |
-| 111 | `runapprSubjectOriginalAmtBak` | runapprSubjectOriginalAmtBak | `runappr_subject_original_amt_bak` | Decimal | `number` |
-| 112 | `rapprSubjectOriginalAmtBak` | rapprSubjectOriginalAmtBak | `rappr_subject_original_amt_bak` | Decimal | `number` |
-| 113 | `rverifiedSubjectOriginalAmtBak` | rverifiedSubjectOriginalAmtBak | `rverified_subject_original_amt_bak` | Decimal | `number` |
-| 114 | `runapprSubjectLocalAmtBak` | runapprSubjectLocalAmtBak | `runappr_subject_local_amt_bak` | Decimal | `number` |
-| 115 | `rapprSubjectLocalAmtBak` | rapprSubjectLocalAmtBak | `rappr_subject_local_amt_bak` | Decimal | `number` |
-| 116 | `rverifiedSubjectLocalAmtBak` | rverifiedSubjectLocalAmtBak | `rverified_subject_local_amt_bak` | Decimal | `number` |
-| 117 | `apprRetentionAmtBak` | apprRetentionAmtBak | `appr_retention_amt_bak` | Decimal | `number` |
-| 118 | `apprSubjectAmtBak` | apprSubjectAmtBak | `appr_subject_amt_bak` | Decimal | `number` |
-| 119 | `availableAmtBak` | availableAmtBak | `available_amt_bak` | Decimal | `number` |
-| 120 | `ctVersionBak` | ctVersionBak | `ct_version_bak` | String | `text` |
-| 121 | `historyFlagBak` | historyFlagBak | `history_flag_bak` | Short | `short` |
-| 122 | `marginAmtBak` | marginAmtBak | `margin_amt_bak` | Decimal | `number` |
-| 123 | `marginRefundAmtBak` | marginRefundAmtBak | `margin_refund_amt_bak` | Decimal | `number` |
-| 124 | `originalReceiptAmtBak` | originalReceiptAmtBak | `original_receipt_amt_bak` | Decimal | `number` |
-| 125 | `paidAdvanceAmtBak` | paidAdvanceAmtBak | `paid_advance_amt_bak` | Decimal | `number` |
-| 126 | `paidAmtBak` | paidAmtBak | `paid_amt_bak` | Decimal | `number` |
-| 127 | `paidRetentionAmtBak` | paidRetentionAmtBak | `paid_retention_amt_bak` | Decimal | `number` |
-| 128 | `unapprAdvanceAmtBak` | unapprAdvanceAmtBak | `unappr_advance_amt_bak` | Decimal | `number` |
-| 129 | `unapprAmtBak` | unapprAmtBak | `unappr_amt_bak` | Decimal | `number` |
-| 130 | `unapprMarginAmtBak` | unapprMarginAmtBak | `unappr_margin_amt_bak` | Decimal | `number` |
-| 131 | `unapprRetentionAmtBak` | unapprRetentionAmtBak | `unappr_retention_amt_bak` | Decimal | `number` |
-| 132 | `unapprSubjectAmtBak` | unapprSubjectAmtBak | `unappr_subject_amt_bak` | Decimal | `number` |
-| 133 | `usedAmtBak` | usedAmtBak | `used_amt_bak` | Decimal | `number` |
-| 134 | `verfitySubjectAmtBak` | verfitySubjectAmtBak | `verfity_subject_amt_bak` | Decimal | `number` |
-| 135 | `versionBak` | versionBak | `version_bak` | String | `text` |
-| 136 | `statusBak` | statusBak | `status_bak` | Short | `short` |
-| 137 | `noTaxLocalMoneyAmt` | noTaxLocalMoneyAmt | `no_tax_local_money_amt` | Decimal | `number` |
-| 138 | `localPlanAmt` | localPlanAmt | `local_plan_amt` | Decimal | `number` |
-| 139 | `retentionApprPlanRefundAmt` | retentionApprPlanRefundAmt | `retention_appr_plan_refund_amt` | Decimal | `number` |
-| 140 | `advanceApprPlanRefundAmt` | advanceApprPlanRefundAmt | `advance_appr_plan_refund_amt` | Decimal | `number` |
-| 141 | `localRetentionApprPlanRefundAmt` | localRetentionApprPlanRefundAmt | `local_retention_appr_plan_refund_amt` | Decimal | `number` |
-| 142 | `localAdvanceApprPlanRefundAmt` | localAdvanceApprPlanRefundAmt | `local_advance_appr_plan_refund_amt` | Decimal | `number` |
-| 143 | `localAvailableAmt` | localAvailableAmt | `local_available_amt` | Decimal | `number` |
-| 144 | `localUsedAmt` | localUsedAmt | `local_used_amt` | Decimal | `number` |
-| 145 | `localOriginalReceiptAmt` | localOriginalReceiptAmt | `local_original_receipt_amt` | Decimal | `number` |
-| 146 | `localUnapprAmt` | localUnapprAmt | `local_unappr_amt` | Decimal | `number` |
-| 147 | `localApprAmt` | localApprAmt | `local_appr_amt` | Decimal | `number` |
-| 148 | `localPaidAmt` | localPaidAmt | `local_paid_amt` | Decimal | `number` |
-| 149 | `localApprPlanRefundAmt` | localApprPlanRefundAmt | `local_appr_plan_refund_amt` | Decimal | `number` |
-| 150 | `unlocalApprPlanRefundAmt` | unlocalApprPlanRefundAmt | `unlocal_appr_plan_refund_amt` | Decimal | `number` |
-| 151 | `localUnapprAdvanceAmt` | localUnapprAdvanceAmt | `local_unappr_advance_amt` | Decimal | `number` |
-| 152 | `localApprAdvanceAmt` | localApprAdvanceAmt | `local_appr_advance_amt` | Decimal | `number` |
-| 153 | `localPaidAdvanceAmt` | localPaidAdvanceAmt | `local_paid_advance_amt` | Decimal | `number` |
-| 154 | `localUnapprRetentionAmt` | localUnapprRetentionAmt | `local_unappr_retention_amt` | Decimal | `number` |
-| 155 | `localApprRetentionAmt` | localApprRetentionAmt | `local_appr_retention_amt` | Decimal | `number` |
-| 156 | `localPaidRetentionAmt` | localPaidRetentionAmt | `local_paid_retention_amt` | Decimal | `number` |
-| 157 | `localMarginAmt` | localMarginAmt | `local_margin_amt` | Decimal | `number` |
-| 158 | `localUnapprMarginAmt` | localUnapprMarginAmt | `local_unappr_margin_amt` | Decimal | `number` |
-| 159 | `localApprMarginAmt` | localApprMarginAmt | `local_appr_margin_amt` | Decimal | `number` |
-| 160 | `localMarginRefundAmt` | localMarginRefundAmt | `local_margin_refund_amt` | Decimal | `number` |
-| 161 | `unapprPlanRefundAmt` | unapprPlanRefundAmt | `unappr_plan_refund_amt` | Decimal | `number` |
-| 162 | `unapprSubjectLocalAmt` | unapprSubjectLocalAmt | `unappr_subject_local_amt` | Decimal | `number` |
-| 163 | `apprSubjectLocalAmt` | apprSubjectLocalAmt | `appr_subject_local_amt` | Decimal | `number` |
-| 164 | `verifiedSubjectLocalAmt` | verifiedSubjectLocalAmt | `verified_subject_local_amt` | Decimal | `number` |
-| 165 | `roriginalTotalAmt` | roriginalTotalAmt | `roriginal_total_amt` | Decimal | `number` |
-| 166 | `rlocalPlanAmt` | rlocalPlanAmt | `rlocal_plan_amt` | Decimal | `number` |
-| 167 | `ravailableAmt` | ravailableAmt | `ravailable_amt` | Decimal | `number` |
-| 168 | `rusedAmt` | rusedAmt | `rused_amt` | Decimal | `number` |
-| 169 | `rlocalAvailableAmt` | rlocalAvailableAmt | `rlocal_available_amt` | Decimal | `number` |
-| 170 | `rlocalUsedAmt` | rlocalUsedAmt | `rlocal_used_amt` | Decimal | `number` |
-| 171 | `rretentionApprPlanRefundAmt` | rretentionApprPlanRefundAmt | `rretention_appr_plan_refund_amt` | Decimal | `number` |
-| 172 | `radvanceApprPlanRefundAmt` | radvanceApprPlanRefundAmt | `radvance_appr_plan_refund_amt` | Decimal | `number` |
-| 173 | `rlocalRetentionApprPlanRefundAmt` | rlocalRetentionApprPlanRefundAmt | `rlocal_retention_appr_plan_refund_amt` | Decimal | `number` |
-| 174 | `rlocalAdvanceApprPlanRefundAmt` | rlocalAdvanceApprPlanRefundAmt | `rlocal_advance_appr_plan_refund_amt` | Decimal | `number` |
-| 175 | `roriginalReceiptAmt` | roriginalReceiptAmt | `roriginal_receipt_amt` | Decimal | `number` |
-| 176 | `runapprAmt` | runapprAmt | `runappr_amt` | Decimal | `number` |
-| 177 | `rapprAmt` | rapprAmt | `rappr_amt` | Decimal | `number` |
-| 178 | `rpaidAmt` | rpaidAmt | `rpaid_amt` | Decimal | `number` |
-| 179 | `rapprPlanRefundAmt` | rapprPlanRefundAmt | `rappr_plan_refund_amt` | Decimal | `number` |
-| 180 | `unrapprPlanRefundAmt` | unrapprPlanRefundAmt | `unrappr_plan_refund_amt` | Decimal | `number` |
-| 181 | `runapprAdvanceAmt` | runapprAdvanceAmt | `runappr_advance_amt` | Decimal | `number` |
-| 182 | `rapprAdvanceAmt` | rapprAdvanceAmt | `rappr_advance_amt` | Decimal | `number` |
-| 183 | `rpaidAdvanceAmt` | rpaidAdvanceAmt | `rpaid_advance_amt` | Decimal | `number` |
-| 184 | `runapprRetentionAmt` | runapprRetentionAmt | `runappr_retention_amt` | Decimal | `number` |
-| 185 | `rapprRetentionAmt` | rapprRetentionAmt | `rappr_retention_amt` | Decimal | `number` |
-| 186 | `rpaidRetentionAmt` | rpaidRetentionAmt | `rpaid_retention_amt` | Decimal | `number` |
-| 187 | `rmarginAmt` | rmarginAmt | `rmargin_amt` | Decimal | `number` |
-| 188 | `runapprMarginAmt` | runapprMarginAmt | `runappr_margin_amt` | Decimal | `number` |
-| 189 | `rapprMarginAmt` | rapprMarginAmt | `rappr_margin_amt` | Decimal | `number` |
-| 190 | `rmarginRefundAmt` | rmarginRefundAmt | `rmargin_refund_amt` | Decimal | `number` |
-| 191 | `rlocalOriginalReceiptAmt` | rlocalOriginalReceiptAmt | `rlocal_original_receipt_amt` | Decimal | `number` |
-| 192 | `rlocalUnapprAmt` | rlocalUnapprAmt | `rlocal_unappr_amt` | Decimal | `number` |
-| 193 | `rlocalApprAmt` | rlocalApprAmt | `rlocal_appr_amt` | Decimal | `number` |
-| 194 | `rlocalPaidAmt` | rlocalPaidAmt | `rlocal_paid_amt` | Decimal | `number` |
-| 195 | `rlocalApprPlanRefundAmt` | rlocalApprPlanRefundAmt | `rlocal_appr_plan_refund_amt` | Decimal | `number` |
-| 196 | `unrlocalApprPlanRefundAmt` | unrlocalApprPlanRefundAmt | `unrlocal_appr_plan_refund_amt` | Decimal | `number` |
-| 197 | `rlocalUnapprAdvanceAmt` | rlocalUnapprAdvanceAmt | `rlocal_unappr_advance_amt` | Decimal | `number` |
-| 198 | `rlocalApprAdvanceAmt` | rlocalApprAdvanceAmt | `rlocal_appr_advance_amt` | Decimal | `number` |
-| 199 | `rlocalPaidAdvanceAmt` | rlocalPaidAdvanceAmt | `rlocal_paid_advance_amt` | Decimal | `number` |
-| 200 | `rlocalUnapprRetentionAmt` | rlocalUnapprRetentionAmt | `rlocal_unappr_retention_amt` | Decimal | `number` |
-| 201 | `rlocalApprRetentionAmt` | rlocalApprRetentionAmt | `rlocal_appr_retention_amt` | Decimal | `number` |
-| 202 | `rlocalPaidRetentionAmt` | rlocalPaidRetentionAmt | `rlocal_paid_retention_amt` | Decimal | `number` |
-| 203 | `rlocalMarginAmt` | rlocalMarginAmt | `rlocal_margin_amt` | Decimal | `number` |
-| 204 | `rlocalUnapprMarginAmt` | rlocalUnapprMarginAmt | `rlocal_unappr_margin_amt` | Decimal | `number` |
-| 205 | `rlocalApprMarginAmt` | rlocalApprMarginAmt | `rlocal_appr_margin_amt` | Decimal | `number` |
-| 206 | `rlocalMarginRefundAmt` | rlocalMarginRefundAmt | `rlocal_margin_refund_amt` | Decimal | `number` |
-| 207 | `runapprSubjectOriginalAmt` | runapprSubjectOriginalAmt | `runappr_subject_original_amt` | Decimal | `number` |
-| 208 | `rapprSubjectOriginalAmt` | rapprSubjectOriginalAmt | `rappr_subject_original_amt` | Decimal | `number` |
-| 209 | `rverifiedSubjectOriginalAmt` | rverifiedSubjectOriginalAmt | `rverified_subject_original_amt` | Decimal | `number` |
-| 210 | `runapprSubjectLocalAmt` | runapprSubjectLocalAmt | `runappr_subject_local_amt` | Decimal | `number` |
-| 211 | `rapprSubjectLocalAmt` | rapprSubjectLocalAmt | `rappr_subject_local_amt` | Decimal | `number` |
-| 212 | `rverifiedSubjectLocalAmt` | rverifiedSubjectLocalAmt | `rverified_subject_local_amt` | Decimal | `number` |
-| 213 | `wbs` | wbs | `wbs` | 145cc7d2-79cf-4f3a-934c-c03b46d0fd42 | `quote` |
-| 214 | `activity` | activity | `activity` | b4a90beb-49ed-4301-b12e-9221d0d12fd1 | `quote` |
-| 215 | `apprRetentionAmt` | apprRetentionAmt | `appr_retention_amt` | Decimal | `number` |
-| 216 | `apprSubjectAmt` | apprSubjectAmt | `appr_subject_amt` | Decimal | `number` |
-| 217 | `attachmentId` | attachmentID | `attachment_id` | String | `text` |
-| 218 | `auditDate` | auditDate | `audit_date` | Date | `date` |
-| 219 | `auditTime` | auditTime | `audit_time` | DateTime | `timestamp` |
-| 220 | `auditor` | auditor | `auditor` | String | `text` |
-| 221 | `auditorId` | auditorID | `auditorId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 222 | `availableAmt` | availableAmt | `available_amt` | Decimal | `number` |
-| 223 | `beginningFlag` | beginningFlag | `beginning_flag` | Short | `short` |
-| 224 | `businessCode` | business编码 | `business_code` | String | `text` |
-| 225 | `bustype` | bustype | `bustype` | 19f9264d-28d1-4b47-9d28-f2e82654f3a9 | `quote` |
-| 226 | `changeId` | changeID | `change_id` | Long | `long` |
-| 227 | `code` | 编码 | `code` | String | `text` |
-| 228 | `createDate` | createDate | `create_date` | Date | `date` |
-| 229 | `createTime` | 创建时间 | `create_time` | DateTime | `timestamp` |
-| 230 | `creator` | 创建人 | `creator` | String | `text` |
-| 231 | `creatorId` | 创建人ID | `creatorId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 232 | `ctVersion` | ctVersion | `ct_version` | String | `text` |
-| 233 | `currencyId` | currencyID | `currency_id` | 02b45339-eb4a-4a31-a8b5-d32f494f4e8e | `quote` |
-| 234 | `deptId` | deptID | `dept_id` | a4352e3c-3eda-4539-a7a9-ec00799be118 | `quote` |
-| 235 | `exceedRatio` | exceedRatio | `exceed_ratio` | Decimal | `number` |
-| 236 | `historyFlag` | historyFlag | `history_flag` | Short | `short` |
-| 237 | `invalDate` | invalDate | `inval_date` | Date | `date` |
-| 238 | `isDeleted` | 是否Deleted | `iDeleted` | Boolean | `switch` |
-| 239 | `isWfControlled` | 是否WfControlled | `isWfControlled` | Boolean | `switch` |
-| 240 | `marginAmt` | marginAmt | `margin_amt` | Decimal | `number` |
-| 241 | `marginRefundAmt` | marginRefundAmt | `margin_refund_amt` | Decimal | `number` |
-| 242 | `modifierId` | 修改人ID | `modifierId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 243 | `name` | 名称 | `name` | String | `text` |
-| 244 | `nexchangeRate` | nexchangeRate | `nexchange_rate` | Decimal | `number` |
-| 245 | `openFlag` | openFlag | `open_flag` | Short | `short` |
-| 246 | `orgId` | orgID | `org_id` | 14302233-1394-4a70-94e1-bed51636f312 | `quote` |
-| 247 | `originalReceiptAmt` | originalReceiptAmt | `original_receipt_amt` | Decimal | `number` |
-| 248 | `originalTotalAmt` | originalTotalAmt | `original_total_amt` | Decimal | `number` |
-| 249 | `paidAdvanceAmt` | paidAdvanceAmt | `paid_advance_amt` | Decimal | `number` |
-| 250 | `paidAmt` | paidAmt | `paid_amt` | Decimal | `number` |
-| 251 | `paidRetentionAmt` | paidRetentionAmt | `paid_retention_amt` | Decimal | `number` |
-| 252 | `payTermId` | payTermID | `pay_term_id` | 3cce8052-512e-4e51-9b6e-57adff40948c | `quote` |
-| 253 | `payeeAccountId` | payeeAccountID | `payee_account_id` | 4b6dcfa2-1d07-407d-a35a-9b219fadf37c | `quote` |
-| 254 | `payeeCardno` | payeeCardno | `payee_cardno` | String | `text` |
-| 255 | `payerAccountId` | payerAccountID | `payer_account_id` | fbc20885-a507-45bd-a986-74d3fc28d38a | `quote` |
-| 256 | `payerCardno` | payerCardno | `payer_cardno` | String | `text` |
-| 257 | `personnelId` | personnelID | `personnel_id` | 4effed83-35f5-4e3b-9be1-092b5ae602e8 | `quote` |
-| 258 | `populateMode` | populateMode | `populate_mode` | Short | `short` |
-| 259 | `projectId` | projectID | `project_id` | b1e7cbf6-094a-4200-b451-36bfa3ac3ff4 | `quote` |
-| 260 | `rateDate` | rateDate | `rate_date` | Date | `date` |
-| 261 | `rateTypeId` | rateTypeID | `rate_type_id` | 1eb63781-e244-464d-b9ba-a7a4e1685295 | `quote` |
-| 262 | `returncount` | returncount | `returncount` | Short | `short` |
-| 263 | `settleTypeId` | settleTypeID | `settle_type_id` | 95f34e90-897c-4bf5-958c-b1c2deaa8aff | `quote` |
-| 264 | `signDate` | signDate | `sign_date` | Date | `date` |
-| 265 | `signOrgId` | signOrgID | `sign_org_id` | 14302233-1394-4a70-94e1-bed51636f312 | `quote` |
-| 266 | `status` | 状态 | `status` | Short | `short` |
-| 267 | `supplierId` | supplierID | `supplier_id` | 89bf026e-cc49-4fe7-9a7b-3e8fdcc77c1e | `quote` |
-| 268 | `tplid` | tplid | `tplid` | Long | `long` |
-| 269 | `unapprAdvanceAmt` | unapprAdvanceAmt | `unappr_advance_amt` | Decimal | `number` |
-| 270 | `unapprAmt` | unapprAmt | `unappr_amt` | Decimal | `number` |
-| 271 | `unapprMarginAmt` | unapprMarginAmt | `unappr_margin_amt` | Decimal | `number` |
-| 272 | `unapprRetentionAmt` | unapprRetentionAmt | `unappr_retention_amt` | Decimal | `number` |
-| 273 | `unapprSubjectAmt` | unapprSubjectAmt | `unappr_subject_amt` | Decimal | `number` |
-| 274 | `usedAmt` | usedAmt | `used_amt` | Decimal | `number` |
-| 275 | `valDate` | valDate | `val_date` | Date | `date` |
-| 276 | `verfitySubjectAmt` | verfitySubjectAmt | `verfity_subject_amt` | Decimal | `number` |
-| 277 | `verifystate` | verifystate | `verifystate` | Short | `short` |
-| 278 | `version` | 版本号 | `version` | String | `text` |
-| 279 | `vouchdate` | vouchdate | `vouchdate` | Date | `date` |
-| 280 | `id` | ID | `id` | Long | `long` |
-| 281 | `settledcount` | settledcount | `settledcount` | Integer | `int` |
-| 282 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `timestamp` |
-| 283 | `modifyDate` | modifyDate | `modify_date` | Date | `date` |
-| 284 | `modifier` | 修改人 | `modifier` | String | `text` |
-| 285 | `ctfrom` | ctfrom | `ctfrom` | String | `text` |
-| 286 | `tenant` | tenant | `tenant_id` | c213cd56-d5de-421f-bae7-d77455b557cd | `quote` |
-| 287 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 288 | `apctApctDcs` | apctApctDcs | `apctApctDcs` | 79f9eb04-861b-4bb2-954d-dfd8db7bd8e9 | `UserDefine` |
-| 289 | `apctCounterpartys` | apctCounterpartys | `` | 87f101ec-e15c-4e2a-b80c-5953c4b4c7f3 | `` |
-| 290 | `apctInvoiceinfos` | apctInvoiceinfos | `` | ca31a591-ac9c-4dd1-a5ee-7c9bd867c537 | `` |
-| 291 | `apctInvoicinginfos` | apctInvoicinginfos | `` | 0401ac42-da28-43c4-8dd5-706519d026f7 | `` |
-| 292 | `apctOwnerChangelogs` | apctOwnerChangelogs | `` | 3e18d3a0-b8c9-44b8-a3e8-17d62cd66022 | `` |
-| 293 | `apctownersub` | apctownersub | `` | f29c219b-459d-4e64-8af1-a4bddfd38cff | `` |
-| 294 | `hisrecords` | hisrecords | `` | 8a2d94d5-0cef-4340-b444-7d231a9c4c2b | `` |
-| 295 | `ibpmcurrentauditors` | ibpmcurrentauditors | `` | 51169115-e150-4e34-8fdd-2bbded5087bd | `` |
-| 296 | `ibpmsteps` | ibpmsteps | `` | ccbc0025-5aba-44db-8273-e7260fcf97a9 | `` |
-| 297 | `items` | items | `` | 6fd02b5e-0a5b-40f6-92e8-1e1f626df0a0 | `` |
-| 298 | `margins` | margins | `` | 9b101166-8c8d-46f3-ba77-8b8b92992aaf | `` |
-| 299 | `materials` | materials | `` | 9cb52058-54d9-491b-a012-1f5c6202f9ca | `` |
-| 300 | `memorabilias` | memorabilias | `` | e88e1ebe-d800-43e1-aa04-d438b94dd821 | `` |
-| 301 | `plans` | plans | `` | f6f2aec8-fae4-49c4-83cd-0399d152fa6f | `` |
-| 302 | `processes` | processes | `` | 6370d646-06e2-4b47-8e48-6cc95e7c0ace | `` |
-| 303 | `receiptplans` | receiptplans | `` | 4442e9a2-d3da-40a7-bc71-ee97ac39c278 | `` |
-| 304 | `relateVouchers` | relateVouchers | `` | 1e9ef373-d6b0-4482-8c02-28c42aef5da0 | `` |
-| 305 | `thirdVoucher` | thirdVoucher | `` | f98fe4d6-bb3f-499f-a852-3fd5ad25f06d | `` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 合同单据表 |
+| 物理表 | `apct_apct` |
+| 数据库 schema | `apct` |
+| 所属应用 | `APCT` |
+| 直连字段 | 305 个 |
+| 子表 | 17 个 |
+| 关联引用 | 45 个 |
 
-## 关联（45 个）
+## 子表
 
-- `rateTypeId` -> `bd.exchangeRate.ExchangeRateTypeVO` () 
-- `margins` -> `apct.contract.ApctMargin` (0..n) 
-- `supplierId` -> `aa.vendor.Vendor` () 
-- `contractLedgerId` -> `CLM.clmContract.contractLib` () 
-- `activity` -> `pgrm.projecttask.ProjectScheduleTask` () 
-- `contractType` -> `DZHTFW.econtract.contractType` () 
-- `creatorId` -> `base.user.User` () 
-- `modifierId` -> `base.user.User` () 
-- `wbs` -> `BGDM.wbs.wbs_doc` () 
-- `localCurrency` -> `bd.currencytenant.CurrencyTenantVO` () 
-- `payerAccountId` -> `bd.enterprise.OrgFinBankacctVO` () 
-- `apctOwnerChangelogs` -> `apct.contract.ApctOwnerChangeLog` (1..n) 
-- `orgId` -> `org.func.BaseOrg` () 
-- `thirdVoucher` -> `apct.contract.ApctThirdVoucher` (0..n) 
-- `apctApctDcs` -> `apct.contract.ApctDcsVo` () 
-- `receiptplans` -> `apct.contract.ApctReceiptplan` (0..n) 
-- `ibpmcurrentauditors` -> `apct.contract.ApctIBpmApprovalTask` (0..n) 
-- `ibpmsteps` -> `apct.contract.ApctIBpmStep` (0..n) 
-- `memorabilias` -> `apct.contract.ApctMemorabilia` (0..n) 
-- `currencyId` -> `bd.currencytenant.CurrencyTenantVO` () 
-- `signOrgId` -> `org.func.BaseOrg` () 
-- `tenant` -> `base.tenant.Tenant` () 
-- `payTermId` -> `bd.payments.PayAgreement` () 
-- `processes` -> `apct.contract.ApctProcess` (0..n) 
-- `payeeAccountId` -> `aa.vendor.VendorBank` () 
-- `ytenant` -> `yht.tenant.YhtTenant` () 
-- `hisrecords` -> `apct.contract.ApctHisrecord` (0..n) 
-- `apctownersub` -> `apct.contract.ApctOwnerSub` (1..n) 
-- `relateVouchers` -> `apct.contract.ApctRelateVoucher` (0..n) 
-- `deptId` -> `bd.adminOrg.AdminOrgVO` () 
-- `acctEntityId` -> `bd.adminOrg.FinanceOrgVO` () 
-- `apctInvoiceinfos` -> `apct.contract.ApctInvoiceinfo` (0..n) 
-- `bustype` -> `bd.bill.TransType` () 
-- `parentId` -> `apct.contract.Apct` () 
-- `auditorId` -> `base.user.User` () 
-- `applyBillId` -> `znbzbx.memoapply.MemoApplyVO` () 
-- `personnelId` -> `bd.staff.Staff` () 
-- `materials` -> `apct.contract.ApctMaterial` (0..n) 
-- `plans` -> `apct.contract.ApctPlan` (0..n) 
-- `settleTypeId` -> `aa.settlemethod.SettleMethod` () 
-- `apctInvoicinginfos` -> `apct.contract.ApctInvoicinginfo` (0..n) 
-- `projectId` -> `bd.project.ProjectVO` () 
-- `items` -> `apct.contract.ApctItem` (0..n) 
-- `apctCounterpartys` -> `apct.contract.ApctCounterparty` (0..n) 
-- `customer` -> `aa.merchant.Merchant` () 
+| 字段名 | URI | 关系 |
+|--------|-----|------|
+| `margins` | `apct.contract.ApctMargin` | composition |
+| `processes` | `apct.contract.ApctProcess` | composition |
+| `hisrecords` | `apct.contract.ApctHisrecord` | composition |
+| `apctownersub` | `apct.contract.ApctOwnerSub` | composition |
+| `relateVouchers` | `apct.contract.ApctRelateVoucher` | composition |
+| `apctInvoiceinfos` | `apct.contract.ApctInvoiceinfo` | composition |
+| `apctOwnerChangelogs` | `apct.contract.ApctOwnerChangeLog` | composition |
+| `thirdVoucher` | `apct.contract.ApctThirdVoucher` | composition |
+| `receiptplans` | `apct.contract.ApctReceiptplan` | composition |
+| `ibpmcurrentauditors` | `apct.contract.ApctIBpmApprovalTask` | composition |
+| `materials` | `apct.contract.ApctMaterial` | composition |
+| `plans` | `apct.contract.ApctPlan` | composition |
+| `ibpmsteps` | `apct.contract.ApctIBpmStep` | composition |
+| `memorabilias` | `apct.contract.ApctMemorabilia` | composition |
+| `apctInvoicinginfos` | `apct.contract.ApctInvoicinginfo` | composition |
+| `items` | `apct.contract.ApctItem` | composition |
+| `apctCounterpartys` | `apct.contract.ApctCounterparty` | composition |
+
+## 关联引用 (45个)
+
+| 字段名 | 引用类型 |
+|--------|---------|
+| `rate_type_id` | `ucfbasedoc.bd_exchangeratetyperef` |
+| `` | `` |
+| `supplier_id` | `yssupplier.aa_vendor` |
+| `contract_ledgerId` | `` |
+| `activity` | `` |
+| `contract_type` | `` |
+| `wbs` | `` |
+| `local_currency` | `` |
+| `payer_account_id` | `` |
+| `org_id` | `ucf-org-center.org_pure_tree_ref` |
+| `apctApctDcs` | `` |
+| `currency_id` | `ucfbasedoc.bd_currencytenantref` |
+| `sign_org_id` | `ucf-org-center.org_pure_tree_ref` |
+| `tenant_id` | `` |
+| `pay_term_id` | `` |
+| `payee_account_id` | `` |
+| `ytenant_id` | `` |
+| `dept_id` | `ucf-org-center.bd_admindepttreeviewref` |
+| `acct_entity_id` | `ucf-org-center.bd_financeorgtreeref` |
+| `bustype` | `transtype.bd_billtyperef` |
+| `parent_id` | `` |
+| `apply_bill_id` | `znbzbx.znbzbx_memoapplyref` |
+| `personnel_id` | `ucf-staff-center.bd_staff_ref` |
+| `settle_type_id` | `productcenter.aa_settlemethodref` |
+| `project_id` | `ucfbasedoc.bd_projectNewRef` |
+| `customer_id` | `` |
+
+## 继承接口 (9个, 28字段)
+
+- **租户相关** (`base.itf.ITenant`)
+  - `tenant_id` → `tenant_id`
+- **统一租户接口(扩展)** (`ucfbase.ucfbaseItf.IYTenantExt`)
+  - `ytenant_id` → `ytenant_id`
+- **审计信息** (`base.itf.IAuditInfo`)
+  - `create_date` → `create_date`
+  - `create_time` → `create_time`
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `modify_date` → `modify_date`
+  - `modify_time` → `modify_time`
+- **逻辑删除相关** (`base.itf.Deletable`)
+  - `iDeleted` → `iDeleted`
+- **审批信息** (`base.itf.IApprovalInfo`)
+  - `audit_date` → `audit_date`
+  - `` → ``
+  - `` → ``
+  - `audit_time` → `audit_time`
+- **审批流信息** (`base.itf.IApprovalFlow`)
+  - `` → ``
+  - `` → ``
+  - `` → ``
+- **自动编号** (`voucher.base.IAutoCode`)
+  - `` → ``
+- **生单回写** (`base.itf.IBackWrite`)
+  - `groupTaskKey` → `groupTaskKey`
+  - `makerule_code` → `makerule_code`
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `sourceMainPubts` → `sourceMainPubts`
+  - `` → ``
+- **项目结构属性** (`BGDM.wbs.projectStructureProperties`)
+  - `activity` → `activity`
+  - `wbs` → `wbs`
+
+## 字段列表（按类型分组）
+
+> 共 305 个直连字段
+
+### 文本字段 (20个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `groupTaskKey` | `groupTaskKey` | `groupTaskKey` | 分组任务KEY |
+| `makerule_code` | `makerule_code` | `makeRuleCode` | 生单规则编号 |
+| `` | `source` | `source` | 上游单据类型 |
+| `` | `upcode` | `upcode` | 上游单据号 |
+| `push_bill_system` | `push_bill_system` | `pushBillSystem` | 下推单据系统 |
+| `bizFlow` | `bizFlow` | `bizFlow` | 业务流id |
+| `ct_version_bak` | `ct_version_bak` | `ctVersionBak` | 合同版本号备份 |
+| `version_bak` | `version_bak` | `versionBak` | 锁版本号备份 |
+| `attachment_id` | `attachment_id` | `attachmentId` | 附件 |
+| `` | `auditor` | `auditor` | 审批人名称 |
+| `business_code` | `business_code` | `businessCode` | 合同业务号 |
+| `code` | `code` | `code` | 合同单据号 |
+| `` | `creator` | `creator` | 创建人名称 |
+| `ct_version` | `ct_version` | `ctVersion` | 合同版本号 |
+| `name` | `name` | `name` | 合同名称 |
+| `payee_cardno` | `payee_cardno` | `payeeCardno` | 收款方银行账号 |
+| `payer_cardno` | `payer_cardno` | `payerCardno` | 付款方银行账号 |
+| `version` | `version` | `version` | 锁版本号 |
+| `` | `modifier` | `modifier` | 修改人名称 |
+| `ctfrom` | `ctfrom` | `ctfrom` | 来源系统 |
+
+### 引用字段 (27个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `acct_entity_id` | `acct_entity_id` | `acctEntityId` | 会计主体 |
+| `contract_ledgerId` | `contract_ledgerId` | `contractLedgerId` | 合同台账 |
+| `contract_type` | `contract_type` | `contractType` | 合同类型 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+| `apply_bill_id` | `apply_bill_id` | `applyBillId` | 申请单号 |
+| `local_currency` | `local_currency` | `localCurrency` | 本币币种 |
+| `parent_id` | `parent_id` | `parentId` | 上级合同 |
+| `customer_id` | `customer_id` | `customer` | 客户 |
+| `wbs` | `wbs` | `wbs` | WBS |
+| `activity` | `activity` | `activity` | 活动 |
+| `` | `auditorId` | `auditorId` | 审批人 |
+| `bustype` | `bustype` | `bustype` | 交易类型 |
+| `` | `creatorId` | `creatorId` | 创建人 |
+| `currency_id` | `currency_id` | `currencyId` | 币种 |
+| `dept_id` | `dept_id` | `deptId` | 承办部门 |
+| `` | `modifierId` | `modifierId` | 修改人 |
+| `org_id` | `org_id` | `orgId` | 承办组织 |
+| `pay_term_id` | `pay_term_id` | `payTermId` | 付款协议 |
+| `payee_account_id` | `payee_account_id` | `payeeAccountId` | 收款方银行账户 |
+| `payer_account_id` | `payer_account_id` | `payerAccountId` | 付款方银行账户 |
+| `personnel_id` | `personnel_id` | `personnelId` | 承办人员 |
+| `project_id` | `project_id` | `projectId` | 项目名称 |
+| `rate_type_id` | `rate_type_id` | `rateTypeId` | 汇率类型 |
+| `settle_type_id` | `settle_type_id` | `settleTypeId` | 结算方式 |
+| `sign_org_id` | `sign_org_id` | `signOrgId` | 签约组织(本方) |
+| `supplier_id` | `supplier_id` | `supplierId` | 供应商 |
+| `tenant_id` | `tenant_id` | `tenant` | 租户 |
+
+### 日期字段 (8个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `audit_date` | `audit_date` | `auditDate` | 审批日期 |
+| `create_date` | `create_date` | `createDate` | 创建日期 |
+| `inval_date` | `inval_date` | `invalDate` | 计划终止日期 |
+| `rate_date` | `rate_date` | `rateDate` | 汇率日期 |
+| `sign_date` | `sign_date` | `signDate` | 签字盖章日期 |
+| `val_date` | `val_date` | `valDate` | 计划生效日期 |
+| `vouchdate` | `vouchdate` | `vouchdate` | 单据日期 |
+| `modify_date` | `modify_date` | `modifyDate` | 修改日期 |
+
+### 布尔字段 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `isprojectapply` | `isprojectapply` | `isprojectapply` | 是否引用立项申请 |
+| `iDeleted` | `iDeleted` | `isDeleted` | 逻辑删除标记 |
+| `` | `isWfControlled` | `isWfControlled` | 是否审批流控制 |
+
+### 整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `settledcount` | `settledcount` | `settledcount` | 已审批原币付款次数 |
+
+### 短整数 (12个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `contract_class` | `contract_class` | `contractClass` | 合同性质 |
+| `contract_direction` | `contract_direction` | `contractDirection` | 收支方向 |
+| `contract_amount_control` | `contract_amount_control` | `contractAmountControl` | 合同金额控制方式 |
+| `history_flag_bak` | `history_flag_bak` | `historyFlagBak` | 是否历史版本备份 |
+| `status_bak` | `status_bak` | `statusBak` | 合同状态备份 |
+| `beginning_flag` | `beginning_flag` | `beginningFlag` | 期初标识 |
+| `history_flag` | `history_flag` | `historyFlag` | 是否历史版本 |
+| `open_flag` | `open_flag` | `openFlag` | 是否敞口合同 |
+| `populate_mode` | `populate_mode` | `populateMode` | 计划金额计算方式 |
+| `` | `returncount` | `returncount` | 退回次数 |
+| `status` | `status` | `status` | 合同状态 |
+| `` | `verifystate` | `verifystate` | 审批状态 |
+
+### 长整数 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `sourceautoid` | `sourceautoid` | 上游单据子表id |
+| `` | `sourceid` | `sourceid` | 上游单据主表id |
+| `change_id` | `change_id` | `changeId` | 当前变更单 |
+| `tplid` | `tplid` | `tplid` | 模板id |
+| `id` | `id` | `id` | ID |
+
+### 数值字段 (205个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `appr_advance_amt` | `appr_advance_amt` | `apprAdvanceAmt` | 已审批原币预付款金额 |
+| `appr_amt` | `appr_amt` | `apprAmt` | 已审批原币付款金额 |
+| `appr_margin_amt` | `appr_margin_amt` | `apprMarginAmt` | 已审批原币退保证金金额 |
+| `appr_plan_refund_amt` | `appr_plan_refund_amt` | `apprPlanRefundAmt` | 已审批原币退款金额 |
+| `original_money_amt` | `original_money_amt` | `originalMoneyAmt` | 原币价税合计 |
+| `original_tax_amt` | `original_tax_amt` | `originalTaxAmt` | 原币税额 |
+| `no_tax_original_money_amt` | `no_tax_original_money_amt` | `noTaxOriginalMoneyAmt` | 原币无税金额 |
+| `local_money_amt` | `local_money_amt` | `localMoneyAmt` | 本币含税金额 |
+| `local_tax_amt` | `local_tax_amt` | `localTaxAmt` | 本币税额 |
+| `expense_reference_amt` | `expense_reference_amt` | `expenseReferenceAmt` | 原币报销参照金额 |
+| `appr_advance_amt_bak` | `appr_advance_amt_bak` | `apprAdvanceAmtBak` | 已审批原币预付款金额备份 |
+| `appr_amt_bak` | `appr_amt_bak` | `apprAmtBak` | 已审批原币付款金额备份 |
+| `appr_margin_amt_bak` | `appr_margin_amt_bak` | `apprMarginAmtBak` | 已审批原币退保证金金额备份 |
+| `appr_plan_refund_amt_bak` | `appr_plan_refund_amt_bak` | `apprPlanRefundAmtBak` | 已审批原币退款金额备份 |
+| `original_tax_amt_bak` | `original_tax_amt_bak` | `originalTaxAmtBak` | 原币税额备份 |
+| `no_tax_original_money_amt_bak` | `no_tax_original_money_amt_bak` | `noTaxOriginalMoneyAmtBak` | 原币无税金额备份 |
+| `local_money_amt_bak` | `local_money_amt_bak` | `localMoneyAmtBak` | 本币含税金额备份 |
+| `local_tax_amt_bak` | `local_tax_amt_bak` | `localTaxAmtBak` | 本币税额备份 |
+| `no_tax_local_money_amt_bak` | `no_tax_local_money_amt_bak` | `noTaxLocalMoneyAmtBak` | 本币无税金额备份 |
+| `local_plan_amt_bak` | `local_plan_amt_bak` | `localPlanAmtBak` | 本币付款金额备份 |
+| `retention_appr_plan_refund_amt_bak` | `retention_appr_plan_refund_amt_bak` | `retentionApprPlanRefundAmtBak` | 原币付款已退质保金金额备份 |
+| `advance_appr_plan_refund_amt_bak` | `advance_appr_plan_refund_amt_bak` | `advanceApprPlanRefundAmtBak` | 原币已退预付款金额备份 |
+| `local_retention_appr_plan_refund_amt_bak` | `local_retention_appr_plan_refund_amt_bak` | `localRetentionApprPlanRefundAmtBak` | 本币付款已退质保金金额备份 |
+| `local_advance_appr_plan_refund_amt_bak` | `local_advance_appr_plan_refund_amt_bak` | `localAdvanceApprPlanRefundAmtBak` | 本币已退预付款金额备份 |
+| `local_available_amt_bak` | `local_available_amt_bak` | `localAvailableAmtBak` | 本币合同付款可用金额备份 |
+| `local_used_amt_bak` | `local_used_amt_bak` | `localUsedAmtBak` | 本币合同付款已用金额备份 |
+| `local_original_receipt_amt_bak` | `local_original_receipt_amt_bak` | `localOriginalReceiptAmtBak` | 本币收票金额备份 |
+| `local_unappr_amt_bak` | `local_unappr_amt_bak` | `localUnapprAmtBak` | 未审批本币付款金额备份 |
+| `local_appr_amt_bak` | `local_appr_amt_bak` | `localApprAmtBak` | 已审批本币付款金额备份 |
+| `local_paid_amt_bak` | `local_paid_amt_bak` | `localPaidAmtBak` | 本币已付款金额备份 |
+| `local_appr_plan_refund_amt_bak` | `local_appr_plan_refund_amt_bak` | `localApprPlanRefundAmtBak` | 已审批本币退款金额备份 |
+| `unlocal_appr_plan_refund_amt_bak` | `unlocal_appr_plan_refund_amt_bak` | `unlocalApprPlanRefundAmtBak` | 未审批本币退款金额备份 |
+| `local_unappr_advance_amt_bak` | `local_unappr_advance_amt_bak` | `localUnapprAdvanceAmtBak` | 未审批本币预付款金额备份 |
+| `local_appr_advance_amt_bak` | `local_appr_advance_amt_bak` | `localApprAdvanceAmtBak` | 已审批本币预付款金额备份 |
+| `local_paid_advance_amt_bak` | `local_paid_advance_amt_bak` | `localPaidAdvanceAmtBak` | 本币已付预付款金额备份 |
+| `local_unappr_retention_amt_bak` | `local_unappr_retention_amt_bak` | `localUnapprRetentionAmtBak` | 未审批本币质保金金额备份 |
+| `local_appr_retention_amt_bak` | `local_appr_retention_amt_bak` | `localApprRetentionAmtBak` | 已审批本币质保金金额备份 |
+| `local_paid_retention_amt_bak` | `local_paid_retention_amt_bak` | `localPaidRetentionAmtBak` | 本币已付质保金金额备份 |
+| `local_margin_amt_bak` | `local_margin_amt_bak` | `localMarginAmtBak` | 本币已收保证金金额备份 |
+| `local_unappr_margin_amt_bak` | `local_unappr_margin_amt_bak` | `localUnapprMarginAmtBak` | 未审批本币退保证金金额备份 |
+| `local_appr_margin_amt_bak` | `local_appr_margin_amt_bak` | `localApprMarginAmtBak` | 已审批本币退保证金金额备份 |
+| `local_margin_refund_amt_bak` | `local_margin_refund_amt_bak` | `localMarginRefundAmtBak` | 本币已退保证金金额备份 |
+| `unappr_plan_refund_amt_bak` | `unappr_plan_refund_amt_bak` | `unapprPlanRefundAmtBak` | 未审批原币退款金额备份 |
+| `unappr_subject_local_amt_bak` | `unappr_subject_local_amt_bak` | `unapprSubjectLocalAmtBak` | 未审批本币应付金额备份 |
+| `appr_subject_local_amt_bak` | `appr_subject_local_amt_bak` | `apprSubjectLocalAmtBak` | 已审批本币应付金额备份 |
+| `verified_subject_local_amt_bak` | `verified_subject_local_amt_bak` | `verifiedSubjectLocalAmtBak` | 已核销本币应付金额备份 |
+| `roriginal_total_amt_bak` | `roriginal_total_amt_bak` | `roriginalTotalAmtBak` | 原币收款金额备份 |
+| `rlocal_plan_amt_bak` | `rlocal_plan_amt_bak` | `rlocalPlanAmtBak` | 本币收款金额备份 |
+| `ravailable_amt_bak` | `ravailable_amt_bak` | `ravailableAmtBak` | 原币合同收款可用金额备份 |
+| `rused_amt_bak` | `rused_amt_bak` | `rusedAmtBak` | 原币合同收款已用金额备份 |
+| `rlocal_available_amt_bak` | `rlocal_available_amt_bak` | `rlocalAvailableAmtBak` | 本币合同收款可用金额备份 |
+| `rlocal_used_amt_bak` | `rlocal_used_amt_bak` | `rlocalUsedAmtBak` | 本币合同收款已用金额备份 |
+| `rretention_appr_plan_refund_amt_bak` | `rretention_appr_plan_refund_amt_bak` | `rretentionApprPlanRefundAmtBak` | 原币收款已退质保金金额备份 |
+| `radvance_appr_plan_refund_amt_bak` | `radvance_appr_plan_refund_amt_bak` | `radvanceApprPlanRefundAmtBak` | 原币已退预收款金额备份 |
+| `rlocal_retention_appr_plan_refund_amt_bak` | `rlocal_retention_appr_plan_refund_amt_bak` | `rlocalRetentionApprPlanRefundAmtBak` | 本币收款已退质保金金额备份 |
+| `rlocal_advance_appr_plan_refund_amt_bak` | `rlocal_advance_appr_plan_refund_amt_bak` | `rlocalAdvanceApprPlanRefundAmtBak` | 本币已退预收款金额备份 |
+| `roriginal_receipt_amt_bak` | `roriginal_receipt_amt_bak` | `roriginalReceiptAmtBak` | 原币开票金额备份 |
+| `runappr_amt_bak` | `runappr_amt_bak` | `runapprAmtBak` | 未审批原币收款金额备份 |
+| `rappr_amt_bak` | `rappr_amt_bak` | `rapprAmtBak` | 已审批原币收款金额备份 |
+| `rpaid_amt_bak` | `rpaid_amt_bak` | `rpaidAmtBak` | 原币已收款金额备份 |
+| `rappr_plan_refund_amt_bak` | `rappr_plan_refund_amt_bak` | `rapprPlanRefundAmtBak` | 已审批原币退款金额备份 |
+| `unrappr_plan_refund_amt_bak` | `unrappr_plan_refund_amt_bak` | `unrapprPlanRefundAmtBak` | 未审批原币退款金额备份 |
+| `runappr_advance_amt_bak` | `runappr_advance_amt_bak` | `runapprAdvanceAmtBak` | 未审批原币预收款金额备份 |
+| `rappr_advance_amt_bak` | `rappr_advance_amt_bak` | `rapprAdvanceAmtBak` | 已审批原币预收款金额备份 |
+| `rpaid_advance_amt_bak` | `rpaid_advance_amt_bak` | `rpaidAdvanceAmtBak` | 原币已收预收款金额备份 |
+| `runappr_retention_amt_bak` | `runappr_retention_amt_bak` | `runapprRetentionAmtBak` | 未审批原币质保金金额备份 |
+| `rappr_retention_amt_bak` | `rappr_retention_amt_bak` | `rapprRetentionAmtBak` | 已审批原币质保金金额备份 |
+| `rpaid_retention_amt_bak` | `rpaid_retention_amt_bak` | `rpaidRetentionAmtBak` | 原币收款质保金金额备份 |
+| `rmargin_amt_bak` | `rmargin_amt_bak` | `rmarginAmtBak` | 原币已收保证金金额备份 |
+| `runappr_margin_amt_bak` | `runappr_margin_amt_bak` | `runapprMarginAmtBak` | 未审批原币退保证金金额备份 |
+| `rappr_margin_amt_bak` | `rappr_margin_amt_bak` | `rapprMarginAmtBak` | 已审批原币退保证金金额备份 |
+| `rmargin_refund_amt_bak` | `rmargin_refund_amt_bak` | `rmarginRefundAmtBak` | 原币已退保证金金额备份 |
+| `rlocal_original_receipt_amt_bak` | `rlocal_original_receipt_amt_bak` | `rlocalOriginalReceiptAmtBak` | 本币开票金额备份 |
+| `rlocal_unappr_amt_bak` | `rlocal_unappr_amt_bak` | `rlocalUnapprAmtBak` | 未审批本币收款金额备份 |
+| `rlocal_appr_amt_bak` | `rlocal_appr_amt_bak` | `rlocalApprAmtBak` | 已审批本币收款金额备份 |
+| `rlocal_paid_amt_bak` | `rlocal_paid_amt_bak` | `rlocalPaidAmtBak` | 本币已收款金额备份 |
+| `rlocal_appr_plan_refund_amt_bak` | `rlocal_appr_plan_refund_amt_bak` | `rlocalApprPlanRefundAmtBak` | 已审批本币退款金额备份 |
+| `unrlocal_appr_plan_refund_amt_bak` | `unrlocal_appr_plan_refund_amt_bak` | `unrlocalApprPlanRefundAmtBak` | 未审批本币退款金额备份 |
+| `rlocal_unappr_advance_amt_bak` | `rlocal_unappr_advance_amt_bak` | `rlocalUnapprAdvanceAmtBak` | 未审批本币预收款金额备份 |
+| `rlocal_appr_advance_amt_bak` | `rlocal_appr_advance_amt_bak` | `rlocalApprAdvanceAmtBak` | 已审批本币预收款金额备份 |
+| `rlocal_paid_advance_amt_bak` | `rlocal_paid_advance_amt_bak` | `rlocalPaidAdvanceAmtBak` | 本币已收预收款金额备份 |
+| `rlocal_unappr_retention_amt_bak` | `rlocal_unappr_retention_amt_bak` | `rlocalUnapprRetentionAmtBak` | 未审批本币质保金金额备份 |
+| `rlocal_appr_retention_amt_bak` | `rlocal_appr_retention_amt_bak` | `rlocalApprRetentionAmtBak` | 已审批本币质保金金额备份 |
+| `rlocal_paid_retention_amt_bak` | `rlocal_paid_retention_amt_bak` | `rlocalPaidRetentionAmtBak` | 本币收款质保金金额备份 |
+| `rlocal_margin_amt_bak` | `rlocal_margin_amt_bak` | `rlocalMarginAmtBak` | 本币已收保证金金额备份 |
+| `rlocal_unappr_margin_amt_bak` | `rlocal_unappr_margin_amt_bak` | `rlocalUnapprMarginAmtBak` | 未审批本币退保证金金额备份 |
+| `rlocal_appr_margin_amt_bak` | `rlocal_appr_margin_amt_bak` | `rlocalApprMarginAmtBak` | 已审批本币退保证金金额备份 |
+| `rlocal_margin_refund_amt_bak` | `rlocal_margin_refund_amt_bak` | `rlocalMarginRefundAmtBak` | 本币已退保证金金额备份 |
+| `runappr_subject_original_amt_bak` | `runappr_subject_original_amt_bak` | `runapprSubjectOriginalAmtBak` | 未审批原币应收金额备份 |
+| `rappr_subject_original_amt_bak` | `rappr_subject_original_amt_bak` | `rapprSubjectOriginalAmtBak` | 已审批原币应收金额备份 |
+| `rverified_subject_original_amt_bak` | `rverified_subject_original_amt_bak` | `rverifiedSubjectOriginalAmtBak` | 已核销原币应收金额备份 |
+| `runappr_subject_local_amt_bak` | `runappr_subject_local_amt_bak` | `runapprSubjectLocalAmtBak` | 未审批本币应收金额备份 |
+| `rappr_subject_local_amt_bak` | `rappr_subject_local_amt_bak` | `rapprSubjectLocalAmtBak` | 已审批本币应收金额备份 |
+| `rverified_subject_local_amt_bak` | `rverified_subject_local_amt_bak` | `rverifiedSubjectLocalAmtBak` | 已核销本币应收金额备份 |
+| `appr_retention_amt_bak` | `appr_retention_amt_bak` | `apprRetentionAmtBak` | 已审批原币质保金金额备份 |
+| `appr_subject_amt_bak` | `appr_subject_amt_bak` | `apprSubjectAmtBak` | 已审批原币应付金额备份 |
+| `available_amt_bak` | `available_amt_bak` | `availableAmtBak` | 合同可用金额备份 |
+| `margin_amt_bak` | `margin_amt_bak` | `marginAmtBak` | 原币已收保证金金额备份 |
+| `margin_refund_amt_bak` | `margin_refund_amt_bak` | `marginRefundAmtBak` | 原币已退保证金金额备份 |
+| `original_receipt_amt_bak` | `original_receipt_amt_bak` | `originalReceiptAmtBak` | 原币收票金额备份 |
+| `paid_advance_amt_bak` | `paid_advance_amt_bak` | `paidAdvanceAmtBak` | 原币已付预付款金额备份 |
+| `paid_amt_bak` | `paid_amt_bak` | `paidAmtBak` | 原币已付款金额备份 |
+| `paid_retention_amt_bak` | `paid_retention_amt_bak` | `paidRetentionAmtBak` | 原币已付质保金金额备份 |
+| `unappr_advance_amt_bak` | `unappr_advance_amt_bak` | `unapprAdvanceAmtBak` | 未审批原币预付款金额备份 |
+| `unappr_amt_bak` | `unappr_amt_bak` | `unapprAmtBak` | 未审批原币付款金额备份 |
+| `unappr_margin_amt_bak` | `unappr_margin_amt_bak` | `unapprMarginAmtBak` | 未审批原币退保证金金额备份 |
+| `unappr_retention_amt_bak` | `unappr_retention_amt_bak` | `unapprRetentionAmtBak` | 未审批原币质保金金额备份 |
+| `unappr_subject_amt_bak` | `unappr_subject_amt_bak` | `unapprSubjectAmtBak` | 未审批原币应付金额备份 |
+| `used_amt_bak` | `used_amt_bak` | `usedAmtBak` | 合同已用金额备份 |
+| `verfity_subject_amt_bak` | `verfity_subject_amt_bak` | `verfitySubjectAmtBak` | 已核销原币应付金额备份 |
+| `no_tax_local_money_amt` | `no_tax_local_money_amt` | `noTaxLocalMoneyAmt` | 本币无税金额 |
+| `local_plan_amt` | `local_plan_amt` | `localPlanAmt` | 本币付款金额 |
+| `retention_appr_plan_refund_amt` | `retention_appr_plan_refund_amt` | `retentionApprPlanRefundAmt` | 原币付款已退质保金金额 |
+| `advance_appr_plan_refund_amt` | `advance_appr_plan_refund_amt` | `advanceApprPlanRefundAmt` | 原币已退预付款金额 |
+| `local_retention_appr_plan_refund_amt` | `local_retention_appr_plan_refund_amt` | `localRetentionApprPlanRefundAmt` | 本币付款已退质保金金额 |
+| `local_advance_appr_plan_refund_amt` | `local_advance_appr_plan_refund_amt` | `localAdvanceApprPlanRefundAmt` | 本币已退预付款金额 |
+| `local_available_amt` | `local_available_amt` | `localAvailableAmt` | 本币合同付款可用金额 |
+| `local_used_amt` | `local_used_amt` | `localUsedAmt` | 本币合同付款已用金额 |
+| `local_original_receipt_amt` | `local_original_receipt_amt` | `localOriginalReceiptAmt` | 本币收票金额 |
+| `local_unappr_amt` | `local_unappr_amt` | `localUnapprAmt` | 未审批本币付款金额 |
+| `local_appr_amt` | `local_appr_amt` | `localApprAmt` | 已审批本币付款金额 |
+| `local_paid_amt` | `local_paid_amt` | `localPaidAmt` | 本币已付款金额 |
+| `local_appr_plan_refund_amt` | `local_appr_plan_refund_amt` | `localApprPlanRefundAmt` | 已审批本币退款金额 |
+| `unlocal_appr_plan_refund_amt` | `unlocal_appr_plan_refund_amt` | `unlocalApprPlanRefundAmt` | 未审批本币退款金额 |
+| `local_unappr_advance_amt` | `local_unappr_advance_amt` | `localUnapprAdvanceAmt` | 未审批本币预付款金额 |
+| `local_appr_advance_amt` | `local_appr_advance_amt` | `localApprAdvanceAmt` | 已审批本币预付款金额 |
+| `local_paid_advance_amt` | `local_paid_advance_amt` | `localPaidAdvanceAmt` | 本币已付预付款金额 |
+| `local_unappr_retention_amt` | `local_unappr_retention_amt` | `localUnapprRetentionAmt` | 未审批本币质保金金额 |
+| `local_appr_retention_amt` | `local_appr_retention_amt` | `localApprRetentionAmt` | 已审批本币质保金金额 |
+| `local_paid_retention_amt` | `local_paid_retention_amt` | `localPaidRetentionAmt` | 本币已付质保金金额 |
+| `local_margin_amt` | `local_margin_amt` | `localMarginAmt` | 本币已收保证金金额 |
+| `local_unappr_margin_amt` | `local_unappr_margin_amt` | `localUnapprMarginAmt` | 未审批本币退保证金金额 |
+| `local_appr_margin_amt` | `local_appr_margin_amt` | `localApprMarginAmt` | 已审批本币退保证金金额 |
+| `local_margin_refund_amt` | `local_margin_refund_amt` | `localMarginRefundAmt` | 本币已退保证金金额 |
+| `unappr_plan_refund_amt` | `unappr_plan_refund_amt` | `unapprPlanRefundAmt` | 未审批原币退款金额 |
+| `unappr_subject_local_amt` | `unappr_subject_local_amt` | `unapprSubjectLocalAmt` | 未审批本币应付金额 |
+| `appr_subject_local_amt` | `appr_subject_local_amt` | `apprSubjectLocalAmt` | 已审批本币应付金额 |
+| `verified_subject_local_amt` | `verified_subject_local_amt` | `verifiedSubjectLocalAmt` | 已核销本币应付金额 |
+| `roriginal_total_amt` | `roriginal_total_amt` | `roriginalTotalAmt` | 原币收款金额 |
+| `rlocal_plan_amt` | `rlocal_plan_amt` | `rlocalPlanAmt` | 本币收款金额 |
+| `ravailable_amt` | `ravailable_amt` | `ravailableAmt` | 原币合同收款可用金额 |
+| `rused_amt` | `rused_amt` | `rusedAmt` | 原币合同收款已用金额 |
+| `rlocal_available_amt` | `rlocal_available_amt` | `rlocalAvailableAmt` | 本币合同收款可用金额 |
+| `rlocal_used_amt` | `rlocal_used_amt` | `rlocalUsedAmt` | 本币合同收款已用金额 |
+| `rretention_appr_plan_refund_amt` | `rretention_appr_plan_refund_amt` | `rretentionApprPlanRefundAmt` | 原币收款已退质保金金额 |
+| `radvance_appr_plan_refund_amt` | `radvance_appr_plan_refund_amt` | `radvanceApprPlanRefundAmt` | 原币已退预收款金额 |
+| `rlocal_retention_appr_plan_refund_amt` | `rlocal_retention_appr_plan_refund_amt` | `rlocalRetentionApprPlanRefundAmt` | 本币收款已退质保金金额 |
+| `rlocal_advance_appr_plan_refund_amt` | `rlocal_advance_appr_plan_refund_amt` | `rlocalAdvanceApprPlanRefundAmt` | 本币已退预收款金额 |
+| `roriginal_receipt_amt` | `roriginal_receipt_amt` | `roriginalReceiptAmt` | 原币开票金额 |
+| `runappr_amt` | `runappr_amt` | `runapprAmt` | 未审批原币收款金额 |
+| `rappr_amt` | `rappr_amt` | `rapprAmt` | 已审批原币收款金额 |
+| `rpaid_amt` | `rpaid_amt` | `rpaidAmt` | 原币已收款金额 |
+| `rappr_plan_refund_amt` | `rappr_plan_refund_amt` | `rapprPlanRefundAmt` | 已审批原币退款金额 |
+| `unrappr_plan_refund_amt` | `unrappr_plan_refund_amt` | `unrapprPlanRefundAmt` | 未审批原币退款金额 |
+| `runappr_advance_amt` | `runappr_advance_amt` | `runapprAdvanceAmt` | 未审批原币预收款金额 |
+| `rappr_advance_amt` | `rappr_advance_amt` | `rapprAdvanceAmt` | 已审批原币预收款金额 |
+| `rpaid_advance_amt` | `rpaid_advance_amt` | `rpaidAdvanceAmt` | 原币已收预收款金额 |
+| `runappr_retention_amt` | `runappr_retention_amt` | `runapprRetentionAmt` | 未审批原币质保金金额 |
+| `rappr_retention_amt` | `rappr_retention_amt` | `rapprRetentionAmt` | 已审批原币质保金金额 |
+| `rpaid_retention_amt` | `rpaid_retention_amt` | `rpaidRetentionAmt` | 原币收款质保金金额 |
+| `rmargin_amt` | `rmargin_amt` | `rmarginAmt` | 原币已收保证金金额 |
+| `runappr_margin_amt` | `runappr_margin_amt` | `runapprMarginAmt` | 未审批原币退保证金金额 |
+| `rappr_margin_amt` | `rappr_margin_amt` | `rapprMarginAmt` | 已审批原币退保证金金额 |
+| `rmargin_refund_amt` | `rmargin_refund_amt` | `rmarginRefundAmt` | 原币已退保证金金额 |
+| `rlocal_original_receipt_amt` | `rlocal_original_receipt_amt` | `rlocalOriginalReceiptAmt` | 本币开票金额 |
+| `rlocal_unappr_amt` | `rlocal_unappr_amt` | `rlocalUnapprAmt` | 未审批本币收款金额 |
+| `rlocal_appr_amt` | `rlocal_appr_amt` | `rlocalApprAmt` | 已审批本币收款金额 |
+| `rlocal_paid_amt` | `rlocal_paid_amt` | `rlocalPaidAmt` | 本币已收款金额 |
+| `rlocal_appr_plan_refund_amt` | `rlocal_appr_plan_refund_amt` | `rlocalApprPlanRefundAmt` | 已审批本币退款金额 |
+| `unrlocal_appr_plan_refund_amt` | `unrlocal_appr_plan_refund_amt` | `unrlocalApprPlanRefundAmt` | 未审批本币退款金额 |
+| `rlocal_unappr_advance_amt` | `rlocal_unappr_advance_amt` | `rlocalUnapprAdvanceAmt` | 未审批本币预收款金额 |
+| `rlocal_appr_advance_amt` | `rlocal_appr_advance_amt` | `rlocalApprAdvanceAmt` | 已审批本币预收款金额 |
+| `rlocal_paid_advance_amt` | `rlocal_paid_advance_amt` | `rlocalPaidAdvanceAmt` | 本币已收预收款金额 |
+| `rlocal_unappr_retention_amt` | `rlocal_unappr_retention_amt` | `rlocalUnapprRetentionAmt` | 未审批本币质保金金额 |
+| `rlocal_appr_retention_amt` | `rlocal_appr_retention_amt` | `rlocalApprRetentionAmt` | 已审批本币质保金金额 |
+| `rlocal_paid_retention_amt` | `rlocal_paid_retention_amt` | `rlocalPaidRetentionAmt` | 本币收款质保金金额 |
+| `rlocal_margin_amt` | `rlocal_margin_amt` | `rlocalMarginAmt` | 本币已收保证金金额 |
+| `rlocal_unappr_margin_amt` | `rlocal_unappr_margin_amt` | `rlocalUnapprMarginAmt` | 未审批本币退保证金金额 |
+| `rlocal_appr_margin_amt` | `rlocal_appr_margin_amt` | `rlocalApprMarginAmt` | 已审批本币退保证金金额 |
+| `rlocal_margin_refund_amt` | `rlocal_margin_refund_amt` | `rlocalMarginRefundAmt` | 本币已退保证金金额 |
+| `runappr_subject_original_amt` | `runappr_subject_original_amt` | `runapprSubjectOriginalAmt` | 未审批原币应收金额 |
+| `rappr_subject_original_amt` | `rappr_subject_original_amt` | `rapprSubjectOriginalAmt` | 已审批原币应收金额 |
+| `rverified_subject_original_amt` | `rverified_subject_original_amt` | `rverifiedSubjectOriginalAmt` | 已核销原币应收金额 |
+| `runappr_subject_local_amt` | `runappr_subject_local_amt` | `runapprSubjectLocalAmt` | 未审批本币应收金额 |
+| `rappr_subject_local_amt` | `rappr_subject_local_amt` | `rapprSubjectLocalAmt` | 已审批本币应收金额 |
+| `rverified_subject_local_amt` | `rverified_subject_local_amt` | `rverifiedSubjectLocalAmt` | 已核销本币应收金额 |
+| `appr_retention_amt` | `appr_retention_amt` | `apprRetentionAmt` | 已审批原币质保金金额 |
+| `appr_subject_amt` | `appr_subject_amt` | `apprSubjectAmt` | 已审批原币应付金额 |
+| `available_amt` | `available_amt` | `availableAmt` | 合同可用金额 |
+| `exceed_ratio` | `exceed_ratio` | `exceedRatio` | 超合同付款比例 |
+| `margin_amt` | `margin_amt` | `marginAmt` | 原币已收保证金金额 |
+| `margin_refund_amt` | `margin_refund_amt` | `marginRefundAmt` | 原币已退保证金金额 |
+| `nexchange_rate` | `nexchange_rate` | `nexchangeRate` | 拆本汇率 |
+| `original_receipt_amt` | `original_receipt_amt` | `originalReceiptAmt` | 原币收票金额 |
+| `original_total_amt` | `original_total_amt` | `originalTotalAmt` | 原币付款金额 |
+| `paid_advance_amt` | `paid_advance_amt` | `paidAdvanceAmt` | 原币已付预付款金额 |
+| `paid_amt` | `paid_amt` | `paidAmt` | 原币已付款金额 |
+| `paid_retention_amt` | `paid_retention_amt` | `paidRetentionAmt` | 原币已付质保金金额 |
+| `unappr_advance_amt` | `unappr_advance_amt` | `unapprAdvanceAmt` | 未审批原币预付款金额 |
+| `unappr_amt` | `unappr_amt` | `unapprAmt` | 未审批原币付款金额 |
+| `unappr_margin_amt` | `unappr_margin_amt` | `unapprMarginAmt` | 未审批原币退保证金金额 |
+| `unappr_retention_amt` | `unappr_retention_amt` | `unapprRetentionAmt` | 未审批原币质保金金额 |
+| `unappr_subject_amt` | `unappr_subject_amt` | `unapprSubjectAmt` | 未审批原币应付金额 |
+| `used_amt` | `used_amt` | `usedAmt` | 合同已用金额 |
+| `verfity_subject_amt` | `verfity_subject_amt` | `verfitySubjectAmt` | 已核销原币应付金额 |
+
+### timestamp (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `sourceMainPubts` | `sourceMainPubts` | `sourceMainPubts` | 时间戳 |
+| `audit_time` | `audit_time` | `auditTime` | 审批时间 |
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+
+### other (18个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `nexchange_rateOps` | `nexchange_rateOps` | `nexchangeRateOps` | 拆本汇率折算方式 |
+| `` | `` | `apctCounterpartys` | 合同相对方 |
+| `` | `` | `apctInvoiceinfos` | 收票信息 |
+| `` | `` | `apctInvoicinginfos` | 开票信息 |
+| `` | `` | `apctOwnerChangelogs` | 所属人维护记录 |
+| `` | `` | `apctownersub` | 合同所属人子表 |
+| `` | `` | `hisrecords` | 变更历史 |
+| `` | `` | `ibpmcurrentauditors` | 合同审批当前审批人 |
+| `` | `` | `ibpmsteps` | 合同审批业务阶段 |
+| `` | `` | `items` | 合同条款 |
+| `` | `` | `margins` | 履约保证金 |
+| `` | `` | `materials` | 标的物 |
+| `` | `` | `memorabilias` | 合同大事记 |
+| `` | `` | `plans` | 付款计划 |
+| `` | `` | `processes` | 执行过程 |
+| `` | `` | `receiptplans` | 收款计划 |
+| `` | `` | `relateVouchers` | 下游关联单据 |
+| `` | `` | `thirdVoucher` | 中间表数据标的物和付款计划 |
+
+### UserDefine (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `apctApctDcs` | `apctApctDcs` | `apctApctDcs` | 合同自定义项 |

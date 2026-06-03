@@ -9,44 +9,95 @@ last_verified: 2026-06-03
 status: verified
 source_type: api_response
 ---
+
 # 开票信息 (`apct.contract.ApctInvoicinginfo`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBip），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `apct_apct_invoicinginfo` | 应用: `APCT`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`apct_apct_invoicinginfo` | domain：`apct` | 应用：`APCT` | 业务对象ID：``
 
-## 属性（22 个）
+## 基本信息
 
-| # | 字段 | 显示名 | 列 | 类型 | biztype |
-|---|------|--------|-----|------|---------|
-| 1 | `ctId` | ctID | `ct_id` | 84a309b9-2fd0-48d8-9b75-8251a20928c2 | `quote` |
-| 2 | `pk_invoice` | pk_invoice | `pk_invoice` | String | `text` |
-| 3 | `pk_invoicetype` | pk_invoicetype | `pk_invoicetype` | 22e45e65-e39f-43d0-8b27-756e9891b275 | `quote` |
-| 4 | `vinvoicecode` | vinvoicecode | `vinvoicecode` | String | `text` |
-| 5 | `vinvoiceno` | vinvoiceno | `vinvoiceno` | String | `text` |
-| 6 | `dcostdate` | dcostdate | `dcostdate` | Date | `date` |
-| 7 | `vcustname` | vcustname | `vcustname` | String | `text` |
-| 8 | `vcurrency` | vcurrency | `vcurrency` | 02b45339-eb4a-4a31-a8b5-d32f494f4e8e | `quote` |
-| 9 | `nuntaxmny` | nuntaxmny | `nuntaxmny` | Decimal | `number` |
-| 10 | `ntaxmny` | ntaxmny | `ntaxmny` | Decimal | `number` |
-| 11 | `nmny` | nmny | `nmny` | Decimal | `number` |
-| 12 | `billtype` | billtype | `bill_type` | 4a227650-b866-4f4c-a6ca-2433297a1713 | `quote` |
-| 13 | `billno` | billno | `billno` | String | `text` |
-| 14 | `nnatuntaxmny` | nnatuntaxmny | `nnatuntaxmny` | Decimal | `number` |
-| 15 | `nnattaxmny` | nnattaxmny | `nnattaxmny` | Decimal | `number` |
-| 16 | `nnatmny` | nnatmny | `nnatmny` | Decimal | `number` |
-| 17 | `invoicestate` | invoicestate | `invoice_state` | String | `text` |
-| 18 | `invoiceOrg` | invoiceOrg | `invoice_org` | 5d4c5590-da40-4b50-80a1-8d04da2f79e0 | `quote` |
-| 19 | `tenant` | tenant | `tenant_id` | c213cd56-d5de-421f-bae7-d77455b557cd | `quote` |
-| 20 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 21 | `id` | ID | `id` | Long | `long` |
-| 22 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 开票信息 |
+| 物理表 | `apct_apct_invoicinginfo` |
+| 数据库 schema | `apct` |
+| 所属应用 | `APCT` |
+| 直连字段 | 22 个 |
+| 子表 | 0 个 |
+| 关联引用 | 7 个 |
 
-## 关联（7 个）
+## 关联引用 (7个)
 
-- `vcurrency` -> `bd.currencytenant.CurrencyTenantVO` () 
-- `ctId` -> `apct.contract.Apct` (0..n) 
-- `invoiceOrg` -> `org.func.FinanceOrg` () 
-- `billtype` -> `bd.bill.BillTypeVO` () 
-- `ytenant` -> `yht.tenant.YhtTenant` () 
-- `pk_invoicetype` -> `znbzbx.invoicetype.InvoiceTypeVO` () 
-- `tenant` -> `base.tenant.Tenant` () 
+| 字段名 | 引用类型 |
+|--------|---------|
+| `vcurrency` | `` |
+| `ct_id` | `` |
+| `invoice_org` | `` |
+| `bill_type` | `` |
+| `ytenant_id` | `` |
+| `pk_invoicetype` | `` |
+| `tenant_id` | `` |
+
+## 继承接口 (2个, 2字段)
+
+- **租户相关** (`base.itf.ITenant`)
+  - `tenant_id` → `tenant_id`
+- **统一租户接口(扩展)** (`ucfbase.ucfbaseItf.IYTenantExt`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 22 个直连字段
+
+### 文本字段 (6个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pk_invoice` | `pk_invoice` | `pk_invoice` | 发票主键 |
+| `vinvoicecode` | `vinvoicecode` | `vinvoicecode` | 发票代码 |
+| `vinvoiceno` | `vinvoiceno` | `vinvoiceno` | 发票号码 |
+| `vcustname` | `vcustname` | `vcustname` | 购方名称 |
+| `billno` | `billno` | `billno` | 单据号 |
+| `invoice_state` | `invoice_state` | `invoicestate` | 发票状态 |
+
+### 引用字段 (7个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `ct_id` | `ct_id` | `ctId` | 合同主键 |
+| `pk_invoicetype` | `pk_invoicetype` | `pk_invoicetype` | 发票类型 |
+| `vcurrency` | `vcurrency` | `vcurrency` | 币种 |
+| `bill_type` | `bill_type` | `billtype` | 来源单据类型 |
+| `invoice_org` | `invoice_org` | `invoiceOrg` | 开票组织 |
+| `tenant_id` | `tenant_id` | `tenant` | 租户 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 日期字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dcostdate` | `dcostdate` | `dcostdate` | 发生日期 |
+
+### 长整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | 主键 |
+
+### 数值字段 (6个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `nuntaxmny` | `nuntaxmny` | `nuntaxmny` | 金额 |
+| `ntaxmny` | `ntaxmny` | `ntaxmny` | 税额 |
+| `nmny` | `nmny` | `nmny` | 价税合计 |
+| `nnatuntaxmny` | `nnatuntaxmny` | `nnatuntaxmny` | 本币金额 |
+| `nnattaxmny` | `nnattaxmny` | `nnattaxmny` | 本币税额 |
+| `nnatmny` | `nnatmny` | `nnatmny` | 本币价税合计 |
+
+### timestamp (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubts` | `pubts` | `pubts` | 时间戳 |

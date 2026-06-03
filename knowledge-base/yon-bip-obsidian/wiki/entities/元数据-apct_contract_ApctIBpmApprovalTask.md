@@ -9,35 +9,93 @@ last_verified: 2026-06-03
 status: verified
 source_type: api_response
 ---
+
 # 合同审批当前审批人 (`apct.contract.ApctIBpmApprovalTask`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBip），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `apct_apct_ibpmcurrentauditor` | 应用: `APCT`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`apct_apct_ibpmcurrentauditor` | domain：`apct` | 应用：`APCT` | 业务对象ID：``
 
-## 属性（16 个）
+## 基本信息
 
-| # | 字段 | 显示名 | 列 | 类型 | biztype |
-|---|------|--------|-----|------|---------|
-| 1 | `ctId` | ctID | `ct_id` | 84a309b9-2fd0-48d8-9b75-8251a20928c2 | `quote` |
-| 2 | `tenant` | tenant | `tenant_id` | c213cd56-d5de-421f-bae7-d77455b557cd | `quote` |
-| 3 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 4 | `taskId` | taskID | `taskid` | String | `text` |
-| 5 | `auditor` | auditor | `auditor` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 6 | `approvalActivityName` | approvalActivity名称 | `approval_activity_name` | String | `text` |
-| 7 | `approvalActivityResid` | approvalActivityResid | `approval_activity_resid` | String | `text` |
-| 8 | `approvalActivityId` | approvalActivityID | `approval_activity_id` | String | `text` |
-| 9 | `approvalComment` | approvalComment | `approval_comment` | String | `text` |
-| 10 | `approvalSign` | approvalSign | `approval_sign` | String | `text` |
-| 11 | `approvalResult` | approvalResult | `approval_result` | String | `text` |
-| 12 | `approvalTime` | approvalTime | `approval_time` | DateTime | `dateTime` |
-| 13 | `approvalInstId` | approvalInstID | `approval_instid` | String | `text` |
-| 14 | `taskStatus` | taskStatus | `task_status` | String | `text` |
-| 15 | `id` | ID | `id` | Long | `long` |
-| 16 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 合同审批当前审批人 |
+| 物理表 | `apct_apct_ibpmcurrentauditor` |
+| 数据库 schema | `apct` |
+| 所属应用 | `APCT` |
+| 直连字段 | 16 个 |
+| 子表 | 0 个 |
+| 关联引用 | 4 个 |
 
-## 关联（4 个）
+## 关联引用 (4个)
 
-- `ctId` -> `apct.contract.Apct` (0..n) 
-- `ytenant` -> `yht.tenant.YhtTenant` () 
-- `auditor` -> `base.user.BipUser` () 
-- `tenant` -> `base.tenant.Tenant` () 
+| 字段名 | 引用类型 |
+|--------|---------|
+| `ct_id` | `` |
+| `ytenant_id` | `` |
+| `auditor` | `u8c-auth.bip_user_ref` |
+| `tenant_id` | `` |
+
+## 继承接口 (3个, 13字段)
+
+- **租户相关** (`base.itf.ITenant`)
+  - `tenant_id` → `tenant_id`
+- **统一租户接口(扩展)** (`ucfbase.ucfbaseItf.IYTenantExt`)
+  - `ytenant_id` → `ytenant_id`
+- **审批任务** (`ucfbase.ucfbaseItf.IBpmApprovalTask`)
+  - `approval_activity_id` → `approval_activity_id`
+  - `approval_activity_name` → `approval_activity_name`
+  - `approval_activity_resid` → `approval_activity_resid`
+  - `approval_comment` → `approval_comment`
+  - `approval_instid` → `approval_instid`
+  - `approval_result` → `approval_result`
+  - `approval_sign` → `approval_sign`
+  - `approval_time` → `approval_time`
+  - `auditor` → `auditor`
+  - `taskid` → `taskid`
+  - `task_status` → `task_status`
+
+## 字段列表（按类型分组）
+
+> 共 16 个直连字段
+
+### 文本字段 (9个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `taskid` | `taskid` | `taskId` | 审批任务ID |
+| `approval_activity_name` | `approval_activity_name` | `approvalActivityName` | 流程环节名称 |
+| `approval_activity_resid` | `approval_activity_resid` | `approvalActivityResid` | 环节名称资源编码 |
+| `approval_activity_id` | `approval_activity_id` | `approvalActivityId` | 流程环节ID |
+| `approval_comment` | `approval_comment` | `approvalComment` | 审批意见 |
+| `approval_sign` | `approval_sign` | `approvalSign` | 签名 |
+| `approval_result` | `approval_result` | `approvalResult` | 审批结果 |
+| `approval_instid` | `approval_instid` | `approvalInstId` | 流程实例ID |
+| `task_status` | `task_status` | `taskStatus` | 活动标记 |
+
+### 引用字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `ct_id` | `ct_id` | `ctId` | 合同 |
+| `tenant_id` | `tenant_id` | `tenant` | 租户 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+| `auditor` | `auditor` | `auditor` | 审批人 |
+
+### 日期时间 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `approval_time` | `approval_time` | `approvalTime` | 审批时间 |
+
+### 长整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | 主键 |
+
+### timestamp (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubts` | `pubts` | `pubts` | 时间戳 |

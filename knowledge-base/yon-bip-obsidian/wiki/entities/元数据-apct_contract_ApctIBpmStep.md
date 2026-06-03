@@ -9,30 +9,83 @@ last_verified: 2026-06-03
 status: verified
 source_type: api_response
 ---
+
 # 合同审批业务阶段 (`apct.contract.ApctIBpmStep`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBip），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `apct_apct_ibpmstep` | 应用: `APCT`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`apct_apct_ibpmstep` | domain：`apct` | 应用：`APCT` | 业务对象ID：``
 
-## 属性（11 个）
+## 基本信息
 
-| # | 字段 | 显示名 | 列 | 类型 | biztype |
-|---|------|--------|-----|------|---------|
-| 1 | `ctId` | ctID | `ct_id` | 84a309b9-2fd0-48d8-9b75-8251a20928c2 | `quote` |
-| 2 | `tenant` | tenant | `tenant_id` | c213cd56-d5de-421f-bae7-d77455b557cd | `quote` |
-| 3 | `stepId` | stepID | `stepid` | 9bcecb5a-ff80-4e82-9b49-67af93c7db82 | `quote` |
-| 4 | `flag` | flag | `flag` | String | `text` |
-| 5 | `stepparam` | stepparam | `stepparam` | String | `text` |
-| 6 | `processinstId` | processinstID | `processinstid` | String | `text` |
-| 7 | `stepLastModify` | stepLastModify | `stepcode_lastmodify` | DateTime | `dateTime` |
-| 8 | `taskId` | taskID | `taskid` | String | `text` |
-| 9 | `id` | ID | `id` | Long | `long` |
-| 10 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 11 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 合同审批业务阶段 |
+| 物理表 | `apct_apct_ibpmstep` |
+| 数据库 schema | `apct` |
+| 所属应用 | `APCT` |
+| 直连字段 | 11 个 |
+| 子表 | 0 个 |
+| 关联引用 | 4 个 |
 
-## 关联（4 个）
+## 关联引用 (4个)
 
-- `ctId` -> `apct.contract.Apct` (0..n) 
-- `ytenant` -> `yht.tenant.YhtTenant` () 
-- `stepId` -> `bd.businessstep.BusinessStep` () 
-- `tenant` -> `base.tenant.Tenant` () 
+| 字段名 | 引用类型 |
+|--------|---------|
+| `ct_id` | `` |
+| `ytenant_id` | `` |
+| `stepid` | `transtype.bd_businessstep_ref` |
+| `tenant_id` | `` |
+
+## 继承接口 (3个, 8字段)
+
+- **租户相关** (`base.itf.ITenant`)
+  - `tenant_id` → `tenant_id`
+- **统一租户接口(扩展)** (`ucfbase.ucfbaseItf.IYTenantExt`)
+  - `ytenant_id` → `ytenant_id`
+- **业务阶段** (`ucfbase.ucfbaseItf.IBpmStep`)
+  - `flag` → `flag`
+  - `processinstid` → `processinstid`
+  - `stepid` → `stepid`
+  - `stepcode_lastmodify` → `stepcode_lastmodify`
+  - `stepparam` → `stepparam`
+  - `taskid` → `taskid`
+
+## 字段列表（按类型分组）
+
+> 共 11 个直连字段
+
+### 文本字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `flag` | `flag` | `flag` | 状态标志位 |
+| `stepparam` | `stepparam` | `stepparam` | 业务阶段参数 |
+| `processinstid` | `processinstid` | `processinstId` | 流程实例 |
+| `taskid` | `taskid` | `taskId` | 任务ID |
+
+### 引用字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `ct_id` | `ct_id` | `ctId` | 合同 |
+| `tenant_id` | `tenant_id` | `tenant` | 租户 |
+| `stepid` | `stepid` | `stepId` | 业务阶段ID |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 日期时间 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `stepcode_lastmodify` | `stepcode_lastmodify` | `stepLastModify` | 业务阶段编码最后修改时间 |
+
+### 长整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | 主键 |
+
+### timestamp (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubts` | `pubts` | `pubts` | 时间戳 |

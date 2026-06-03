@@ -12,29 +12,60 @@ source_type: api_response
 
 # 学历 (`socialmdm.social.EduQualification`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `mdm_educationtbcode` | 应用: `DPMPI` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`mdm_educationtbcode` | domain：`iuap-apdoc-social` | 应用：`DPMPI` | 业务对象ID：`bff2ec26-fdd6-47e0-a7e0-7cf90e8aee08`
 
-## 属性（19 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `code` | 编码 | `code` | String | `text` |
-| 2 | `dr` | 逻辑删除 | `dr` | Integer | `int` |
-| 3 | `eid` | eid | `eid` | String | `text` |
-| 4 | `id` | ID | `pk_mdm` | String | `text` |
-| 5 | `linkFieldValue` | linkFieldValue | `link_fieldvalue` | String | `text` |
-| 6 | `mdmCode` | mdm编码 | `mdm_code` | String | `text` |
-| 7 | `mdmDuplicate` | mdmDuplicate | `mdm_duplicate` | Integer | `int` |
-| 8 | `mdmParentCode` | mdmParent编码 | `mdm_parentcode` | String | `text` |
-| 9 | `mdmSeal` | mdmSeal | `mdm_seal` | Integer | `int` |
-| 10 | `mdmVersion` | mdmVersion | `mdm_version` | Integer | `int` |
-| 11 | `name` | 名称 | `name` | String | `multiLanguage` |
-| 12 | `nameResId` | nameResID | `name_resid` | String | `text` |
-| 13 | `pubts` | 时间戳 | `ts` | DateTime | `timestamp` |
-| 14 | `sysId` | sysID | `sys_id` | String | `text` |
-| 15 | `treeMasterId` | treeMasterID | `treemasterid` | String | `text` |
-| 16 | `treeParentId` | treeParentID | `treeparentid` | String | `text` |
-| 17 | `treeRefForeignKey` | treeRefForeignKey | `treeref_foreignkey` | String | `text` |
-| 18 | `updateAt` | updateAt | `update_at` | String | `text` |
-| 19 | `ytenantId` | ytenantID | `ytenant_id` | String | `text` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 学历 |
+| 物理表 | `mdm_educationtbcode` |
+| 数据库 schema | `iuap-apdoc-social` |
+| 所属应用 | `DPMPI` |
+| 直连字段 | 19 个 |
+| 子表 | 0 个 |
+| 关联引用 | 0 个 |
+
+## 字段列表（按类型分组）
+
+> 共 19 个直连字段
+
+### 文本字段 (13个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `code` | `code` | `code` | 数字编码(1) |
+| `eid` | `eid` | `eid` | 无 |
+| `pk_mdm` | `pk_mdm` | `id` | 自定义主键 |
+| `link_fieldvalue` | `link_fieldvalue` | `linkFieldValue` | 无 |
+| `mdm_code` | `mdm_code` | `mdmCode` | 数字编码(0000000001 |
+| `mdm_parentcode` | `mdm_parentcode` | `mdmParentCode` | 父编码 |
+| `name_resid` | `name_resid` | `nameResId` | 多语平台资源编码 |
+| `sys_id` | `sys_id` | `sysId` | 领域名称 |
+| `treemasterid` | `treemasterid` | `treeMasterId` | 无 |
+| `treeparentid` | `treeparentid` | `treeParentId` | 无 |
+| `treeref_foreignkey` | `treeref_foreignkey` | `treeRefForeignKey` | 无 |
+| `update_at` | `update_at` | `updateAt` | 无 |
+| `ytenant_id` | `ytenant_id` | `ytenantId` | 友户通租户id |
+
+### 整数 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dr` | `dr` | `dr` | 是否删除 |
+| `mdm_duplicate` | `mdm_duplicate` | `mdmDuplicate` | 无 |
+| `mdm_seal` | `mdm_seal` | `mdmSeal` | 无 |
+| `mdm_version` | `mdm_version` | `mdmVersion` | 版本号 |
+
+### multiLanguage (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `name` | `name` | `name` | 学历名称 |
+
+### timestamp (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `ts` | `ts` | `pubts` | 时间戳 |

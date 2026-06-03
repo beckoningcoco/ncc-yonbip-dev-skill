@@ -1,5 +1,5 @@
 ---
-tags: [BIP, 元数据, 数据字典, bd, bd.region.BaseRegionVO]
+tags: [BIP, 元数据, 数据字典, bd.region.BaseRegionVO]
 created: 2026-06-03
 updated: 2026-06-03
 sources: [元数据API queryByUri]
@@ -9,71 +9,122 @@ last_verified: 2026-06-03
 status: verified
 source_type: api_response
 ---
+
 # 行政区划 (`bd.region.BaseRegionVO`)
 
-> ⚡ **平台版本：BIP 旗舰版 V5** — 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `bd_baseregion` | 应用: `DPMPI`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`bd_baseregion` | domain：`ucfbasedoc` | 应用：`DPMPI` | 业务对象ID：`0f012d25-573b-4161-aae3-79be728e3173`
 
-## 主键与编码
+## 基本信息
 
-| 角色 | 字段 | 列 | 类型 |
-|------|------|-----|------|
-| 主键 | `id` | `id` | String |
-| 编码 | `code` | `code` | |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 行政区划 |
+| 物理表 | `bd_baseregion` |
+| 数据库 schema | `ucfbasedoc` |
+| 所属应用 | `DPMPI` |
+| 直连字段 | 27 个 |
+| 子表 | 1 个 |
+| 关联引用 | 5 个 |
 
-## 全部属性（27 个）
+## 子表
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype | 必填 | 可空 |
-|---|--------|--------|-----|------|---------|------|------|
-| 1 | `id` | 主键ID | `id` | String | `text` |  | true |
-| 2 | `code` | 编码 | `code` | String | `text` | false | true |
-| 3 | `name` | 名称 | `name` | String | `multiLanguage` | false | true |
-| 4 | `enName` | en名称 | `en_name` | String | `text` | false | true |
-| 5 | `parentCode` | parent编码 | `parent_code` | String | `text` | false | true |
-| 6 | `objid` | objid | `objid` | String | `text` | false | true |
-| 7 | `ispreset` | 是否preset | `ispreset` | Integer | `int` | false | true |
-| 8 | `parent` | parent | `parent_id` | 95577e23-979f-4f09-a629-61fea93e576d | `quote` | false | true |
-| 9 | `level` | level | `level` | Integer | `int` |  | true |
-| 10 | `pathName` | path名称 | `path_name` | String | `multiLanguage` | false | true |
-| 11 | `countryCode` | 国家编码 | `country_code` | String | `text` | false | true |
-| 12 | `slyCode` | sly编码 | `sly_code` | String | `text` | false | true |
-| 13 | `sysid` | sysid | `sysid` | String | `text` |  | true |
-| 14 | `isEnd` | 是否End | `isEnd` | Integer | `int` | false | true |
-| 15 | `enable` | enable | `enable` | Integer | `int` | false | true |
-| 16 | `sort` | sort | `sort_num` | String | `text` | false | true |
-| 17 | `path` | path | `path` | String | `text` |  | true |
-| 18 | `dr` | 逻辑删除 | `dr` | Integer | `int` |  | true |
-| 19 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` | false | true |
-| 20 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |  | true |
-| 21 | `log` | log | `log` | String | `text` | false | true |
-| 22 | `tenant` | tenant | `tenantid` | String | `text` | false | true |
-| 23 | `creator` | 创建人 | `creator` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |  | true |
-| 24 | `createTime` | 创建时间 | `create_time` | DateTime | `dateTime` |  | true |
-| 25 | `modifier` | 修改人 | `modifier` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |  | true |
-| 26 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `dateTime` |  | true |
-| 27 | `BaseRegionStatusVOList` | BaseRegionStatusVOList | `` | 273e77c8-be84-404a-8916-fc525e541a93 | `` |  |  |
+| 字段名 | URI | 关系 |
+|--------|-----|------|
+| `BaseRegionStatusVOList` | `bd.region.BaseRegionStatusVO` | composition |
 
-## 关联属性（5 个）
+## 关联引用 (5个)
 
-| # | 字段 | 目标实体 | 列 | 多重性 | 组合 | 废弃 |
-|---|------|---------|-----|--------|------|------|
-| 1 | `parent` | `bd.region.BaseRegionVO` | `parent_id` |  |  |  |
-| 2 | `creator` | `base.user.BipUser` | `creator` |  |  |  |
-| 3 | `ytenant` | `yht.tenant.YhtTenant` | `ytenant_id` |  |  |  |
-| 4 | `modifier` | `base.user.BipUser` | `modifier` |  |  |  |
-| 5 | `BaseRegionStatusVOList` | `bd.region.BaseRegionStatusVO` | `` | 0..n | Y |  |
+| 字段名 | 引用类型 |
+|--------|---------|
+| `parent_id` | `bd_baseregiontreeref` |
+| `creator` | `bip-usercenter.bip_user_ref` |
+| `ytenant_id` | `` |
+| `modifier` | `bip-usercenter.bip_user_ref` |
+| `` | `` |
 
-## 依赖接口（5 个）
+## 继承接口 (5个, 12字段)
 
-- `BasedocIState` → `basedoc.basedocItf.BasedocIState` (v101)
-- `ITree` → `ucfbase.ucfbaseItf.ITree` (v339)
-- `IYTenant` → `ucfbase.ucfbaseItf.IYTenant` (v40)
-- `LogicDelete` → `basedoc.basedocItf.LogicDelete` (v31)
-- `IAuditInfo` → `iuap.busiObj.IAuditInfo` (v679)
+- **UCF公共状态** (`basedoc.basedocItf.BasedocIState`)
+  - `enable` → `enable`
+- **树型结构** (`ucfbase.ucfbaseItf.ITree`)
+  - `` → ``
+  - `level` → `level`
+  - `name` → `name`
+  - `parent_id` → `parent_id`
+  - `path` → `path`
+  - `sort_num` → `sort_num`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+- **逻辑删除(待废除)** (`basedoc.basedocItf.LogicDelete`)
+- **审计信息** (`iuap.busiObj.IAuditInfo`)
+  - `create_time` → `create_time`
+  - `creator` → `creator`
+  - `modifier` → `modifier`
+  - `modify_time` → `modify_time`
 
-## SQL 示例
+## 字段列表（按类型分组）
 
-```sql
-SELECT id, code, name, en_name, parent_code, objid, ispreset, parent_id
-FROM bd_baseregion
-```
+> 共 27 个直连字段
+
+### 文本字段 (12个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+| `code` | `code` | `code` | 编码 |
+| `en_name` | `en_name` | `enName` | 英文名称 |
+| `parent_code` | `parent_code` | `parentCode` | 父节点编码 |
+| `objid` | `objid` | `objid` | 外系统主键 |
+| `country_code` | `country_code` | `countryCode` | 国家/地区编码 |
+| `sly_code` | `sly_code` | `slyCode` | 商旅云编码 |
+| `sysid` | `sysid` | `sysid` | 应用标识 |
+| `sort_num` | `sort_num` | `sort` | 排序号 |
+| `path` | `path` | `path` | 路径 |
+| `log` | `log` | `log` | 操作日志 |
+| `tenantid` | `tenantid` | `tenant` | 租户(废弃) |
+
+### 引用字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `parent_id` | `parent_id` | `parent` | 上级分类 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户 |
+| `creator` | `creator` | `creator` | 创建人 |
+| `modifier` | `modifier` | `modifier` | 修改人 |
+
+### 日期时间 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+
+### 整数 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `ispreset` | `ispreset` | `ispreset` | 是否预置 |
+| `level` | `level` | `level` | 层级 |
+| `isEnd` | `isEnd` | `isEnd` | 是否末级 |
+| `enable` | `enable` | `enable` | 启用状态 |
+| `dr` | `dr` | `dr` | 删除状态 |
+
+### multiLanguage (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `name` | `name` | `name` | 名称 |
+| `path_name` | `path_name` | `pathName` | 展示层级 |
+
+### timestamp (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+
+### other (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `` | `BaseRegionStatusVOList` | 行政区划状态 |

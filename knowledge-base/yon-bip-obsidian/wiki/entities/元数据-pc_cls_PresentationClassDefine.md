@@ -12,75 +12,162 @@ source_type: api_response
 
 # 商品分类自定义项 (`pc.cls.PresentationClassDefine`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `product_presentation_class_define` | 应用: `GZTBDM` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`product_presentation_class_define` | domain：`productcenter` | 应用：`GZTBDM` | 业务对象ID：``
 
-## 属性（61 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `define1` | define1 | `define1` | String | `text` |
-| 2 | `define10` | define10 | `define10` | String | `text` |
-| 3 | `define11` | define11 | `define11` | String | `text` |
-| 4 | `define12` | define12 | `define12` | String | `text` |
-| 5 | `define13` | define13 | `define13` | String | `text` |
-| 6 | `define14` | define14 | `define14` | String | `text` |
-| 7 | `define15` | define15 | `define15` | String | `text` |
-| 8 | `define16` | define16 | `define16` | String | `text` |
-| 9 | `define17` | define17 | `define17` | String | `text` |
-| 10 | `define18` | define18 | `define18` | String | `text` |
-| 11 | `define19` | define19 | `define19` | String | `text` |
-| 12 | `define2` | define2 | `define2` | String | `text` |
-| 13 | `define20` | define20 | `define20` | String | `text` |
-| 14 | `define21` | define21 | `define21` | String | `text` |
-| 15 | `define22` | define22 | `define22` | String | `text` |
-| 16 | `define23` | define23 | `define23` | String | `text` |
-| 17 | `define24` | define24 | `define24` | String | `text` |
-| 18 | `define25` | define25 | `define25` | String | `text` |
-| 19 | `define26` | define26 | `define26` | String | `text` |
-| 20 | `define27` | define27 | `define27` | String | `text` |
-| 21 | `define28` | define28 | `define28` | String | `text` |
-| 22 | `define29` | define29 | `define29` | String | `text` |
-| 23 | `define3` | define3 | `define3` | String | `text` |
-| 24 | `define30` | define30 | `define30` | String | `text` |
-| 25 | `define31` | define31 | `define31` | String | `text` |
-| 26 | `define32` | define32 | `define32` | String | `text` |
-| 27 | `define33` | define33 | `define33` | String | `text` |
-| 28 | `define34` | define34 | `define34` | String | `text` |
-| 29 | `define35` | define35 | `define35` | String | `text` |
-| 30 | `define36` | define36 | `define36` | String | `text` |
-| 31 | `define37` | define37 | `define37` | String | `text` |
-| 32 | `define38` | define38 | `define38` | String | `text` |
-| 33 | `define39` | define39 | `define39` | String | `text` |
-| 34 | `define4` | define4 | `define4` | String | `text` |
-| 35 | `define40` | define40 | `define40` | String | `text` |
-| 36 | `define41` | define41 | `define41` | String | `text` |
-| 37 | `define42` | define42 | `define42` | String | `text` |
-| 38 | `define43` | define43 | `define43` | String | `text` |
-| 39 | `define44` | define44 | `define44` | String | `text` |
-| 40 | `define45` | define45 | `define45` | String | `text` |
-| 41 | `define46` | define46 | `define46` | String | `text` |
-| 42 | `define47` | define47 | `define47` | String | `text` |
-| 43 | `define48` | define48 | `define48` | String | `text` |
-| 44 | `define49` | define49 | `define49` | String | `text` |
-| 45 | `define5` | define5 | `define5` | String | `text` |
-| 46 | `define50` | define50 | `define50` | String | `text` |
-| 47 | `define51` | define51 | `define51` | String | `text` |
-| 48 | `define52` | define52 | `define52` | String | `text` |
-| 49 | `define53` | define53 | `define53` | String | `text` |
-| 50 | `define54` | define54 | `define54` | String | `text` |
-| 51 | `define55` | define55 | `define55` | String | `text` |
-| 52 | `define56` | define56 | `define56` | String | `text` |
-| 53 | `define57` | define57 | `define57` | String | `text` |
-| 54 | `define58` | define58 | `define58` | String | `text` |
-| 55 | `define59` | define59 | `define59` | String | `text` |
-| 56 | `define6` | define6 | `define6` | String | `text` |
-| 57 | `define60` | define60 | `define60` | String | `text` |
-| 58 | `define7` | define7 | `define7` | String | `text` |
-| 59 | `define8` | define8 | `define8` | String | `text` |
-| 60 | `define9` | define9 | `define9` | String | `text` |
-| 61 | `id` | ID | `id` | 5ad8fc93-4e6b-409f-a70f-462efa6fcee9 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 商品分类自定义项 |
+| 物理表 | `product_presentation_class_define` |
+| 数据库 schema | `productcenter` |
+| 所属应用 | `GZTBDM` |
+| 直连字段 | 61 个 |
+| 子表 | 0 个 |
+| 关联引用 | 1 个 |
 
-## 关联（1 个）
+## 关联引用 (1个)
 
-- `id` -> `pc.cls.PresentationClass` (1)
+| 字段名 | 引用类型 |
+|--------|---------|
+| `id` | `` |
+
+## 继承接口 (1个, 60字段)
+
+- **自由自定义项** (`base.itf.AttrextItem`)
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+
+## 字段列表（按类型分组）
+
+> 共 61 个直连字段
+
+### 文本字段 (60个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `define1` | `define1` | 自定义项1 |
+| `` | `define10` | `define10` | 自定义项10 |
+| `` | `define11` | `define11` | 自定义项11 |
+| `` | `define12` | `define12` | 自定义项12 |
+| `` | `define13` | `define13` | 自定义项13 |
+| `` | `define14` | `define14` | 自定义项14 |
+| `` | `define15` | `define15` | 自定义项15 |
+| `` | `define16` | `define16` | 自定义项16 |
+| `` | `define17` | `define17` | 自定义项17 |
+| `` | `define18` | `define18` | 自定义项18 |
+| `` | `define19` | `define19` | 自定义项19 |
+| `` | `define2` | `define2` | 自定义项2 |
+| `` | `define20` | `define20` | 自定义项20 |
+| `` | `define21` | `define21` | 自定义项21 |
+| `` | `define22` | `define22` | 自定义项22 |
+| `` | `define23` | `define23` | 自定义项23 |
+| `` | `define24` | `define24` | 自定义项24 |
+| `` | `define25` | `define25` | 自定义项25 |
+| `` | `define26` | `define26` | 自定义项26 |
+| `` | `define27` | `define27` | 自定义项27 |
+| `` | `define28` | `define28` | 自定义项28 |
+| `` | `define29` | `define29` | 自定义项29 |
+| `` | `define3` | `define3` | 自定义项3 |
+| `` | `define30` | `define30` | 自定义项30 |
+| `` | `define31` | `define31` | 自定义项31 |
+| `` | `define32` | `define32` | 自定义项32 |
+| `` | `define33` | `define33` | 自定义项33 |
+| `` | `define34` | `define34` | 自定义项34 |
+| `` | `define35` | `define35` | 自定义项35 |
+| `` | `define36` | `define36` | 自定义项36 |
+| `` | `define37` | `define37` | 自定义项37 |
+| `` | `define38` | `define38` | 自定义项38 |
+| `` | `define39` | `define39` | 自定义项39 |
+| `` | `define4` | `define4` | 自定义项4 |
+| `` | `define40` | `define40` | 自定义项40 |
+| `` | `define41` | `define41` | 自定义项41 |
+| `` | `define42` | `define42` | 自定义项42 |
+| `` | `define43` | `define43` | 自定义项43 |
+| `` | `define44` | `define44` | 自定义项44 |
+| `` | `define45` | `define45` | 自定义项45 |
+| `` | `define46` | `define46` | 自定义项46 |
+| `` | `define47` | `define47` | 自定义项47 |
+| `` | `define48` | `define48` | 自定义项48 |
+| `` | `define49` | `define49` | 自定义项49 |
+| `` | `define5` | `define5` | 自定义项5 |
+| `` | `define50` | `define50` | 自定义项50 |
+| `` | `define51` | `define51` | 自定义项51 |
+| `` | `define52` | `define52` | 自定义项52 |
+| `` | `define53` | `define53` | 自定义项53 |
+| `` | `define54` | `define54` | 自定义项54 |
+| `` | `define55` | `define55` | 自定义项55 |
+| `` | `define56` | `define56` | 自定义项56 |
+| `` | `define57` | `define57` | 自定义项57 |
+| `` | `define58` | `define58` | 自定义项58 |
+| `` | `define59` | `define59` | 自定义项59 |
+| `` | `define6` | `define6` | 自定义项6 |
+| `` | `define60` | `define60` | 自定义项60 |
+| `` | `define7` | `define7` | 自定义项7 |
+| `` | `define8` | `define8` | 自定义项8 |
+| `` | `define9` | `define9` | 自定义项9 |
+
+### 引用字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | 商品分类ID |

@@ -1,5 +1,5 @@
 ---
-tags: [BIP, 元数据, 数据字典, bd, bd.expenseitem.ExpenseItemType]
+tags: [BIP, 元数据, 数据字典, bd.expenseitem.ExpenseItemType]
 created: 2026-06-03
 updated: 2026-06-03
 sources: [元数据API queryByUri]
@@ -9,77 +9,148 @@ last_verified: 2026-06-03
 status: verified
 source_type: api_response
 ---
+
 # 费用项目类别 (`bd.expenseitem.ExpenseItemType`)
 
-> ⚡ **平台版本：BIP 旗舰版 V5** — 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `bd_expenseitemtype` | 应用: `DPMACCT`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`bd_expenseitemtype` | domain：`finbd` | 应用：`DPMACCT` | 业务对象ID：`1eeb5888-bc55-4b6f-911f-214f5a9391ea`
 
-## 主键与编码
+## 基本信息
 
-| 角色 | 字段 | 列 | 类型 |
-|------|------|-----|------|
-| 主键 | `id` | `id` | Long |
-| 编码 | `code` | `code` | |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 费用项目类别 |
+| 物理表 | `bd_expenseitemtype` |
+| 数据库 schema | `finbd` |
+| 所属应用 | `DPMACCT` |
+| 直连字段 | 28 个 |
+| 子表 | 0 个 |
+| 关联引用 | 8 个 |
 
-## 全部属性（28 个）
+## 关联引用 (8个)
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype | 必填 | 可空 |
-|---|--------|--------|-----|------|---------|------|------|
-| 1 | `id` | 主键ID | `id` | Long | `long` |  | true |
-| 2 | `code` | 编码 | `code` | String | `text` | false | true |
-| 3 | `remark` | remark | `remark` | String | `text` | false | true |
-| 4 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` | true | true |
-| 5 | `dr` | 逻辑删除 | `dr` | Short | `short` |  | true |
-| 6 | `name` | 名称 | `name` | String | `multiLanguage` | false | true |
-| 7 | `objid` | objid | `obj_id` | String | `text` | false | true |
-| 8 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |  | true |
-| 9 | `accentity` | accentity | `accentity` | 14302233-1394-4a70-94e1-bed51636f312 | `quote` | false | true |
-| 10 | `expenseitemtype` | expenseitemtype | `expenseitemtype` | f21b5eab-a129-49f6-ae72-9f9a2f415134 | `quote` | false | true |
-| 11 | `enabled` | enabled | `enabled` | Boolean | `switch` | false | true |
-| 12 | `createTime` | 创建时间 | `create_time` | DateTime | `timestamp` |  | true |
-| 13 | `createDate` | 创建日期 | `create_date` | Date | `date` |  | true |
-| 14 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `timestamp` |  | true |
-| 15 | `modifyDate` | 修改日期 | `modify_date` | Date | `date` |  | true |
-| 16 | `creator` | 创建人 | `creator` | String | `text` |  | true |
-| 17 | `modifier` | 修改人 | `modifier` | String | `text` |  | true |
-| 18 | `creatorId` | 创建人ID | `creatorId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |  | true |
-| 19 | `modifierId` | 修改人ID | `modifierId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |  | true |
-| 20 | `stoptime` | stoptime | `stop_time` | DateTime | `timestamp` |  | true |
-| 21 | `stopstatus` | stopstatus | `stopstatus` | Boolean | `switch` |  | true |
-| 22 | `tenant` | tenant | `tenant_id` | c213cd56-d5de-421f-bae7-d77455b557cd | `quote` | true | true |
-| 23 | `character` | character | `character` | b914a4c3-e7db-4291-9712-0e6d81672058 | `UserDefine` | false | true |
-| 24 | `isEnd` | 是否End | `isEnd` | Boolean | `switch` |  | true |
-| 25 | `level` | level | `level` | Integer | `int` |  | true |
-| 26 | `parent` | parent | `parent` | f21b5eab-a129-49f6-ae72-9f9a2f415134 | `quote` | false | true |
-| 27 | `path` | path | `path` | String | `text` |  | true |
-| 28 | `sort` | sort | `sort_num` | Integer | `int` |  | true |
+| 字段名 | 引用类型 |
+|--------|---------|
+| `parent` | `` |
+| `character` | `` |
+| `expenseitemtype` | `bd_expenseitemtyperef_nomc` |
+| `ytenant_id` | `` |
+| `` | `` |
+| `accentity` | `ucf-org-center.org_pure_tree_ref` |
+| `tenant_id` | `` |
 
-## 关联属性（8 个）
+## 继承接口 (7个, 24字段)
 
-| # | 字段 | 目标实体 | 列 | 多重性 | 组合 | 废弃 |
-|---|------|---------|-----|--------|------|------|
-| 1 | `parent` | `bd.expenseitem.ExpenseItemType` | `parent` |  |  |  |
-| 2 | `character` | `bd.expenseitem.expenseitemTypeCharacter` | `character` |  |  |  |
-| 3 | `expenseitemtype` | `bd.expenseitem.ExpenseItemType` | `expenseitemtype` |  |  |  |
-| 4 | `ytenant` | `yht.tenant.YhtTenant` | `ytenant_id` |  |  |  |
-| 5 | `creatorId` | `base.user.User` | `creatorId` |  |  |  |
-| 6 | `modifierId` | `base.user.User` | `modifierId` |  |  |  |
-| 7 | `accentity` | `org.func.BaseOrg` | `accentity` |  |  |  |
-| 8 | `tenant` | `base.tenant.Tenant` | `tenant_id` |  |  |  |
+- **审计信息** (`base.itf.IAuditInfo`)
+  - `create_date` → `create_date`
+  - `create_time` → `create_time`
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `modify_date` → `modify_date`
+  - `modify_time` → `modify_time`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+- **租户相关** (`base.itf.ITenant`)
+  - `tenant_id` → `tenant_id`
+- **树型结构** (`ucfbase.ucfbaseItf.ITree`)
+  - `` → ``
+  - `level` → `level`
+  - `name` → `name`
+  - `parent_id` → `parent_id`
+  - `path` → `path`
+  - `sort_num` → `sort_num`
+- **树型结构** (`base.itf.ITree`)
+  - `` → ``
+  - `level` → `level`
+  - `parent_id` → `parent_id`
+  - `path` → `path`
+  - `sort_num` → `sort_num`
+- **停用信息** (`base.itf.IStopping`)
+  - `stopstatus` → `stopstatus`
+  - `stop_time` → `stop_time`
+- **逻辑删除相关** (`ucfbase.ucfbaseItf.LogicDelete`)
+  - `dr` → `dr`
 
-## 依赖接口（7 个）
+## 字段列表（按类型分组）
 
-- `IAuditInfo` → `base.itf.IAuditInfo` (v340)
-- `IYTenant` → `ucfbase.ucfbaseItf.IYTenant` (v40)
-- `ITenant` → `base.itf.ITenant` (v73)
-- `ITree` → `ucfbase.ucfbaseItf.ITree` (v339)
-- `ITree` → `base.itf.ITree` (v231)
-- `IStopping` → `base.itf.IStopping` (v111)
-- `LogicDelete` → `ucfbase.ucfbaseItf.LogicDelete` (v74)
+> 共 28 个直连字段
 
-## SQL 示例
+### 文本字段 (6个)
 
-```sql
-SELECT id, code, remark, ytenant_id, dr, name, obj_id, pubts
-FROM bd_expenseitemtype
-```
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `code` | `code` | `code` | 编码 |
+| `remark` | `remark` | `remark` | 备注 |
+| `obj_id` | `obj_id` | `objid` | 友企连id |
+| `` | `creator` | `creator` | 创建人 |
+| `` | `modifier` | `modifier` | 修改人 |
+| `path` | `path` | `path` | 路径 |
+
+### 引用字段 (7个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+| `accentity` | `accentity` | `accentity` | 业务单元id |
+| `expenseitemtype` | `expenseitemtype` | `expenseitemtype` | 上级费用项目类型 |
+| `` | `creatorId` | `creatorId` | 创建人 |
+| `` | `modifierId` | `modifierId` | 修改人 |
+| `tenant_id` | `tenant_id` | `tenant` | 租户 |
+| `parent` | `parent` | `parent` | 上级费用项目类型 |
+
+### 日期字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_date` | `create_date` | `createDate` | 创建日期 |
+| `modify_date` | `modify_date` | `modifyDate` | 修改日期 |
+
+### 布尔字段 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `enabled` | `enabled` | `enabled` | 状态 |
+| `stopstatus` | `stopstatus` | `stopstatus` | 停用状态 |
+| `` | `isEnd` | `isEnd` | 是否末级 |
+
+### 整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `level` | `level` | `level` | 层级 |
+| `sort_num` | `sort_num` | `sort` | 排序号 |
+
+### 短整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dr` | `dr` | `dr` | 逻辑删除标记 |
+
+### 长整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+
+### multiLanguage (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `name` | `name` | `name` | 名称 |
+
+### timestamp (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+| `stop_time` | `stop_time` | `stoptime` | 停用时间 |
+
+### UserDefine (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `character` | `character` | `character` | 费用项目类型特征属性 |

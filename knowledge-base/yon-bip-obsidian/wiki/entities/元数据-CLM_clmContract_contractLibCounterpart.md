@@ -9,60 +9,146 @@ last_verified: 2026-06-03
 status: verified
 source_type: api_response
 ---
+
 # 合同中心相对方 (`CLM.clmContract.contractLibCounterpart`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBip），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `clm_contract_counterpart` | 应用: `CLM`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`clm_contract_counterpart` | domain：`yonbip-ec-contract` | 应用：`CLM` | 业务对象ID：`0cd0fc9c-1380-4ac6-b06b-ab2811d7f10d`
 
-## 属性（37 个）
+## 基本信息
 
-| # | 字段 | 显示名 | 列 | 类型 | biztype |
-|---|------|--------|-----|------|---------|
-| 1 | `accountOpeningAddress` | accountOpeningAddress | `account_opening_address` | String | `text` |
-| 2 | `address` | address | `address` | String | `text` |
-| 3 | `bankAccount` | bankAccount | `bank_account` | String | `text` |
-| 4 | `bizFlowInstanceId` | bizFlowInstanceID | `bizflowinstance_id` | String | `text` |
-| 5 | `bizFlowMakeBillCode` | bizFlowMakeBill编码 | `bizflow_makebillcode` | String | `text` |
-| 6 | `bizflowId` | bizflowID | `bizflow_id` | String | `text` |
-| 7 | `bizflowName` | bizflow名称 | `bizflowname` | String | `text` |
-| 8 | `bprincipalCounterparty` | bprincipalCounterparty | `bprincipal_counterparty` | Boolean | `switch` |
-| 9 | `clmCounterpartId` | clmCounterpartID | `clm_counterpart_id` | 90e85817-9c8a-41f4-b1f8-0f61b6030e78 | `quote` |
-| 10 | `contractLibId` | contractLibID | `contractlib_id` | a2b72a3c-8c65-4b56-8e8f-35821ac27556 | `quote` |
-| 11 | `createTime` | 创建时间 | `create_time` | DateTime | `dateTime` |
-| 12 | `creator` | 创建人 | `creator` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 13 | `ctlibFeature` | ctlibFeature | `ctlib_feature` | 99caa9c5-0739-4324-821a-80330e20e6b3 | `UserDefine` |
-| 14 | `customerId` | customerID | `customer_id` | 94b3280a-27a4-485a-b90b-b7bce57c6df2 | `quote` |
-| 15 | `dr` | 逻辑删除 | `dr` | Short | `short` |
-| 16 | `firstBusiObj` | firstBusiObj | `firstbusiobj` | String | `text` |
-| 17 | `firstChildId` | firstChildID | `firstchild_id` | String | `text` |
-| 18 | `firstCode` | first编码 | `firstcode` | String | `text` |
-| 19 | `firstId` | firstID | `first_id` | String | `text` |
-| 20 | `fullName` | full名称 | `person_id` | String | `text` |
-| 21 | `id` | ID | `id` | String | `text` |
-| 22 | `merchantType` | merchantType | `merchant_type` | merchantType | `singleOption` |
-| 23 | `mobile` | mobile | `mobile` | String | `text` |
-| 24 | `modifier` | 修改人 | `modifier` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 25 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `dateTime` |
-| 26 | `participant` | participant | `participant` | participant | `singleOption` |
-| 27 | `pubts` | 时间戳 | `pubts` | DateTime | `dateTime` |
-| 28 | `signSort` | signSort | `sign_sort` | Decimal | `number` |
-| 29 | `sourceBusiObj` | sourceBusiObj | `sourcebusiobj` | String | `text` |
-| 30 | `sourceChildId` | sourceChildID | `sourcechild_id` | String | `text` |
-| 31 | `sourceCode` | source编码 | `sourcecode` | String | `text` |
-| 32 | `sourceGrandId` | sourceGrandID | `sourcegrand_id` | String | `text` |
-| 33 | `sourceId` | sourceID | `source_id` | String | `text` |
-| 34 | `supplierId` | supplierID | `supplier_id` | 89bf026e-cc49-4fe7-9a7b-3e8fdcc77c1e | `quote` |
-| 35 | `taxNumber` | taxNumber | `tax_number` | String | `text` |
-| 36 | `tbFilterType` | tbFilterType | `tb_filter_type` | Integer | `int` |
-| 37 | `ytenantId` | ytenantID | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 合同中心相对方 |
+| 物理表 | `clm_contract_counterpart` |
+| 数据库 schema | `yonbip-ec-contract` |
+| 所属应用 | `CLM` |
+| 直连字段 | 37 个 |
+| 子表 | 0 个 |
+| 关联引用 | 8 个 |
 
-## 关联（8 个）
+## 关联引用 (8个)
 
-- `creator` -> `base.user.BipUser` () 
-- `supplierId` -> `aa.vendor.Vendor` () [废]
-- `modifier` -> `base.user.BipUser` () 
-- `customerId` -> `aa.merchant.Merchant` () [废]
-- `contractLibId` -> `CLM.clmContract.contractLib` (0..n) [废]
-- `ytenantId` -> `yht.tenant.YhtTenant` () 
-- `ctlibFeature` -> `CLM.clmContract.contractLibCounterpartctlibFeatureUserDefine` () [废]
-- `clmCounterpartId` -> `DZHTFW.econtract.counterpart` () [废]
+| 字段名 | 引用类型 |
+|--------|---------|
+| `creator` | `bip-usercenter.bip_user_ref` |
+| `supplier_id` | `yssupplier.aa_vendor` |
+| `modifier` | `bip-usercenter.bip_user_ref` |
+| `customer_id` | `productcenter.aa_invoicemerchantref` |
+| `contractlib_id` | `` |
+| `ytenant_id` | `` |
+| `ctlib_feature` | `` |
+| `clm_counterpart_id` | `` |
+
+## 继承接口 (5个, 19字段)
+
+- **逻辑删除** (`iuap.busiObj.LogicDelete`)
+  - `dr` → `dr`
+- **统一租户接口** (`iuap.busiObj.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+- **业务流多来源** (`iuap.busiObj.BusinessFlowSourcesItf`)
+  - `firstbusiobj` → `firstbusiobj`
+  - `firstchild_id` → `firstchild_id`
+  - `firstcode` → `firstcode`
+  - `first_id` → `first_id`
+  - `sourcegrand_id` → `sourcegrand_id`
+- **业务流基础** (`iuap.busiObj.BusinessFlowItf`)
+  - `bizflow_id` → `bizflow_id`
+  - `bizflowinstance_id` → `bizflowinstance_id`
+  - `bizflow_makebillcode` → `bizflow_makebillcode`
+  - `bizflowname` → `bizflowname`
+  - `sourcebusiobj` → `sourcebusiobj`
+  - `sourcechild_id` → `sourcechild_id`
+  - `sourcecode` → `sourcecode`
+  - `source_id` → `source_id`
+- **审计信息** (`iuap.busiObj.IAuditInfo`)
+  - `create_time` → `create_time`
+  - `creator` → `creator`
+  - `modifier` → `modifier`
+  - `modify_time` → `modify_time`
+
+## 字段列表（按类型分组）
+
+> 共 37 个直连字段
+
+### 文本字段 (20个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `account_opening_address` | `account_opening_address` | `accountOpeningAddress` | 开户行 |
+| `address` | `address` | `address` | 地址 |
+| `bank_account` | `bank_account` | `bankAccount` | 银行账号 |
+| `bizflowinstance_id` | `bizflowinstance_id` | `bizFlowInstanceId` | 业务流实例id |
+| `bizflow_makebillcode` | `bizflow_makebillcode` | `bizFlowMakeBillCode` | 单据转换规则编码 |
+| `bizflow_id` | `bizflow_id` | `bizflowId` | 业务流id |
+| `bizflowname` | `bizflowname` | `bizflowName` | 流程名称 |
+| `firstbusiobj` | `firstbusiobj` | `firstBusiObj` | 来源业务对象 |
+| `firstchild_id` | `firstchild_id` | `firstChildId` | 来源单据子表id |
+| `firstcode` | `firstcode` | `firstCode` | 来源单据号 |
+| `first_id` | `first_id` | `firstId` | 来源单据主表id |
+| `person_id` | `person_id` | `fullName` | 联系人 |
+| `id` | `id` | `id` | 主键 |
+| `mobile` | `mobile` | `mobile` | 联系电话 |
+| `sourcebusiobj` | `sourcebusiobj` | `sourceBusiObj` | 上游业务对象 |
+| `sourcechild_id` | `sourcechild_id` | `sourceChildId` | 上游单据子表id |
+| `sourcecode` | `sourcecode` | `sourceCode` | 上游单据号 |
+| `sourcegrand_id` | `sourcegrand_id` | `sourceGrandId` | 来源孙表id |
+| `source_id` | `source_id` | `sourceId` | 上游单据主表id |
+| `tax_number` | `tax_number` | `taxNumber` | 税号 |
+
+### 引用字段 (7个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `clm_counterpart_id` | `clm_counterpart_id` | `clmCounterpartId` | 相对方档案 |
+| `contractlib_id` | `contractlib_id` | `contractLibId` | 合同中心 |
+| `creator` | `creator` | `creator` | 创建人 |
+| `customer_id` | `customer_id` | `customerId` | 客户 |
+| `modifier` | `modifier` | `modifier` | 修改人 |
+| `supplier_id` | `supplier_id` | `supplierId` | 供应商 |
+| `ytenant_id` | `ytenant_id` | `ytenantId` | 租户id |
+
+### 日期时间 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+
+### 布尔字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `bprincipal_counterparty` | `bprincipal_counterparty` | `bprincipalCounterparty` | 是否主相对方 |
+
+### 枚举字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `merchant_type` | `merchant_type` | `merchantType` | 客商类型 |
+| `participant` | `participant` | `participant` | 参与方 |
+
+### 整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `tb_filter_type` | `tb_filter_type` | `tbFilterType` | 表过滤类型 |
+
+### 短整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dr` | `dr` | `dr` | 逻辑删除 |
+
+### 数值字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `sign_sort` | `sign_sort` | `signSort` |  签署顺序 |
+
+### UserDefine (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `ctlib_feature` | `ctlib_feature` | `ctlibFeature` | 合同库相对方的特征 |

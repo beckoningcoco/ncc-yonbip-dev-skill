@@ -12,121 +12,207 @@ source_type: api_response
 
 # 项目进度计划 (`pgrm.projectschedule.ProjectScheduleItem`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `prjc_project_schedule_item` | 应用: `PGRM` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`prjc_project_schedule_item` | domain：`yonbip-pm-projectme` | 应用：`PGRM` | 业务对象ID：`5ed50b6c-9204-42ec-8910-4b7147d2f488`
 
-## 属性（88 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `actualEndDate` | actualEndDate | `actual_end_date` | Date | `date` |
-| 2 | `actualStartDate` | actualStartDate | `actual_start_date` | Date | `date` |
-| 3 | `actualTime` | actualTime | `actual_time` | Integer | `int` |
-| 4 | `childPlanFlag` | childPlanFlag | `childplan_flag` | Boolean | `switch` |
-| 5 | `code` | 编码 | `code` | String | `text` |
-| 6 | `completionRatio` | completionRatio | `completion_ratio` | Decimal | `number` |
-| 7 | `createrId` | createrID | `creater_id` | 4effed83-35f5-4e3b-9be1-092b5ae602e8 | `quote` |
-| 8 | `departmentId` | departmentID | `department_id` | a4352e3c-3eda-4539-a7a9-ec00799be118 | `quote` |
-| 9 | `effectiveFlag` | effectiveFlag | `effective_flag` | Boolean | `switch` |
-| 10 | `externalSysDataCode` | externalSysData编码 | `external_sys_data_code` | String | `text` |
-| 11 | `externalSysDataPk` | externalSysDataPk | `external_sys_data_pk` | String | `text` |
-| 12 | `externalSysDataPubts` | externalSysDataPubts | `external_sys_data_pubts` | Date | `dateTime` |
-| 13 | `externalSysDataStatus` | externalSysDataStatus | `external_sys_data_status` | String | `text` |
-| 14 | `externalSysDataVersion` | externalSysDataVersion | `external_sys_data_version` | String | `text` |
-| 15 | `floatingTime` | floatingTime | `floating_time` | Integer | `int` |
-| 16 | `ingatherCalculateFlag` | ingatherCalculateFlag | `ingather_calculate_flag` | Boolean | `switch` |
-| 17 | `integrationSystemCode` | integrationSystem编码 | `integration_system_code` | String | `text` |
-| 18 | `isEnd` | 是否End | `ifend` | Short | `short` |
-| 19 | `isExternalPerson` | 是否ExternalPerson | `is_external_person` | Integer | `int` |
-| 20 | `isGroupingWbs` | 是否GroupingWbs | `is_grouping_wbs` | pm_common_yesno | `singleOption` |
-| 21 | `leafFlag` | leafFlag | `leaf_flag` | Integer | `int` |
-| 22 | `level` | 层级 | `level` | Integer | `int` |
-| 23 | `milestoneFlag` | milestoneFlag | `milestone_flag` | String | `text` |
-| 24 | `milestoneRatio` | milestoneRatio | `milestone_ratio` | Decimal | `number` |
-| 25 | `newFlag` | newFlag | `new_flag` | Boolean | `switch` |
-| 26 | `node` | node | `node` | String | `text` |
-| 27 | `oid` | oid | `oid` | String | `text` |
-| 28 | `orgId` | 组织ID | `org_id` | 14302233-1394-4a70-94e1-bed51636f312 | `quote` |
-| 29 | `parent` | parent | `parent_id` | 992ac0ab-4ad3-40bd-b1c1-7e2368056423 | `quote` |
-| 30 | `path` | path | `path` | String | `text` |
-| 31 | `planEarlyEndDate` | planEarlyEndDate | `plan_early_end_date` | Date | `dateTime` |
-| 32 | `planEarlyStartDate` | planEarlyStartDate | `plan_early_start_date` | Date | `dateTime` |
-| 33 | `planEndDate` | planEndDate | `plan_end_date` | Date | `date` |
-| 34 | `planHours` | planHours | `plan_hours` | Decimal | `number` |
-| 35 | `planLatestEndDate` | planLatestEndDate | `plan_latest_end_date` | Date | `dateTime` |
-| 36 | `planLatestStartDate` | planLatestStartDate | `plan_latest_start_date` | Date | `dateTime` |
-| 37 | `planStartDate` | planStartDate | `plan_start_date` | Date | `date` |
-| 38 | `planTime` | planTime | `plan_time` | Integer | `int` |
-| 39 | `pnode` | pnode | `pnode` | String | `text` |
-| 40 | `preWBSCode` | preWBS编码 | `pre_wbs_code` | String | `text` |
-| 41 | `predicateEndDate` | predicateEndDate | `predicate_end_date` | Date | `dateTime` |
-| 42 | `predicateStartDate` | predicateStartDate | `predicate_start_date` | Date | `dateTime` |
-| 43 | `predicateTime` | predicateTime | `predicate_time` | Integer | `int` |
-| 44 | `projectId` | projectID | `project_id` | b1e7cbf6-094a-4200-b451-36bfa3ac3ff4 | `quote` |
-| 45 | `projectScheduleDefineCharacter` | projectScheduleDefineCharacter | `project_schedule_item_define_character` | 5b2959fa-1444-44fe-94c2-b7ff9f0733a3 | `UserDefine` |
-| 46 | `remark` | remark | `remark` | String | `text` |
-| 47 | `responsibleId` | responsibleID | `responsible_id` | 78bff1de-ddf1-4814-90de-b0b5f1eac78a | `quote` |
-| 48 | `scheduleFlag` | scheduleFlag | `schedule_flag` | Boolean | `switch` |
-| 49 | `scheduleType` | scheduleType | `schedule_type` | 19f9264d-28d1-4b47-9d28-f2e82654f3a9 | `quote` |
-| 50 | `serial` | serial | `serial` | Integer | `int` |
-| 51 | `sort` | 排序 | `sort_num` | Integer | `int` |
-| 52 | `sourceId` | sourceID | `source_id` | String | `text` |
-| 53 | `sourceType` | sourceType | `source_type` | String | `text` |
-| 54 | `stageId` | stageID | `stage_id` | 226fae36-161f-456a-adb9-95a7497bf9fd | `quote` |
-| 55 | `stageInspectionFlag` | stageInspectionFlag | `stage_inspection_flag` | String | `text` |
-| 56 | `tempId` | tempID | `temp_id` | String | `text` |
-| 57 | `tplItemId` | tplItemID | `tpl_item_id` | String | `text` |
-| 58 | `wbsName` | wbs名称 | `wbs_name` | String | `text` |
-| 59 | `wbsScheduleMethod` | wbsScheduleMethod | `wbs_schedule_method` | wbsScheduleMethod | `singleOption` |
-| 60 | `wbsStatus` | wbsStatus | `wbs_status` | Short | `short` |
-| 61 | `bResourcePlan` | bResourcePlan | `bresource_plan` | pm_common_yesno | `singleOption` |
-| 62 | `participatingEnterprise` | participatingEnterprise | `participating_enterprise_id` | f730d346-ca82-43e3-bbe3-ce0bb1a32530 | `quote` |
-| 63 | `scheduleId` | scheduleID | `schedule_id` | c4efac13-8e2d-4fa4-b66a-ef806b1dc6ff | `quote` |
-| 64 | `costAccountingFlag` | costAccountingFlag | `cost_accounting_flag` | Boolean | `switch` |
-| 65 | `costAccountingStartDate` | costAccountingStartDate | `cost_accounting_start_date` | Date | `dateTime` |
-| 66 | `finOrgId` | finOrgID | `fin_org_id` | 5d4c5590-da40-4b50-80a1-8d04da2f79e0 | `quote` |
-| 67 | `reasonForCompletionDelay` | reasonForCompletionDelay | `reason_for_completion_delay` | String | `text` |
-| 68 | `reasonForStartingDelay` | reasonForStartingDelay | `reason_for_starting_delay` | String | `text` |
-| 69 | `txStatus` | txStatus | `tx_status` | Integer | `int` |
-| 70 | `wbsBudgetFlag` | wbsBudgetFlag | `wbs_budget_flag` | Boolean | `switch` |
-| 71 | `wbsDocType` | wbsDocType | `type` | wbsDocType | `singleOption` |
-| 72 | `id` | ID | `id` | String | `text` |
-| 73 | `pubts` | 时间戳 | `pubts` | DateTime | `dateTime` |
-| 74 | `createTime` | 创建时间 | `create_time` | DateTime | `dateTime` |
-| 75 | `creator` | 创建人 | `creator` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 76 | `modifier` | 修改人 | `modifier` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 77 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `dateTime` |
-| 78 | `disablets` | disablets | `disablets` | DateTime | `dateTime` |
-| 79 | `enable` | enable | `enable` | sys_intboolean | `singleOption` |
-| 80 | `enablets` | enablets | `enablets` | DateTime | `dateTime` |
-| 81 | `name` | 名称 | `name` | String | `text` |
-| 82 | `ytenantId` | ytenantID | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 83 | `dr` | 逻辑删除 | `dr` | Short | `short` |
-| 84 | `defines` | defines | `` | 1ae598ed-95f4-4124-b363-6e4db3eb6cd7 | `` |
-| 85 | `projectScheduleItemLinks` | projectScheduleItemLinks | `` | b0ad4d3d-99fa-4b5e-9534-0cee4773a505 | `` |
-| 86 | `projectScheduleItemResult` | projectScheduleItemResult | `` | 8fd514f3-079e-4350-9f81-e66de86c78d2 | `` |
-| 87 | `checkitem` | checkitem | `` | 89ae014f-1fc1-4fe7-8e1e-8f6fa3391463 | `` |
-| 88 | `projectScheduleItemParticipants` | projectScheduleItemParticipants | `` | b9ffd0a6-3dad-4a7b-bf61-af1eb856845e | `` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 项目进度计划 |
+| 物理表 | `prjc_project_schedule_item` |
+| 数据库 schema | `yonbip-pm-projectme` |
+| 所属应用 | `PGRM` |
+| 直连字段 | 88 个 |
+| 子表 | 5 个 |
+| 关联引用 | 20 个 |
 
-## 关联（20 个）
+## 子表
 
-- `parent` -> `pgrm.projectschedule.ProjectScheduleItem` ()
-- `creator` -> `base.user.BipUser` ()
-- `departmentId` -> `bd.adminOrg.AdminOrgVO` ()
-- `modifier` -> `base.user.BipUser` ()
-- `ytenantId` -> `yht.tenant.YhtTenant` ()
-- `projectScheduleDefineCharacter` -> `PGRM.PGRM.ProjectScheWbsDefineCharacter` ()
-- `orgId` -> `org.func.BaseOrg` ()
-- `defines` -> `pgrm.projectschedule.ProjectScheduleItemDefine` (1)
-- `checkitem` -> `pgrm.projectschedule.ProjectScheduleItemCheckitem` (0..n)
-- `projectScheduleItemParticipants` -> `pgrm.projectschedule.ProjectScheduleItemParticipants` (0..n)
-- `participatingEnterprise` -> `PRJC.projectParticipant.ProjectParticipant` ()
-- `scheduleType` -> `bd.bill.TransType` ()
-- `projectScheduleItemLinks` -> `pgrm.projectschedule.ProjectScheduleItemLinks` (0..n)
-- `responsibleId` -> `bd.staff.StaffNew` ()
-- `createrId` -> `bd.staff.Staff` ()
-- `projectScheduleItemResult` -> `pgrm.projectschedule.ProjectScheduleItemResult` (0..n)
-- `projectId` -> `bd.project.ProjectVO` ()
-- `finOrgId` -> `org.func.FinanceOrg` ()
-- `scheduleId` -> `pgrm.projectschedule.ProjectSchedule` (0..n)
-- `stageId` -> `PRJC.stage.Stage` ()
+| 字段名 | URI | 关系 |
+|--------|-----|------|
+| `checkitem` | `pgrm.projectschedule.ProjectScheduleItemCheckitem` | composition |
+| `projectScheduleItemParticipants` | `pgrm.projectschedule.ProjectScheduleItemParticipants` | composition |
+| `projectScheduleItemLinks` | `pgrm.projectschedule.ProjectScheduleItemLinks` | composition |
+| `projectScheduleItemResult` | `pgrm.projectschedule.ProjectScheduleItemResult` | composition |
+| `defines` | `pgrm.projectschedule.ProjectScheduleItemDefine` | composition |
+
+## 关联引用 (20个)
+
+| 字段名 | 引用类型 |
+|--------|---------|
+| `parent_id` | `` |
+| `creator` | `bip-usercenter.bip_user_ref` |
+| `department_id` | `ucf-org-center.org_unit_tree_ref` |
+| `modifier` | `bip-usercenter.bip_user_ref` |
+| `ytenant_id` | `` |
+| `project_schedule_item_define_character` | `` |
+| `org_id` | `ucf-org-center.org_pure_tree_ref` |
+| `` | `` |
+| `participating_enterprise_id` | `yonbip-pm-projectme.prjc_projectparticipant_ref` |
+| `schedule_type` | `ucfbasedoc.bd_billtyperef` |
+| `responsible_id` | `ucf-staff-center.bd_staff_leave_ref` |
+| `creater_id` | `iuap-ptc-yoncmm.sattUuser` |
+| `project_id` | `ucfbasedoc.bd_projectcardref` |
+| `fin_org_id` | `ucf-org-center.bd_financeorgtreeref` |
+| `schedule_id` | `` |
+| `stage_id` | `yonbip-pm-projectme.RefTable_0494c88295` |
+
+## 继承接口 (2个, 7字段)
+
+- **树型结构** (`iuap.busiObj.ITree`)
+  - `ifend` → `ifend`
+  - `level` → `level`
+  - `name` → `name`
+  - `parent_id` → `parent_id`
+  - `path` → `path`
+  - `sort_num` → `sort_num`
+- **逻辑删除** (`iuap.busiObj.LogicDelete`)
+  - `dr` → `dr`
+
+## 字段列表（按类型分组）
+
+> 共 88 个直连字段
+
+### 文本字段 (23个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `code` | `code` | `code` | code |
+| `external_sys_data_code` | `external_sys_data_code` | `externalSysDataCode` | 第三方数据编码 |
+| `external_sys_data_pk` | `external_sys_data_pk` | `externalSysDataPk` | 第三方数据主键 |
+| `external_sys_data_status` | `external_sys_data_status` | `externalSysDataStatus` | 第三方数据状态 |
+| `external_sys_data_version` | `external_sys_data_version` | `externalSysDataVersion` | 第三方数据版本号 |
+| `integration_system_code` | `integration_system_code` | `integrationSystemCode` | 集成系统编码 |
+| `milestone_flag` | `milestone_flag` | `milestoneFlag` | 里程碑标识 |
+| `node` | `node` | `node` | 节点id |
+| `oid` | `oid` | `oid` | 原始id |
+| `path` | `path` | `path` | 路径,上级的id拼接 |
+| `pnode` | `pnode` | `pnode` | 父节点id |
+| `pre_wbs_code` | `pre_wbs_code` | `preWBSCode` | 前置集合 |
+| `remark` | `remark` | `remark` | 备注 |
+| `source_id` | `source_id` | `sourceId` | 来源id |
+| `source_type` | `source_type` | `sourceType` | 来源类型 |
+| `stage_inspection_flag` | `stage_inspection_flag` | `stageInspectionFlag` | 阶段验收标识 |
+| `temp_id` | `temp_id` | `tempId` | 立项临时数据id |
+| `tpl_item_id` | `tpl_item_id` | `tplItemId` | 模版明细 |
+| `wbs_name` | `wbs_name` | `wbsName` | WBS名称 |
+| `reason_for_completion_delay` | `reason_for_completion_delay` | `reasonForCompletionDelay` | 完成延期原因 |
+| `reason_for_starting_delay` | `reason_for_starting_delay` | `reasonForStartingDelay` | 开始延期原因 |
+| `id` | `id` | `id` | 主键 |
+| `name` | `name` | `name` | 节点标题 |
+
+### 引用字段 (14个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `creater_id` | `creater_id` | `createrId` | 创建人id |
+| `department_id` | `department_id` | `departmentId` | 责任部门id |
+| `org_id` | `org_id` | `orgId` | 立项企业 |
+| `parent_id` | `parent_id` | `parent` | 上级分类 |
+| `project_id` | `project_id` | `projectId` | 项目档案 |
+| `responsible_id` | `responsible_id` | `responsibleId` | 责任人id |
+| `schedule_type` | `schedule_type` | `scheduleType` | 计划类型 |
+| `stage_id` | `stage_id` | `stageId` | 项目阶段 |
+| `participating_enterprise_id` | `participating_enterprise_id` | `participatingEnterprise` | 参与企业 |
+| `schedule_id` | `schedule_id` | `scheduleId` | 项目进度主表外键 |
+| `fin_org_id` | `fin_org_id` | `finOrgId` | 会计主体 |
+| `creator` | `creator` | `creator` | 创建人 |
+| `modifier` | `modifier` | `modifier` | 修改人 |
+| `ytenant_id` | `ytenant_id` | `ytenantId` | 租户id |
+
+### 日期字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `actual_end_date` | `actual_end_date` | `actualEndDate` | 实际完成日期 |
+| `actual_start_date` | `actual_start_date` | `actualStartDate` | 实际开始日期 |
+| `plan_end_date` | `plan_end_date` | `planEndDate` | 计划结束日期 |
+| `plan_start_date` | `plan_start_date` | `planStartDate` | 计划开始日期 |
+
+### 日期时间 (13个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `external_sys_data_pubts` | `external_sys_data_pubts` | `externalSysDataPubts` | 第三方数据时间戳 |
+| `plan_early_end_date` | `plan_early_end_date` | `planEarlyEndDate` | 计划最早完成时间 |
+| `plan_early_start_date` | `plan_early_start_date` | `planEarlyStartDate` | 计划最早开始时间 |
+| `plan_latest_end_date` | `plan_latest_end_date` | `planLatestEndDate` | 计划最晚结束时间 |
+| `plan_latest_start_date` | `plan_latest_start_date` | `planLatestStartDate` | 计划最晚开始时间 |
+| `predicate_end_date` | `predicate_end_date` | `predicateEndDate` | 预测结束日期 |
+| `predicate_start_date` | `predicate_start_date` | `predicateStartDate` | 预测开始日期 |
+| `cost_accounting_start_date` | `cost_accounting_start_date` | `costAccountingStartDate` | 成本核算启用日期 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+| `disablets` | `disablets` | `disablets` | 停用时间 |
+| `enablets` | `enablets` | `enablets` | 启用时间 |
+
+### 布尔字段 (7个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `childplan_flag` | `childplan_flag` | `childPlanFlag` | 是否子计划标识 |
+| `effective_flag` | `effective_flag` | `effectiveFlag` | 是否生效标识 |
+| `ingather_calculate_flag` | `ingather_calculate_flag` | `ingatherCalculateFlag` | 是否收入核算 |
+| `new_flag` | `new_flag` | `newFlag` | 是否最新版本标识 |
+| `schedule_flag` | `schedule_flag` | `scheduleFlag` | 是否计划 |
+| `cost_accounting_flag` | `cost_accounting_flag` | `costAccountingFlag` | 是否成本核算 |
+| `wbs_budget_flag` | `wbs_budget_flag` | `wbsBudgetFlag` | WBS预算属性 |
+
+### 枚举字段 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `is_grouping_wbs` | `is_grouping_wbs` | `isGroupingWbs` | 是否库存管理WBS |
+| `wbs_schedule_method` | `wbs_schedule_method` | `wbsScheduleMethod` | 编制方式 |
+| `bresource_plan` | `bresource_plan` | `bResourcePlan` | 是否资源计划 |
+| `type` | `type` | `wbsDocType` | WBS类型 |
+| `enable` | `enable` | `enable` | 档案状态 |
+
+### 整数 (10个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `actual_time` | `actual_time` | `actualTime` | 实际工期 |
+| `floating_time` | `floating_time` | `floatingTime` | 浮动天数 |
+| `is_external_person` | `is_external_person` | `isExternalPerson` | 是否外部人员 |
+| `leaf_flag` | `leaf_flag` | `leafFlag` | 是否叶子节点 |
+| `level` | `level` | `level` | 等级 |
+| `plan_time` | `plan_time` | `planTime` | 计划工期 |
+| `predicate_time` | `predicate_time` | `predicateTime` | 预测天数 |
+| `serial` | `serial` | `serial` | 排序 |
+| `sort_num` | `sort_num` | `sort` | 排序号 |
+| `tx_status` | `tx_status` | `txStatus` | 事务状态 |
+
+### 短整数 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `ifend` | `ifend` | `isEnd` | 是否末级 |
+| `wbs_status` | `wbs_status` | `wbsStatus` | WBS状态 |
+| `dr` | `dr` | `dr` | 逻辑删除 |
+
+### 数值字段 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `completion_ratio` | `completion_ratio` | `completionRatio` | 完工比 |
+| `milestone_ratio` | `milestone_ratio` | `milestoneRatio` | 里程碑进度 |
+| `plan_hours` | `plan_hours` | `planHours` | 计划时长 |
+
+### UserDefine (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `project_schedule_item_define_character` | `project_schedule_item_define_character` | `projectScheduleDefineCharacter` | 自定义项特征属性 |
+
+### other (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `` | `defines` | 项目进度详情自定义项 |
+| `` | `` | `projectScheduleItemLinks` | 项目进度计划链接 |
+| `` | `` | `projectScheduleItemResult` | 项目进度成果物 |
+| `` | `` | `checkitem` | 进度计划检查项 |
+| `` | `` | `projectScheduleItemParticipants` | 项目进度参与人 |

@@ -12,126 +12,230 @@ source_type: api_response
 
 # 订单商品金额 (`voucher.order.OrderDetailPrice`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `orderdetail_price` | 应用: `SCMSA` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`orderdetail_price` | domain：`udinghuo` | 应用：`SCMSA` | 业务对象ID：``
 
-## 属性（105 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `code` | 编码 | `cOrderNo` | String | `text` |
-| 2 | `id` | ID | `id` | Long | `long` |
-| 3 | `idKey` | idKey | `cOrderDetailIdkey` | String | `text` |
-| 4 | `orderDetailId` | orderDetailID | `iOrderDetailId` | 3722d563-08aa-453d-ac82-6b8cf906b1ab | `quote` |
-| 5 | `qty` | qty | `qty` | Decimal | `number` |
-| 6 | `subQty` | subQty | `subQty` | Decimal | `number` |
-| 7 | `favorableRate` | favorableRate | `fFavorableRate` | Decimal | `number` |
-| 8 | `ismakeorderbom` | 是否makeorderbom | `ismakeorderbom` | Short | `short` |
-| 9 | `excessiveSigning` | excessiveSigning | `excessivesigning` | Short | `short` |
-| 10 | `advancePaymentOffsetMethod` | advancePaymentOffsetMethod | `advancePaymentOffsetMethod` | Integer | `int` |
-| 11 | `returnOriSum` | returnOriSum | `freturnorisum` | Decimal | `number` |
-| 12 | `returnPreSendOriSum` | returnPreSendOriSum | `freturnpresendorisum` | Decimal | `number` |
-| 13 | `totalReturnStockOriSum` | totalReturnStockOriSum | `ftotalreturnstockorisum` | Decimal | `number` |
-| 14 | `totalReturnInvoiceOriSum` | totalReturnInvoiceOriSum | `ftotalreturninvoiceorisum` | Decimal | `number` |
-| 15 | `returnPriceQty` | returnPriceQty | `freturnpriceqty` | Decimal | `number` |
-| 16 | `totalReturnStockQty` | totalReturnStockQty | `ftotalreturnstockqty` | Decimal | `number` |
-| 17 | `totalReturnStockPriceQty` | totalReturnStockPriceQty | `ftotalreturnstockpriceqty` | Decimal | `number` |
-| 18 | `totalReturnInvoiceQty` | totalReturnInvoiceQty | `ftotalreturninvoiceqty` | Decimal | `number` |
-| 19 | `totalReturnInvoicePriceQty` | totalReturnInvoicePriceQty | `ftotalreturninvoicepriceqty` | Decimal | `number` |
-| 20 | `financeReferenced` | financeReferenced | `ifinancereferenced` | Integer | `int` |
-| 21 | `paidMoneyNew` | paidMoneyNew | `paidMoneyNew` | Decimal | `number` |
-| 22 | `taxCodeId` | tax编码ID | `tax_code_id` | 3f7c3856-5b00-4506-b458-a64eed0d3bfb | `quote` |
-| 23 | `oriWithholdingTax` | oriWithholdingTax | `oriwithholdingtax` | Decimal | `number` |
-| 24 | `natWithholdingTax` | natWithholdingTax | `natwithholdingtax` | Decimal | `number` |
-| 25 | `proposedVendorId` | proposedVendorID | `proposed_vendor_id` | 89bf026e-cc49-4fe7-9a7b-3e8fdcc77c1e | `quote` |
-| 26 | `receivableDiffQty` | receivableDiffQty | `freceivablediffqty` | Decimal | `number` |
-| 27 | `calBase` | calBase | `calbase` | Short | `short` |
-| 28 | `salesactionid` | salesactionid | `salesactionid` | Long | `long` |
-| 29 | `totalOutStockConfirmQuantity` | totalOutStockConfirmQuantity | `ftotaloutstockconfirmquantity` | Decimal | `number` |
-| 30 | `totalOutStockConfirmSubQty` | totalOutStockConfirmSubQty | `ftotaloutstockconfirmsubqty` | Decimal | `number` |
-| 31 | `isUpConfigured` | 是否UpConfigured | `isupconfigured` | Integer | `int` |
-| 32 | `reissue` | reissue | `ireissue` | Integer | `int` |
-| 33 | `sourceOrderNo` | sourceOrderNo | `csourceorderno` | String | `text` |
-| 34 | `sourceOrderLineNo` | sourceOrderLineNo | `fsourceorderlineno` | Decimal | `number` |
-| 35 | `sourceOrderId` | sourceOrderID | `isourceorderid` | Long | `long` |
-| 36 | `sourceOrderDetailId` | sourceOrderDetailID | `isourceorderdetailid` | Long | `long` |
-| 37 | `totalNewOrderRepQuantity` | totalNewOrderRepQuantity | `ftotalneworderrepquantity` | Decimal | `number` |
-| 38 | `custodianType` | custodianType | `custodiantype` | String | `text` |
-| 39 | `custodian` | custodian | `custodian` | 0578a613-7f7f-4bec-b589-039035ca3f8a | `quote` |
-| 40 | `openingOutStockPriceQty` | openingOutStockPriceQty | `fopeningoutstockpriceqty` | Decimal | `number` |
-| 41 | `openingOutStockOriTaxMoney` | openingOutStockOriTaxMoney | `fopeningoutstockoritaxmoney` | Decimal | `number` |
-| 42 | `totalTransferQty` | totalTransferQty | `ftotal_transfer_qty` | Decimal | `number` |
-| 43 | `inventoryowner` | inventoryowner | `inventoryowner` | af1b583d-f5e4-4f7c-bba5-66d570ef7e3e | `quote` |
-| 44 | `ownertype` | ownertype | `ownertype` | Integer | `int` |
-| 45 | `totalServiceQty` | totalServiceQty | `ftotalServiceQty` | Decimal | `number` |
-| 46 | `prepayInvRvnRecogBkgMeth` | prepayInvRvnRecogBkgMeth | `prepayInvRvnRecogBkgMeth` | Integer | `int` |
-| 47 | `confirmQty` | confirmQty | `fconfirmqty` | Decimal | `number` |
-| 48 | `unConfirmQty` | unConfirmQty | `funconfirmqty` | Decimal | `number` |
-| 49 | `orderQtyRebateMoney` | orderQtyRebateMoney | `forderqtyrebatemoney` | Decimal | `number` |
-| 50 | `checkByRevenueManagement` | checkByRevenueManagement | `revmanagecalculate` | Boolean | `switch` |
-| 51 | `revPerformObligation` | revPerformObligation | `revperformobligation` | Boolean | `switch` |
-| 52 | `serviceStartDate` | serviceStartDate | `service_startdate` | Date | `date` |
-| 53 | `serviceEndDate` | serviceEndDate | `service_enddate` | Date | `date` |
-| 54 | `optionalQuotationId` | optionalQuotationID | `optional_quotation_id` | fe25af69-5dad-4a67-b9dd-c8a720a2da76 | `quote` |
-| 55 | `variantconfigctsCode` | variantconfigcts编码 | `variantconfigcts_code` | String | `text` |
-| 56 | `variantconfigctsVersion` | variantconfigctsVersion | `variantconfigcts_version` | String | `text` |
-| 57 | `optionalType` | optionalType | `optionalType` | Integer | `int` |
-| 58 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 59 | `priceQty` | priceQty | `priceQty` | Decimal | `number` |
-| 60 | `invExchRate` | invExchRate | `invExchRate` | Decimal | `number` |
-| 61 | `invPriceExchRate` | invPriceExchRate | `invPriceExchRate` | Decimal | `number` |
-| 62 | `oriTaxUnitPrice` | oriTaxUnitPrice | `oriTaxUnitPrice` | Decimal | `number` |
-| 63 | `oriUnitPrice` | oriUnitPrice | `fTransactionPrice_orig_taxfree` | Decimal | `number` |
-| 64 | `oriSum` | oriSum | `oriSum` | Decimal | `number` |
-| 65 | `oriMoney` | oriMoney | `fSalePayMoney_orig_taxfree` | Decimal | `number` |
-| 66 | `oriTax` | oriTax | `fOriTax` | Decimal | `number` |
-| 67 | `taxRate` | taxRate | `taxRate` | Decimal | `number` |
-| 68 | `discountRate` | discountRate | `fDiscountRate` | Decimal | `number` |
-| 69 | `lineDiscountMoney` | lineDiscountMoney | `fLineDiscountMoney` | Decimal | `number` |
-| 70 | `particularlyMoneyOrigTaxfree` | particularlyMoneyOrigTaxfree | `fParticularlyMoney_orig_taxfree` | Decimal | `number` |
-| 71 | `promotionMoneyOrigTaxfree` | promotionMoneyOrigTaxfree | `fPromotionMoney_orig_taxfree` | Decimal | `number` |
-| 72 | `rebateMoneyOrigTaxfree` | rebateMoneyOrigTaxfree | `fRebateMoney_orig_taxfree` | Decimal | `number` |
-| 73 | `pointsMoneyOrigTaxfree` | pointsMoneyOrigTaxfree | `fPointsMoney_orig_taxfree` | Decimal | `number` |
-| 74 | `natTaxUnitPrice` | natTaxUnitPrice | `fTransactionPrice_domestic` | Decimal | `number` |
-| 75 | `natUnitPrice` | natUnitPrice | `fTransactionPrice_domestic_taxfree` | Decimal | `number` |
-| 76 | `natSum` | natSum | `fSalePayMoney_domestic` | Decimal | `number` |
-| 77 | `natMoney` | natMoney | `fSalePayMoney_domestic_taxfree` | Decimal | `number` |
-| 78 | `natTax` | natTax | `fNatTax` | Decimal | `number` |
-| 79 | `particularlyMoneyDomestic` | particularlyMoneyDomestic | `fParticularlyMoney_domestic` | Decimal | `number` |
-| 80 | `particularlyMoneyDomesticTaxfree` | particularlyMoneyDomesticTaxfree | `fParticularlyMoney_domestic_taxfree` | Decimal | `number` |
-| 81 | `rebateMoneyDomestic` | rebateMoneyDomestic | `fRebateMoney_domestic` | Decimal | `number` |
-| 82 | `rebateMoneyDomesticTaxfree` | rebateMoneyDomesticTaxfree | `fRebateMoney_domestic_taxfree` | Decimal | `number` |
-| 83 | `cashRebateMoneyDomestic` | cashRebateMoneyDomestic | `fCashRebateMoney_domestic` | Decimal | `number` |
-| 84 | `orderRebateMoneyDomestic` | orderRebateMoneyDomestic | `fOrderRebateMoney_domestic` | Decimal | `number` |
-| 85 | `promotionMoneyDomestic` | promotionMoneyDomestic | `fPromotionMoney_domestic` | Decimal | `number` |
-| 86 | `promotionMoneyDomesticTaxfree` | promotionMoneyDomesticTaxfree | `fPromotionMoney_domestic_taxfree` | Decimal | `number` |
-| 87 | `pointsMoneyDomestic` | pointsMoneyDomestic | `fPointsMoney_domestic` | Decimal | `number` |
-| 88 | `pointsMoneyDomesticTaxfree` | pointsMoneyDomesticTaxfree | `fPointsMoney_domestic_taxfree` | Decimal | `number` |
-| 89 | `salePrice_orig_taxfree` | salePrice_orig_taxfree | `fSalePrice_orig_taxfree` | Decimal | `number` |
-| 90 | `saleCost_orig_taxfree` | saleCost_orig_taxfree | `fSaleCost_orig_taxfree` | Decimal | `number` |
-| 91 | `saleCost_domestic` | saleCost_domestic | `fSaleCost_domestic` | Decimal | `number` |
-| 92 | `saleCost_domestic_taxfree` | saleCost_domestic_taxfree | `fSaleCost_domestic_taxfree` | Decimal | `number` |
-| 93 | `salePrice_domestic` | salePrice_domestic | `fSalePrice_domestic` | Decimal | `number` |
-| 94 | `salePrice_domestic_taxfree` | salePrice_domestic_taxfree | `fSalePrice_domestic_taxfree` | Decimal | `number` |
-| 95 | `uordercorp` | uordercorp | `iCorpId` | Long | `long` |
-| 96 | `pubts` | 时间戳 | `pubuts` | DateTime | `timestamp` |
-| 97 | `isDeleted` | 是否Deleted | `iDeleted` | Boolean | `switch` |
-| 98 | `invExchRateDen` | invExchRateDen | `invexchrateden` | Decimal | `number` |
-| 99 | `invExchRateNum` | invExchRateNum | `invexchratenum` | Decimal | `number` |
-| 100 | `invPriceExchRateDen` | invPriceExchRateDen | `invpriceexchrateden` | Decimal | `number` |
-| 101 | `invPriceExchRateNum` | invPriceExchRateNum | `invpriceexchratenum` | Decimal | `number` |
-| 102 | `optionalQuotationSubId` | optionalQuotationSubID | `optional_quotation_sub_id` | 4a962e6e-40fd-4b1c-b093-37739c6494d1 | `quote` |
-| 103 | `totalSettledOriSum` | totalSettledOriSum | `totalsettledorisum` | Decimal | `number` |
-| 104 | `totalSettledQuantity` | totalSettledQuantity | `totalsettledquantity` | Decimal | `number` |
-| 105 | `totalWorkOrderQty` | totalWorkOrderQty | `ftotalworkorderqty` | Decimal | `number` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 订单商品金额 |
+| 物理表 | `orderdetail_price` |
+| 数据库 schema | `udinghuo` |
+| 所属应用 | `SCMSA` |
+| 直连字段 | 105 个 |
+| 子表 | 0 个 |
+| 关联引用 | 8 个 |
 
-## 关联（8 个）
+## 关联引用 (8个)
 
-- `custodian` -> `st.custodian.Custodian` ()
-- `optionalQuotationSubId` -> `marketing.cpq.OptionalQuotationDetail` ()
-- `optionalQuotationId` -> `marketing.cpq.OptionalQuotation` ()
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `proposedVendorId` -> `aa.vendor.Vendor` ()
-- `taxCodeId` -> `taxpubdoc.taxengine.TaxCode` ()
-- `orderDetailId` -> `voucher.order.OrderDetail` (1)
-- `inventoryowner` -> `st.inventoryowner.InventoryOwner` ()
+| 字段名 | 引用类型 |
+|--------|---------|
+| `custodian` | `` |
+| `optional_quotation_sub_id` | `` |
+| `optional_quotation_id` | `` |
+| `ytenant_id` | `` |
+| `proposed_vendor_id` | `` |
+| `tax_code_id` | `` |
+| `iOrderDetailId` | `` |
+| `` | `` |
+
+## 继承接口 (11个, 32字段)
+
+- **换算比** (`gscm.itf.IUOMExchRate`)
+  - `` → ``
+  - `invexchrateden` → `invexchrateden`
+  - `invexchratenum` → `invexchratenum`
+  - `` → ``
+  - `` → ``
+- **计价换算比** (`gscm.itf.IUOMPriceExchRate`)
+  - `` → ``
+  - `invpriceexchrateden` → `invpriceexchrateden`
+  - `invpriceexchratenum` → `invpriceexchratenum`
+  - `` → ``
+  - `` → ``
+- **U订货租户相关** (`base.itf.IUordercorp`)
+  - `iCorpId` → `iCorpId`
+- **逻辑删除相关** (`base.itf.Deletable`)
+  - `iDeleted` → `iDeleted`
+- **本币金额信息** (`voucher.base.INatMoneyInfo`)
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+- **原币金额信息** (`voucher.base.IOriMoneyInfo`)
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+- **计量单位信息** (`voucher.base.IUOMInfo`)
+  - `` → ``
+  - `` → ``
+  - `` → ``
+- **计价单位信息** (`voucher.base.IUOMPriceInfo`)
+  - `` → ``
+  - `` → ``
+  - `` → ``
+- **统一租户接口(扩展)** (`ucfbase.ucfbaseItf.IYTenantExt`)
+  - `ytenant_id` → `ytenant_id`
+- **货主对象** (`st.inventoryowner.IInventoryOwner`)
+  - `` → ``
+- **货权归属** (`st.inventoryowner.IOwnerType`)
+  - `` → ``
+
+## 字段列表（按类型分组）
+
+> 共 105 个直连字段
+
+### 文本字段 (6个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `cOrderNo` | `cOrderNo` | `code` | 单据编号 |
+| `cOrderDetailIdkey` | `cOrderDetailIdkey` | `idKey` | 行标识 |
+| `csourceorderno` | `csourceorderno` | `sourceOrderNo` | 来源订单号 |
+| `custodiantype` | `custodiantype` | `custodianType` | 保管者类型 |
+| `variantconfigcts_code` | `variantconfigcts_code` | `variantconfigctsCode` | 配置号 |
+| `variantconfigcts_version` | `variantconfigcts_version` | `variantconfigctsVersion` | 配置清单版本 |
+
+### 引用字段 (8个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iOrderDetailId` | `iOrderDetailId` | `orderDetailId` | 订单详情id |
+| `tax_code_id` | `tax_code_id` | `taxCodeId` | 税码 |
+| `proposed_vendor_id` | `proposed_vendor_id` | `proposedVendorId` | 建议供应商 |
+| `custodian` | `custodian` | `custodian` | 保管者 |
+| `` | `inventoryowner` | `inventoryowner` | 货主对象Id |
+| `optional_quotation_id` | `optional_quotation_id` | `optionalQuotationId` | 报价配置清单 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+| `optional_quotation_sub_id` | `optional_quotation_sub_id` | `optionalQuotationSubId` | 母件配置报价清单行ID |
+
+### 日期字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `service_startdate` | `service_startdate` | `serviceStartDate` | 服务起始日期 |
+| `service_enddate` | `service_enddate` | `serviceEndDate` | 服务结束日期 |
+
+### 布尔字段 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `revmanagecalculate` | `revmanagecalculate` | `checkByRevenueManagement` | 收入管理核算 |
+| `revperformobligation` | `revperformobligation` | `revPerformObligation` | 已生成收入履约义务 |
+| `iDeleted` | `iDeleted` | `isDeleted` | 逻辑删除标记 |
+
+### 整数 (7个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `advancePaymentOffsetMethod` | `advancePaymentOffsetMethod` | `advancePaymentOffsetMethod` | 预收款开票冲抵方式 |
+| `ifinancereferenced` | `ifinancereferenced` | `financeReferenced` | 财务已引用 |
+| `isupconfigured` | `isupconfigured` | `isUpConfigured` | 是否上游已选配 |
+| `ireissue` | `ireissue` | `reissue` | 是否补发 |
+| `` | `ownertype` | `ownertype` | 货权归属 |
+| `prepayInvRvnRecogBkgMeth` | `prepayInvRvnRecogBkgMeth` | `prepayInvRvnRecogBkgMeth` | 预收款开票应收入账方式 |
+| `optionalType` | `optionalType` | `optionalType` | 选配方式 |
+
+### 短整数 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `ismakeorderbom` | `ismakeorderbom` | `ismakeorderbom` | 已生成订单BOM |
+| `excessivesigning` | `excessivesigning` | `excessiveSigning` | 超量签收 |
+| `calbase` | `calbase` | `calBase` | 计算基准 |
+
+### 长整数 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | id |
+| `salesactionid` | `salesactionid` | `salesactionid` | 行动id |
+| `isourceorderid` | `isourceorderid` | `sourceOrderId` | 来源订单id |
+| `isourceorderdetailid` | `isourceorderdetailid` | `sourceOrderDetailId` | 来源订单行id |
+| `iCorpId` | `iCorpId` | `uordercorp` | 租户 |
+
+### 数值字段 (70个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `qty` | `qty` | `qty` | 数量 |
+| `subQty` | `subQty` | `subQty` | 销售数量 |
+| `fFavorableRate` | `fFavorableRate` | `favorableRate` | 倒扣 |
+| `freturnorisum` | `freturnorisum` | `returnOriSum` | 退货金额 |
+| `freturnpresendorisum` | `freturnpresendorisum` | `returnPreSendOriSum` | 退货补发含税金额 |
+| `ftotalreturnstockorisum` | `ftotalreturnstockorisum` | `totalReturnStockOriSum` | 累计退货入库含税金额 |
+| `ftotalreturninvoiceorisum` | `ftotalreturninvoiceorisum` | `totalReturnInvoiceOriSum` | 累计退货开票含税金额 |
+| `freturnpriceqty` | `freturnpriceqty` | `returnPriceQty` | 退货计价数量 |
+| `ftotalreturnstockqty` | `ftotalreturnstockqty` | `totalReturnStockQty` | 累计退货入库数量 |
+| `ftotalreturnstockpriceqty` | `ftotalreturnstockpriceqty` | `totalReturnStockPriceQty` | 累计退货入库计价数量 |
+| `ftotalreturninvoiceqty` | `ftotalreturninvoiceqty` | `totalReturnInvoiceQty` | 累计退货开票数量 |
+| `ftotalreturninvoicepriceqty` | `ftotalreturninvoicepriceqty` | `totalReturnInvoicePriceQty` | 累计退货开票计价数量 |
+| `paidMoneyNew` | `paidMoneyNew` | `paidMoneyNew` | 已收款金额 |
+| `oriwithholdingtax` | `oriwithholdingtax` | `oriWithholdingTax` | 代扣税税额 |
+| `natwithholdingtax` | `natwithholdingtax` | `natWithholdingTax` | 本币代扣税税额 |
+| `freceivablediffqty` | `freceivablediffqty` | `receivableDiffQty` | 应收扣减数量 |
+| `ftotaloutstockconfirmquantity` | `ftotaloutstockconfirmquantity` | `totalOutStockConfirmQuantity` | 累计出库确认数量 |
+| `ftotaloutstockconfirmsubqty` | `ftotaloutstockconfirmsubqty` | `totalOutStockConfirmSubQty` | 累计出库确认件数 |
+| `fsourceorderlineno` | `fsourceorderlineno` | `sourceOrderLineNo` | 来源订单行号 |
+| `ftotalneworderrepquantity` | `ftotalneworderrepquantity` | `totalNewOrderRepQuantity` | 累计新单补货数量 |
+| `fopeningoutstockpriceqty` | `fopeningoutstockpriceqty` | `openingOutStockPriceQty` | 期初出库/服务计价数量 |
+| `fopeningoutstockoritaxmoney` | `fopeningoutstockoritaxmoney` | `openingOutStockOriTaxMoney` | 期初出库/服务含税金额 |
+| `ftotal_transfer_qty` | `ftotal_transfer_qty` | `totalTransferQty` | 累计调拨数量 |
+| `ftotalServiceQty` | `ftotalServiceQty` | `totalServiceQty` | 累计下达服务量 |
+| `fconfirmqty` | `fconfirmqty` | `confirmQty` | 已确认数量 |
+| `funconfirmqty` | `funconfirmqty` | `unConfirmQty` | 未确认数量 |
+| `forderqtyrebatemoney` | `forderqtyrebatemoney` | `orderQtyRebateMoney` | 数量货补分摊金额 |
+| `priceQty` | `priceQty` | `priceQty` | 计价数量 |
+| `invExchRate` | `invExchRate` | `invExchRate` | 换算率 |
+| `invPriceExchRate` | `invPriceExchRate` | `invPriceExchRate` | 计价换算率 |
+| `oriTaxUnitPrice` | `oriTaxUnitPrice` | `oriTaxUnitPrice` | 含税成交价 |
+| `fTransactionPrice_orig_taxfree` | `fTransactionPrice_orig_taxfree` | `oriUnitPrice` | 无税成交价 |
+| `oriSum` | `oriSum` | `oriSum` | 含税金额 |
+| `fSalePayMoney_orig_taxfree` | `fSalePayMoney_orig_taxfree` | `oriMoney` | 无税金额 |
+| `fOriTax` | `fOriTax` | `oriTax` | 税额 |
+| `taxRate` | `taxRate` | `taxRate` | 税率 |
+| `fDiscountRate` | `fDiscountRate` | `discountRate` | 扣率% |
+| `fLineDiscountMoney` | `fLineDiscountMoney` | `lineDiscountMoney` | 行折扣额 |
+| `fParticularlyMoney_orig_taxfree` | `fParticularlyMoney_orig_taxfree` | `particularlyMoneyOrigTaxfree` | 原币无税特殊优惠 |
+| `fPromotionMoney_orig_taxfree` | `fPromotionMoney_orig_taxfree` | `promotionMoneyOrigTaxfree` | 原币无税促销 |
+| `fRebateMoney_orig_taxfree` | `fRebateMoney_orig_taxfree` | `rebateMoneyOrigTaxfree` | 原币无税分摊返利 |
+| `fPointsMoney_orig_taxfree` | `fPointsMoney_orig_taxfree` | `pointsMoneyOrigTaxfree` | 原币无税抵扣积分 |
+| `fTransactionPrice_domestic` | `fTransactionPrice_domestic` | `natTaxUnitPrice` | 本币含税单价 |
+| `fTransactionPrice_domestic_taxfree` | `fTransactionPrice_domestic_taxfree` | `natUnitPrice` | 本币无税单价 |
+| `fSalePayMoney_domestic` | `fSalePayMoney_domestic` | `natSum` | 本币含税金额 |
+| `fSalePayMoney_domestic_taxfree` | `fSalePayMoney_domestic_taxfree` | `natMoney` | 本币无税金额 |
+| `fNatTax` | `fNatTax` | `natTax` | 本币税额 |
+| `fParticularlyMoney_domestic` | `fParticularlyMoney_domestic` | `particularlyMoneyDomestic` | 本币特殊优惠 |
+| `fParticularlyMoney_domestic_taxfree` | `fParticularlyMoney_domestic_taxfree` | `particularlyMoneyDomesticTaxfree` | 本币无税特殊优惠 |
+| `fRebateMoney_domestic` | `fRebateMoney_domestic` | `rebateMoneyDomestic` | 本币分摊返利 |
+| `fRebateMoney_domestic_taxfree` | `fRebateMoney_domestic_taxfree` | `rebateMoneyDomesticTaxfree` | 本币无税分摊返利 |
+| `fCashRebateMoney_domestic` | `fCashRebateMoney_domestic` | `cashRebateMoneyDomestic` | 本币返利直接抵现 |
+| `fOrderRebateMoney_domestic` | `fOrderRebateMoney_domestic` | `orderRebateMoneyDomestic` | 本币返利整单折扣 |
+| `fPromotionMoney_domestic` | `fPromotionMoney_domestic` | `promotionMoneyDomestic` | 本币促销优惠 |
+| `fPromotionMoney_domestic_taxfree` | `fPromotionMoney_domestic_taxfree` | `promotionMoneyDomesticTaxfree` | 本币无税促销优惠 |
+| `fPointsMoney_domestic` | `fPointsMoney_domestic` | `pointsMoneyDomestic` | 本币积分抵扣 |
+| `fPointsMoney_domestic_taxfree` | `fPointsMoney_domestic_taxfree` | `pointsMoneyDomesticTaxfree` | 本币无税积分抵扣 |
+| `fSalePrice_orig_taxfree` | `fSalePrice_orig_taxfree` | `salePrice_orig_taxfree` | 无税报价 |
+| `fSaleCost_orig_taxfree` | `fSaleCost_orig_taxfree` | `saleCost_orig_taxfree` | 报价无税金额 |
+| `fSaleCost_domestic` | `fSaleCost_domestic` | `saleCost_domestic` | 报价本币含税金额 |
+| `fSaleCost_domestic_taxfree` | `fSaleCost_domestic_taxfree` | `saleCost_domestic_taxfree` | 报价本币无税金额 |
+| `fSalePrice_domestic` | `fSalePrice_domestic` | `salePrice_domestic` | 报价本币含税单价 |
+| `fSalePrice_domestic_taxfree` | `fSalePrice_domestic_taxfree` | `salePrice_domestic_taxfree` | 报价本币无税单价 |
+| `invexchrateden` | `invexchrateden` | `invExchRateDen` | 换算率分母 |
+| `invexchratenum` | `invexchratenum` | `invExchRateNum` | 换算率分子 |
+| `invpriceexchrateden` | `invpriceexchrateden` | `invPriceExchRateDen` | 计价换算率分母 |
+| `invpriceexchratenum` | `invpriceexchratenum` | `invPriceExchRateNum` | 计价换算率分子 |
+| `totalsettledorisum` | `totalsettledorisum` | `totalSettledOriSum` | 累计价格结算含税金额 |
+| `totalsettledquantity` | `totalsettledquantity` | `totalSettledQuantity` | 累计价格结算数量 |
+| `ftotalworkorderqty` | `ftotalworkorderqty` | `totalWorkOrderQty` | 累计服务工单数量 |
+
+### timestamp (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubuts` | `pubuts` | `pubts` | 时间戳 |

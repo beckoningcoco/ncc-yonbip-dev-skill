@@ -1,5 +1,5 @@
 ---
-tags: [BIP, 元数据, 数据字典, pc, pc.productline.ProductLine]
+tags: [BIP, 元数据, 数据字典, pc.productline.ProductLine]
 created: 2026-06-03
 updated: 2026-06-03
 sources: [元数据API queryByUri]
@@ -9,10 +9,11 @@ last_verified: 2026-06-03
 status: verified
 source_type: api_response
 ---
+
 # 产品线 (`pc.productline.ProductLine`)
 
-> ⚡ **平台版本：BIP 旗舰版 V5** — 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `productline` | 应用: `GZTBDM` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`productline` | domain：`productcenter` | 应用：`GZTBDM` | 业务对象ID：`e90fac87-5605-4330-80c4-b94c073e682c`
 
 ## 基本信息
 
@@ -20,69 +21,94 @@ source_type: api_response
 |------|-----|
 | 显示名 | 产品线 |
 | 物理表 | `productline` |
-| 应用 | `GZTBDM` |
-| 元数据类型 | `Class` |
+| 数据库 schema | `productcenter` |
+| 所属应用 | `GZTBDM` |
+| 直连字段 | 13 个 |
+| 子表 | 1 个 |
+| 关联引用 | 4 个 |
 
-## 主键与编码
+## 子表
 
-| 角色 | 字段 | 列 | 类型 |
-|------|------|-----|------|
-| 主键 | `id` | `id` | Long |
-| 编码 | `code` | `cCode` | |
+| 字段名 | URI | 关系 |
+|--------|-----|------|
+| `productLineDefines` | `pc.productline.ProductLineDefine` | composition |
 
-## 部署信息
+## 关联引用 (4个)
 
-- 部署时间: 2026-05-22 23:00:07:000
-- 安装来源: `/app/ugoods/upc/src/upc-server/scripts/db/patch/mongodb/V7_R0_2507/0001_material/0010_iuap_common/DML/0270_iuap_metadata/20260515-itr/202602021529_metadata_pc-productline.zip`
+| 字段名 | 引用类型 |
+|--------|---------|
+| `productline_character_def` | `` |
+| `` | `` |
+| `ytenant_id` | `` |
+| `tenant_id` | `` |
 
-## 术语标记
+## 继承接口 (5个, 6字段)
 
-`data_auth`, `DirectConnection`, `doc`, `MasterData`
+- **租户相关** (`base.itf.ITenant`)
+  - `tenant_id` → `tenant_id`
+- **erp编码** (`base.itf.IErpCode`)
+  - `erpCode` → `erpCode`
+- **停用信息** (`base.itf.IStopping`)
+  - `stopstatus` → `stopstatus`
+  - `stop_time` → `stop_time`
+- **社会化核心企业档案** (`base.itf.ISociCoreArchive`)
+  - `sociCoreArchive_id` → `sociCoreArchive_id`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
 
-## 依赖接口（5 个）
+## 字段列表（按类型分组）
 
-| 接口 | URI | 版本 | 属性数 |
-|------|-----|------|--------|
-| ITenant (`ITenant`) | `base.itf.ITenant` | 73 | 1 |
-| IErp编码 (`IErpCode`) | `base.itf.IErpCode` | 73 | 1 |
-| IStopping (`IStopping`) | `base.itf.IStopping` | 111 | 2 |
-| ISociCoreArchive (`ISociCoreArchive`) | `base.itf.ISociCoreArchive` | 28 | 1 |
-| IYTenant (`IYTenant`) | `ucfbase.ucfbaseItf.IYTenant` | 40 | 1 |
+> 共 13 个直连字段
 
----
+### 文本字段 (2个)
 
-## 全部属性（13 个）
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `cCode` | `cCode` | `code` | 编码 |
+| `erpCode` | `erpCode` | `erpCode` | 外部编码 |
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype | 必填 | 可空 |
-|---|--------|--------|-----|------|---------|------|------|
-| 1 | `id` | 主键ID | `id` | Long | `long` | false | true |
-| 2 | `code` | 编码 | `cCode` | String | `text` | true | false |
-| 3 | `name` | 名称 | `cName` | String | `multiLanguage` | true | false |
-| 4 | `stopstatus` | stopstatus | `stopstatus` | Boolean | `switch` |  | true |
-| 5 | `stoptime` | stoptime | `stop_time` | DateTime | `timestamp` |  | true |
-| 6 | `remark` | 备注 | `remark` | String | `multiLanguage` | false | true |
-| 7 | `erpCode` | erp编码 | `erpCode` | String | `text` |  | true |
-| 8 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` | true | true |
-| 9 | `productLineCharacterDef` | productLineCharacterDef | `productline_character_def` | 69bc9871-a427-427c-9672-6a3c0ddf6293 | `UserDefine` | false | true |
-| 10 | `sociCoreArchive` | sociCoreArchive | `sociCoreArchive_id` | Long | `long` |  | true |
-| 11 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |  | true |
-| 12 | `tenant` | tenant | `tenant_id` | c213cd56-d5de-421f-bae7-d77455b557cd | `quote` | true | true |
-| 13 | `productLineDefines` | productLineDefines | `` | ed6f2c0b-aa49-4607-b883-108003cf34ce | `` |  |  |
+### 引用字段 (2个)
 
-## 关联属性（4 个）
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户 |
+| `tenant_id` | `tenant_id` | `tenant` | 租户(废弃) |
 
-| # | 字段 | 显示名 | 目标实体 | 列 | 关系 | 多重性 | 组合 | 隔离 | 废弃 |
-|---|------|--------|---------|-----|------|--------|------|------|------|
-| 1 | `productLineCharacterDef` | productLineCharacterDef | `pc.productline.ProductLineCharacterDef` | `productline_character_def` | 外键 |  |  | None |  |
-| 2 | `productLineDefines` | productLineDefines | `pc.productline.ProductLineDefine` | `` | productLineDefines → id | 1 | Y | None |  |
-| 3 | `ytenant` | ytenant | `yht.tenant.YhtTenant` | `ytenant_id` | 外键 |  |  | Service |  |
-| 4 | `tenant` | tenant | `base.tenant.Tenant` | `tenant_id` | 外键 |  |  | None |  |
+### 布尔字段 (1个)
 
----
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `stopstatus` | `stopstatus` | `stopstatus` | 启用状态 |
 
-## SQL 示例
+### 长整数 (2个)
 
-```sql
-SELECT id, cCode, cName, stopstatus, stop_time, remark, erpCode, ytenant_id
-FROM productline
-```
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+| `sociCoreArchive_id` | `sociCoreArchive_id` | `sociCoreArchive` | 社会化核心企业档案 |
+
+### multiLanguage (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `cName` | `cName` | `name` | 名称 |
+| `remark` | `remark` | `remark` | 备注 |
+
+### timestamp (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `stop_time` | `stop_time` | `stoptime` | 停用时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+
+### UserDefine (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `productline_character_def` | `productline_character_def` | `productLineCharacterDef` | 产品线自定义项 |
+
+### other (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `` | `productLineDefines` | 产品线自定义项 |

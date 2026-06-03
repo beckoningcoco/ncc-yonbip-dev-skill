@@ -1,5 +1,5 @@
 ---
-tags: [BIP, 元数据, 数据字典, aa, aa.custcategory.CustCategory]
+tags: [BIP, 元数据, 数据字典, aa.custcategory.CustCategory]
 created: 2026-06-03
 updated: 2026-06-03
 sources: [元数据API queryByUri]
@@ -9,104 +9,176 @@ last_verified: 2026-06-03
 status: verified
 source_type: api_response
 ---
+
 # 客户分类 (`aa.custcategory.CustCategory`)
 
-> ⚡ **平台版本：BIP 旗舰版 V5** — 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `agentcategory` | 应用: `DPMCUS`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`agentcategory` | domain：`productcenter` | 应用：`DPMCUS` | 业务对象ID：`9b48fe02-b024-43a7-b674-eea9d91949b9`
 
-## 主键与编码
+## 基本信息
 
-| 角色 | 字段 | 列 | 类型 |
-|------|------|-----|------|
-| 主键 | `id` | `id` | Long |
-| 编码 | `code` | `cCode` | |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 客户分类 |
+| 物理表 | `agentcategory` |
+| 数据库 schema | `productcenter` |
+| 所属应用 | `DPMCUS` |
+| 直连字段 | 45 个 |
+| 子表 | 2 个 |
+| 关联引用 | 18 个 |
 
-## 全部属性（45 个）
+## 子表
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype | 必填 | 可空 |
-|---|--------|--------|-----|------|---------|------|------|
-| 1 | `id` | 主键ID | `id` | Long | `long` | false | true |
-| 2 | `orgId` | orgID | `orgId` | 8aaf4bce-2eb3-443c-bce1-0fb94fec3c0c | `quote` | false | true |
-| 3 | `code` | 编码 | `cCode` | String | `text` | true | false |
-| 4 | `name` | 名称 | `cName` | String | `multiLanguage` | true | false |
-| 5 | `erpCode` | erp编码 | `cErpCode` | String | `text` | false | true |
-| 6 | `parent` | parent | `iParentId` | 3198ce2d-0e64-462d-bacf-54d18171756a | `quote` | false | true |
-| 7 | `order` | order | `iOrder` | Integer | `int` | false | true |
-| 8 | `comment` | comment | `cComment` | String | `multiLanguage` | false | true |
-| 9 | `isEnabled` | 是否Enabled | `isEnabled` | Boolean | `switch` | true | false |
-| 10 | `custCategoryCharacter` | custCategoryCharacter | `agentcategory_character` | cad4ee8f-852a-4e70-a443-e454bb6a42a0 | `UserDefine` | false | true |
-| 11 | `custType` | custType | `iCreatorType` | CustType | `` | false | true |
-| 12 | `shop` | shop | `iShopID` | Long | `long` |  | true |
-| 13 | `path` | path | `cPath` | String | `text` | false | true |
-| 14 | `isEnd` | 是否End | `isEnd` | Boolean | `switch` | false | true |
-| 15 | `level` | level | `iDepth` | Integer | `int` | false | true |
-| 16 | `firstLevel` | firstLevel | `firstLevelId` | 3198ce2d-0e64-462d-bacf-54d18171756a | `quote` | false | true |
-| 17 | `secondLevel` | secondLevel | `secondLevelId` | 3198ce2d-0e64-462d-bacf-54d18171756a | `quote` | false | true |
-| 18 | `thirdLevel` | thirdLevel | `thirdLevelId` | 3198ce2d-0e64-462d-bacf-54d18171756a | `quote` | false | true |
-| 19 | `fourthLevel` | fourthLevel | `fourthLevelId` | 3198ce2d-0e64-462d-bacf-54d18171756a | `quote` | false | true |
-| 20 | `fifthLevel` | fifthLevel | `fifthLevelId` | 3198ce2d-0e64-462d-bacf-54d18171756a | `quote` | false | true |
-| 21 | `sixthLevel` | sixthLevel | `sixthLevelId` | 3198ce2d-0e64-462d-bacf-54d18171756a | `quote` | false | true |
-| 22 | `seventhLevel` | seventhLevel | `seventhLevelId` | 3198ce2d-0e64-462d-bacf-54d18171756a | `quote` | false | true |
-| 23 | `eighthLevel` | eighthLevel | `eighthLevelId` | 3198ce2d-0e64-462d-bacf-54d18171756a | `quote` | false | true |
-| 24 | `orgGroupId` | orgGroupID | `org_group_id` | 6a8af5af-0687-4254-ab87-c07e00fc8398 | `quote` | false | true |
-| 25 | `socialMctype` | socialMctype | `social_mctype` | Integer | `int` |  | true |
-| 26 | `socialSrcid` | socialSrcid | `social_srcid` | String | `text` |  | true |
-| 27 | `socialTenantid` | socialTenantid | `social_tenantid` | String | `text` |  | true |
-| 28 | `iDeleted` | iDeleted | `iDeleted` | Integer | `int` | false | true |
-| 29 | `logicallyDeleteType` | logicallyDeleteType | `logically_delete_type` | LogicallyDeleteType | `` | false | true |
-| 30 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |  | true |
-| 31 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` | true | true |
-| 32 | `tenant` | tenant | `tenant_id` | c213cd56-d5de-421f-bae7-d77455b557cd | `quote` | true | true |
-| 33 | `sort` | sort | `sort_num` | Integer | `int` | false | true |
-| 34 | `outSysKey` | outSysKey | `cOutSysKey` | String | `text` | false | true |
-| 35 | `createDate` | 创建日期 | `create_date` | Date | `date` |  | true |
-| 36 | `createTime` | 创建时间 | `create_time` | DateTime | `timestamp` |  | true |
-| 37 | `creatorId` | 创建人ID | `creatorId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |  | true |
-| 38 | `creator` | 创建人 | `creator` | String | `text` |  | true |
-| 39 | `creatorName` | creator名称 | `cCreatorName` | String | `text` | false | true |
-| 40 | `modifyDate` | 修改日期 | `modify_date` | Date | `date` |  | true |
-| 41 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `timestamp` |  | true |
-| 42 | `modifierId` | 修改人ID | `modifierId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |  | true |
-| 43 | `modifier` | 修改人 | `modifier` | String | `text` |  | true |
-| 44 | `custCategoryApplyRanges` | custCategoryApplyRanges | `` | 9db4ff2c-312f-47cd-b0c8-61abae44f371 | `` |  |  |
-| 45 | `custCategoryDefines` | custCategoryDefines | `` | 8bd647c6-9050-4287-9a80-edd5d7cfce77 | `` |  |  |
+| 字段名 | URI | 关系 |
+|--------|-----|------|
+| `custCategoryDefines` | `aa.custcategory.CustCategoryDefine` | composition |
+| `custCategoryApplyRanges` | `aa.custcategory.CustCategoryApplyRange` | composition |
 
-## 关联属性（18 个）
+## 关联引用 (18个)
 
-| # | 字段 | 目标实体 | 列 | 多重性 | 组合 | 废弃 |
-|---|------|---------|-----|--------|------|------|
-| 1 | `parent` | `aa.custcategory.CustCategory` | `iParentId` |  |  |  |
-| 2 | `thirdLevel` | `aa.custcategory.CustCategory` | `thirdLevelId` |  |  |  |
-| 3 | `ytenant` | `yht.tenant.YhtTenant` | `ytenant_id` |  |  |  |
-| 4 | `fourthLevel` | `aa.custcategory.CustCategory` | `fourthLevelId` |  |  |  |
-| 5 | `creatorId` | `base.user.User` | `creatorId` |  |  |  |
-| 6 | `modifierId` | `base.user.User` | `modifierId` |  |  |  |
-| 7 | `sixthLevel` | `aa.custcategory.CustCategory` | `sixthLevelId` |  |  |  |
-| 8 | `firstLevel` | `aa.custcategory.CustCategory` | `firstLevelId` |  |  |  |
-| 9 | `eighthLevel` | `aa.custcategory.CustCategory` | `eighthLevelId` |  |  |  |
-| 10 | `orgId` | `bd.adminOrg.BaseOrgVO` | `orgId` |  |  |  |
-| 11 | `seventhLevel` | `aa.custcategory.CustCategory` | `seventhLevelId` |  |  |  |
-| 12 | `secondLevel` | `aa.custcategory.CustCategory` | `secondLevelId` |  |  |  |
-| 13 | `custCategoryDefines` | `aa.custcategory.CustCategoryDefine` | `` | 1 | Y |  |
-| 14 | `orgGroupId` | `pc.pub_org_group.PubOrgGroup` | `org_group_id` |  |  |  |
-| 15 | `custCategoryApplyRanges` | `aa.custcategory.CustCategoryApplyRange` | `` | 0..n | Y |  |
-| 16 | `custCategoryCharacter` | `aa.custcategory.CustCategoryCharacter` | `agentcategory_character` |  |  |  |
-| 17 | `fifthLevel` | `aa.custcategory.CustCategory` | `fifthLevelId` |  |  |  |
-| 18 | `tenant` | `base.tenant.Tenant` | `tenant_id` |  |  |  |
+| 字段名 | 引用类型 |
+|--------|---------|
+| `iParentId` | `productcenter.aa_custcategoryref` |
+| `thirdLevelId` | `` |
+| `ytenant_id` | `` |
+| `fourthLevelId` | `` |
+| `` | `` |
+| `sixthLevelId` | `` |
+| `firstLevelId` | `` |
+| `eighthLevelId` | `` |
+| `orgId` | `productcenter.aa_adminorgref` |
+| `seventhLevelId` | `` |
+| `secondLevelId` | `` |
+| `org_group_id` | `` |
+| `agentcategory_character` | `` |
+| `fifthLevelId` | `` |
+| `tenant_id` | `` |
 
-## 依赖接口（7 个）
+## 继承接口 (7个, 20字段)
 
-- `ITree` → `base.itf.ITree` (v231)
-- `IAuditInfo` → `base.itf.IAuditInfo` (v340)
-- `ITenant` → `base.itf.ITenant` (v73)
-- `IShop` → `base.itf.IShop` (v65)
-- `ISocialMcType` → `bd.social.ISocialMcType` (v977)
-- `IAutoCode` → `voucher.base.IAutoCode` (v49)
-- `IYTenant` → `ucfbase.ucfbaseItf.IYTenant` (v40)
+- **树型结构** (`base.itf.ITree`)
+  - `` → ``
+  - `level` → `level`
+  - `parent_id` → `parent_id`
+  - `path` → `path`
+  - `sort_num` → `sort_num`
+- **审计信息** (`base.itf.IAuditInfo`)
+  - `create_date` → `create_date`
+  - `create_time` → `create_time`
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `modify_date` → `modify_date`
+  - `modify_time` → `modify_time`
+- **租户相关** (`base.itf.ITenant`)
+  - `tenant_id` → `tenant_id`
+- **商家相关** (`base.itf.IShop`)
+  - `iShopID` → `iShopID`
+- **社会化企业群档案** (`bd.social.ISocialMcType`)
+  - `social_mctype` → `social_mctype`
+  - `social_srcid` → `social_srcid`
+  - `social_tenantid` → `social_tenantid`
+- **自动编号** (`voucher.base.IAutoCode`)
+  - `` → ``
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
 
-## SQL 示例
+## 字段列表（按类型分组）
 
-```sql
-SELECT id, orgId, cCode, cName, cErpCode, iParentId, iOrder, cComment
-FROM agentcategory
-```
+> 共 45 个直连字段
+
+### 文本字段 (9个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `cCode` | `cCode` | `code` | 编码 |
+| `cErpCode` | `cErpCode` | `erpCode` | 外部编码 |
+| `cPath` | `cPath` | `path` | 路径 |
+| `social_srcid` | `social_srcid` | `socialSrcid` | 社会化来源 |
+| `social_tenantid` | `social_tenantid` | `socialTenantid` | 社会化来源租户 |
+| `cOutSysKey` | `cOutSysKey` | `outSysKey` | 数据来源(废弃) |
+| `` | `creator` | `creator` | 创建人 |
+| `cCreatorName` | `cCreatorName` | `creatorName` | 创建人 |
+| `` | `modifier` | `modifier` | 修改人 |
+
+### 引用字段 (15个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `orgId` | `orgId` | `orgId` | 管理组织 |
+| `iParentId` | `iParentId` | `parent` | 上级分类 |
+| `firstLevelId` | `firstLevelId` | `firstLevel` | 第一级分类 |
+| `secondLevelId` | `secondLevelId` | `secondLevel` | 第二级分类 |
+| `thirdLevelId` | `thirdLevelId` | `thirdLevel` | 第三级分类 |
+| `fourthLevelId` | `fourthLevelId` | `fourthLevel` | 第四级分类 |
+| `fifthLevelId` | `fifthLevelId` | `fifthLevel` | 第五级分类 |
+| `sixthLevelId` | `sixthLevelId` | `sixthLevel` | 第六级分类 |
+| `seventhLevelId` | `seventhLevelId` | `seventhLevel` | 第七级分类 |
+| `eighthLevelId` | `eighthLevelId` | `eighthLevel` | 第八级分类 |
+| `org_group_id` | `org_group_id` | `orgGroupId` | 组织组 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户 |
+| `tenant_id` | `tenant_id` | `tenant` | 租户(废弃) |
+| `` | `creatorId` | `creatorId` | 创建人 |
+| `` | `modifierId` | `modifierId` | 修改人 |
+
+### 日期字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_date` | `create_date` | `createDate` | 创建日期 |
+| `modify_date` | `modify_date` | `modifyDate` | 修改日期 |
+
+### 布尔字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `isEnabled` | `isEnabled` | `isEnabled` | 启用状态 |
+| `isEnd` | `isEnd` | `isEnd` | 是否末级 |
+
+### 整数 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iOrder` | `iOrder` | `order` | 排序 |
+| `iDepth` | `iDepth` | `level` | 层级 |
+| `social_mctype` | `social_mctype` | `socialMctype` | 社会化管控类型 |
+| `iDeleted` | `iDeleted` | `iDeleted` | 删除状态 |
+| `sort_num` | `sort_num` | `sort` | 排序(废弃) |
+
+### 长整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+| `iShopID` | `iShopID` | `shop` | 商家 |
+
+### multiLanguage (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `cName` | `cName` | `name` | 名称 |
+| `cComment` | `cComment` | `comment` | 备注 |
+
+### UserDefine (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `agentcategory_character` | `agentcategory_character` | `custCategoryCharacter` | 客户分类表头自定义项 |
+
+### other (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iCreatorType` | `iCreatorType` | `custType` | 创建者类型 |
+| `logically_delete_type` | `logically_delete_type` | `logicallyDeleteType` | 逻辑删除类型 |
+| `` | `` | `custCategoryApplyRanges` | 客户分类适用范围 |
+| `` | `` | `custCategoryDefines` | 客户分类自定义项 |
+
+### timestamp (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |

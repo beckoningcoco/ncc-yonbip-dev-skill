@@ -12,62 +12,156 @@ source_type: api_response
 
 # 员工类别 (`bd.staff.PsnlCatg`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `bd_psnl_catg` | 应用: `DPMSTF` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`bd_psnl_catg` | domain：`ucf-staff-center` | 应用：`DPMSTF` | 业务对象ID：`efb15607-296f-4b59-bbb8-dadb80e6e9d7`
 
-## 属性（39 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `bu_id` | bu_id | `bu_id` | String | `text` |
-| 2 | `businessid` | businessid | `businessid` | String | `text` |
-| 3 | `cltype` | cltype | `cltype` | Integer | `int` |
-| 4 | `code` | 编码 | `code` | String | `text` |
-| 5 | `country` | country | `country` | b3429f8e-f5f1-4d41-8caf-be62768f2cdb | `quote` |
-| 6 | `countryList` | countryList | `` | b3429f8e-f5f1-4d41-8caf-be62768f2cdb | `` |
-| 7 | `createTime` | 创建时间 | `creationtime` | DateTime | `timestamp` |
-| 8 | `creator` | 创建人 | `creator` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 9 | `defines` | defines | `` | 58084c6b-6815-4e0a-9e96-6a112356c5dc | `` |
-| 10 | `distributionSite` | distributionSite | `distribution_site` | String | `text` |
-| 11 | `dr` | 逻辑删除 | `dr` | Integer | `int` |
-| 12 | `enable` | enable | `enable` | Integer | `int` |
-| 13 | `id` | ID | `id` | String | `text` |
-| 14 | `innercode` | innercode | `innercode` | String | `text` |
-| 15 | `isEnd` | 是否End | `isEnd` | Boolean | `switch` |
-| 16 | `level` | 层级 | `level` | Integer | `int` |
-| 17 | `log` | log | `log` | String | `text` |
-| 18 | `memo` | 备注 | `memo` | String | `text` |
-| 19 | `modifier` | 修改人 | `modifier` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 20 | `modifyTime` | 修改时间 | `modifiedtime` | DateTime | `timestamp` |
-| 21 | `name` | 名称 | `name` | String | `multiLanguage` |
-| 22 | `name2` | name2 | `name2` | String | `text` |
-| 23 | `name3` | name3 | `name3` | String | `text` |
-| 24 | `name4` | name4 | `name4` | String | `text` |
-| 25 | `name5` | name5 | `name5` | String | `text` |
-| 26 | `name6` | name6 | `name6` | String | `text` |
-| 27 | `objid` | objid | `objid` | String | `text` |
-| 28 | `parent` | parent | `parentid` | 03a11361-aad7-416c-95cd-ccd64f14d503 | `quote` |
-| 29 | `parentid` | parentid | `parentid` | 03a11361-aad7-416c-95cd-ccd64f14d503 | `quote` |
-| 30 | `path` | path | `path` | String | `text` |
-| 31 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 32 | `sort` | 排序 | `sort_num` | Integer | `int` |
-| 33 | `synchts` | synchts | `synchts` | DateTime | `timestamp` |
-| 34 | `sysid` | sysid | `sysid` | String | `text` |
-| 35 | `tenant` | tenant | `tenantid` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 36 | `tenantid` | tenantid | `tenantid` | String | `text` |
-| 37 | `ts` | ts | `ts` | DateTime | `timestamp` |
-| 38 | `user_define_character` | user_define_character | `user_define_character` | 197de504-4c3d-4300-ad71-73d1d8c0c42e | `UserDefine` |
-| 39 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 员工类别 |
+| 物理表 | `bd_psnl_catg` |
+| 数据库 schema | `ucf-staff-center` |
+| 所属应用 | `DPMSTF` |
+| 直连字段 | 39 个 |
+| 子表 | 2 个 |
+| 关联引用 | 10 个 |
 
-## 关联（10 个）
+## 子表
 
-- `country` -> `bd.staff.PsnlCatgCountry` ()
-- `parent` -> `bd.staff.PsnlCatg` ()
-- `user_define_character` -> `bd.staff.PsnlCatgDefineCharacter` ()
-- `creator` -> `base.user.BipUser` ()
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `modifier` -> `base.user.BipUser` ()
-- `countryList` -> `bd.staff.PsnlCatgCountry` (0..n)
-- `parentid` -> `bd.staff.PsnlCatg` ()
-- `tenant` -> `yht.tenant.YhtTenant` ()
-- `defines` -> `bd.staff.PsnlCatgDefine` (1)
+| 字段名 | URI | 关系 |
+|--------|-----|------|
+| `countryList` | `bd.staff.PsnlCatgCountry` | composition |
+| `defines` | `bd.staff.PsnlCatgDefine` | composition |
+
+## 关联引用 (10个)
+
+| 字段名 | 引用类型 |
+|--------|---------|
+| `country` | `` |
+| `parentid` | `` |
+| `user_define_character` | `` |
+| `creator` | `` |
+| `ytenant_id` | `` |
+| `modifier` | `` |
+| `` | `` |
+| `tenantid` | `` |
+
+## 继承接口 (9个, 24字段)
+
+- **UCF公共租户相关** (`basedoc.basedocItf.BasedocITenant`)
+  - `tenantid` → `tenantid`
+- **树型结构** (`ucfbase.ucfbaseItf.ITree`)
+  - `` → ``
+  - `level` → `level`
+  - `name` → `name`
+  - `parent_id` → `parent_id`
+  - `path` → `path`
+  - `sort_num` → `sort_num`
+- **审批信息** (`bd.itf.ISystemInfo`)
+  - `dr` → `dr`
+  - `enable` → `enable`
+  - `sysid` → `sysid`
+  - `tenantid` → `tenantid`
+  - `ts` → `ts`
+- **树型结构** (`basedoc.basedocItf.ITree`)
+  - `` → ``
+  - `level` → `level`
+  - `parent_id` → `parent_id`
+  - `path` → `path`
+  - `sort_num` → `sort_num`
+- **UCF公共状态** (`basedoc.basedocItf.BasedocIState`)
+  - `enable` → `enable`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+- **逻辑删除(待废除)** (`basedoc.basedocItf.LogicDelete`)
+- **审计信息** (`ucfbase.ucfbaseItf.IAuditInfo`)
+  - `create_time` → `create_time`
+  - `` → ``
+  - `` → ``
+  - `modify_time` → `modify_time`
+- **逻辑删除相关** (`ucfbase.ucfbaseItf.LogicDelete`)
+  - `dr` → `dr`
+
+## 字段列表（按类型分组）
+
+> 共 39 个直连字段
+
+### 文本字段 (17个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `bu_id` | `bu_id` | `bu_id` | 所属业务群 |
+| `businessid` | `businessid` | `businessid` | 友企联同步业务主键 |
+| `code` | `code` | `code` | 编码 |
+| `distribution_site` | `distribution_site` | `distributionSite` | 来源站点 |
+| `id` | `id` | `id` | 主键 |
+| `innercode` | `innercode` | `innercode` | 内部码 |
+| `log` | `log` | `log` | 删除引用日志 |
+| `memo` | `memo` | `memo` | 备注 |
+| `name2` | `name2` | `name2` | 员工名称备用2 |
+| `name3` | `name3` | `name3` | 员工名称备用3 |
+| `name4` | `name4` | `name4` | 员工名称备用4 |
+| `name5` | `name5` | `name5` | 员工名称备用5 |
+| `name6` | `name6` | `name6` | 员工名称备用6 |
+| `objid` | `objid` | `objid` | 友企联同步主键 |
+| `path` | `path` | `path` | 路径 |
+| `sysid` | `sysid` | `sysid` | 系统标识 |
+| `tenantid` | `tenantid` | `tenantid` | 租户标识 |
+
+### 引用字段 (7个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `country` | `country` | `country` | 国家/地区 |
+| `creator` | `creator` | `creator` | 创建人 |
+| `modifier` | `modifier` | `modifier` | 修改人 |
+| `parentid` | `parentid` | `parent` | 上级类别显示属性 |
+| `parentid` | `parentid` | `parentid` | 上级类别 |
+| `tenantid` | `tenantid` | `tenant` | 租户 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 布尔字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `isEnd` | `isEnd` | 是否末级 |
+
+### 整数 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `cltype` | `cltype` | `cltype` | 类型 |
+| `dr` | `dr` | `dr` | 逻辑删除标识 |
+| `enable` | `enable` | `enable` | 启用状态 |
+| `level` | `level` | `level` | 层级 |
+| `sort_num` | `sort_num` | `sort` | 排序号 |
+
+### other (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `` | `countryList` | 员工类别国家/地区 |
+| `` | `` | `defines` | 员工类别自定义项 |
+
+### timestamp (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `creationtime` | `creationtime` | `createTime` | 创建时间 |
+| `modifiedtime` | `modifiedtime` | `modifyTime` | 修改时间 |
+| `pubts` | `pubts` | `pubts` | 公共时间戳 |
+| `synchts` | `synchts` | `synchts` | 友企联同步时间戳 |
+| `ts` | `ts` | `ts` | 时间戳 |
+
+### multiLanguage (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `name` | `name` | `name` | 名称 |
+
+### UserDefine (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `user_define_character` | `user_define_character` | `user_define_character` | 自定义项特征属性 |

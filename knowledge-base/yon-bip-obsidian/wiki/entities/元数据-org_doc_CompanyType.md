@@ -12,40 +12,109 @@ source_type: api_response
 
 # 组织形态 (`org.doc.CompanyType`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `org_company_type` | 应用: `GZTORG` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`org_company_type` | domain：`ucf-org-center` | 应用：`GZTORG` | 业务对象ID：`93809811-1bf5-4b31-81c0-411a1b92471b`
 
-## 属性（24 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `id` | ID | `id` | String | `text` |
-| 2 | `code` | 编码 | `code` | String | `text` |
-| 3 | `name` | 名称 | `name` | String | `multiLanguage` |
-| 4 | `name2` | name2 | `name2` | String | `text` |
-| 5 | `name3` | name3 | `name3` | String | `text` |
-| 6 | `name4` | name4 | `name4` | String | `text` |
-| 7 | `name5` | name5 | `name5` | String | `text` |
-| 8 | `name6` | name6 | `name6` | String | `text` |
-| 9 | `displayorder` | displayorder | `displayorder` | Integer | `int` |
-| 10 | `enable` | enable | `enable` | Integer | `int` |
-| 11 | `memo` | 备注 | `memo` | String | `text` |
-| 12 | `creator` | 创建人 | `creator` | String | `text` |
-| 13 | `creationtime` | creationtime | `creationtime` | DateTime | `timestamp` |
-| 14 | `modifier` | 修改人 | `modifier` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 15 | `modifiedtime` | modifiedtime | `modifiedtime` | Date | `date` |
-| 16 | `tenant` | tenant | `tenantid` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 17 | `tenantid` | tenantid | `tenantid` | String | `text` |
-| 18 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 19 | `sysid` | sysid | `sysid` | String | `text` |
-| 20 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 21 | `ts` | ts | `ts` | DateTime | `timestamp` |
-| 22 | `dr` | 逻辑删除 | `dr` | Short | `short` |
-| 23 | `sysdefine` | sysdefine | `sysdefine` | Integer | `int` |
-| 24 | `relatedFunc` | relatedFunc | `related_func` | String | `text` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 组织形态 |
+| 物理表 | `org_company_type` |
+| 数据库 schema | `ucf-org-center` |
+| 所属应用 | `GZTORG` |
+| 直连字段 | 24 个 |
+| 子表 | 0 个 |
+| 关联引用 | 3 个 |
 
-## 关联（3 个）
+## 关联引用 (3个)
 
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `modifier` -> `base.user.BipUser` ()
-- `tenant` -> `yht.tenant.YhtTenant` ()
+| 字段名 | 引用类型 |
+|--------|---------|
+| `ytenant_id` | `` |
+| `modifier` | `` |
+| `tenantid` | `` |
+
+## 继承接口 (6个, 12字段)
+
+- **UCF公共租户相关** (`basedoc.basedocItf.BasedocITenant`)
+  - `tenantid` → `tenantid`
+- **UCF公共状态** (`basedoc.basedocItf.BasedocIState`)
+  - `enable` → `enable`
+- **逻辑删除(待废除)** (`basedoc.basedocItf.LogicDelete`)
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+- **审批信息** (`bd.itf.ISystemInfo`)
+  - `dr` → `dr`
+  - `enable` → `enable`
+  - `sysid` → `sysid`
+  - `tenantid` → `tenantid`
+  - `ts` → `ts`
+- **审计信息** (`bd.itf.IAuditInfo`)
+  - `creationtime` → `creationtime`
+  - `creator` → `creator`
+  - `modifiedtime` → `modifiedtime`
+  - `modifier` → `modifier`
+
+## 字段列表（按类型分组）
+
+> 共 24 个直连字段
+
+### 文本字段 (12个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | 主键 |
+| `code` | `code` | `code` | 编码 |
+| `name2` | `name2` | `name2` | 名称(多语备用) |
+| `name3` | `name3` | `name3` | 名称(多语备用) |
+| `name4` | `name4` | `name4` | 名称(多语备用) |
+| `name5` | `name5` | `name5` | 名称(多语备用) |
+| `name6` | `name6` | `name6` | 名称(多语备用) |
+| `memo` | `memo` | `memo` | 备注 |
+| `creator` | `creator` | `creator` | 创建人 |
+| `tenantid` | `tenantid` | `tenantid` | 租户标识 |
+| `sysid` | `sysid` | `sysid` | 系统标识 |
+| `related_func` | `related_func` | `relatedFunc` | 关联职能(废弃) |
+
+### 引用字段 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `modifier` | `modifier` | `modifier` | 修改人 |
+| `tenantid` | `tenantid` | `tenant` | 租户 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户ID |
+
+### 日期字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `modifiedtime` | `modifiedtime` | `modifiedtime` | 修改时间 |
+
+### 整数 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `displayorder` | `displayorder` | `displayorder` | 排序号 |
+| `enable` | `enable` | `enable` | 状态 |
+| `sysdefine` | `sysdefine` | `sysdefine` | 系统预制(废弃) |
+
+### 短整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dr` | `dr` | `dr` | 逻辑删除标识 |
+
+### multiLanguage (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `name` | `name` | `name` | 名称 |
+
+### timestamp (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `creationtime` | `creationtime` | `creationtime` | 创建时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+| `ts` | `ts` | `ts` | 时间戳 |

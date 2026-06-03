@@ -12,50 +12,100 @@ source_type: api_response
 
 # 返利回退商品记录 (`voucher.rebate.RebateReturnProductRecord`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `rebateReturnProductRecord` | 应用: `BBSMK` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`rebateReturnProductRecord` | domain：`marketingbill` | 应用：`BBSMK` | 业务对象ID：``
 
-## 属性（29 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `agentId` | agentID | `iAgentId` | 265e9b66-8898-43a6-9a65-0a156c84f0c1 | `quote` |
-| 2 | `createDate` | 创建日期 | `dCreateDate` | DateTime | `timestamp` |
-| 3 | `id` | ID | `id` | Long | `long` |
-| 4 | `orderDetailIdKey` | orderDetailIdKey | `cOrderDetailIdKey` | String | `text` |
-| 5 | `orderId` | orderID | `iOrderId` | c7c0beb4-f830-486d-83e1-51072b319fd2 | `quote` |
-| 6 | `orderNo` | orderNo | `cOrderNo` | String | `text` |
-| 7 | `outSysKey` | outSysKey | `cOutSysKey` | String | `text` |
-| 8 | `product` | product | `iProductId` | 89f3b06e-23df-4403-b4a7-19f99eeeae72 | `quote` |
-| 9 | `productSku` | productSku | `iSkuId` | 3e9ddc6d-edd0-4508-afcc-e4a20535f2f9 | `quote` |
-| 10 | `pubts` | 时间戳 | `pubuts` | DateTime | `timestamp` |
-| 11 | `quantity` | quantity | `iQuantity` | Decimal | `number` |
-| 12 | `rebateId` | rebateID | `iRebateId` | 9b73cf61-0421-4d25-8694-116cbe27ba7c | `quote` |
-| 13 | `rebateNo` | rebateNo | `cRebateNo` | String | `text` |
-| 14 | `rebateReturnProductId` | rebateReturnProductID | `iRebateReturnProductId` | 631cf218-f93d-48a9-8d02-7c2d4c520538 | `quote` |
-| 15 | `recordStatus` | recordStatus | `cRecordStatus` | String | `text` |
-| 16 | `recordStatusName` | recordStatus名称 | `recordStatusName` | String | `text` |
-| 17 | `submitUser` | submitUser | `iSubmiterId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 18 | `uordercorp` | uordercorp | `iCorpId` | Long | `long` |
-| 19 | `usedAmount` | usedAmount | `iUsedAmount` | Decimal | `number` |
-| 20 | `feeTransferStatus` | feeTransferStatus | `feeTransferStatus` | Boolean | `switch` |
-| 21 | `freezeDate` | freezeDate | `freezeDate` | DateTime | `timestamp` |
-| 22 | `rebateDetailType` | rebateDetailType | `cRebateDetailType` | String | `text` |
-| 23 | `saleReturnDetailId` | saleReturnDetailID | `iSaleReturnDetailId` | Long | `long` |
-| 24 | `saleReturnId` | saleReturnID | `iSaleReturnId` | Long | `long` |
-| 25 | `saleReturnNo` | saleReturnNo | `cSaleReturnNo` | String | `text` |
-| 26 | `settlementId` | settlementID | `settlementId` | Long | `long` |
-| 27 | `settlementNo` | settlementNo | `settlementNo` | String | `text` |
-| 28 | `voucherSourceType` | voucherSourceType | `cVoucherSourceType` | String | `text` |
-| 29 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 返利回退商品记录 |
+| 物理表 | `rebateReturnProductRecord` |
+| 数据库 schema | `marketingbill` |
+| 所属应用 | `BBSMK` |
+| 直连字段 | 29 个 |
+| 子表 | 0 个 |
+| 关联引用 | 8 个 |
 
-## 关联（8 个）
+## 关联引用 (8个)
 
-- `agentId` -> `aa.agent.Agent` ()
-- `product` -> `pc.product.Product` ()
-- `productSku` -> `pc.product.ProductSKU` ()
-- `orderId` -> `voucher.order.Order` ()
-- `submitUser` -> `base.user.User` ()
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `rebateId` -> `voucher.rebate.ProductRebate` (0..n)
-- `rebateReturnProductId` -> `voucher.rebate.RebateReturnProduct` (0..n)
+| 字段名 | 引用类型 |
+|--------|---------|
+| `iAgentId` | `` |
+| `iProductId` | `` |
+| `iSkuId` | `` |
+| `iOrderId` | `` |
+| `iSubmiterId` | `` |
+| `ytenant_id` | `` |
+| `iRebateId` | `` |
+| `iRebateReturnProductId` | `` |
+
+## 继承接口 (2个, 2字段)
+
+- **U订货租户相关** (`base.itf.IUordercorp`)
+  - `iCorpId` → `iCorpId`
+- **统一租户接口(扩展)** (`ucfbase.ucfbaseItf.IYTenantExt`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 29 个直连字段
+
+### 文本字段 (10个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `cOrderDetailIdKey` | `cOrderDetailIdKey` | `orderDetailIdKey` | 订单详情 |
+| `cOrderNo` | `cOrderNo` | `orderNo` | 订单号 |
+| `cOutSysKey` | `cOutSysKey` | `outSysKey` | 外部接口唯一标识 |
+| `cRebateNo` | `cRebateNo` | `rebateNo` | 返利单号 |
+| `cRecordStatus` | `cRecordStatus` | `recordStatus` | 状态(待确认，已生效，已作废) |
+| `recordStatusName` | `recordStatusName` | `recordStatusName` | 状态名称 |
+| `cRebateDetailType` | `cRebateDetailType` | `rebateDetailType` | 返利明细类型 |
+| `cSaleReturnNo` | `cSaleReturnNo` | `saleReturnNo` | 退货单编号 |
+| `settlementNo` | `settlementNo` | `settlementNo` | 冲销单号 |
+| `cVoucherSourceType` | `cVoucherSourceType` | `voucherSourceType` | 单据来源类型 |
+
+### 引用字段 (8个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iAgentId` | `iAgentId` | `agentId` | 客户id |
+| `iOrderId` | `iOrderId` | `orderId` | 订单id |
+| `iProductId` | `iProductId` | `product` | 商品 |
+| `iSkuId` | `iSkuId` | `productSku` | 商品 |
+| `iRebateId` | `iRebateId` | `rebateId` | 返利单id |
+| `iRebateReturnProductId` | `iRebateReturnProductId` | `rebateReturnProductId` | 返商品返利 详情id |
+| `iSubmiterId` | `iSubmiterId` | `submitUser` | 创建人 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 布尔字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `feeTransferStatus` | `feeTransferStatus` | `feeTransferStatus` | 费用转移状态 |
+
+### 长整数 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+| `iCorpId` | `iCorpId` | `uordercorp` | 租户 |
+| `iSaleReturnDetailId` | `iSaleReturnDetailId` | `saleReturnDetailId` | 退货单明细ID |
+| `iSaleReturnId` | `iSaleReturnId` | `saleReturnId` | 退货单ID |
+| `settlementId` | `settlementId` | `settlementId` | 冲销单id |
+
+### 数值字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iQuantity` | `iQuantity` | `quantity` | 使用数量 |
+| `iUsedAmount` | `iUsedAmount` | `usedAmount` | 使用金额 |
+
+### timestamp (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dCreateDate` | `dCreateDate` | `createDate` | 创建时间 |
+| `pubuts` | `pubuts` | `pubts` | 时间戳 |
+| `freezeDate` | `freezeDate` | `freezeDate` | 授信截止日期 |

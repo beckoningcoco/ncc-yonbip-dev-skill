@@ -9,46 +9,122 @@ last_verified: 2026-06-03
 status: verified
 source_type: api_response
 ---
+
 # 计税组件 (`taxpubdoc.taxengine.TaxCalculationComponent`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBip），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `tax_calculation_component` | 应用: `DPMTAX`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`tax_calculation_component` | domain：`yonbip-fi-taxpubdoc` | 应用：`DPMTAX` | 业务对象ID：`fb302e77-e133-40c3-96b3-6030c4a4db97`
 
-## 属性（24 个）
+## 基本信息
 
-| # | 字段 | 显示名 | 列 | 类型 | biztype |
-|---|------|--------|-----|------|---------|
-| 1 | `taxBaseFormulaName` | taxBaseFormula名称 | `tax_base_formula_name` | String | `text` |
-| 2 | `formulaName` | formula名称 | `formula_name` | String | `bigText` |
-| 3 | `applicationType` | applicationType | `application_type` | TaxCalcAppType | `singleOption` |
-| 4 | `formula` | formula | `formula` | String | `bigText` |
-| 5 | `taxCategoryId` | taxCategoryID | `tax_category_id` | 01a37978-70b8-4e8c-83d7-3a9b79d84917 | `quote` |
-| 6 | `taxItemId` | taxItemID | `tax_item_id` | 0eea81a1-2a5f-4f44-af40-c1da88b6edde | `quote` |
-| 7 | `taxBureauId` | taxBureauID | `tax_bureau_id` | d910183c-a1c4-48b2-8bc4-0b9f1dda6eb8 | `quote` |
-| 8 | `componentCode` | component编码 | `component_code` | String | `text` |
-| 9 | `formulaJson` | formulaJson | `formula_json` | String | `bigText` |
-| 10 | `taxSubItem` | taxSubItem | `tax_sub_item` | String | `text` |
-| 11 | `name` | 名称 | `name` | String | `multiLanguage` |
-| 12 | `taxBaseFormula` | taxBaseFormula | `tax_base_formula` | String | `bigText` |
-| 13 | `id` | ID | `id` | String | `text` |
-| 14 | `pubts` | 时间戳 | `pubts` | DateTime | `dateTime` |
-| 15 | `createTime` | 创建时间 | `create_time` | DateTime | `dateTime` |
-| 16 | `creator` | 创建人 | `creator` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 17 | `modifier` | 修改人 | `modifier` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 18 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `dateTime` |
-| 19 | `disablets` | disablets | `disablets` | DateTime | `dateTime` |
-| 20 | `enable` | enable | `enable` | sys_intboolean | `singleOption` |
-| 21 | `enablets` | enablets | `enablets` | DateTime | `dateTime` |
-| 22 | `ytenantId` | ytenantID | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 23 | `dr` | 逻辑删除 | `dr` | Short | `short` |
-| 24 | `TaxCalculationComponentDetailList` | TaxCalculationComponentDetailList | `` | 16cf0e36-9b2f-4afd-9b23-d03d7cbab7cd | `` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 计税组件 |
+| 物理表 | `tax_calculation_component` |
+| 数据库 schema | `yonbip-fi-taxpubdoc` |
+| 所属应用 | `DPMTAX` |
+| 直连字段 | 24 个 |
+| 子表 | 1 个 |
+| 关联引用 | 7 个 |
 
-## 关联（7 个）
+## 子表
 
-- `creator` -> `base.user.BipUser` () 
-- `taxBureauId` -> `archive.taxArchives.TaxBureauArchive` () [废]
-- `modifier` -> `base.user.BipUser` () 
-- `TaxCalculationComponentDetailList` -> `taxpubdoc.taxengine.TaxCalculationComponentDetail` (0..n) 
-- `ytenantId` -> `yht.tenant.YhtTenant` () 
-- `taxItemId` -> `taxpubdoc.taxpubdoc.TaxItem` () [废]
-- `taxCategoryId` -> `archive.taxArchives.TaxCategoryArchive` () [废]
+| 字段名 | URI | 关系 |
+|--------|-----|------|
+| `TaxCalculationComponentDetailList` | `taxpubdoc.taxengine.TaxCalculationComponentDetail` | composition |
+
+## 关联引用 (7个)
+
+| 字段名 | 引用类型 |
+|--------|---------|
+| `creator` | `bip-usercenter.bip_user_ref` |
+| `tax_bureau_id` | `yonbip-fi-taxpubdoc.RefTable_457b0fd24` |
+| `modifier` | `bip-usercenter.bip_user_ref` |
+| `` | `` |
+| `ytenant_id` | `` |
+| `tax_item_id` | `yonbip-fi-taxpubdoc.RefTable_182eb8090` |
+| `tax_category_id` | `tax.category_archive_ref` |
+
+## 继承接口 (4个, 9字段)
+
+- **逻辑删除** (`iuap.busiObj.LogicDelete`)
+  - `dr` → `dr`
+- **统一租户接口** (`iuap.busiObj.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+- **审计信息** (`iuap.busiObj.IAuditInfo`)
+  - `create_time` → `create_time`
+  - `creator` → `creator`
+  - `modifier` → `modifier`
+  - `modify_time` → `modify_time`
+- **档案状态** (`iuap.busiObj.IEnable`)
+  - `disablets` → `disablets`
+  - `enable` → `enable`
+  - `enablets` → `enablets`
+
+## 字段列表（按类型分组）
+
+> 共 24 个直连字段
+
+### 文本字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `tax_base_formula_name` | `tax_base_formula_name` | `taxBaseFormulaName` | 税基公式对象名称 |
+| `component_code` | `component_code` | `componentCode` | 组件编码 |
+| `tax_sub_item` | `tax_sub_item` | `taxSubItem` | 子目 |
+| `id` | `id` | `id` | 主键 |
+
+### 引用字段 (6个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `tax_category_id` | `tax_category_id` | `taxCategoryId` | 税种 |
+| `tax_item_id` | `tax_item_id` | `taxItemId` | 税目 |
+| `tax_bureau_id` | `tax_bureau_id` | `taxBureauId` | 税制 |
+| `creator` | `creator` | `creator` | 创建人 |
+| `modifier` | `modifier` | `modifier` | 修改人 |
+| `ytenant_id` | `ytenant_id` | `ytenantId` | 租户id |
+
+### 日期时间 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+| `disablets` | `disablets` | `disablets` | 停用时间 |
+| `enablets` | `enablets` | `enablets` | 启用时间 |
+
+### 枚举字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `application_type` | `application_type` | `applicationType` | 类型 |
+| `enable` | `enable` | `enable` | 档案状态 |
+
+### 短整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dr` | `dr` | `dr` | 逻辑删除 |
+
+### bigText (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `formula_name` | `formula_name` | `formulaName` | 公式对象名称 |
+| `formula` | `formula` | `formula` | 公式 |
+| `formula_json` | `formula_json` | `formulaJson` | 公式文本 |
+| `tax_base_formula` | `tax_base_formula` | `taxBaseFormula` | 税基公式 |
+
+### multiLanguage (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `name` | `name` | `name` | 组件名称 |
+
+### other (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `` | `TaxCalculationComponentDetailList` | 计税组件公式变量 |

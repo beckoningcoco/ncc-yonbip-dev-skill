@@ -1,0 +1,69 @@
+---
+tags: [BIP, 元数据, 数据字典, aa.vendorclass.VendorClassOrg]
+created: 2026-06-03
+updated: 2026-06-03
+sources: [元数据API queryByUri]
+platform_version: "BIP V5"
+project: ""
+last_verified: 2026-06-03
+status: verified
+source_type: api_response
+---
+
+# 供应商分类组织分配子表-用于导入 (`aa.vendorclass.VendorClassOrg`)
+
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`aa_vendorclass_org` | domain：`yssupplier` | 应用：`DPMSPL` | 业务对象ID：``
+
+## 基本信息
+
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 供应商分类组织分配子表-用于导入 |
+| 物理表 | `aa_vendorclass_org` |
+| 数据库 schema | `yssupplier` |
+| 所属应用 | `DPMSPL` |
+| 直连字段 | 6 个 |
+| 子表 | 0 个 |
+| 关联引用 | 4 个 |
+
+## 关联引用 (4个)
+
+| 字段名 | 引用类型 |
+|--------|---------|
+| `vendorClass` | `` |
+| `org` | `` |
+| `ytenant_id` | `` |
+| `tenant_id` | `` |
+
+## 继承接口 (2个, 2字段)
+
+- **统一租户接口(扩展)** (`ucfbase.ucfbaseItf.IYTenantExt`)
+  - `ytenant_id` → `ytenant_id`
+- **租户相关** (`base.itf.ITenant`)
+  - `tenant_id` → `tenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 6 个直连字段
+
+### 引用字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `org` | `org` | `org` | 所属组织 |
+| `tenant_id` | `tenant_id` | `tenant` | 租户 |
+| `vendorClass` | `vendorClass` | `vendorClass` | 供应商分类id |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 长整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+
+### timestamp (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubts` | `pubts` | `pubts` | 时间戳 |

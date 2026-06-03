@@ -12,34 +12,84 @@ source_type: api_response
 
 # 计划运输路线子表 (`usp.plantransportroute.PlanTransportRouteDetail`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `usp_plantransportroutedetail` | 应用: `SCCS` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`usp_plantransportroutedetail` | domain：`uscmpub` | 应用：`SCCS` | 业务对象ID：``
 
-## 属性（14 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 2 | `tenant` | tenant | `tenant_id` | c213cd56-d5de-421f-bae7-d77455b557cd | `quote` |
-| 3 | `id` | ID | `id` | Long | `long` |
-| 4 | `mainId` | mainID | `mainId` | 9aea767e-c207-4758-863d-afa266aa0138 | `quote` |
-| 5 | `segmentNum` | segmentNum | `segmentNum` | Integer | `int` |
-| 6 | `startPoint` | startPoint | `startPoint` | 34d9bf8f-9540-455e-9d6d-b3cd04d726df | `quote` |
-| 7 | `endPoint` | endPoint | `endPoint` | 34d9bf8f-9540-455e-9d6d-b3cd04d726df | `quote` |
-| 8 | `sendTransWay` | sendTransWay | `sendTransWay` | aa2f6845-347d-499f-a5b2-964b84747d99 | `quote` |
-| 9 | `defaultCarrier` | defaultCarrier | `defaultCarrier` | 1b03840a-b023-48e5-8ef4-0e613721e2d0 | `quote` |
-| 10 | `specifyCarrier` | specifyCarrier | `specifyCarrier` | Boolean | `switch` |
-| 11 | `routeDistance` | routeDistance | `routeDistance` | Decimal | `number` |
-| 12 | `routeDuration` | routeDuration | `routeDuration` | Decimal | `number` |
-| 13 | `isConsiderPlan` | 是否ConsiderPlan | `isConsiderPlan` | Boolean | `switch` |
-| 14 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 计划运输路线子表 |
+| 物理表 | `usp_plantransportroutedetail` |
+| 数据库 schema | `uscmpub` |
+| 所属应用 | `SCCS` |
+| 直连字段 | 14 个 |
+| 子表 | 0 个 |
+| 关联引用 | 7 个 |
 
-## 关联（7 个）
+## 关联引用 (7个)
 
-- `endPoint` -> `usp.transportstation.TransportStation` ()
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `defaultCarrier` -> `les.carrier.carrier` ()
-- `startPoint` -> `usp.transportstation.TransportStation` ()
-- `sendTransWay` -> `aa.sendtrans.SendTransWay` ()
-- `mainId` -> `usp.plantransportroute.PlanTransportRoute` (0..n)
-- `tenant` -> `base.tenant.Tenant` ()
+| 字段名 | 引用类型 |
+|--------|---------|
+| `endPoint` | `usp_transportstationref` |
+| `ytenant_id` | `` |
+| `defaultCarrier` | `yonbip-mm-ilsbd.les_carrier_ref` |
+| `startPoint` | `usp_transportstationref` |
+| `sendTransWay` | `productcenter.aa_sendtranswayref` |
+| `mainId` | `` |
+| `tenant_id` | `` |
+
+## 继承接口 (2个, 2字段)
+
+- **租户相关** (`base.itf.ITenant`)
+  - `tenant_id` → `tenant_id`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 14 个直连字段
+
+### 引用字段 (7个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `tenant_id` | `tenant_id` | `tenant` | 租户 |
+| `mainId` | `mainId` | `mainId` | mainId |
+| `startPoint` | `startPoint` | `startPoint` | 起始地ID |
+| `endPoint` | `endPoint` | `endPoint` | 目的地ID |
+| `sendTransWay` | `sendTransWay` | `sendTransWay` | 发运方式ID |
+| `defaultCarrier` | `defaultCarrier` | `defaultCarrier` | 默认承运商ID |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 布尔字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `specifyCarrier` | `specifyCarrier` | `specifyCarrier` | 是否指定承运商 |
+| `isConsiderPlan` | `isConsiderPlan` | `isConsiderPlan` | 是否考虑运输计划 |
+
+### 整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `segmentNum` | `segmentNum` | `segmentNum` | 分段行程编号 |
+
+### 长整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | 表体id |
+
+### 数值字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `routeDistance` | `routeDistance` | `routeDistance` | 分段距离(公里) |
+| `routeDuration` | `routeDuration` | `routeDuration` | 分段在途时间(天) |
+
+### timestamp (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubts` | `pubts` | `pubts` | 时间戳 |

@@ -1,5 +1,5 @@
 ---
-tags: [BIP, 元数据, 数据字典, bd, bd.period.AccPeriodScheme]
+tags: [BIP, 元数据, 数据字典, bd.period.AccPeriodScheme]
 created: 2026-06-03
 updated: 2026-06-03
 sources: [元数据API queryByUri]
@@ -9,71 +9,125 @@ last_verified: 2026-06-03
 status: verified
 source_type: api_response
 ---
+
 # 会计日历 (`bd.period.AccPeriodScheme`)
 
-> ⚡ **平台版本：BIP 旗舰版 V5** — 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `bd_accperiodscheme` | 应用: `FP`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`bd_accperiodscheme` | domain：`finbd` | 应用：`FP` | 业务对象ID：`7e1261a8-cfc3-46d1-b737-71d14c41f579`
 
-## 主键与编码
+## 基本信息
 
-| 角色 | 字段 | 列 | 类型 |
-|------|------|-----|------|
-| 主键 | `id` | `id` | Long |
-| 编码 | `code` | `code` | |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 会计日历 |
+| 物理表 | `bd_accperiodscheme` |
+| 数据库 schema | `finbd` |
+| 所属应用 | `FP` |
+| 直连字段 | 27 个 |
+| 子表 | 1 个 |
+| 关联引用 | 6 个 |
 
-## 全部属性（27 个）
+## 子表
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype | 必填 | 可空 |
-|---|--------|--------|-----|------|---------|------|------|
-| 1 | `code` | 编码 | `code` | String | `text` | false | true |
-| 2 | `name` | 名称 | `name` | String | `multiLanguage` | false | true |
-| 3 | `objId` | objID | `obj_id` | String | `text` | false | true |
-| 4 | `periodClass` | periodClass | `periodClass` | PeriodType | `` | false | true |
-| 5 | `startyear` | startyear | `startyear` | String | `text` | false | true |
-| 6 | `periodcount` | periodcount | `periodcount` | String | `text` | false | true |
-| 7 | `periodqcount` | periodqcount | `periodqcount` | String | `text` | false | true |
-| 8 | `periodhcount` | periodhcount | `periodhcount` | String | `text` | false | true |
-| 9 | `description` | description | `description` | String | `text` | false | true |
-| 10 | `startdate` | startdate | `startdate` | Date | `date` | false | true |
-| 11 | `system` | system | `system` | Boolean | `switch` | false | true |
-| 12 | `owerorg` | owerorg | `owerorg` | dabb8185-bfd2-4ed3-a721-f5bc5d948246 | `quote` | false | true |
-| 13 | `createDate` | 创建日期 | `create_date` | Date | `date` |  | true |
-| 14 | `createTime` | 创建时间 | `create_time` | DateTime | `timestamp` |  | true |
-| 15 | `creator` | 创建人 | `creator` | String | `text` |  | true |
-| 16 | `creatorId` | 创建人ID | `creatorId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |  | true |
-| 17 | `id` | 主键ID | `id` | Long | `long` |  | true |
-| 18 | `modifier` | 修改人 | `modifier` | String | `text` |  | true |
-| 19 | `modifierId` | 修改人ID | `modifierId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |  | true |
-| 20 | `modifyDate` | 修改日期 | `modify_date` | Date | `date` |  | true |
-| 21 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `timestamp` |  | true |
-| 22 | `periodyear` | periodyear | `` | c1fb756f-95cc-4faf-b1bf-7cea0aa99973 | `` |  |  |
-| 23 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |  | true |
-| 24 | `stopstatus` | stopstatus | `stopstatus` | Boolean | `switch` |  | true |
-| 25 | `stoptime` | stoptime | `stop_time` | DateTime | `timestamp` |  | true |
-| 26 | `tenant` | tenant | `tenant_id` | c213cd56-d5de-421f-bae7-d77455b557cd | `quote` | true | true |
-| 27 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` | true | true |
+| 字段名 | URI | 关系 |
+|--------|-----|------|
+| `periodyear` | `bd.period.PeriodYear` | composition |
 
-## 关联属性（6 个）
+## 关联引用 (6个)
 
-| # | 字段 | 目标实体 | 列 | 多重性 | 组合 | 废弃 |
-|---|------|---------|-----|--------|------|------|
-| 1 | `ytenant` | `yht.tenant.YhtTenant` | `ytenant_id` |  |  |  |
-| 2 | `owerorg` | `bd.virtualaccbody.VirtualAccbody_view` | `owerorg` |  |  |  |
-| 3 | `periodyear` | `bd.period.PeriodYear` | `` | 0..n | Y |  |
-| 4 | `creatorId` | `base.user.User` | `creatorId` |  |  |  |
-| 5 | `modifierId` | `base.user.User` | `modifierId` |  |  |  |
-| 6 | `tenant` | `base.tenant.Tenant` | `tenant_id` |  |  |  |
+| 字段名 | 引用类型 |
+|--------|---------|
+| `ytenant_id` | `` |
+| `owerorg` | `` |
+| `` | `` |
+| `tenant_id` | `` |
 
-## 依赖接口（4 个）
+## 继承接口 (4个, 12字段)
 
-- `ITenant` → `base.itf.ITenant` (v73)
-- `IYTenant` → `ucfbase.ucfbaseItf.IYTenant` (v40)
-- `IStopping` → `base.itf.IStopping` (v111)
-- `IAuditInfo` → `base.itf.IAuditInfo` (v340)
+- **租户相关** (`base.itf.ITenant`)
+  - `tenant_id` → `tenant_id`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+- **停用信息** (`base.itf.IStopping`)
+  - `stopstatus` → `stopstatus`
+  - `stop_time` → `stop_time`
+- **审计信息** (`base.itf.IAuditInfo`)
+  - `create_date` → `create_date`
+  - `create_time` → `create_time`
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `modify_date` → `modify_date`
+  - `modify_time` → `modify_time`
 
-## SQL 示例
+## 字段列表（按类型分组）
 
-```sql
-SELECT code, name, obj_id, periodClass, startyear, periodcount, periodqcount, periodhcount
-FROM bd_accperiodscheme
-```
+> 共 27 个直连字段
+
+### 文本字段 (9个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `code` | `code` | `code` | 编码 |
+| `obj_id` | `obj_id` | `objId` | 友企连id |
+| `startyear` | `startyear` | `startyear` | 起始年度 |
+| `periodcount` | `periodcount` | `periodcount` | 会计期间个数 |
+| `periodqcount` | `periodqcount` | `periodqcount` | 会计季度个数 |
+| `periodhcount` | `periodhcount` | `periodhcount` | 会计半年个数 |
+| `description` | `description` | `description` | 描述 |
+| `` | `creator` | `creator` | 创建人名称 |
+| `` | `modifier` | `modifier` | 修改人名称 |
+
+### 引用字段 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `owerorg` | `owerorg` | `owerorg` | 会计主体 |
+| `` | `creatorId` | `creatorId` | 创建人 |
+| `` | `modifierId` | `modifierId` | 修改人 |
+| `tenant_id` | `tenant_id` | `tenant` | 租户 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 日期字段 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `startdate` | `startdate` | `startdate` | 起始日期 |
+| `create_date` | `create_date` | `createDate` | 创建日期 |
+| `modify_date` | `modify_date` | `modifyDate` | 修改日期 |
+
+### 布尔字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `system` | `system` | `system` | 是否系统预制 |
+| `stopstatus` | `stopstatus` | `stopstatus` | 停用状态 |
+
+### 长整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+
+### multiLanguage (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `name` | `name` | `name` | 名称 |
+
+### other (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `periodClass` | `periodClass` | `periodClass` | 期间类型 |
+| `` | `` | `periodyear` | 会计期间年 |
+
+### timestamp (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+| `stop_time` | `stop_time` | `stoptime` | 停用时间 |

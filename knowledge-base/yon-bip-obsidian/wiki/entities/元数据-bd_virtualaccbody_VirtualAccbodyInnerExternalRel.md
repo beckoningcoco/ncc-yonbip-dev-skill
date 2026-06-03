@@ -12,37 +12,107 @@ source_type: api_response
 
 # 会计主体对内对外关系 (`bd.virtualaccbody.VirtualAccbodyInnerExternalRel`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `bd_virtualaccbody_innerexternal_rel` | 应用: `DPMACCT` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`bd_virtualaccbody_innerexternal_rel` | domain：`finbd` | 应用：`DPMACCT` | 业务对象ID：``
 
-## 属性（18 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `id` | ID | `id` | Long | `long` |
-| 2 | `accentity` | accentity | `accentity` | e33ec72a-3857-4167-89e2-a437168ed3bb | `quote` |
-| 3 | `innerExternal` | innerExternal | `inner_external` | e33ec72a-3857-4167-89e2-a437168ed3bb | `quote` |
-| 4 | `innerExternalType` | innerExternalType | `inner_external_type` | Integer | `int` |
-| 5 | `creator` | 创建人 | `creator` | String | `text` |
-| 6 | `modifyDate` | 修改日期 | `modify_date` | Date | `date` |
-| 7 | `modifier` | 修改人 | `modifier` | String | `text` |
-| 8 | `creatorId` | 创建人ID | `creatorId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 9 | `modifierId` | 修改人ID | `modifierId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 10 | `dr` | 逻辑删除 | `dr` | Short | `short` |
-| 11 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `timestamp` |
-| 12 | `createTime` | 创建时间 | `create_time` | DateTime | `timestamp` |
-| 13 | `createDate` | 创建日期 | `create_date` | Date | `date` |
-| 14 | `bdefault` | bdefault | `bdefault` | Boolean | `switch` |
-| 15 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 16 | `rowno` | rowno | `rowno` | Integer | `int` |
-| 17 | `tenant` | tenant | `tenant_id` | c213cd56-d5de-421f-bae7-d77455b557cd | `quote` |
-| 18 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 会计主体对内对外关系 |
+| 物理表 | `bd_virtualaccbody_innerexternal_rel` |
+| 数据库 schema | `finbd` |
+| 所属应用 | `DPMACCT` |
+| 直连字段 | 18 个 |
+| 子表 | 0 个 |
+| 关联引用 | 6 个 |
 
-## 关联（6 个）
+## 关联引用 (6个)
 
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `creatorId` -> `base.user.User` ()
-- `modifierId` -> `base.user.User` ()
-- `accentity` -> `bd.virtualaccbody.VirtualAccbody` (0..n)
-- `tenant` -> `base.tenant.Tenant` ()
-- `innerExternal` -> `bd.virtualaccbody.VirtualAccbody` ()
+| 字段名 | 引用类型 |
+|--------|---------|
+| `ytenant_id` | `` |
+| `` | `` |
+| `accentity` | `` |
+| `tenant_id` | `` |
+| `inner_external` | `` |
+
+## 继承接口 (4个, 11字段)
+
+- **租户相关** (`base.itf.ITenant`)
+  - `tenant_id` → `tenant_id`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+- **审计信息** (`base.itf.IAuditInfo`)
+  - `create_date` → `create_date`
+  - `create_time` → `create_time`
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `modify_date` → `modify_date`
+  - `modify_time` → `modify_time`
+- **逻辑删除相关** (`ucfbase.ucfbaseItf.LogicDelete`)
+  - `dr` → `dr`
+
+## 字段列表（按类型分组）
+
+> 共 18 个直连字段
+
+### 文本字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `creator` | `creator` | 创建人名称 |
+| `` | `modifier` | `modifier` | 修改人名称 |
+
+### 引用字段 (6个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `accentity` | `accentity` | `accentity` | 主会计主体 |
+| `inner_external` | `inner_external` | `innerExternal` | 对内/对外会计主体 |
+| `` | `creatorId` | `creatorId` | 创建人 |
+| `` | `modifierId` | `modifierId` | 修改人 |
+| `tenant_id` | `tenant_id` | `tenant` | 租户 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 日期字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `modify_date` | `modify_date` | `modifyDate` | 修改日期 |
+| `create_date` | `create_date` | `createDate` | 创建日期 |
+
+### 布尔字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `bdefault` | `bdefault` | `bdefault` | 是否默认 |
+
+### 整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `inner_external_type` | `inner_external_type` | `innerExternalType` | 对内/对外会计主体性质 |
+| `rowno` | `rowno` | `rowno` | 行号 |
+
+### 短整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dr` | `dr` | `dr` | 逻辑删除标记 |
+
+### 长整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | 主键id |
+
+### timestamp (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |

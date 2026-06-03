@@ -12,24 +12,64 @@ source_type: api_response
 
 # 物料模板-关联品牌 (`pc.tpl.ProductTplBrand`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `producttpl_brand` | 应用: `GZTBDM` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`producttpl_brand` | domain：`productcenter` | 应用：`GZTBDM` | 业务对象ID：``
 
-## 属性（7 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `id` | ID | `id` | Long | `long` |
-| 2 | `brand` | brand | `brand_id` | 75116b40-efe4-455e-b62d-d56ac4811eb1 | `quote` |
-| 3 | `template` | template | `type_id` | c40d564b-d166-4e0e-875f-1fafdab28955 | `quote` |
-| 4 | `ordernumber` | ordernumber | `ordernumber` | Integer | `int` |
-| 5 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 6 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 7 | `tenant` | tenant | `tenant_id` | c213cd56-d5de-421f-bae7-d77455b557cd | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 物料模板-关联品牌 |
+| 物理表 | `producttpl_brand` |
+| 数据库 schema | `productcenter` |
+| 所属应用 | `GZTBDM` |
+| 直连字段 | 7 个 |
+| 子表 | 0 个 |
+| 关联引用 | 4 个 |
 
-## 关联（4 个）
+## 关联引用 (4个)
 
-- `template` -> `pc.tpl.ProductTpl` (0..n)
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `brand` -> `pc.brand.Brand` ()
-- `tenant` -> `base.tenant.Tenant` ()
+| 字段名 | 引用类型 |
+|--------|---------|
+| `type_id` | `` |
+| `ytenant_id` | `` |
+| `brand_id` | `` |
+| `tenant_id` | `` |
+
+## 继承接口 (2个, 2字段)
+
+- **租户相关** (`base.itf.ITenant`)
+  - `tenant_id` → `tenant_id`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 7 个直连字段
+
+### 引用字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `brand_id` | `brand_id` | `brand` | 品牌 |
+| `type_id` | `type_id` | `template` | 物料模板 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户 |
+| `tenant_id` | `tenant_id` | `tenant` | 租户(废弃) |
+
+### 整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `ordernumber` | `ordernumber` | `ordernumber` | 排序号 |
+
+### 长整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+
+### timestamp (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubts` | `pubts` | `pubts` | 时间戳 |

@@ -12,26 +12,66 @@ source_type: api_response
 
 # 销售区域适用范围 (`aa.salearea.SaleAreaApplyRange`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `aa_salearea_applyrange` | 应用: `DPMCUS` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`aa_salearea_applyrange` | domain：`productcenter` | 应用：`DPMCUS` | 业务对象ID：``
 
-## 属性（9 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `id` | ID | `id` | Long | `long` |
-| 2 | `saleArea` | saleArea | `salearea_id` | 75fb7b76-fdb5-4e87-ab0d-e4215a299634 | `quote` |
-| 3 | `orgId` | 组织ID | `orgId` | 8aaf4bce-2eb3-443c-bce1-0fb94fec3c0c | `quote` |
-| 4 | `isCreator` | 是否Creator | `isCreator` | Boolean | `switch` |
-| 5 | `isApplied` | 是否Applied | `isApplied` | Boolean | `switch` |
-| 6 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 7 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 8 | `tenant` | tenant | `tenant_id` | c213cd56-d5de-421f-bae7-d77455b557cd | `quote` |
-| 9 | `isEnd` | 是否End | `isEnd` | Boolean | `switch` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 销售区域适用范围 |
+| 物理表 | `aa_salearea_applyrange` |
+| 数据库 schema | `productcenter` |
+| 所属应用 | `DPMCUS` |
+| 直连字段 | 9 个 |
+| 子表 | 0 个 |
+| 关联引用 | 4 个 |
 
-## 关联（4 个）
+## 关联引用 (4个)
 
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `saleArea` -> `aa.salearea.SaleArea` (0..n)
-- `orgId` -> `bd.adminOrg.BaseOrgVO` ()
-- `tenant` -> `base.tenant.Tenant` ()
+| 字段名 | 引用类型 |
+|--------|---------|
+| `ytenant_id` | `` |
+| `salearea_id` | `` |
+| `orgId` | `productcenter.aa_adminorgrangeref` |
+| `tenant_id` | `` |
+
+## 继承接口 (2个, 2字段)
+
+- **租户相关** (`base.itf.ITenant`)
+  - `tenant_id` → `tenant_id`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 9 个直连字段
+
+### 引用字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `salearea_id` | `salearea_id` | `saleArea` | 销售区域 |
+| `orgId` | `orgId` | `orgId` | 组织名称 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户 |
+| `tenant_id` | `tenant_id` | `tenant` | 租户(废弃) |
+
+### 布尔字段 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `isCreator` | `isCreator` | `isCreator` | 是否为创建者 |
+| `isApplied` | `isApplied` | `isApplied` | 是否被使用组织使用 |
+| `isEnd` | `isEnd` | `isEnd` | 是否末级(废弃) |
+
+### 长整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+
+### timestamp (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubts` | `pubts` | `pubts` | 时间戳 |

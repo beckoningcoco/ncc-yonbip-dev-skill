@@ -1,0 +1,209 @@
+---
+tags: [BIP, 元数据, 数据字典, FIAP.FIAP.OpenningAPSureEventGrandson]
+created: 2026-06-03
+updated: 2026-06-03
+sources: [元数据API queryByUri]
+platform_version: "BIP V5"
+project: ""
+last_verified: 2026-06-03
+status: verified
+source_type: api_response
+---
+
+# 期初确认应付计划信息 (`FIAP.FIAP.OpenningAPSureEventGrandson`)
+
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`arap_ledger_g` | domain：`yonbip-fi-earap` | 应用：`EAP` | 业务对象ID：`ebf9a75f-1124-41eb-aff2-eb159ef1f809`
+
+## 基本信息
+
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 期初确认应付计划信息 |
+| 物理表 | `arap_ledger_g` |
+| 数据库 schema | `yonbip-fi-earap` |
+| 所属应用 | `EAP` |
+| 直连字段 | 76 个 |
+| 子表 | 0 个 |
+| 关联引用 | 15 个 |
+
+## 关联引用 (15个)
+
+| 字段名 | 引用类型 |
+|--------|---------|
+| `creator` | `bip-usercenter.bip_user_ref` |
+| `finance_org_id` | `ucf-org-center.bd_financeorgtreeref` |
+| `carryover_year_id` | `` |
+| `modifier` | `bip-usercenter.bip_user_ref` |
+| `ap_subject_id` | `fiepub.fiepub_accsubjectref` |
+| `carryover_period_id` | `` |
+| `ap_subject_vid` | `fiepub.epub_accsubjectversion_treecard_ref` |
+| `ytenant_id` | `` |
+| `body_id` | `` |
+| `b_quick_type_id` | `finbd.bd_paymenttyperef` |
+| `acc_period_id` | `finbd.bd_period` |
+| `acc_book_id` | `fiepub.fiepub_accountbookref` |
+| `settle_mode_id` | `productcenter.aa_settlemethodref` |
+| `acc_year_id` | `finbd.bd_period` |
+| `event_id` | `` |
+
+## 继承接口 (6个, 27字段)
+
+- **逻辑删除** (`iuap.busiObj.LogicDelete`)
+  - `dr` → `dr`
+- **统一租户接口** (`iuap.busiObj.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+- **收付结转孙表** (`FIAP.FIAP.IEARAPCarryoverGrandson`)
+  - `bln_carryover` → `bln_carryover`
+  - `carryover_body_id` → `carryover_body_id`
+  - `carryover_event_id` → `carryover_event_id`
+  - `carryover_grandson_id` → `carryover_grandson_id`
+  - `carryover_period_id` → `carryover_period_id`
+  - `carryover_period_code` → `carryover_period_code`
+  - `carryover_year_id` → `carryover_year_id`
+  - `carryover_year_code` → `carryover_year_code`
+- **业务流多来源** (`iuap.busiObj.BusinessFlowSourcesItf`)
+  - `firstbusiobj` → `firstbusiobj`
+  - `firstchild_id` → `firstchild_id`
+  - `firstcode` → `firstcode`
+  - `first_id` → `first_id`
+  - `sourcegrand_id` → `sourcegrand_id`
+- **业务流基础** (`iuap.busiObj.BusinessFlowItf`)
+  - `bizflow_id` → `bizflow_id`
+  - `bizflowinstance_id` → `bizflowinstance_id`
+  - `bizflow_makebillcode` → `bizflow_makebillcode`
+  - `bizflowname` → `bizflowname`
+  - `sourcebusiobj` → `sourcebusiobj`
+  - `sourcechild_id` → `sourcechild_id`
+  - `sourcecode` → `sourcecode`
+  - `source_id` → `source_id`
+- **审计信息** (`iuap.busiObj.IAuditInfo`)
+  - `create_time` → `create_time`
+  - `creator` → `creator`
+  - `modifier` → `modifier`
+  - `modify_time` → `modify_time`
+
+## 字段列表（按类型分组）
+
+> 共 76 个直连字段
+
+### 文本字段 (31个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `acc_period_code` | `acc_period_code` | `accPeriodCode` | 会计期间编码 |
+| `acc_year_code` | `acc_year_code` | `accYearCode` | 会计年度编码 |
+| `arap_event_type` | `arap_event_type` | `arapEventType` | 收付会计事务类型 |
+| `bizflowinstance_id` | `bizflowinstance_id` | `bizFlowInstanceId` | 业务流实例id |
+| `bizflow_makebillcode` | `bizflow_makebillcode` | `bizFlowMakeBillCode` | 单据转换规则编码 |
+| `bizflow_id` | `bizflow_id` | `bizflowId` | 业务流id |
+| `bizflowname` | `bizflowname` | `bizflowName` | 流程名称 |
+| `carryover_body_id` | `carryover_body_id` | `carryoverBody` | 结转事务行 |
+| `carryover_event_id` | `carryover_event_id` | `carryoverEvent` | 结转事务 |
+| `carryover_grandson_id` | `carryover_grandson_id` | `carryoverGrandson` | 结转事务孙行 |
+| `carryover_period_code` | `carryover_period_code` | `carryoverPeriodCode` | 结转期间编码 |
+| `carryover_year_code` | `carryover_year_code` | `carryoverYearCode` | 结转年度编码 |
+| `digest` | `digest` | `digest` | 处理摘要 |
+| `event_type_id` | `event_type_id` | `eventType` | 会计事务类型 |
+| `firstbusiobj` | `firstbusiobj` | `firstBusiObj` | 来源业务对象 |
+| `firstchild_id` | `firstchild_id` | `firstChildId` | 来源单据子表id |
+| `firstcode` | `firstcode` | `firstCode` | 来源单据号 |
+| `first_id` | `first_id` | `firstId` | 来源单据主表id |
+| `id` | `id` | `id` | 主键 |
+| `ori_arap_event_type` | `ori_arap_event_type` | `oriArapEventType` | 源头事务类型 |
+| `ori_grandson_id` | `ori_grandson_id` | `oriGrandsonId` | 源头孙表ID |
+| `sourcebusiobj` | `sourcebusiobj` | `sourceBusiObj` | 上游业务对象 |
+| `sourcechild_id` | `sourcechild_id` | `sourceChildId` | 上游单据子表id |
+| `sourcecode` | `sourcecode` | `sourceCode` | 上游单据号 |
+| `sourcegrand_id` | `sourcegrand_id` | `sourceGrandId` | 来源孙表id |
+| `source_id` | `source_id` | `sourceId` | 上游单据主表id |
+| `src_arap_event_type` | `src_arap_event_type` | `srcArapEventType` | 来源收付会计事务 |
+| `src_body_id` | `src_body_id` | `srcBody` | 来源明细id |
+| `src_event_id` | `src_event_id` | `srcEvent` | 来源事务id |
+| `src_exe_detail_id` | `src_exe_detail_id` | `srcExeDetailId` | 来源执行明细ID |
+| `src_grandson_id` | `src_grandson_id` | `srcGrandson` | 来源核算ID |
+
+### 引用字段 (15个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `acc_book_id` | `acc_book_id` | `accBook` | 财务账簿 |
+| `acc_period_id` | `acc_period_id` | `accPeriod` | 会计期间ID |
+| `acc_year_id` | `acc_year_id` | `accYear` | 会计年度ID |
+| `ap_subject_id` | `ap_subject_id` | `apSubject` | 应付账款科目 |
+| `ap_subject_vid` | `ap_subject_vid` | `apSubjectVid` | 应付账款科目版本 |
+| `body_id` | `body_id` | `body` | 明细ID |
+| `carryover_period_id` | `carryover_period_id` | `carryoverPeriod` | 结转期间 |
+| `carryover_year_id` | `carryover_year_id` | `carryoverYear` | 结转年度 |
+| `creator` | `creator` | `creator` | 创建人 |
+| `event_id` | `event_id` | `event` | 表头事务ID |
+| `finance_org_id` | `finance_org_id` | `financeOrg` | 会计主体 |
+| `modifier` | `modifier` | `modifier` | 修改人 |
+| `b_quick_type_id` | `b_quick_type_id` | `quickType` | 款项类型 |
+| `settle_mode_id` | `settle_mode_id` | `settleMode` | 结算方式 |
+| `ytenant_id` | `ytenant_id` | `ytenantId` | 租户id |
+
+### 日期字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `clear_time` | `clear_time` | `clearTime` | 清账时间 |
+| `expire_date` | `expire_date` | `expireDate` | 到期日 |
+| `local_clear_time` | `local_clear_time` | `localClearTime` | 本币清账时间 |
+| `start_date` | `start_date` | `startDate` | 起算日期 |
+
+### 日期时间 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+
+### 布尔字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `bln_deposit` | `bln_deposit` | `blnDeposit` | 是否质保金 |
+| `bln_prepare` | `bln_prepare` | `blnPrepare` | 是否预付 |
+
+### 枚举字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `amount_direction` | `amount_direction` | `amountDirection` | 借贷方向 |
+| `balance_state` | `balance_state` | `balanceState` | 清账状态 |
+| `convert_way` | `convert_way` | `convertWay` | 预付核销方法 |
+| `local_balance_state` | `local_balance_state` | `localBalanceState` | 本币清账状态 |
+
+### 整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dtc_status` | `dtc_status` | `dtcStatus` | 全局事务状态 |
+| `issue_no` | `issue_no` | `issueNo` | 付款期号 |
+
+### 短整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `bln_carryover` | `bln_carryover` | `blnCarryover` | 是否结转 |
+| `dr` | `dr` | `dr` | 逻辑删除 |
+
+### 数值字段 (13个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `acc_amount` | `acc_amount` | `accAmount` | 本币金额 |
+| `acc_balance` | `acc_balance` | `accBalance` | 本币余额 |
+| `gbl_amount` | `gbl_amount` | `gblAmount` | 全局币金额 |
+| `gbl_balance` | `gbl_balance` | `gblBalance` | 全局币余额 |
+| `grp_amount` | `grp_amount` | `grpAmount` | 集团币金额 |
+| `grp_balance` | `grp_balance` | `grpBalance` | 集团币余额 |
+| `org_amount` | `org_amount` | `orgAmount` | 组织币金额 |
+| `org_balance` | `org_balance` | `orgBalance` | 组织币余额 |
+| `ori_amount` | `ori_amount` | `oriAmount` | 金额 |
+| `ori_balance` | `ori_balance` | `oriBalance` | 余额 |
+| `ori_ocupy_amount` | `ori_ocupy_amount` | `oriOcupyAmount` | 预占用金额 |
+| `ratio` | `ratio` | `ratio` | 付款比例 |
+| `row_no` | `row_no` | `rowNo` | 行号 |

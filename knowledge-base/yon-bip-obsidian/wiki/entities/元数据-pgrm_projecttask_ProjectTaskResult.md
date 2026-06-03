@@ -12,42 +12,112 @@ source_type: api_response
 
 # 项目活动成果物 (`pgrm.projecttask.ProjectTaskResult`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `pgrm_activity_result` | 应用: `PGRM` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`pgrm_activity_result` | domain：`yonbip-pm-projectme` | 应用：`PGRM` | 业务对象ID：`f76a015a-f5ed-4916-8354-47da523fbe1f`
 
-## 属性（21 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `acceptanceStatus` | acceptanceStatus | `acceptance_status` | Integer | `int` |
-| 2 | `createTime` | 创建时间 | `create_time` | DateTime | `dateTime` |
-| 3 | `creator` | 创建人 | `creator` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 4 | `defineCharacter` | defineCharacter | `define_character` | 7bd246f2-8cdf-4744-a12b-4e792e83cfb1 | `UserDefine` |
-| 5 | `dr` | 逻辑删除 | `dr` | Short | `short` |
-| 6 | `id` | ID | `id` | String | `text` |
-| 7 | `modifier` | 修改人 | `modifier` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 8 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `dateTime` |
-| 9 | `mustSubmit` | mustSubmit | `must_submit` | Boolean | `switch` |
-| 10 | `name` | 名称 | `name` | String | `text` |
-| 11 | `orgId` | 组织ID | `org_id` | 14302233-1394-4a70-94e1-bed51636f312 | `quote` |
-| 12 | `projectDocumentUrl` | projectDocumentUrl | `project_document_url` | String | `link` |
-| 13 | `projectId` | projectID | `project_id` | b1e7cbf6-094a-4200-b451-36bfa3ac3ff4 | `quote` |
-| 14 | `pubts` | 时间戳 | `pubts` | DateTime | `dateTime` |
-| 15 | `result` | result | `result` | String | `text` |
-| 16 | `resultUploadFlag` | resultUploadFlag | `result_upload_flag` | Boolean | `switch` |
-| 17 | `submissionTime` | submissionTime | `submission_time` | Date | `date` |
-| 18 | `submitterId` | submitterID | `submitter_id` | 4effed83-35f5-4e3b-9be1-092b5ae602e8 | `quote` |
-| 19 | `taskId` | taskID | `task_id` | b4a90beb-49ed-4301-b12e-9221d0d12fd1 | `quote` |
-| 20 | `template` | template | `template` | String | `text` |
-| 21 | `ytenantId` | ytenantID | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 项目活动成果物 |
+| 物理表 | `pgrm_activity_result` |
+| 数据库 schema | `yonbip-pm-projectme` |
+| 所属应用 | `PGRM` |
+| 直连字段 | 21 个 |
+| 子表 | 0 个 |
+| 关联引用 | 8 个 |
 
-## 关联（8 个）
+## 关联引用 (8个)
 
-- `creator` -> `base.user.BipUser` ()
-- `submitterId` -> `bd.staff.Staff` ()
-- `modifier` -> `base.user.BipUser` ()
-- `ytenantId` -> `yht.tenant.YhtTenant` ()
-- `defineCharacter` -> `pgrm.projecttask.ProjectTaskResultdefineCharacterUserDefine` ()
-- `projectId` -> `bd.project.ProjectVO` ()
-- `orgId` -> `org.func.BaseOrg` ()
-- `taskId` -> `pgrm.projecttask.ProjectScheduleTask` (0..n)
+| 字段名 | 引用类型 |
+|--------|---------|
+| `creator` | `bip-usercenter.bip_user_ref` |
+| `submitter_id` | `` |
+| `modifier` | `bip-usercenter.bip_user_ref` |
+| `ytenant_id` | `` |
+| `define_character` | `` |
+| `project_id` | `` |
+| `org_id` | `` |
+| `task_id` | `yonbip-pm-projectme.RefTable_ebcf54ed61` |
+
+## 继承接口 (3个, 6字段)
+
+- **逻辑删除** (`iuap.busiObj.LogicDelete`)
+  - `dr` → `dr`
+- **统一租户接口** (`iuap.busiObj.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+- **审计信息** (`iuap.busiObj.IAuditInfo`)
+  - `create_time` → `create_time`
+  - `creator` → `creator`
+  - `modifier` → `modifier`
+  - `modify_time` → `modify_time`
+
+## 字段列表（按类型分组）
+
+> 共 21 个直连字段
+
+### 文本字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | 主键 |
+| `name` | `name` | `name` | 成果物名称 |
+| `result` | `result` | `result` | 成果物 |
+| `template` | `template` | `template` | 附件模板 |
+
+### 引用字段 (7个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `creator` | `creator` | `creator` | 创建人 |
+| `modifier` | `modifier` | `modifier` | 修改人 |
+| `org_id` | `org_id` | `orgId` | 主组织 |
+| `project_id` | `project_id` | `projectId` | 项目id |
+| `submitter_id` | `submitter_id` | `submitterId` | 提交人 |
+| `task_id` | `task_id` | `taskId` | 项目活动主表外键 |
+| `ytenant_id` | `ytenant_id` | `ytenantId` | 租户id |
+
+### 日期字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `submission_time` | `submission_time` | `submissionTime` | 最后提交时间 |
+
+### 日期时间 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+
+### 布尔字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `must_submit` | `must_submit` | `mustSubmit` | 是否必须提交 |
+| `result_upload_flag` | `result_upload_flag` | `resultUploadFlag` | 成果物已上传标识 |
+
+### 整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `acceptance_status` | `acceptance_status` | `acceptanceStatus` | 验收状态 |
+
+### 短整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dr` | `dr` | `dr` | 逻辑删除 |
+
+### UserDefine (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `define_character` | `define_character` | `defineCharacter` | 自定义项属性特征 |
+
+### link (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `project_document_url` | `project_document_url` | `projectDocumentUrl` | 项目文档地址 |

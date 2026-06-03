@@ -9,31 +9,82 @@ last_verified: 2026-06-03
 status: verified
 source_type: api_response
 ---
+
 # 科目分类影响因素 (`eeac.subjectcategory.SubjectCategoryInfluenceFactorDO`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBip），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `epub_subject_cat_influence` | 应用: `EVNT`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`epub_subject_cat_influence` | domain：`yonbip-fi-eeac` | 应用：`EVNT` | 业务对象ID：`ab370190-1090-4cb9-854f-6bd8fe4cf577`
 
-## 属性（11 个）
+## 基本信息
 
-| # | 字段 | 显示名 | 列 | 类型 | biztype |
-|---|------|--------|-----|------|---------|
-| 1 | `blnDefault` | blnDefault | `bln_default` | Boolean | `switch` |
-| 2 | `createTime` | 创建时间 | `create_time` | DateTime | `dateTime` |
-| 3 | `creator` | 创建人 | `creator` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 4 | `dr` | 逻辑删除 | `dr` | Short | `short` |
-| 5 | `id` | ID | `id` | String | `text` |
-| 6 | `influenceFactorId` | influenceFactorID | `influence_factor_id` | e81adbf5-4b6e-44c8-ae1a-a1cbeea85d48 | `quote` |
-| 7 | `modifier` | 修改人 | `modifier` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 8 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `dateTime` |
-| 9 | `pubts` | 时间戳 | `pubts` | DateTime | `dateTime` |
-| 10 | `subjectCategoryId` | subjectCategoryID | `subject_cat_id` | b0b86993-75b7-4a08-a66b-8ce4257990ab | `quote` |
-| 11 | `ytenantId` | ytenantID | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 科目分类影响因素 |
+| 物理表 | `epub_subject_cat_influence` |
+| 数据库 schema | `yonbip-fi-eeac` |
+| 所属应用 | `EVNT` |
+| 直连字段 | 11 个 |
+| 子表 | 0 个 |
+| 关联引用 | 5 个 |
 
-## 关联（5 个）
+## 关联引用 (5个)
 
-- `influenceFactorId` -> `eeac.influencefactorsetting.InfluenceFactorDO` () 
-- `creator` -> `base.user.BipUser` () 
-- `modifier` -> `base.user.BipUser` () 
-- `subjectCategoryId` -> `eeac.subjectcategory.SubjectCategoryDO` (0..n) 
-- `ytenantId` -> `yht.tenant.YhtTenant` () 
+| 字段名 | 引用类型 |
+|--------|---------|
+| `influence_factor_id` | `` |
+| `creator` | `bip-usercenter.bip_user_ref` |
+| `modifier` | `bip-usercenter.bip_user_ref` |
+| `subject_cat_id` | `yonbip-fi-eeac.RefTable_2c31e15e31` |
+| `ytenant_id` | `` |
+
+## 继承接口 (3个, 6字段)
+
+- **逻辑删除** (`iuap.busiObj.LogicDelete`)
+  - `dr` → `dr`
+- **统一租户接口** (`iuap.busiObj.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+- **审计信息** (`iuap.busiObj.IAuditInfo`)
+  - `create_time` → `create_time`
+  - `creator` → `creator`
+  - `modifier` → `modifier`
+  - `modify_time` → `modify_time`
+
+## 字段列表（按类型分组）
+
+> 共 11 个直连字段
+
+### 文本字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | 主键 |
+
+### 引用字段 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `creator` | `creator` | `creator` | 创建人 |
+| `influence_factor_id` | `influence_factor_id` | `influenceFactorId` | 影响因素 |
+| `modifier` | `modifier` | `modifier` | 修改人 |
+| `subject_cat_id` | `subject_cat_id` | `subjectCategoryId` | 科目分类 |
+| `ytenant_id` | `ytenant_id` | `ytenantId` | 租户id |
+
+### 日期时间 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+
+### 布尔字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `bln_default` | `bln_default` | `blnDefault` | 是否默认 |
+
+### 短整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dr` | `dr` | `dr` | 逻辑删除 |

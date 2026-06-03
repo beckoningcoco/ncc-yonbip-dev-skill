@@ -12,28 +12,89 @@ source_type: api_response
 
 # 终端分类 (`aa.store.StoreCategory`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `mp_store_category` | 应用: `Marketingpublic` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`mp_store_category` | domain：`yxybase` | 应用：`Marketingpublic` | 业务对象ID：`f9a7a1e6-785b-46f4-99a0-d71c22edb848`
 
-## 属性（13 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `code` | 编码 | `code` | String | `text` |
-| 2 | `name` | 名称 | `name` | String | `text` |
-| 3 | `note` | note | `note` | String | `text` |
-| 4 | `id` | ID | `id` | Long | `long` |
-| 5 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 6 | `enabled` | enabled | `enabled` | EnableStatus | `` |
-| 7 | `isEnd` | 是否End | `isEnd` | Boolean | `switch` |
-| 8 | `level` | 层级 | `level` | Integer | `int` |
-| 9 | `parent` | parent | `parent_id` | Long | `long` |
-| 10 | `path` | path | `path` | String | `text` |
-| 11 | `sort` | 排序 | `sort_num` | Integer | `int` |
-| 12 | `tenant` | tenant | `tenant_id` | c213cd56-d5de-421f-bae7-d77455b557cd | `quote` |
-| 13 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 终端分类 |
+| 物理表 | `mp_store_category` |
+| 数据库 schema | `yxybase` |
+| 所属应用 | `Marketingpublic` |
+| 直连字段 | 13 个 |
+| 子表 | 0 个 |
+| 关联引用 | 2 个 |
 
-## 关联（2 个）
+## 关联引用 (2个)
 
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `tenant` -> `base.tenant.Tenant` ()
+| 字段名 | 引用类型 |
+|--------|---------|
+| `ytenant_id` | `` |
+| `tenant_id` | `` |
+
+## 继承接口 (3个, 7字段)
+
+- **树型结构** (`base.itf.ITree`)
+  - `` → ``
+  - `level` → `level`
+  - `parent_id` → `parent_id`
+  - `path` → `path`
+  - `sort_num` → `sort_num`
+- **租户相关** (`base.itf.ITenant`)
+  - `tenant_id` → `tenant_id`
+- **统一租户接口(扩展)** (`ucfbase.ucfbaseItf.IYTenantExt`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 13 个直连字段
+
+### 文本字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `code` | `code` | `code` | 编码 |
+| `name` | `name` | `name` | 名称 |
+| `note` | `note` | `note` | 备注 |
+| `path` | `path` | `path` | 路径 |
+
+### 引用字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `tenant_id` | `tenant_id` | `tenant` | 租户 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 布尔字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `isEnd` | `isEnd` | 是否末级 |
+
+### 整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `level` | `level` | `level` | 层级 |
+| `sort_num` | `sort_num` | `sort` | 排序号 |
+
+### 长整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+| `parent_id` | `parent_id` | `parent` | 上级分类 |
+
+### timestamp (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubts` | `pubts` | `pubts` | ID |
+
+### other (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `enabled` | `enabled` | `enabled` | 启用状态 |

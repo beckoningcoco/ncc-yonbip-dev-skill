@@ -12,92 +12,150 @@ source_type: api_response
 
 # 行政组织视图参照 (`bd.adminOrg.AdminOrgViewOrg`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `org_admin` | 应用: `GZTORG` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`org_admin` | domain：`ucf-org-center` | 应用：`GZTORG` | 业务对象ID：`32f32e76-80fe-4d57-b3f8-59595691b2b8`
 
-## 属性（66 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `AdminOrgVO` | AdminOrgVO | `id` | a4352e3c-3eda-4539-a7a9-ec00799be118 | `quote` |
-| 2 | `address` | address | `address` | String | `text` |
-| 3 | `branchleader` | branchleader | `branchleader` | 4effed83-35f5-4e3b-9be1-092b5ae602e8 | `quote` |
-| 4 | `businessid` | businessid | `businessid` | String | `text` |
-| 5 | `code` | 编码 | `code` | String | `text` |
-| 6 | `companytype` | companytype | `companytype` | 45cbc79d-a41a-41e4-af94-b264ce83596a | `quote` |
-| 7 | `contact` | contact | `contact` | String | `text` |
-| 8 | `corpid` | corpid | `corpid` | 8aaf4bce-2eb3-443c-bce1-0fb94fec3c0c | `quote` |
-| 9 | `countryzone` | countryzone | `countryzone` | String | `text` |
-| 10 | `deptnature` | deptnature | `dept_nature` | Short | `short` |
-| 11 | `depttype` | depttype | `depttype` | 3bb6a10a-b3a8-438b-a891-3f81baf7a850 | `quote` |
-| 12 | `description` | description | `description` | String | `multiLanguage` |
-| 13 | `description2` | description2 | `description2` | String | `text` |
-| 14 | `description3` | description3 | `description3` | String | `text` |
-| 15 | `description4` | description4 | `description4` | String | `text` |
-| 16 | `description5` | description5 | `description5` | String | `text` |
-| 17 | `description6` | description6 | `description6` | String | `text` |
-| 18 | `displayorder` | displayorder | `displayorder` | Integer | `int` |
-| 19 | `dr` | 逻辑删除 | `dr` | Short | `short` |
-| 20 | `effectivedate` | effectivedate | `effectivedate` | DateTime | `timestamp` |
-| 21 | `enable` | enable | `enable` | Integer | `int` |
-| 22 | `endtime` | endtime | `end_time` | DateTime | `timestamp` |
-| 23 | `expirationdate` | expirationdate | `expirationdate` | DateTime | `timestamp` |
-| 24 | `externalorg` | externalorg | `external_org` | Integer | `int` |
-| 25 | `id` | ID | `id` | String | `text` |
-| 26 | `innercode` | innercode | `innercode` | String | `text` |
-| 27 | `isEnd` | 是否End | `isEnd` | Integer | `int` |
-| 28 | `is_biz_unit` | 是否_biz_unit | `is_biz_unit` | Integer | `int` |
-| 29 | `isbizunit` | 是否bizunit | `is_biz_unit` | Integer | `int` |
-| 30 | `level` | 层级 | `level` | Integer | `int` |
-| 31 | `locationid` | locationid | `locationid` | 8aaf4bce-2eb3-443c-bce1-0fb94fec3c0c | `quote` |
-| 32 | `name` | 名称 | `name` | String | `multiLanguage` |
-| 33 | `name2` | name2 | `name2` | String | `text` |
-| 34 | `name3` | name3 | `name3` | String | `text` |
-| 35 | `name4` | name4 | `name4` | String | `text` |
-| 36 | `name5` | name5 | `name5` | String | `text` |
-| 37 | `name6` | name6 | `name6` | String | `text` |
-| 38 | `objid` | objid | `objid` | String | `text` |
-| 39 | `orgform` | orgform | `orgform` | String | `text` |
-| 40 | `orgid` | orgid | `orgid` | 8aaf4bce-2eb3-443c-bce1-0fb94fec3c0c | `quote` |
-| 41 | `orglevel` | orglevel | `orglevel` | String | `text` |
-| 42 | `orgtype` | orgtype | `orgtype` | Integer | `int` |
-| 43 | `parent` | parent | `parentid` | a4352e3c-3eda-4539-a7a9-ec00799be118 | `quote` |
-| 44 | `parentid` | parentid | `parentid` | 6f914e2e-2a69-4e22-a217-0732653ce8c7 | `quote` |
-| 45 | `parentorgid` | parentorgid | `parentorgid` | 6f914e2e-2a69-4e22-a217-0732653ce8c7 | `quote` |
-| 46 | `path` | path | `path` | String | `text` |
-| 47 | `principal` | principal | `principal` | 4effed83-35f5-4e3b-9be1-092b5ae602e8 | `quote` |
-| 48 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 49 | `region` | region | `region` | String | `text` |
-| 50 | `shortname` | shortname | `shortname` | String | `multiLanguage` |
-| 51 | `shortname2` | shortname2 | `shortname2` | String | `text` |
-| 52 | `shortname3` | shortname3 | `shortname3` | String | `text` |
-| 53 | `shortname4` | shortname4 | `shortname4` | String | `text` |
-| 54 | `shortname5` | shortname5 | `shortname5` | String | `text` |
-| 55 | `shortname6` | shortname6 | `shortname6` | String | `text` |
-| 56 | `sort` | 排序 | `displayorder` | Integer | `int` |
-| 57 | `sourceid` | sourceid | `sourceid` | String | `text` |
-| 58 | `starttime` | starttime | `start_time` | DateTime | `timestamp` |
-| 59 | `synchts` | synchts | `synchts` | DateTime | `timestamp` |
-| 60 | `sysid` | sysid | `sysid` | String | `text` |
-| 61 | `taxpayerid` | taxpayerid | `taxpayerid` | String | `text` |
-| 62 | `telephone` | telephone | `telephone` | String | `text` |
-| 63 | `tenant` | tenant | `tenantid` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 64 | `tenantid` | tenantid | `tenantid` | String | `text` |
-| 65 | `timezone` | timezone | `timezone` | String | `text` |
-| 66 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 行政组织视图参照 |
+| 物理表 | `org_admin` |
+| 数据库 schema | `ucf-org-center` |
+| 所属应用 | `GZTORG` |
+| 直连字段 | 66 个 |
+| 子表 | 0 个 |
+| 关联引用 | 13 个 |
 
-## 关联（13 个）
+## 关联引用 (13个)
 
-- `parent` -> `bd.adminOrg.AdminOrgVO` ()
-- `corpid` -> `bd.adminOrg.BaseOrgVO` ()
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `orgid` -> `bd.adminOrg.BaseOrgVO` (0..n)
-- `parentid` -> `bd.adminOrg.AdminOrgViewOrg` ()
-- `principal` -> `bd.staff.Staff` ()
-- `branchleader` -> `bd.staff.Staff` ()
-- `locationid` -> `bd.adminOrg.BaseOrgVO` ()
-- `parentorgid` -> `bd.adminOrg.AdminOrgViewOrg` ()
-- `companytype` -> `org.doc.CompanyType` ()
-- `depttype` -> `org.doc.DeptType` ()
-- `AdminOrgVO` -> `bd.adminOrg.AdminOrgVO` ()
-- `tenant` -> `yht.tenant.YhtTenant` ()
+| 字段名 | 引用类型 |
+|--------|---------|
+| `parentid` | `` |
+| `corpid` | `` |
+| `ytenant_id` | `` |
+| `orgid` | `` |
+| `principal` | `` |
+| `branchleader` | `` |
+| `locationid` | `` |
+| `parentorgid` | `` |
+| `companytype` | `` |
+| `depttype` | `` |
+| `id` | `` |
+| `tenantid` | `` |
+
+## 继承接口 (5个, 8字段)
+
+- **逻辑删除(待废除)** (`basedoc.basedocItf.LogicDelete`)
+- **UCF公共状态** (`basedoc.basedocItf.BasedocIState`)
+  - `enable` → `enable`
+- **UCF公共租户相关** (`basedoc.basedocItf.BasedocITenant`)
+  - `tenantid` → `tenantid`
+- **树型结构** (`basedoc.basedocItf.ITree`)
+  - `` → ``
+  - `level` → `level`
+  - `parent_id` → `parent_id`
+  - `path` → `path`
+  - `sort_num` → `sort_num`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 66 个直连字段
+
+### 文本字段 (33个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `address` | `address` | `address` | 公司注册地址 |
+| `businessid` | `businessid` | `businessid` | 友企联同步业务主键 |
+| `code` | `code` | `code` | 编码 |
+| `contact` | `contact` | `contact` | 联系人 |
+| `countryzone` | `countryzone` | `countryzone` | 国家地区 |
+| `description2` | `description2` | `description2` | 备注(多语备用) |
+| `description3` | `description3` | `description3` | 备注(多语备用) |
+| `description4` | `description4` | `description4` | 备注(多语备用) |
+| `description5` | `description5` | `description5` | 备注(多语备用) |
+| `description6` | `description6` | `description6` | 备注(多语备用) |
+| `id` | `id` | `id` | 主键 |
+| `innercode` | `innercode` | `innercode` | 内部码 |
+| `name2` | `name2` | `name2` | 名称(多语备用) |
+| `name3` | `name3` | `name3` | 名称(多语备用) |
+| `name4` | `name4` | `name4` | 名称(多语备用) |
+| `name5` | `name5` | `name5` | 名称(多语备用) |
+| `name6` | `name6` | `name6` | 名称(多语备用) |
+| `objid` | `objid` | `objid` | 外部系统主键 |
+| `orgform` | `orgform` | `orgform` | 组织类型 |
+| `orglevel` | `orglevel` | `orglevel` | 组织级别 |
+| `path` | `path` | `path` | 路径 |
+| `region` | `region` | `region` | 行政区划 |
+| `shortname2` | `shortname2` | `shortname2` | 简称(多语备用) |
+| `shortname3` | `shortname3` | `shortname3` | 简称(多语备用) |
+| `shortname4` | `shortname4` | `shortname4` | 简称(多语备用) |
+| `shortname5` | `shortname5` | `shortname5` | 简称(多语备用) |
+| `shortname6` | `shortname6` | `shortname6` | 简称(多语备用) |
+| `sourceid` | `sourceid` | `sourceid` | 来源入口 |
+| `sysid` | `sysid` | `sysid` | 系统标识 |
+| `taxpayerid` | `taxpayerid` | `taxpayerid` | 纳税人识别号 |
+| `telephone` | `telephone` | `telephone` | 联系电话 |
+| `tenantid` | `tenantid` | `tenantid` | 租户标识 |
+| `timezone` | `timezone` | `timezone` | 时区 |
+
+### 引用字段 (13个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `AdminOrgVO` | 部门 |
+| `branchleader` | `branchleader` | `branchleader` | 分管领导 |
+| `companytype` | `companytype` | `companytype` | 组织形态 |
+| `corpid` | `corpid` | `corpid` | 对应合同主体 |
+| `depttype` | `depttype` | `depttype` | 部门性质 |
+| `locationid` | `locationid` | `locationid` | 地点 |
+| `orgid` | `orgid` | `orgid` | 基础组织ID |
+| `parentid` | `parentid` | `parent` | 上级节点 |
+| `parentid` | `parentid` | `parentid` | 上级节点ID |
+| `parentorgid` | `parentorgid` | `parentorgid` | 上级组织ID |
+| `principal` | `principal` | `principal` | 负责人 |
+| `tenantid` | `tenantid` | `tenant` | 租户 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 整数 (9个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `displayorder` | `displayorder` | `displayorder` | 排序号 |
+| `enable` | `enable` | `enable` | 状态 |
+| `external_org` | `external_org` | `externalorg` | 外部组织 |
+| `isEnd` | `isEnd` | `isEnd` | 是否末级 |
+| `is_biz_unit` | `is_biz_unit` | `is_biz_unit` | 是否业务单元 |
+| `is_biz_unit` | `is_biz_unit` | `isbizunit` | 是否业务单元 |
+| `level` | `level` | `level` | 层级 |
+| `orgtype` | `orgtype` | `orgtype` | 是否部门 |
+| `displayorder` | `displayorder` | `sort` | 排序号 |
+
+### 短整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dept_nature` | `dept_nature` | `deptnature` | 部门类型 |
+| `dr` | `dr` | `dr` | 逻辑删除标识 |
+
+### multiLanguage (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `description` | `description` | `description` | 备注 |
+| `name` | `name` | `name` | 名称 |
+| `shortname` | `shortname` | `shortname` | 简称 |
+
+### timestamp (6个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `effectivedate` | `effectivedate` | `effectivedate` | 生效日期 |
+| `end_time` | `end_time` | `endtime` | 结束时间 |
+| `expirationdate` | `expirationdate` | `expirationdate` | 失效日期 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+| `start_time` | `start_time` | `starttime` | 开始时间 |
+| `synchts` | `synchts` | `synchts` | 友企联同步时间戳 |

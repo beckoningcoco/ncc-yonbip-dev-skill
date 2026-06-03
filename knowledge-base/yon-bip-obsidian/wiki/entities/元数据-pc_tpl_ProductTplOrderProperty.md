@@ -12,31 +12,94 @@ source_type: api_response
 
 # 物料模板-订单属性 (`pc.tpl.ProductTplOrderProperty`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `product_tpl_orderprop` | 应用: `GZTBDM` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`product_tpl_orderprop` | domain：`productcenter` | 应用：`GZTBDM` | 业务对象ID：``
 
-## 属性（13 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `id` | ID | `id` | Long | `long` |
-| 2 | `alias` | alias | `propertyAlias` | String | `text` |
-| 3 | `isRequired` | 是否Required | `isWebRequired` | Boolean | `switch` |
-| 4 | `isShow` | 是否Show | `isShow` | Boolean | `switch` |
-| 5 | `limitNum` | limitNum | `iLimitNum` | Integer | `int` |
-| 6 | `order` | order | `ordernumber` | Integer | `int` |
-| 7 | `propertyType` | propertyType | `propertyType` | 8420b5e5-7919-41ca-a192-7b8c4fb1d8b8 | `quote` |
-| 8 | `template` | template | `tpl_id` | c40d564b-d166-4e0e-875f-1fafdab28955 | `quote` |
-| 9 | `isDeleted` | 是否Deleted | `iDeleted` | Boolean | `switch` |
-| 10 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 11 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 12 | `tenant` | tenant | `tenant_id` | c213cd56-d5de-421f-bae7-d77455b557cd | `quote` |
-| 13 | `valueItems` | valueItems | `` | 1d3105f3-86dd-4852-887b-7652a69cbf71 | `` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 物料模板-订单属性 |
+| 物理表 | `product_tpl_orderprop` |
+| 数据库 schema | `productcenter` |
+| 所属应用 | `GZTBDM` |
+| 直连字段 | 13 个 |
+| 子表 | 1 个 |
+| 关联引用 | 5 个 |
 
-## 关联（5 个）
+## 子表
 
-- `template` -> `pc.tpl.ProductTpl` (0..n)
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `propertyType` -> `pc.userdef.UserDefineClass` ()
-- `valueItems` -> `pc.tpl.ProductTplOrderPropertyValue` (0..n)
-- `tenant` -> `base.tenant.Tenant` ()
+| 字段名 | URI | 关系 |
+|--------|-----|------|
+| `valueItems` | `pc.tpl.ProductTplOrderPropertyValue` | composition |
+
+## 关联引用 (5个)
+
+| 字段名 | 引用类型 |
+|--------|---------|
+| `tpl_id` | `` |
+| `ytenant_id` | `` |
+| `propertyType` | `` |
+| `` | `` |
+| `tenant_id` | `` |
+
+## 继承接口 (3个, 3字段)
+
+- **逻辑删除相关** (`base.itf.Deletable`)
+  - `iDeleted` → `iDeleted`
+- **租户相关** (`base.itf.ITenant`)
+  - `tenant_id` → `tenant_id`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 13 个直连字段
+
+### 文本字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `propertyAlias` | `propertyAlias` | `alias` | 属性别名 |
+
+### 引用字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `propertyType` | `propertyType` | `propertyType` | 属性名称 |
+| `tpl_id` | `tpl_id` | `template` | 物料模板 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户 |
+| `tenant_id` | `tenant_id` | `tenant` | 租户(废弃) |
+
+### 布尔字段 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `isWebRequired` | `isWebRequired` | `isRequired` | 前端必输 |
+| `isShow` | `isShow` | `isShow` | 前端显示 |
+| `iDeleted` | `iDeleted` | `isDeleted` | 逻辑删除标记 |
+
+### 整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iLimitNum` | `iLimitNum` | `limitNum` | 字数限制 |
+| `ordernumber` | `ordernumber` | `order` | 排序号 |
+
+### 长整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+
+### timestamp (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+
+### other (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `` | `valueItems` | 物料模板-订单属性值 |

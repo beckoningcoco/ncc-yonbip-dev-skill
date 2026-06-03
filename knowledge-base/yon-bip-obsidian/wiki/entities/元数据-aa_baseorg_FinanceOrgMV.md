@@ -12,72 +12,125 @@ source_type: api_response
 
 # 会计主体 (`aa.baseorg.FinanceOrgMV`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `org_fin` | 应用: `GZTORG` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`org_fin` | domain：`ucf-org-center` | 应用：`GZTORG` | 业务对象ID：``
 
-## 属性（49 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `accountingcalendar` | accountingcalendar | `accountingcalendar` | String | `text` |
-| 2 | `code` | 编码 | `code` | String | `text` |
-| 3 | `coder0e0` | coder0e0 | `currency` | String | `text` |
-| 4 | `createDate` | 创建日期 | `creationtime` | Date | `date` |
-| 5 | `sourcetype` | sourcetype | `source_type` | Integer | `int` |
-| 6 | `creationtime` | creationtime | `creationtime` | DateTime | `timestamp` |
-| 7 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 8 | `creator` | 创建人 | `creator` | String | `text` |
-| 9 | `currency` | currency | `currency` | 02b45339-eb4a-4a31-a8b5-d32f494f4e8e | `quote` |
-| 10 | `currencyCode` | currency编码 | `currency` | String | `text` |
-| 11 | `currencyName` | currency名称 | `currency` | String | `text` |
-| 12 | `customerId` | customerID | `dr` | Integer | `int` |
-| 13 | `displayorder` | displayorder | `displayorder` | Integer | `int` |
-| 14 | `dr` | 逻辑删除 | `dr` | Short | `short` |
-| 15 | `eaiCode` | eai编码 | `tenantid` | String | `text` |
-| 16 | `erpCode` | erp编码 | `tenantid` | String | `text` |
-| 17 | `exchangerate` | exchangerate | `exchangerate` | 1eb63781-e244-464d-b9ba-a7a4e1685295 | `quote` |
-| 18 | `externalorg` | externalorg | `external_org` | Integer | `int` |
-| 19 | `fullname` | fullname | `name` | String | `multiLanguage` |
-| 20 | `id` | ID | `id` | eaa75c14-e58f-4b35-9ae5-0032f4a98f54 | `quote` |
-| 21 | `isEnd` | 是否End | `isEnd` | Integer | `int` |
-| 22 | `isGlobal` | 是否Global | `isEnd` | Integer | `int` |
-| 23 | `level` | 层级 | `level` | Integer | `int` |
-| 24 | `localtaxregnum` | localtaxregnum | `localtaxregnum` | String | `text` |
-| 25 | `modifiedtime` | modifiedtime | `modifiedtime` | DateTime | `timestamp` |
-| 26 | `modifier` | 修改人 | `modifier` | String | `text` |
-| 27 | `modifyDate` | 修改日期 | `modifiedtime` | Date | `date` |
-| 28 | `name` | 名称 | `name` | String | `multiLanguage` |
-| 29 | `namer0e0` | namer0e0 | `currency` | String | `multiLanguage` |
-| 30 | `org` | org | `orgid` | eaa75c14-e58f-4b35-9ae5-0032f4a98f54 | `quote` |
-| 31 | `orgFunc` | orgFunc | `tenantid` | String | `text` |
-| 32 | `orgid` | orgid | `orgid` | 14302233-1394-4a70-94e1-bed51636f312 | `quote` |
-| 33 | `orglevel` | orglevel | `orglevel` | String | `text` |
-| 34 | `parent` | parent | `parentid` | 5d4c5590-da40-4b50-80a1-8d04da2f79e0 | `quote` |
-| 35 | `parentid` | parentid | `parentid` | 5d4c5590-da40-4b50-80a1-8d04da2f79e0 | `quote` |
-| 36 | `parentorgid` | parentorgid | `parentid` | String | `text` |
-| 37 | `path` | path | `id` | String | `text` |
-| 38 | `periodschema` | periodschema | `periodschema` | e7bb3d2b-b288-4696-b5f0-a9b0626cded8 | `quote` |
-| 39 | `principal` | principal | `principal` | 4effed83-35f5-4e3b-9be1-092b5ae602e8 | `quote` |
-| 40 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 41 | `region` | region | `region` | String | `text` |
-| 42 | `sort` | 排序 | `displayorder` | Integer | `int` |
-| 43 | `statetaxregnum` | statetaxregnum | `statetaxregnum` | String | `text` |
-| 44 | `stopstatus` | stopstatus | `enable` | Integer | `int` |
-| 45 | `stoptime` | stoptime | `modifiedtime` | DateTime | `timestamp` |
-| 46 | `taxPayingCategories` | taxPayingCategories | `taxpayertype` | Integer | `int` |
-| 47 | `taxpayerid` | taxpayerid | `taxpayerid` | String | `text` |
-| 48 | `tenant` | tenant | `tenantid` | String | `text` |
-| 49 | `ts` | ts | `ts` | DateTime | `timestamp` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 会计主体 |
+| 物理表 | `org_fin` |
+| 数据库 schema | `ucf-org-center` |
+| 所属应用 | `GZTORG` |
+| 直连字段 | 49 个 |
+| 子表 | 0 个 |
+| 关联引用 | 10 个 |
 
-## 关联（10 个）
+## 关联引用 (10个)
 
-- `principal` -> `bd.staff.Staff` ()
-- `parent` -> `org.func.FinanceOrg` ()
-- `org` -> `aa.baseorg.OrgMV` ()
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `exchangerate` -> `bd.exchangeRate.ExchangeRateTypeVO` ()
-- `periodschema` -> `bd.period.AccPeriodScheme` ()
-- `currency` -> `bd.currencytenant.CurrencyTenantVO` ()
-- `id` -> `aa.baseorg.OrgMV` (1)
-- `orgid` -> `org.func.BaseOrg` ()
-- `parentid` -> `org.func.FinanceOrg` ()
+| 字段名 | 引用类型 |
+|--------|---------|
+| `principal` | `` |
+| `parentid` | `` |
+| `orgid` | `` |
+| `ytenant_id` | `` |
+| `exchangerate` | `` |
+| `periodschema` | `` |
+| `currency` | `` |
+| `id` | `` |
+
+## 继承接口 (2个, 2字段)
+
+- **UCF公共租户相关** (`basedoc.basedocItf.BasedocITenant`)
+  - `tenantid` → `tenantid`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 49 个直连字段
+
+### 文本字段 (18个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `accountingcalendar` | `accountingcalendar` | `accountingcalendar` | 会计日历 |
+| `code` | `code` | `code` | 编码 |
+| `currency` | `currency` | `coder0e0` | 币种简称 |
+| `creator` | `creator` | `creator` | 创建人 |
+| `currency` | `currency` | `currencyCode` | 币种编码 |
+| `currency` | `currency` | `currencyName` | 币种名称 |
+| `tenantid` | `tenantid` | `eaiCode` | EAI编码 |
+| `tenantid` | `tenantid` | `erpCode` | erp编码 |
+| `localtaxregnum` | `localtaxregnum` | `localtaxregnum` | 地税登记号 |
+| `modifier` | `modifier` | `modifier` | 修改人 |
+| `tenantid` | `tenantid` | `orgFunc` | 组织职能 |
+| `orglevel` | `orglevel` | `orglevel` | 组织级别 |
+| `parentid` | `parentid` | `parentorgid` | 上级组织ID |
+| `id` | `id` | `path` | 路径 |
+| `region` | `region` | `region` | 行政区划 |
+| `statetaxregnum` | `statetaxregnum` | `statetaxregnum` | 国税登记号 |
+| `taxpayerid` | `taxpayerid` | `taxpayerid` | 纳税人识别号 |
+| `tenantid` | `tenantid` | `tenant` | 租户标识 |
+
+### 引用字段 (10个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+| `currency` | `currency` | `currency` | 币种 |
+| `exchangerate` | `exchangerate` | `exchangerate` | 汇率类型 |
+| `id` | `id` | `id` | 主键 |
+| `orgid` | `orgid` | `org` | 基础组织ID |
+| `orgid` | `orgid` | `orgid` | 关联组织主键 |
+| `parentid` | `parentid` | `parent` | 上级节点ID |
+| `parentid` | `parentid` | `parentid` | 上级节点 |
+| `periodschema` | `periodschema` | `periodschema` | 期间方案 |
+| `principal` | `principal` | `principal` | 负责人 |
+
+### 日期字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `creationtime` | `creationtime` | `createDate` | 创建日期 |
+| `modifiedtime` | `modifiedtime` | `modifyDate` | 修改日期 |
+
+### 整数 (10个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `source_type` | `source_type` | `sourcetype` | 数据来源类型 |
+| `dr` | `dr` | `customerId` | 客户ID |
+| `displayorder` | `displayorder` | `displayorder` | 显示顺序 |
+| `external_org` | `external_org` | `externalorg` | 外部组织标识 |
+| `isEnd` | `isEnd` | `isEnd` | 是否全局 |
+| `isEnd` | `isEnd` | `isGlobal` | 是否全局 |
+| `level` | `level` | `level` | 层级 |
+| `displayorder` | `displayorder` | `sort` | 排序号 |
+| `enable` | `enable` | `stopstatus` | 停用状态 |
+| `taxpayertype` | `taxpayertype` | `taxPayingCategories` | 纳税类别 |
+
+### 短整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dr` | `dr` | `dr` | 逻辑删除标识 |
+
+### timestamp (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `creationtime` | `creationtime` | `creationtime` | 创建时间 |
+| `modifiedtime` | `modifiedtime` | `modifiedtime` | 修改时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+| `modifiedtime` | `modifiedtime` | `stoptime` | 停用时间 |
+| `ts` | `ts` | `ts` | 时间戳 |
+
+### multiLanguage (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `name` | `name` | `fullname` | 名称 |
+| `name` | `name` | `name` | 名称 |
+| `currency` | `currency` | `namer0e0` | 币种名称 |

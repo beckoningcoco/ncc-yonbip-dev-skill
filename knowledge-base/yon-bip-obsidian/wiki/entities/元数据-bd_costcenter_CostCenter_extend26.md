@@ -12,30 +12,84 @@ source_type: api_response
 
 # BIP用户多选引用子实体 (`bd.costcenter.CostCenter_extend26`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `iuap_quotelist_i92076_35254245285954382` | 应用: `DPMACCT` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`iuap_quotelist_i92076_35254245285954382` | domain：`finbd` | 应用：`DPMACCT` | 业务对象ID：``
 
-## 属性（12 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `createTime` | 创建时间 | `create_time` | DateTime | `dateTime` |
-| 2 | `creator` | 创建人 | `creator` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 3 | `dr` | 逻辑删除 | `dr` | Short | `short` |
-| 4 | `extend26` | extend26 | `mainid` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 5 | `fkid` | fkid | `fkid_int` | 872630ba-e8f4-4080-817d-8fc9a6958733 | `quote` |
-| 6 | `id` | ID | `id` | String | `text` |
-| 7 | `modifier` | 修改人 | `modifier` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 8 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `dateTime` |
-| 9 | `pk_temp` | pk_temp | `pk_temp` | String | `text` |
-| 10 | `pubts` | 时间戳 | `pubts` | DateTime | `dateTime` |
-| 11 | `version` | 版本号 | `version` | Integer | `int` |
-| 12 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | BIP用户多选引用子实体 |
+| 物理表 | `iuap_quotelist_i92076_35254245285954382` |
+| 数据库 schema | `finbd` |
+| 所属应用 | `DPMACCT` |
+| 直连字段 | 12 个 |
+| 子表 | 0 个 |
+| 关联引用 | 5 个 |
 
-## 关联（5 个）
+## 关联引用 (5个)
 
-- `creator` -> `base.user.BipUser` ()
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `modifier` -> `base.user.BipUser` ()
-- `extend26` -> `base.user.BipUser` ()
-- `fkid` -> `bd.costcenter.CostCenter` (0..n)
+| 字段名 | 引用类型 |
+|--------|---------|
+| `` | `` |
+| `ytenant_id` | `` |
+| `mainid` | `bip-usercenter.bip_user_ref` |
+| `fkid_int` | `` |
+
+## 继承接口 (5个, 9字段)
+
+- **逻辑删除接口** (`common.base.LogicDelete`)
+  - `dr` → `dr`
+- **模版接口** (`common.base.Template`)
+  - `pk_temp` → `pk_temp`
+  - `version` → `version`
+- **逻辑删除** (`iuap.busiObj.LogicDelete`)
+  - `dr` → `dr`
+- **审计信息** (`ucfbase.ucfbaseItf.IAuditInfo`)
+  - `create_time` → `create_time`
+  - `` → ``
+  - `` → ``
+  - `modify_time` → `modify_time`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 12 个直连字段
+
+### 文本字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+| `pk_temp` | `pk_temp` | `pk_temp` | 模版 |
+
+### 引用字段 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `creator` | `creator` | 创建人 |
+| `mainid` | `mainid` | `extend26` | BIP用户 |
+| `fkid_int` | `fkid_int` | `fkid` | 外键 |
+| `` | `modifier` | `modifier` | 修改人 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 日期时间 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+
+### 整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `version` | `version` | `version` | 版本 |
+
+### 短整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dr` | `dr` | `dr` | 逻辑删除标记 |

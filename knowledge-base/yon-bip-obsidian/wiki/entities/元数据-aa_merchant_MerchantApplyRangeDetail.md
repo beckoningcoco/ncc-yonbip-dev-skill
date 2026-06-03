@@ -12,95 +12,176 @@ source_type: api_response
 
 # (停用)客户适用范围详情 (`aa.merchant.MerchantApplyRangeDetail`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `merchantapplyrangedetail` | 应用: `DPMCUS` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`merchantapplyrangedetail` | domain：`productcenter` | 应用：`DPMCUS` | 业务对象ID：``
 
-## 属性（57 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `id` | ID | `id` | 94b3280a-27a4-485a-b90b-b7bce57c6df2 | `quote` |
-| 2 | `merchantApplyRangeId` | merchantApplyRangeID | `merchantApplyRangeId` | c6b2ce53-9c17-45ca-b313-c775c94bc001 | `quote` |
-| 3 | `merchantApplyRangeExtId` | merchantApplyRangeExtID | `merchantApplyRangeId` | b023ebd3-0f7f-4a9a-a28b-32183b1b8022 | `quote` |
-| 4 | `belongOrg` | belongOrg | `cBelongOrg` | 8aaf4bce-2eb3-443c-bce1-0fb94fec3c0c | `quote` |
-| 5 | `belongMerchant` | belongMerchant | `cBelongMerchant` | 8aaf4bce-2eb3-443c-bce1-0fb94fec3c0c | `quote` |
-| 6 | `searchcode` | searchcode | `searchCode` | String | `text` |
-| 7 | `customerLevel` | customerLevel | `oCustomerLevel_id` | 40e121d8-8927-4bf1-ba4f-22a7b9f7b3b5 | `quote` |
-| 8 | `customerType` | customerType | `iCustomerTypeId` | e62ca924-4399-44b2-99d7-f33fc5a5b9e9 | `quote` |
-| 9 | `deliveryWarehouse` | deliveryWarehouse | `cDeliveryWarehouse` | 4256da1b-7d9f-49d6-b510-a05e771d17b0 | `quote` |
-| 10 | `transactionCurrency` | transactionCurrency | `cTransactionCurrency` | 02b45339-eb4a-4a31-a8b5-d32f494f4e8e | `quote` |
-| 11 | `exchangeratetype` | exchangeratetype | `cExchangeratetypeId` | 1eb63781-e244-464d-b9ba-a7a4e1685295 | `quote` |
-| 12 | `taxRate` | taxRate | `iTaxRate` | 709cd092-3dd4-49ca-9eb9-7b8888551810 | `quote` |
-| 13 | `payway` | payway | `cPayWay` | Payway | `` |
-| 14 | `creditServiceDay` | creditServiceDay | `iCreditServiceDay` | Integer | `int` |
-| 15 | `collectionAgreement` | collectionAgreement | `cCollectionAgreement` | e336f779-f1e5-4530-b6d5-fa2e5ed1c302 | `quote` |
-| 16 | `settlementMethod` | settlementMethod | `cSettlementMethod` | 95f34e90-897c-4bf5-958c-b1c2deaa8aff | `quote` |
-| 17 | `shipmentMethod` | shipmentMethod | `iShipmentMethodId` | aa2f6845-347d-499f-a5b2-964b84747d99 | `quote` |
-| 18 | `priceMarking` | priceMarking | `cPriceMarking` | Integer | `int` |
-| 19 | `signBack` | signBack | `bSignBack` | Boolean | `switch` |
-| 20 | `isTradeCustomers` | 是否TradeCustomers | `is_trade_customers` | String | `text` |
-| 21 | `orgDefaultAddress` | orgDefaultAddress | `orgdefaultaddress` | String | `text` |
-| 22 | `merchantApplyRangeDetailCharacter` | merchantApplyRangeDetailCharacter | `merchant_detail_character` | e2c1560c-f967-47af-8018-536256dd0ca7 | `UserDefine` |
-| 23 | `frozenState` | frozenState | `bfrozenstate` | FrozenState | `` |
-| 24 | `freezingLink` | freezingLink | `cfreezinglink` | String | `text` |
-| 25 | `customerArea` | customerArea | `oCustomerArea_id` | 75fb7b76-fdb5-4e87-ab0d-e4215a299634 | `quote` |
-| 26 | `professSalesman` | professSalesman | `cProfessSalesman` | 4effed83-35f5-4e3b-9be1-092b5ae602e8 | `quote` |
-| 27 | `specialManagementDep` | specialManagementDep | `cSpecialManagementDep` | a4352e3c-3eda-4539-a7a9-ec00799be118 | `quote` |
-| 28 | `internationalTradeTerms` | internationalTradeTerms | `internationaltradeterms` | InternationalTradeTerms | `` |
-| 29 | `erpCode` | erp编码 | `erpCode` | String | `text` |
-| 30 | `stopstatus` | stopstatus | `stopstatus` | Boolean | `switch` |
-| 31 | `stoptime` | stoptime | `stop_time` | DateTime | `timestamp` |
-| 32 | `layoffId` | layoffID | `layoff_id` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 33 | `createDate` | 创建日期 | `create_date` | Date | `date` |
-| 34 | `createTime` | 创建时间 | `create_time` | DateTime | `timestamp` |
-| 35 | `creatorId` | 创建人ID | `creatorId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 36 | `creator` | 创建人 | `creator` | String | `text` |
-| 37 | `modifyDate` | 修改日期 | `modify_date` | Date | `date` |
-| 38 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `timestamp` |
-| 39 | `modifierId` | 修改人ID | `modifierId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 40 | `modifier` | 修改人 | `modifier` | String | `text` |
-| 41 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 42 | `lockDate` | lockDate | `lock_Date` | Date | `date` |
-| 43 | `lockTime` | lockTime | `lock_time` | DateTime | `timestamp` |
-| 44 | `locker` | locker | `locker` | String | `text` |
-| 45 | `applyStatus` | applyStatus | `apply_status` | Integer | `int` |
-| 46 | `applyTime` | applyTime | `apply_time` | DateTime | `timestamp` |
-| 47 | `applyPerson` | applyPerson | `apply_person` | 4effed83-35f5-4e3b-9be1-092b5ae602e8 | `quote` |
-| 48 | `clue` | clue | `clueId` | Long | `long` |
-| 49 | `recentFollower` | recentFollower | `recent_follower` | 4effed83-35f5-4e3b-9be1-092b5ae602e8 | `quote` |
-| 50 | `recentFollowContent` | recentFollowContent | `recent_follow_content` | String | `text` |
-| 51 | `sourceOfTheHighSeas` | sourceOfTheHighSeas | `sourceOfTheHighSeas` | Long | `long` |
-| 52 | `highSeas` | highSeas | `highSeas` | Long | `long` |
-| 53 | `logicallyDeleteType` | logicallyDeleteType | `logicallyDeleteType` | LogicallyDeleteType | `` |
-| 54 | `deleteLog` | deleteLog | `deleteLog` | String | `text` |
-| 55 | `yhtUserId` | yhtUserID | `cyhtUserId` | String | `text` |
-| 56 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 57 | `tenant` | tenant | `tenant_id` | c213cd56-d5de-421f-bae7-d77455b557cd | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | (停用)客户适用范围详情 |
+| 物理表 | `merchantapplyrangedetail` |
+| 数据库 schema | `productcenter` |
+| 所属应用 | `DPMCUS` |
+| 直连字段 | 57 个 |
+| 子表 | 0 个 |
+| 关联引用 | 25 个 |
 
-## 关联（25 个）
+## 关联引用 (25个)
 
-- `layoffId` -> `base.user.User` ()
-- `creatorId` -> `base.user.User` ()
-- `modifierId` -> `base.user.User` ()
-- `specialManagementDep` -> `bd.adminOrg.AdminOrgVO` ()
-- `settlementMethod` -> `aa.settlemethod.SettleMethod` ()
-- `merchantApplyRangeDetailCharacter` -> `aa.merchant.MerchantApplyRangeDetailCharacter` ()
-- `shipmentMethod` -> `aa.sendtrans.SendTransWay` ()
-- `customerType` -> `aa.customertype.CustomerType` ()
-- `recentFollower` -> `bd.staff.Staff` ()
-- `id` -> `aa.merchant.Merchant` (0..n)
-- `tenant` -> `base.tenant.Tenant` ()
-- `belongMerchant` -> `bd.adminOrg.BaseOrgVO` ()
-- `transactionCurrency` -> `bd.currencytenant.CurrencyTenantVO` ()
-- `professSalesman` -> `bd.staff.Staff` ()
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `merchantApplyRangeId` -> `aa.merchant.MerchantApplyRange` (1)
-- `customerArea` -> `aa.salearea.SaleArea` ()
-- `customerLevel` -> `aa.agentlevel.AgentLevel` ()
-- `applyPerson` -> `bd.staff.Staff` ()
-- `collectionAgreement` -> `bd.receivables.ReceiveAgreement` ()
-- `taxRate` -> `archive.taxArchives.TaxRateArchive` ()
-- `deliveryWarehouse` -> `aa.warehouse.Warehouse` ()
-- `belongOrg` -> `bd.adminOrg.BaseOrgVO` ()
-- `exchangeratetype` -> `bd.exchangeRate.ExchangeRateTypeVO` ()
-- `merchantApplyRangeExtId` -> `aa.merchant.MerchantApplyRangeExt` (1)
+| 字段名 | 引用类型 |
+|--------|---------|
+| `layoff_id` | `` |
+| `` | `` |
+| `cSpecialManagementDep` | `ucf-org-center.bd_admindepttreeviewref` |
+| `cSettlementMethod` | `productcenter.aa_settlemethodref` |
+| `merchant_detail_character` | `` |
+| `iShipmentMethodId` | `productcenter.aa_sendtranswayref` |
+| `iCustomerTypeId` | `productcenter.aa_customerTyperef` |
+| `recent_follower` | `` |
+| `id` | `` |
+| `tenant_id` | `` |
+| `cBelongMerchant` | `productcenter.aa_adminorgqueryref` |
+| `cTransactionCurrency` | `ucfbasedoc.bd_currencytenantref` |
+| `cProfessSalesman` | `ucf-staff-center.bd_staff_ref` |
+| `ytenant_id` | `` |
+| `merchantApplyRangeId` | `productcenter.aa_adminorgqueryref` |
+| `oCustomerArea_id` | `productcenter.aa_salearearef` |
+| `oCustomerLevel_id` | `productcenter.aa_customerlevelref` |
+| `apply_person` | `` |
+| `cCollectionAgreement` | `ucfbasedoc.bd_receiveagreementref` |
+| `iTaxRate` | `ucfbasedoc.bd_taxrate` |
+| `cDeliveryWarehouse` | `productcenter.aa_warehouse` |
+| `cBelongOrg` | `productcenter.aa_adminorgqueryref` |
+| `cExchangeratetypeId` | `ucfbasedoc.bd_exchangeratetyperef` |
+
+## 继承接口 (6个, 16字段)
+
+- **erp编码** (`base.itf.IErpCode`)
+  - `erpCode` → `erpCode`
+- **租户相关** (`base.itf.ITenant`)
+  - `tenant_id` → `tenant_id`
+- **停用信息** (`base.itf.IStopping`)
+  - `stopstatus` → `stopstatus`
+  - `stop_time` → `stop_time`
+- **审计信息** (`base.itf.IAuditInfo`)
+  - `create_date` → `create_date`
+  - `create_time` → `create_time`
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `modify_date` → `modify_date`
+  - `modify_time` → `modify_time`
+- **锁定信息** (`base.itf.ILock`)
+  - `lock_Date` → `lock_Date`
+  - `locker` → `locker`
+  - `lock_time` → `lock_time`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 57 个直连字段
+
+### 文本字段 (11个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `searchCode` | `searchCode` | `searchcode` | 助记码 |
+| `is_trade_customers` | `is_trade_customers` | `isTradeCustomers` | 是否交易客户 |
+| `orgdefaultaddress` | `orgdefaultaddress` | `orgDefaultAddress` | 组织默认地址 |
+| `cfreezinglink` | `cfreezinglink` | `freezingLink` | 冻结环节 |
+| `erpCode` | `erpCode` | `erpCode` | 商家编码 |
+| `` | `creator` | `creator` | 创建人名称 |
+| `` | `modifier` | `modifier` | 修改人名称 |
+| `locker` | `locker` | `locker` | 锁定人 |
+| `recent_follow_content` | `recent_follow_content` | `recentFollowContent` | 最近跟进内容 |
+| `deleteLog` | `deleteLog` | `deleteLog` | 逻辑操作日志 |
+| `cyhtUserId` | `cyhtUserId` | `yhtUserId` | 友互通用户标识 |
+
+### 引用字段 (24个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | 客户id |
+| `merchantApplyRangeId` | `merchantApplyRangeId` | `merchantApplyRangeId` | 主键 |
+| `merchantApplyRangeId` | `merchantApplyRangeId` | `merchantApplyRangeExtId` | 客户分配范围扩展ID |
+| `cBelongOrg` | `cBelongOrg` | `belongOrg` | 所属组织 |
+| `cBelongMerchant` | `cBelongMerchant` | `belongMerchant` | 所属商家 |
+| `oCustomerLevel_id` | `oCustomerLevel_id` | `customerLevel` | 客户级别 |
+| `iCustomerTypeId` | `iCustomerTypeId` | `customerType` | 销售渠道 |
+| `cDeliveryWarehouse` | `cDeliveryWarehouse` | `deliveryWarehouse` | 发货仓库 |
+| `cTransactionCurrency` | `cTransactionCurrency` | `transactionCurrency` | 交易币种 |
+| `cExchangeratetypeId` | `cExchangeratetypeId` | `exchangeratetype` | 汇率类型 |
+| `iTaxRate` | `iTaxRate` | `taxRate` | 销项税率 |
+| `cCollectionAgreement` | `cCollectionAgreement` | `collectionAgreement` | 收款协议 |
+| `cSettlementMethod` | `cSettlementMethod` | `settlementMethod` | 结算方式 |
+| `iShipmentMethodId` | `iShipmentMethodId` | `shipmentMethod` | 发运方式 |
+| `oCustomerArea_id` | `oCustomerArea_id` | `customerArea` | 销售区域 |
+| `cProfessSalesman` | `cProfessSalesman` | `professSalesman` | 专管业务员 |
+| `cSpecialManagementDep` | `cSpecialManagementDep` | `specialManagementDep` | 专管部门 |
+| `layoff_id` | `layoff_id` | `layoffId` | 停用人 |
+| `` | `creatorId` | `creatorId` | 创建人 |
+| `` | `modifierId` | `modifierId` | 修改人 |
+| `apply_person` | `apply_person` | `applyPerson` | 申领人 |
+| `recent_follower` | `recent_follower` | `recentFollower` | 最近跟进人 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+| `tenant_id` | `tenant_id` | `tenant` | 租户 |
+
+### 日期字段 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_date` | `create_date` | `createDate` | 创建日期 |
+| `modify_date` | `modify_date` | `modifyDate` | 修改日期 |
+| `lock_Date` | `lock_Date` | `lockDate` | 锁定日期 |
+
+### 布尔字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `bSignBack` | `bSignBack` | `signBack` | 签收后开票 |
+| `stopstatus` | `stopstatus` | `stopstatus` | 停用状态 |
+
+### 整数 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iCreditServiceDay` | `iCreditServiceDay` | `creditServiceDay` | 信用期限 |
+| `cPriceMarking` | `cPriceMarking` | `priceMarking` | 价格标识 |
+| `apply_status` | `apply_status` | `applyStatus` | 申领状态 |
+
+### 长整数 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `clueId` | `clueId` | `clue` | 来源线索 |
+| `sourceOfTheHighSeas` | `sourceOfTheHighSeas` | `sourceOfTheHighSeas` | 来源公海 |
+| `highSeas` | `highSeas` | `highSeas` | 所属公海 |
+
+### other (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `cPayWay` | `cPayWay` | `payway` | 支付方式 |
+| `bfrozenstate` | `bfrozenstate` | `frozenState` | 冻结状态 |
+| `internationaltradeterms` | `internationaltradeterms` | `internationalTradeTerms` | 国际贸易条款 |
+| `logicallyDeleteType` | `logicallyDeleteType` | `logicallyDeleteType` | 逻辑删除类型 |
+
+### UserDefine (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `merchant_detail_character` | `merchant_detail_character` | `merchantApplyRangeDetailCharacter` | 业务信息自定义项 |
+
+### timestamp (6个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `stop_time` | `stop_time` | `stoptime` | 停用时间 |
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+| `lock_time` | `lock_time` | `lockTime` | 锁定时间 |
+| `apply_time` | `apply_time` | `applyTime` | 申领时间 |

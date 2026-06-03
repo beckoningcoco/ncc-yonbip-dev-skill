@@ -12,37 +12,82 @@ source_type: api_response
 
 # 客户员工 (`aa.merchant.MerchantStaff`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `merchantstaff` | 应用: `DPMCUS` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`merchantstaff` | domain：`productcenter` | 应用：`DPMCUS` | 业务对象ID：``
 
-## 属性（20 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `cHeadPicUrl` | cHeadPicUrl | `cHeadPicUrl` | String | `text` |
-| 2 | `code` | 编码 | `cCode` | String | `text` |
-| 3 | `dEntryTime` | dEntryTime | `dEntryTime` | DateTime | `timestamp` |
-| 4 | `dLeaveTime` | dLeaveTime | `dLeaveTime` | DateTime | `timestamp` |
-| 5 | `email` | email | `cEmail` | String | `text` |
-| 6 | `fullName` | full名称 | `cFullName` | String | `text` |
-| 7 | `gender` | gender | `iGender` | Integer | `int` |
-| 8 | `iPosition` | iPosition | `iPosition` | a06cee30-92b1-4a03-b399-3886f55e4ba1 | `quote` |
-| 9 | `merchantId` | merchantID | `imerchantId` | 94b3280a-27a4-485a-b90b-b7bce57c6df2 | `quote` |
-| 10 | `mobile` | mobile | `cMobile` | String | `text` |
-| 11 | `qq` | qq | `cQQ` | String | `text` |
-| 12 | `remarks` | remarks | `cRemarks` | String | `text` |
-| 13 | `source` | source | `source` | String | `text` |
-| 14 | `userName` | user名称 | `cUserName` | String | `text` |
-| 15 | `weChat` | weChat | `cWeChat` | String | `text` |
-| 16 | `yhtUserId` | yhtUserID | `cyhtUserId` | String | `text` |
-| 17 | `tenant` | tenant | `tenant_id` | c213cd56-d5de-421f-bae7-d77455b557cd | `quote` |
-| 18 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 19 | `id` | ID | `id` | Long | `long` |
-| 20 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 客户员工 |
+| 物理表 | `merchantstaff` |
+| 数据库 schema | `productcenter` |
+| 所属应用 | `DPMCUS` |
+| 直连字段 | 20 个 |
+| 子表 | 0 个 |
+| 关联引用 | 4 个 |
 
-## 关联（4 个）
+## 关联引用 (4个)
 
-- `merchantId` -> `aa.merchant.Merchant` (0..n)
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `iPosition` -> `bd.duty.Position` ()
-- `tenant` -> `base.tenant.Tenant` ()
+| 字段名 | 引用类型 |
+|--------|---------|
+| `imerchantId` | `` |
+| `ytenant_id` | `` |
+| `iPosition` | `` |
+| `tenant_id` | `` |
+
+## 继承接口 (2个, 2字段)
+
+- **租户相关** (`base.itf.ITenant`)
+  - `tenant_id` → `tenant_id`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 20 个直连字段
+
+### 文本字段 (11个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `cHeadPicUrl` | `cHeadPicUrl` | `cHeadPicUrl` | 员工照片 |
+| `cCode` | `cCode` | `code` | 员工编码 |
+| `cEmail` | `cEmail` | `email` | 邮箱 |
+| `cFullName` | `cFullName` | `fullName` | 姓名 |
+| `cMobile` | `cMobile` | `mobile` | 手机号 |
+| `cQQ` | `cQQ` | `qq` | QQ |
+| `cRemarks` | `cRemarks` | `remarks` | 备注 |
+| `source` | `source` | `source` | 来源 |
+| `cUserName` | `cUserName` | `userName` | 账号 |
+| `cWeChat` | `cWeChat` | `weChat` | 微信 |
+| `cyhtUserId` | `cyhtUserId` | `yhtUserId` | 友互通用户标识 |
+
+### 引用字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iPosition` | `iPosition` | `iPosition` | 员工职位Id |
+| `imerchantId` | `imerchantId` | `merchantId` | 所属客户 |
+| `tenant_id` | `tenant_id` | `tenant` | 租户 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iGender` | `iGender` | `gender` | 性别 |
+
+### 长整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | 主键 |
+
+### timestamp (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dEntryTime` | `dEntryTime` | `dEntryTime` | 入职时间 |
+| `dLeaveTime` | `dLeaveTime` | `dLeaveTime` | 离职时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |

@@ -12,82 +12,174 @@ source_type: api_response
 
 # 物料分类 (`pc.cls.ManagementClass`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `product_management_class` | 应用: `GZTBDM` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`product_management_class` | domain：`productcenter` | 应用：`GZTBDM` | 业务对象ID：`5ac274da-4507-488f-8fd4-84d896e14504`
 
-## 属性（48 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `id` | ID | `id` | Long | `long` |
-| 2 | `orgId` | 组织ID | `orgId` | 8aaf4bce-2eb3-443c-bce1-0fb94fec3c0c | `quote` |
-| 3 | `code` | 编码 | `code` | String | `text` |
-| 4 | `name` | 名称 | `name` | String | `multiLanguage` |
-| 5 | `erpCode` | erp编码 | `erpCode` | String | `text` |
-| 6 | `parent` | parent | `parent_id` | b295ef54-c421-4865-aca3-f5a9207a8d50 | `quote` |
-| 7 | `template` | template | `tpl_id` | c40d564b-d166-4e0e-875f-1fafdab28955 | `quote` |
-| 8 | `expenseItem` | expenseItem | `expenseItem` | d78cdbfa-0424-4dc3-a995-5c8624e1a560 | `quote` |
-| 9 | `remark` | remark | `remark` | String | `multiLanguage` |
-| 10 | `stopstatus` | stopstatus | `stopstatus` | Boolean | `switch` |
-| 11 | `firstLevel` | firstLevel | `firstLevelId` | b295ef54-c421-4865-aca3-f5a9207a8d50 | `quote` |
-| 12 | `secondLevel` | secondLevel | `secondLevelId` | b295ef54-c421-4865-aca3-f5a9207a8d50 | `quote` |
-| 13 | `thirdLevel` | thirdLevel | `thirdLevelId` | b295ef54-c421-4865-aca3-f5a9207a8d50 | `quote` |
-| 14 | `fourthLevel` | fourthLevel | `fourthLevelId` | b295ef54-c421-4865-aca3-f5a9207a8d50 | `quote` |
-| 15 | `fifthLevel` | fifthLevel | `fifthLevelId` | b295ef54-c421-4865-aca3-f5a9207a8d50 | `quote` |
-| 16 | `sixthLevel` | sixthLevel | `sixthLevelId` | b295ef54-c421-4865-aca3-f5a9207a8d50 | `quote` |
-| 17 | `seventhLevel` | seventhLevel | `seventhLevelId` | b295ef54-c421-4865-aca3-f5a9207a8d50 | `quote` |
-| 18 | `eighthLevel` | eighthLevel | `eighthLevelId` | b295ef54-c421-4865-aca3-f5a9207a8d50 | `quote` |
-| 19 | `order` | order | `iOrder` | Integer | `int` |
-| 20 | `productClass` | productClass | `oProductClass_id` | 5ad8fc93-4e6b-409f-a70f-462efa6fcee9 | `quote` |
-| 21 | `stoptime` | stoptime | `stop_time` | DateTime | `timestamp` |
-| 22 | `isEnd` | 是否End | `isEnd` | Boolean | `switch` |
-| 23 | `level` | 层级 | `level` | Integer | `int` |
-| 24 | `path` | path | `path` | String | `text` |
-| 25 | `fullPath` | fullPath | `cFullPath` | String | `text` |
-| 26 | `productCount` | productCount | `productCount` | Decimal | `number` |
-| 27 | `managementClassCharacter` | managementClassCharacter | `management_class_character` | fe203533-4747-4319-9bbc-47c356ceb2c9 | `UserDefine` |
-| 28 | `socialMctype` | socialMctype | `social_mctype` | Integer | `int` |
-| 29 | `socialTenantid` | socialTenantid | `social_tenantid` | String | `text` |
-| 30 | `socialSrcid` | socialSrcid | `social_srcid` | String | `text` |
-| 31 | `sociCoreArchive` | sociCoreArchive | `sociCoreArchive_id` | Long | `long` |
-| 32 | `logicallyDeleteType` | logicallyDeleteType | `logically_delete_type` | LogicallyDeleteType | `` |
-| 33 | `isDeleted` | 是否Deleted | `iDeleted` | Boolean | `switch` |
-| 34 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 35 | `orgGroupId` | orgGroupID | `org_group_id` | 6a8af5af-0687-4254-ab87-c07e00fc8398 | `quote` |
-| 36 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 37 | `creatorId` | 创建人ID | `creatorId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 38 | `creator` | 创建人 | `creator` | String | `text` |
-| 39 | `createDate` | 创建日期 | `create_date` | Date | `date` |
-| 40 | `createTime` | 创建时间 | `create_time` | DateTime | `timestamp` |
-| 41 | `modifierId` | 修改人ID | `modifierId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 42 | `modifier` | 修改人 | `modifier` | String | `text` |
-| 43 | `modifyDate` | 修改日期 | `modify_date` | Date | `date` |
-| 44 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `timestamp` |
-| 45 | `sort` | 排序 | `sort_num` | Integer | `int` |
-| 46 | `tenant` | tenant | `tenant_id` | c213cd56-d5de-421f-bae7-d77455b557cd | `quote` |
-| 47 | `managementClassApplyRanges` | managementClassApplyRanges | `` | f784b641-7c72-4b5d-a3f9-c58199445899 | `` |
-| 48 | `managementClassDefines` | managementClassDefines | `` | 2acab3c2-e505-468c-bd4d-8614113b761d | `` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 物料分类 |
+| 物理表 | `product_management_class` |
+| 数据库 schema | `productcenter` |
+| 所属应用 | `GZTBDM` |
+| 直连字段 | 48 个 |
+| 子表 | 2 个 |
+| 关联引用 | 21 个 |
 
-## 关联（21 个）
+## 子表
 
-- `expenseItem` -> `bd.expenseitem.ExpenseItem` ()
-- `template` -> `pc.tpl.ProductTpl` ()
-- `parent` -> `pc.cls.ManagementClass` ()
-- `productClass` -> `pc.cls.PresentationClass` ()
-- `thirdLevel` -> `pc.cls.ManagementClass` ()
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `fourthLevel` -> `pc.cls.ManagementClass` ()
-- `creatorId` -> `base.user.User` ()
-- `modifierId` -> `base.user.User` ()
-- `sixthLevel` -> `pc.cls.ManagementClass` ()
-- `firstLevel` -> `pc.cls.ManagementClass` ()
-- `managementClassDefines` -> `pc.cls.ManagementClassDefine` (1)
-- `eighthLevel` -> `pc.cls.ManagementClass` ()
-- `orgId` -> `bd.adminOrg.BaseOrgVO` ()
-- `managementClassCharacter` -> `pc.cls.ManagementClassCharacter` ()
-- `seventhLevel` -> `pc.cls.ManagementClass` ()
-- `secondLevel` -> `pc.cls.ManagementClass` ()
-- `orgGroupId` -> `pc.pub_org_group.PubOrgGroup` ()
-- `managementClassApplyRanges` -> `pc.cls.ManagementClassApplyRangeGroup` (0..n)
-- `fifthLevel` -> `pc.cls.ManagementClass` ()
-- `tenant` -> `base.tenant.Tenant` ()
+| 字段名 | URI | 关系 |
+|--------|-----|------|
+| `managementClassApplyRanges` | `pc.cls.ManagementClassApplyRangeGroup` | composition |
+| `managementClassDefines` | `pc.cls.ManagementClassDefine` | composition |
+
+## 关联引用 (21个)
+
+| 字段名 | 引用类型 |
+|--------|---------|
+| `expenseItem` | `finbd.bd_expenseitemref` |
+| `tpl_id` | `productcenter.pc_producttplref` |
+| `parent_id` | `productcenter.pc_managementclassref` |
+| `oProductClass_id` | `productcenter.pc_presentationclassref` |
+| `thirdLevelId` | `productcenter.pc_managementclassref` |
+| `ytenant_id` | `` |
+| `fourthLevelId` | `productcenter.pc_managementclassref` |
+| `` | `` |
+| `sixthLevelId` | `productcenter.pc_managementclassref` |
+| `firstLevelId` | `productcenter.pc_managementclassref` |
+| `eighthLevelId` | `productcenter.pc_managementclassref` |
+| `orgId` | `productcenter.aa_adminorgref` |
+| `management_class_character` | `` |
+| `seventhLevelId` | `productcenter.pc_managementclassref` |
+| `secondLevelId` | `productcenter.pc_managementclassref` |
+| `org_group_id` | `` |
+| `fifthLevelId` | `productcenter.pc_managementclassref` |
+| `tenant_id` | `` |
+
+## 继承接口 (4个, 13字段)
+
+- **自动编号** (`voucher.base.IAutoCode`)
+  - `` → ``
+- **审计信息** (`base.itf.IAuditInfo`)
+  - `create_date` → `create_date`
+  - `create_time` → `create_time`
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `modify_date` → `modify_date`
+  - `modify_time` → `modify_time`
+- **社会化企业群档案** (`bd.social.ISocialMcType`)
+  - `social_mctype` → `social_mctype`
+  - `social_srcid` → `social_srcid`
+  - `social_tenantid` → `social_tenantid`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 48 个直连字段
+
+### 文本字段 (8个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `code` | `code` | `code` | 分类编码 |
+| `erpCode` | `erpCode` | `erpCode` | 外部编码 |
+| `path` | `path` | `path` | 路径 |
+| `cFullPath` | `cFullPath` | `fullPath` | 全路径 |
+| `social_tenantid` | `social_tenantid` | `socialTenantid` | 社会化来源租户 |
+| `social_srcid` | `social_srcid` | `socialSrcid` | 社会化来源 |
+| `` | `creator` | `creator` | 创建人 |
+| `` | `modifier` | `modifier` | 修改人 |
+
+### 引用字段 (18个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `orgId` | `orgId` | `orgId` | 管理组织 |
+| `parent_id` | `parent_id` | `parent` | 上级分类 |
+| `tpl_id` | `tpl_id` | `template` | 物料模板 |
+| `expenseItem` | `expenseItem` | `expenseItem` | 费用项目 |
+| `firstLevelId` | `firstLevelId` | `firstLevel` | 第一级分类 |
+| `secondLevelId` | `secondLevelId` | `secondLevel` | 第二级分类 |
+| `thirdLevelId` | `thirdLevelId` | `thirdLevel` | 第三级分类 |
+| `fourthLevelId` | `fourthLevelId` | `fourthLevel` | 第四级分类 |
+| `fifthLevelId` | `fifthLevelId` | `fifthLevel` | 第五级分类 |
+| `sixthLevelId` | `sixthLevelId` | `sixthLevel` | 第六级分类 |
+| `seventhLevelId` | `seventhLevelId` | `seventhLevel` | 第七级分类 |
+| `eighthLevelId` | `eighthLevelId` | `eighthLevel` | 第八级分类 |
+| `oProductClass_id` | `oProductClass_id` | `productClass` | 管理分类 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户 |
+| `org_group_id` | `org_group_id` | `orgGroupId` | 组织组 |
+| `` | `creatorId` | `creatorId` | 创建人 |
+| `` | `modifierId` | `modifierId` | 修改人 |
+| `tenant_id` | `tenant_id` | `tenant` | 租户(废弃) |
+
+### 日期字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_date` | `create_date` | `createDate` | 创建日期 |
+| `modify_date` | `modify_date` | `modifyDate` | 修改日期 |
+
+### 布尔字段 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `stopstatus` | `stopstatus` | `stopstatus` | 启用状态 |
+| `` | `isEnd` | `isEnd` | 是否末级 |
+| `iDeleted` | `iDeleted` | `isDeleted` | 逻辑删除标记 |
+
+### 整数 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iOrder` | `iOrder` | `order` | 排序号 |
+| `level` | `level` | `level` | 层级 |
+| `social_mctype` | `social_mctype` | `socialMctype` | 社会化管控类型 |
+| `sort_num` | `sort_num` | `sort` | 排序号(废弃) |
+
+### 长整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+| `sociCoreArchive_id` | `sociCoreArchive_id` | `sociCoreArchive` | 社会化核心企业档案 |
+
+### 数值字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `productCount` | `productCount` | `productCount` | 物料数量 |
+
+### multiLanguage (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `name` | `name` | `name` | 分类名称 |
+| `remark` | `remark` | `remark` | 备注 |
+
+### timestamp (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `stop_time` | `stop_time` | `stoptime` | 停用时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+
+### UserDefine (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `management_class_character` | `management_class_character` | `managementClassCharacter` | 物料分类自定义项 |
+
+### other (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `logically_delete_type` | `logically_delete_type` | `logicallyDeleteType` | 逻辑删除类型 |
+| `` | `` | `managementClassApplyRanges` | 物料分类适用范围组 |
+| `` | `` | `managementClassDefines` | 物料分类自定义项 |

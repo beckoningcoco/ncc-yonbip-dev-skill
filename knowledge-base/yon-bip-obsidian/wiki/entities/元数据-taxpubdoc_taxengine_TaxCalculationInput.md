@@ -9,93 +9,185 @@ last_verified: 2026-06-03
 status: verified
 source_type: api_response
 ---
+
 # 计税输入 (`taxpubdoc.taxengine.TaxCalculationInput`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBip），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `tax_calc_input` | 应用: `DPMTAX`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`tax_calc_input` | domain：`yonbip-fi-taxpubdoc` | 应用：`DPMTAX` | 业务对象ID：`3f94a0e6-2b63-4846-92f3-691818172b8e`
 
-## 属性（58 个）
+## 基本信息
 
-| # | 字段 | 显示名 | 列 | 类型 | biztype |
-|---|------|--------|-----|------|---------|
-| 1 | `taxPriceFlag` | taxPriceFlag | `tax_price_flag` | taxPriceFlag | `singleOption` |
-| 2 | `taxAccType` | taxAccType | `tax_acc_type` | taxCurrType | `singleOption` |
-| 3 | `invoiceReceiptAddress` | invoiceReceiptAddress | `invoice_receipt_address` | 0d98e246-387e-4239-a8da-c372e94fff77 | `quote` |
-| 4 | `invoiceAddress` | invoiceAddress | `invoice_address` | String | `text` |
-| 5 | `vendorTaxCountry` | vendorTaxCountry | `vendor_tax_country` | 8e9602ac-5ca2-4d06-aede-4a0af4c316bf | `quote` |
-| 6 | `customerId` | customerID | `customer_id` | 94b3280a-27a4-485a-b90b-b7bce57c6df2 | `quote` |
-| 7 | `billtypeId` | billtypeID | `billtype_id` | 4a227650-b866-4f4c-a6ca-2433297a1713 | `quote` |
-| 8 | `warehouseId` | warehouseID | `warehouse_id` | 4256da1b-7d9f-49d6-b510-a05e771d17b0 | `quote` |
-| 9 | `customerTaxNumber` | customerTaxNumber | `customer_tax_number` | String | `text` |
-| 10 | `directDelivery` | directDelivery | `direct_delivery` | taxpubdocYNEnum | `singleOption` |
-| 11 | `receiverAddress` | receiverAddress | `receiver_address` | String | `text` |
-| 12 | `deliveryCountry` | deliveryCountry | `delivery_country` | 8e9602ac-5ca2-4d06-aede-4a0af4c316bf | `quote` |
-| 13 | `invoiceReceiptCountry` | invoiceReceiptCountry | `invoice_receipt_country` | 8e9602ac-5ca2-4d06-aede-4a0af4c316bf | `quote` |
-| 14 | `transtypeId` | transtypeID | `transtype_id` | 19f9264d-28d1-4b47-9d28-f2e82654f3a9 | `quote` |
-| 15 | `insiderTrading` | insiderTrading | `insider_trading` | taxpubdocYNEnum | `singleOption` |
-| 16 | `invoiceCountry` | invoiceCountry | `invoice_country` | 8e9602ac-5ca2-4d06-aede-4a0af4c316bf | `quote` |
-| 17 | `customerTaxCountry` | customerTaxCountry | `customer_tax_country` | 8e9602ac-5ca2-4d06-aede-4a0af4c316bf | `quote` |
-| 18 | `receiverPostcode` | receiverPostcode | `receiver_postcode` | String | `text` |
-| 19 | `invoicePostcode` | invoicePostcode | `invoice_postcode` | String | `text` |
-| 20 | `currencyId` | currencyID | `currency_id` | 02b45339-eb4a-4a31-a8b5-d32f494f4e8e | `quote` |
-| 21 | `taxpayerType` | taxpayerType | `taxpayer_type` | String | `text` |
-| 22 | `receiverCountry` | receiverCountry | `receiver_country` | 8e9602ac-5ca2-4d06-aede-4a0af4c316bf | `quote` |
-| 23 | `currencyConvertDate` | currencyConvertDate | `currency_convert_date` | String | `date` |
-| 24 | `vendorTaxNumber` | vendorTaxNumber | `vendor_tax_number` | String | `text` |
-| 25 | `vendorId` | vendorID | `vendor_id` | 89bf026e-cc49-4fe7-9a7b-3e8fdcc77c1e | `quote` |
-| 26 | `transDate` | transDate | `trans_date` | Date | `dateTime` |
-| 27 | `orgCountry` | orgCountry | `org_country` | 8e9602ac-5ca2-4d06-aede-4a0af4c316bf | `quote` |
-| 28 | `deliveryAddress` | deliveryAddress | `delivery_address` | String | `text` |
-| 29 | `defineTerm` | defineTerm | `define_term` | e0d65972-3883-40a0-b81f-f956e19a8f30 | `UserDefine` |
-| 30 | `invoiceReceiptPostcode` | invoiceReceiptPostcode | `invoice_receipt_postcode` | String | `text` |
-| 31 | `deliveryPostcode` | deliveryPostcode | `delivery_postcode` | String | `text` |
-| 32 | `taxCalcMethod` | taxCalcMethod | `tax_calc_method` | TaxCalcMethod_C | `singleOption` |
-| 33 | `currType` | currType | `curr_type` | taxEngineCurrType | `singleOption` |
-| 34 | `localCurrencyId` | localCurrencyID | `local_currency_id` | 02b45339-eb4a-4a31-a8b5-d32f494f4e8e | `quote` |
-| 35 | `exchangeRate` | exchangeRate | `exchange_rate` | Decimal | `number` |
-| 36 | `exchangeRateMethod` | exchangeRateMethod | `exchange_rate_method` | String | `text` |
-| 37 | `id` | ID | `id` | String | `text` |
-| 38 | `pubts` | 时间戳 | `pubts` | DateTime | `dateTime` |
-| 39 | `bizFlowInstanceId` | bizFlowInstanceID | `bizflowinstance_id` | String | `text` |
-| 40 | `bizFlowMakeBillCode` | bizFlowMakeBill编码 | `bizflow_makebillcode` | String | `text` |
-| 41 | `bizflowId` | bizflowID | `bizflow_id` | String | `text` |
-| 42 | `bizflowName` | bizflow名称 | `bizflowname` | String | `text` |
-| 43 | `sourceBusiObj` | sourceBusiObj | `sourcebusiobj` | String | `text` |
-| 44 | `sourceChildId` | sourceChildID | `sourcechild_id` | String | `text` |
-| 45 | `sourceCode` | source编码 | `sourcecode` | String | `text` |
-| 46 | `sourceId` | sourceID | `source_id` | String | `text` |
-| 47 | `firstBusiObj` | firstBusiObj | `firstbusiobj` | String | `text` |
-| 48 | `firstChildId` | firstChildID | `firstchild_id` | String | `text` |
-| 49 | `firstCode` | first编码 | `firstcode` | String | `text` |
-| 50 | `firstId` | firstID | `first_id` | String | `text` |
-| 51 | `sourceGrandId` | sourceGrandID | `sourcegrand_id` | String | `text` |
-| 52 | `createTime` | 创建时间 | `create_time` | DateTime | `dateTime` |
-| 53 | `creator` | 创建人 | `creator` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 54 | `modifier` | 修改人 | `modifier` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 55 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `dateTime` |
-| 56 | `ytenantId` | ytenantID | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 57 | `dr` | 逻辑删除 | `dr` | Short | `short` |
-| 58 | `TaxCalculationInputDetailList` | TaxCalculationInputDetailList | `` | 002f1c0c-815d-4afd-a93e-446e31a5abc9 | `` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 计税输入 |
+| 物理表 | `tax_calc_input` |
+| 数据库 schema | `yonbip-fi-taxpubdoc` |
+| 所属应用 | `DPMTAX` |
+| 直连字段 | 58 个 |
+| 子表 | 1 个 |
+| 关联引用 | 20 个 |
 
-## 关联（20 个）
+## 子表
 
-- `invoiceReceiptAddress` -> `aa.regioncorp.RegionCorp` () [废]
-- `billtypeId` -> `bd.bill.BillTypeVO` () [废]
-- `creator` -> `base.user.BipUser` () 
-- `invoiceReceiptCountry` -> `bd.country.CountryVO` () [废]
-- `invoiceCountry` -> `bd.country.CountryVO` () [废]
-- `localCurrencyId` -> `bd.currencytenant.CurrencyTenantVO` () [废]
-- `defineTerm` -> `taxpubdoc.taxengine.TaxCalculationInputdefineTermUserDefine` () [废]
-- `modifier` -> `base.user.BipUser` () 
-- `orgCountry` -> `bd.country.CountryVO` () [废]
-- `vendorId` -> `aa.vendor.Vendor` () [废]
-- `TaxCalculationInputDetailList` -> `taxpubdoc.taxengine.TaxCalculationInputDetail` (0..n) 
-- `ytenantId` -> `yht.tenant.YhtTenant` () 
-- `customerTaxCountry` -> `bd.country.CountryVO` () [废]
-- `receiverCountry` -> `bd.country.CountryVO` () [废]
-- `warehouseId` -> `aa.warehouse.Warehouse` () [废]
-- `deliveryCountry` -> `bd.country.CountryVO` () [废]
-- `customerId` -> `aa.merchant.Merchant` () [废]
-- `vendorTaxCountry` -> `bd.country.CountryVO` () [废]
-- `currencyId` -> `bd.currencytenant.CurrencyTenantVO` () [废]
-- `transtypeId` -> `bd.bill.TransType` () [废]
+| 字段名 | URI | 关系 |
+|--------|-----|------|
+| `TaxCalculationInputDetailList` | `taxpubdoc.taxengine.TaxCalculationInputDetail` | composition |
+
+## 关联引用 (20个)
+
+| 字段名 | 引用类型 |
+|--------|---------|
+| `invoice_receipt_address` | `productcenter.pc_addressarchivesref` |
+| `billtype_id` | `ucfbasedoc.bd_billtypetreeref` |
+| `creator` | `bip-usercenter.bip_user_ref` |
+| `invoice_receipt_country` | `ucfbasedoc.bd_countryref` |
+| `invoice_country` | `ucfbasedoc.bd_countryref` |
+| `local_currency_id` | `ucfbasedoc.bd_currencytenantref` |
+| `define_term` | `` |
+| `modifier` | `bip-usercenter.bip_user_ref` |
+| `org_country` | `ucfbasedoc.bd_countryref` |
+| `vendor_id` | `yssupplier.aa_vendor` |
+| `` | `` |
+| `ytenant_id` | `` |
+| `customer_tax_country` | `ucfbasedoc.bd_countryref` |
+| `receiver_country` | `ucfbasedoc.bd_countryref` |
+| `warehouse_id` | `productcenter.aa_warehouse` |
+| `delivery_country` | `ucfbasedoc.bd_countryref` |
+| `customer_id` | `productcenter.aa_invoicemerchantref` |
+| `vendor_tax_country` | `ucfbasedoc.bd_countryref` |
+| `currency_id` | `ucfbasedoc.bd_currencytenantref` |
+| `transtype_id` | `ucfbasedoc.bd_billtyperef` |
+
+## 继承接口 (5个, 19字段)
+
+- **逻辑删除** (`iuap.busiObj.LogicDelete`)
+  - `dr` → `dr`
+- **统一租户接口** (`iuap.busiObj.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+- **业务流多来源** (`iuap.busiObj.BusinessFlowSourcesItf`)
+  - `firstbusiobj` → `firstbusiobj`
+  - `firstchild_id` → `firstchild_id`
+  - `firstcode` → `firstcode`
+  - `first_id` → `first_id`
+  - `sourcegrand_id` → `sourcegrand_id`
+- **业务流基础** (`iuap.busiObj.BusinessFlowItf`)
+  - `bizflow_id` → `bizflow_id`
+  - `bizflowinstance_id` → `bizflowinstance_id`
+  - `bizflow_makebillcode` → `bizflow_makebillcode`
+  - `bizflowname` → `bizflowname`
+  - `sourcebusiobj` → `sourcebusiobj`
+  - `sourcechild_id` → `sourcechild_id`
+  - `sourcecode` → `sourcecode`
+  - `source_id` → `source_id`
+- **审计信息** (`iuap.busiObj.IAuditInfo`)
+  - `create_time` → `create_time`
+  - `creator` → `creator`
+  - `modifier` → `modifier`
+  - `modify_time` → `modify_time`
+
+## 字段列表（按类型分组）
+
+> 共 58 个直连字段
+
+### 文本字段 (25个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `invoice_address` | `invoice_address` | `invoiceAddress` | 开票方地址(市县) |
+| `customer_tax_number` | `customer_tax_number` | `customerTaxNumber` | 客户税务登记编码 |
+| `receiver_address` | `receiver_address` | `receiverAddress` | 收货地址(市县) |
+| `receiver_postcode` | `receiver_postcode` | `receiverPostcode` | 收货邮编 |
+| `invoice_postcode` | `invoice_postcode` | `invoicePostcode` | 开票方邮编 |
+| `taxpayer_type` | `taxpayer_type` | `taxpayerType` | 组织纳税人类型 |
+| `vendor_tax_number` | `vendor_tax_number` | `vendorTaxNumber` | 供应商税务登记编号 |
+| `delivery_address` | `delivery_address` | `deliveryAddress` | 发货地址(市县) |
+| `invoice_receipt_postcode` | `invoice_receipt_postcode` | `invoiceReceiptPostcode` | 受票方邮编 |
+| `delivery_postcode` | `delivery_postcode` | `deliveryPostcode` | 发货邮编 |
+| `exchange_rate_method` | `exchange_rate_method` | `exchangeRateMethod` | 汇率折算方式 |
+| `id` | `id` | `id` | 主键 |
+| `bizflowinstance_id` | `bizflowinstance_id` | `bizFlowInstanceId` | 业务流实例id |
+| `bizflow_makebillcode` | `bizflow_makebillcode` | `bizFlowMakeBillCode` | 单据转换规则编码 |
+| `bizflow_id` | `bizflow_id` | `bizflowId` | 业务流id |
+| `bizflowname` | `bizflowname` | `bizflowName` | 流程名称 |
+| `sourcebusiobj` | `sourcebusiobj` | `sourceBusiObj` | 上游业务对象 |
+| `sourcechild_id` | `sourcechild_id` | `sourceChildId` | 上游单据子表id |
+| `sourcecode` | `sourcecode` | `sourceCode` | 上游单据号 |
+| `source_id` | `source_id` | `sourceId` | 上游单据主表id |
+| `firstbusiobj` | `firstbusiobj` | `firstBusiObj` | 来源业务对象 |
+| `firstchild_id` | `firstchild_id` | `firstChildId` | 来源单据子表id |
+| `firstcode` | `firstcode` | `firstCode` | 来源单据号 |
+| `first_id` | `first_id` | `firstId` | 来源单据主表id |
+| `sourcegrand_id` | `sourcegrand_id` | `sourceGrandId` | 来源孙表id |
+
+### 引用字段 (18个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `invoice_receipt_address` | `invoice_receipt_address` | `invoiceReceiptAddress` | 受票方地址(市县) |
+| `vendor_tax_country` | `vendor_tax_country` | `vendorTaxCountry` | 供应商税务登记国家/地区 |
+| `customer_id` | `customer_id` | `customerId` | 客户 |
+| `billtype_id` | `billtype_id` | `billtypeId` | 单据类型 |
+| `warehouse_id` | `warehouse_id` | `warehouseId` | 仓库 |
+| `delivery_country` | `delivery_country` | `deliveryCountry` | 发货国家/地区 |
+| `invoice_receipt_country` | `invoice_receipt_country` | `invoiceReceiptCountry` | 受票方国家/地区 |
+| `transtype_id` | `transtype_id` | `transtypeId` | 交易类型 |
+| `invoice_country` | `invoice_country` | `invoiceCountry` | 开票方国家/地区 |
+| `customer_tax_country` | `customer_tax_country` | `customerTaxCountry` | 客户税务登记国家/地区 |
+| `currency_id` | `currency_id` | `currencyId` | 原币 |
+| `receiver_country` | `receiver_country` | `receiverCountry` | 收货国家/地区 |
+| `vendor_id` | `vendor_id` | `vendorId` | 供应商 |
+| `org_country` | `org_country` | `orgCountry` | 组织税务登记国家/地区 |
+| `local_currency_id` | `local_currency_id` | `localCurrencyId` | 本币 |
+| `creator` | `creator` | `creator` | 创建人 |
+| `modifier` | `modifier` | `modifier` | 修改人 |
+| `ytenant_id` | `ytenant_id` | `ytenantId` | 租户id |
+
+### 日期字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `currency_convert_date` | `currency_convert_date` | `currencyConvertDate` | 汇率转换日期 |
+
+### 日期时间 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `trans_date` | `trans_date` | `transDate` | 交易日期 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+
+### 枚举字段 (6个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `tax_price_flag` | `tax_price_flag` | `taxPriceFlag` | 价格标识 |
+| `tax_acc_type` | `tax_acc_type` | `taxAccType` | 精度类型 |
+| `direct_delivery` | `direct_delivery` | `directDelivery` | 是否直接交货 |
+| `insider_trading` | `insider_trading` | `insiderTrading` | 是否内部交易 |
+| `tax_calc_method` | `tax_calc_method` | `taxCalcMethod` | 计税方式 |
+| `curr_type` | `curr_type` | `currType` | 计税币种 |
+
+### 短整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dr` | `dr` | `dr` | 逻辑删除 |
+
+### 数值字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `exchange_rate` | `exchange_rate` | `exchangeRate` | 汇率 |
+
+### UserDefine (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `define_term` | `define_term` | `defineTerm` | 自定义特征项 |
+
+### other (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `` | `TaxCalculationInputDetailList` | 计税输入明细 |

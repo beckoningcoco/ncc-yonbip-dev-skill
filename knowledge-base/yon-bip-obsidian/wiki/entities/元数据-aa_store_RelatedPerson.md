@@ -12,33 +12,78 @@ source_type: api_response
 
 # 相关人员 (`aa.store.RelatedPerson`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `mp_relatedperson` | 应用: `Marketingpublic` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`mp_relatedperson` | domain：`yxybase` | 应用：`Marketingpublic` | 业务对象ID：``
 
-## 属性（12 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `id` | ID | `id` | Long | `long` |
-| 2 | `store` | store | `iStoreId` | 16e4e14c-ab05-4ee5-bbb8-c67351c9a8b3 | `quote` |
-| 3 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 4 | `saleOrg` | saleOrg | `saleorg` | 14302233-1394-4a70-94e1-bed51636f312 | `quote` |
-| 5 | `person` | person | `person` | 4effed83-35f5-4e3b-9be1-092b5ae602e8 | `quote` |
-| 6 | `ower` | ower | `ower` | Boolean | `switch` |
-| 7 | `cust` | cust | `cust` | 94b3280a-27a4-485a-b90b-b7bce57c6df2 | `quote` |
-| 8 | `partnerPerson` | partnerPerson | `partner_person` | 4effed83-35f5-4e3b-9be1-092b5ae602e8 | `quote` |
-| 9 | `dept` | dept | `dept` | String | `text` |
-| 10 | `partnerDept` | partnerDept | `partner_dept` | b54fc393-1d66-4f6e-806b-c8a50b5e788b | `quote` |
-| 11 | `tenant` | tenant | `tenant_id` | c213cd56-d5de-421f-bae7-d77455b557cd | `quote` |
-| 12 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 相关人员 |
+| 物理表 | `mp_relatedperson` |
+| 数据库 schema | `yxybase` |
+| 所属应用 | `Marketingpublic` |
+| 直连字段 | 12 个 |
+| 子表 | 0 个 |
+| 关联引用 | 8 个 |
 
-## 关联（8 个）
+## 关联引用 (8个)
 
-- `partnerPerson` -> `bd.staff.Staff` ()
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `person` -> `bd.staff.Staff` ()
-- `store` -> `aa.store.Store` (0..n)
-- `partnerDept` -> `cust.custoperateinfo.CustTechnologyDepartment` ()
-- `cust` -> `aa.merchant.Merchant` ()
-- `saleOrg` -> `org.func.BaseOrg` ()
-- `tenant` -> `base.tenant.Tenant` ()
+| 字段名 | 引用类型 |
+|--------|---------|
+| `partner_person` | `ucf-staff-center.bd_outerstaff_info` |
+| `ytenant_id` | `` |
+| `person` | `ucf-staff-center.bd_staff_ref` |
+| `iStoreId` | `` |
+| `partner_dept` | `` |
+| `cust` | `productcenter.aa_merchantoutref` |
+| `saleorg` | `ucf-org-center.bd_salesorg` |
+| `tenant_id` | `` |
+
+## 继承接口 (2个, 2字段)
+
+- **租户相关** (`base.itf.ITenant`)
+  - `tenant_id` → `tenant_id`
+- **统一租户接口(扩展)** (`ucfbase.ucfbaseItf.IYTenantExt`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 12 个直连字段
+
+### 文本字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dept` | `dept` | `dept` | 部门 |
+
+### 引用字段 (8个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iStoreId` | `iStoreId` | `store` | 主表ID |
+| `saleorg` | `saleorg` | `saleOrg` | 销售组织id |
+| `person` | `person` | `person` | 人员id |
+| `cust` | `cust` | `cust` | 伙伴主键 |
+| `partner_person` | `partner_person` | `partnerPerson` | 伙伴人员主键 |
+| `partner_dept` | `partner_dept` | `partnerDept` | 伙伴部门 |
+| `tenant_id` | `tenant_id` | `tenant` | 租户 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 布尔字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `ower` | `ower` | `ower` | 负责人 |
+
+### 长整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | 相关人员id |
+
+### timestamp (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubts` | `pubts` | `pubts` | 相关人员时间戳 |

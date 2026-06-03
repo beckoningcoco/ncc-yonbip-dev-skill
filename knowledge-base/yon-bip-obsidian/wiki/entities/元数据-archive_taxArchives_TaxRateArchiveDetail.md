@@ -12,37 +12,102 @@ source_type: api_response
 
 # 税率档案明细 (`archive.taxArchives.TaxRateArchiveDetail`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `bd_taxrate_detail` | 应用: `DPMTAX` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`bd_taxrate_detail` | domain：`yonbip-fi-taxpubdoc` | 应用：`DPMTAX` | 业务对象ID：`eef18317-c20c-46f8-9408-416f8e938a19`
 
-## 属性（17 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `unit` | unit | `unit` | 9ea02a0b-3a48-4051-bcbe-59c7bcc7a25b | `quote` |
-| 2 | `effectiveDate` | effectiveDate | `effective_date` | String | `date` |
-| 3 | `ntaxrate` | ntaxrate | `ntaxrate` | Decimal | `number` |
-| 4 | `taxRateArchiveId` | taxRateArchiveID | `taxRateArchive_id` | 709cd092-3dd4-49ca-9eb9-7b8888551810 | `quote` |
-| 5 | `taxfree` | taxfree | `taxfree` | Boolean | `switch` |
-| 6 | `notaxation` | notaxation | `notaxation` | Boolean | `switch` |
-| 7 | `define` | define | `define` | aa6ce0d7-dc0c-4003-b8de-613de5dcc6e1 | `UserDefine` |
-| 8 | `invalidationDate` | invalidationDate | `invalidation_date` | String | `date` |
-| 9 | `currency` | currency | `currency` | 02b45339-eb4a-4a31-a8b5-d32f494f4e8e | `quote` |
-| 10 | `createTime` | 创建时间 | `create_time` | DateTime | `dateTime` |
-| 11 | `creator` | 创建人 | `creator` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 12 | `dr` | 逻辑删除 | `dr` | Short | `short` |
-| 13 | `id` | ID | `id` | String | `text` |
-| 14 | `modifier` | 修改人 | `modifier` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 15 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `dateTime` |
-| 16 | `pubts` | 时间戳 | `pubts` | DateTime | `dateTime` |
-| 17 | `ytenantId` | ytenantID | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 税率档案明细 |
+| 物理表 | `bd_taxrate_detail` |
+| 数据库 schema | `yonbip-fi-taxpubdoc` |
+| 所属应用 | `DPMTAX` |
+| 直连字段 | 17 个 |
+| 子表 | 0 个 |
+| 关联引用 | 7 个 |
 
-## 关联（7 个）
+## 关联引用 (7个)
 
-- `unit` -> `pc.unit.Unit` ()
-- `creator` -> `base.user.BipUser` ()
-- `modifier` -> `base.user.BipUser` ()
-- `define` -> `archive.taxArchives.TaxRateArchiveDetaildefineUserDefine` ()
-- `taxRateArchiveId` -> `archive.taxArchives.TaxRateArchive` (0..n)
-- `currency` -> `bd.currencytenant.CurrencyTenantVO` ()
-- `ytenantId` -> `yht.tenant.YhtTenant` ()
+| 字段名 | 引用类型 |
+|--------|---------|
+| `unit` | `productcenter.pc_unitref` |
+| `creator` | `bip-usercenter.bip_user_ref` |
+| `modifier` | `bip-usercenter.bip_user_ref` |
+| `define` | `` |
+| `taxRateArchive_id` | `yonbip-fi-taxpubdoc.RefTable_55c5b82f11` |
+| `currency` | `ucfbasedoc.bd_currencytenantref` |
+| `ytenant_id` | `` |
+
+## 继承接口 (3个, 6字段)
+
+- **逻辑删除** (`iuap.busiObj.LogicDelete`)
+  - `dr` → `dr`
+- **统一租户接口** (`iuap.busiObj.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+- **审计信息** (`iuap.busiObj.IAuditInfo`)
+  - `create_time` → `create_time`
+  - `creator` → `creator`
+  - `modifier` → `modifier`
+  - `modify_time` → `modify_time`
+
+## 字段列表（按类型分组）
+
+> 共 17 个直连字段
+
+### 文本字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | 主键 |
+
+### 引用字段 (6个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `unit` | `unit` | `unit` | 单位 |
+| `taxRateArchive_id` | `taxRateArchive_id` | `taxRateArchiveId` | 税率档案 |
+| `currency` | `currency` | `currency` | 币种 |
+| `creator` | `creator` | `creator` | 创建人 |
+| `modifier` | `modifier` | `modifier` | 修改人 |
+| `ytenant_id` | `ytenant_id` | `ytenantId` | 租户id |
+
+### 日期字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `effective_date` | `effective_date` | `effectiveDate` | 生效日期 |
+| `invalidation_date` | `invalidation_date` | `invalidationDate` | 失效日期 |
+
+### 日期时间 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+
+### 布尔字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `taxfree` | `taxfree` | `taxfree` | 免税 |
+| `notaxation` | `notaxation` | `notaxation` | 不征税 |
+
+### 短整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dr` | `dr` | `dr` | 逻辑删除 |
+
+### 数值字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `ntaxrate` | `ntaxrate` | `ntaxrate` | 税率 |
+
+### UserDefine (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `define` | `define` | `define` | 自定义项特征组 |

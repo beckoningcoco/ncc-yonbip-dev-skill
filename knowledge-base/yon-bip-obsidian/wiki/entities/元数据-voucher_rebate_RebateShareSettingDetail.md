@@ -12,47 +12,113 @@ source_type: api_response
 
 # 返利分摊设置明细 (`voucher.rebate.RebateShareSettingDetail`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `udh_rebatesharesettingdetail` | 应用: `BBSMK` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`udh_rebatesharesettingdetail` | domain：`marketingbill` | 应用：`BBSMK` | 业务对象ID：``
 
-## 属性（21 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `id` | ID | `id` | Long | `long` |
-| 2 | `productLineId` | productLineID | `iProductLineId` | fcdf5213-a995-4874-928f-ff97bcfa4b91 | `quote` |
-| 3 | `productBrandId` | productBrandID | `iProductBrandId` | 75116b40-efe4-455e-b62d-d56ac4811eb1 | `quote` |
-| 4 | `productClassId` | productClassID | `iProductClassId` | 5ad8fc93-4e6b-409f-a70f-462efa6fcee9 | `quote` |
-| 5 | `productId` | productID | `iProductId` | 89f3b06e-23df-4403-b4a7-19f99eeeae72 | `quote` |
-| 6 | `skuId` | skuID | `iProductSkuId` | 3e9ddc6d-edd0-4508-afcc-e4a20535f2f9 | `quote` |
-| 7 | `maxRebateRatio` | maxRebateRatio | `maxRebateRatio` | Decimal | `number` |
-| 8 | `maxRebateMoney` | maxRebateMoney | `maxRebateMoney` | Decimal | `number` |
-| 9 | `minRebateMoney` | minRebateMoney | `minRebateMoney` | Decimal | `number` |
-| 10 | `applicableType` | applicableType | `applicableType` | RebateApplicableTypeEnum | `` |
-| 11 | `bizId` | bizID | `iBizId` | 94b3280a-27a4-485a-b90b-b7bce57c6df2 | `quote` |
-| 12 | `isDocumentLineControl` | 是否DocumentLineControl | `isDocumentLineControl` | Boolean | `switch` |
-| 13 | `materialClassId` | materialClassID | `iMaterialClassId` | b295ef54-c421-4865-aca3-f5a9207a8d50 | `quote` |
-| 14 | `pubts` | 时间戳 | `pubuts` | DateTime | `timestamp` |
-| 15 | `rebateShareSettingDetailCharacteristics` | rebateShareSettingDetailCharacteristics | `rebateShareSettingDetailCharacteristics` | eaf4d196-4184-4084-9c36-ad928ffb89bb | `FreeCT` |
-| 16 | `rebateShareSettingDetailDefineCharacter` | rebateShareSettingDetailDefineCharacter | `rebateShareSettingDetailDefineCharacter` | c6a200f8-0193-43a4-9a81-f23a5d6014be | `UserDefine` |
-| 17 | `saleOrgId` | saleOrgID | `iSaleOrgId` | 4991976e-11ee-406e-bdbb-0f73f9f89ff2 | `quote` |
-| 18 | `shareSettingId` | shareSettingID | `iShareSettingId` | 6353a3f1-4736-4c35-bc35-64ec2ea8bb7d | `quote` |
-| 19 | `stepCondition` | stepCondition | `` | 1f0babeb-762b-46b3-be4e-1aa218d79d57 | `` |
-| 20 | `uordercorp` | uordercorp | `iCorpId` | Long | `long` |
-| 21 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 返利分摊设置明细 |
+| 物理表 | `udh_rebatesharesettingdetail` |
+| 数据库 schema | `marketingbill` |
+| 所属应用 | `BBSMK` |
+| 直连字段 | 21 个 |
+| 子表 | 1 个 |
+| 关联引用 | 13 个 |
 
-## 关联（13 个）
+## 子表
 
-- `saleOrgId` -> `org.func.SalesOrg` ()
-- `productClassId` -> `pc.cls.PresentationClass` ()
-- `materialClassId` -> `pc.cls.ManagementClass` ()
-- `productId` -> `pc.product.Product` ()
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `productBrandId` -> `pc.brand.Brand` ()
-- `rebateShareSettingDetailCharacteristics` -> `voucher.rebate.RebateShareSettingDetailCharacteristics` ()
-- `shareSettingId` -> `voucher.rebate.RebateShareSetting` (0..n)
-- `bizId` -> `aa.merchant.Merchant` ()
-- `rebateShareSettingDetailDefineCharacter` -> `voucher.rebate.RebateShareSettingDetailDefineCharacter` ()
-- `stepCondition` -> `voucher.rebate.StepCondition` (0..n)
-- `skuId` -> `pc.product.ProductSKU` ()
-- `productLineId` -> `pc.productline.ProductLine` ()
+| 字段名 | URI | 关系 |
+|--------|-----|------|
+| `stepCondition` | `voucher.rebate.StepCondition` | composition |
+
+## 关联引用 (13个)
+
+| 字段名 | 引用类型 |
+|--------|---------|
+| `iSaleOrgId` | `` |
+| `iProductClassId` | `productcenter.pc_presentationclassref` |
+| `iMaterialClassId` | `` |
+| `iProductId` | `productcenter.productref` |
+| `ytenant_id` | `` |
+| `iProductBrandId` | `productcenter.pc_brandref` |
+| `rebateShareSettingDetailCharacteristics` | `` |
+| `iShareSettingId` | `` |
+| `iBizId` | `` |
+| `rebateShareSettingDetailDefineCharacter` | `` |
+| `` | `` |
+| `iProductSkuId` | `productcenter.productskuref` |
+| `iProductLineId` | `productcenter.pc_productlineref` |
+
+## 继承接口 (2个, 2字段)
+
+- **U订货租户相关** (`base.itf.IUordercorp`)
+  - `iCorpId` → `iCorpId`
+- **统一租户接口(扩展)** (`ucfbase.ucfbaseItf.IYTenantExt`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 21 个直连字段
+
+### 引用字段 (10个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iProductLineId` | `iProductLineId` | `productLineId` | 产品线id |
+| `iProductBrandId` | `iProductBrandId` | `productBrandId` | 品牌id |
+| `iProductClassId` | `iProductClassId` | `productClassId` | 商品分类id |
+| `iProductId` | `iProductId` | `productId` | 商品id |
+| `iProductSkuId` | `iProductSkuId` | `skuId` | skuid |
+| `iBizId` | `iBizId` | `bizId` | 供应商id |
+| `iMaterialClassId` | `iMaterialClassId` | `materialClassId` | 物料分类 |
+| `iSaleOrgId` | `iSaleOrgId` | `saleOrgId` | 组织id |
+| `iShareSettingId` | `iShareSettingId` | `shareSettingId` | 分摊设置id |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 布尔字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `isDocumentLineControl` | `isDocumentLineControl` | `isDocumentLineControl` | 按单据行控制 |
+
+### 长整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | 单据id |
+| `iCorpId` | `iCorpId` | `uordercorp` | 租户 |
+
+### 数值字段 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `maxRebateRatio` | `maxRebateRatio` | `maxRebateRatio` | 最大分摊比例(%) |
+| `maxRebateMoney` | `maxRebateMoney` | `maxRebateMoney` | 最大分摊金额 |
+| `minRebateMoney` | `minRebateMoney` | `minRebateMoney` | 最低购买金额 |
+
+### other (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `applicableType` | `applicableType` | `applicableType` | 适用类型 |
+| `` | `` | `stepCondition` | 阶梯设置 |
+
+### timestamp (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubuts` | `pubuts` | `pubts` | 时间戳 |
+
+### FreeCT (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `rebateShareSettingDetailCharacteristics` | `rebateShareSettingDetailCharacteristics` | `rebateShareSettingDetailCharacteristics` | 自定义项特征组 |
+
+### UserDefine (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `rebateShareSettingDetailDefineCharacter` | `rebateShareSettingDetailDefineCharacter` | `rebateShareSettingDetailDefineCharacter` | 自定义项特征属性组 |

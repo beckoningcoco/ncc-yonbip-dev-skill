@@ -12,28 +12,73 @@ source_type: api_response
 
 # 销售区域 (`aa.merchant.CustomerArea`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `customerarea` | 应用: `DPMCUS` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`customerarea` | domain：`productcenter` | 应用：`DPMCUS` | 业务对象ID：``
 
-## 属性（9 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `id` | ID | `id` | Long | `long` |
-| 2 | `merchantId` | merchantID | `imerchantid` | 94b3280a-27a4-485a-b90b-b7bce57c6df2 | `quote` |
-| 3 | `merchantApplyRangeId` | merchantApplyRangeID | `merchantapplyrangeid` | b023ebd3-0f7f-4a9a-a28b-32183b1b8022 | `quote` |
-| 4 | `saleAreaId` | saleAreaID | `csaleareaid` | 75fb7b76-fdb5-4e87-ab0d-e4215a299634 | `quote` |
-| 5 | `isDefault` | 是否Default | `bdefaultcustomerarea` | Boolean | `switch` |
-| 6 | `customerAreaCharacter` | customerAreaCharacter | `customer_area_character` | 9ff39c65-e4c9-4414-81ec-bf9e448e26e4 | `UserDefine` |
-| 7 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 8 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 9 | `tenant` | tenant | `tenant_id` | c213cd56-d5de-421f-bae7-d77455b557cd | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 销售区域 |
+| 物理表 | `customerarea` |
+| 数据库 schema | `productcenter` |
+| 所属应用 | `DPMCUS` |
+| 直连字段 | 9 个 |
+| 子表 | 0 个 |
+| 关联引用 | 6 个 |
 
-## 关联（6 个）
+## 关联引用 (6个)
 
-- `merchantId` -> `aa.merchant.Merchant` (0..n)
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `merchantApplyRangeId` -> `aa.merchant.MerchantApplyRangeExt` (0..n)
-- `customerAreaCharacter` -> `aa.merchant.CustomerAreaCharacter` ()
-- `saleAreaId` -> `aa.salearea.SaleArea` ()
-- `tenant` -> `base.tenant.Tenant` ()
+| 字段名 | 引用类型 |
+|--------|---------|
+| `imerchantid` | `` |
+| `ytenant_id` | `` |
+| `merchantapplyrangeid` | `` |
+| `customer_area_character` | `` |
+| `csaleareaid` | `productcenter.aa_salearearef` |
+| `tenant_id` | `` |
+
+## 继承接口 (2个, 2字段)
+
+- **租户相关** (`base.itf.ITenant`)
+  - `tenant_id` → `tenant_id`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 9 个直连字段
+
+### 引用字段 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `imerchantid` | `imerchantid` | `merchantId` | 客户 |
+| `merchantapplyrangeid` | `merchantapplyrangeid` | `merchantApplyRangeId` | 客户适用范围 |
+| `csaleareaid` | `csaleareaid` | `saleAreaId` | 区域编码 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户 |
+| `tenant_id` | `tenant_id` | `tenant` | 租户(废弃) |
+
+### 布尔字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `bdefaultcustomerarea` | `bdefaultcustomerarea` | `isDefault` | 是否默认销售区域 |
+
+### 长整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+
+### UserDefine (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `customer_area_character` | `customer_area_character` | `customerAreaCharacter` | 客户销售区域信息自定义项 |
+
+### timestamp (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubts` | `pubts` | `pubts` | 时间戳 |

@@ -9,42 +9,123 @@ last_verified: 2026-06-03
 status: verified
 source_type: api_response
 ---
+
 # 代扣税税码 (`taxpubdoc.taxWithholding.taxWithholdingCode`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBip），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `tax_withholding_code` | 应用: `DPMTAX`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`tax_withholding_code` | domain：`yonbip-fi-taxpubdoc` | 应用：`DPMTAX` | 业务对象ID：`2b481747-da02-451e-8a22-c0a7e0785ac4`
 
-## 属性（21 个）
+## 基本信息
 
-| # | 字段 | 显示名 | 列 | 类型 | biztype |
-|---|------|--------|-----|------|---------|
-| 1 | `countryId` | countryID | `country_id` | 8e9602ac-5ca2-4d06-aede-4a0af4c316bf | `quote` |
-| 2 | `createTime` | 创建时间 | `create_time` | DateTime | `dateTime` |
-| 3 | `creator` | 创建人 | `creator` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 4 | `delFlag` | delFlag | `del_flag` | deleteFlag | `singleOption` |
-| 5 | `disablets` | disablets | `disablets` | DateTime | `dateTime` |
-| 6 | `dr` | 逻辑删除 | `dr` | Short | `short` |
-| 7 | `drFlag` | drFlag | `dr_flag` | String | `text` |
-| 8 | `enable` | enable | `enable` | sys_intboolean | `singleOption` |
-| 9 | `enablets` | enablets | `enablets` | DateTime | `dateTime` |
-| 10 | `id` | ID | `id` | String | `text` |
-| 11 | `log` | log | `log` | String | `bigText` |
-| 12 | `modifier` | 修改人 | `modifier` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 13 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `dateTime` |
-| 14 | `pubts` | 时间戳 | `pubts` | DateTime | `dateTime` |
-| 15 | `taskId` | taskID | `task_id` | String | `text` |
-| 16 | `taxCalculatePoint` | taxCalculatePoint | `tax_calculate_point` | taxCalculationPointEnum | `multipleOption` |
-| 17 | `taxCode` | tax编码 | `tax_code` | String | `text` |
-| 18 | `taxCodeDescription` | taxCodeDescription | `tax_code_description` | String | `multiLanguage` |
-| 19 | `taxWithholdingCodeSubList` | taxWithholdingCodeSubList | `` | 0b8d1aef-21b5-4089-bfc4-aa2d283826f8 | `` |
-| 20 | `taxWithholdingScopeList` | taxWithholdingScopeList | `` | 185de92e-eb8f-4050-afdc-f3834340f2ed | `` |
-| 21 | `ytenantId` | ytenantID | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 代扣税税码 |
+| 物理表 | `tax_withholding_code` |
+| 数据库 schema | `yonbip-fi-taxpubdoc` |
+| 所属应用 | `DPMTAX` |
+| 直连字段 | 21 个 |
+| 子表 | 2 个 |
+| 关联引用 | 6 个 |
 
-## 关联（6 个）
+## 子表
 
-- `creator` -> `base.user.BipUser` () 
-- `taxWithholdingScopeList` -> `taxpubdoc.taxWithholding.taxWithholdingScope` (1..n) 
-- `modifier` -> `base.user.BipUser` () 
-- `taxWithholdingCodeSubList` -> `taxpubdoc.taxWithholding.taxWithholdingCodeSub` (1..n) 
-- `ytenantId` -> `yht.tenant.YhtTenant` () 
-- `countryId` -> `bd.country.CountryVO` () 
+| 字段名 | URI | 关系 |
+|--------|-----|------|
+| `taxWithholdingScopeList` | `taxpubdoc.taxWithholding.taxWithholdingScope` | composition |
+| `taxWithholdingCodeSubList` | `taxpubdoc.taxWithholding.taxWithholdingCodeSub` | composition |
+
+## 关联引用 (6个)
+
+| 字段名 | 引用类型 |
+|--------|---------|
+| `creator` | `bip-usercenter.bip_user_ref` |
+| `` | `` |
+| `modifier` | `bip-usercenter.bip_user_ref` |
+| `ytenant_id` | `` |
+| `country_id` | `ucfbasedoc.bd_countryref` |
+
+## 继承接口 (4个, 9字段)
+
+- **逻辑删除** (`iuap.busiObj.LogicDelete`)
+  - `dr` → `dr`
+- **统一租户接口** (`iuap.busiObj.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+- **审计信息** (`iuap.busiObj.IAuditInfo`)
+  - `create_time` → `create_time`
+  - `creator` → `creator`
+  - `modifier` → `modifier`
+  - `modify_time` → `modify_time`
+- **档案状态** (`iuap.busiObj.IEnable`)
+  - `disablets` → `disablets`
+  - `enable` → `enable`
+  - `enablets` → `enablets`
+
+## 字段列表（按类型分组）
+
+> 共 21 个直连字段
+
+### 文本字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dr_flag` | `dr_flag` | `drFlag` | 唯一索引的字段 |
+| `id` | `id` | `id` | 主键 |
+| `task_id` | `task_id` | `taskId` | 删除引用校验任务id |
+| `tax_code` | `tax_code` | `taxCode` | 代扣税税码 |
+
+### 引用字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `country_id` | `country_id` | `countryId` | 国家地区 |
+| `creator` | `creator` | `creator` | 创建人 |
+| `modifier` | `modifier` | `modifier` | 修改人 |
+| `ytenant_id` | `ytenant_id` | `ytenantId` | 租户id |
+
+### 日期时间 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `disablets` | `disablets` | `disablets` | 停用时间 |
+| `enablets` | `enablets` | `enablets` | 启用时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+
+### 枚举字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `del_flag` | `del_flag` | `delFlag` | 自定义删除标记 |
+| `enable` | `enable` | `enable` | 档案状态 |
+
+### 短整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dr` | `dr` | `dr` | 逻辑删除 |
+
+### bigText (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `log` | `log` | `log` | 操作日志 |
+
+### multipleOption (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `tax_calculate_point` | `tax_calculate_point` | `taxCalculatePoint` | 计税时点 |
+
+### multiLanguage (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `tax_code_description` | `tax_code_description` | `taxCodeDescription` | 税码描述 |
+
+### other (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `` | `taxWithholdingCodeSubList` | 代扣税税码子表(代扣税组合) |
+| `` | `` | `taxWithholdingScopeList` | 适用范围 |

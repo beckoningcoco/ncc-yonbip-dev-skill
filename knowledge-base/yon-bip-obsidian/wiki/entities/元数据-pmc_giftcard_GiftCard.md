@@ -1,5 +1,5 @@
 ---
-tags: [BIP, 元数据, 数据字典, pmc, pmc.giftcard.GiftCard]
+tags: [BIP, 元数据, 数据字典, pmc.giftcard.GiftCard]
 created: 2026-06-03
 updated: 2026-06-03
 sources: [元数据API queryByUri]
@@ -9,74 +9,128 @@ last_verified: 2026-06-03
 status: verified
 source_type: api_response
 ---
+
 # 礼品卡主表信息 (`pmc.giftcard.GiftCard`)
 
-> ⚡ **平台版本：BIP 旗舰版 V5** — 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `mk_giftcard` | 应用: `PMC`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`mk_giftcard` | domain：`upromotion` | 应用：`PMC` | 业务对象ID：`c855dc0c-14f8-42a3-9724-8381784c4313`
 
-## 主键与编码
+## 基本信息
 
-| 角色 | 字段 | 列 | 类型 |
-|------|------|-----|------|
-| 主键 | `id` | `id` | Long |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 礼品卡主表信息 |
+| 物理表 | `mk_giftcard` |
+| 数据库 schema | `upromotion` |
+| 所属应用 | `PMC` |
+| 直连字段 | 31 个 |
+| 子表 | 0 个 |
+| 关联引用 | 4 个 |
 
-## 全部属性（31 个）
+## 关联引用 (4个)
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype | 必填 | 可空 |
-|---|--------|--------|-----|------|---------|------|------|
-| 1 | `allMemberLevel` | allMemberLevel | `allMemberLevel` | Short | `short` |  | true |
-| 2 | `cOrgPath` | cOrgPath | `cOrgPath` | String | `text` |  | true |
-| 3 | `createTime` | 创建时间 | `create_time` | DateTime | `timestamp` |  | true |
-| 4 | `creator` | 创建人 | `creator` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |  | true |
-| 5 | `iEnterpriseID` | iEnterpriseID | `iEnterpriseID` | Long | `long` |  | true |
-| 6 | `modifier` | 修改人 | `modifier` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |  | true |
-| 7 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `timestamp` |  | true |
-| 8 | `name` | 名称 | `name` | String | `text` |  | true |
-| 9 | `productPicUrl` | productPicUrl | `productPicUrl` | String | `text` |  | true |
-| 10 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |  | true |
-| 11 | `tenant` | tenant | `tenant_id` | c213cd56-d5de-421f-bae7-d77455b557cd | `quote` | true | true |
-| 12 | `cOrgId` | cOrgID | `cOrgId` | String | `text` |  | true |
-| 13 | `id` | 主键ID | `id` | Long | `long` |  | true |
-| 14 | `styleId` | styleID | `styleId` | Integer | `int` |  | true |
-| 15 | `cImgName` | cImg名称 | `cImgName` | String | `text` |  | true |
-| 16 | `giftCardName` | 礼品卡名称 | `giftCardName` | String | `text` |  | true |
-| 17 | `giftCardCode` | 礼品卡编码 | `giftCardCode` | String | `text` |  | true |
-| 18 | `expireStartDate` | expireStartDate | `expireStartDate` | Date | `date` |  | true |
-| 19 | `expireEndDate` | expireEndDate | `expireEndDate` | Date | `date` |  | true |
-| 20 | `reduceAmount` | reduceAmount | `reduceAmount` | Decimal | `number` |  | true |
-| 21 | `salePrice` | salePrice | `salePrice` | Decimal | `number` |  | true |
-| 22 | `status` | 状态 | `status` | Integer | `int` |  | true |
-| 23 | `isDelete` | 是否Delete | `isDelete` | Boolean | `switch` |  | true |
-| 24 | `cFolder` | cFolder | `cFolder` | String | `text` |  | true |
-| 25 | `cOriginalName` | cOriginal名称 | `cOriginalName` | String | `text` |  | true |
-| 26 | `fontColor` | fontColor | `fontColor` | String | `text` |  | true |
-| 27 | `directionForUse` | directionForUse | `directionForUse` | String | `text` |  | true |
-| 28 | `iShopId` | iShopID | `iShopId` | Long | `long` |  | true |
-| 29 | `mallcorp` | mallcorp | `iCorpId` | Long | `long` |  | true |
-| 30 | `promotionClassId` | promotionClassID | `promotionClassId` | Long | `long` |  | true |
-| 31 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |  | true |
+| 字段名 | 引用类型 |
+|--------|---------|
+| `` | `` |
+| `ytenant_id` | `` |
+| `tenant_id` | `` |
 
-## 关联属性（4 个）
+## 继承接口 (6个, 11字段)
 
-| # | 字段 | 目标实体 | 列 | 多重性 | 组合 | 废弃 |
-|---|------|---------|-----|--------|------|------|
-| 1 | `creator` | `base.user.User` | `creator` |  |  |  |
-| 2 | `ytenant` | `yht.tenant.YhtTenant` | `ytenant_id` |  |  |  |
-| 3 | `modifier` | `base.user.User` | `modifier` |  |  |  |
-| 4 | `tenant` | `base.tenant.Tenant` | `tenant_id` |  |  |  |
+- **商城租户相关** (`base.itf.IMallcorp`)
+  - `iCorpId` → `iCorpId`
+- **多会籍相关** (`promotion.itf.MultiMember`)
+  - `cOrgId` → `cOrgId`
+  - `cOrgPath` → `cOrgPath`
+  - `iEnterpriseID` → `iEnterpriseID`
+- **商城商家相关** (`um.base.IMallshop`)
+  - `iShopId` → `iShopId`
+- **审计信息** (`promotion.itf.IAuditInfo`)
+  - `create_time` → `create_time`
+  - `` → ``
+  - `` → ``
+  - `modify_time` → `modify_time`
+- **租户相关** (`base.itf.ITenant`)
+  - `tenant_id` → `tenant_id`
+- **统一租户接口(扩展)** (`ucfbase.ucfbaseItf.IYTenantExt`)
+  - `ytenant_id` → `ytenant_id`
 
-## 依赖接口（6 个）
+## 字段列表（按类型分组）
 
-- `IMallcorp` → `base.itf.IMallcorp` (v73)
-- `MultiMember` → `promotion.itf.MultiMember` (v16)
-- `IMallshop` → `um.base.IMallshop` (v5)
-- `IAuditInfo` → `promotion.itf.IAuditInfo` (v67)
-- `ITenant` → `base.itf.ITenant` (v73)
-- `IYTenantExt` → `ucfbase.ucfbaseItf.IYTenantExt` (v24)
+> 共 31 个直连字段
 
-## SQL 示例
+### 文本字段 (11个)
 
-```sql
-SELECT allMemberLevel, cOrgPath, create_time, creator, iEnterpriseID, modifier, modify_time, name
-FROM mk_giftcard
-```
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `cOrgPath` | `cOrgPath` | `cOrgPath` | 组织ID(会籍对应的组织路径) |
+| `name` | `name` | `name` | 未知字段 |
+| `productPicUrl` | `productPicUrl` | `productPicUrl` | 未知字段 |
+| `cOrgId` | `cOrgId` | `cOrgId` | 组织ID |
+| `cImgName` | `cImgName` | `cImgName` | 背景图片 |
+| `giftCardName` | `giftCardName` | `giftCardName` | 礼品卡名称 |
+| `giftCardCode` | `giftCardCode` | `giftCardCode` | 礼品卡号码 |
+| `cFolder` | `cFolder` | `cFolder` | 图片路径 |
+| `cOriginalName` | `cOriginalName` | `cOriginalName` | 原图名称 |
+| `fontColor` | `fontColor` | `fontColor` | 文字颜色 |
+| `directionForUse` | `directionForUse` | `directionForUse` | 使用说明 |
+
+### 引用字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `creator` | `creator` | 创建人 |
+| `` | `modifier` | `modifier` | 修改人 |
+| `tenant_id` | `tenant_id` | `tenant` | 租户 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 日期字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `expireStartDate` | `expireStartDate` | `expireStartDate` | 有效时间 |
+| `expireEndDate` | `expireEndDate` | `expireEndDate` | 至 |
+
+### 布尔字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `isDelete` | `isDelete` | `isDelete` | 是否已删除 |
+
+### 整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `styleId` | `styleId` | `styleId` | 预制模板 |
+| `status` | `status` | `status` | 状态 |
+
+### 短整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `allMemberLevel` | `allMemberLevel` | `allMemberLevel` | 所有会员适用 |
+
+### 长整数 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iEnterpriseID` | `iEnterpriseID` | `iEnterpriseID` | 企业ID(多会籍时会籍对应的根结点) |
+| `id` | `id` | `id` | id |
+| `iShopId` | `iShopId` | `iShopId` | 商家ID |
+| `iCorpId` | `iCorpId` | `mallcorp` | 租户ID |
+| `promotionClassId` | `promotionClassId` | `promotionClassId` | promotionClassId |
+
+### 数值字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `reduceAmount` | `reduceAmount` | `reduceAmount` | 面值 |
+| `salePrice` | `salePrice` | `salePrice` | 售价 |
+
+### timestamp (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |

@@ -12,21 +12,49 @@ source_type: api_response
 
 # 分级管理集合详情 (`bd.puborggroup.PubOrgGroupDetail`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `pub_org_group_detail` | 应用: `DPMPI` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`pub_org_group_detail` | domain：`ucfbasedoc` | 应用：`DPMPI` | 业务对象ID：``
 
-## 属性（5 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `groupId` | 组ID | `group_id` | 44210b7f-0ffa-4cf9-be11-8fdfa006a2ae | `quote` |
-| 2 | `id` | ID | `id` | String | `text` |
-| 3 | `orgId` | 组织ID | `org_id` | 14302233-1394-4a70-94e1-bed51636f312 | `quote` |
-| 4 | `tenant` | tenant | `tenantid` | String | `text` |
-| 5 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 分级管理集合详情 |
+| 物理表 | `pub_org_group_detail` |
+| 数据库 schema | `ucfbasedoc` |
+| 所属应用 | `DPMPI` |
+| 直连字段 | 5 个 |
+| 子表 | 0 个 |
+| 关联引用 | 3 个 |
 
-## 关联（3 个）
+## 关联引用 (3个)
 
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `groupId` -> `bd.puborggroup.PubOrgGroup` (0..n)
-- `orgId` -> `org.func.BaseOrg` ()
+| 字段名 | 引用类型 |
+|--------|---------|
+| `ytenant_id` | `` |
+| `group_id` | `` |
+| `org_id` | `` |
+
+## 继承接口 (1个, 1字段)
+
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 5 个直连字段
+
+### 文本字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | 主键 |
+| `tenantid` | `tenantid` | `tenant` | 租户废弃 |
+
+### 引用字段 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `group_id` | `group_id` | `groupId` | 组id |
+| `org_id` | `org_id` | `orgId` | 组织id |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |

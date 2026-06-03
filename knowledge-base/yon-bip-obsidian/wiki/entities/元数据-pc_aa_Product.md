@@ -12,110 +12,146 @@ source_type: api_response
 
 # (停用)Product (`pc.aa.Product`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `` | 应用: `pc` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`` | domain：`productcenter` | 应用：`pc` | 业务对象ID：`e850ba9c-b492-4cf2-a664-55e4c86f4910`
 
-## 属性（67 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `abbreviation` | abbreviation | `abbreviation` | String | `` |
-| 2 | `barCode` | bar编码 | `barCode` | String | `` |
-| 3 | `cCode` | c编码 | `code` | String | `` |
-| 4 | `cName` | c名称 | `name` | String | `` |
-| 5 | `couponId` | couponID | `couponId` | a96db54f-8118-4d2b-8c91-dae4d2fd160e | `` |
-| 6 | `couponType` | couponType | `couponType` | Integer | `` |
-| 7 | `creatorType` | creatorType | `creatorType` | CreatorType | `` |
-| 8 | `cust` | cust | `cust` | 69bfc334-60af-4138-acc8-c3b08eb1b6b4 | `` |
-| 9 | `defaultAlbumId` | defaultAlbumID | `url` | String | `` |
-| 10 | `defaultSKUId` | defaultSKUID | `defaultSKUId` | 3e9ddc6d-edd0-4508-afcc-e4a20535f2f9 | `` |
-| 11 | `deleted` | deleted | `isDeleted` | Boolean | `` |
-| 12 | `deliveryWarehouse` | deliveryWarehouse | `deliveryWarehouse` | 4256da1b-7d9f-49d6-b510-a05e771d17b0 | `` |
-| 13 | `erpCode` | erp编码 | `erpCode` | String | `` |
-| 14 | `fMarketPrice` | fMarketPrice | `fMarketPrice` | Decimal | `` |
-| 15 | `fSalePrice` | fSalePrice | `fSalePrice` | Decimal | `` |
-| 16 | `hasSpecs` | hasSpecs | `hasSpecs` | Boolean | `` |
-| 17 | `id` | ID | `id` | Long | `` |
-| 18 | `inputTax` | inputTax | `inTaxrate` | 709cd092-3dd4-49ca-9eb9-7b8888551810 | `` |
-| 19 | `isCreator` | 是否Creator | `isCreator` | Boolean | `` |
-| 20 | `manageClass` | manageClass | `manageClass` | b295ef54-c421-4865-aca3-f5a9207a8d50 | `` |
-| 21 | `manufacturer` | manufacturer | `manufacturer` | String | `` |
-| 22 | `markPrice` | markPrice | `fMarkPrice` | Decimal | `` |
-| 23 | `mnemonicCode` | mnemonic编码 | `mnemonicCode` | String | `` |
-| 24 | `model` | model | `model` | String | `` |
-| 25 | `modelDescription` | modelDescription | `modelDescription` | String | `` |
-| 26 | `netWeight` | netWeight | `netWeight` | Decimal | `` |
-| 27 | `netWeightUnit` | netWeightUnit | `netWeightUnitId` | 9ea02a0b-3a48-4051-bcbe-59c7bcc7a25b | `` |
-| 28 | `oUnitId` | oUnitID | `unit` | 9ea02a0b-3a48-4051-bcbe-59c7bcc7a25b | `` |
-| 29 | `orgId` | 组织ID | `orgId` | eaa75c14-e58f-4b35-9ae5-0032f4a98f54 | `` |
-| 30 | `outTaxrate` | outTaxrate | `outTaxrate` | 709cd092-3dd4-49ca-9eb9-7b8888551810 | `` |
-| 31 | `placeOfOrigin` | placeOfOrigin | `placeOfOrigin` | String | `` |
-| 32 | `primeCosts` | primeCosts | `maxPrimeCosts` | Decimal | `` |
-| 33 | `productBrand` | productBrand | `brand` | 75116b40-efe4-455e-b62d-d56ac4811eb1 | `` |
-| 34 | `productClass` | productClass | `productClass` | 5ad8fc93-4e6b-409f-a70f-462efa6fcee9 | `` |
-| 35 | `pubts` | 时间戳 | `pubts` | DateTime | `` |
-| 36 | `pubuts` | pubuts | `pubts` | DateTime | `` |
-| 37 | `realProductAttribute` | realProductAttribute | `realProductAttribute` | Integer | `` |
-| 38 | `realProductAttributeType` | realProductAttributeType | `realProductAttributeType` | Integer | `` |
-| 39 | `receiptName` | receipt名称 | `receiptName` | String | `` |
-| 40 | `receiptWarehouse` | receiptWarehouse | `receiptWarehouse` | 4256da1b-7d9f-49d6-b510-a05e771d17b0 | `` |
-| 41 | `reservation` | reservation | `reservation` | Boolean | `` |
-| 42 | `shortName` | short名称 | `shortName` | String | `` |
-| 43 | `source` | source | `source` | ProductSource | `` |
-| 44 | `specPropertyTemplate` | specPropertyTemplate | `productTemplate` | c40d564b-d166-4e0e-875f-1fafdab28955 | `` |
-| 45 | `status` | 状态 | `stopstatus` | Boolean | `` |
-| 46 | `taxClass` | taxClass | `taxClass` | 76bb6900-8cb4-4837-86b2-1d0ddab73269 | `` |
-| 47 | `tenant` | tenant | `tenant` | c213cd56-d5de-421f-bae7-d77455b557cd | `` |
-| 48 | `virtualProductAttribute` | virtualProductAttribute | `virtualProductAttribute` | Integer | `` |
-| 49 | `volume` | volume | `volume` | Decimal | `` |
-| 50 | `volumeUnit` | volumeUnit | `volumeUnitId` | 9ea02a0b-3a48-4051-bcbe-59c7bcc7a25b | `` |
-| 51 | `weight` | weight | `weight` | Decimal | `` |
-| 52 | `weightUnit` | weightUnit | `weightUnitId` | 9ea02a0b-3a48-4051-bcbe-59c7bcc7a25b | `` |
-| 53 | `freeDefine` | freeDefine | `` | eb7d9145-cb45-4a96-974a-c2877736eb38 | `` |
-| 54 | `homepageBusinessId` | homepageBusinessID | `homepage_business_id` | String | `` |
-| 55 | `iABCClass` | iABCClass | `iABCClass` | Integer | `` |
-| 56 | `productAlbums` | productAlbums | `` | b79dfa9c-2738-442b-b27e-43b7c63c5147 | `` |
-| 57 | `productApplyRanges` | productApplyRanges | `` | 444ccb86-4b60-45af-82a1-f37fd1b8bf1f | `` |
-| 58 | `productAssistUnitExchanges` | productAssistUnitExchanges | `` | adbcbd2c-ff00-487e-9144-629b9583b445 | `` |
-| 59 | `productBarCodes` | productBarCodes | `` | ddab7c90-d6a4-49a6-b6f5-aa9d8e5b31e0 | `` |
-| 60 | `productLine` | productLine | `productLineId` | fcdf5213-a995-4874-928f-ff97bcfa4b91 | `` |
-| 61 | `productOfflineRetail` | productOfflineRetail | `` | 6f4d7ef0-3a73-414f-a237-ab00af62f2eb | `` |
-| 62 | `productPropCharacterDefine` | productPropCharacterDefine | `iProductPropCharacterDefine` | 34e76385-7dbd-4fd1-91ff-56ead36c9565 | `MaterialPropCT` |
-| 63 | `productProps` | productProps | `` | 7a1a021a-657f-47e9-a14d-dbd88a18d5bf | `` |
-| 64 | `productskus` | productskus | `` | 0d86941d-5af3-4cf4-9255-4f5c74a3476f | `` |
-| 65 | `purchaseOrderQuantity` | purchaseOrderQuantity | `purchase_order_quantity` | Decimal | `` |
-| 66 | `shopProduct` | shopProduct | `` | 0599b497-f178-41e3-874b-492842894394 | `` |
-| 67 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | (停用)Product |
+| 物理表 | `` |
+| 数据库 schema | `productcenter` |
+| 所属应用 | `pc` |
+| 直连字段 | 67 个 |
+| 子表 | 9 个 |
+| 关联引用 | 30 个 |
 
-## 关联（30 个）
+## 子表
 
-- `productskus` -> `pc.aa.ProductSKU` (1..n)
-- `productAssistUnitExchanges` -> `pc.aa.ProductAssistUnitExchange` (0..n)
-- `productBrand` -> `pc.brand.Brand` ()
-- `volumeUnit` -> `pc.unit.Unit` ()
-- `couponId` -> `membercenter.archive.Coupon` ()
-- `orgId` -> `aa.baseorg.OrgMV` ()
-- `inputTax` -> `archive.taxArchives.TaxRateArchive` ()
-- `productLine` -> `pc.productline.ProductLine` ()
-- `oUnitId` -> `pc.unit.Unit` ()
-- `shopProduct` -> `pc.aa.ShopProduct` (0..n)
-- `outTaxrate` -> `archive.taxArchives.TaxRateArchive` ()
-- `productApplyRanges` -> `pc.aa.ProductApplyRange` (1..n)
-- `defaultSKUId` -> `pc.product.ProductSKU` ()
-- `manageClass` -> `pc.cls.ManagementClass` ()
-- `productPropCharacterDefine` -> `pc.product.ProductPropCharacterDefine` ()
-- `tenant` -> `base.tenant.Tenant` ()
-- `netWeightUnit` -> `pc.unit.Unit` ()
-- `taxClass` -> `pc.tax.TaxRevenue` ()
-- `productClass` -> `pc.cls.PresentationClass` ()
-- `receiptWarehouse` -> `aa.warehouse.Warehouse` ()
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `productProps` -> `pc.product.ProductDefine` (1)
-- `specPropertyTemplate` -> `pc.tpl.ProductTpl` ()
-- `productOfflineRetail` -> `pc.aa.ProductOfflineRetail` (1)
-- `productAlbums` -> `aa.product.ProductAlbum` (0..n)
-- `deliveryWarehouse` -> `aa.warehouse.Warehouse` ()
-- `freeDefine` -> `pc.product.ProductFreeDefine` (1)
-- `cust` -> `aa.customer.Customer` ()
-- `productBarCodes` -> `pc.product.ProductBarCode` (0..n)
-- `weightUnit` -> `pc.unit.Unit` ()
+| 字段名 | URI | 关系 |
+|--------|-----|------|
+| `productskus` | `pc.aa.ProductSKU` | composition |
+| `shopProduct` | `pc.aa.ShopProduct` | composition |
+| `productAlbums` | `aa.product.ProductAlbum` | composition |
+| `productApplyRanges` | `pc.aa.ProductApplyRange` | composition |
+| `productAssistUnitExchanges` | `pc.aa.ProductAssistUnitExchange` | composition |
+| `productProps` | `pc.product.ProductDefine` | composition |
+| `freeDefine` | `pc.product.ProductFreeDefine` | composition |
+| `productOfflineRetail` | `pc.aa.ProductOfflineRetail` | composition |
+| `productBarCodes` | `pc.product.ProductBarCode` | composition |
+
+## 关联引用 (30个)
+
+| 字段名 | 引用类型 |
+|--------|---------|
+| `` | `` |
+| `brand` | `` |
+| `volumeUnitId` | `` |
+| `couponId` | `` |
+| `orgId` | `` |
+| `inTaxrate` | `` |
+| `productLineId` | `` |
+| `unit` | `` |
+| `outTaxrate` | `` |
+| `defaultSKUId` | `` |
+| `manageClass` | `` |
+| `iProductPropCharacterDefine` | `` |
+| `tenant` | `` |
+| `netWeightUnitId` | `` |
+| `taxClass` | `` |
+| `productClass` | `` |
+| `receiptWarehouse` | `` |
+| `ytenant_id` | `` |
+| `productTemplate` | `` |
+| `deliveryWarehouse` | `` |
+| `cust` | `` |
+| `weightUnitId` | `` |
+
+## 继承接口 (2个, 2字段)
+
+- **租户相关** (`coredoc.pub.TenantObselete`)
+  - `tenant_id` → `tenant_id`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 67 个直连字段
+
+### other (66个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `abbreviation` | `abbreviation` | `abbreviation` | 物料简称 |
+| `barCode` | `barCode` | `barCode` | 条形码 |
+| `code` | `code` | `cCode` | 物料编码 |
+| `name` | `name` | `cName` | 物料名称 |
+| `couponId` | `couponId` | `couponId` | 卡券 |
+| `couponType` | `couponType` | `couponType` | 卡券类型 |
+| `creatorType` | `creatorType` | `creatorType` | 创建者类型 |
+| `cust` | `cust` | `cust` | 创建者客户 |
+| `url` | `url` | `defaultAlbumId` | 物料首图片 |
+| `defaultSKUId` | `defaultSKUId` | `defaultSKUId` | 默认SKUID |
+| `isDeleted` | `isDeleted` | `deleted` | 逻辑删除标记 |
+| `deliveryWarehouse` | `deliveryWarehouse` | `deliveryWarehouse` | 库存-发货仓库 |
+| `erpCode` | `erpCode` | `erpCode` | 商家编码 |
+| `fMarketPrice` | `fMarketPrice` | `fMarketPrice` | 市场价 |
+| `fSalePrice` | `fSalePrice` | `fSalePrice` | 线上零售价 |
+| `hasSpecs` | `hasSpecs` | `hasSpecs` | 是否包含属性 |
+| `id` | `id` | `id` | ID |
+| `inTaxrate` | `inTaxrate` | `inputTax` | 进项税率(%) |
+| `isCreator` | `isCreator` | `isCreator` | 是否创建者 |
+| `manageClass` | `manageClass` | `manageClass` | 物料分类 |
+| `manufacturer` | `manufacturer` | `manufacturer` | 生产厂商 |
+| `fMarkPrice` | `fMarkPrice` | `markPrice` | 建议零售价 |
+| `mnemonicCode` | `mnemonicCode` | `mnemonicCode` | 助记码 |
+| `model` | `model` | `model` | 型号 |
+| `modelDescription` | `modelDescription` | `modelDescription` | 规格 |
+| `netWeight` | `netWeight` | `netWeight` | 库存-净重 |
+| `netWeightUnitId` | `netWeightUnitId` | `netWeightUnit` | 库存-净重单位 |
+| `unit` | `unit` | `oUnitId` | 主计量单位 |
+| `orgId` | `orgId` | `orgId` | 创建者组织 |
+| `outTaxrate` | `outTaxrate` | `outTaxrate` | 销项税率(%) |
+| `placeOfOrigin` | `placeOfOrigin` | `placeOfOrigin` | 产地 |
+| `maxPrimeCosts` | `maxPrimeCosts` | `primeCosts` | 最高进价 |
+| `brand` | `brand` | `productBrand` | 物料品牌 |
+| `productClass` | `productClass` | `productClass` | 商品分类 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+| `pubts` | `pubts` | `pubuts` | 时间戳 |
+| `realProductAttribute` | `realProductAttribute` | `realProductAttribute` | 物料属性 |
+| `realProductAttributeType` | `realProductAttributeType` | `realProductAttributeType` | 实物物料属性 |
+| `receiptName` | `receiptName` | `receiptName` | 开票名称 |
+| `receiptWarehouse` | `receiptWarehouse` | `receiptWarehouse` | 采购-收货仓库 |
+| `reservation` | `reservation` | `reservation` | 库存-可预留 |
+| `shortName` | `shortName` | `shortName` | 物料简称 |
+| `source` | `source` | `source` | 物料来源 |
+| `productTemplate` | `productTemplate` | `specPropertyTemplate` | 物料模板 |
+| `stopstatus` | `stopstatus` | `status` | 停用状态 |
+| `taxClass` | `taxClass` | `taxClass` | 税收分类码 |
+| `tenant` | `tenant` | `tenant` | 租户 |
+| `virtualProductAttribute` | `virtualProductAttribute` | `virtualProductAttribute` | 虚拟物料属性 |
+| `volume` | `volume` | `volume` | 库存-体积 |
+| `volumeUnitId` | `volumeUnitId` | `volumeUnit` | 库存-体积单位 |
+| `weight` | `weight` | `weight` | 库存-毛重 |
+| `weightUnitId` | `weightUnitId` | `weightUnit` | 库存-毛重单位 |
+| `` | `` | `freeDefine` |  |
+| `homepage_business_id` | `homepage_business_id` | `homepageBusinessId` | 物料首页图片业务ID |
+| `iABCClass` | `iABCClass` | `iABCClass` | 库存-ABC分类 |
+| `` | `` | `productAlbums` |  |
+| `` | `` | `productApplyRanges` |  |
+| `` | `` | `productAssistUnitExchanges` |  |
+| `` | `` | `productBarCodes` |  |
+| `productLineId` | `productLineId` | `productLine` | 产品线 |
+| `` | `` | `productOfflineRetail` |  |
+| `` | `` | `productProps` |  |
+| `` | `` | `productskus` |  |
+| `purchase_order_quantity` | `purchase_order_quantity` | `purchaseOrderQuantity` | 采购-采购起订量 |
+| `` | `` | `shopProduct` |  |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### MaterialPropCT (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iProductPropCharacterDefine` | `iProductPropCharacterDefine` | `productPropCharacterDefine` | 物料属性特征实体 |

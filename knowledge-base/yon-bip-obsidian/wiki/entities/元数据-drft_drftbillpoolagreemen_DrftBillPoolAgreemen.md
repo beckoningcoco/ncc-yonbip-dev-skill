@@ -1,5 +1,5 @@
 ---
-tags: [BIP, 元数据, 数据字典, drft.drftbillpoolagreemen.DrftBillPoolAgreemen]
+tags: [BIP, 元数据, 数据字典, drft.drftbillpoolagreemen.DrftBillPoolagreemen]
 created: 2026-06-03
 updated: 2026-06-03
 sources: [元数据API queryByUri]
@@ -9,79 +9,157 @@ last_verified: 2026-06-03
 status: verified
 source_type: api_response
 ---
-# 票据池协议 (`drft.drftbillpoolagreemen.DrftBillPoolAgreemen`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBip），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `drft_billpoolagreemen` | 应用: `DRFT`
+# 票据池协议 (`drft.drftbillpoolagreemen.DrftBillPoolagreemen`)
 
-## 属性（51 个）
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`drft_billpoolagreemen` | domain：`drft` | 应用：`DRFT` | 业务对象ID：`c855019b-0d38-4348-a24b-f69af7a47819`
 
-| # | 字段 | 显示名 | 列 | 类型 | biztype |
-|---|------|--------|-----|------|---------|
-| 1 | `accentity` | accentity | `accentity` | eaa75c14-e58f-4b35-9ae5-0032f4a98f54 | `quote` |
-| 2 | `id` | ID | `id` | Long | `long` |
-| 3 | `protocolcode` | protocolcode | `protocolcode` | String | `text` |
-| 4 | `code` | 编码 | `code` | String | `text` |
-| 5 | `oldCode` | old编码 | `old_code` | String | `text` |
-| 6 | `accentityRaw` | accentityRaw | `accentity_raw` | eaa75c14-e58f-4b35-9ae5-0032f4a98f54 | `quote` |
-| 7 | `tenant` | tenant | `tenant_id` | c213cd56-d5de-421f-bae7-d77455b557cd | `quote` |
-| 8 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 9 | `returncount` | returncount | `returncount` | Short | `short` |
-| 10 | `tplid` | tplid | `tplid` | Long | `long` |
-| 11 | `status` | 状态 | `status` | Short | `short` |
-| 12 | `createDate` | createDate | `create_date` | Date | `date` |
-| 13 | `modifyDate` | modifyDate | `modify_date` | Date | `date` |
-| 14 | `creatorId` | 创建人ID | `creatorId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 15 | `protocolname` | protocolname | `protocol_name` | String | `text` |
-| 16 | `currency` | currency | `currency` | 02b45339-eb4a-4a31-a8b5-d32f494f4e8e | `quote` |
-| 17 | `bankname` | bankname | `bankname` | b7ee7189-ed97-48d5-91e4-808228664429 | `quote` |
-| 18 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 19 | `signupaccount` | signupaccount | `sign_up_account` | 96da623d-ced9-44d0-8448-45c389add0a1 | `quote` |
-| 20 | `securityaccount` | securityaccount | `securityaccount` | fbc20885-a507-45bd-a986-74d3fc28d38a | `quote` |
-| 21 | `creditlimit` | creditlimit | `credit_limit` | Decimal | `number` |
-| 22 | `creditlowwerlimit` | creditlowwerlimit | `credit_lowwer_limit` | Decimal | `number` |
-| 23 | `signingdate` | signingdate | `signing_date` | Date | `date` |
-| 24 | `basebilltype` | basebilltype | `basebilltype` | Short | `short` |
-| 25 | `srcitem` | srcitem | `srcitem` | Short | `short` |
-| 26 | `eventType` | eventType | `event_type` | Short | `short` |
-| 27 | `effectivedate` | effectivedate | `effective_date` | Date | `date` |
-| 28 | `bustype` | bustype | `trade_type` | 19f9264d-28d1-4b47-9d28-f2e82654f3a9 | `quote` |
-| 29 | `vouchdate` | vouchdate | `vouchdate` | Date | `date` |
-| 30 | `duedate` | duedate | `due_date` | Date | `date` |
-| 31 | `verifystate` | verifystate | `verifystate` | Short | `short` |
-| 32 | `isWfControlled` | 是否WfControlled | `isWfControlled` | Boolean | `switch` |
-| 33 | `isallowendorsame` | 是否allowendorsame | `isallowendorsame` | Boolean | `switch` |
-| 34 | `canuseflow` | canuseflow | `canuseflow` | Boolean | `switch` |
-| 35 | `isallowintopool` | 是否allowintopool | `is_allow_into_pool` | Boolean | `switch` |
-| 36 | `auditDate` | auditDate | `audit_date` | Date | `date` |
-| 37 | `remark` | remark | `remark` | String | `text` |
-| 38 | `versions` | versions | `versions` | String | `text` |
-| 39 | `isModify` | 是否Modify | `isModify` | Boolean | `switch` |
-| 40 | `auditStatus` | auditStatus | `audit_status` | Short | `short` |
-| 41 | `effectiveStatus` | effectiveStatus | `effective_status` | Short | `short` |
-| 42 | `oldBillPoolId` | oldBillPoolID | `oldBillPoolId_id` | Long | `long` |
-| 43 | `creator` | 创建人 | `creator` | String | `text` |
-| 44 | `createTime` | 创建时间 | `create_time` | DateTime | `timestamp` |
-| 45 | `auditor` | auditor | `auditor` | String | `text` |
-| 46 | `auditorId` | auditorID | `auditorId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 47 | `auditTime` | auditTime | `audit_time` | DateTime | `timestamp` |
-| 48 | `modifier` | 修改人 | `modifier` | String | `text` |
-| 49 | `modifierId` | 修改人ID | `modifierId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 50 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `timestamp` |
-| 51 | `drftmembersoftheunit` | drftmembersoftheunit | `` | 8be89ef3-17e1-477e-a5d3-ace6b7ef8585 | `` |
+## 基本信息
 
-## 关联（13 个）
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 票据池协议 |
+| 物理表 | `drft_billpoolagreemen` |
+| 数据库 schema | `drft` |
+| 所属应用 | `DRFT` |
+| 直连字段 | 51 个 |
+| 子表 | 1 个 |
+| 关联引用 | 13 个 |
 
-- `securityaccount` -> `bd.enterprise.OrgFinBankacctVO` () 
-- `ytenant` -> `yht.tenant.YhtTenant` () 
-- `accentityRaw` -> `aa.baseorg.OrgMV` () 
-- `creatorId` -> `base.user.User` () 
-- `modifierId` -> `base.user.User` () 
-- `accentity` -> `aa.baseorg.OrgMV` () 
-- `bustype` -> `bd.bill.TransType` () 
-- `auditorId` -> `base.user.User` () 
-- `drftmembersoftheunit` -> `drft.drftbillpoolagreemen.DrftMembersOfTheUnit` (0..n) 
-- `currency` -> `bd.currencytenant.CurrencyTenantVO` () 
-- `bankname` -> `bd.bank.BankVO` () 
-- `signupaccount` -> `tmsp.elebankaccountset.EleBankAccountSet` () 
-- `tenant` -> `base.tenant.Tenant` () 
+## 子表
+
+| 字段名 | URI | 关系 |
+|--------|-----|------|
+| `drftmembersoftheunit` | `drft.drftbillpoolagreemen.DrftMembersOfTheUnit` | composition |
+
+## 关联引用 (13个)
+
+| 字段名 | 引用类型 |
+|--------|---------|
+| `securityaccount` | `bd_enterprisebankacctref` |
+| `ytenant_id` | `` |
+| `accentity_raw` | `bd_accbody` |
+| `` | `` |
+| `accentity` | `ucf-org-center.bd_fundsorg_na` |
+| `trade_type` | `bd_transtypelistref` |
+| `currency` | `bd_currencytenantreflist` |
+| `bankname` | `bd_bankcardref` |
+| `sign_up_account` | `yonbip-fi-ctmtmsp.tmsp_elebankaccountref` |
+| `tenant_id` | `` |
+
+## 继承接口 (4个, 9字段)
+
+- **租户相关** (`base.itf.ITenant`)
+  - `tenant_id` → `tenant_id`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+- **审批流信息** (`base.itf.IApprovalFlow`)
+  - `` → ``
+  - `` → ``
+  - `` → ``
+- **审批信息** (`base.itf.IApprovalInfo`)
+  - `audit_date` → `audit_date`
+  - `` → ``
+  - `` → ``
+  - `audit_time` → `audit_time`
+
+## 字段列表（按类型分组）
+
+> 共 51 个直连字段
+
+### 文本字段 (9个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `protocolcode` | `protocolcode` | `protocolcode` | 协议编号 |
+| `code` | `code` | `code` | 单据编号 |
+| `old_code` | `old_code` | `oldCode` | 旧的协议编码 |
+| `protocol_name` | `protocol_name` | `protocolname` | 协议名称 |
+| `remark` | `remark` | `remark` | 备注 |
+| `versions` | `versions` | `versions` | 版本号 |
+| `` | `creator` | `creator` | 创建人 |
+| `` | `auditor` | `auditor` | 审批人 |
+| `` | `modifier` | `modifier` | 修改人 |
+
+### 引用字段 (12个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `accentity` | `accentity` | `accentity` | 下拨资金组织id |
+| `accentity_raw` | `accentity_raw` | `accentityRaw` | 核算会计主体 |
+| `tenant_id` | `tenant_id` | `tenant` | 租户 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+| `` | `creatorId` | `creatorId` | 创建人 |
+| `currency` | `currency` | `currency` | 币种id |
+| `bankname` | `bankname` | `bankname` | 签约银行id |
+| `sign_up_account` | `sign_up_account` | `signupaccount` | 签约主账号id |
+| `securityaccount` | `securityaccount` | `securityaccount` | 保证金账户id |
+| `trade_type` | `trade_type` | `bustype` | 交易类型id |
+| `` | `auditorId` | `auditorId` | 审批人id |
+| `` | `modifierId` | `modifierId` | 修改人id |
+
+### 日期字段 (7个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_date` | `create_date` | `createDate` | 创建日期 |
+| `modify_date` | `modify_date` | `modifyDate` | 修改日期 |
+| `signing_date` | `signing_date` | `signingdate` | 签约日期 |
+| `effective_date` | `effective_date` | `effectivedate` | 生效日期 |
+| `` | `vouchdate` | `vouchdate` | 单据日期 |
+| `due_date` | `due_date` | `duedate` | 到期日期 |
+| `audit_date` | `audit_date` | `auditDate` | 审批日期 |
+
+### 布尔字段 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `isWfControlled` | `isWfControlled` | 审批流控制 |
+| `isallowendorsame` | `isallowendorsame` | `isallowendorsame` | 支持同名背书 |
+| `canuseflow` | `canuseflow` | `canuseflow` | 是否走审批流 |
+| `is_allow_into_pool` | `is_allow_into_pool` | `isallowintopool` | 是否允许商承入池 |
+| `isModify` | `isModify` | `isModify` | 是否变更过 |
+
+### 短整数 (8个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `returncount` | `returncount` | 退回次数 |
+| `` | `status` | `status` | 单据状态 |
+| `basebilltype` | `basebilltype` | `basebilltype` | 单据类型 |
+| `srcitem` | `srcitem` | `srcitem` | 事项来源 |
+| `event_type` | `event_type` | `eventType` | 事项类型 |
+| `` | `verifystate` | `verifystate` | 审批状态 |
+| `audit_status` | `audit_status` | `auditStatus` | 审批状态 |
+| `effective_status` | `effective_status` | `effectiveStatus` | 生效状态 |
+
+### 长整数 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | 主表id |
+| `` | `tplid` | `tplid` | 模板id |
+| `oldBillPoolId_id` | `oldBillPoolId_id` | `oldBillPoolId` | 主表老id |
+
+### 数值字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `credit_limit` | `credit_limit` | `creditlimit` | 最高水位 |
+| `credit_lowwer_limit` | `credit_lowwer_limit` | `creditlowwerlimit` | 最低水位 |
+
+### timestamp (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `audit_time` | `audit_time` | `auditTime` | 审批时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+
+### other (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `` | `drftmembersoftheunit` | 成员单位 |

@@ -9,45 +9,114 @@ last_verified: 2026-06-03
 status: verified
 source_type: api_response
 ---
+
 # 电子合同模板 (`DZHTFW.econtract.econtractTemplate`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBip），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `contract_template` | 应用: `DZHTFW`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`contract_template` | domain：`iuap-apcom-contract` | 应用：`DZHTFW` | 业务对象ID：`d4386dba-a059-4f45-923b-65eddf4d1374`
 
-## 属性（27 个）
+## 基本信息
 
-| # | 字段 | 显示名 | 列 | 类型 | biztype |
-|---|------|--------|-----|------|---------|
-| 1 | `nameGenerateRule` | nameGenerateRule | `name_generate_rule` | String | `text` |
-| 2 | `appCode` | app编码 | `app_code` | String | `text` |
-| 3 | `code` | 编码 | `code` | String | `text` |
-| 4 | `contractObjectCode` | contractObject编码 | `contract_object_code` | String | `text` |
-| 5 | `createFileType` | createFileType | `create_file_type` | String | `text` |
-| 6 | `designMode` | designMode | `design_mode` | Decimal | `number` |
-| 7 | `domain` | domain | `domain` | String | `text` |
-| 8 | `fileKey` | fileKey | `file_key` | String | `attachment` |
-| 9 | `isSample` | 是否Sample | `is_sample` | Integer | `int` |
-| 10 | `orgId` | orgID | `org_id` | String | `text` |
-| 11 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 12 | `secretLevel` | secretLevel | `secret_level` | String | `text` |
-| 13 | `secretLimit` | secretLimit | `secret_limit` | String | `text` |
-| 14 | `sourceFileKey` | sourceFileKey | `source_file_key` | String | `text` |
-| 15 | `tempSource` | tempSource | `temp_source` | String | `text` |
-| 16 | `templateCategory` | templateCategory | `template_category` | String | `text` |
-| 17 | `templateDesc` | templateDesc | `template_desc` | String | `text` |
-| 18 | `templateName` | 模板名称 | `template_name` | String | `multiLanguage` |
-| 19 | `templatetatus` | templatetatus | `template_status` | templateStatus | `singleOption` |
-| 20 | `thumbnailFileKey` | thumbnailFileKey | `thumbnail_file_key` | String | `text` |
-| 21 | `versionId` | 版本号ID | `version_id` | String | `text` |
-| 22 | `id` | ID | `id` | String | `text` |
-| 23 | `createTime` | 创建时间 | `create_time` | DateTime | `dateTime` |
-| 24 | `creator` | 创建人 | `creator` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 25 | `modifier` | 修改人 | `modifier` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 26 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `dateTime` |
-| 27 | `ytenantId` | ytenantID | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 电子合同模板 |
+| 物理表 | `contract_template` |
+| 数据库 schema | `iuap-apcom-contract` |
+| 所属应用 | `DZHTFW` |
+| 直连字段 | 27 个 |
+| 子表 | 0 个 |
+| 关联引用 | 3 个 |
 
-## 关联（3 个）
+## 关联引用 (3个)
 
-- `creator` -> `base.user.BipUser` () 
-- `modifier` -> `base.user.BipUser` () 
-- `ytenantId` -> `yht.tenant.YhtTenant` () 
+| 字段名 | 引用类型 |
+|--------|---------|
+| `creator` | `bip-usercenter.bip_user_ref` |
+| `modifier` | `bip-usercenter.bip_user_ref` |
+| `ytenant_id` | `` |
+
+## 继承接口 (2个, 5字段)
+
+- **审计信息** (`iuap.busiObj.IAuditInfo`)
+  - `create_time` → `create_time`
+  - `creator` → `creator`
+  - `modifier` → `modifier`
+  - `modify_time` → `modify_time`
+- **统一租户接口** (`iuap.busiObj.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 27 个直连字段
+
+### 文本字段 (16个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `name_generate_rule` | `name_generate_rule` | `nameGenerateRule` | 文件名称生成规则 |
+| `app_code` | `app_code` | `appCode` | 应用code |
+| `code` | `code` | `code` | 模板编码 |
+| `contract_object_code` | `contract_object_code` | `contractObjectCode` | 合同对象编码 |
+| `create_file_type` | `create_file_type` | `createFileType` | 文件创建类型pdf、word |
+| `domain` | `domain` | `domain` | 领域 |
+| `org_id` | `org_id` | `orgId` | 组织ID |
+| `secret_level` | `secret_level` | `secretLevel` | 密级 |
+| `secret_limit` | `secret_limit` | `secretLimit` | 保密期限	 |
+| `source_file_key` | `source_file_key` | `sourceFileKey` | 源合同模板文件key |
+| `temp_source` | `temp_source` | `tempSource` | 模板来源 |
+| `template_category` | `template_category` | `templateCategory` | 模板分类 |
+| `template_desc` | `template_desc` | `templateDesc` | 描述 |
+| `thumbnail_file_key` | `thumbnail_file_key` | `thumbnailFileKey` | 缩略图key |
+| `version_id` | `version_id` | `versionId` | 模板最新版本id |
+| `id` | `id` | `id` | 主键 |
+
+### 引用字段 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `creator` | `creator` | `creator` | 创建人 |
+| `modifier` | `modifier` | `modifier` | 修改人 |
+| `ytenant_id` | `ytenant_id` | `ytenantId` | 租户id |
+
+### 日期时间 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+
+### 枚举字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `template_status` | `template_status` | `templatetatus` | 模板状态 |
+
+### 整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `is_sample` | `is_sample` | `isSample` | 是否范本 |
+
+### 数值字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `design_mode` | `design_mode` | `designMode` | 设计模式 0 线上 1线下 |
+
+### attachment (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `file_key` | `file_key` | `fileKey` | 文件key |
+
+### timestamp (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubts` | `pubts` | `pubts` | pubts |
+
+### multiLanguage (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `template_name` | `template_name` | `templateName` | 模板名称 |

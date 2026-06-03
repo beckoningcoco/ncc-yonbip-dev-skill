@@ -12,30 +12,82 @@ source_type: api_response
 
 # 新增页签 (`aa.merchant.newPage`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `iuap_extend_nfkwaryp_newpage` | 应用: `DPMCUS` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`iuap_extend_nfkwaryp_newpage` | domain：`productcenter` | 应用：`DPMCUS` | 业务对象ID：``
 
-## 属性（13 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `extend1` | extend1 | `string_0` | String | `text` |
-| 2 | `extend2` | extend2 | `string_1` | String | `text` |
-| 3 | `createTime` | 创建时间 | `create_time` | DateTime | `dateTime` |
-| 4 | `creator` | 创建人 | `creator` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 5 | `dr` | 逻辑删除 | `dr` | Short | `short` |
-| 6 | `foreignerKey` | foreignerKey | `foreign_key_bigint` | 94b3280a-27a4-485a-b90b-b7bce57c6df2 | `quote` |
-| 7 | `id` | ID | `id` | String | `text` |
-| 8 | `modifier` | 修改人 | `modifier` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 9 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `dateTime` |
-| 10 | `pk_temp` | pk_temp | `pk_temp` | String | `text` |
-| 11 | `pubts` | 时间戳 | `pubts` | DateTime | `dateTime` |
-| 12 | `version` | 版本号 | `version` | Integer | `int` |
-| 13 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 新增页签 |
+| 物理表 | `iuap_extend_nfkwaryp_newpage` |
+| 数据库 schema | `productcenter` |
+| 所属应用 | `DPMCUS` |
+| 直连字段 | 13 个 |
+| 子表 | 0 个 |
+| 关联引用 | 4 个 |
 
-## 关联（4 个）
+## 关联引用 (4个)
 
-- `foreignerKey` -> `aa.merchant.Merchant` (0..n)
-- `creator` -> `base.user.BipUser` ()
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `modifier` -> `base.user.BipUser` ()
+| 字段名 | 引用类型 |
+|--------|---------|
+| `foreign_key_bigint` | `` |
+| `` | `` |
+| `ytenant_id` | `` |
+
+## 继承接口 (4个, 8字段)
+
+- **逻辑删除接口** (`common.base.LogicDelete`)
+  - `dr` → `dr`
+- **模版接口** (`common.base.Template`)
+  - `pk_temp` → `pk_temp`
+  - `version` → `version`
+- **审计信息** (`ucfbase.ucfbaseItf.IAuditInfo`)
+  - `create_time` → `create_time`
+  - `` → ``
+  - `` → ``
+  - `modify_time` → `modify_time`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 13 个直连字段
+
+### 文本字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `string_0` | `string_0` | `extend1` | 字段1 |
+| `string_1` | `string_1` | `extend2` | 字段2 |
+| `id` | `id` | `id` | ID |
+| `pk_temp` | `pk_temp` | `pk_temp` | 模版 |
+
+### 引用字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `creator` | `creator` | 创建人 |
+| `foreign_key_bigint` | `foreign_key_bigint` | `foreignerKey` | 客户档案 |
+| `` | `modifier` | `modifier` | 修改人 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 日期时间 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+
+### 整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `version` | `version` | `version` | 版本 |
+
+### 短整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dr` | `dr` | `dr` | 逻辑删除标记 |

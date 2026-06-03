@@ -12,31 +12,81 @@ source_type: api_response
 
 # 物料定金时间关联明细表 (`pc.product.ProductDepositTimeDetail`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `productdeposittimedetail` | 应用: `GZTBDM` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`productdeposittimedetail` | domain：`productcenter` | 应用：`GZTBDM` | 业务对象ID：``
 
-## 属性（14 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `id` | ID | `id` | Long | `long` |
-| 2 | `productId` | productID | `productId` | 89f3b06e-23df-4403-b4a7-19f99eeeae72 | `quote` |
-| 3 | `isCreator` | 是否Creator | `isCreator` | Boolean | `switch` |
-| 4 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 5 | `productApplyRangeId` | productApplyRangeID | `productApplyRangeId` | ed1f55f2-a3f7-4617-8bd2-7f2f404843ab | `quote` |
-| 6 | `productDetailId` | productDetailID | `productDetailId` | 04616b02-47f8-4821-8c02-2e7a6d3264a8 | `quote` |
-| 7 | `ControlTimeType` | ControlTimeType | `ControlTimeType` | Integer | `int` |
-| 8 | `RelativeDate` | RelativeDate | `RelativeDate` | Integer | `int` |
-| 9 | `dEndDate` | dEndDate | `dEndDate` | Date | `date` |
-| 10 | `dStartDate` | dStartDate | `dStartDate` | Date | `date` |
-| 11 | `durationDate` | durationDate | `durationDate` | Integer | `int` |
-| 12 | `iControlTime` | iControlTime | `iControlTime` | Boolean | `switch` |
-| 13 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 14 | `tenant` | tenant | `tenant_id` | Long | `long` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 物料定金时间关联明细表 |
+| 物理表 | `productdeposittimedetail` |
+| 数据库 schema | `productcenter` |
+| 所属应用 | `GZTBDM` |
+| 直连字段 | 14 个 |
+| 子表 | 0 个 |
+| 关联引用 | 4 个 |
 
-## 关联（4 个）
+## 关联引用 (4个)
 
-- `productApplyRangeId` -> `pc.product.ProductApplyRange` ()
-- `productId` -> `pc.product.Product` (0..n)
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `productDetailId` -> `pc.product.ProductDetail` (0..n)
+| 字段名 | 引用类型 |
+|--------|---------|
+| `productApplyRangeId` | `` |
+| `productId` | `` |
+| `ytenant_id` | `` |
+| `productDetailId` | `` |
+
+## 继承接口 (2个, 2字段)
+
+- **租户相关** (`coredoc.pub.TenantObselete`)
+  - `tenant_id` → `tenant_id`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 14 个直连字段
+
+### 引用字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `productId` | `productId` | `productId` | 物料 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户 |
+| `productApplyRangeId` | `productApplyRangeId` | `productApplyRangeId` | 物料分配范围 |
+| `productDetailId` | `productDetailId` | `productDetailId` | 物料组织级表 |
+
+### 日期字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dEndDate` | `dEndDate` | `dEndDate` | 固定时间方式时收尾款结束日期 |
+| `dStartDate` | `dStartDate` | `dStartDate` | 固定时间方式时收尾款开始日期 |
+
+### 布尔字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `isCreator` | `isCreator` | `isCreator` | 是否管理组织 |
+| `iControlTime` | `iControlTime` | `iControlTime` | 线上付尾款规则:是否控制时间 |
+
+### 整数 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `ControlTimeType` | `ControlTimeType` | `ControlTimeType` | 线上付尾款控制方式 |
+| `RelativeDate` | `RelativeDate` | `RelativeDate` | 相对时间时几天后支付尾款 |
+| `durationDate` | `durationDate` | `durationDate` | 相对时间时持续支付尾款的天数 |
+
+### 长整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+| `tenant_id` | `tenant_id` | `tenant` | 租户(废弃) |
+
+### timestamp (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubts` | `pubts` | `pubts` | 时间戳 |

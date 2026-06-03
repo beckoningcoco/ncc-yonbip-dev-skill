@@ -12,31 +12,69 @@ source_type: api_response
 
 # 客户资质文件管理 (`aa.merchant.MerchantQualificationDocument`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `merchant_qualification_document` | 应用: `DPMCUS` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`merchant_qualification_document` | domain：`productcenter` | 应用：`DPMCUS` | 业务对象ID：``
 
-## 属性（15 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `id` | ID | `id` | String | `text` |
-| 2 | `merchantId` | merchantID | `merchant_id` | 94b3280a-27a4-485a-b90b-b7bce57c6df2 | `quote` |
-| 3 | `licenseName` | license名称 | `license_name` | 24adca98-a52e-4e01-bd71-6304184e474c | `quote` |
-| 4 | `attachment` | attachment | `attachment` | String | `text` |
-| 5 | `licenseNumber` | licenseNumber | `license_number` | String | `text` |
-| 6 | `longTermEffective` | longTermEffective | `long_term_effective` | String | `text` |
-| 7 | `validityStartDate` | validityStartDate | `validity_start_date` | Date | `date` |
-| 8 | `dueDate` | dueDate | `due_date` | Date | `date` |
-| 9 | `remarks` | remarks | `remarks` | String | `text` |
-| 10 | `documentUploader` | documentUploader | `document_uploader` | String | `text` |
-| 11 | `documentUploaderTime` | documentUploaderTime | `document_uploader_time` | Date | `date` |
-| 12 | `informationModifier` | informationModifier | `information_modifier` | String | `text` |
-| 13 | `informationModifyTime` | informationModifyTime | `information_modify_time` | Date | `date` |
-| 14 | `pubts` | 时间戳 | `pubts` | DateTime | `dateTime` |
-| 15 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 客户资质文件管理 |
+| 物理表 | `merchant_qualification_document` |
+| 数据库 schema | `productcenter` |
+| 所属应用 | `DPMCUS` |
+| 直连字段 | 15 个 |
+| 子表 | 0 个 |
+| 关联引用 | 3 个 |
 
-## 关联（3 个）
+## 关联引用 (3个)
 
-- `merchantId` -> `aa.merchant.Merchant` (0..n)
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `licenseName` -> `aa.qualify.Qualify` ()
+| 字段名 | 引用类型 |
+|--------|---------|
+| `merchant_id` | `` |
+| `ytenant_id` | `` |
+| `license_name` | `yssupplier.aa_qualify` |
+
+## 继承接口 (1个, 1字段)
+
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 15 个直连字段
+
+### 文本字段 (7个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+| `attachment` | `attachment` | `attachment` | 附件 |
+| `license_number` | `license_number` | `licenseNumber` | 证照号码 |
+| `long_term_effective` | `long_term_effective` | `longTermEffective` | 长期有效 |
+| `remarks` | `remarks` | `remarks` | 备注 |
+| `document_uploader` | `document_uploader` | `documentUploader` | 证件上传人员 |
+| `information_modifier` | `information_modifier` | `informationModifier` | 信息修改人员 |
+
+### 引用字段 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `merchant_id` | `merchant_id` | `merchantId` | 客户 |
+| `license_name` | `license_name` | `licenseName` | 证照名称 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户 |
+
+### 日期字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `validity_start_date` | `validity_start_date` | `validityStartDate` | 有效期开始日期 |
+| `due_date` | `due_date` | `dueDate` | 到期日期 |
+| `document_uploader_time` | `document_uploader_time` | `documentUploaderTime` | 证件上传时间 |
+| `information_modify_time` | `information_modify_time` | `informationModifyTime` | 信息修改时间 |
+
+### 日期时间 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubts` | `pubts` | `pubts` | 时间戳 |

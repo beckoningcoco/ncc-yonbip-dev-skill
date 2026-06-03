@@ -1,5 +1,5 @@
 ---
-tags: [BIP, 元数据, 数据字典, base, base.user.User]
+tags: [BIP, 元数据, 数据字典, base.user.User]
 created: 2026-06-03
 updated: 2026-06-03
 sources: [元数据API queryByUri]
@@ -9,10 +9,11 @@ last_verified: 2026-06-03
 status: verified
 source_type: api_response
 ---
+
 # 身份信息 (`base.user.User`)
 
-> ⚡ **平台版本：BIP 旗舰版 V5** — 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `user` | 应用: `GZTACT` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`user` | domain：`u8c-auth` | 应用：`GZTACT` | 业务对象ID：`e4dacd42-2b7c-4ab9-af56-06d8a5a94d8e`
 
 ## 基本信息
 
@@ -20,128 +21,164 @@ source_type: api_response
 |------|-----|
 | 显示名 | 身份信息 |
 | 物理表 | `user` |
-| 应用 | `GZTACT` |
-| 元数据类型 | `Class` |
+| 数据库 schema | `u8c-auth` |
+| 所属应用 | `GZTACT` |
+| 直连字段 | 64 个 |
+| 子表 | 1 个 |
+| 关联引用 | 10 个 |
 
-## 主键与编码
+## 子表
 
-| 角色 | 字段 | 列 | 类型 |
-|------|------|-----|------|
-| 主键 | `id` | `id` | Long |
-| 编码 | `code` | `code` | |
+| 字段名 | URI | 关系 |
+|--------|-----|------|
+| `defines` | `base.user.UserDefine` | composition |
 
-## 部署信息
+## 关联引用 (10个)
 
-- 部署时间: 2026-01-23 23:10:38:000
-- 安装来源: `/app/auth/iuap-auth-bootstrap/scripts/db/patch/mongodb/V7_R0_2507/0001_iuap_apcom_auth/0010_iuap_common/DML/0270_iuap_metadata/202512151534_metadata_base-user_delta.zip`
+| 字段名 | 引用类型 |
+|--------|---------|
+| `defaultorg` | `` |
+| `yht_tenant_id` | `` |
+| `ytenant_id` | `` |
+| `json_str` | `` |
+| `yht_user_id` | `` |
+| `department_id` | `ucf-org-center.org_admin_dept_tree_ref` |
+| `user_type` | `` |
+| `tenant_id` | `` |
+| `` | `` |
 
-## 术语标记
+## 继承接口 (7个, 13字段)
 
-`bill_add`, `bill_query`, `data_auth`, `doc`, `isMain`, `MasterData`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+- **审计信息** (`base.itf.IAuditInfo`)
+  - `create_date` → `create_date`
+  - `create_time` → `create_time`
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `modify_date` → `modify_date`
+  - `modify_time` → `modify_time`
+- **停用信息** (`base.itf.IStopping`)
+  - `stopstatus` → `stopstatus`
+  - `stop_time` → `stop_time`
+- **客户接口** (`aa.itf.ICust`)
+  - `iCustID` → `iCustID`
+- **客户接口** (`aa.itf.ICustAll`)
+- **商家相关** (`base.itf.IShop`)
+  - `iShopID` → `iShopID`
+- **商家相关** (`base.itf.IShopAll`)
 
-## 依赖接口（7 个）
+## 字段列表（按类型分组）
 
-| 接口 | URI | 版本 | 属性数 |
-|------|-----|------|--------|
-| IYTenant (`IYTenant`) | `ucfbase.ucfbaseItf.IYTenant` | 40 | 1 |
-| IAuditInfo (`IAuditInfo`) | `base.itf.IAuditInfo` | 340 | 8 |
-| IStopping (`IStopping`) | `base.itf.IStopping` | 111 | 2 |
-| ICust (`ICust`) | `aa.itf.ICust` | 52 | 1 |
-| ICustAll (`ICustAll`) | `aa.itf.ICustAll` | 22 | 0 |
-| IShop (`IShop`) | `base.itf.IShop` | 65 | 1 |
-| IShopAll (`IShopAll`) | `base.itf.IShopAll` | 32 | 0 |
+> 共 64 个直连字段
 
----
+### 文本字段 (35个)
 
-## 全部属性（64 个）
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `code` | `code` | `code` | 用户账号 |
+| `name` | `name` | `name` | 用户名称 |
+| `mobile` | `mobile` | `mobile` | 手机账号 |
+| `email` | `email` | `email` | 邮箱账号 |
+| `doc_ids` | `doc_ids` | `docId` | 档案ID |
+| `` | `creator` | `creator` | 创建人名称 |
+| `` | `modifier` | `modifier` | 修改人名称 |
+| `avatar` | `avatar` | `avatar` | 头像 |
+| `nick_name` | `nick_name` | `nickName` | 昵称 |
+| `gender` | `gender` | `gender` | 性别 |
+| `password` | `password` | `password` | 密码 |
+| `tel` | `tel` | `tel` | 座机 |
+| `qq` | `qq` | `qq` | qq |
+| `wechat` | `wechat` | `wechat` | 微信 |
+| `position` | `position` | `position` | 职位 |
+| `doc_ids` | `doc_ids` | `cust` | 客户ID |
+| `status` | `status` | `status` | 账号状态 |
+| `registersource` | `registersource` | `registersource` | 注册来源 |
+| `openid` | `openid` | `openId` | 开通Id |
+| `code` | `code` | `userCode` | 日志用编码 |
+| `name` | `name` | `userName` | 日志用名称 |
+| `res_code` | `res_code` | `rescode` | 应用编码 |
+| `yxyuserid` | `yxyuserid` | `yxyUserId` | 应用关联用户guid |
+| `erpcode` | `erpcode` | `erpcode` | ERP编码 |
+| `ext1` | `ext1` | `ext1` | 扩展1 |
+| `ext2` | `ext2` | `ext2` | 扩展2 |
+| `ext3` | `ext3` | `ext3` | 扩展3 |
+| `ext4` | `ext4` | `ext4` | 扩展4 |
+| `ext5` | `ext5` | `ext5` | 扩展5 |
+| `ext6` | `ext6` | `ext6` | 扩展6 |
+| `ext7` | `ext7` | `ext7` | 扩展7 |
+| `ext8` | `ext8` | `ext8` | 扩展8 |
+| `ext9` | `ext9` | `ext9` | 扩展9 |
+| `ext10` | `ext10` | `ext10` | 扩展10 |
+| `salt` | `salt` | `salt` | 盐 |
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype | 必填 | 可空 |
-|---|--------|--------|-----|------|---------|------|------|
-| 1 | `defaultorg` | efaultorg(日期) | `defaultorg` | 14302233-1394-4a70-94e1-bed51636f312 | `quote` |  | true |
-| 2 | `department` | epartment(日期) | `department_id` | a4352e3c-3eda-4539-a7a9-ec00799be118 | `quote` |  | true |
-| 3 | `yhtUserId` | yhtUserId | `yht_user_id` | 3991fd81-191b-4fb2-bd23-f484e057e116 | `quote` |  | true |
-| 4 | `code` | 编码 | `code` | String | `text` |  | true |
-| 5 | `name` | 名称 | `name` | String | `text` |  | true |
-| 6 | `mobile` | 手机号 | `mobile` | String | `text` |  | true |
-| 7 | `email` | 邮箱 | `email` | String | `text` |  | true |
-| 8 | `userType` | 用户类型 | `user_type` | Short | `short` |  | true |
-| 9 | `docId` | docId | `doc_ids` | String | `text` |  | true |
-| 10 | `stopstatus` | stopstatus | `stopstatus` | Integer | `int` |  | true |
-| 11 | `stoptime` | stoptime | `stop_time` | DateTime | `timestamp` |  | true |
-| 12 | `deleted` | eleted(日期) | `deleted` | Long | `long` |  | true |
-| 13 | `creatorId` | 创建人ID | `creatorId` | Long | `long` |  | true |
-| 14 | `creator` | 创建人 | `creator` | String | `text` |  | true |
-| 15 | `createTime` | 创建时间 | `create_time` | DateTime | `timestamp` |  | true |
-| 16 | `modifierId` | 修改人ID | `modifierId` | Long | `long` |  | true |
-| 17 | `modifier` | 修改人 | `modifier` | String | `text` |  | true |
-| 18 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `timestamp` |  | true |
-| 19 | `id` | 主键ID | `id` | Long | `long` |  | true |
-| 20 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |  | true |
-| 21 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` | true | true |
-| 22 | `foreignId` | foreignId | `foreign_id` | Long | `long` |  | true |
-| 23 | `mobilepreno` | mobilepreno | `mobilepreno` | Long | `long` |  | true |
-| 24 | `avatar` | 头像 | `avatar` | String | `text` |  | true |
-| 25 | `nickName` | 昵称 | `nick_name` | String | `text` |  | true |
-| 26 | `gender` | 性别 | `gender` | String | `text` |  | true |
-| 27 | `birthday` | birthday | `birthday` | Date | `date` |  | true |
-| 28 | `password` | 密码 | `password` | String | `text` |  | true |
-| 29 | `tel` | tel | `tel` | String | `text` |  | true |
-| 30 | `qq` | qq | `qq` | String | `text` |  | true |
-| 31 | `wechat` | wechat | `wechat` | String | `text` |  | true |
-| 32 | `corpration` | orpration | `corpration_id` | Long | `long` |  | true |
-| 33 | `position` | position | `position` | String | `text` |  | true |
-| 34 | `cust` | ust | `doc_ids` | String | `text` |  | true |
-| 35 | `customer` | ustomer | `doc_ids` | Long | `long` |  | true |
-| 36 | `hstaff` | hstaff | `json_str` | 4effed83-35f5-4e3b-9be1-092b5ae602e8 | `quote` |  | true |
-| 37 | `staff` | staff | `yht_user_id` | 4effed83-35f5-4e3b-9be1-092b5ae602e8 | `quote` |  | true |
-| 38 | `yhtTenantId` | yhtTenantId | `yht_tenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |  | true |
-| 39 | `shop` | shop | `doc_ids` | Long | `long` |  | true |
-| 40 | `isOpenUdh` | 是否OpenUdh | `isOpenUdh` | Boolean | `switch` |  | true |
-| 41 | `status` | 状态 | `status` | String | `text` |  | true |
-| 42 | `registersource` | registersource | `registersource` | String | `text` |  | true |
-| 43 | `openId` | openId | `openid` | String | `text` |  | true |
-| 44 | `userCode` | 用户编码 | `code` | String | `text` |  | true |
-| 45 | `userName` | 用户名 | `name` | String | `text` |  | true |
-| 46 | `rescode` | rescode | `res_code` | String | `text` |  | true |
-| 47 | `yxyUserId` | yxyUserId | `yxyuserid` | String | `text` |  | true |
-| 48 | `erpcode` | erpcode | `erpcode` | String | `text` |  | true |
-| 49 | `createDate` | 创建日期 | `create_date` | Date | `date` |  | true |
-| 50 | `modifyDate` | 修改日期 | `modify_date` | Date | `date` |  | true |
-| 51 | `tenant` | tenant | `tenant_id` | c213cd56-d5de-421f-bae7-d77455b557cd | `quote` | true | true |
-| 52 | `ext1` | ext1 | `ext1` | String | `text` |  | true |
-| 53 | `ext2` | ext2 | `ext2` | String | `text` |  | true |
-| 54 | `ext3` | ext3 | `ext3` | String | `text` |  | true |
-| 55 | `ext4` | ext4 | `ext4` | String | `text` |  | true |
-| 56 | `ext5` | ext5 | `ext5` | String | `text` |  | true |
-| 57 | `ext6` | ext6 | `ext6` | String | `text` |  | true |
-| 58 | `ext7` | ext7 | `ext7` | String | `text` |  | true |
-| 59 | `ext8` | ext8 | `ext8` | String | `text` |  | true |
-| 60 | `ext9` | ext9 | `ext9` | String | `text` |  | true |
-| 61 | `ext10` | ext10 | `ext10` | String | `text` |  | true |
-| 62 | `defines` | efines(日期) | `` | 0cf7b751-2ebb-47f4-9115-f38deae09b29 | `` |  |  |
-| 63 | `userManageType` | userManageType(类型) | `user_type` | f94d0a86-10db-46a6-b5f5-f8d5bf7634c0 | `quote` |  | true |
-| 64 | `salt` | salt | `salt` | String | `text` |  | true |
+### 引用字段 (9个)
 
-## 关联属性（10 个）
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `defaultorg` | `defaultorg` | `defaultorg` | 所属组织 |
+| `department_id` | `department_id` | `department` | 所属部门 |
+| `yht_user_id` | `yht_user_id` | `yhtUserId` | 用户ID |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户 |
+| `json_str` | `json_str` | `hstaff` | 员工参照 |
+| `yht_user_id` | `yht_user_id` | `staff` | 员工 |
+| `yht_tenant_id` | `yht_tenant_id` | `yhtTenantId` | 商家 |
+| `tenant_id` | `tenant_id` | `tenant` | 租户 |
+| `user_type` | `user_type` | `userManageType` | 身份类型 |
 
-| # | 字段 | 显示名 | 目标实体 | 列 | 关系 | 多重性 | 组合 | 隔离 | 废弃 |
-|---|------|--------|---------|-----|------|--------|------|------|------|
-| 1 | `defaultorg` | efaultorg(日期) | `org.func.BaseOrg` | `defaultorg` | 外键 |  |  | Service |  |
-| 2 | `yhtTenantId` | yhtTenantId | `yht.tenant.YhtTenant` | `yht_tenant_id` | 外键 |  |  | Service |  |
-| 3 | `ytenant` | ytenant | `yht.tenant.YhtTenant` | `ytenant_id` | 外键 |  |  | Service |  |
-| 4 | `hstaff` | hstaff | `bd.staff.Staff` | `json_str` | 外键 |  |  | Service |  |
-| 5 | `staff` | staff | `bd.staff.Staff` | `yht_user_id` | 外键 |  |  | Service |  |
-| 6 | `department` | epartment(日期) | `bd.adminOrg.AdminOrgVO` | `department_id` | 外键 |  |  | Service |  |
-| 7 | `userManageType` | userManageType(类型) | `usermanager.usertype.UserType` | `user_type` | 外键 |  |  | Service |  |
-| 8 | `yhtUserId` | yhtUserId | `ucfbase.yht.PubUserTenant` | `yht_user_id` | 外键 |  |  | Service |  |
-| 9 | `tenant` | tenant | `base.tenant.Tenant` | `tenant_id` | 外键 |  |  | Service |  |
-| 10 | `defines` | efines(日期) | `base.user.UserDefine` | `` | defines → id | 1 | Y | None |  |
+### 日期字段 (3个)
 
----
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `birthday` | `birthday` | `birthday` | 出生日期 |
+| `create_date` | `create_date` | `createDate` | 创建日期 |
+| `modify_date` | `modify_date` | `modifyDate` | 修改日期 |
 
-## SQL 示例
+### 布尔字段 (1个)
 
-```sql
-SELECT defaultorg, department_id, yht_user_id, code, name, mobile, email, user_type
-FROM user
-```
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `isOpenUdh` | `isOpenUdh` | `isOpenUdh` | 是否开通订货 |
+
+### 整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `stopstatus` | `stopstatus` | `stopstatus` | 停用状态 |
+
+### 短整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `user_type` | `user_type` | `userType` | 身份类型 |
+
+### 长整数 (9个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `deleted` | `deleted` | `deleted` | 删除状态 |
+| `creatorId` | `creatorId` | `creatorId` | 创建人 |
+| `modifierId` | `modifierId` | `modifierId` | 修改人 |
+| `id` | `id` | `id` | ID |
+| `foreign_id` | `foreign_id` | `foreignId` | 用户雪花ID |
+| `mobilepreno` | `mobilepreno` | `mobilepreno` | 国家地区 |
+| `corpration_id` | `corpration_id` | `corpration` | 公司 |
+| `doc_ids` | `doc_ids` | `customer` | 客户 |
+| `doc_ids` | `doc_ids` | `shop` | 商家 |
+
+### timestamp (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `stop_time` | `stop_time` | `stoptime` | 停用时间 |
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+
+### other (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `` | `defines` | 操作员自定义项 |

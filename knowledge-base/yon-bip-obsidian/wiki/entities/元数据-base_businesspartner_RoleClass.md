@@ -12,24 +12,77 @@ source_type: api_response
 
 # 角色类别 (`base.businesspartner.RoleClass`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `base_role_class` | 应用: `DPMBP` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`base_role_class` | domain：`productcenter` | 应用：`DPMBP` | 业务对象ID：``
 
-## 属性（9 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `id` | ID | `id` | String | `text` |
-| 2 | `partnerId` | partnerID | `partnerId` | c1627369-6457-4828-883d-756b79bd0f46 | `quote` |
-| 3 | `roleClassName` | roleClass名称 | `roleClassName` | RoleClassName | `` |
-| 4 | `isCheck` | 是否Check | `isCheck` | Boolean | `switch` |
-| 5 | `stopstatus` | stopstatus | `stopstatus` | Boolean | `switch` |
-| 6 | `stoptime` | stoptime | `stop_time` | DateTime | `timestamp` |
-| 7 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 8 | `dr` | 逻辑删除 | `dr` | Short | `short` |
-| 9 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 角色类别 |
+| 物理表 | `base_role_class` |
+| 数据库 schema | `productcenter` |
+| 所属应用 | `DPMBP` |
+| 直连字段 | 9 个 |
+| 子表 | 0 个 |
+| 关联引用 | 2 个 |
 
-## 关联（2 个）
+## 关联引用 (2个)
 
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `partnerId` -> `base.businesspartner.BusinessPartner` (0..n)
+| 字段名 | 引用类型 |
+|--------|---------|
+| `ytenant_id` | `` |
+| `partnerId` | `` |
+
+## 继承接口 (3个, 4字段)
+
+- **停用信息** (`base.itf.IStopping`)
+  - `stopstatus` → `stopstatus`
+  - `stop_time` → `stop_time`
+- **逻辑删除相关** (`ucfbase.ucfbaseItf.LogicDelete`)
+  - `dr` → `dr`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 9 个直连字段
+
+### 文本字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+
+### 引用字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `partnerId` | `partnerId` | `partnerId` | 业务伙伴 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户 |
+
+### 布尔字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `isCheck` | `isCheck` | `isCheck` | 是否已勾选 |
+| `stopstatus` | `stopstatus` | `stopstatus` | 启用状态 |
+
+### 短整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dr` | `dr` | `dr` | 删除状态 |
+
+### other (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `roleClassName` | `roleClassName` | `roleClassName` | 角色类别 |
+
+### timestamp (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `stop_time` | `stop_time` | `stoptime` | 停用时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |

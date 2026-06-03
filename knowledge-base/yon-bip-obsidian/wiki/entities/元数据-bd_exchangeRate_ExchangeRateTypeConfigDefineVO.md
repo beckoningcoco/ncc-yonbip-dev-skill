@@ -12,35 +12,81 @@ source_type: api_response
 
 # 汇率类型同步配置自定义表 (`bd.exchangeRate.ExchangeRateTypeConfigDefineVO`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `bd_exchangeratetype_config_define` | 应用: `DPMPI` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`bd_exchangeratetype_config_define` | domain：`ucfbasedoc` | 应用：`DPMPI` | 业务对象ID：``
 
-## 属性（16 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `id` | ID | `id` | String | `text` |
-| 2 | `exchangeConversionMethod` | exchangeConversionMethod | `exchange_conversion_method` | Integer | `int` |
-| 3 | `bankSource` | bankSource | `bank_source` | String | `text` |
-| 4 | `exchangeratetype` | exchangeratetype | `exchangerate_type` | 1eb63781-e244-464d-b9ba-a7a4e1685295 | `quote` |
-| 5 | `targetCurrencyId` | targetCurrencyID | `targetcurrency_id` | 02b45339-eb4a-4a31-a8b5-d32f494f4e8e | `quote` |
-| 6 | `sourceCurrencyId` | sourceCurrencyID | `sourcecurrency_id` | 02b45339-eb4a-4a31-a8b5-d32f494f4e8e | `quote` |
-| 7 | `enable` | enable | `enable` | Integer | `int` |
-| 8 | `sysid` | sysid | `sysid` | String | `text` |
-| 9 | `dr` | 逻辑删除 | `dr` | Integer | `int` |
-| 10 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 11 | `tenant` | tenant | `tenantid` | String | `text` |
-| 12 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 13 | `creator` | 创建人 | `creator` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 14 | `creationtime` | creationtime | `creationtime` | DateTime | `timestamp` |
-| 15 | `modifier` | 修改人 | `modifier` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 16 | `modifiedtime` | modifiedtime | `modifiedtime` | DateTime | `timestamp` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 汇率类型同步配置自定义表 |
+| 物理表 | `bd_exchangeratetype_config_define` |
+| 数据库 schema | `ucfbasedoc` |
+| 所属应用 | `DPMPI` |
+| 直连字段 | 16 个 |
+| 子表 | 0 个 |
+| 关联引用 | 6 个 |
 
-## 关联（6 个）
+## 关联引用 (6个)
 
-- `creator` -> `base.user.BipUser` ()
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `modifier` -> `base.user.BipUser` ()
-- `sourceCurrencyId` -> `bd.currencytenant.CurrencyTenantVO` ()
-- `exchangeratetype` -> `bd.exchangeRate.ExchangeRateTypeVO` (0..n)
-- `targetCurrencyId` -> `bd.currencytenant.CurrencyTenantVO` ()
+| 字段名 | 引用类型 |
+|--------|---------|
+| `creator` | `` |
+| `ytenant_id` | `` |
+| `modifier` | `` |
+| `sourcecurrency_id` | `bd_currencytenantref` |
+| `exchangerate_type` | `` |
+| `targetcurrency_id` | `bd_currencytenantref` |
+
+## 继承接口 (4个, 6字段)
+
+- **UCF公共状态** (`basedoc.basedocItf.BasedocIState`)
+  - `enable` → `enable`
+- **逻辑删除(待废除)** (`basedoc.basedocItf.LogicDelete`)
+- **审计信息** (`basedoc.basedocItf.AuditInfo`)
+  - `creationtime` → `creationtime`
+  - `creator` → `creator`
+  - `modifiedtime` → `modifiedtime`
+  - `modifier` → `modifier`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 16 个直连字段
+
+### 文本字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+| `bank_source` | `bank_source` | `bankSource` | 数据来源 |
+| `sysid` | `sysid` | `sysid` | 应用标识 |
+| `tenantid` | `tenantid` | `tenant` | 租户(废弃) |
+
+### 引用字段 (6个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `exchangerate_type` | `exchangerate_type` | `exchangeratetype` | 汇率类型主表主键 |
+| `targetcurrency_id` | `targetcurrency_id` | `targetCurrencyId` | 目的币种 |
+| `sourcecurrency_id` | `sourcecurrency_id` | `sourceCurrencyId` | 原币种 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户 |
+| `creator` | `creator` | `creator` | 创建人 |
+| `modifier` | `modifier` | `modifier` | 修改人 |
+
+### 整数 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `exchange_conversion_method` | `exchange_conversion_method` | `exchangeConversionMethod` | 汇率折算方式 |
+| `enable` | `enable` | `enable` | 状态 |
+| `dr` | `dr` | `dr` | 删除标识 |
+
+### timestamp (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubts` | `pubts` | `pubts` | 配置基本表的ts |
+| `creationtime` | `creationtime` | `creationtime` | 创建时间 |
+| `modifiedtime` | `modifiedtime` | `modifiedtime` | 修改时间 |

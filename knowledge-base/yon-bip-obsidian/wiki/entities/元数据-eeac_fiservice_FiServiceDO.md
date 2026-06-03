@@ -9,53 +9,114 @@ last_verified: 2026-06-03
 status: verified
 source_type: api_response
 ---
+
 # 财务服务 (`eeac.fiservice.FiServiceDO`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBip），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `eac_fi_service` | 应用: `EVNT`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`eac_fi_service` | domain：`yonbip-fi-eeac` | 应用：`EVNT` | 业务对象ID：`9e42fe9f-1dbb-4484-ab97-e3fd2cd4c349`
 
-## 属性（34 个）
+## 基本信息
 
-| # | 字段 | 显示名 | 列 | 类型 | biztype |
-|---|------|--------|-----|------|---------|
-| 1 | `appCode` | app编码 | `app_code` | String | `text` |
-| 2 | `appId` | appID | `app_id` | d5737052-9d1e-4cfa-9cab-bee31d88dd8b | `quote` |
-| 3 | `blnStdProduct` | blnStdProduct | `bln_std_product` | Boolean | `switch` |
-| 4 | `blnUserDef` | blnUserDef | `bln_user_def` | Boolean | `switch` |
-| 5 | `cancelClass` | cancelClass | `cancel_class` | String | `text` |
-| 6 | `cancelPersistenceClass` | cancelPersistenceClass | `cancel_persistence_class` | String | `text` |
-| 7 | `cancelPersistenceUri` | cancelPersistenceUri | `cancel_persistence_uri` | String | `text` |
-| 8 | `cancelSdkClass` | cancelSdkClass | `cancel_sdk_class` | String | `text` |
-| 9 | `cancelSdkPersistenceClass` | cancelSdkPersistenceClass | `cancel_sdk_persistence_class` | String | `text` |
-| 10 | `cancelUri` | cancelUri | `cancel_uri` | String | `text` |
-| 11 | `code` | 编码 | `code` | String | `text` |
-| 12 | `domainCode` | domain编码 | `domain_code` | String | `text` |
-| 13 | `domainKey` | domainKey | `domain_key` | String | `text` |
-| 14 | `execClass` | execClass | `exec_class` | String | `text` |
-| 15 | `execSdkClass` | execSdkClass | `exec_sdk_class` | String | `text` |
-| 16 | `execUri` | execUri | `exec_uri` | String | `text` |
-| 17 | `interfaceType` | interfaceType | `interface_type` | String | `text` |
-| 18 | `name` | 名称 | `name` | String | `multiLanguage` |
-| 19 | `orderNo` | orderNo | `order_no` | Integer | `int` |
-| 20 | `persistenceClass` | persistenceClass | `persistence_class` | String | `text` |
-| 21 | `persistenceSdkClass` | persistenceSdkClass | `persistence_sdk_class` | String | `text` |
-| 22 | `persistenceUri` | persistenceUri | `persistence_uri` | String | `text` |
-| 23 | `queryPeriodStatusUri` | queryPeriodStatusUri | `query_period_status_uri` | String | `text` |
-| 24 | `socialMctype` | socialMctype | `social_mctype` | Integer | `int` |
-| 25 | `socialSrcid` | socialSrcid | `social_srcid` | String | `text` |
-| 26 | `socialTenantid` | socialTenantid | `social_tenantid` | String | `text` |
-| 27 | `id` | ID | `id` | String | `text` |
-| 28 | `pubts` | 时间戳 | `pubts` | DateTime | `dateTime` |
-| 29 | `createTime` | 创建时间 | `create_time` | DateTime | `dateTime` |
-| 30 | `creator` | 创建人 | `creator` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 31 | `modifier` | 修改人 | `modifier` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 32 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `dateTime` |
-| 33 | `ytenantId` | ytenantID | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 34 | `dr` | 逻辑删除 | `dr` | Short | `short` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 财务服务 |
+| 物理表 | `eac_fi_service` |
+| 数据库 schema | `yonbip-fi-eeac` |
+| 所属应用 | `EVNT` |
+| 直连字段 | 34 个 |
+| 子表 | 0 个 |
+| 关联引用 | 4 个 |
 
-## 关联（4 个）
+## 关联引用 (4个)
 
-- `creator` -> `base.user.BipUser` () 
-- `appId` -> `epub.sourceapplication.SourceApplication` () [废]
-- `modifier` -> `base.user.BipUser` () 
-- `ytenantId` -> `yht.tenant.YhtTenant` () 
+| 字段名 | 引用类型 |
+|--------|---------|
+| `creator` | `bip-usercenter.bip_user_ref` |
+| `app_id` | `fiepub.fiepub_sourceapplicationref` |
+| `modifier` | `bip-usercenter.bip_user_ref` |
+| `ytenant_id` | `` |
+
+## 继承接口 (3个, 6字段)
+
+- **审计信息** (`iuap.busiObj.IAuditInfo`)
+  - `create_time` → `create_time`
+  - `creator` → `creator`
+  - `modifier` → `modifier`
+  - `modify_time` → `modify_time`
+- **统一租户接口** (`iuap.busiObj.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+- **逻辑删除** (`iuap.busiObj.LogicDelete`)
+  - `dr` → `dr`
+
+## 字段列表（按类型分组）
+
+> 共 34 个直连字段
+
+### 文本字段 (21个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `app_code` | `app_code` | `appCode` | 模块编码 |
+| `cancel_class` | `cancel_class` | `cancelClass` | 注册取消类 |
+| `cancel_persistence_class` | `cancel_persistence_class` | `cancelPersistenceClass` | 注册取消持久化类 |
+| `cancel_persistence_uri` | `cancel_persistence_uri` | `cancelPersistenceUri` | 注册取消持久化uri |
+| `cancel_sdk_class` | `cancel_sdk_class` | `cancelSdkClass` | 注册sdk取消类 |
+| `cancel_sdk_persistence_class` | `cancel_sdk_persistence_class` | `cancelSdkPersistenceClass` | 注册sdk取消持久化类 |
+| `cancel_uri` | `cancel_uri` | `cancelUri` | 注册取消uri |
+| `code` | `code` | `code` | 编码 |
+| `domain_code` | `domain_code` | `domainCode` | 领域 |
+| `domain_key` | `domain_key` | `domainKey` | 领域微服务编码 |
+| `exec_class` | `exec_class` | `execClass` | 注册执行类 |
+| `exec_sdk_class` | `exec_sdk_class` | `execSdkClass` | 注册sdk执行类 |
+| `exec_uri` | `exec_uri` | `execUri` | 注册执行uri |
+| `interface_type` | `interface_type` | `interfaceType` | 本地调用、rpc调用、 restful |
+| `persistence_class` | `persistence_class` | `persistenceClass` | 注册持久化类 |
+| `persistence_sdk_class` | `persistence_sdk_class` | `persistenceSdkClass` | 注册sdk持久化类 |
+| `persistence_uri` | `persistence_uri` | `persistenceUri` | 注册持久化uri |
+| `query_period_status_uri` | `query_period_status_uri` | `queryPeriodStatusUri` | 会计期间是否关账状态查询类 |
+| `social_srcid` | `social_srcid` | `socialSrcid` | 社会化来源id |
+| `social_tenantid` | `social_tenantid` | `socialTenantid` | 社会化来源租户 |
+| `id` | `id` | `id` | 主键 |
+
+### 引用字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `app_id` | `app_id` | `appId` | 来源应用id |
+| `creator` | `creator` | `creator` | 创建人 |
+| `modifier` | `modifier` | `modifier` | 修改人 |
+| `ytenant_id` | `ytenant_id` | `ytenantId` | 租户id |
+
+### 日期时间 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+
+### 布尔字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `bln_std_product` | `bln_std_product` | `blnStdProduct` | 是否为标准产品 |
+| `bln_user_def` | `bln_user_def` | `blnUserDef` | 是否自定义 |
+
+### 整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `order_no` | `order_no` | `orderNo` | 序号 |
+| `social_mctype` | `social_mctype` | `socialMctype` | 社会化管控类型 |
+
+### 短整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dr` | `dr` | `dr` | 逻辑删除 |
+
+### multiLanguage (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `name` | `name` | `name` | 名称 |

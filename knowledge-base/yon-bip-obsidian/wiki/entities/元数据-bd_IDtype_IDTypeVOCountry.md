@@ -12,31 +12,84 @@ source_type: api_response
 
 # 国家地区 (`bd.IDtype.IDTypeVOCountry`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `bd_idtype_country` | 应用: `DPMSTF` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`bd_idtype_country` | domain：`ucf-staff-center` | 应用：`DPMSTF` | 业务对象ID：``
 
-## 属性（13 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `id_type_id` | id_type_id | `id_type_id` | 59ff90b4-adcb-4cf7-942f-8fa060e22943 | `quote` |
-| 2 | `country` | country | `country` | 8e9602ac-5ca2-4d06-aede-4a0af4c316bf | `quote` |
-| 3 | `enable` | enable | `enable` | sys_intboolean | `singleOption` |
-| 4 | `enablets` | enablets | `enablets` | DateTime | `dateTime` |
-| 5 | `disablets` | disablets | `disablets` | DateTime | `dateTime` |
-| 6 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 7 | `createTime` | 创建时间 | `create_time` | DateTime | `dateTime` |
-| 8 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `dateTime` |
-| 9 | `creator` | 创建人 | `creator` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 10 | `modifier` | 修改人 | `modifier` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 11 | `dr` | 逻辑删除 | `dr` | Short | `short` |
-| 12 | `id` | ID | `id` | String | `text` |
-| 13 | `pubts` | 时间戳 | `pubts` | DateTime | `dateTime` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 国家地区 |
+| 物理表 | `bd_idtype_country` |
+| 数据库 schema | `ucf-staff-center` |
+| 所属应用 | `DPMSTF` |
+| 直连字段 | 13 个 |
+| 子表 | 0 个 |
+| 关联引用 | 5 个 |
 
-## 关联（5 个）
+## 关联引用 (5个)
 
-- `country` -> `bd.country.CountryVO` ()
-- `creator` -> `base.user.BipUser` ()
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `modifier` -> `base.user.BipUser` ()
-- `id_type_id` -> `bd.IDtype.IDTypeVO` (0..n)
+| 字段名 | 引用类型 |
+|--------|---------|
+| `country` | `ucfbasedoc.bd_countryref` |
+| `` | `` |
+| `ytenant_id` | `` |
+| `id_type_id` | `ucfbasedoc.bd_IDtyperef` |
+
+## 继承接口 (4个, 9字段)
+
+- **启用** (`ucfbase.ucfbaseItf.IEnable`)
+  - `disablets` → `disablets`
+  - `enable` → `enable`
+  - `enablets` → `enablets`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+- **审计信息** (`ucfbase.ucfbaseItf.IAuditInfo`)
+  - `create_time` → `create_time`
+  - `` → ``
+  - `` → ``
+  - `modify_time` → `modify_time`
+- **逻辑删除相关** (`ucfbase.ucfbaseItf.LogicDelete`)
+  - `dr` → `dr`
+
+## 字段列表（按类型分组）
+
+> 共 13 个直连字段
+
+### 文本字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+
+### 引用字段 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id_type_id` | `id_type_id` | `id_type_id` | 证件类型ID |
+| `country` | `country` | `country` | 国家/地区 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+| `` | `creator` | `creator` | 创建人 |
+| `` | `modifier` | `modifier` | 修改人 |
+
+### 日期时间 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `enablets` | `enablets` | `enablets` | 启用时间 |
+| `disablets` | `disablets` | `disablets` | 停用时间 |
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+
+### 枚举字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `enable` | `enable` | `enable` | 启用 |
+
+### 短整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dr` | `dr` | `dr` | 逻辑删除标记 |

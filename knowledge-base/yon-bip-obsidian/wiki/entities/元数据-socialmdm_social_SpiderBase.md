@@ -12,35 +12,85 @@ source_type: api_response
 
 # 行政区划 (`socialmdm.social.SpiderBase`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `sdm_spider_base` | 应用: `DPMPI` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`sdm_spider_base` | domain：`iuap-apdoc-social` | 应用：`DPMPI` | 业务对象ID：`731070b3-e622-470e-9397-b43e2b143565`
 
-## 属性（25 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `autoId` | autoID | `auto_id` | Long | `long` |
-| 2 | `country` | country | `country` | String | `text` |
-| 3 | `countryCode` | country编码 | `country_code` | String | `text` |
-| 4 | `countryOrder` | countryOrder | `country_order` | String | `text` |
-| 5 | `dr` | 逻辑删除 | `dr` | Integer | `int` |
-| 6 | `fullName` | full名称 | `full_name` | String | `text` |
-| 7 | `id` | ID | `code` | String | `text` |
-| 8 | `isEnd` | 是否End | `isEnd` | Boolean | `switch` |
-| 9 | `level` | 层级 | `level` | Integer | `int` |
-| 10 | `mulLanguage` | mulLanguage | `mul_language` | String | `text` |
-| 11 | `name` | 名称 | `name` | String | `multiLanguage` |
-| 12 | `name2` | name2 | `name2` | String | `text` |
-| 13 | `name3` | name3 | `name3` | String | `text` |
-| 14 | `name4` | name4 | `name4` | String | `text` |
-| 15 | `name5` | name5 | `name5` | String | `text` |
-| 16 | `name6` | name6 | `name6` | String | `text` |
-| 17 | `nameResId` | nameResID | `name_resid` | String | `text` |
-| 18 | `parent` | parent | `parent_code` | String | `text` |
-| 19 | `path` | path | `path` | String | `text` |
-| 20 | `pk` | pk | `pk` | String | `text` |
-| 21 | `sort` | 排序 | `sort_num` | Integer | `int` |
-| 22 | `sysId` | sysID | `sys_id` | String | `text` |
-| 23 | `tenantId` | 租户ID | `tenant_id` | String | `text` |
-| 24 | `ts` | ts | `ts` | DateTime | `timestamp` |
-| 25 | `ytenantId` | ytenantID | `ytenant_id` | String | `text` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 行政区划 |
+| 物理表 | `sdm_spider_base` |
+| 数据库 schema | `iuap-apdoc-social` |
+| 所属应用 | `DPMPI` |
+| 直连字段 | 25 个 |
+| 子表 | 0 个 |
+| 关联引用 | 0 个 |
+
+## 继承接口 (1个, 5字段)
+
+- **树型结构** (`basedoc.basedocItf.ITree`)
+  - `` → ``
+  - `level` → `level`
+  - `parent_id` → `parent_id`
+  - `path` → `path`
+  - `sort_num` → `sort_num`
+
+## 字段列表（按类型分组）
+
+> 共 25 个直连字段
+
+### 文本字段 (18个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `country` | `country` | `country` | 国别编码 |
+| `country_code` | `country_code` | `countryCode` | 新增11 |
+| `country_order` | `country_order` | `countryOrder` | 新增12 |
+| `full_name` | `full_name` | `fullName` | 全名称 |
+| `code` | `code` | `id` | 编码 |
+| `mul_language` | `mul_language` | `mulLanguage` | 多语json串 |
+| `name2` | `name2` | `name2` | 英文名称 |
+| `name3` | `name3` | `name3` | 繁体名称 |
+| `name4` | `name4` | `name4` | 新增7 |
+| `name5` | `name5` | `name5` | 新增8 |
+| `name6` | `name6` | `name6` | 新增9 |
+| `name_resid` | `name_resid` | `nameResId` | 多语平台资源编码 |
+| `parent_code` | `parent_code` | `parent` | 父编码 |
+| `path` | `path` | `path` | 路径 |
+| `pk` | `pk` | `pk` | pk主键 |
+| `sys_id` | `sys_id` | `sysId` | 新增14 |
+| `tenant_id` | `tenant_id` | `tenantId` | 租户id |
+| `ytenant_id` | `ytenant_id` | `ytenantId` | 友户通租户id |
+
+### 布尔字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `isEnd` | `isEnd` | 是否末级 |
+
+### 整数 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dr` | `dr` | `dr` | 是否删除 |
+| `level` | `level` | `level` | 行政区划等级 |
+| `sort_num` | `sort_num` | `sort` | 排序号 |
+
+### 长整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `auto_id` | `auto_id` | `autoId` | 自增id |
+
+### multiLanguage (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `name` | `name` | `name` | 名称 |
+
+### timestamp (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `ts` | `ts` | `ts` | 最后更新时间 |

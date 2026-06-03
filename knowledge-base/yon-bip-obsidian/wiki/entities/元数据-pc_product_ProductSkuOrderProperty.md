@@ -12,34 +12,84 @@ source_type: api_response
 
 # 物料订单属性(整合) (`pc.product.ProductSkuOrderProperty`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `productskuorderproperty` | 应用: `GZTBDM` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`productskuorderproperty` | domain：`productcenter` | 应用：`GZTBDM` | 业务对象ID：``
 
-## 属性（15 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `id` | ID | `id` | Long | `long` |
-| 2 | `productId` | productID | `productId` | 89f3b06e-23df-4403-b4a7-19f99eeeae72 | `quote` |
-| 3 | `skuId` | skuID | `skuId` | 3e9ddc6d-edd0-4508-afcc-e4a20535f2f9 | `quote` |
-| 4 | `isShow` | 是否Show | `isShow` | Boolean | `switch` |
-| 5 | `isRequired` | 是否Required | `isRequired` | Boolean | `switch` |
-| 6 | `iLimitNum` | iLimitNum | `iLimitNum` | Integer | `int` |
-| 7 | `iOrder` | iOrder | `iOrder` | Integer | `int` |
-| 8 | `promptMessage` | promptMessage | `promptMessage` | String | `text` |
-| 9 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 10 | `isCreator` | 是否Creator | `isCreator` | Boolean | `switch` |
-| 11 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 12 | `productApplyRangeId` | productApplyRangeID | `productApplyRangeId` | ed1f55f2-a3f7-4617-8bd2-7f2f404843ab | `quote` |
-| 13 | `productDetailId` | productDetailID | `productDetailId` | 04616b02-47f8-4821-8c02-2e7a6d3264a8 | `quote` |
-| 14 | `skuPropertyTypeId` | skuPropertyTypeID | `skuPropertyTypeId` | 8ce8fd53-c231-4a19-953d-5081a4c9bf20 | `quote` |
-| 15 | `tenant` | tenant | `tenant_id` | Long | `long` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 物料订单属性(整合) |
+| 物理表 | `productskuorderproperty` |
+| 数据库 schema | `productcenter` |
+| 所属应用 | `GZTBDM` |
+| 直连字段 | 15 个 |
+| 子表 | 0 个 |
+| 关联引用 | 6 个 |
 
-## 关联（6 个）
+## 关联引用 (6个)
 
-- `productApplyRangeId` -> `pc.product.ProductApplyRange` (0..n)
-- `productId` -> `pc.product.Product` ()
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `skuPropertyTypeId` -> `pc.tpl.ProductTplOrderProperty` ()
-- `productDetailId` -> `pc.product.ProductDetail` (0..n)
-- `skuId` -> `pc.product.ProductSKU` (0..n)
+| 字段名 | 引用类型 |
+|--------|---------|
+| `productApplyRangeId` | `` |
+| `productId` | `` |
+| `ytenant_id` | `` |
+| `skuPropertyTypeId` | `` |
+| `productDetailId` | `` |
+| `skuId` | `` |
+
+## 继承接口 (2个, 2字段)
+
+- **租户相关** (`coredoc.pub.TenantObselete`)
+  - `tenant_id` → `tenant_id`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 15 个直连字段
+
+### 文本字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `promptMessage` | `promptMessage` | `promptMessage` | 提示语内容 |
+
+### 引用字段 (6个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `productId` | `productId` | `productId` | 物料 |
+| `skuId` | `skuId` | `skuId` | SKU |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户 |
+| `productApplyRangeId` | `productApplyRangeId` | `productApplyRangeId` | 物料分配范围 |
+| `productDetailId` | `productDetailId` | `productDetailId` | 物料组织级表 |
+| `skuPropertyTypeId` | `skuPropertyTypeId` | `skuPropertyTypeId` | 物料模板上物料订单属性 |
+
+### 布尔字段 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `isShow` | `isShow` | `isShow` | 前端是否显示 |
+| `isRequired` | `isRequired` | `isRequired` | 前端是否必输 |
+| `isCreator` | `isCreator` | `isCreator` | 是否管理组织 |
+
+### 整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iLimitNum` | `iLimitNum` | `iLimitNum` | 字数限制 |
+| `iOrder` | `iOrder` | `iOrder` | 排序 |
+
+### 长整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+| `tenant_id` | `tenant_id` | `tenant` | 租户(废弃) |
+
+### timestamp (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubts` | `pubts` | `pubts` | 时间戳 |

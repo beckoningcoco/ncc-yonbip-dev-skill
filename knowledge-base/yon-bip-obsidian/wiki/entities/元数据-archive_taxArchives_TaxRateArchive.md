@@ -1,5 +1,5 @@
 ---
-tags: [BIP, 元数据, 数据字典, archive, archive.taxArchives.TaxRateArchive]
+tags: [BIP, 元数据, 数据字典, archive.taxArchives.TaxRateArchive]
 created: 2026-06-03
 updated: 2026-06-03
 sources: [元数据API queryByUri]
@@ -9,10 +9,11 @@ last_verified: 2026-06-03
 status: verified
 source_type: api_response
 ---
+
 # 税率档案 (`archive.taxArchives.TaxRateArchive`)
 
-> ⚡ **平台版本：BIP 旗舰版 V5** — 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `bd_taxrate` | 应用: `DPMTAX` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`bd_taxrate` | domain：`yonbip-fi-taxpubdoc` | 应用：`DPMTAX` | 业务对象ID：`eef18317-c20c-46f8-9408-416f8e938a19`
 
 ## 基本信息
 
@@ -20,105 +21,158 @@ source_type: api_response
 |------|-----|
 | 显示名 | 税率档案 |
 | 物理表 | `bd_taxrate` |
-| 应用 | `DPMTAX` |
-| 元数据类型 | `Class` |
+| 数据库 schema | `yonbip-fi-taxpubdoc` |
+| 所属应用 | `DPMTAX` |
+| 直连字段 | 44 个 |
+| 子表 | 2 个 |
+| 关联引用 | 10 个 |
 
-## 主键与编码
+## 子表
 
-| 角色 | 字段 | 列 | 类型 |
-|------|------|-----|------|
-| 主键 | `id` | `id` | String |
-| 编码 | `code` | `code` | |
+| 字段名 | URI | 关系 |
+|--------|-----|------|
+| `TaxRateArchiveDetailList` | `archive.taxArchives.TaxRateArchiveDetail` | composition |
+| `progressiveTaxRateList` | `archive.taxArchives.progressiveTaxRate` | composition |
 
-## 部署信息
+## 关联引用 (10个)
 
-- 部署时间: 2026-05-23 00:30:31:000
-- 安装来源: `/app/resources/yonbip-fi-taxpubdoc-bootstrap/scripts/db/patch/mongodb/V5_R0_2507/0001_yonbip-fi-taxpubdoc/0010_iuap_common/DML/0270_iuap_metadata/202601/202603271653_metadata_archive-taxArchives_delta.zip`
+| 字段名 | 引用类型 |
+|--------|---------|
+| `country` | `ucfbasedoc.bd_countryref` |
+| `unit` | `productcenter.pc_unitref` |
+| `creator` | `bip-usercenter.bip_user_ref` |
+| `modifier` | `bip-usercenter.bip_user_ref` |
+| `define` | `` |
+| `` | `` |
+| `currency` | `ucfbasedoc.bd_currencytenantref` |
+| `tax_bureau_archive_id` | `yonbip-fi-taxpubdoc.RefTable_457b0fd24` |
+| `tax_category_archive_id` | `yonbip-fi-taxpubdoc.RefTable_c271791694` |
 
-## 术语标记
+## 继承接口 (4个, 9字段)
 
-`MasterData`, `SharedZeroTenant`, `doc`
+- **逻辑删除** (`iuap.busiObj.LogicDelete`)
+  - `dr` → `dr`
+- **统一租户接口** (`iuap.busiObj.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+- **审计信息** (`iuap.busiObj.IAuditInfo`)
+  - `create_time` → `create_time`
+  - `creator` → `creator`
+  - `modifier` → `modifier`
+  - `modify_time` → `modify_time`
+- **档案状态** (`iuap.busiObj.IEnable`)
+  - `disablets` → `disablets`
+  - `enable` → `enable`
+  - `enablets` → `enablets`
 
-## 依赖接口（4 个）
+## 字段列表（按类型分组）
 
-| 接口 | URI | 版本 | 属性数 |
-|------|-----|------|--------|
-| LogicDelete (`LogicDelete`) | `iuap.busiObj.LogicDelete` | 211 | 1 |
-| IYTenant (`IYTenant`) | `iuap.busiObj.IYTenant` | 214 | 1 |
-| IAuditInfo (`IAuditInfo`) | `iuap.busiObj.IAuditInfo` | 679 | 4 |
-| IEnable (`IEnable`) | `iuap.busiObj.IEnable` | 508 | 3 |
+> 共 44 个直连字段
 
----
+### 文本字段 (9个)
 
-## 全部属性（44 个）
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `objid` | `objid` | `objid` | 来源系统主键 |
+| `ytenant_id` | `ytenant_id` | `ytenantId` | 租户id |
+| `tenantid` | `tenantid` | `tenantid` | 老租户id |
+| `unit_code` | `unit_code` | `unitCode` | 计量单位编码 |
+| `task_id` | `task_id` | `taskId` | 删除引用校验任务id |
+| `sysid` | `sysid` | `sysid` | 应用标识 |
+| `businessid` | `businessid` | `businessid` | 业务主键 |
+| `code` | `code` | `code` | 税率编码 |
+| `id` | `id` | `id` | 主键 |
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype | 必填 | 可空 |
-|---|--------|--------|-----|------|---------|------|------|
-| 1 | `synchts` | synchts | `synchts` | Date | `dateTime` | false |  |
-| 2 | `isGlobal` | 是否Global | `is_global` | taxpubdocYNEnum | `singleOption` | false |  |
-| 3 | `socialData` | socialData | `social_data` | taxpubdoc_tax_bureau_archive_social_data | `singleOption` | false |  |
-| 4 | `objid` | objid | `objid` | String | `text` | false |  |
-| 5 | `ytenantId` | ytenantId | `ytenant_id` | String | `text` | false | true |
-| 6 | `withholdRemit` | withholdRemit | `withhold_remit` | Boolean | `switch` | false |  |
-| 7 | `define` | efine(日期) | `define` | 78189218-86d4-4286-bb4b-02880abf76fe | `UserDefine` | false |  |
-| 8 | `creationtime` | reationtime | `creationtime` | Date | `dateTime` | false |  |
-| 9 | `effectiveDate` | effectiveDate(日期) | `effective_date` | String | `date` | false |  |
-| 10 | `scope` | scope | `scope` | applyScenesWithTaxRate | `singleOption` | false |  |
-| 11 | `calculateCoefficient` | alculateCoefficient | `calculate_coefficient` | Integer | `int` | false |  |
-| 12 | `ts` | ts | `ts` | Date | `dateTime` | false |  |
-| 13 | `currency` | urrency | `currency` | 02b45339-eb4a-4a31-a8b5-d32f494f4e8e | `quote` | false |  |
-| 14 | `tenantid` | tenantid | `tenantid` | String | `text` | false |  |
-| 15 | `log` | log | `log` | String | `bigText` | false |  |
-| 16 | `modifiedtime` | modifiedtime | `modifiedtime` | Date | `dateTime` | false |  |
-| 17 | `unit` | unit | `unit` | 9ea02a0b-3a48-4051-bcbe-59c7bcc7a25b | `quote` | false |  |
-| 18 | `taxCategoryArchiveId` | taxCategoryArchiveId | `tax_category_archive_id` | 01a37978-70b8-4e8c-83d7-3a9b79d84917 | `quote` | false |  |
-| 19 | `unitCode` | 单位编码 | `unit_code` | String | `text` | false |  |
-| 20 | `taxBureauArchiveId` | taxBureauArchiveId | `tax_bureau_archive_id` | d910183c-a1c4-48b2-8bc4-0b9f1dda6eb8 | `quote` | false |  |
-| 21 | `notaxation` | notaxation | `notaxation` | Boolean | `switch` | false |  |
-| 22 | `name` | 名称 | `name` | String | `multiLanguage` | false |  |
-| 23 | `taxRateType` | taxRateType(类型) | `tax_rate_type` | taxRateType | `singleOption` | false |  |
-| 24 | `invalidationDate` | invalidationDate(日期) | `invalidation_date` | String | `date` | false |  |
-| 25 | `taskId` | taskId | `task_id` | String | `text` | false |  |
-| 26 | `taxfree` | taxfree | `taxfree` | Boolean | `switch` | false |  |
-| 27 | `ntaxrate` | ntaxrate | `ntaxrate` | Decimal | `number` | false |  |
-| 28 | `sysid` | sysid | `sysid` | String | `text` | false |  |
-| 29 | `delFlag` | elFlag(日期) | `del_flag` | Integer | `int` | false |  |
-| 30 | `businessid` | businessid | `businessid` | String | `text` | false |  |
-| 31 | `country` | ountry | `country` | 8e9602ac-5ca2-4d06-aede-4a0af4c316bf | `quote` | false |  |
-| 32 | `code` | 编码 | `code` | String | `text` | false |  |
-| 33 | `TaxRateArchiveDetailList` | TaxRateArchiveDetailList | `` | 7e7304f0-4c00-413f-a0fc-31c5ed25c177 | `` |  |  |
-| 34 | `progressiveTaxRateList` | progressiveTaxRateList | `` | 7cb79bb2-da5a-4b0f-a516-5880d24559cf | `` |  |  |
-| 35 | `id` | 主键ID | `id` | String | `text` | false | true |
-| 36 | `pubts` | 时间戳 | `pubts` | DateTime | `dateTime` |  | true |
-| 37 | `createTime` | 创建时间 | `create_time` | DateTime | `dateTime` |  | true |
-| 38 | `creator` | 创建人 | `creator` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |  | true |
-| 39 | `modifier` | 修改人 | `modifier` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |  | true |
-| 40 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `dateTime` |  | true |
-| 41 | `disablets` | isablets(日期) | `disablets` | DateTime | `dateTime` |  | true |
-| 42 | `enable` | enable | `enable` | sys_intboolean | `singleOption` |  | true |
-| 43 | `enablets` | enablets | `enablets` | DateTime | `dateTime` |  | true |
-| 44 | `dr` | 逻辑删除 | `dr` | Short | `short` |  | true |
+### 引用字段 (7个)
 
-## 关联属性（10 个）
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `currency` | `currency` | `currency` | 币种 |
+| `unit` | `unit` | `unit` | 单位 |
+| `tax_category_archive_id` | `tax_category_archive_id` | `taxCategoryArchiveId` | 税种名称 |
+| `tax_bureau_archive_id` | `tax_bureau_archive_id` | `taxBureauArchiveId` | 税制名称 |
+| `country` | `country` | `country` | 国家地区 |
+| `creator` | `creator` | `creator` | 创建人 |
+| `modifier` | `modifier` | `modifier` | 修改人 |
 
-| # | 字段 | 显示名 | 目标实体 | 列 | 关系 | 多重性 | 组合 | 隔离 | 废弃 |
-|---|------|--------|---------|-----|------|--------|------|------|------|
-| 1 | `country` | ountry | `bd.country.CountryVO` | `country` | 外键 |  |  | Service | false |
-| 2 | `unit` | unit | `pc.unit.Unit` | `unit` | 外键 |  |  | Service | false |
-| 3 | `creator` | 创建人 | `base.user.BipUser` | `creator` | 外键 |  |  | Service |  |
-| 4 | `modifier` | 修改人 | `base.user.BipUser` | `modifier` | 外键 |  |  | Service |  |
-| 5 | `define` | efine(日期) | `archive.taxArchives.TaxRateArchivedefineUserDefine` | `define` | 外键 |  |  | None | false |
-| 6 | `TaxRateArchiveDetailList` | TaxRateArchiveDetailList | `archive.taxArchives.TaxRateArchiveDetail` | `` | TaxRateArchiveDetailList → taxRateArchiveId | 0..n | Y | None |  |
-| 7 | `currency` | urrency | `bd.currencytenant.CurrencyTenantVO` | `currency` | 外键 |  |  | Service | false |
-| 8 | `taxBureauArchiveId` | taxBureauArchiveId | `archive.taxArchives.TaxBureauArchive` | `tax_bureau_archive_id` | 外键 |  |  | None | false |
-| 9 | `taxCategoryArchiveId` | taxCategoryArchiveId | `archive.taxArchives.TaxCategoryArchive` | `tax_category_archive_id` | 外键 |  |  | None | false |
-| 10 | `progressiveTaxRateList` | progressiveTaxRateList | `archive.taxArchives.progressiveTaxRate` | `` | progressiveTaxRateList → taxRateArchiveId | 0..n | Y | None |  |
+### 日期字段 (2个)
 
----
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `effective_date` | `effective_date` | `effectiveDate` | 生效日期 |
+| `invalidation_date` | `invalidation_date` | `invalidationDate` | 失效日期 |
 
-## SQL 示例
+### 日期时间 (9个)
 
-```sql
-SELECT synchts, is_global, social_data, objid, ytenant_id, withhold_remit, define, creationtime
-FROM bd_taxrate
-```
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `synchts` | `synchts` | `synchts` | 来源系统时间戳 |
+| `creationtime` | `creationtime` | `creationtime` | 创建时间(平台原有) |
+| `ts` | `ts` | `ts` | 时间戳 |
+| `modifiedtime` | `modifiedtime` | `modifiedtime` | 修改时间(平台原有) |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+| `disablets` | `disablets` | `disablets` | 停用时间 |
+| `enablets` | `enablets` | `enablets` | 启用时间 |
+
+### 布尔字段 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `withhold_remit` | `withhold_remit` | `withholdRemit` | 代扣代缴 |
+| `notaxation` | `notaxation` | `notaxation` | 不征税 |
+| `taxfree` | `taxfree` | `taxfree` | 免税 |
+
+### 枚举字段 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `is_global` | `is_global` | `isGlobal` | 是否预置 |
+| `social_data` | `social_data` | `socialData` | 社会化数据 |
+| `scope` | `scope` | `scope` | 适用范围 |
+| `tax_rate_type` | `tax_rate_type` | `taxRateType` | 税率类型 |
+| `enable` | `enable` | `enable` | 档案状态 |
+
+### 整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `calculate_coefficient` | `calculate_coefficient` | `calculateCoefficient` | 计算系数 |
+| `del_flag` | `del_flag` | `delFlag` | 自定义删除标记 |
+
+### 短整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dr` | `dr` | `dr` | 逻辑删除 |
+
+### 数值字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `ntaxrate` | `ntaxrate` | `ntaxrate` | 税率 |
+
+### UserDefine (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `define` | `define` | `define` | 自定义项 |
+
+### bigText (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `log` | `log` | `log` | 操作日志 |
+
+### multiLanguage (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `name` | `name` | `name` | 税率描述 |
+
+### other (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `` | `TaxRateArchiveDetailList` | 税率档案明细 |
+| `` | `` | `progressiveTaxRateList` | 累进税率 |

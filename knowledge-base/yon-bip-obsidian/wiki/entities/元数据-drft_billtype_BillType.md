@@ -9,42 +9,116 @@ last_verified: 2026-06-03
 status: verified
 source_type: api_response
 ---
+
 # 票据类型 (`drft.billtype.BillType`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBip），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `drft_billtype` | 应用: `DRFT`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`drft_billtype` | domain：`drft` | 应用：`DRFT` | 业务对象ID：`0d24caf6-2aaa-4fe1-ae04-ff94dce9ff27`
 
-## 属性（23 个）
+## 基本信息
 
-| # | 字段 | 显示名 | 列 | 类型 | biztype |
-|---|------|--------|-----|------|---------|
-| 1 | `billsourcetype` | billsourcetype | `billsourcetype` | Short | `short` |
-| 2 | `name` | 名称 | `name` | String | `multiLanguage` |
-| 3 | `supticketcatecory` | supticketcatecory | `supticketcatecory` | Short | `short` |
-| 4 | `creatorId` | 创建人ID | `creatorId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 5 | `modifierId` | 修改人ID | `modifierId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 6 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 7 | `tenant` | tenant | `tenant_id` | c213cd56-d5de-421f-bae7-d77455b557cd | `quote` |
-| 8 | `billtypeno` | billtypeno | `billtypeno` | String | `text` |
-| 9 | `billtypename` | billtypename | `billtypename` | String | `multiLanguage` |
-| 10 | `billbtype` | billbtype | `billbtype` | BillbType | `` |
-| 11 | `payperiodunit` | payperiodunit | `payperiodunit` | PayPeriodUnit | `` |
-| 12 | `paymentdate` | paymentdate | `paymentdate` | String | `text` |
-| 13 | `description` | description | `description` | String | `multiLanguage` |
-| 14 | `iselecbill` | 是否elecbill | `iselecbill` | NoteFlag | `` |
-| 15 | `isEnabled` | 是否Enabled | `isEnabled` | Boolean | `switch` |
-| 16 | `id` | ID | `id` | Long | `long` |
-| 17 | `creator` | 创建人 | `creator` | String | `text` |
-| 18 | `createTime` | 创建时间 | `create_time` | DateTime | `timestamp` |
-| 19 | `createDate` | createDate | `create_date` | Date | `date` |
-| 20 | `modifier` | 修改人 | `modifier` | String | `text` |
-| 21 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `timestamp` |
-| 22 | `modifyDate` | modifyDate | `modify_date` | Date | `date` |
-| 23 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 票据类型 |
+| 物理表 | `drft_billtype` |
+| 数据库 schema | `drft` |
+| 所属应用 | `DRFT` |
+| 直连字段 | 23 个 |
+| 子表 | 0 个 |
+| 关联引用 | 4 个 |
 
-## 关联（4 个）
+## 关联引用 (4个)
 
-- `ytenant` -> `yht.tenant.YhtTenant` () 
-- `creatorId` -> `base.user.User` () 
-- `modifierId` -> `base.user.User` () 
-- `tenant` -> `base.tenant.Tenant` () 
+| 字段名 | 引用类型 |
+|--------|---------|
+| `ytenant_id` | `` |
+| `` | `` |
+| `tenant_id` | `` |
+
+## 继承接口 (3个, 10字段)
+
+- **审计信息** (`base.itf.IAuditInfo`)
+  - `create_date` → `create_date`
+  - `create_time` → `create_time`
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `modify_date` → `modify_date`
+  - `modify_time` → `modify_time`
+- **租户相关** (`base.itf.ITenant`)
+  - `tenant_id` → `tenant_id`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 23 个直连字段
+
+### 文本字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `billtypeno` | `billtypeno` | `billtypeno` | 票据类型编码 |
+| `paymentdate` | `paymentdate` | `paymentdate` | 付款期 |
+| `` | `creator` | `creator` | 创建人名称 |
+| `` | `modifier` | `modifier` | 修改人名称 |
+
+### 引用字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `creatorId` | `creatorId` | 创建人 |
+| `` | `modifierId` | `modifierId` | 修改人 |
+| `tenant_id` | `tenant_id` | `tenant` | 租户 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 日期字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_date` | `create_date` | `createDate` | 创建日期 |
+| `modify_date` | `modify_date` | `modifyDate` | 修改日期 |
+
+### 布尔字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `isEnabled` | `isEnabled` | `isEnabled` | 是否启用 |
+
+### 短整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `billsourcetype` | `billsourcetype` | `billsourcetype` | 票据来源 |
+| `supticketcatecory` | `supticketcatecory` | `supticketcatecory` | 供票平台类别 |
+
+### 长整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+
+### multiLanguage (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `name` | `name` | `name` | 隐藏票据类型名称 |
+| `billtypename` | `billtypename` | `billtypename` | 票据类型名称 |
+| `description` | `description` | `description` | 备注 |
+
+### timestamp (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+
+### other (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `billbtype` | `billbtype` | `billbtype` | 票据大类 |
+| `payperiodunit` | `payperiodunit` | `payperiodunit` | 付款期单位 |
+| `iselecbill` | `iselecbill` | `iselecbill` | 票据标识 |

@@ -12,32 +12,100 @@ source_type: api_response
 
 # 用户密级枚举对象 (`sys.secret.UserSecretObj`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `military_usersecretobj` | 应用: `GFJGMJ` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`military_usersecretobj` | domain：`yonbip-ndi-jgmj` | 应用：`GFJGMJ` | 业务对象ID：`377c8073-10c0-4ece-9008-d5b51a60e1a4`
 
-## 属性（15 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `id` | ID | `id` | Long | `long` |
-| 2 | `code` | 编码 | `code` | String | `text` |
-| 3 | `name` | 名称 | `name` | String | `text` |
-| 4 | `secretType` | secretType | `secret_type` | Integer | `int` |
-| 5 | `weight` | weight | `weight` | Integer | `int` |
-| 6 | `enable` | enable | `enable` | Boolean | `switch` |
-| 7 | `createTime` | 创建时间 | `create_time` | DateTime | `dateTime` |
-| 8 | `creator` | 创建人 | `creator` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 9 | `dr` | 逻辑删除 | `dr` | Short | `short` |
-| 10 | `isDeleted` | 是否Deleted | `iDeleted` | Boolean | `switch` |
-| 11 | `modifier` | 修改人 | `modifier` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 12 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `dateTime` |
-| 13 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 14 | `tenant` | tenant | `tenantid` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 15 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 用户密级枚举对象 |
+| 物理表 | `military_usersecretobj` |
+| 数据库 schema | `yonbip-ndi-jgmj` |
+| 所属应用 | `GFJGMJ` |
+| 直连字段 | 15 个 |
+| 子表 | 0 个 |
+| 关联引用 | 4 个 |
 
-## 关联（4 个）
+## 关联引用 (4个)
 
-- `creator` -> `base.user.BipUser` ()
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `modifier` -> `base.user.BipUser` ()
-- `tenant` -> `yht.tenant.YhtTenant` ()
+| 字段名 | 引用类型 |
+|--------|---------|
+| `` | `` |
+| `ytenant_id` | `` |
+| `tenantid` | `` |
+
+## 继承接口 (5个, 8字段)
+
+- **审计信息** (`ucfbase.ucfbaseItf.IAuditInfo`)
+  - `create_time` → `create_time`
+  - `` → ``
+  - `` → ``
+  - `modify_time` → `modify_time`
+- **UCF公共租户相关** (`basedoc.basedocItf.BasedocITenant`)
+  - `tenantid` → `tenantid`
+- **逻辑删除相关** (`base.itf.Deletable`)
+  - `iDeleted` → `iDeleted`
+- **统一租户接口(扩展)** (`ucfbase.ucfbaseItf.IYTenantExt`)
+  - `ytenant_id` → `ytenant_id`
+- **逻辑删除相关** (`ucfbase.ucfbaseItf.LogicDelete`)
+  - `dr` → `dr`
+
+## 字段列表（按类型分组）
+
+> 共 15 个直连字段
+
+### 文本字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `code` | `code` | `code` | 密级编码 |
+| `name` | `name` | `name` | 密级名称 |
+
+### 引用字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `creator` | `creator` | 创建人 |
+| `` | `modifier` | `modifier` | 修改人 |
+| `tenantid` | `tenantid` | `tenant` | 租户 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 日期时间 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+
+### 布尔字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `enable` | `enable` | `enable` | 状态 |
+| `iDeleted` | `iDeleted` | `isDeleted` | 逻辑删除标记 |
+
+### 整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `secret_type` | `secret_type` | `secretType` | 密级类型 |
+| `weight` | `weight` | `weight` | 权重 |
+
+### 短整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dr` | `dr` | `dr` | 逻辑删除标记 |
+
+### 长整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+
+### timestamp (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubts` | `pubts` | `pubts` | 时间戳 |

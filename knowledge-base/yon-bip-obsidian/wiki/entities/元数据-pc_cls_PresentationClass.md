@@ -1,5 +1,5 @@
 ---
-tags: [BIP, 元数据, 数据字典, pc, pc.cls.PresentationClass]
+tags: [BIP, 元数据, 数据字典, pc.cls.PresentationClass]
 created: 2026-06-03
 updated: 2026-06-03
 sources: [元数据API queryByUri]
@@ -9,10 +9,11 @@ last_verified: 2026-06-03
 status: verified
 source_type: api_response
 ---
+
 # 商品分类 (`pc.cls.PresentationClass`)
 
-> ⚡ **平台版本：BIP 旗舰版 V5** — 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `product_presentation_class` | 应用: `GZTBDM` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`product_presentation_class` | domain：`productcenter` | 应用：`GZTBDM` | 业务对象ID：`b0578a77-9704-4a57-bbea-450f04030684`
 
 ## 基本信息
 
@@ -20,113 +21,157 @@ source_type: api_response
 |------|-----|
 | 显示名 | 商品分类 |
 | 物理表 | `product_presentation_class` |
-| 应用 | `GZTBDM` |
-| 元数据类型 | `Class` |
+| 数据库 schema | `productcenter` |
+| 所属应用 | `GZTBDM` |
+| 直连字段 | 51 个 |
+| 子表 | 1 个 |
+| 关联引用 | 12 个 |
 
-## 主键与编码
+## 子表
 
-| 角色 | 字段 | 列 | 类型 |
-|------|------|-----|------|
-| 主键 | `id` | `id` | Long |
-| 编码 | `code` | `code` | |
+| 字段名 | URI | 关系 |
+|--------|-----|------|
+| `presentationClassDefines` | `pc.cls.PresentationClassDefine` | composition |
 
-## 部署信息
+## 关联引用 (12个)
 
-- 部署时间: 2026-05-22 23:00:11:000
-- 安装来源: `/app/ugoods/upc/src/upc-server/scripts/db/patch/mongodb/V7_R0_2507/0001_material/0010_iuap_common/DML/0270_iuap_metadata/20260515-itr/202604071230_metadata_pc-cls_delta.zip`
+| 字段名 | 引用类型 |
+|--------|---------|
+| `secondLevelId` | `productcenter.pc_presentationclassref` |
+| `tpl_id` | `productcenter.pc_producttplref` |
+| `parent_id` | `productcenter.pc_presentationclassref` |
+| `thirdLevelId` | `productcenter.pc_presentationclassref` |
+| `ytenant_id` | `` |
+| `manageclass_id` | `productcenter.pc_managementclassref` |
+| `presentation_class_character` | `` |
+| `` | `` |
+| `firstLevelId` | `productcenter.pc_presentationclassref` |
+| `tenant_id` | `` |
 
-## 术语标记
+## 继承接口 (3个, 12字段)
 
-`data_auth`, `MasterData`, `dataAuth`, `doc`, `DirectConnection`
+- **审计信息** (`base.itf.IAuditInfo`)
+  - `create_date` → `create_date`
+  - `create_time` → `create_time`
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `modify_date` → `modify_date`
+  - `modify_time` → `modify_time`
+- **社会化企业群档案** (`bd.social.ISocialMcType`)
+  - `social_mctype` → `social_mctype`
+  - `social_srcid` → `social_srcid`
+  - `social_tenantid` → `social_tenantid`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
 
-## 依赖接口（3 个）
+## 字段列表（按类型分组）
 
-| 接口 | URI | 版本 | 属性数 |
-|------|-----|------|--------|
-| IAuditInfo (`IAuditInfo`) | `base.itf.IAuditInfo` | 340 | 8 |
-| ISocialMcType(类型) (`ISocialMcType`) | `bd.social.ISocialMcType` | 977 | 3 |
-| IYTenant (`IYTenant`) | `ucfbase.ucfbaseItf.IYTenant` | 40 | 1 |
+> 共 51 个直连字段
 
----
+### 文本字段 (12个)
 
-## 全部属性（51 个）
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `code` | `code` | `code` | 分类编码 |
+| `erpCode` | `erpCode` | `erpCode` | 外部编码 |
+| `adImage_business_id` | `adImage_business_id` | `adImageBusinessId` | 广告图片 |
+| `adImage` | `adImage` | `adImage` | 广告图片 |
+| `image_business_id` | `image_business_id` | `imageBusinessId` | 分类图片 |
+| `image` | `image` | `image` | 分类图片 |
+| `path` | `path` | `path` | 路径 |
+| `cFullPath` | `cFullPath` | `fullPath` | 全路径 |
+| `social_tenantid` | `social_tenantid` | `socialTenantid` | 社会化来源租户 |
+| `social_srcid` | `social_srcid` | `socialSrcid` | 社会化来源 |
+| `` | `creator` | `creator` | 创建人 |
+| `` | `modifier` | `modifier` | 修改人 |
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype | 必填 | 可空 |
-|---|--------|--------|-----|------|---------|------|------|
-| 1 | `id` | 主键ID | `id` | Long | `long` |  | true |
-| 2 | `code` | 编码 | `code` | String | `text` | true | true |
-| 3 | `name` | 名称 | `name` | String | `multiLanguage` | true | true |
-| 4 | `erpCode` | erp编码 | `erpCode` | String | `text` |  | true |
-| 5 | `parent` | parent | `parent_id` | 5ad8fc93-4e6b-409f-a70f-462efa6fcee9 | `quote` |  | true |
-| 6 | `template` | template | `tpl_id` | c40d564b-d166-4e0e-875f-1fafdab28955 | `quote` |  | true |
-| 7 | `manageClass` | manageClass | `manageclass_id` | b295ef54-c421-4865-aca3-f5a9207a8d50 | `quote` |  | true |
-| 8 | `order` | order | `iOrder` | Integer | `int` |  | true |
-| 9 | `isRecommend` | 是否Recommend | `isRecommend` | Boolean | `switch` |  | true |
-| 10 | `iUOrderStatus` | iUOrderStatus(状态) | `iUOrderStatus` | Boolean | `switch` |  | true |
-| 11 | `isURecommend` | 是否URecommend | `isURecommend` | Boolean | `switch` |  | true |
-| 12 | `showInFront` | showInFront | `showInFront` | Boolean | `switch` |  | true |
-| 13 | `showInTouchpad` | showInTouchpad | `showInTouchpad` | Boolean | `switch` |  | true |
-| 14 | `pageTitle` | pageTitle | `pageTitle` | String | `multiLanguage` |  | true |
-| 15 | `seoKeyword` | seoKeyword | `seoKeyword` | String | `multiLanguage` |  | true |
-| 16 | `seoDescription` | seoDescription | `seoDescription` | String | `multiLanguage` |  | true |
-| 17 | `shareDescription` | shareDescription | `shareDescription` | String | `multiLanguage` |  | true |
-| 18 | `adImageBusinessId` | adImageBusinessId | `adImage_business_id` | String | `text` |  | true |
-| 19 | `adImage` | adImage | `adImage` | String | `text` |  | true |
-| 20 | `imageBusinessId` | imageBusinessId | `image_business_id` | String | `text` |  | true |
-| 21 | `image` | mage(ID) | `image` | String | `text` |  | true |
-| 22 | `remark` | 备注 | `remark` | String | `multiLanguage` |  | true |
-| 23 | `stopstatus` | stopstatus | `stopstatus` | Boolean | `switch` |  | true |
-| 24 | `stoptime` | stoptime | `stop_time` | DateTime | `timestamp` |  | true |
-| 25 | `isEnd` | 是否End | `isEnd` | Boolean | `switch` |  | true |
-| 26 | `level` | level | `level` | Integer | `int` |  | true |
-| 27 | `path` | path | `path` | String | `text` |  | true |
-| 28 | `fullPath` | ullPath(金额) | `cFullPath` | String | `text` |  | true |
-| 29 | `firstLevel` | irstLevel(金额) | `firstLevelId` | 5ad8fc93-4e6b-409f-a70f-462efa6fcee9 | `quote` |  | true |
-| 30 | `thirdLevel` | thirdLevel | `thirdLevelId` | 5ad8fc93-4e6b-409f-a70f-462efa6fcee9 | `quote` |  | true |
-| 31 | `secondLevel` | secondLevel | `secondLevelId` | 5ad8fc93-4e6b-409f-a70f-462efa6fcee9 | `quote` |  | true |
-| 32 | `productCount` | productCount | `productCount` | Decimal | `number` |  | true |
-| 33 | `socialMctype` | socialMctype | `social_mctype` | Integer | `int` |  | true |
-| 34 | `socialTenantid` | socialTenantid | `social_tenantid` | String | `text` |  | true |
-| 35 | `socialSrcid` | socialSrcid | `social_srcid` | String | `text` |  | true |
-| 36 | `sociCoreArchive` | sociCoreArchive | `sociCoreArchive_id` | Long | `long` |  | true |
-| 37 | `isDeleted` | 是否Deleted | `iDeleted` | Boolean | `switch` |  | true |
-| 38 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |  | true |
-| 39 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` | true | true |
-| 40 | `presentationClassCharacter` | presentationClassCharacter | `presentation_class_character` | edb477bf-08c5-47f1-a351-ce46e25a9fe3 | `UserDefine` |  | true |
-| 41 | `createDate` | 创建日期 | `create_date` | Date | `date` |  | true |
-| 42 | `createTime` | 创建时间 | `create_time` | DateTime | `timestamp` |  | true |
-| 43 | `creator` | 创建人 | `creator` | String | `text` |  | true |
-| 44 | `creatorId` | 创建人ID | `creatorId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |  | true |
-| 45 | `modifier` | 修改人 | `modifier` | String | `text` |  | true |
-| 46 | `modifierId` | 修改人ID | `modifierId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |  | true |
-| 47 | `modifyDate` | 修改日期 | `modify_date` | Date | `date` |  | true |
-| 48 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `timestamp` |  | true |
-| 49 | `tenant` | tenant | `tenant_id` | c213cd56-d5de-421f-bae7-d77455b557cd | `quote` | true | true |
-| 50 | `sort` | 排序号 | `sort_num` | Integer | `int` |  | true |
-| 51 | `presentationClassDefines` | presentationClassDefines | `` | 5067309b-8976-4a7c-9a81-fcb012b118dc | `` |  |  |
+### 引用字段 (10个)
 
-## 关联属性（12 个）
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `parent_id` | `parent_id` | `parent` | 上级分类 |
+| `tpl_id` | `tpl_id` | `template` | 物料模板 |
+| `manageclass_id` | `manageclass_id` | `manageClass` | 物料分类 |
+| `firstLevelId` | `firstLevelId` | `firstLevel` | 第一级分类 |
+| `thirdLevelId` | `thirdLevelId` | `thirdLevel` | 第三级分类 |
+| `secondLevelId` | `secondLevelId` | `secondLevel` | 第二级分类 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户 |
+| `` | `creatorId` | `creatorId` | 创建人 |
+| `` | `modifierId` | `modifierId` | 修改人 |
+| `tenant_id` | `tenant_id` | `tenant` | 租户(废弃) |
 
-| # | 字段 | 显示名 | 目标实体 | 列 | 关系 | 多重性 | 组合 | 隔离 | 废弃 |
-|---|------|--------|---------|-----|------|--------|------|------|------|
-| 1 | `secondLevel` | secondLevel | `pc.cls.PresentationClass` | `secondLevelId` | 外键 |  |  | None |  |
-| 2 | `template` | template | `pc.tpl.ProductTpl` | `tpl_id` | 外键 |  |  | None |  |
-| 3 | `parent` | parent | `pc.cls.PresentationClass` | `parent_id` | 外键 |  |  | None |  |
-| 4 | `thirdLevel` | thirdLevel | `pc.cls.PresentationClass` | `thirdLevelId` | 外键 |  |  | None |  |
-| 5 | `ytenant` | ytenant | `yht.tenant.YhtTenant` | `ytenant_id` | 外键 |  |  | Service |  |
-| 6 | `manageClass` | manageClass | `pc.cls.ManagementClass` | `manageclass_id` | 外键 |  |  | None |  |
-| 7 | `presentationClassCharacter` | presentationClassCharacter | `pc.cls.PresentationClassCharacter` | `presentation_class_character` | 外键 |  |  | None |  |
-| 8 | `creatorId` | 创建人ID | `base.user.User` | `creatorId` | 外键 |  |  | Service |  |
-| 9 | `modifierId` | 修改人ID | `base.user.User` | `modifierId` | 外键 |  |  | Service |  |
-| 10 | `firstLevel` | irstLevel(金额) | `pc.cls.PresentationClass` | `firstLevelId` | 外键 |  |  | None |  |
-| 11 | `tenant` | tenant | `base.tenant.Tenant` | `tenant_id` | 外键 |  |  | None |  |
-| 12 | `presentationClassDefines` | presentationClassDefines | `pc.cls.PresentationClassDefine` | `` | presentationClassDefines → id | 1 | Y | None |  |
+### 日期字段 (2个)
 
----
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_date` | `create_date` | `createDate` | 创建日期 |
+| `modify_date` | `modify_date` | `modifyDate` | 修改日期 |
 
-## SQL 示例
+### 布尔字段 (8个)
 
-```sql
-SELECT id, code, name, erpCode, parent_id, tpl_id, manageclass_id, iOrder
-FROM product_presentation_class
-```
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `isRecommend` | `isRecommend` | `isRecommend` | 商城推荐分类 |
+| `iUOrderStatus` | `iUOrderStatus` | `iUOrderStatus` | U订货前端显示 |
+| `isURecommend` | `isURecommend` | `isURecommend` | U订货推荐分类 |
+| `showInFront` | `showInFront` | `showInFront` | 商城前端显示 |
+| `showInTouchpad` | `showInTouchpad` | `showInTouchpad` | 触屏端开单显示 |
+| `stopstatus` | `stopstatus` | `stopstatus` | 启用状态 |
+| `` | `isEnd` | `isEnd` | 是否末级 |
+| `iDeleted` | `iDeleted` | `isDeleted` | 逻辑删除标记 |
+
+### 整数 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iOrder` | `iOrder` | `order` | 排序号 |
+| `level` | `level` | `level` | 层级 |
+| `social_mctype` | `social_mctype` | `socialMctype` | 社会化管控类型 |
+| `sort_num` | `sort_num` | `sort` | 排序号(废弃) |
+
+### 长整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+| `sociCoreArchive_id` | `sociCoreArchive_id` | `sociCoreArchive` | 社会化核心企业档案 |
+
+### 数值字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `productCount` | `productCount` | `productCount` | 物料数量 |
+
+### multiLanguage (6个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `name` | `name` | `name` | 分类名称 |
+| `pageTitle` | `pageTitle` | `pageTitle` | 页面标题 |
+| `seoKeyword` | `seoKeyword` | `seoKeyword` | SEO关键字 |
+| `seoDescription` | `seoDescription` | `seoDescription` | SEO描述 |
+| `shareDescription` | `shareDescription` | `shareDescription` | 分享说明 |
+| `remark` | `remark` | `remark` | 备注 |
+
+### timestamp (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `stop_time` | `stop_time` | `stoptime` | 停用时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+
+### UserDefine (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `presentation_class_character` | `presentation_class_character` | `presentationClassCharacter` | 商品分类自定义项 |
+
+### other (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `` | `presentationClassDefines` | 商品分类自定义项 |

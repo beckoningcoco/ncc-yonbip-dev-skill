@@ -12,26 +12,61 @@ source_type: api_response
 
 # 物料装载方式(整合) (`pc.product.ProductLoadWay`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `productloadway` | 应用: `GZTBDM` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`productloadway` | domain：`productcenter` | 应用：`GZTBDM` | 业务对象ID：``
 
-## 属性（8 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `id` | ID | `id` | Long | `long` |
-| 2 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 3 | `productId` | productID | `product_id` | 89f3b06e-23df-4403-b4a7-19f99eeeae72 | `quote` |
-| 4 | `productApplyRangeId` | productApplyRangeID | `product_apply_range_id` | ed1f55f2-a3f7-4617-8bd2-7f2f404843ab | `quote` |
-| 5 | `productDetailId` | productDetailID | `product_detail_id` | 04616b02-47f8-4821-8c02-2e7a6d3264a8 | `quote` |
-| 6 | `loadWay` | loadWay | `load_way` | 3b73800a-106b-41bb-8960-826a7f003aaa | `quote` |
-| 7 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 8 | `tenant` | tenant | `tenant_id` | Long | `long` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 物料装载方式(整合) |
+| 物理表 | `productloadway` |
+| 数据库 schema | `productcenter` |
+| 所属应用 | `GZTBDM` |
+| 直连字段 | 8 个 |
+| 子表 | 0 个 |
+| 关联引用 | 5 个 |
 
-## 关联（5 个）
+## 关联引用 (5个)
 
-- `productApplyRangeId` -> `pc.product.ProductApplyRange` (0..n)
-- `productId` -> `pc.product.Product` (0..n)
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `loadWay` -> `base.loadway.LoadWay` ()
-- `productDetailId` -> `pc.product.ProductDetail` (0..n)
+| 字段名 | 引用类型 |
+|--------|---------|
+| `product_apply_range_id` | `` |
+| `product_id` | `` |
+| `ytenant_id` | `` |
+| `load_way` | `productcenter.base_loadwayref` |
+| `product_detail_id` | `` |
+
+## 继承接口 (2个, 2字段)
+
+- **租户相关** (`coredoc.pub.TenantObselete`)
+  - `tenant_id` → `tenant_id`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 8 个直连字段
+
+### 引用字段 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户 |
+| `product_id` | `product_id` | `productId` | 物料 |
+| `product_apply_range_id` | `product_apply_range_id` | `productApplyRangeId` | 物料分配范围 |
+| `product_detail_id` | `product_detail_id` | `productDetailId` | 物料组织级表 |
+| `load_way` | `load_way` | `loadWay` | 装载方式 |
+
+### 长整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+| `tenant_id` | `tenant_id` | `tenant` | 租户(废弃) |
+
+### timestamp (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubts` | `pubts` | `pubts` | 时间戳 |

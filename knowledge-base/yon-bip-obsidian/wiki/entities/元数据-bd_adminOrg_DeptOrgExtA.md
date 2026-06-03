@@ -12,35 +12,68 @@ source_type: api_response
 
 # 部门扩展信息A (`bd.adminOrg.DeptOrgExtA`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `org_dept_ext` | 应用: `GZTORG` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`org_dept_ext` | domain：`ucf-org-center` | 应用：`GZTORG` | 业务对象ID：``
 
-## 属性（14 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `id` | ID | `id` | a4352e3c-3eda-4539-a7a9-ec00799be118 | `quote` |
-| 2 | `deptLevel` | deptLevel | `dept_level` | 35c233ff-f2ff-4e4c-bbc8-7ac90ea36ae9 | `quote` |
-| 3 | `deptCategory` | deptCategory | `dept_category` | a9e28e89-a584-48cb-a7a2-c4e777f4b021 | `quote` |
-| 4 | `otherPrincipal` | otherPrincipal | `other_principal` | 4effed83-35f5-4e3b-9be1-092b5ae602e8 | `quote` |
-| 5 | `hrbp` | hrbp | `hrbp` | 4effed83-35f5-4e3b-9be1-092b5ae602e8 | `quote` |
-| 6 | `approvalOrg` | approvalOrg | `approval_org` | String | `text` |
-| 7 | `approvalCode` | approval编码 | `approval_code` | String | `text` |
-| 8 | `deptRank` | deptRank | `dept_rank` | b030fd11-3f64-4ea5-8056-3f81d243ba5e | `quote` |
-| 9 | `establishmentDate` | establishmentDate | `establishment_date` | Date | `date` |
-| 10 | `authorizedStrength` | authorizedStrength | `authorized_strength` | Integer | `int` |
-| 11 | `attachment` | attachment | `attachment` | String | `text` |
-| 12 | `managepositionid` | managepositionid | `manage_position_id` | a06cee30-92b1-4a03-b399-3886f55e4ba1 | `quote` |
-| 13 | `deptResponsibilities` | deptResponsibilities | `dept_responsibilities` | String | `text` |
-| 14 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 部门扩展信息A |
+| 物理表 | `org_dept_ext` |
+| 数据库 schema | `ucf-org-center` |
+| 所属应用 | `GZTORG` |
+| 直连字段 | 14 个 |
+| 子表 | 0 个 |
+| 关联引用 | 8 个 |
 
-## 关联（8 个）
+## 关联引用 (8个)
 
-- `deptRank` -> `bd.deptTier.DeptTier` ()
-- `deptCategory` -> `bd.deptType.DeptType` ()
-- `deptLevel` -> `bd.deptlevel.DeptLevel` ()
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `hrbp` -> `bd.staff.Staff` ()
-- `otherPrincipal` -> `bd.staff.Staff` ()
-- `id` -> `bd.adminOrg.AdminOrgVO` (1)
-- `managepositionid` -> `bd.duty.Position` ()
+| 字段名 | 引用类型 |
+|--------|---------|
+| `dept_rank` | `ucf-staff-center.bd_dept_tier_ref` |
+| `dept_category` | `ucf-staff-center.bd_dept_type_ref` |
+| `dept_level` | `ucf-staff-center.bd_dept_level_ref` |
+| `ytenant_id` | `` |
+| `hrbp` | `ucf-staff-center.bd_staff_ref` |
+| `other_principal` | `ucf-staff-center.bd_staff_ref` |
+| `id` | `` |
+| `manage_position_id` | `ucf-staff-center.bd_position_timeline_ref` |
+
+## 字段列表（按类型分组）
+
+> 共 14 个直连字段
+
+### 文本字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `approval_org` | `approval_org` | `approvalOrg` | 批文单位 |
+| `approval_code` | `approval_code` | `approvalCode` | 批文编码 |
+| `attachment` | `attachment` | `attachment` | 附件 |
+| `dept_responsibilities` | `dept_responsibilities` | `deptResponsibilities` | 部门职责 |
+
+### 引用字段 (8个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | 主键 |
+| `dept_level` | `dept_level` | `deptLevel` | 部门级别 |
+| `dept_category` | `dept_category` | `deptCategory` | 部门分类 |
+| `other_principal` | `other_principal` | `otherPrincipal` | 其他负责人 |
+| `hrbp` | `hrbp` | `hrbp` | HRBP |
+| `dept_rank` | `dept_rank` | `deptRank` | 部门层级 |
+| `manage_position_id` | `manage_position_id` | `managepositionid` | 负责岗 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 日期字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `establishment_date` | `establishment_date` | `establishmentDate` | 设立日期 |
+
+### 整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `authorized_strength` | `authorized_strength` | `authorizedStrength` | 编制 |

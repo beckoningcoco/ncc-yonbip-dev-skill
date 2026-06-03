@@ -1,5 +1,5 @@
 ---
-tags: [BIP, 元数据, 数据字典, bd, bd.costcenter.CostCenter]
+tags: [BIP, 元数据, 数据字典, bd.costcenter.CostCenter]
 created: 2026-06-03
 updated: 2026-06-03
 sources: [元数据API queryByUri]
@@ -9,10 +9,11 @@ last_verified: 2026-06-03
 status: verified
 source_type: api_response
 ---
+
 # 成本中心基本档案 (`bd.costcenter.CostCenter`)
 
-> ⚡ **平台版本：BIP 旗舰版 V5** — 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `bd_costcenter` | 应用: `DPMACCT` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`bd_costcenter` | domain：`finbd` | 应用：`DPMACCT` | 业务对象ID：`2d00c294-59f0-4f9e-a2a5-c4b37d67712c`
 
 ## 基本信息
 
@@ -20,120 +21,175 @@ source_type: api_response
 |------|-----|
 | 显示名 | 成本中心基本档案 |
 | 物理表 | `bd_costcenter` |
-| 应用 | `DPMACCT` |
-| 元数据类型 | `Class` |
+| 数据库 schema | `finbd` |
+| 所属应用 | `DPMACCT` |
+| 直连字段 | 47 个 |
+| 子表 | 5 个 |
+| 关联引用 | 20 个 |
 
-## 主键与编码
+## 子表
 
-| 角色 | 字段 | 列 | 类型 |
-|------|------|-----|------|
-| 主键 | `id` | `id` | Long |
-| 编码 | `code` | `code` | |
+| 字段名 | URI | 关系 |
+|--------|-----|------|
+| `factorScopes` | `bd.costcenter.FactorScope` | composition |
+| `CostCenter_extend26List` | `bd.costcenter.CostCenter_extend26` | composition |
+| `accentities` | `bd.costcenter.CostCenterAccentity` | composition |
+| `relations` | `bd.costcenter.ContrastRelation` | composition |
+| `dis` | `bd.costcenter.CostCenterDis` | composition |
 
-## 部署信息
+## 关联引用 (20个)
 
-- 部署时间: 2026-05-23 00:43:02:000
-- 安装来源: `/app/finbd/finbd-web/scripts/db/patch/mongodb/V7_R0_2507/0001_iuap-apdoc-finbd/0010_iuap_common/DML/0270_iuap_metadata/20260422/202604221702_metadata_bd-costcenter.zip`
+| 字段名 | 引用类型 |
+|--------|---------|
+| `parent_id` | `` |
+| `cc_class` | `bd_costcenterclassref` |
+| `manager` | `ucf-staff-center.bd_staff_ref` |
+| `` | `` |
+| `virtually` | `` |
+| `ytenant_id` | `` |
+| `org_unit` | `ucf-org-center.org_pure_tree_ref` |
+| `extend26fieldName` | `bip-usercenter.bip_user_ref` |
+| `factor_scope` | `` |
+| `profit_center` | `finbd.bd_allaccbodyref` |
+| `accentity` | `finbd.bd_allaccbodyref` |
+| `cost_center_character` | `` |
+| `related_admin_org` | `` |
+| `tenant_id` | `` |
 
-## 术语标记
+## 继承接口 (6个, 18字段)
 
-`data_auth`, `MasterData`, `isMultiCodeRule`, `ConfigData`, `doc`, `tree_tag`, `isUseCondition`
+- **审计信息** (`base.itf.IAuditInfo`)
+  - `create_date` → `create_date`
+  - `create_time` → `create_time`
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `modify_date` → `modify_date`
+  - `modify_time` → `modify_time`
+- **租户相关** (`base.itf.ITenant`)
+  - `tenant_id` → `tenant_id`
+- **逻辑删除相关** (`ucfbase.ucfbaseItf.LogicDelete`)
+  - `dr` → `dr`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+- **树型结构** (`ucfbase.ucfbaseItf.ITree`)
+  - `` → ``
+  - `level` → `level`
+  - `name` → `name`
+  - `parent_id` → `parent_id`
+  - `path` → `path`
+  - `sort_num` → `sort_num`
+- **自动编号** (`voucher.base.IAutoCode`)
+  - `` → ``
 
-## 依赖接口（6 个）
+## 字段列表（按类型分组）
 
-| 接口 | URI | 版本 | 属性数 |
-|------|-----|------|--------|
-| IAuditInfo (`IAuditInfo`) | `base.itf.IAuditInfo` | 340 | 8 |
-| ITenant (`ITenant`) | `base.itf.ITenant` | 73 | 1 |
-| LogicDelete (`LogicDelete`) | `ucfbase.ucfbaseItf.LogicDelete` | 74 | 1 |
-| IYTenant (`IYTenant`) | `ucfbase.ucfbaseItf.IYTenant` | 40 | 1 |
-| ITree (`ITree`) | `ucfbase.ucfbaseItf.ITree` | 339 | 6 |
-| IAuto编码 (`IAutoCode`) | `voucher.base.IAutoCode` | 49 | 1 |
+> 共 47 个直连字段
 
----
+### 文本字段 (10个)
 
-## 全部属性（47 个）
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `code` | `code` | `code` | 成本中心编码 |
+| `log` | `log` | `log` | 引用校验失败日志 |
+| `log_detail` | `log_detail` | `logDetail` | 引用详情 |
+| `log_error` | `log_error` | `logError` | 引用检查出错信息 |
+| `obj_id` | `obj_id` | `objid` | NCC数据ID |
+| `task_id` | `task_id` | `taskId` | 任务id(引用校验检查) |
+| `description` | `description` | `description` | 备注 |
+| `` | `creator` | `creator` | 创建人 |
+| `` | `modifier` | `modifier` | 修改人 |
+| `path` | `path` | `path` | 路径 |
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype | 必填 | 可空 |
-|---|--------|--------|-----|------|---------|------|------|
-| 1 | `extend26` | extend26 | `extend26fieldName` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quoteList` | false |  |
-| 2 | `id` | 主键ID | `id` | Long | `long` | false | true |
-| 3 | `code` | 编码 | `code` | String | `text` | false | true |
-| 4 | `name` | 名称 | `name` | String | `multiLanguage` | false | true |
-| 5 | `creatorId` | 创建人ID | `creatorId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |  | true |
-| 6 | `factorScope` | actorScope(金额) | `factor_scope` | c823e22a-3b1f-4c41-9cf5-11f2b56f6fd2 | `quote` | false | true |
-| 7 | `log` | log | `log` | String | `text` | false | true |
-| 8 | `logDetail` | logDetail | `log_detail` | String | `text` | false | true |
-| 9 | `dr` | 逻辑删除 | `dr` | Short | `short` |  | true |
-| 10 | `logError` | logError | `log_error` | String | `text` | false | true |
-| 11 | `logDr` | logDr | `log_dr` | Short | `short` | false | true |
-| 12 | `modifierId` | 修改人ID | `modifierId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |  | true |
-| 13 | `objid` | objid | `obj_id` | String | `text` | false | true |
-| 14 | `taskId` | taskId | `task_id` | String | `text` | false | true |
-| 15 | `tenant` | tenant | `tenant_id` | c213cd56-d5de-421f-bae7-d77455b557cd | `quote` | true | true |
-| 16 | `ccClass` | cClass | `cc_class` | 424d7156-98a0-4980-a73e-4e72fbb3feec | `quote` | false | true |
-| 17 | `manager` | manager | `manager` | 78bff1de-ddf1-4814-90de-b0b5f1eac78a | `quote` | false | true |
-| 18 | `isDefault` | 是否Default | `is_default` | Boolean | `switch` | false | true |
-| 19 | `enableDate` | enableDate(日期) | `enabledate` | DateTime | `timestamp` | false | true |
-| 20 | `expireDate` | expireDate(日期) | `expiredate` | DateTime | `timestamp` | false | true |
-| 21 | `effect` | effect | `effect` | Boolean | `switch` | false | true |
-| 22 | `description` | 描述 | `description` | String | `text` | false | true |
-| 23 | `accentity` | accentity | `accentity` | dabb8185-bfd2-4ed3-a721-f5bc5d948246 | `quote` | false | true |
-| 24 | `orgUnit` | orgUnit | `org_unit` | 14302233-1394-4a70-94e1-bed51636f312 | `quote` | false | true |
-| 25 | `profitCenter` | profitCenter | `profit_center` | e33ec72a-3857-4167-89e2-a437168ed3bb | `quote` | false | true |
-| 26 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |  | true |
-| 27 | `creator` | 创建人 | `creator` | String | `text` |  | true |
-| 28 | `createTime` | 创建时间 | `create_time` | DateTime | `timestamp` |  | true |
-| 29 | `createDate` | 创建日期 | `create_date` | Date | `date` |  | true |
-| 30 | `modifier` | 修改人 | `modifier` | String | `text` |  | true |
-| 31 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `timestamp` |  | true |
-| 32 | `modifyDate` | 修改日期 | `modify_date` | Date | `date` |  | true |
-| 33 | `character` | haracter | `cost_center_character` | 955f46ea-39e1-47b7-a4e0-b05266f6500a | `UserDefine` | false | true |
-| 34 | `CostCenter_extend26List` | CostCenter_extend26List | `` | b58ab032-6cf8-45dd-8ddd-3e1d7f9e09de | `` |  |  |
-| 35 | `accentities` | accentities | `` | 22951db7-925a-4f96-afab-4f8140862e22 | `` |  |  |
-| 36 | `dis` | is(日期) | `` | 5266320e-e40b-4ae5-ae40-9e3b6cb91693 | `` |  |  |
-| 37 | `factorScopes` | actorScopes(金额) | `` | f9ca3e30-b5d2-4b45-8261-798e217cc250 | `` |  |  |
-| 38 | `isEnd` | 是否End | `isEnd` | Boolean | `switch` |  | true |
-| 39 | `level` | level | `level` | Integer | `int` |  | true |
-| 40 | `parent` | parent | `parent_id` | 872630ba-e8f4-4080-817d-8fc9a6958733 | `quote` | false | true |
-| 41 | `path` | path | `path` | String | `text` |  | true |
-| 42 | `relatedAdminOrg` | relatedAdminOrg | `related_admin_org` | a4352e3c-3eda-4539-a7a9-ec00799be118 | `quote` | false | true |
-| 43 | `relations` | relations | `` | f1293f17-104c-453c-bda3-afe90213ce8f | `` |  |  |
-| 44 | `shareAccentity` | shareAccentity | `share_accentity` | Boolean | `switch` | false | true |
-| 45 | `sort` | 排序号 | `sort_num` | Integer | `int` |  | true |
-| 46 | `virtually` | virtually | `virtually` | 66a2f2ab-802c-4583-9d85-4a015d35f10c | `quote` | false | true |
-| 47 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` | true | true |
+### 引用字段 (13个)
 
-## 关联属性（20 个）
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `creatorId` | `creatorId` | 创建人 |
+| `factor_scope` | `factor_scope` | `factorScope` | 要素范围 |
+| `` | `modifierId` | `modifierId` | 修改人 |
+| `tenant_id` | `tenant_id` | `tenant` | 租户 |
+| `cc_class` | `cc_class` | `ccClass` | 成本中心类别 |
+| `manager` | `manager` | `manager` | 负责人 |
+| `accentity` | `accentity` | `accentity` | 会计主体 |
+| `org_unit` | `org_unit` | `orgUnit` | 所属业务单元 |
+| `profit_center` | `profit_center` | `profitCenter` | 利润中心 |
+| `parent_id` | `parent_id` | `parent` | 父级成本中心 |
+| `related_admin_org` | `related_admin_org` | `relatedAdminOrg` | 关联行政组织 |
+| `virtually` | `virtually` | `virtually` | 虚拟 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
 
-| # | 字段 | 显示名 | 目标实体 | 列 | 关系 | 多重性 | 组合 | 隔离 | 废弃 |
-|---|------|--------|---------|-----|------|--------|------|------|------|
-| 1 | `parent` | parent | `bd.costcenter.CostCenter` | `parent_id` | 外键 |  |  | None |  |
-| 2 | `ccClass` | cClass | `bd.costcenter.CostCenterClass` | `cc_class` | 外键 |  |  | None |  |
-| 3 | `manager` | manager | `bd.staff.StaffNew` | `manager` | 外键 |  |  | Service |  |
-| 4 | `factorScopes` | actorScopes(金额) | `bd.costcenter.FactorScope` | `` | factorScopes → header | 0..n | Y | None |  |
-| 5 | `virtually` | virtually | `bd.costcenter.virtually` | `virtually` | virtually → virtually | 0..n | Y | None |  |
-| 6 | `ytenant` | ytenant | `yht.tenant.YhtTenant` | `ytenant_id` | 外键 |  |  | Service |  |
-| 7 | `orgUnit` | orgUnit | `org.func.BaseOrg` | `org_unit` | 外键 |  |  | Service |  |
-| 8 | `creatorId` | 创建人ID | `base.user.User` | `creatorId` | 外键 |  |  | Service |  |
-| 9 | `modifierId` | 修改人ID | `base.user.User` | `modifierId` | 外键 |  |  | Service |  |
-| 10 | `extend26` | extend26 | `base.user.BipUser` | `extend26fieldName` | 外键 |  |  | Service | false |
-| 11 | `factorScope` | actorScope(金额) | `bd.costcenter.CostCenterFactorScope` | `factor_scope` | 外键 |  |  | None |  |
-| 12 | `profitCenter` | profitCenter | `bd.virtualaccbody.VirtualAccbody` | `profit_center` | 外键 |  |  | None |  |
-| 13 | `accentity` | accentity | `bd.virtualaccbody.VirtualAccbody_view` | `accentity` | 外键 |  |  | None |  |
-| 14 | `dis` | is(日期) | `bd.costcenter.CostCenterDis` | `` | dis → header | 0..n | Y | None |  |
-| 15 | `character` | haracter | `bd.costcenter.costCenterCharacter` | `cost_center_character` | 外键 |  |  | None |  |
-| 16 | `relatedAdminOrg` | relatedAdminOrg | `bd.adminOrg.AdminOrgVO` | `related_admin_org` | 外键 |  |  | Service |  |
-| 17 | `CostCenter_extend26List` | CostCenter_extend26List | `bd.costcenter.CostCenter_extend26` | `` | CostCenter_extend26List → fkid | 0..n | Y | None |  |
-| 18 | `accentities` | accentities | `bd.costcenter.CostCenterAccentity` | `` | accentities → header | 0..n | Y | None |  |
-| 19 | `relations` | relations | `bd.costcenter.ContrastRelation` | `` | relations → header | 0..n | Y | None |  |
-| 20 | `tenant` | tenant | `base.tenant.Tenant` | `tenant_id` | 外键 |  |  | Service |  |
+### 日期字段 (2个)
 
----
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_date` | `create_date` | `createDate` | 创建日期 |
+| `modify_date` | `modify_date` | `modifyDate` | 修改日期 |
 
-## SQL 示例
+### 布尔字段 (4个)
 
-```sql
-SELECT extend26fieldName, id, code, name, creatorId, factor_scope, log, log_detail
-FROM bd_costcenter
-```
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `is_default` | `is_default` | `isDefault` | 默认成本中心 |
+| `effect` | `effect` | `effect` | 生效 |
+| `` | `isEnd` | `isEnd` | 是否末级 |
+| `share_accentity` | `share_accentity` | `shareAccentity` | 是否共享会计主体 |
+
+### 整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `level` | `level` | `level` | 层级 |
+| `sort_num` | `sort_num` | `sort` | 排序号 |
+
+### 短整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dr` | `dr` | `dr` | 逻辑删除标记 |
+| `log_dr` | `log_dr` | `logDr` | 删除操作状态 |
+
+### 长整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+
+### quoteList (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `extend26fieldName` | `extend26fieldName` | `extend26` | BIP用户 |
+
+### multiLanguage (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `name` | `name` | `name` | 成本中心名称 |
+
+### timestamp (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `enabledate` | `enabledate` | `enableDate` | 生效日期 |
+| `expiredate` | `expiredate` | `expireDate` | 失效日期 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+
+### UserDefine (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `cost_center_character` | `cost_center_character` | `character` | 特征 |
+
+### other (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `` | `CostCenter_extend26List` |  |
+| `` | `` | `accentities` | 共享会计主体 |
+| `` | `` | `dis` | 成本中心组织信息 |
+| `` | `` | `factorScopes` | 要素范围 |
+| `` | `` | `relations` | 对照关系 |

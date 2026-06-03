@@ -12,46 +12,105 @@ source_type: api_response
 
 # 薪资组参照 (`hrxc.mddGroupDoc.waGroupDoc`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `wa_group_doc` | 应用: `HRXZHS_MDD` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`wa_group_doc` | domain：`yonbip-hr-paybiz` | 应用：`HRXZHS_MDD` | 业务对象ID：`2ff32620-2a21-49cf-bee0-ee3e4f098df6`
 
-## 属性（27 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `orgId` | 组织ID | `ORGID` | c3b96360-c57f-455b-9728-2ca499d9922a | `quote` |
-| 2 | `description2` | description2 | `DESCRIPTION2` | String | `text` |
-| 3 | `description3` | description3 | `DESCRIPTION3` | String | `text` |
-| 4 | `description4` | description4 | `DESCRIPTION4` | String | `text` |
-| 5 | `description5` | description5 | `DESCRIPTION5` | String | `text` |
-| 6 | `description6` | description6 | `DESCRIPTION6` | String | `text` |
-| 7 | `orgName` | org名称 | `ORG_NAME` | String | `text` |
-| 8 | `name2` | name2 | `NAME2` | String | `text` |
-| 9 | `name3` | name3 | `NAME3` | String | `text` |
-| 10 | `name4` | name4 | `NAME4` | String | `text` |
-| 11 | `name5` | name5 | `NAME5` | String | `text` |
-| 12 | `name6` | name6 | `NAME6` | String | `text` |
-| 13 | `code` | 编码 | `CODE` | String | `text` |
-| 14 | `name` | 名称 | `NAME` | String | `multiLanguage` |
-| 15 | `description` | description | `DESCRIPTION` | String | `text` |
-| 16 | `enable` | enable | `ENABLE` | Integer | `int` |
-| 17 | `id` | ID | `ID` | String | `text` |
-| 18 | `dr` | 逻辑删除 | `DR` | Integer | `int` |
-| 19 | `pubts` | 时间戳 | `PUBTS` | DateTime | `timestamp` |
-| 20 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 21 | `creator` | 创建人 | `CREATOR` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 22 | `createTime` | 创建时间 | `CREATIONTIME` | DateTime | `timestamp` |
-| 23 | `modifier` | 修改人 | `MODIFIER` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 24 | `modifyTime` | 修改时间 | `MODIFIEDTIME` | DateTime | `timestamp` |
-| 25 | `ts` | ts | `TS` | DateTime | `timestamp` |
-| 26 | `tenant` | tenant | `TENANTID` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 27 | `waGroupAuths` | waGroupAuths | `` | 27570a4a-7ee6-426c-b2d5-93fe803ff309 | `` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 薪资组参照 |
+| 物理表 | `wa_group_doc` |
+| 数据库 schema | `yonbip-hr-paybiz` |
+| 所属应用 | `HRXZHS_MDD` |
+| 直连字段 | 27 个 |
+| 子表 | 1 个 |
+| 关联引用 | 6 个 |
 
-## 关联（6 个）
+## 子表
 
-- `creator` -> `base.user.BipUser` ()
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `modifier` -> `base.user.BipUser` ()
-- `orgId` -> `org.func.AdminOrg` ()
-- `tenant` -> `yht.tenant.YhtTenant` ()
-- `waGroupAuths` -> `hrxc.mddGroupDoc.WaGroupDocAuth` (0..n)
+| 字段名 | URI | 关系 |
+|--------|-----|------|
+| `waGroupAuths` | `hrxc.mddGroupDoc.WaGroupDocAuth` | composition |
+
+## 关联引用 (6个)
+
+| 字段名 | 引用类型 |
+|--------|---------|
+| `CREATOR` | `` |
+| `ytenant_id` | `` |
+| `MODIFIER` | `` |
+| `ORGID` | `ucf-org-center.member_org_tree_ref` |
+| `TENANTID` | `` |
+| `` | `` |
+
+## 继承接口 (4个, 3字段)
+
+- **租户接口** (`ucfbase.ucfbaseItf.ITenant`)
+  - `tenant_id` → `tenant_id`
+- **逻辑删除相关** (`ucfbase.ucfbaseItf.LogicDelete`)
+  - `dr` → `dr`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+- **自动编码** (`ucfbase.ucfbaseItf.IAutoCode`)
+
+## 字段列表（按类型分组）
+
+> 共 27 个直连字段
+
+### 文本字段 (14个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `DESCRIPTION2` | `DESCRIPTION2` | `description2` | 描述2 |
+| `DESCRIPTION3` | `DESCRIPTION3` | `description3` | 描述3 |
+| `DESCRIPTION4` | `DESCRIPTION4` | `description4` | 描述4 |
+| `DESCRIPTION5` | `DESCRIPTION5` | `description5` | 描述5 |
+| `DESCRIPTION6` | `DESCRIPTION6` | `description6` | 描述6 |
+| `ORG_NAME` | `ORG_NAME` | `orgName` | 组织名称 |
+| `NAME2` | `NAME2` | `name2` | 多语名称2 |
+| `NAME3` | `NAME3` | `name3` | 多语名称3 |
+| `NAME4` | `NAME4` | `name4` | 多语名称4 |
+| `NAME5` | `NAME5` | `name5` | 多语名称5 |
+| `NAME6` | `NAME6` | `name6` | 多语名称6 |
+| `CODE` | `CODE` | `code` | 薪资组编码 |
+| `DESCRIPTION` | `DESCRIPTION` | `description` | 备注 |
+| `ID` | `ID` | `id` | 主键 |
+
+### 引用字段 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `ORGID` | `ORGID` | `orgId` | 组织主键 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户主键 |
+| `CREATOR` | `CREATOR` | `creator` | 创建人 |
+| `MODIFIER` | `MODIFIER` | `modifier` | 修改人 |
+| `TENANTID` | `TENANTID` | `tenant` | 租户主键(旧) |
+
+### 整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `ENABLE` | `ENABLE` | `enable` | 启用状态 |
+| `DR` | `DR` | `dr` | 逻辑删除标识 |
+
+### multiLanguage (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `NAME` | `NAME` | `name` | 薪资组名称 |
+
+### timestamp (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `PUBTS` | `PUBTS` | `pubts` | 时间戳 |
+| `CREATIONTIME` | `CREATIONTIME` | `createTime` | 创建时间 |
+| `MODIFIEDTIME` | `MODIFIEDTIME` | `modifyTime` | 修改时间 |
+| `TS` | `TS` | `ts` | 时间戳(旧) |
+
+### other (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `` | `waGroupAuths` | 薪资组授权 |

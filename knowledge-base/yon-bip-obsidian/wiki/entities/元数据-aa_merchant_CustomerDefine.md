@@ -12,51 +12,91 @@ source_type: api_response
 
 # 客户(自定义项)表(废弃) (`aa.merchant.CustomerDefine`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `customerdefine` | 应用: `DPMCUS` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`customerdefine` | domain：`productcenter` | 应用：`DPMCUS` | 业务对象ID：``
 
-## 属性（35 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `customerDefine1` | customerDefine1 | `define1` | String | `text` |
-| 2 | `customerDefine10` | customerDefine10 | `define10` | String | `text` |
-| 3 | `customerDefine11` | customerDefine11 | `define11` | String | `text` |
-| 4 | `customerDefine12` | customerDefine12 | `define12` | String | `text` |
-| 5 | `customerDefine13` | customerDefine13 | `define13` | String | `text` |
-| 6 | `customerDefine14` | customerDefine14 | `define14` | String | `text` |
-| 7 | `customerDefine15` | customerDefine15 | `define15` | String | `text` |
-| 8 | `customerDefine16` | customerDefine16 | `define16` | String | `text` |
-| 9 | `customerDefine17` | customerDefine17 | `define17` | String | `text` |
-| 10 | `customerDefine18` | customerDefine18 | `define18` | String | `text` |
-| 11 | `customerDefine19` | customerDefine19 | `define19` | String | `text` |
-| 12 | `customerDefine2` | customerDefine2 | `define2` | String | `text` |
-| 13 | `customerDefine20` | customerDefine20 | `define20` | String | `text` |
-| 14 | `customerDefine21` | customerDefine21 | `define21` | String | `text` |
-| 15 | `customerDefine22` | customerDefine22 | `define22` | String | `text` |
-| 16 | `customerDefine23` | customerDefine23 | `define23` | String | `text` |
-| 17 | `customerDefine24` | customerDefine24 | `define24` | String | `text` |
-| 18 | `customerDefine25` | customerDefine25 | `define25` | String | `text` |
-| 19 | `customerDefine26` | customerDefine26 | `define26` | String | `text` |
-| 20 | `customerDefine27` | customerDefine27 | `define27` | String | `text` |
-| 21 | `customerDefine28` | customerDefine28 | `define28` | String | `text` |
-| 22 | `customerDefine29` | customerDefine29 | `define29` | String | `text` |
-| 23 | `customerDefine3` | customerDefine3 | `define3` | String | `text` |
-| 24 | `customerDefine30` | customerDefine30 | `define30` | String | `text` |
-| 25 | `customerDefine4` | customerDefine4 | `define4` | String | `text` |
-| 26 | `customerDefine5` | customerDefine5 | `define5` | String | `text` |
-| 27 | `customerDefine6` | customerDefine6 | `define6` | String | `text` |
-| 28 | `customerDefine7` | customerDefine7 | `define7` | String | `text` |
-| 29 | `customerDefine8` | customerDefine8 | `define8` | String | `text` |
-| 30 | `customerDefine9` | customerDefine9 | `define9` | String | `text` |
-| 31 | `id` | ID | `id` | Long | `long` |
-| 32 | `merchantId` | merchantID | `imerchantId` | 94b3280a-27a4-485a-b90b-b7bce57c6df2 | `quote` |
-| 33 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 34 | `tenant` | tenant | `tenant_id` | c213cd56-d5de-421f-bae7-d77455b557cd | `quote` |
-| 35 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 客户(自定义项)表(废弃) |
+| 物理表 | `customerdefine` |
+| 数据库 schema | `productcenter` |
+| 所属应用 | `DPMCUS` |
+| 直连字段 | 35 个 |
+| 子表 | 0 个 |
+| 关联引用 | 3 个 |
 
-## 关联（3 个）
+## 关联引用 (3个)
 
-- `merchantId` -> `aa.merchant.Merchant` (1)
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `tenant` -> `base.tenant.Tenant` ()
+| 字段名 | 引用类型 |
+|--------|---------|
+| `imerchantId` | `` |
+| `ytenant_id` | `` |
+| `tenant_id` | `` |
+
+## 继承接口 (2个, 2字段)
+
+- **租户相关** (`base.itf.ITenant`)
+  - `tenant_id` → `tenant_id`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 35 个直连字段
+
+### 文本字段 (30个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `define1` | `define1` | `customerDefine1` | 客户扩展属性1 |
+| `define10` | `define10` | `customerDefine10` | 客户扩展属性10 |
+| `define11` | `define11` | `customerDefine11` | 客户扩展属性11 |
+| `define12` | `define12` | `customerDefine12` | 客户扩展属性12 |
+| `define13` | `define13` | `customerDefine13` | 客户扩展属性13 |
+| `define14` | `define14` | `customerDefine14` | 客户扩展属性14 |
+| `define15` | `define15` | `customerDefine15` | 客户扩展属性15 |
+| `define16` | `define16` | `customerDefine16` | 客户扩展属性16 |
+| `define17` | `define17` | `customerDefine17` | 客户扩展属性17 |
+| `define18` | `define18` | `customerDefine18` | 客户扩展属性18 |
+| `define19` | `define19` | `customerDefine19` | 客户扩展属性19 |
+| `define2` | `define2` | `customerDefine2` | 客户扩展属性2 |
+| `define20` | `define20` | `customerDefine20` | 客户扩展属性20 |
+| `define21` | `define21` | `customerDefine21` | 客户扩展属性21 |
+| `define22` | `define22` | `customerDefine22` | 客户扩展属性22 |
+| `define23` | `define23` | `customerDefine23` | 客户扩展属性23 |
+| `define24` | `define24` | `customerDefine24` | 客户扩展属性24 |
+| `define25` | `define25` | `customerDefine25` | 客户扩展属性25 |
+| `define26` | `define26` | `customerDefine26` | 客户扩展属性26 |
+| `define27` | `define27` | `customerDefine27` | 客户扩展属性27 |
+| `define28` | `define28` | `customerDefine28` | 客户扩展属性28 |
+| `define29` | `define29` | `customerDefine29` | 客户扩展属性29 |
+| `define3` | `define3` | `customerDefine3` | 客户扩展属性3 |
+| `define30` | `define30` | `customerDefine30` | 客户扩展属性30 |
+| `define4` | `define4` | `customerDefine4` | 客户扩展属性4 |
+| `define5` | `define5` | `customerDefine5` | 客户扩展属性5 |
+| `define6` | `define6` | `customerDefine6` | 客户扩展属性6 |
+| `define7` | `define7` | `customerDefine7` | 客户扩展属性7 |
+| `define8` | `define8` | `customerDefine8` | 客户扩展属性8 |
+| `define9` | `define9` | `customerDefine9` | 客户扩展属性9 |
+
+### 引用字段 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `imerchantId` | `imerchantId` | `merchantId` | 所属客户 |
+| `tenant_id` | `tenant_id` | `tenant` | 租户 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 长整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+
+### timestamp (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubts` | `pubts` | `pubts` | 时间戳 |

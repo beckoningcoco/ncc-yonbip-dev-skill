@@ -9,46 +9,128 @@ last_verified: 2026-06-03
 status: verified
 source_type: api_response
 ---
+
 # 资金业务伙伴类型 (`tmsp.fundbusinobjtype.FundBusinObjType`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBip），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `tmsp_fundbusinobj_type` | 应用: `TMSP`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`tmsp_fundbusinobj_type` | domain：`yonbip-fi-ctmtmsp` | 应用：`TMSP` | 业务对象ID：`ae7feccd-b8bb-4e1e-a0fa-cab5ba80bcc4`
 
-## 属性（25 个）
+## 基本信息
 
-| # | 字段 | 显示名 | 列 | 类型 | biztype |
-|---|------|--------|-----|------|---------|
-| 1 | `code` | 编码 | `code` | String | `text` |
-| 2 | `dr` | 逻辑删除 | `dr` | Short | `short` |
-| 3 | `enabled` | enabled | `enabled` | Boolean | `switch` |
-| 4 | `ext` | ext | `ext` | String | `text` |
-| 5 | `fundbusinobjbankid` | fundbusinobjbankid | `fundbusinobjbank_id` | c5eba128-e930-4602-897a-30d3a049390e | `quote` |
-| 6 | `fundbusinobjid` | fundbusinobjid | `fundbusinobj_id` | e969728a-efe8-49db-86b0-5f8e18c2f098 | `quote` |
-| 7 | `objectName` | object名称 | `objectName` | String | `multiLanguage` |
-| 8 | `parent` | parent | `parent` | a1d6f36f-1ea8-46c7-a409-d38a0f14c292 | `quote` |
-| 9 | `sort` | sort | `sort` | Integer | `int` |
-| 10 | `systemPrepare` | systemPrepare | `systemPrepare` | Boolean | `switch` |
-| 11 | `vouchdate` | vouchdate | `vouchdate` | String | `date` |
-| 12 | `isEnd` | 是否End | `is_end` | Short | `short` |
-| 13 | `name` | 名称 | `name` | String | `text` |
-| 14 | `id` | ID | `id` | String | `text` |
-| 15 | `pubts` | 时间戳 | `pubts` | DateTime | `dateTime` |
-| 16 | `createTime` | 创建时间 | `create_time` | DateTime | `dateTime` |
-| 17 | `creator` | 创建人 | `creator` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 18 | `modifier` | 修改人 | `modifier` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 19 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `dateTime` |
-| 20 | `disablets` | disablets | `disablets` | DateTime | `dateTime` |
-| 21 | `enable` | enable | `enable` | sys_intboolean | `singleOption` |
-| 22 | `enablets` | enablets | `enablets` | DateTime | `dateTime` |
-| 23 | `level` | level | `level` | Integer | `int` |
-| 24 | `path` | path | `path` | String | `text` |
-| 25 | `ytenantId` | ytenantID | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 资金业务伙伴类型 |
+| 物理表 | `tmsp_fundbusinobj_type` |
+| 数据库 schema | `yonbip-fi-ctmtmsp` |
+| 所属应用 | `TMSP` |
+| 直连字段 | 25 个 |
+| 子表 | 0 个 |
+| 关联引用 | 6 个 |
 
-## 关联（6 个）
+## 关联引用 (6个)
 
-- `parent` -> `tmsp.fundbusinobjtype.FundBusinObjType` () [废]
-- `creator` -> `base.user.BipUser` () 
-- `fundbusinobjid` -> `tmsp.fundbusinobjarchives.FundBusinObjArchives` () [废]
-- `modifier` -> `base.user.BipUser` () 
-- `ytenantId` -> `yht.tenant.YhtTenant` () 
-- `fundbusinobjbankid` -> `tmsp.fundbusinobjarchives.FundBusinObjArchivesItem` () [废]
+| 字段名 | 引用类型 |
+|--------|---------|
+| `parent` | `` |
+| `creator` | `bip-usercenter.bip_user_ref` |
+| `fundbusinobj_id` | `yonbip-fi-ctmtmsp.tmsp_fundbusinobj_Ref` |
+| `modifier` | `bip-usercenter.bip_user_ref` |
+| `ytenant_id` | `` |
+| `fundbusinobjbank_id` | `yonbip-fi-ctmtmsp.tmsp_fundbusinobjbank_Ref` |
+
+## 继承接口 (5个, 15字段)
+
+- **树型结构** (`iuap.busiObj.ITree`)
+  - `ifend` → `ifend`
+  - `level` → `level`
+  - `name` → `name`
+  - `parent_id` → `parent_id`
+  - `path` → `path`
+  - `sort_num` → `sort_num`
+- **档案状态** (`iuap.busiObj.IEnable`)
+  - `disablets` → `disablets`
+  - `enable` → `enable`
+  - `enablets` → `enablets`
+- **审计信息** (`iuap.busiObj.IAuditInfo`)
+  - `create_time` → `create_time`
+  - `creator` → `creator`
+  - `modifier` → `modifier`
+  - `modify_time` → `modify_time`
+- **统一租户接口** (`iuap.busiObj.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+- **逻辑删除** (`iuap.busiObj.LogicDelete`)
+  - `dr` → `dr`
+
+## 字段列表（按类型分组）
+
+> 共 25 个直连字段
+
+### 文本字段 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `code` | `code` | `code` | 资金业务伙伴类型编号 |
+| `ext` | `ext` | `ext` | ext |
+| `name` | `name` | `name` | 节点标题 |
+| `id` | `id` | `id` | 主键 |
+| `path` | `path` | `path` | 路径 |
+
+### 引用字段 (6个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `fundbusinobjbank_id` | `fundbusinobjbank_id` | `fundbusinobjbankid` | 资金业务伙伴银行信息参照 |
+| `fundbusinobj_id` | `fundbusinobj_id` | `fundbusinobjid` | 资金业务伙伴参照 |
+| `parent` | `parent` | `parent` | 上级分类 |
+| `creator` | `creator` | `creator` | 创建人 |
+| `modifier` | `modifier` | `modifier` | 修改人 |
+| `ytenant_id` | `ytenant_id` | `ytenantId` | 租户id |
+
+### 日期字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `vouchdate` | `vouchdate` | `vouchdate` | 单据日期 |
+
+### 日期时间 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+| `disablets` | `disablets` | `disablets` | 停用时间 |
+| `enablets` | `enablets` | `enablets` | 启用时间 |
+
+### 布尔字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `enabled` | `enabled` | `enabled` | 启停用状态 |
+| `systemPrepare` | `systemPrepare` | `systemPrepare` | 是否系统预制 |
+
+### 枚举字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `enable` | `enable` | `enable` | 档案状态 |
+
+### 整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `sort` | `sort` | `sort` | 排序号 |
+| `level` | `level` | `level` | 层级 |
+
+### 短整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dr` | `dr` | `dr` | dr |
+| `is_end` | `is_end` | `isEnd` | 是否末级 |
+
+### multiLanguage (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `objectName` | `objectName` | `objectName` | 资金业务伙伴类型名称 |

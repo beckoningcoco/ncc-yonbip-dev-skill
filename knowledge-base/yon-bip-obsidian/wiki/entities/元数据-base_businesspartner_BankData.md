@@ -12,41 +12,103 @@ source_type: api_response
 
 # 银行信息(废弃) (`base.businesspartner.BankData`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `base_bankdata` | 应用: `DPMBP` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`base_bankdata` | domain：`productcenter` | 应用：`DPMBP` | 业务对象ID：``
 
-## 属性（20 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `id` | ID | `id` | String | `text` |
-| 2 | `partnerId` | partnerID | `partnerId` | c1627369-6457-4828-883d-756b79bd0f46 | `quote` |
-| 3 | `country` | country | `country` | 8e9602ac-5ca2-4d06-aede-4a0af4c316bf | `quote` |
-| 4 | `province` | province | `province` | 0d98e246-387e-4239-a8da-c372e94fff77 | `quote` |
-| 5 | `currency` | currency | `currency` | 02b45339-eb4a-4a31-a8b5-d32f494f4e8e | `quote` |
-| 6 | `accountType` | accountType | `accountType` | Integer | `int` |
-| 7 | `bank` | bank | `bank` | b7ee7189-ed97-48d5-91e4-808228664429 | `quote` |
-| 8 | `openBank` | openBank | `openBank` | 47a69dfe-37ef-4ad1-aa19-1d61797a7821 | `quote` |
-| 9 | `bankAccount` | bankAccount | `bankAccount` | String | `text` |
-| 10 | `bankAccountName` | bankAccount名称 | `bankAccountName` | String | `text` |
-| 11 | `jointLineNo` | jointLineNo | `jointLineNo` | String | `text` |
-| 12 | `isDefault` | 是否Default | `isDefault` | Boolean | `switch` |
-| 13 | `stopstatus` | stopstatus | `stopstatus` | Boolean | `switch` |
-| 14 | `stoptime` | stoptime | `stop_time` | DateTime | `timestamp` |
-| 15 | `comment` | comment | `comment` | String | `multiLanguage` |
-| 16 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 17 | `dr` | 逻辑删除 | `dr` | Short | `short` |
-| 18 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 19 | `tenant` | tenant | `tenant_id` | c213cd56-d5de-421f-bae7-d77455b557cd | `quote` |
-| 20 | `erpCode` | erp编码 | `erpCode` | String | `text` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 银行信息(废弃) |
+| 物理表 | `base_bankdata` |
+| 数据库 schema | `productcenter` |
+| 所属应用 | `DPMBP` |
+| 直连字段 | 20 个 |
+| 子表 | 0 个 |
+| 关联引用 | 8 个 |
 
-## 关联（8 个）
+## 关联引用 (8个)
 
-- `country` -> `bd.country.CountryVO` ()
-- `bank` -> `bd.bank.BankVO` ()
-- `province` -> `aa.regioncorp.RegionCorp` ()
-- `openBank` -> `bd.bank.BankDotVO` ()
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `currency` -> `bd.currencytenant.CurrencyTenantVO` ()
-- `partnerId` -> `base.businesspartner.BusinessPartner` (0..n)
-- `tenant` -> `base.tenant.Tenant` ()
+| 字段名 | 引用类型 |
+|--------|---------|
+| `country` | `ucfbasedoc.bd_countryref` |
+| `bank` | `ucfbasedoc.bd_bankcard` |
+| `province` | `productcenter.pc_addressarchivesref` |
+| `openBank` | `ucfbasedoc.bd_bankdotref` |
+| `ytenant_id` | `` |
+| `currency` | `ucfbasedoc.bd_currencytenantref` |
+| `partnerId` | `` |
+| `tenant_id` | `` |
+
+## 继承接口 (5个, 6字段)
+
+- **租户相关** (`base.itf.ITenant`)
+  - `tenant_id` → `tenant_id`
+- **停用信息** (`base.itf.IStopping`)
+  - `stopstatus` → `stopstatus`
+  - `stop_time` → `stop_time`
+- **erp编码** (`base.itf.IErpCode`)
+  - `erpCode` → `erpCode`
+- **逻辑删除相关** (`ucfbase.ucfbaseItf.LogicDelete`)
+  - `dr` → `dr`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 20 个直连字段
+
+### 文本字段 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+| `bankAccount` | `bankAccount` | `bankAccount` | 银行账号 |
+| `bankAccountName` | `bankAccountName` | `bankAccountName` | 账户名称 |
+| `jointLineNo` | `jointLineNo` | `jointLineNo` | 联行号 |
+| `erpCode` | `erpCode` | `erpCode` | 商家编码 |
+
+### 引用字段 (8个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `partnerId` | `partnerId` | `partnerId` | 业务伙伴 |
+| `country` | `country` | `country` | 国家/地区 |
+| `province` | `province` | `province` | 省份 |
+| `currency` | `currency` | `currency` | 币种 |
+| `bank` | `bank` | `bank` | 银行类别 |
+| `openBank` | `openBank` | `openBank` | 银行网点 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户 |
+| `tenant_id` | `tenant_id` | `tenant` | 租户(废弃) |
+
+### 布尔字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `isDefault` | `isDefault` | `isDefault` | 默认银行 |
+| `stopstatus` | `stopstatus` | `stopstatus` | 启用状态 |
+
+### 整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `accountType` | `accountType` | `accountType` | 账户类型 |
+
+### 短整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dr` | `dr` | `dr` | 删除状态 |
+
+### timestamp (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `stop_time` | `stop_time` | `stoptime` | 停用时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+
+### multiLanguage (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `comment` | `comment` | `comment` | 备注 |

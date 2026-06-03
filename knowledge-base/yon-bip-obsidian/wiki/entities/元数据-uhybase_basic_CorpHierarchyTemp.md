@@ -12,31 +12,83 @@ source_type: api_response
 
 # 会籍 (`uhybase.basic.CorpHierarchyTemp`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `mp_corphierarchy` | 应用: `SDMB` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`mp_corphierarchy` | domain：`uhy` | 应用：`SDMB` | 业务对象ID：`fe6d2cb8-d520-45f2-9471-ce6271124ba4`
 
-## 属性（16 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `bIsOpenUpMall` | 是否sOpenUpMall | `bIsOpenUpMall` | Short | `short` |
-| 2 | `bOpenUpMall` | bOpenUpMall | `bOpenUpMall` | Short | `short` |
-| 3 | `cAppID` | cAppID | `cAppID` | String | `text` |
-| 4 | `cAppName` | cApp名称 | `cAppName` | String | `text` |
-| 5 | `cECCustomerID` | cECCustomerID | `cECCustomerID` | String | `text` |
-| 6 | `cOrgName` | cOrg名称 | `cOrgName` | String | `text` |
-| 7 | `cOrgPath` | cOrgPath | `cOrgPath` | String | `text` |
-| 8 | `cRegAgreement` | cRegAgreement | `cRegAgreement` | String | `text` |
-| 9 | `cUserName` | cUser名称 | `cUserName` | String | `text` |
-| 10 | `createTime` | 创建时间 | `dCreateTime` | Integer | `int` |
-| 11 | `dUpdateTime` | dUpdateTime | `dUpdateTime` | Integer | `int` |
-| 12 | `iOrgID` | iOrgID | `iOrgID` | eaa75c14-e58f-4b35-9ae5-0032f4a98f54 | `quote` |
-| 13 | `id` | ID | `id` | String | `text` |
-| 14 | `membercorp` | membercorp | `iCorpId` | Long | `long` |
-| 15 | `pubts` | 时间戳 | `ts` | DateTime | `timestamp` |
-| 16 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 会籍 |
+| 物理表 | `mp_corphierarchy` |
+| 数据库 schema | `uhy` |
+| 所属应用 | `SDMB` |
+| 直连字段 | 16 个 |
+| 子表 | 0 个 |
+| 关联引用 | 2 个 |
 
-## 关联（2 个）
+## 关联引用 (2个)
 
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `iOrgID` -> `aa.baseorg.OrgMV` ()
+| 字段名 | 引用类型 |
+|--------|---------|
+| `ytenant_id` | `` |
+| `iOrgID` | `` |
+
+## 继承接口 (3个, 3字段)
+
+- **会员租户相关** (`base.itf.IMembercorp`)
+  - `iCorpId` → `iCorpId`
+- **创建时间** (`uhy.itf.CreateTime`)
+  - `dCreateTime` → `dCreateTime`
+- **统一租户接口(扩展)** (`ucfbase.ucfbaseItf.IYTenantExt`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 16 个直连字段
+
+### 文本字段 (8个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `cAppID` | `cAppID` | `cAppID` | 会籍ID |
+| `cAppName` | `cAppName` | `cAppName` | 会籍名称 |
+| `cECCustomerID` | `cECCustomerID` | `cECCustomerID` | 电商客户id |
+| `cOrgName` | `cOrgName` | `cOrgName` | 组织名称 |
+| `cOrgPath` | `cOrgPath` | `cOrgPath` | 组织路径 |
+| `cRegAgreement` | `cRegAgreement` | `cRegAgreement` | 会员协议 |
+| `cUserName` | `cUserName` | `cUserName` | 最近修改人 |
+| `id` | `id` | `id` | ID |
+
+### 引用字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iOrgID` | `iOrgID` | `iOrgID` | 组织ID |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dCreateTime` | `dCreateTime` | `createTime` | 创建时间 |
+| `dUpdateTime` | `dUpdateTime` | `dUpdateTime` | 更新时间 |
+
+### 短整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `bIsOpenUpMall` | `bIsOpenUpMall` | `bIsOpenUpMall` | 是否允许开通U商城， |
+| `bOpenUpMall` | `bOpenUpMall` | `bOpenUpMall` | 是否开通商城 |
+
+### 长整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iCorpId` | `iCorpId` | `membercorp` | 租户 |
+
+### timestamp (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `ts` | `ts` | `pubts` | 时间戳 |

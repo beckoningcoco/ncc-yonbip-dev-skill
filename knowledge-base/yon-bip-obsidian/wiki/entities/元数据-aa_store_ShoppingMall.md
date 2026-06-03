@@ -12,71 +12,124 @@ source_type: api_response
 
 # 商城业务 (`aa.store.ShoppingMall`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `mp_shoppingmall` | 应用: `Marketingpublic` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`mp_shoppingmall` | domain：`yxybase` | 应用：`Marketingpublic` | 业务对象ID：``
 
-## 属性（51 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `address` | address | `detailAddress` | String | `text` |
-| 2 | `beginTime` | beginTime | `beginTime` | String | `text` |
-| 3 | `cAppId` | cAppID | `cAppId` | String | `text` |
-| 4 | `cInventoryType` | cInventoryType | `cInventoryType` | Short | `short` |
-| 5 | `cPayWay` | cPayWay | `cPayWay` | String | `text` |
-| 6 | `cPaytypeCodes` | cPaytypeCodes | `cPaytypeCodes` | String | `text` |
-| 7 | `closed` | closed | `closed` | Short | `short` |
-| 8 | `concatQrcode` | concatQrcode | `concatQrcode` | String | `text` |
-| 9 | `deliveryScope` | deliveryScope | `deliveryScope` | String | `text` |
-| 10 | `deliveryScopeAddress` | deliveryScopeAddress | `deliveryScopeAddress` | String | `text` |
-| 11 | `deliveryType` | deliveryType | `deliveryType` | String | `text` |
-| 12 | `dlyFeeRuleId` | dlyFeeRuleID | `dlyFeeRuleId` | b4505671-79b1-4593-8be4-ddc7eed18484 | `quote` |
-| 13 | `endTime` | endTime | `endTime` | String | `text` |
-| 14 | `extendFeild` | extendFeild | `extendFeild` | String | `text` |
-| 15 | `fDistributionRadius` | fDistributionRadius | `fDistributionRadius` | Decimal | `number` |
-| 16 | `groupreferenceIds` | groupreferenceIds | `groupreferenceIds` | String | `text` |
-| 17 | `iDeleted` | iDeleted | `iDeleted` | Boolean | `switch` |
-| 18 | `iDistributionMode` | iDistributionMode | `iDistributionMode` | Short | `short` |
-| 19 | `iHotSpot` | iHotSpot | `iHotSpot` | Short | `short` |
-| 20 | `iStart` | iStart | `iStart` | Boolean | `switch` |
-| 21 | `id` | ID | `id` | Long | `long` |
-| 22 | `isHeadQuarters` | 是否HeadQuarters | `isHeadQuarters` | Boolean | `switch` |
-| 23 | `latitude` | latitude | `latitude` | Decimal | `number` |
-| 24 | `longitude` | longitude | `longitude` | Decimal | `number` |
-| 25 | `minDeliveryFee` | minDeliveryFee | `minDeliveryFee` | Decimal | `number` |
-| 26 | `mobileManualUrl` | mobileManualUrl | `mobileManualUrl` | String | `text` |
-| 27 | `mobilePageType` | mobilePageType | `mobilePageType` | Short | `short` |
-| 28 | `name` | 名称 | `name` | String | `text` |
-| 29 | `orderTakeTemplateId` | orderTakeTemplateID | `orderTakeTemplateId` | fe1b83d8-10c2-4b21-ad18-e4122194d629 | `quote` |
-| 30 | `orderTakeTemplatePage` | orderTakeTemplatePage | `orderTakeTemplatePage` | String | `text` |
-| 31 | `pcTemplateId` | pcTemplateID | `pcTemplateId` | fe1b83d8-10c2-4b21-ad18-e4122194d629 | `quote` |
-| 32 | `pcTemplatePage` | pcTemplatePage | `pcTemplatePage` | String | `text` |
-| 33 | `polygonPath` | polygonPath | `fenceJsonStr` | String | `text` |
-| 34 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 35 | `referenceId` | referenceID | `referenceId` | Long | `long` |
-| 36 | `referenceRetailPrice` | referenceRetailPrice | `referenceRetailPrice` | Short | `short` |
-| 37 | `regionCode` | region编码 | `regionCode` | String | `text` |
-| 38 | `regionName` | region名称 | `regionName` | String | `text` |
-| 39 | `returnDetail` | returnDetail | `returnDetail` | String | `text` |
-| 40 | `scopeCode` | scope编码 | `scopeCode` | String | `text` |
-| 41 | `scopeName` | scope名称 | `scopeName` | String | `text` |
-| 42 | `shopsid` | shopsid | `shopsid` | String | `text` |
-| 43 | `shopsname` | shopsname | `shopsname` | String | `text` |
-| 44 | `siteType` | siteType | `siteType` | String | `text` |
-| 45 | `store` | store | `iStoreId` | 16e4e14c-ab05-4ee5-bbb8-c67351c9a8b3 | `quote` |
-| 46 | `storeDlyFeeRuleId` | storeDlyFeeRuleID | `storeDlyFeeRuleId` | b4505671-79b1-4593-8be4-ddc7eed18484 | `quote` |
-| 47 | `templateId` | templateID | `templateId` | fe1b83d8-10c2-4b21-ad18-e4122194d629 | `quote` |
-| 48 | `templatePage` | templatePage | `templatePage` | String | `text` |
-| 49 | `unionPayMid` | unionPayMid | `unionPayMid` | String | `text` |
-| 50 | `unionPaytid` | unionPaytid | `unionPaytid` | String | `text` |
-| 51 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 商城业务 |
+| 物理表 | `mp_shoppingmall` |
+| 数据库 schema | `yxybase` |
+| 所属应用 | `Marketingpublic` |
+| 直连字段 | 51 个 |
+| 子表 | 0 个 |
+| 关联引用 | 7 个 |
 
-## 关联（7 个）
+## 关联引用 (7个)
 
-- `dlyFeeRuleId` -> `um.logisticssetting.Deliverytype` ()
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `storeDlyFeeRuleId` -> `um.logisticssetting.Deliverytype` ()
-- `store` -> `aa.store.Store` (1)
-- `pcTemplateId` -> `um.templatepage.Templatepage` ()
-- `templateId` -> `um.templatepage.Templatepage` ()
-- `orderTakeTemplateId` -> `um.templatepage.Templatepage` ()
+| 字段名 | 引用类型 |
+|--------|---------|
+| `dlyFeeRuleId` | `` |
+| `ytenant_id` | `` |
+| `storeDlyFeeRuleId` | `` |
+| `iStoreId` | `` |
+| `pcTemplateId` | `` |
+| `templateId` | `` |
+| `orderTakeTemplateId` | `` |
+
+## 继承接口 (1个, 1字段)
+
+- **统一租户接口(扩展)** (`ucfbase.ucfbaseItf.IYTenantExt`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 51 个直连字段
+
+### 文本字段 (28个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `detailAddress` | `detailAddress` | `address` | 详细地址 |
+| `beginTime` | `beginTime` | `beginTime` | 营业开始时间 |
+| `cAppId` | `cAppId` | `cAppId` | AppID(应用ID) |
+| `cPayWay` | `cPayWay` | `cPayWay` | 支付类型 |
+| `cPaytypeCodes` | `cPaytypeCodes` | `cPaytypeCodes` | 支付方式 |
+| `concatQrcode` | `concatQrcode` | `concatQrcode` | 联系人二维码图片 |
+| `deliveryScope` | `deliveryScope` | `deliveryScope` | 行政区划地址编码 |
+| `deliveryScopeAddress` | `deliveryScopeAddress` | `deliveryScopeAddress` | 行政区划地址 |
+| `deliveryType` | `deliveryType` | `deliveryType` | 配送方式 |
+| `endTime` | `endTime` | `endTime` | 营业结束时间 |
+| `extendFeild` | `extendFeild` | `extendFeild` | 客服坐席ID |
+| `groupreferenceIds` | `groupreferenceIds` | `groupreferenceIds` | 门店组 |
+| `mobileManualUrl` | `mobileManualUrl` | `mobileManualUrl` | 移动端手工链接地址 |
+| `name` | `name` | `name` | 线上店铺名称 |
+| `orderTakeTemplatePage` | `orderTakeTemplatePage` | `orderTakeTemplatePage` | 扫码点单页面 |
+| `pcTemplatePage` | `pcTemplatePage` | `pcTemplatePage` | pc端主页 |
+| `fenceJsonStr` | `fenceJsonStr` | `polygonPath` | 地图范围坐标集合(依照JSON串保存) |
+| `regionCode` | `regionCode` | `regionCode` | 地址编码 |
+| `regionName` | `regionName` | `regionName` | 地址名称 |
+| `returnDetail` | `returnDetail` | `returnDetail` | 退货信息 |
+| `scopeCode` | `scopeCode` | `scopeCode` | 行政区划编码 |
+| `scopeName` | `scopeName` | `scopeName` | 行政区划名称 |
+| `shopsid` | `shopsid` | `shopsid` | 门店组id |
+| `shopsname` | `shopsname` | `shopsname` | 门店组名称 |
+| `siteType` | `siteType` | `siteType` | 站点类型 |
+| `templatePage` | `templatePage` | `templatePage` | 移动端主页 |
+| `unionPayMid` | `unionPayMid` | `unionPayMid` | 支付商户号 |
+| `unionPaytid` | `unionPaytid` | `unionPaytid` | 支付终端号 |
+
+### 引用字段 (7个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dlyFeeRuleId` | `dlyFeeRuleId` | `dlyFeeRuleId` | 运费模板 |
+| `orderTakeTemplateId` | `orderTakeTemplateId` | `orderTakeTemplateId` | 扫码点单页面模板id |
+| `pcTemplateId` | `pcTemplateId` | `pcTemplateId` | pc端主页模板id |
+| `iStoreId` | `iStoreId` | `store` | 所属门店主表 |
+| `storeDlyFeeRuleId` | `storeDlyFeeRuleId` | `storeDlyFeeRuleId` | 门店配送运费模板ID |
+| `templateId` | `templateId` | `templateId` | 移动端主页模板id |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 布尔字段 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iDeleted` | `iDeleted` | `iDeleted` | 是否删除 |
+| `iStart` | `iStart` | `iStart` | 启用状态 |
+| `isHeadQuarters` | `isHeadQuarters` | `isHeadQuarters` | 总部 |
+
+### 短整数 (6个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `cInventoryType` | `cInventoryType` | `cInventoryType` | 库存规则 |
+| `closed` | `closed` | `closed` | 是否打烊 |
+| `iDistributionMode` | `iDistributionMode` | `iDistributionMode` | 商城配送范围 |
+| `iHotSpot` | `iHotSpot` | `iHotSpot` | 热门区域 |
+| `mobilePageType` | `mobilePageType` | `mobilePageType` | 移动端页面类型 |
+| `referenceRetailPrice` | `referenceRetailPrice` | `referenceRetailPrice` | 商品取价规则 |
+
+### 长整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+| `referenceId` | `referenceId` | `referenceId` | 交货门店id |
+
+### 数值字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `fDistributionRadius` | `fDistributionRadius` | `fDistributionRadius` | 配送半径 |
+| `latitude` | `latitude` | `latitude` | 纬度 |
+| `longitude` | `longitude` | `longitude` | 经度 |
+| `minDeliveryFee` | `minDeliveryFee` | `minDeliveryFee` | 起送费 |
+
+### timestamp (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubts` | `pubts` | `pubts` | 时间戳 |

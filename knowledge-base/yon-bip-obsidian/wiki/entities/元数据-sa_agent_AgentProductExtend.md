@@ -12,30 +12,94 @@ source_type: api_response
 
 # 客户商品对照详情(管理组织) (`sa.agent.AgentProductExtend`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `agentproductextend` | 应用: `SCMSA` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`agentproductextend` | domain：`udinghuo` | 应用：`SCMSA` | 业务对象ID：``
 
-## 属性（13 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `agentProductCode` | agentProduct编码 | `cAgentProductCode` | String | `text` |
-| 2 | `agentProductId` | agentProductID | `agentProductId` | 27a41e77-558c-4f2b-9fdb-f108db09b3b5 | `quote` |
-| 3 | `agentProductName` | agentProduct名称 | `cAgentProductName` | String | `text` |
-| 4 | `agentSkuCode` | agentSku编码 | `cAgentSkuCode` | String | `text` |
-| 5 | `agentSkuName` | agentSku名称 | `cAgentSkuName` | String | `text` |
-| 6 | `detailDefineCharacter` | detailDefineCharacter | `detailDefineCharacter` | d24aa346-0537-4d68-be37-bb0ee38ce0e4 | `UserDefine` |
-| 7 | `id` | ID | `id` | Long | `long` |
-| 8 | `pubts` | 时间戳 | `pubuts` | DateTime | `timestamp` |
-| 9 | `stopstatus` | stopstatus | `stopstatus` | Boolean | `switch` |
-| 10 | `stoptime` | stoptime | `stop_time` | DateTime | `timestamp` |
-| 11 | `uordercorp` | uordercorp | `iCorpId` | Long | `long` |
-| 12 | `bodyItem` | bodyItem | `` | 23e058ed-aaca-49e2-8f1b-a809a6c24ae3 | `` |
-| 13 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 客户商品对照详情(管理组织) |
+| 物理表 | `agentproductextend` |
+| 数据库 schema | `udinghuo` |
+| 所属应用 | `SCMSA` |
+| 直连字段 | 13 个 |
+| 子表 | 1 个 |
+| 关联引用 | 4 个 |
 
-## 关联（4 个）
+## 子表
 
-- `bodyItem` -> `sa.agent.AgentProductDefine` (1)
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `agentProductId` -> `sa.agent.AgentProductRelation` (0..n)
-- `detailDefineCharacter` -> `sa.agent.DetailDefineCharacter` ()
+| 字段名 | URI | 关系 |
+|--------|-----|------|
+| `bodyItem` | `sa.agent.AgentProductDefine` | composition |
+
+## 关联引用 (4个)
+
+| 字段名 | 引用类型 |
+|--------|---------|
+| `` | `` |
+| `ytenant_id` | `` |
+| `agentProductId` | `` |
+| `detailDefineCharacter` | `` |
+
+## 继承接口 (3个, 4字段)
+
+- **U订货租户相关** (`base.itf.IUordercorp`)
+  - `iCorpId` → `iCorpId`
+- **停用信息** (`base.itf.IStopping`)
+  - `stopstatus` → `stopstatus`
+  - `stop_time` → `stop_time`
+- **统一租户接口(扩展)** (`ucfbase.ucfbaseItf.IYTenantExt`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 13 个直连字段
+
+### 文本字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `cAgentProductCode` | `cAgentProductCode` | `agentProductCode` | 客户商品编码 |
+| `cAgentProductName` | `cAgentProductName` | `agentProductName` | 客户商品名称 |
+| `cAgentSkuCode` | `cAgentSkuCode` | `agentSkuCode` | 客户sku编码 |
+| `cAgentSkuName` | `cAgentSkuName` | `agentSkuName` | 客户sku名称 |
+
+### 引用字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `agentProductId` | `agentProductId` | `agentProductId` | 客户商品对照ID |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 布尔字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `stopstatus` | `stopstatus` | `stopstatus` | 停用状态 |
+
+### 长整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | Id |
+| `iCorpId` | `iCorpId` | `uordercorp` | 租户 |
+
+### UserDefine (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `detailDefineCharacter` | `detailDefineCharacter` | `detailDefineCharacter` | 自定义项特征属性组 |
+
+### timestamp (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubuts` | `pubuts` | `pubts` | 时间戳 |
+| `stop_time` | `stop_time` | `stoptime` | 停用时间 |
+
+### other (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `` | `bodyItem` | 客户商品表体自定义项 |

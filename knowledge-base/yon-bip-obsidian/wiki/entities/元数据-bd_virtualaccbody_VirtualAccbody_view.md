@@ -12,54 +12,120 @@ source_type: api_response
 
 # 虚拟会计主体参照 (`bd.virtualaccbody.VirtualAccbody_view`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `bd_virtualaccbody` | 应用: `DPMACCT` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`bd_virtualaccbody` | domain：`finbd` | 应用：`DPMACCT` | 业务对象ID：``
 
-## 属性（32 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `accperiodscheme` | accperiodscheme | `accperiodscheme` | e7bb3d2b-b288-4696-b5f0-a9b0626cded8 | `quote` |
-| 2 | `code` | 编码 | `code` | String | `text` |
-| 3 | `country` | country | `country` | 8e9602ac-5ca2-4d06-aede-4a0af4c316bf | `quote` |
-| 4 | `currency` | currency | `currency` | 02b45339-eb4a-4a31-a8b5-d32f494f4e8e | `quote` |
-| 5 | `description` | description | `description` | String | `multiLanguage` |
-| 6 | `displayOrder` | displayOrder | `display_order` | Integer | `int` |
-| 7 | `dr` | 逻辑删除 | `dr` | Short | `short` |
-| 8 | `enabledate` | enabledate | `enabledate` | DateTime | `timestamp` |
-| 9 | `exchangerate` | exchangerate | `exchangerate` | 1eb63781-e244-464d-b9ba-a7a4e1685295 | `quote` |
-| 10 | `expiredate` | expiredate | `expiredate` | DateTime | `timestamp` |
-| 11 | `id` | ID | `id` | String | `text` |
-| 12 | `isEnd` | 是否End | `isEnd` | Boolean | `switch` |
-| 13 | `is_virtualaccbody` | 是否_virtualaccbody | `is_virtualaccbody` | Boolean | `switch` |
-| 14 | `isexternal` | 是否external | `isexternal` | Boolean | `switch` |
-| 15 | `isinner` | 是否inner | `isinner` | Boolean | `switch` |
-| 16 | `level` | 层级 | `level` | Integer | `int` |
-| 17 | `liableperson` | liableperson | `liableperson` | 4effed83-35f5-4e3b-9be1-092b5ae602e8 | `quote` |
-| 18 | `name` | 名称 | `name` | String | `multiLanguage` |
-| 19 | `orgid` | orgid | `orgid` | 14302233-1394-4a70-94e1-bed51636f312 | `quote` |
-| 20 | `orgtype` | orgtype | `orgtype` | String | `text` |
-| 21 | `parent` | parent | `parent` | e33ec72a-3857-4167-89e2-a437168ed3bb | `quote` |
-| 22 | `parentid` | parentid | `parent` | String | `text` |
-| 23 | `path` | path | `path` | String | `text` |
-| 24 | `shortname` | shortname | `shortname` | String | `multiLanguage` |
-| 25 | `sort` | 排序 | `sort_num` | Integer | `int` |
-| 26 | `source` | source | `source` | Short | `short` |
-| 27 | `status` | 状态 | `status` | Short | `short` |
-| 28 | `stopstatus` | stopstatus | `stopstatus` | Boolean | `switch` |
-| 29 | `stoptime` | stoptime | `stop_time` | DateTime | `timestamp` |
-| 30 | `tenant` | tenant | `tenant_id` | c213cd56-d5de-421f-bae7-d77455b557cd | `quote` |
-| 31 | `timezone` | timezone | `timezone` | String | `text` |
-| 32 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 虚拟会计主体参照 |
+| 物理表 | `bd_virtualaccbody` |
+| 数据库 schema | `finbd` |
+| 所属应用 | `DPMACCT` |
+| 直连字段 | 32 个 |
+| 子表 | 0 个 |
+| 关联引用 | 9 个 |
 
-## 关联（9 个）
+## 关联引用 (9个)
 
-- `country` -> `bd.country.CountryVO` ()
-- `liableperson` -> `bd.staff.Staff` ()
-- `parent` -> `bd.virtualaccbody.VirtualAccbody` ()
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `exchangerate` -> `bd.exchangeRate.ExchangeRateTypeVO` ()
-- `accperiodscheme` -> `bd.period.AccPeriodScheme` ()
-- `currency` -> `bd.currencytenant.CurrencyTenantVO` ()
-- `orgid` -> `org.func.BaseOrg` ()
-- `tenant` -> `base.tenant.Tenant` ()
+| 字段名 | 引用类型 |
+|--------|---------|
+| `country` | `` |
+| `liableperson` | `` |
+| `parent` | `` |
+| `ytenant_id` | `` |
+| `exchangerate` | `` |
+| `accperiodscheme` | `` |
+| `currency` | `` |
+| `orgid` | `` |
+| `tenant_id` | `` |
+
+## 继承接口 (5个, 10字段)
+
+- **租户相关** (`base.itf.ITenant`)
+  - `tenant_id` → `tenant_id`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+- **停用信息** (`base.itf.IStopping`)
+  - `stopstatus` → `stopstatus`
+  - `stop_time` → `stop_time`
+- **树型结构** (`base.itf.ITree`)
+  - `` → ``
+  - `level` → `level`
+  - `parent_id` → `parent_id`
+  - `path` → `path`
+  - `sort_num` → `sort_num`
+- **逻辑删除相关** (`ucfbase.ucfbaseItf.LogicDelete`)
+  - `dr` → `dr`
+
+## 字段列表（按类型分组）
+
+> 共 32 个直连字段
+
+### 文本字段 (6个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `code` | `code` | `code` | 编码 |
+| `id` | `id` | `id` | 会计主体id |
+| `orgtype` | `orgtype` | `orgtype` | 组织类型 |
+| `parent` | `parent` | `parentid` | 上级会计主体 |
+| `path` | `path` | `path` | 路径 |
+| `timezone` | `timezone` | `timezone` | 时区 |
+
+### 引用字段 (9个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `accperiodscheme` | `accperiodscheme` | `accperiodscheme` | 会计期间方案 |
+| `country` | `country` | `country` | 国家 |
+| `currency` | `currency` | `currency` | 本位币 |
+| `exchangerate` | `exchangerate` | `exchangerate` | 汇率类型 |
+| `liableperson` | `liableperson` | `liableperson` | 负责人 |
+| `orgid` | `orgid` | `orgid` | 组织id |
+| `parent` | `parent` | `parent` | 上级会计主体 |
+| `tenant_id` | `tenant_id` | `tenant` | 租户 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 布尔字段 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `isEnd` | `isEnd` | 是否末级 |
+| `is_virtualaccbody` | `is_virtualaccbody` | `is_virtualaccbody` | 是否虚拟会计主体 |
+| `isexternal` | `isexternal` | `isexternal` | 是否对外核算主体 |
+| `isinner` | `isinner` | `isinner` | 是否对内核算主体 |
+| `stopstatus` | `stopstatus` | `stopstatus` | 停用状态 |
+
+### 整数 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `display_order` | `display_order` | `displayOrder` | 显示顺序 |
+| `level` | `level` | `level` | 层级 |
+| `sort_num` | `sort_num` | `sort` | 排序号 |
+
+### 短整数 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dr` | `dr` | `dr` | 逻辑删除标记 |
+| `source` | `source` | `source` | 来源 |
+| `status` | `status` | `status` | 状态 |
+
+### multiLanguage (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `description` | `description` | `description` | 备注 |
+| `name` | `name` | `name` | 名称 |
+| `shortname` | `shortname` | `shortname` | 简称 |
+
+### timestamp (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `enabledate` | `enabledate` | `enabledate` | 启用时间 |
+| `expiredate` | `expiredate` | `expiredate` | 失效时间 |
+| `stop_time` | `stop_time` | `stoptime` | 停用时间 |

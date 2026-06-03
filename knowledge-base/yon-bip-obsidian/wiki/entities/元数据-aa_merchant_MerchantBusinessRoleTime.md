@@ -12,25 +12,70 @@ source_type: api_response
 
 # 业务角色时间 (`aa.merchant.MerchantBusinessRoleTime`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `merchantbusinessroletime` | 应用: `DPMCUS` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`merchantbusinessroletime` | domain：`productcenter` | 应用：`DPMCUS` | 业务对象ID：``
 
-## 属性（9 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 2 | `id` | ID | `id` | Long | `long` |
-| 3 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 4 | `merchantId` | merchantID | `imerchantId` | 94b3280a-27a4-485a-b90b-b7bce57c6df2 | `quote` |
-| 5 | `businessRole` | businessRole | `cBusinessRole` | String | `text` |
-| 6 | `ActivationTime` | ActivationTime | `ActivationTime` | DateTime | `timestamp` |
-| 7 | `DisableTime` | DisableTime | `DisableTime` | DateTime | `timestamp` |
-| 8 | `RoleTimeStopstatus` | RoleTimeStopstatus | `cRoleTimeStopstatus` | Boolean | `switch` |
-| 9 | `tenant` | tenant | `tenant_id` | c213cd56-d5de-421f-bae7-d77455b557cd | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 业务角色时间 |
+| 物理表 | `merchantbusinessroletime` |
+| 数据库 schema | `productcenter` |
+| 所属应用 | `DPMCUS` |
+| 直连字段 | 9 个 |
+| 子表 | 0 个 |
+| 关联引用 | 3 个 |
 
-## 关联（3 个）
+## 关联引用 (3个)
 
-- `merchantId` -> `aa.merchant.Merchant` (0..n)
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `tenant` -> `base.tenant.Tenant` ()
+| 字段名 | 引用类型 |
+|--------|---------|
+| `imerchantId` | `` |
+| `ytenant_id` | `` |
+| `tenant_id` | `` |
+
+## 继承接口 (2个, 2字段)
+
+- **租户相关** (`base.itf.ITenant`)
+  - `tenant_id` → `tenant_id`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 9 个直连字段
+
+### 文本字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `cBusinessRole` | `cBusinessRole` | `businessRole` | 业务角色 |
+
+### 引用字段 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+| `imerchantId` | `imerchantId` | `merchantId` | 客户ID |
+| `tenant_id` | `tenant_id` | `tenant` | 租户 |
+
+### 布尔字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `cRoleTimeStopstatus` | `cRoleTimeStopstatus` | `RoleTimeStopstatus` | 启用状态 |
+
+### 长整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | 主键ID |
+
+### timestamp (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+| `ActivationTime` | `ActivationTime` | `ActivationTime` | 启用时间 |
+| `DisableTime` | `DisableTime` | `DisableTime` | 停用时间 |

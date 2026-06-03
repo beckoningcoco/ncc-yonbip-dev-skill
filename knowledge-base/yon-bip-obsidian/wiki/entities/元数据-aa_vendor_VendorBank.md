@@ -12,53 +12,129 @@ source_type: api_response
 
 # 供应商银行 (`aa.vendor.VendorBank`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `aa_vendorbank` | 应用: `DPMSPL` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`aa_vendorbank` | domain：`yssupplier` | 应用：`DPMSPL` | 业务对象ID：``
 
-## 属性（29 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `id` | ID | `id` | Long | `long` |
-| 2 | `vendor` | vendor | `iVendorId` | 89bf026e-cc49-4fe7-9a7b-3e8fdcc77c1e | `quote` |
-| 3 | `elecBillBankNode` | elecBillBankNode | `elecBillBankNode` | 47a69dfe-37ef-4ad1-aa19-1d61797a7821 | `quote` |
-| 4 | `enterMode` | enterMode | `enter_mode` | String | `text` |
-| 5 | `entBank` | entBank | `entBank` | fbc20885-a507-45bd-a986-74d3fc28d38a | `quote` |
-| 6 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 7 | `receiveAddress` | receiveAddress | `receiveAddress` | String | `multiLanguage` |
-| 8 | `bankAccountFile` | bankAccountFile | `bank_account_file` | String | `text` |
-| 9 | `country` | country | `iCountryId` | 8e9602ac-5ca2-4d06-aede-4a0af4c316bf | `quote` |
-| 10 | `province` | province | `cProvince` | String | `text` |
-| 11 | `currency` | currency | `iCurrencyId` | 02b45339-eb4a-4a31-a8b5-d32f494f4e8e | `quote` |
-| 12 | `bank` | bank | `iBankId` | b7ee7189-ed97-48d5-91e4-808228664429 | `quote` |
-| 13 | `openaccountbank` | openaccountbank | `iOpenAccountBankId` | 47a69dfe-37ef-4ad1-aa19-1d61797a7821 | `quote` |
-| 14 | `account` | account | `cAccount` | String | `text` |
-| 15 | `accountname` | accountname | `cAccountName` | String | `multiLanguage` |
-| 16 | `correspondentcode` | correspondentcode | `cCorrespondentCode` | String | `text` |
-| 17 | `accountType` | accountType | `iAccountType` | Integer | `int` |
-| 18 | `defaultbank` | defaultbank | `bDefaultBank` | Boolean | `switch` |
-| 19 | `stopstatus` | stopstatus | `stopstatus` | Boolean | `switch` |
-| 20 | `memo` | 备注 | `cmemo` | String | `multiLanguage` |
-| 21 | `erpCode` | erp编码 | `erpCode` | String | `text` |
-| 22 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 23 | `stoptime` | stoptime | `stop_time` | DateTime | `timestamp` |
-| 24 | `region` | region | `cRegion` | String | `text` |
-| 25 | `regionCode` | region编码 | `cRegionCode` | String | `text` |
-| 26 | `bankFilePath` | bankFilePath | `bank_file_path` | String | `text` |
-| 27 | `vendorBankCharacterDefine` | vendorBankCharacterDefine | `vendorBankCharacterDefine` | 293239f5-502d-4152-a654-27266cf3f2f8 | `UserDefine` |
-| 28 | `tenant` | tenant | `tenant_id` | c213cd56-d5de-421f-bae7-d77455b557cd | `quote` |
-| 29 | `defines` | defines | `` | 02db3290-29bd-44e2-93b2-dfa85d228193 | `` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 供应商银行 |
+| 物理表 | `aa_vendorbank` |
+| 数据库 schema | `yssupplier` |
+| 所属应用 | `DPMSPL` |
+| 直连字段 | 29 个 |
+| 子表 | 1 个 |
+| 关联引用 | 11 个 |
 
-## 关联（11 个）
+## 子表
 
-- `country` -> `bd.country.CountryVO` ()
-- `bank` -> `bd.bank.BankVO` ()
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `vendor` -> `aa.vendor.Vendor` (0..n)
-- `openaccountbank` -> `bd.bank.BankDotVO` ()
-- `vendorBankCharacterDefine` -> `aa.vendor.VendorBankCharacterDefine` ()
-- `currency` -> `bd.currencytenant.CurrencyTenantVO` ()
-- `entBank` -> `bd.enterprise.OrgFinBankacctVO` ()
-- `tenant` -> `base.tenant.Tenant` ()
-- `elecBillBankNode` -> `bd.bank.BankDotVO` ()
-- `defines` -> `aa.vendor.VendorBankDefine` (1)
+| 字段名 | URI | 关系 |
+|--------|-----|------|
+| `defines` | `aa.vendor.VendorBankDefine` | composition |
+
+## 关联引用 (11个)
+
+| 字段名 | 引用类型 |
+|--------|---------|
+| `iCountryId` | `ucfbasedoc.bd_countryref` |
+| `iBankId` | `ucfbasedoc.bd_bankcard` |
+| `ytenant_id` | `` |
+| `iVendorId` | `` |
+| `iOpenAccountBankId` | `ucfbasedoc.bd_bankdotref` |
+| `vendorBankCharacterDefine` | `` |
+| `iCurrencyId` | `ucfbasedoc.bd_currencytenantref` |
+| `entBank` | `ucfbasedoc.bd_enterprisebankacct` |
+| `tenant_id` | `` |
+| `elecBillBankNode` | `` |
+| `` | `` |
+
+## 继承接口 (4个, 5字段)
+
+- **租户相关** (`base.itf.ITenant`)
+  - `tenant_id` → `tenant_id`
+- **停用信息** (`base.itf.IStopping`)
+  - `stopstatus` → `stopstatus`
+  - `stop_time` → `stop_time`
+- **erp编码** (`base.itf.IErpCode`)
+  - `erpCode` → `erpCode`
+- **统一租户接口(扩展)** (`ucfbase.ucfbaseItf.IYTenantExt`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 29 个直连字段
+
+### 文本字段 (9个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `enter_mode` | `enter_mode` | `enterMode` | 数据录入方式 |
+| `bank_account_file` | `bank_account_file` | `bankAccountFile` | 银行账号附件 |
+| `cProvince` | `cProvince` | `province` | 省份 |
+| `cAccount` | `cAccount` | `account` | 银行账号 |
+| `cCorrespondentCode` | `cCorrespondentCode` | `correspondentcode` | 联行号 |
+| `erpCode` | `erpCode` | `erpCode` | 外部编码 |
+| `cRegion` | `cRegion` | `region` | 开户地区 |
+| `cRegionCode` | `cRegionCode` | `regionCode` | 开户地区编码 |
+| `bank_file_path` | `bank_file_path` | `bankFilePath` | 附件 |
+
+### 引用字段 (9个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iVendorId` | `iVendorId` | `vendor` | 供应商档案主键 |
+| `elecBillBankNode` | `elecBillBankNode` | `elecBillBankNode` | 代理电票银行网点 |
+| `entBank` | `entBank` | `entBank` | 企业银行账户 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+| `iCountryId` | `iCountryId` | `country` | 国家地区主键 |
+| `iCurrencyId` | `iCurrencyId` | `currency` | 币种主键 |
+| `iBankId` | `iBankId` | `bank` | 银行类别主键 |
+| `iOpenAccountBankId` | `iOpenAccountBankId` | `openaccountbank` | 银行网点主键 |
+| `tenant_id` | `tenant_id` | `tenant` | 租户 |
+
+### 布尔字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `bDefaultBank` | `bDefaultBank` | `defaultbank` | 默认银行 |
+| `stopstatus` | `stopstatus` | `stopstatus` | 状态 |
+
+### 整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iAccountType` | `iAccountType` | `accountType` | 账号类型 |
+
+### 长整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | 供应商银行主键 |
+
+### multiLanguage (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `receiveAddress` | `receiveAddress` | `receiveAddress` | 收款地址 |
+| `cAccountName` | `cAccountName` | `accountname` | 账号名称 |
+| `cmemo` | `cmemo` | `memo` | 备注 |
+
+### timestamp (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+| `stop_time` | `stop_time` | `stoptime` | 停用时间 |
+
+### UserDefine (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `vendorBankCharacterDefine` | `vendorBankCharacterDefine` | `vendorBankCharacterDefine` | 供应商银行自定义项 |
+
+### other (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `` | `defines` | 供应商银行自定义项 |

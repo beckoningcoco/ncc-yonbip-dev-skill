@@ -12,22 +12,57 @@ source_type: api_response
 
 # 物料辅助分类 (`pc.product.ProductAssistClass`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `productassistclass` | 应用: `GZTBDM` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`productassistclass` | domain：`productcenter` | 应用：`GZTBDM` | 业务对象ID：``
 
-## 属性（6 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `id` | ID | `id` | Long | `long` |
-| 2 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 3 | `productClassId` | productClassID | `productClassId` | 5ad8fc93-4e6b-409f-a70f-462efa6fcee9 | `quote` |
-| 4 | `productId` | productID | `productId` | 89f3b06e-23df-4403-b4a7-19f99eeeae72 | `quote` |
-| 5 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 6 | `tenant` | tenant | `tenant_id` | Long | `long` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 物料辅助分类 |
+| 物理表 | `productassistclass` |
+| 数据库 schema | `productcenter` |
+| 所属应用 | `GZTBDM` |
+| 直连字段 | 6 个 |
+| 子表 | 0 个 |
+| 关联引用 | 3 个 |
 
-## 关联（3 个）
+## 关联引用 (3个)
 
-- `productClassId` -> `pc.cls.PresentationClass` ()
-- `productId` -> `pc.product.Product` (0..n)
-- `ytenant` -> `yht.tenant.YhtTenant` ()
+| 字段名 | 引用类型 |
+|--------|---------|
+| `productClassId` | `productcenter.pc_presentationclassref` |
+| `productId` | `` |
+| `ytenant_id` | `` |
+
+## 继承接口 (2个, 2字段)
+
+- **租户相关** (`coredoc.pub.TenantObselete`)
+  - `tenant_id` → `tenant_id`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 6 个直连字段
+
+### 引用字段 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户 |
+| `productClassId` | `productClassId` | `productClassId` | 辅助分类 |
+| `productId` | `productId` | `productId` | 物料 |
+
+### 长整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+| `tenant_id` | `tenant_id` | `tenant` | 租户(废弃) |
+
+### timestamp (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubts` | `pubts` | `pubts` | 时间戳 |

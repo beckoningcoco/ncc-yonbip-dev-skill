@@ -12,37 +12,92 @@ source_type: api_response
 
 # 成本中心组织信息 (`bd.costcenter.CostCenterDis`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `bd_costcenter_dis` | 应用: `DPMACCT` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`bd_costcenter_dis` | domain：`finbd` | 应用：`DPMACCT` | 业务对象ID：``
 
-## 属性（17 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `id` | ID | `id` | String | `text` |
-| 2 | `header` | header | `header` | 872630ba-e8f4-4080-817d-8fc9a6958733 | `quote` |
-| 3 | `enableDate` | enableDate | `enabledate` | DateTime | `timestamp` |
-| 4 | `creator` | 创建人 | `creator` | String | `text` |
-| 5 | `modifyDate` | 修改日期 | `modify_date` | Date | `date` |
-| 6 | `creatorId` | 创建人ID | `creatorId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 7 | `modifierId` | 修改人ID | `modifierId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 8 | `dr` | 逻辑删除 | `dr` | Short | `short` |
-| 9 | `createTime` | 创建时间 | `create_time` | DateTime | `timestamp` |
-| 10 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 11 | `tenant` | tenant | `tenant_id` | c213cd56-d5de-421f-bae7-d77455b557cd | `quote` |
-| 12 | `createDate` | 创建日期 | `create_date` | Date | `date` |
-| 13 | `profitCenter` | profitCenter | `profit_center` | e33ec72a-3857-4167-89e2-a437168ed3bb | `quote` |
-| 14 | `modifier` | 修改人 | `modifier` | String | `text` |
-| 15 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `timestamp` |
-| 16 | `accPurpose` | accPurpose | `acc_purpose` | 637f4637-0862-4167-a2bf-ef52818ca9d9 | `quote` |
-| 17 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 成本中心组织信息 |
+| 物理表 | `bd_costcenter_dis` |
+| 数据库 schema | `finbd` |
+| 所属应用 | `DPMACCT` |
+| 直连字段 | 17 个 |
+| 子表 | 0 个 |
+| 关联引用 | 7 个 |
 
-## 关联（7 个）
+## 关联引用 (7个)
 
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `creatorId` -> `base.user.User` ()
-- `modifierId` -> `base.user.User` ()
-- `header` -> `bd.costcenter.CostCenter` (0..n)
-- `profitCenter` -> `bd.virtualaccbody.VirtualAccbody` ()
-- `accPurpose` -> `bd.accpurpose.AccPurposeVO` ()
-- `tenant` -> `base.tenant.Tenant` ()
+| 字段名 | 引用类型 |
+|--------|---------|
+| `ytenant_id` | `` |
+| `` | `` |
+| `header` | `` |
+| `profit_center` | `finbd.bd_allaccbodyref_inner` |
+| `acc_purpose` | `` |
+| `tenant_id` | `` |
+
+## 继承接口 (4个, 11字段)
+
+- **审计信息** (`base.itf.IAuditInfo`)
+  - `create_date` → `create_date`
+  - `create_time` → `create_time`
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `modify_date` → `modify_date`
+  - `modify_time` → `modify_time`
+- **租户相关** (`base.itf.ITenant`)
+  - `tenant_id` → `tenant_id`
+- **逻辑删除相关** (`ucfbase.ucfbaseItf.LogicDelete`)
+  - `dr` → `dr`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 17 个直连字段
+
+### 文本字段 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | id |
+| `` | `creator` | `creator` | 创建人名称 |
+| `` | `modifier` | `modifier` | 变更人 |
+
+### 引用字段 (7个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `header` | `header` | `header` | 主表id |
+| `` | `creatorId` | `creatorId` | 创建人 |
+| `` | `modifierId` | `modifierId` | 修改人 |
+| `tenant_id` | `tenant_id` | `tenant` | 租户 |
+| `profit_center` | `profit_center` | `profitCenter` | 利润中心 |
+| `acc_purpose` | `acc_purpose` | `accPurpose` | 核算目的 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 日期字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `modify_date` | `modify_date` | `modifyDate` | 修改日期 |
+| `create_date` | `create_date` | `createDate` | 创建日期 |
+
+### 短整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dr` | `dr` | `dr` | 逻辑删除标记 |
+
+### timestamp (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `enabledate` | `enabledate` | `enableDate` | 生效日期 |
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+| `modify_time` | `modify_time` | `modifyTime` | 变更时间 |

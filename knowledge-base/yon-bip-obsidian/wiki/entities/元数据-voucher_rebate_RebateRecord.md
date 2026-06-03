@@ -12,45 +12,95 @@ source_type: api_response
 
 # 返利记录 (`voucher.rebate.RebateRecord`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `rebateRecord` | 应用: `BBSMK` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`rebateRecord` | domain：`marketingbill` | 应用：`BBSMK` | 业务对象ID：``
 
-## 属性（26 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `agentId` | agentID | `iAgentId` | 94b3280a-27a4-485a-b90b-b7bce57c6df2 | `quote` |
-| 2 | `createDate` | 创建日期 | `dCreateDate` | DateTime | `timestamp` |
-| 3 | `id` | ID | `id` | Long | `long` |
-| 4 | `orderId` | orderID | `iOrderId` | c7c0beb4-f830-486d-83e1-51072b319fd2 | `quote` |
-| 5 | `orderNo` | orderNo | `cOrderNo` | String | `text` |
-| 6 | `orderRebateMoney` | orderRebateMoney | `fOrderRebateMoney` | Decimal | `number` |
-| 7 | `outSysKey` | outSysKey | `cOutSysKey` | String | `text` |
-| 8 | `pubts` | 时间戳 | `pubuts` | DateTime | `timestamp` |
-| 9 | `rebateId` | rebateID | `iRebateId` | 8eda1ebb-ea7d-465d-a414-d26019cad0c8 | `quote` |
-| 10 | `rebateNo` | rebateNo | `cRebateNo` | String | `text` |
-| 11 | `recordStatus` | recordStatus | `cRecordStatus` | String | `text` |
-| 12 | `recordStatusName` | recordStatus名称 | `recordStatusName` | String | `text` |
-| 13 | `saleReturnId` | saleReturnID | `iSaleReturnId` | Long | `long` |
-| 14 | `saleReturnNo` | saleReturnNo | `cSaleReturnNo` | String | `text` |
-| 15 | `submitUser` | submitUser | `iSubmiterId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 16 | `uordercorp` | uordercorp | `iCorpId` | Long | `long` |
-| 17 | `useWayCode` | useWay编码 | `cUseWayCode` | String | `text` |
-| 18 | `voucherSourceType` | voucherSourceType | `cVoucherSourceType` | String | `text` |
-| 19 | `feeTransferStatus` | feeTransferStatus | `feeTransferStatus` | Boolean | `switch` |
-| 20 | `freezeDate` | freezeDate | `freezeDate` | DateTime | `timestamp` |
-| 21 | `paymentFinanceCode` | paymentFinance编码 | `cPaymentFinanceCode` | String | `text` |
-| 22 | `paymentFinanceId` | paymentFinanceID | `iPaymentFinanceId` | Long | `long` |
-| 23 | `saleInvoiceId` | saleInvoiceID | `saleInvoiceId` | 7a70750d-b22c-40ae-8516-df758fbd8cc5 | `quote` |
-| 24 | `settlementId` | settlementID | `settlementId` | Long | `long` |
-| 25 | `settlementNo` | settlementNo | `settlementNo` | String | `text` |
-| 26 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 返利记录 |
+| 物理表 | `rebateRecord` |
+| 数据库 schema | `marketingbill` |
+| 所属应用 | `BBSMK` |
+| 直连字段 | 26 个 |
+| 子表 | 0 个 |
+| 关联引用 | 6 个 |
 
-## 关联（6 个）
+## 关联引用 (6个)
 
-- `agentId` -> `aa.merchant.Merchant` ()
-- `orderId` -> `voucher.order.Order` ()
-- `saleInvoiceId` -> `voucher.invoice.SaleInvoice` ()
-- `submitUser` -> `base.user.User` ()
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `rebateId` -> `voucher.rebate.AmountRebate` (0..n)
+| 字段名 | 引用类型 |
+|--------|---------|
+| `iAgentId` | `` |
+| `iOrderId` | `` |
+| `saleInvoiceId` | `` |
+| `iSubmiterId` | `` |
+| `ytenant_id` | `` |
+| `iRebateId` | `` |
+
+## 继承接口 (2个, 2字段)
+
+- **U订货租户相关** (`base.itf.IUordercorp`)
+  - `iCorpId` → `iCorpId`
+- **统一租户接口(扩展)** (`ucfbase.ucfbaseItf.IYTenantExt`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 26 个直连字段
+
+### 文本字段 (10个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `cOrderNo` | `cOrderNo` | `orderNo` | 订单号 |
+| `cOutSysKey` | `cOutSysKey` | `outSysKey` | 外部接口唯一标识 |
+| `cRebateNo` | `cRebateNo` | `rebateNo` | 返利单号 |
+| `cRecordStatus` | `cRecordStatus` | `recordStatus` | 状态(使用中，已生效，已作废) |
+| `recordStatusName` | `recordStatusName` | `recordStatusName` | 状态名称 |
+| `cSaleReturnNo` | `cSaleReturnNo` | `saleReturnNo` | 退货单编号 |
+| `cUseWayCode` | `cUseWayCode` | `useWayCode` | 应用方式Code |
+| `cVoucherSourceType` | `cVoucherSourceType` | `voucherSourceType` | 单据来源类型 |
+| `cPaymentFinanceCode` | `cPaymentFinanceCode` | `paymentFinanceCode` | 收款单code |
+| `settlementNo` | `settlementNo` | `settlementNo` | 冲销单号 |
+
+### 引用字段 (6个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iAgentId` | `iAgentId` | `agentId` | 客户id |
+| `iOrderId` | `iOrderId` | `orderId` | 订单id |
+| `iRebateId` | `iRebateId` | `rebateId` | 返利单id |
+| `iSubmiterId` | `iSubmiterId` | `submitUser` | 创建人Id |
+| `saleInvoiceId` | `saleInvoiceId` | `saleInvoiceId` | 销售发票主表id |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 布尔字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `feeTransferStatus` | `feeTransferStatus` | `feeTransferStatus` | 费用转移状态 |
+
+### 长整数 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+| `iSaleReturnId` | `iSaleReturnId` | `saleReturnId` | 退货单id |
+| `iCorpId` | `iCorpId` | `uordercorp` | 租户 |
+| `iPaymentFinanceId` | `iPaymentFinanceId` | `paymentFinanceId` | 收款单id |
+| `settlementId` | `settlementId` | `settlementId` | 冲销单id |
+
+### 数值字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `fOrderRebateMoney` | `fOrderRebateMoney` | `orderRebateMoney` | 返利金额 |
+
+### timestamp (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dCreateDate` | `dCreateDate` | `createDate` | 创建时间 |
+| `pubuts` | `pubuts` | `pubts` | 时间戳 |
+| `freezeDate` | `freezeDate` | `freezeDate` | 授信截止日期 |

@@ -12,134 +12,208 @@ source_type: api_response
 
 # 商品返利 (`voucher.rebate.ProductRebate`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `rebate` | 应用: `BBSMK` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`rebate` | domain：`marketingbill` | 应用：`BBSMK` | 业务对象ID：`66749095-27d5-4a12-8f72-ed77a01bb644`
 
-## 属性（98 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `agentId` | agentID | `iAgentId` | 94b3280a-27a4-485a-b90b-b7bce57c6df2 | `quote` |
-| 2 | `agentRelationId` | agentRelationID | `iAgentRelationId` | Long | `long` |
-| 3 | `auditDate` | auditDate | `auditDate` | Date | `date` |
-| 4 | `auditTime` | auditTime | `dConfirmDate` | Date | `date` |
-| 5 | `auditor` | auditor | `auditor` | String | `text` |
-| 6 | `auditorId` | auditorID | `iConfirmUserId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 7 | `bizId` | bizID | `iBizId` | Long | `long` |
-| 8 | `bizName` | biz名称 | `cBizName` | String | `text` |
-| 9 | `canUsable` | canUsable | `canUsable` | Boolean | `switch` |
-| 10 | `sourceDetailId` | sourceDetailID | `cSourceDetailId` | Long | `long` |
-| 11 | `paymentType` | paymentType | `paymentType` | Short | `short` |
-| 12 | `messageType` | messageType | `messageType` | Short | `short` |
-| 13 | `useRule` | useRule | `useRule` | Short | `short` |
-| 14 | `sourceBillSettlementType` | sourceBillSettlementType | `sourceBillSettlementType` | Integer | `int` |
-| 15 | `finalesponsibleOrgId` | finalesponsibleOrgID | `finalesponsibleOrgId` | 14302233-1394-4a70-94e1-bed51636f312 | `quote` |
-| 16 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 17 | `exchangeStatus` | exchangeStatus | `exchangeStatus` | Short | `short` |
-| 18 | `failedInfo` | failedInfo | `failedInfo` | String | `text` |
-| 19 | `closeDate` | closeDate | `dCloseDate` | Date | `date` |
-| 20 | `closeTime` | closeTime | `dCloseTime` | DateTime | `timestamp` |
-| 21 | `closer` | closer | `cCloser` | String | `text` |
-| 22 | `closerId` | closerID | `iCloserId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 23 | `code` | 编码 | `cRebateNo` | String | `text` |
-| 24 | `costCenterId` | costCenterID | `iCostCenterId` | 872630ba-e8f4-4080-817d-8fc9a6958733 | `quote` |
-| 25 | `createDate` | 创建日期 | `dCreateDate` | Date | `date` |
-| 26 | `createTime` | 创建时间 | `dCreatedTime` | DateTime | `timestamp` |
-| 27 | `creator` | 创建人 | `cCreator` | String | `text` |
-| 28 | `creatorId` | 创建人ID | `iSubmiterId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 29 | `domesticCode` | domestic编码 | `cDomesticCode` | String | `text` |
-| 30 | `domesticName` | domestic名称 | `cDomesticName` | String | `text` |
-| 31 | `domesticPk` | domesticPk | `cDomesticPk` | 02b45339-eb4a-4a31-a8b5-d32f494f4e8e | `quote` |
-| 32 | `exchangeRate` | exchangeRate | `fExchangeRate` | Decimal | `number` |
-| 33 | `expenseItemId` | expenseItemID | `iExpenseItemId` | d78cdbfa-0424-4dc3-a995-5c8624e1a560 | `quote` |
-| 34 | `rebateQuantity` | rebateQuantity | `fRebateQuantity` | Decimal | `number` |
-| 35 | `expenseItemTypeId` | expenseItemTypeID | `iExpenseItemTypeId` | f21b5eab-a129-49f6-ae72-9f9a2f415134 | `quote` |
-| 36 | `hasUsed` | hasUsed | `hasUsed` | Boolean | `switch` |
-| 37 | `iDeleted` | iDeleted | `ideleted` | Short | `short` |
-| 38 | `isPastDue` | 是否PastDue | `isPastDue` | Boolean | `switch` |
-| 39 | `isWfControlled` | 是否WfControlled | `isWfControlled` | Boolean | `switch` |
-| 40 | `isWiteList` | 是否WiteList | `isWiteList` | Boolean | `switch` |
-| 41 | `marketingActiveId` | marketingActiveID | `iMarketingActiveId` | 924ae32c-2a09-4ec0-aff9-5959ec1f8024 | `quote` |
-| 42 | `memo` | 备注 | `cMemo` | String | `text` |
-| 43 | `modifier` | 修改人 | `cModifier` | String | `text` |
-| 44 | `modifierId` | 修改人ID | `iModifierId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 45 | `modifyDate` | 修改日期 | `modify_date` | Date | `date` |
-| 46 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `timestamp` |
-| 47 | `orderNos` | orderNos | `cOrderNos` | String | `text` |
-| 48 | `orderRebateMoney` | orderRebateMoney | `fOrderRebateMoney` | Decimal | `number` |
-| 49 | `originalCode` | original编码 | `cOriginalCode` | String | `text` |
-| 50 | `originalName` | original名称 | `cOriginalName` | String | `text` |
-| 51 | `originalPk` | originalPk | `cOriginalPk` | 02b45339-eb4a-4a31-a8b5-d32f494f4e8e | `quote` |
-| 52 | `outSysKey` | outSysKey | `cOutSysKey` | String | `text` |
-| 53 | `payType` | payType | `payType` | Integer | `int` |
-| 54 | `paymentFinanceCode` | paymentFinance编码 | `cPaymentFinanceCode` | String | `text` |
-| 55 | `paymentFinanceId` | paymentFinanceID | `iPaymentFinanceId` | Long | `long` |
-| 56 | `platformLower` | platformLower | `isPlatformLower` | Boolean | `switch` |
-| 57 | `shareUseRebate` | shareUseRebate | `shareUseRebate` | Boolean | `switch` |
-| 58 | `pubts` | 时间戳 | `pubuts` | DateTime | `timestamp` |
-| 59 | `rebateCode` | rebate编码 | `cRebateCode` | String | `text` |
-| 60 | `shareOrgRebate` | shareOrgRebate | `shareOrgRebate` | Boolean | `switch` |
-| 61 | `rebateDefineCharacter` | rebateDefineCharacter | `rebateDefineCharacter` | 2d75fc13-abb3-4f12-b9af-2e4d644a52e5 | `UserDefine` |
-| 62 | `rebateMoney` | rebateMoney | `fRebateMoney` | Decimal | `number` |
-| 63 | `rebateMoneyDomestic` | rebateMoneyDomestic | `fRebateMoneyDomestic` | Decimal | `number` |
-| 64 | `rebateRecord` | rebateRecord | `rebateRecord` | 13a2d42c-010e-4a6d-b984-153a9c212fad | `quote` |
-| 65 | `rebateSourceId` | rebateSourceID | `iRebateSourceId` | Long | `long` |
-| 66 | `rebateStatus` | rebateStatus | `cRebateStatus` | String | `text` |
-| 67 | `returncount` | returncount | `returncount` | Short | `short` |
-| 68 | `salesOrgId` | salesOrgID | `iSalesOrgId` | 4991976e-11ee-406e-bdbb-0f73f9f89ff2 | `quote` |
-| 69 | `settlementOrgId` | settlementOrgID | `iSettlementOrgId` | 5d4c5590-da40-4b50-80a1-8d04da2f79e0 | `quote` |
-| 70 | `settlementWayErpCode` | settlementWayErp编码 | `settlementWayErpCode` | String | `text` |
-| 71 | `shareSettingId` | shareSettingID | `iShareSettingId` | 6353a3f1-4736-4c35-bc35-64ec2ea8bb7d | `quote` |
-| 72 | `shop` | shop | `iShopID` | Long | `long` |
-| 73 | `sourceNo` | sourceNo | `cSourceNo` | String | `text` |
-| 74 | `sourceType` | sourceType | `iSourceType` | Short | `short` |
-| 75 | `status` | 状态 | `status` | Short | `short` |
-| 76 | `surplusMoney` | surplusMoney | `fSurplusMoney` | Decimal | `number` |
-| 77 | `tplid` | tplid | `tplid` | Long | `long` |
-| 78 | `uordercorp` | uordercorp | `iCorpId` | Long | `long` |
-| 79 | `useType` | useType | `cUseType` | String | `text` |
-| 80 | `useWayCode` | useWay编码 | `cUseWayCode` | String | `text` |
-| 81 | `useWayName` | useWay名称 | `useWayName` | String | `text` |
-| 82 | `usedMoney` | usedMoney | `usedMoney` | Decimal | `number` |
-| 83 | `usmpPayModel` | usmpPayModel | `usmpPayModel` | Short | `short` |
-| 84 | `valid` | valid | `canUsable` | Boolean | `switch` |
-| 85 | `validEndDate` | validEndDate | `dValidEndDate` | Date | `date` |
-| 86 | `validStartDate` | validStartDate | `dValidStartDate` | Date | `date` |
-| 87 | `verifystate` | verifystate | `verifystate` | Short | `short` |
-| 88 | `version` | 版本号 | `version` | Integer | `int` |
-| 89 | `vouchdate` | vouchdate | `vouchdate` | Date | `date` |
-| 90 | `voucherType` | voucherType | `cVoucherType` | String | `text` |
-| 91 | `voucherTypeName` | voucherType名称 | `voucherTypeName` | String | `text` |
-| 92 | `id` | ID | `id` | Long | `long` |
-| 93 | `surplusQuantity` | surplusQuantity | `iSurplusQuantity` | Decimal | `number` |
-| 94 | `WhiteProduct` | WhiteProduct | `` | baaaf685-d004-419f-a5fc-14d78e7e0ab3 | `` |
-| 95 | `department` | department | `department` | a4352e3c-3eda-4539-a7a9-ec00799be118 | `quote` |
-| 96 | `headItem` | headItem | `` | 8f8c2792-a67f-4535-9738-0ef6ef661156 | `` |
-| 97 | `rebateReturnProductRecords` | rebateReturnProductRecords | `` | 18a0fb7c-4997-4818-b148-cd8b3a5ebb2c | `` |
-| 98 | `rebateReturnProducts` | rebateReturnProducts | `` | 631cf218-f93d-48a9-8d02-7c2d4c520538 | `` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 商品返利 |
+| 物理表 | `rebate` |
+| 数据库 schema | `marketingbill` |
+| 所属应用 | `BBSMK` |
+| 直连字段 | 98 个 |
+| 子表 | 4 个 |
+| 关联引用 | 23 个 |
 
-## 关联（23 个）
+## 子表
 
-- `WhiteProduct` -> `voucher.rebate.RebateWhiteProduct` (0..n)
-- `expenseItemId` -> `bd.expenseitem.ExpenseItem` ()
-- `rebateReturnProductRecords` -> `voucher.rebate.RebateReturnProductRecord` (0..n)
-- `agentId` -> `aa.merchant.Merchant` ()
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `creatorId` -> `base.user.User` ()
-- `modifierId` -> `base.user.User` ()
-- `rebateDefineCharacter` -> `voucher.rebate.ProductRebateDefineCharacter` ()
-- `finalesponsibleOrgId` -> `org.func.BaseOrg` ()
-- `headItem` -> `voucher.rebate.ProductRebateDefine` (1)
-- `shareSettingId` -> `voucher.rebate.RebateShareSetting` ()
-- `auditorId` -> `base.user.User` ()
-- `costCenterId` -> `bd.costcenter.CostCenter` ()
-- `closerId` -> `base.user.User` ()
-- `settlementOrgId` -> `org.func.FinanceOrg` ()
-- `domesticPk` -> `bd.currencytenant.CurrencyTenantVO` ()
-- `marketingActiveId` -> `mka.activity.Activity` ()
-- `originalPk` -> `bd.currencytenant.CurrencyTenantVO` ()
-- `rebateReturnProducts` -> `voucher.rebate.RebateReturnProduct` (0..n)
-- `department` -> `bd.adminOrg.AdminOrgVO` ()
-- `expenseItemTypeId` -> `bd.expenseitem.ExpenseItemType` ()
-- `rebateRecord` -> `voucher.rebate.RebateRecord` ()
-- `salesOrgId` -> `org.func.SalesOrg` ()
+| 字段名 | URI | 关系 |
+|--------|-----|------|
+| `WhiteProduct` | `voucher.rebate.RebateWhiteProduct` | composition |
+| `rebateReturnProductRecords` | `voucher.rebate.RebateReturnProductRecord` | composition |
+| `headItem` | `voucher.rebate.ProductRebateDefine` | composition |
+| `rebateReturnProducts` | `voucher.rebate.RebateReturnProduct` | composition |
+
+## 关联引用 (23个)
+
+| 字段名 | 引用类型 |
+|--------|---------|
+| `` | `` |
+| `iExpenseItemId` | `finbd.bd_expenseitemref` |
+| `iAgentId` | `aa_merchantbill` |
+| `ytenant_id` | `` |
+| `iSubmiterId` | `` |
+| `iModifierId` | `` |
+| `rebateDefineCharacter` | `` |
+| `finalesponsibleOrgId` | `` |
+| `iShareSettingId` | `rebate_sharesettingref` |
+| `iConfirmUserId` | `` |
+| `iCostCenterId` | `finbd.bd_costcenterref` |
+| `iCloserId` | `` |
+| `iSettlementOrgId` | `financeOrgref` |
+| `cDomesticPk` | `` |
+| `iMarketingActiveId` | `yycrm.mka_activityref` |
+| `cOriginalPk` | `ucfbasedoc.bd_currencytenantref` |
+| `department` | `` |
+| `iExpenseItemTypeId` | `finbd.bd_expenseitemtyperef` |
+| `rebateRecord` | `` |
+| `iSalesOrgId` | `market_salesorgref` |
+
+## 字段列表（按类型分组）
+
+> 共 98 个直连字段
+
+### 文本字段 (24个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `auditor` | `auditor` | 审批人名称 |
+| `cBizName` | `cBizName` | `bizName` | 供应商名称 |
+| `failedInfo` | `failedInfo` | `failedInfo` | 失败信息 |
+| `cCloser` | `cCloser` | `closer` | 关闭人 |
+| `cRebateNo` | `cRebateNo` | `code` | 返利单号 |
+| `cCreator` | `cCreator` | `creator` | 创建人 |
+| `cDomesticCode` | `cDomesticCode` | `domesticCode` | 本币编码 |
+| `cDomesticName` | `cDomesticName` | `domesticName` | 本币名称 |
+| `cMemo` | `cMemo` | `memo` | 备注 |
+| `cModifier` | `cModifier` | `modifier` | 修改人 |
+| `cOrderNos` | `cOrderNos` | `orderNos` | 返利订单号集合 |
+| `cOriginalCode` | `cOriginalCode` | `originalCode` | 原币编码 |
+| `cOriginalName` | `cOriginalName` | `originalName` | 原币名称 |
+| `cOutSysKey` | `cOutSysKey` | `outSysKey` | 接口唯一创建标识 |
+| `cPaymentFinanceCode` | `cPaymentFinanceCode` | `paymentFinanceCode` | 财务收款单code |
+| `cRebateCode` | `cRebateCode` | `rebateCode` | 返利单类型 |
+| `cRebateStatus` | `cRebateStatus` | `rebateStatus` | 返利状态 |
+| `settlementWayErpCode` | `settlementWayErpCode` | `settlementWayErpCode` | 结算方式编码 |
+| `cSourceNo` | `cSourceNo` | `sourceNo` | 来源单号 |
+| `cUseType` | `cUseType` | `useType` | 应用类型(增加,扣减) |
+| `cUseWayCode` | `cUseWayCode` | `useWayCode` | 兑付方式 |
+| `useWayName` | `useWayName` | `useWayName` | 应用方式名称 |
+| `cVoucherType` | `cVoucherType` | `voucherType` | 单据类型 |
+| `voucherTypeName` | `voucherTypeName` | `voucherTypeName` | 单据类型名称 |
+
+### 引用字段 (18个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iAgentId` | `iAgentId` | `agentId` | 客户名称 |
+| `iConfirmUserId` | `iConfirmUserId` | `auditorId` | 审核人ID |
+| `finalesponsibleOrgId` | `finalesponsibleOrgId` | `finalesponsibleOrgId` | 最终承担组织 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+| `iCloserId` | `iCloserId` | `closerId` | 关闭人Id |
+| `iCostCenterId` | `iCostCenterId` | `costCenterId` | 成本中心 |
+| `iSubmiterId` | `iSubmiterId` | `creatorId` | 创建人ID |
+| `cDomesticPk` | `cDomesticPk` | `domesticPk` | 本币pk |
+| `iExpenseItemId` | `iExpenseItemId` | `expenseItemId` | 费用项目 |
+| `iExpenseItemTypeId` | `iExpenseItemTypeId` | `expenseItemTypeId` | 费用项目类别 |
+| `iMarketingActiveId` | `iMarketingActiveId` | `marketingActiveId` | 营销活动 |
+| `iModifierId` | `iModifierId` | `modifierId` | 修改人id |
+| `cOriginalPk` | `cOriginalPk` | `originalPk` | 币种 |
+| `rebateRecord` | `rebateRecord` | `rebateRecord` | 返利记录 |
+| `iSalesOrgId` | `iSalesOrgId` | `salesOrgId` | 销售组织 |
+| `iSettlementOrgId` | `iSettlementOrgId` | `settlementOrgId` | 开票组织 |
+| `iShareSettingId` | `iShareSettingId` | `shareSettingId` | 账户使用规则 |
+| `department` | `department` | `department` | 部门 |
+
+### 日期字段 (8个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `auditDate` | `auditDate` | `auditDate` | 审核日期 |
+| `dConfirmDate` | `dConfirmDate` | `auditTime` | 审核日期 |
+| `dCloseDate` | `dCloseDate` | `closeDate` | 关闭日期 |
+| `dCreateDate` | `dCreateDate` | `createDate` | 创建日期 |
+| `modify_date` | `modify_date` | `modifyDate` | 修改日期 |
+| `dValidEndDate` | `dValidEndDate` | `validEndDate` | 有效期结束日期 |
+| `dValidStartDate` | `dValidStartDate` | `validStartDate` | 有效期开始日期 |
+| `vouchdate` | `vouchdate` | `vouchdate` | 单据日期 |
+
+### 布尔字段 (9个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `canUsable` | `canUsable` | `canUsable` | 是否可用 |
+| `hasUsed` | `hasUsed` | `hasUsed` | 是否使用 |
+| `isPastDue` | `isPastDue` | `isPastDue` | 是否过期 |
+| `` | `isWfControlled` | `isWfControlled` | 是否审批流控制 |
+| `isWiteList` | `isWiteList` | `isWiteList` | 是否是白名单  ture白名单  false 黑名单 |
+| `isPlatformLower` | `isPlatformLower` | `platformLower` | 是否是平台下发 |
+| `shareUseRebate` | `shareUseRebate` | `shareUseRebate` | 允许下级客户使用 |
+| `shareOrgRebate` | `shareOrgRebate` | `shareOrgRebate` | 允许下级组织使用 |
+| `canUsable` | `canUsable` | `valid` | 是否失效 |
+
+### 整数 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `sourceBillSettlementType` | `sourceBillSettlementType` | `sourceBillSettlementType` | 来源单据结算类型 |
+| `payType` | `payType` | `payType` | 支付方式 |
+| `version` | `version` | `version` | 版本 |
+
+### 短整数 (10个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `paymentType` | `paymentType` | `paymentType` | 收款单类型 |
+| `messageType` | `messageType` | `messageType` | 消息类型 |
+| `useRule` | `useRule` | `useRule` | 是否使用分摊规则 |
+| `exchangeStatus` | `exchangeStatus` | `exchangeStatus` | 交换状态 |
+| `ideleted` | `ideleted` | `iDeleted` | 删除标记 |
+| `` | `returncount` | `returncount` | 退回次数 |
+| `iSourceType` | `iSourceType` | `sourceType` | 返利来源类型 |
+| `` | `status` | `status` | 单据状态 |
+| `usmpPayModel` | `usmpPayModel` | `usmpPayModel` | 上游单据类型 |
+| `` | `verifystate` | `verifystate` | 审批状态 |
+
+### 长整数 (9个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iAgentRelationId` | `iAgentRelationId` | `agentRelationId` | 客户交易关系id |
+| `iBizId` | `iBizId` | `bizId` | 供应商id |
+| `cSourceDetailId` | `cSourceDetailId` | `sourceDetailId` | 来源单ID |
+| `iPaymentFinanceId` | `iPaymentFinanceId` | `paymentFinanceId` | 财务收款单id |
+| `iRebateSourceId` | `iRebateSourceId` | `rebateSourceId` | 返利来源id |
+| `iShopID` | `iShopID` | `shop` | 商家 |
+| `` | `tplid` | `tplid` | 模板id |
+| `iCorpId` | `iCorpId` | `uordercorp` | 租户 |
+| `id` | `id` | `id` | 商品返利商品行Id |
+
+### 数值字段 (8个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `fExchangeRate` | `fExchangeRate` | `exchangeRate` | 汇率 |
+| `fRebateQuantity` | `fRebateQuantity` | `rebateQuantity` | 返货数量 |
+| `fOrderRebateMoney` | `fOrderRebateMoney` | `orderRebateMoney` | 此次使用金额 |
+| `fRebateMoney` | `fRebateMoney` | `rebateMoney` | 返货金额 |
+| `fRebateMoneyDomestic` | `fRebateMoneyDomestic` | `rebateMoneyDomestic` | 本币金额 |
+| `fSurplusMoney` | `fSurplusMoney` | `surplusMoney` | 可用金额 |
+| `usedMoney` | `usedMoney` | `usedMoney` | 返利使用金额 |
+| `iSurplusQuantity` | `iSurplusQuantity` | `surplusQuantity` | 可用数量 |
+
+### timestamp (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dCloseTime` | `dCloseTime` | `closeTime` | 关闭时间 |
+| `dCreatedTime` | `dCreatedTime` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+| `pubuts` | `pubuts` | `pubts` | 时间戳 |
+
+### UserDefine (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `rebateDefineCharacter` | `rebateDefineCharacter` | `rebateDefineCharacter` | 自定义项特征属性组 |
+
+### other (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `` | `WhiteProduct` | 例外商品 |
+| `` | `` | `headItem` | 营销费用自由自定义项 |
+| `` | `` | `rebateReturnProductRecords` | 返利回退商品记录 |
+| `` | `` | `rebateReturnProducts` | 返利回退商品 |

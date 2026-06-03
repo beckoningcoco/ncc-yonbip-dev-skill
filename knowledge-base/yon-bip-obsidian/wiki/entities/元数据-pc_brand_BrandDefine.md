@@ -12,49 +12,79 @@ source_type: api_response
 
 # 品牌属性(自定义项)表 (`pc.brand.BrandDefine`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `branddefine` | 应用: `GZTBDM` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`branddefine` | domain：`productcenter` | 应用：`GZTBDM` | 业务对象ID：``
 
-## 属性（33 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `brandDefine1` | brandDefine1 | `define1` | String | `text` |
-| 2 | `brandDefine10` | brandDefine10 | `define10` | String | `text` |
-| 3 | `brandDefine11` | brandDefine11 | `define11` | String | `text` |
-| 4 | `brandDefine12` | brandDefine12 | `define12` | String | `text` |
-| 5 | `brandDefine13` | brandDefine13 | `define13` | String | `text` |
-| 6 | `brandDefine14` | brandDefine14 | `define14` | String | `text` |
-| 7 | `brandDefine15` | brandDefine15 | `define15` | String | `text` |
-| 8 | `brandDefine16` | brandDefine16 | `define16` | String | `text` |
-| 9 | `brandDefine17` | brandDefine17 | `define17` | String | `text` |
-| 10 | `brandDefine18` | brandDefine18 | `define18` | String | `text` |
-| 11 | `brandDefine19` | brandDefine19 | `define19` | String | `text` |
-| 12 | `brandDefine2` | brandDefine2 | `define2` | String | `text` |
-| 13 | `brandDefine20` | brandDefine20 | `define20` | String | `text` |
-| 14 | `brandDefine21` | brandDefine21 | `define21` | String | `text` |
-| 15 | `brandDefine22` | brandDefine22 | `define22` | String | `text` |
-| 16 | `brandDefine23` | brandDefine23 | `define23` | String | `text` |
-| 17 | `brandDefine24` | brandDefine24 | `define24` | String | `text` |
-| 18 | `brandDefine25` | brandDefine25 | `define25` | String | `text` |
-| 19 | `brandDefine26` | brandDefine26 | `define26` | String | `text` |
-| 20 | `brandDefine27` | brandDefine27 | `define27` | String | `text` |
-| 21 | `brandDefine28` | brandDefine28 | `define28` | String | `text` |
-| 22 | `brandDefine29` | brandDefine29 | `define29` | String | `text` |
-| 23 | `brandDefine3` | brandDefine3 | `define3` | String | `text` |
-| 24 | `brandDefine30` | brandDefine30 | `define30` | String | `text` |
-| 25 | `brandDefine4` | brandDefine4 | `define4` | String | `text` |
-| 26 | `brandDefine5` | brandDefine5 | `define5` | String | `text` |
-| 27 | `brandDefine6` | brandDefine6 | `define6` | String | `text` |
-| 28 | `brandDefine7` | brandDefine7 | `define7` | String | `text` |
-| 29 | `brandDefine8` | brandDefine8 | `define8` | String | `text` |
-| 30 | `brandDefine9` | brandDefine9 | `define9` | String | `text` |
-| 31 | `id` | ID | `id` | 75116b40-efe4-455e-b62d-d56ac4811eb1 | `quote` |
-| 32 | `tenant` | tenant | `tenant_id` | c213cd56-d5de-421f-bae7-d77455b557cd | `quote` |
-| 33 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 品牌属性(自定义项)表 |
+| 物理表 | `branddefine` |
+| 数据库 schema | `productcenter` |
+| 所属应用 | `GZTBDM` |
+| 直连字段 | 33 个 |
+| 子表 | 0 个 |
+| 关联引用 | 3 个 |
 
-## 关联（3 个）
+## 关联引用 (3个)
 
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `id` -> `pc.brand.Brand` (1)
-- `tenant` -> `base.tenant.Tenant` ()
+| 字段名 | 引用类型 |
+|--------|---------|
+| `ytenant_id` | `` |
+| `id` | `` |
+| `tenant_id` | `` |
+
+## 继承接口 (2个, 2字段)
+
+- **租户相关** (`base.itf.ITenant`)
+  - `tenant_id` → `tenant_id`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 33 个直连字段
+
+### 文本字段 (30个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `define1` | `define1` | `brandDefine1` | 品牌扩展属性1 |
+| `define10` | `define10` | `brandDefine10` | 品牌扩展属性10 |
+| `define11` | `define11` | `brandDefine11` | 品牌扩展属性11 |
+| `define12` | `define12` | `brandDefine12` | 品牌扩展属性12 |
+| `define13` | `define13` | `brandDefine13` | 品牌扩展属性13 |
+| `define14` | `define14` | `brandDefine14` | 品牌扩展属性14 |
+| `define15` | `define15` | `brandDefine15` | 品牌扩展属性15 |
+| `define16` | `define16` | `brandDefine16` | 品牌扩展属性16 |
+| `define17` | `define17` | `brandDefine17` | 品牌扩展属性17 |
+| `define18` | `define18` | `brandDefine18` | 品牌扩展属性18 |
+| `define19` | `define19` | `brandDefine19` | 品牌扩展属性19 |
+| `define2` | `define2` | `brandDefine2` | 品牌扩展属性2 |
+| `define20` | `define20` | `brandDefine20` | 品牌扩展属性20 |
+| `define21` | `define21` | `brandDefine21` | 品牌扩展属性21 |
+| `define22` | `define22` | `brandDefine22` | 品牌扩展属性22 |
+| `define23` | `define23` | `brandDefine23` | 品牌扩展属性23 |
+| `define24` | `define24` | `brandDefine24` | 品牌扩展属性24 |
+| `define25` | `define25` | `brandDefine25` | 品牌扩展属性25 |
+| `define26` | `define26` | `brandDefine26` | 品牌扩展属性26 |
+| `define27` | `define27` | `brandDefine27` | 品牌扩展属性27 |
+| `define28` | `define28` | `brandDefine28` | 品牌扩展属性28 |
+| `define29` | `define29` | `brandDefine29` | 品牌扩展属性29 |
+| `define3` | `define3` | `brandDefine3` | 品牌扩展属性3 |
+| `define30` | `define30` | `brandDefine30` | 品牌扩展属性30 |
+| `define4` | `define4` | `brandDefine4` | 品牌扩展属性4 |
+| `define5` | `define5` | `brandDefine5` | 品牌扩展属性5 |
+| `define6` | `define6` | `brandDefine6` | 品牌扩展属性6 |
+| `define7` | `define7` | `brandDefine7` | 品牌扩展属性7 |
+| `define8` | `define8` | `brandDefine8` | 品牌扩展属性8 |
+| `define9` | `define9` | `brandDefine9` | 品牌扩展属性9 |
+
+### 引用字段 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | 品牌ID |
+| `tenant_id` | `tenant_id` | `tenant` | 租户 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |

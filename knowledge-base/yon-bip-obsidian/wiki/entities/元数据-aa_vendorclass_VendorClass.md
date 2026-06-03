@@ -12,58 +12,153 @@ source_type: api_response
 
 # 供应商分类 (`aa.vendorclass.VendorClass`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `aa_vendorclass` | 应用: `DPMSPL` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`aa_vendorclass` | domain：`yssupplier` | 应用：`DPMSPL` | 业务对象ID：`c10e22c0-aa28-411d-92cc-1e069b24423f`
 
-## 属性（35 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `id` | ID | `id` | Long | `long` |
-| 2 | `code` | 编码 | `code` | String | `text` |
-| 3 | `name` | 名称 | `name` | String | `multiLanguage` |
-| 4 | `vcCrowd` | vcCrowd | `vcCrowd` | cab397ab-358b-440d-8dc7-2e7150077fb1 | `quote` |
-| 5 | `socialMctype` | socialMctype | `social_mctype` | Integer | `int` |
-| 6 | `socialSrcid` | socialSrcid | `social_srcid` | String | `text` |
-| 7 | `socialTenantid` | socialTenantid | `social_tenantid` | String | `text` |
-| 8 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 9 | `level` | 层级 | `iDepth` | Integer | `int` |
-| 10 | `parent` | parent | `iParentId` | 59ec0b4d-4e38-483d-9bdd-e7aa44176ce8 | `quote` |
-| 11 | `path` | path | `cPath` | String | `text` |
-| 12 | `isEnd` | 是否End | `isEnd` | Boolean | `switch` |
-| 13 | `order` | order | `iOrder` | Integer | `int` |
-| 14 | `erpCode` | erp编码 | `cErpCode` | String | `text` |
-| 15 | `comment` | comment | `cComment` | String | `multiLanguage` |
-| 16 | `isEnabled` | 启用 | `isEnabled` | Boolean | `switch` |
-| 17 | `classType` | classType | `iCreatorType` | VendorClassType | `` |
-| 18 | `createDate` | 创建日期 | `create_date` | Date | `date` |
-| 19 | `createTime` | 创建时间 | `create_time` | DateTime | `timestamp` |
-| 20 | `creator` | 创建人 | `creator` | String | `text` |
-| 21 | `creatorId` | 创建人ID | `creatorId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 22 | `creatorName` | creator名称 | `cCreatorName` | String | `text` |
-| 23 | `iDeleted` | iDeleted | `iDeleted` | Integer | `int` |
-| 24 | `modifier` | 修改人 | `modifier` | String | `text` |
-| 25 | `modifierId` | 修改人ID | `modifierId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 26 | `modifyDate` | 修改日期 | `modify_date` | Date | `date` |
-| 27 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `timestamp` |
-| 28 | `org` | org | `orgId` | 8aaf4bce-2eb3-443c-bce1-0fb94fec3c0c | `quote` |
-| 29 | `outSysKey` | outSysKey | `cOutSysKey` | String | `text` |
-| 30 | `sort` | 排序 | `sort_num` | Integer | `int` |
-| 31 | `tenant` | tenant | `tenant_id` | c213cd56-d5de-421f-bae7-d77455b557cd | `quote` |
-| 32 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 33 | `vendorClassCharacterDefine` | vendorClassCharacterDefine | `vendorClassCharacterDefine` | 46a147ee-f4fc-463d-8b89-9015e98b32fc | `UserDefine` |
-| 34 | `defines` | defines | `` | c98cec35-ac4e-4d0e-82fd-bbcc739c8464 | `` |
-| 35 | `vendorClassOrgs` | vendorClassOrgs | `` | 3a87d4bf-5e1e-48b8-8397-ccfbda3020c3 | `` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 供应商分类 |
+| 物理表 | `aa_vendorclass` |
+| 数据库 schema | `yssupplier` |
+| 所属应用 | `DPMSPL` |
+| 直连字段 | 35 个 |
+| 子表 | 2 个 |
+| 关联引用 | 10 个 |
 
-## 关联（10 个）
+## 子表
 
-- `parent` -> `aa.vendorclass.VendorClass` ()
-- `vendorClassOrgs` -> `aa.vendorclass.VendorClassOrg` (0..n)
-- `vendorClassCharacterDefine` -> `aa.vendorclass.VendorClassCharacterDefine` ()
-- `vcCrowd` -> `aa.vendorclass.VcCrowd` ()
-- `org` -> `bd.adminOrg.BaseOrgVO` ()
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `creatorId` -> `base.user.User` ()
-- `modifierId` -> `base.user.User` ()
-- `tenant` -> `base.tenant.Tenant` ()
-- `defines` -> `aa.vendorclass.VendorClassDefine` (1)
+| 字段名 | URI | 关系 |
+|--------|-----|------|
+| `vendorClassOrgs` | `aa.vendorclass.VendorClassOrg` | composition |
+| `defines` | `aa.vendorclass.VendorClassDefine` | composition |
+
+## 关联引用 (10个)
+
+| 字段名 | 引用类型 |
+|--------|---------|
+| `iParentId` | `aa_vendorclassificationref` |
+| `` | `` |
+| `vendorClassCharacterDefine` | `` |
+| `vcCrowd` | `` |
+| `orgId` | `yssupplier.aa_adminorgref` |
+| `ytenant_id` | `` |
+| `tenant_id` | `` |
+
+## 继承接口 (6个, 19字段)
+
+- **树型结构** (`base.itf.ITree`)
+  - `` → ``
+  - `level` → `level`
+  - `parent_id` → `parent_id`
+  - `path` → `path`
+  - `sort_num` → `sort_num`
+- **审计信息** (`base.itf.IAuditInfo`)
+  - `create_date` → `create_date`
+  - `create_time` → `create_time`
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `modify_date` → `modify_date`
+  - `modify_time` → `modify_time`
+- **租户相关** (`base.itf.ITenant`)
+  - `tenant_id` → `tenant_id`
+- **社会化企业群档案** (`bd.social.ISocialMcType`)
+  - `social_mctype` → `social_mctype`
+  - `social_srcid` → `social_srcid`
+  - `social_tenantid` → `social_tenantid`
+- **自动编号** (`voucher.base.IAutoCode`)
+  - `` → ``
+- **统一租户接口(扩展)** (`ucfbase.ucfbaseItf.IYTenantExt`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 35 个直连字段
+
+### 文本字段 (9个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `code` | `code` | `code` | 分类编码 |
+| `social_srcid` | `social_srcid` | `socialSrcid` | 社会化来源id |
+| `social_tenantid` | `social_tenantid` | `socialTenantid` | 社会化来源租户 |
+| `cPath` | `cPath` | `path` | 路径 |
+| `cErpCode` | `cErpCode` | `erpCode` | 外部编码 |
+| `` | `creator` | `creator` | 创建人名称 |
+| `cCreatorName` | `cCreatorName` | `creatorName` | 创建者名称 |
+| `` | `modifier` | `modifier` | 修改人名称 |
+| `cOutSysKey` | `cOutSysKey` | `outSysKey` | 数据来源主键 |
+
+### 引用字段 (7个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `vcCrowd` | `vcCrowd` | `vcCrowd` | 群 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+| `iParentId` | `iParentId` | `parent` | 上级分类主键 |
+| `` | `creatorId` | `creatorId` | 创建人ID |
+| `` | `modifierId` | `modifierId` | 修改人 |
+| `orgId` | `orgId` | `org` | 创建组织主键 |
+| `tenant_id` | `tenant_id` | `tenant` | 租户 |
+
+### 日期字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_date` | `create_date` | `createDate` | 创建日期 |
+| `modify_date` | `modify_date` | `modifyDate` | 修改日期 |
+
+### 布尔字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `isEnd` | `isEnd` | `isEnd` | 是否末级 |
+| `isEnabled` | `isEnabled` | `isEnabled` | 是否启用 |
+
+### 整数 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `social_mctype` | `social_mctype` | `socialMctype` | 社会化管控类型 |
+| `iDepth` | `iDepth` | `level` | 层级 |
+| `iOrder` | `iOrder` | `order` | 排序号 |
+| `iDeleted` | `iDeleted` | `iDeleted` | 状态 |
+| `sort_num` | `sort_num` | `sort` | 排序号 |
+
+### 长整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | 分类主键 |
+
+### multiLanguage (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `name` | `name` | `name` | 分类名称 |
+| `cComment` | `cComment` | `comment` | 备注 |
+
+### other (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iCreatorType` | `iCreatorType` | `classType` | 创建者类型 |
+| `` | `` | `defines` | 项目(自定义项)表1 |
+| `` | `` | `vendorClassOrgs` | 供应商分类组织分配子表-用于导入 |
+
+### timestamp (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+
+### UserDefine (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `vendorClassCharacterDefine` | `vendorClassCharacterDefine` | `vendorClassCharacterDefine` | 供应商分类自定义项 |

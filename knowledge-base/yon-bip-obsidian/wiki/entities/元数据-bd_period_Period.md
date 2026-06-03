@@ -12,44 +12,97 @@ source_type: api_response
 
 # 会计期间 (`bd.period.Period`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `bd_period` | 应用: `FP` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`bd_period` | domain：`finbd` | 应用：`FP` | 业务对象ID：`de0a06e3-d12a-4159-a2c1-4093ddad2eff`
 
-## 属性（24 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `code` | 编码 | `code` | String | `text` |
-| 2 | `name` | 名称 | `name` | String | `text` |
-| 3 | `objId` | objID | `obj_id` | String | `text` |
-| 4 | `begindate` | begindate | `begindate` | Date | `date` |
-| 5 | `accperiodyear2` | accperiodyear2 | `accperiodyear2` | String | `text` |
-| 6 | `periodyear` | periodyear | `periodyear` | c1fb756f-95cc-4faf-b1bf-7cea0aa99973 | `quote` |
-| 7 | `periodtree` | periodtree | `periodtree` | d84acede-7690-4b3b-ac33-e64e4f24e7cf | `quote` |
-| 8 | `localcode` | localcode | `localcode` | String | `text` |
-| 9 | `description` | description | `description` | String | `text` |
-| 10 | `codedate` | codedate | `codedate` | String | `text` |
-| 11 | `enddate` | enddate | `enddate` | Date | `date` |
-| 12 | `accperiodscheme` | accperiodscheme | `accperiodscheme` | e7bb3d2b-b288-4696-b5f0-a9b0626cded8 | `quote` |
-| 13 | `createDate` | 创建日期 | `create_date` | Date | `date` |
-| 14 | `createTime` | 创建时间 | `create_time` | DateTime | `timestamp` |
-| 15 | `creator` | 创建人 | `creator` | String | `text` |
-| 16 | `creatorId` | 创建人ID | `creatorId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 17 | `id` | ID | `id` | Long | `long` |
-| 18 | `modifier` | 修改人 | `modifier` | String | `text` |
-| 19 | `modifierId` | 修改人ID | `modifierId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 20 | `modifyDate` | 修改日期 | `modify_date` | Date | `date` |
-| 21 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `timestamp` |
-| 22 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 23 | `tenant` | tenant | `tenant_id` | c213cd56-d5de-421f-bae7-d77455b557cd | `quote` |
-| 24 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 会计期间 |
+| 物理表 | `bd_period` |
+| 数据库 schema | `finbd` |
+| 所属应用 | `FP` |
+| 直连字段 | 24 个 |
+| 子表 | 0 个 |
+| 关联引用 | 7 个 |
 
-## 关联（7 个）
+## 关联引用 (7个)
 
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `periodyear` -> `bd.period.PeriodYear` (0..n)
-- `accperiodscheme` -> `bd.period.AccPeriodScheme` ()
-- `periodtree` -> `bd.period.PeriodTree` ()
-- `creatorId` -> `base.user.User` ()
-- `modifierId` -> `base.user.User` ()
-- `tenant` -> `base.tenant.Tenant` ()
+| 字段名 | 引用类型 |
+|--------|---------|
+| `ytenant_id` | `` |
+| `periodyear` | `` |
+| `accperiodscheme` | `` |
+| `periodtree` | `` |
+| `` | `` |
+| `tenant_id` | `` |
+
+## 继承接口 (3个, 10字段)
+
+- **租户相关** (`base.itf.ITenant`)
+  - `tenant_id` → `tenant_id`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+- **审计信息** (`base.itf.IAuditInfo`)
+  - `create_date` → `create_date`
+  - `create_time` → `create_time`
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `modify_date` → `modify_date`
+  - `modify_time` → `modify_time`
+
+## 字段列表（按类型分组）
+
+> 共 24 个直连字段
+
+### 文本字段 (9个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `code` | `code` | `code` | 编码 |
+| `name` | `name` | `name` | 名称 |
+| `obj_id` | `obj_id` | `objId` | 友企连id |
+| `accperiodyear2` | `accperiodyear2` | `accperiodyear2` | 期间年 |
+| `localcode` | `localcode` | `localcode` | 本地会计期间名 |
+| `description` | `description` | `description` | 描述 |
+| `codedate` | `codedate` | `codedate` | 会计期间名称 |
+| `` | `creator` | `creator` | 创建人名称 |
+| `` | `modifier` | `modifier` | 修改人名称 |
+
+### 引用字段 (7个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `periodyear` | `periodyear` | `periodyear` | 期间年 |
+| `periodtree` | `periodtree` | `periodtree` | 会计期间树 |
+| `accperiodscheme` | `accperiodscheme` | `accperiodscheme` | 会计日历 |
+| `` | `creatorId` | `creatorId` | 创建人 |
+| `` | `modifierId` | `modifierId` | 修改人 |
+| `tenant_id` | `tenant_id` | `tenant` | 租户 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 日期字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `begindate` | `begindate` | `begindate` | 开始时间 |
+| `enddate` | `enddate` | `enddate` | 结束时间 |
+| `create_date` | `create_date` | `createDate` | 创建日期 |
+| `modify_date` | `modify_date` | `modifyDate` | 修改日期 |
+
+### 长整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+
+### timestamp (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |

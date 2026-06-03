@@ -12,55 +12,113 @@ source_type: api_response
 
 # (停用)物料SKU详情(管理组织) (`pc.product.ProductSKUExtend`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `productskudetailnew` | 应用: `GZTBDM` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`productskudetailnew` | domain：`productcenter` | 应用：`GZTBDM` | 业务对象ID：``
 
-## 属性（37 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `id` | ID | `id` | Long | `long` |
-| 2 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 3 | `tenant` | tenant | `tenant_id` | Long | `long` |
-| 4 | `productId` | productID | `productId` | 89f3b06e-23df-4403-b4a7-19f99eeeae72 | `quote` |
-| 5 | `highestStock` | highestStock | `highestStock` | Decimal | `number` |
-| 6 | `lowestStock` | lowestStock | `lowestStock` | Decimal | `number` |
-| 7 | `productApplyRangeId` | productApplyRangeID | `productApplyRangeId` | ed1f55f2-a3f7-4617-8bd2-7f2f404843ab | `quote` |
-| 8 | `skuId` | skuID | `skuId` | 3e9ddc6d-edd0-4508-afcc-e4a20535f2f9 | `quote` |
-| 9 | `shortName` | short名称 | `shortName` | String | `text` |
-| 10 | `mnemonicCode` | mnemonic编码 | `mnemonicCode` | String | `text` |
-| 11 | `barCode` | bar编码 | `cBarCode` | String | `text` |
-| 12 | `fNoTaxCostPrice` | fNoTaxCostPrice | `fNoTaxCostPrice` | Decimal | `number` |
-| 13 | `fPrimeCosts` | fPrimeCosts | `fPrimeCosts` | Decimal | `number` |
-| 14 | `iMinOrderQuantity` | iMinOrderQuantity | `iMinOrderQuantity` | Decimal | `number` |
-| 15 | `iDoubleSale` | iDoubleSale | `iDoubleSale` | Decimal | `number` |
-| 16 | `batchDeliveryDays` | batchDeliveryDays | `batchDeliveryDays` | Integer | `int` |
-| 17 | `batchPrice` | batchPrice | `batchPrice` | Decimal | `number` |
-| 18 | `markPrice` | markPrice | `fMarkPrice` | Decimal | `number` |
-| 19 | `salePrice` | salePrice | `fSalePrice` | Decimal | `number` |
-| 20 | `fLowestMarkPrice` | fLowestMarkPrice | `fLowestMarkPrice` | Decimal | `number` |
-| 21 | `fMarketPrice` | fMarketPrice | `fMarketPrice` | Decimal | `number` |
-| 22 | `fSettleAccountsRate` | fSettleAccountsRate | `fSettleAccountsRate` | Decimal | `number` |
-| 23 | `salePoints` | salePoints | `salePoints` | Integer | `int` |
-| 24 | `saled` | saled | `iSaled` | Boolean | `switch` |
-| 25 | `inventoryCount` | inventoryCount | `lInventoryCount` | Decimal | `number` |
-| 26 | `safetyStock` | safetyStock | `safetyStock` | Decimal | `number` |
-| 27 | `iOrder` | iOrder | `iOrder` | Integer | `int` |
-| 28 | `ustatus` | ustatus | `iUStatus` | Boolean | `switch` |
-| 29 | `ustatus_b` | ustatus_b | `iUStatus_b` | Boolean | `switch` |
-| 30 | `status` | 状态 | `iStatus` | Boolean | `switch` |
-| 31 | `status_b` | status_b | `iStatus_b` | Boolean | `switch` |
-| 32 | `stopstatus` | stopstatus | `stopstatus` | Boolean | `switch` |
-| 33 | `stoptime` | stoptime | `stop_time` | DateTime | `timestamp` |
-| 34 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 35 | `batchPriceUnit` | batchPriceUnit | `batchPriceUnitId` | 9ea02a0b-3a48-4051-bcbe-59c7bcc7a25b | `quote` |
-| 36 | `batchPriceUnitRate` | batchPriceUnitRate | `batchPriceUnitRate` | Decimal | `number` |
-| 37 | `isCreator` | 是否Creator | `isCreator` | Boolean | `switch` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | (停用)物料SKU详情(管理组织) |
+| 物理表 | `productskudetailnew` |
+| 数据库 schema | `productcenter` |
+| 所属应用 | `GZTBDM` |
+| 直连字段 | 37 个 |
+| 子表 | 0 个 |
+| 关联引用 | 5 个 |
 
-## 关联（5 个）
+## 关联引用 (5个)
 
-- `batchPriceUnit` -> `pc.unit.Unit` ()
-- `productApplyRangeId` -> `pc.product.ProductApplyRange` ()
-- `productId` -> `pc.product.Product` ()
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `skuId` -> `pc.product.ProductSKU` (1)
+| 字段名 | 引用类型 |
+|--------|---------|
+| `batchPriceUnitId` | `` |
+| `productApplyRangeId` | `` |
+| `productId` | `` |
+| `ytenant_id` | `` |
+| `skuId` | `` |
+
+## 继承接口 (3个, 4字段)
+
+- **停用信息** (`base.itf.IStopping`)
+  - `stopstatus` → `stopstatus`
+  - `stop_time` → `stop_time`
+- **租户相关** (`coredoc.pub.TenantObselete`)
+  - `tenant_id` → `tenant_id`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 37 个直连字段
+
+### 文本字段 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `shortName` | `shortName` | `shortName` | SKU简称 |
+| `mnemonicCode` | `mnemonicCode` | `mnemonicCode` | SKU助记码 |
+| `cBarCode` | `cBarCode` | `barCode` | SKU条形码 |
+
+### 引用字段 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户ID |
+| `productId` | `productId` | `productId` | 所属物料 |
+| `productApplyRangeId` | `productApplyRangeId` | `productApplyRangeId` | 物料适用范围ID |
+| `skuId` | `skuId` | `skuId` | SKUID |
+| `batchPriceUnitId` | `batchPriceUnitId` | `batchPriceUnit` | 批发计价单位 |
+
+### 布尔字段 (7个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iSaled` | `iSaled` | `saled` | 已售标记 |
+| `iUStatus` | `iUStatus` | `ustatus` | U订货上下架状态 |
+| `iUStatus_b` | `iUStatus_b` | `ustatus_b` | U订货上下架状态_备用 |
+| `iStatus` | `iStatus` | `status` | 商城上下架状态 |
+| `iStatus_b` | `iStatus_b` | `status_b` | 商城上下架状态_备用 |
+| `stopstatus` | `stopstatus` | `stopstatus` | 停用状态 |
+| `isCreator` | `isCreator` | `isCreator` | 是否创建者 |
+
+### 整数 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `batchDeliveryDays` | `batchDeliveryDays` | `batchDeliveryDays` | 批发-交货周期(天) |
+| `salePoints` | `salePoints` | `salePoints` | 销售积分 |
+| `iOrder` | `iOrder` | `iOrder` | 排序号 |
+
+### 长整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+| `tenant_id` | `tenant_id` | `tenant` | 租户ID(旧) |
+
+### 数值字段 (15个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `highestStock` | `highestStock` | `highestStock` | 最高库存 |
+| `lowestStock` | `lowestStock` | `lowestStock` | 最低库存 |
+| `fNoTaxCostPrice` | `fNoTaxCostPrice` | `fNoTaxCostPrice` | 参考成本 |
+| `fPrimeCosts` | `fPrimeCosts` | `fPrimeCosts` | 采购参考价 |
+| `iMinOrderQuantity` | `iMinOrderQuantity` | `iMinOrderQuantity` | 批发-起订量 |
+| `iDoubleSale` | `iDoubleSale` | `iDoubleSale` | 销售倍量 |
+| `batchPrice` | `batchPrice` | `batchPrice` | 批发价 |
+| `fMarkPrice` | `fMarkPrice` | `markPrice` | 建议零售价 |
+| `fSalePrice` | `fSalePrice` | `salePrice` | 线上零售价 |
+| `fLowestMarkPrice` | `fLowestMarkPrice` | `fLowestMarkPrice` | 最低零售价 |
+| `fMarketPrice` | `fMarketPrice` | `fMarketPrice` | 市场价 |
+| `fSettleAccountsRate` | `fSettleAccountsRate` | `fSettleAccountsRate` | 结算费率 |
+| `lInventoryCount` | `lInventoryCount` | `inventoryCount` | 线上库存量 |
+| `safetyStock` | `safetyStock` | `safetyStock` | 安全库存 |
+| `batchPriceUnitRate` | `batchPriceUnitRate` | `batchPriceUnitRate` | 批发计价单位换算率 |
+
+### timestamp (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `stop_time` | `stop_time` | `stoptime` | 停用时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |

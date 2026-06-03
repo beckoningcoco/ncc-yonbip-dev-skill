@@ -12,25 +12,68 @@ source_type: api_response
 
 # 营业执照 (`aa.store.BusinessLicense`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `mp_businesslicense` | 应用: `Marketingpublic` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`mp_businesslicense` | domain：`yxybase` | 应用：`Marketingpublic` | 业务对象ID：``
 
-## 属性（10 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `url` | url | `cUrl` | String | `text` |
-| 2 | `desc` | desc | `cDesc` | String | `text` |
-| 3 | `store` | store | `iStoreID` | 16e4e14c-ab05-4ee5-bbb8-c67351c9a8b3 | `quote` |
-| 4 | `sort` | 排序 | `iSort` | Integer | `int` |
-| 5 | `type` | type | `cType` | String | `text` |
-| 6 | `size` | size | `cSize` | String | `text` |
-| 7 | `id` | ID | `id` | Long | `long` |
-| 8 | `name` | 名称 | `cName` | String | `text` |
-| 9 | `pubts` | 时间戳 | `ts` | DateTime | `timestamp` |
-| 10 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 营业执照 |
+| 物理表 | `mp_businesslicense` |
+| 数据库 schema | `yxybase` |
+| 所属应用 | `Marketingpublic` |
+| 直连字段 | 10 个 |
+| 子表 | 0 个 |
+| 关联引用 | 2 个 |
 
-## 关联（2 个）
+## 关联引用 (2个)
 
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `store` -> `aa.store.Store` (0..n)
+| 字段名 | 引用类型 |
+|--------|---------|
+| `ytenant_id` | `` |
+| `iStoreID` | `` |
+
+## 继承接口 (1个, 1字段)
+
+- **统一租户接口(扩展)** (`ucfbase.ucfbaseItf.IYTenantExt`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 10 个直连字段
+
+### 文本字段 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `cUrl` | `cUrl` | `url` | 附件路径 |
+| `cDesc` | `cDesc` | `desc` | 附件说明 |
+| `cType` | `cType` | `type` | 附件类型 |
+| `cSize` | `cSize` | `size` | 附件大小 |
+| `cName` | `cName` | `name` | 附件名称 |
+
+### 引用字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iStoreID` | `iStoreID` | `store` | 所属门店 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iSort` | `iSort` | `sort` | 顺序 |
+
+### 长整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | id |
+
+### timestamp (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `ts` | `ts` | `pubts` | 时间戳 |

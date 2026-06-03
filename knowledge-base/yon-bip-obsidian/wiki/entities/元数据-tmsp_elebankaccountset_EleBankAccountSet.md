@@ -9,43 +9,104 @@ last_verified: 2026-06-03
 status: verified
 source_type: api_response
 ---
+
 # 账户业务范围设置 (`tmsp.elebankaccountset.EleBankAccountSet`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBip），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `tmsp_elebankaccountset` | 应用: `TMSP`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`tmsp_elebankaccountset` | domain：`yonbip-fi-ctmtmsp` | 应用：`TMSP` | 业务对象ID：`86ccfb06-3bb2-427b-8fda-94d760211eaa`
 
-## 属性（23 个）
+## 基本信息
 
-| # | 字段 | 显示名 | 列 | 类型 | biztype |
-|---|------|--------|-----|------|---------|
-| 1 | `accentity` | accentity | `accentity` | 60bf293e-5593-454b-be50-5a5fa016e4a6 | `quote` |
-| 2 | `bankInfo` | bankInfo | `bankInfo` | String | `text` |
-| 3 | `contactName` | contact名称 | `contact_name` | String | `text` |
-| 4 | `contactPhone` | contactPhone | `contact_phone` | String | `text` |
-| 5 | `creditCode` | credit编码 | `credit_code` | String | `text` |
-| 6 | `customNo` | customNo | `customNo` | String | `text` |
-| 7 | `customNum` | customNum | `customNum` | String | `text` |
-| 8 | `customerName` | customer名称 | `customer_name` | String | `text` |
-| 9 | `enterpriseBankAccount` | enterpriseBankAccount | `enterprisebankaccount` | fbc20885-a507-45bd-a986-74d3fc28d38a | `quote` |
-| 10 | `logout` | logout | `logout` | Boolean | `switch` |
-| 11 | `openBill` | openBill | `openBill` | Boolean | `switch` |
-| 12 | `openFlag` | openFlag | `openflag` | Boolean | `switch` |
-| 13 | `openTicketService` | openTicketService | `openTicketService` | Boolean | `switch` |
-| 14 | `signStatus` | signStatus | `signStatus` | tmsp_signstatus | `singleOption` |
-| 15 | `tenantId` | tenantID | `tenant_id` | Long | `long` |
-| 16 | `createTime` | 创建时间 | `create_time` | DateTime | `dateTime` |
-| 17 | `creator` | 创建人 | `creator` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 18 | `dr` | 逻辑删除 | `dr` | Short | `short` |
-| 19 | `id` | ID | `id` | String | `text` |
-| 20 | `modifier` | 修改人 | `modifier` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 21 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `dateTime` |
-| 22 | `pubts` | 时间戳 | `pubts` | DateTime | `dateTime` |
-| 23 | `ytenantId` | ytenantID | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 账户业务范围设置 |
+| 物理表 | `tmsp_elebankaccountset` |
+| 数据库 schema | `yonbip-fi-ctmtmsp` |
+| 所属应用 | `TMSP` |
+| 直连字段 | 23 个 |
+| 子表 | 0 个 |
+| 关联引用 | 5 个 |
 
-## 关联（5 个）
+## 关联引用 (5个)
 
-- `creator` -> `base.user.BipUser` () 
-- `enterpriseBankAccount` -> `bd.enterprise.OrgFinBankacctVO` () [废]
-- `modifier` -> `base.user.BipUser` () 
-- `ytenantId` -> `yht.tenant.YhtTenant` () 
-- `accentity` -> `org.func.FundsOrg` () [废]
+| 字段名 | 引用类型 |
+|--------|---------|
+| `creator` | `bip-usercenter.bip_user_ref` |
+| `enterprisebankaccount` | `ucfbasedoc.bd_enterprisebank` |
+| `modifier` | `bip-usercenter.bip_user_ref` |
+| `ytenant_id` | `` |
+| `accentity` | `ucf-org-center.bd_fundsorg_table` |
+
+## 继承接口 (3个, 6字段)
+
+- **审计信息** (`iuap.busiObj.IAuditInfo`)
+  - `create_time` → `create_time`
+  - `creator` → `creator`
+  - `modifier` → `modifier`
+  - `modify_time` → `modify_time`
+- **统一租户接口** (`iuap.busiObj.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+- **逻辑删除** (`iuap.busiObj.LogicDelete`)
+  - `dr` → `dr`
+
+## 字段列表（按类型分组）
+
+> 共 23 个直连字段
+
+### 文本字段 (8个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `bankInfo` | `bankInfo` | `bankInfo` | 银行返回信息 |
+| `contact_name` | `contact_name` | `contactName` | 联系人姓名 |
+| `contact_phone` | `contact_phone` | `contactPhone` | 联系人电话 |
+| `credit_code` | `credit_code` | `creditCode` | 社会统一信用代码 |
+| `customNo` | `customNo` | `customNo` | 客户号 |
+| `customNum` | `customNum` | `customNum` | 客户号开放银行 |
+| `customer_name` | `customer_name` | `customerName` | 客户名称 |
+| `id` | `id` | `id` | 主键 |
+
+### 引用字段 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `accentity` | `accentity` | `accentity` | 资金组织 |
+| `enterprisebankaccount` | `enterprisebankaccount` | `enterpriseBankAccount` | 企业银行账户 |
+| `creator` | `creator` | `creator` | 创建人 |
+| `modifier` | `modifier` | `modifier` | 修改人 |
+| `ytenant_id` | `ytenant_id` | `ytenantId` | 租户id |
+
+### 日期时间 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+
+### 布尔字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `logout` | `logout` | `logout` | 是否注销 |
+| `openBill` | `openBill` | `openBill` | 开通银行票据池 |
+| `openflag` | `openflag` | `openFlag` | 开通银企连服务 |
+| `openTicketService` | `openTicketService` | `openTicketService` | 开通银行电票 |
+
+### 枚举字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `signStatus` | `signStatus` | `signStatus` | 签约状态 |
+
+### 短整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dr` | `dr` | `dr` | 逻辑删除 |
+
+### 长整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `tenant_id` | `tenant_id` | `tenantId` | 租户id |

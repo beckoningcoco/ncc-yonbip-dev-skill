@@ -12,66 +12,122 @@ source_type: api_response
 
 # 员工任职兼职 (`bd.staff.StaffJob`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `bd_staff_job` | 应用: `DPMSTF` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`bd_staff_job` | domain：`ucf-staff-center` | 应用：`DPMSTF` | 业务对象ID：`f38679b1-213d-44f5-ae3d-946f4a7dc562`
 
-## 属性（38 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `begindate` | begindate | `begindate` | DateTime | `timestamp` |
-| 2 | `enddate` | enddate | `enddate` | DateTime | `timestamp` |
-| 3 | `org_id` | org_id | `org_id` | c3b96360-c57f-455b-9728-2ca499d9922a | `quote` |
-| 4 | `dept_id` | dept_id | `dept_id` | a4352e3c-3eda-4539-a7a9-ec00799be118 | `quote` |
-| 5 | `psncl_id` | psncl_id | `psncl_id` | 03a11361-aad7-416c-95cd-ccd64f14d503 | `quote` |
-| 6 | `new_post_id` | new_post_id | `new_post_id` | 71cd20df-9892-415b-a6e1-08304ef52cfb | `quote` |
-| 7 | `post_id` | post_id | `post_id` | a06cee30-92b1-4a03-b399-3886f55e4ba1 | `quote` |
-| 8 | `job_id` | job_id | `job_id` | 9703c8bf-0092-4566-96bd-933cc03c0acd | `quote` |
-| 9 | `jobgrade_id` | jobgrade_id | `jobgrade_id` | 7dfa7985-5073-4394-8f4f-cea8d1829b84 | `quote` |
-| 10 | `jobrank_id` | jobrank_id | `jobrank_id` | e00dd36a-aace-43d2-9e87-156b36799fef | `quote` |
-| 11 | `director` | director | `director` | 4effed83-35f5-4e3b-9be1-092b5ae602e8 | `quote` |
-| 12 | `responsibilities` | responsibilities | `responsibilities` | String | `text` |
-| 13 | `memo` | 备注 | `memo` | String | `text` |
-| 14 | `enable` | enable | `enable` | Integer | `int` |
-| 15 | `account_org_id` | account_org_id | `account_org_id` | 5d4c5590-da40-4b50-80a1-8d04da2f79e0 | `quote` |
-| 16 | `showorder` | showorder | `showorder` | Integer | `int` |
-| 17 | `lastestjob` | lastestjob | `lastestjob` | Integer | `int` |
-| 18 | `ismainjob` | 是否mainjob | `ismainjob` | Integer | `int` |
-| 19 | `endflag` | endflag | `endflag` | Integer | `int` |
-| 20 | `synchts` | synchts | `synchts` | DateTime | `timestamp` |
-| 21 | `modifiedtime` | modifiedtime | `modifiedtime` | DateTime | `timestamp` |
-| 22 | `tenantid` | tenantid | `tenantid` | String | `text` |
-| 23 | `objid` | objid | `objid` | String | `text` |
-| 24 | `id` | ID | `id` | String | `text` |
-| 25 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 26 | `jsonextattr` | jsonextattr | `jsonextattr` | String | `text` |
-| 27 | `sysid` | sysid | `sysid` | String | `text` |
-| 28 | `businessid` | businessid | `businessid` | String | `text` |
-| 29 | `creationtime` | creationtime | `creationtime` | DateTime | `timestamp` |
-| 30 | `ts` | ts | `ts` | DateTime | `timestamp` |
-| 31 | `trnsevent` | trnsevent | `trnsevent` | Integer | `int` |
-| 32 | `staff_id` | staff_id | `staff_id` | 4effed83-35f5-4e3b-9be1-092b5ae602e8 | `quote` |
-| 33 | `dr` | 逻辑删除 | `dr` | Integer | `int` |
-| 34 | `modifier` | 修改人 | `modifier` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 35 | `creator` | 创建人 | `creator` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 36 | `tenant` | tenant | `tenantid` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 37 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 38 | `otherJobType` | otherJobType | `other_job_type` | Integer | `int` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 员工任职兼职 |
+| 物理表 | `bd_staff_job` |
+| 数据库 schema | `ucf-staff-center` |
+| 所属应用 | `DPMSTF` |
+| 直连字段 | 38 个 |
+| 子表 | 0 个 |
+| 关联引用 | 15 个 |
 
-## 关联（15 个）
+## 关联引用 (15个)
 
-- `creator` -> `base.user.BipUser` ()
-- `jobrank_id` -> `bd.duty.Grade` ()
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `director` -> `bd.staff.Staff` ()
-- `modifier` -> `base.user.BipUser` ()
-- `account_org_id` -> `org.func.FinanceOrg` ()
-- `psncl_id` -> `bd.staff.PsnlCatg` ()
-- `jobgrade_id` -> `bd.duty.Rank` ()
-- `post_id` -> `bd.duty.Position` ()
-- `job_id` -> `bd.duty.Duty` ()
-- `org_id` -> `org.func.AdminOrg` ()
-- `new_post_id` -> `bd.duty.Posts` ()
-- `staff_id` -> `bd.staff.Staff` (0..n)
-- `dept_id` -> `bd.adminOrg.AdminOrgVO` ()
-- `tenant` -> `yht.tenant.YhtTenant` ()
+| 字段名 | 引用类型 |
+|--------|---------|
+| `creator` | `` |
+| `jobrank_id` | `ucf-staff-center.bd_graderef` |
+| `ytenant_id` | `` |
+| `director` | `` |
+| `modifier` | `` |
+| `account_org_id` | `` |
+| `psncl_id` | `` |
+| `jobgrade_id` | `` |
+| `post_id` | `` |
+| `job_id` | `` |
+| `org_id` | `` |
+| `new_post_id` | `` |
+| `staff_id` | `ucf-staff-center.bd_staff_ref` |
+| `dept_id` | `` |
+| `tenantid` | `` |
+
+## 继承接口 (7个, 13字段)
+
+- **审计信息** (`bd.itf.IAuditInfo`)
+  - `creationtime` → `creationtime`
+  - `creator` → `creator`
+  - `modifiedtime` → `modifiedtime`
+  - `modifier` → `modifier`
+- **UCF公共状态** (`basedoc.basedocItf.BasedocIState`)
+  - `enable` → `enable`
+- **审批信息** (`bd.itf.ISystemInfo`)
+  - `dr` → `dr`
+  - `enable` → `enable`
+  - `sysid` → `sysid`
+  - `tenantid` → `tenantid`
+  - `ts` → `ts`
+- **UCF公共租户相关** (`basedoc.basedocItf.BasedocITenant`)
+  - `tenantid` → `tenantid`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+- **逻辑删除(待废除)** (`basedoc.basedocItf.LogicDelete`)
+- **逻辑删除相关** (`ucfbase.ucfbaseItf.LogicDelete`)
+  - `dr` → `dr`
+
+## 字段列表（按类型分组）
+
+> 共 38 个直连字段
+
+### 文本字段 (8个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `responsibilities` | `responsibilities` | `responsibilities` | 工作职责 |
+| `memo` | `memo` | `memo` | 备注 |
+| `tenantid` | `tenantid` | `tenantid` | 租户ID |
+| `objid` | `objid` | `objid` | 友企联同步主键 |
+| `id` | `id` | `id` | 主键 |
+| `jsonextattr` | `jsonextattr` | `jsonextattr` | 扩展属性(隐藏) |
+| `sysid` | `sysid` | `sysid` | 系统标识 |
+| `businessid` | `businessid` | `businessid` | 友企联同步业务主键 |
+
+### 引用字段 (15个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `org_id` | `org_id` | `org_id` | 组织 |
+| `dept_id` | `dept_id` | `dept_id` | 部门 |
+| `psncl_id` | `psncl_id` | `psncl_id` | 人员类别 |
+| `new_post_id` | `new_post_id` | `new_post_id` | 职位 |
+| `post_id` | `post_id` | `post_id` | 岗位 |
+| `job_id` | `job_id` | `job_id` | 职务 |
+| `jobgrade_id` | `jobgrade_id` | `jobgrade_id` | 职级 |
+| `jobrank_id` | `jobrank_id` | `jobrank_id` | 职等  |
+| `director` | `director` | `director` | 主管 |
+| `account_org_id` | `account_org_id` | `account_org_id` | 会计主体 |
+| `staff_id` | `staff_id` | `staff_id` | 员工 |
+| `modifier` | `modifier` | `modifier` | 修改人 |
+| `creator` | `creator` | `creator` | 创建人 |
+| `tenantid` | `tenantid` | `tenant` | 租户 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 整数 (8个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `enable` | `enable` | `enable` | 启用状态 |
+| `showorder` | `showorder` | `showorder` | 顺序号 |
+| `lastestjob` | `lastestjob` | `lastestjob` | 是否当前最新 |
+| `ismainjob` | `ismainjob` | `ismainjob` | 是否主职 |
+| `endflag` | `endflag` | `endflag` | 是否生效中 |
+| `trnsevent` | `trnsevent` | `trnsevent` | 变动事件 |
+| `dr` | `dr` | `dr` | 逻辑删除标识 |
+| `other_job_type` | `other_job_type` | `otherJobType` | 其他任职类型 |
+
+### timestamp (7个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `begindate` | `begindate` | `begindate` | 开始时间 |
+| `enddate` | `enddate` | `enddate` | 结束时间 |
+| `synchts` | `synchts` | `synchts` | 友企联同步时间戳 |
+| `modifiedtime` | `modifiedtime` | `modifiedtime` | 修改时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+| `creationtime` | `creationtime` | `creationtime` | 创建时间 |
+| `ts` | `ts` | `ts` | 时间戳 |

@@ -9,486 +9,575 @@ last_verified: 2026-06-03
 status: verified
 source_type: api_response
 ---
+
 # 票据信息 (`drft.drftnoteinformation.DrftNoteInformation`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBip），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `drft_noteinformation` | 应用: `DRFT`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`drft_noteinformation` | domain：`drft` | 应用：`DRFT` | 业务对象ID：`b9965bca-9226-4556-a216-0293d4f42e21`
 
-## 属性（355 个）
+## 基本信息
 
-| # | 字段 | 显示名 | 列 | 类型 | biztype |
-|---|------|--------|-----|------|---------|
-| 1 | `acceptaccbyfundobject` | acceptaccbyfundobject | `acceptaccbyfundobject` | c5eba128-e930-4602-897a-30d3a049390e | `quote` |
-| 2 | `acceptancerbyfundobject` | acceptancerbyfundobject | `acceptancerbyfundobject` | e969728a-efe8-49db-86b0-5f8e18c2f098 | `quote` |
-| 3 | `chargetype` | chargetype | `chargetype` | 14b092f3-5d27-4a47-82a0-d6bad074c9f1 | `quote` |
-| 4 | `impawneraccbyfundobject` | impawneraccbyfundobject | `impawneraccbyfundobject` | c5eba128-e930-4602-897a-30d3a049390e | `quote` |
-| 5 | `impawnerfundobject` | impawnerfundobject | `impawnerfundobject` | e969728a-efe8-49db-86b0-5f8e18c2f098 | `quote` |
-| 6 | `impawnerfundobjecttpye` | impawnerfundobjecttpye | `impawnerfundobjecttpye` | String | `text` |
-| 7 | `invoiceraccbyobject` | invoiceraccbyobject | `invoiceraccbyobject` | c5eba128-e930-4602-897a-30d3a049390e | `quote` |
-| 8 | `invoicerbyfundobject` | invoicerbyfundobject | `invoicerbyfundobject` | e969728a-efe8-49db-86b0-5f8e18c2f098 | `quote` |
-| 9 | `invoicerbyfundobjecttpye` | invoicerbyfundobjecttpye | `invoicerbyfundobjecttpye` | String | `text` |
-| 10 | `paybankaccbycust` | paybankaccbycust | `paybankaccbycust` | 60cc421e-5605-475b-a829-02fd75c0b189 | `quote` |
-| 11 | `paybankaccbyobject` | paybankaccbyobject | `paybankaccbyobject` | c5eba128-e930-4602-897a-30d3a049390e | `quote` |
-| 12 | `paybankaccbysupp` | paybankaccbysupp | `paybankaccbysupp` | 4b6dcfa2-1d07-407d-a35a-9b219fadf37c | `quote` |
-| 13 | `paybyfundobject` | paybyfundobject | `paybyfundobject` | e969728a-efe8-49db-86b0-5f8e18c2f098 | `quote` |
-| 14 | `paybyfundobjecttpye` | paybyfundobjecttpye | `paybyfundobjecttpye` | String | `text` |
-| 15 | `quicktype` | quicktype | `quicktype` | 14b092f3-5d27-4a47-82a0-d6bad074c9f1 | `quote` |
-| 16 | `receiveraccbyobject` | receiveraccbyobject | `receiveraccbyobject` | c5eba128-e930-4602-897a-30d3a049390e | `quote` |
-| 17 | `receiverbyfundobject` | receiverbyfundobject | `receiverbyfundobject` | e969728a-efe8-49db-86b0-5f8e18c2f098 | `quote` |
-| 18 | `recallBankmsg` | recallBankmsg | `recallbankmsg` | a8e8326a-317f-4dae-8e68-d372b1437163 | `quote` |
-| 19 | `receiverbyfundobjecttpye` | receiverbyfundobjecttpye | `receiverbyfundobjecttpye` | String | `text` |
-| 20 | `withdrticketBankmsg` | withdrticketBankmsg | `withdrticketbankmsg` | a8e8326a-317f-4dae-8e68-d372b1437163 | `quote` |
-| 21 | `settlementStatus` | settlementStatus | `settlementStatus` | Short | `short` |
-| 22 | `showpaybankacc` | showpaybankacc | `showpaybankacc` | String | `text` |
-| 23 | `availableQuota` | availableQuota | `available_quota` | Decimal | `number` |
-| 24 | `bankName` | 银行名称 | `bankName` | b7ee7189-ed97-48d5-91e4-808228664429 | `quote` |
-| 25 | `billPool` | billPool | `bill_pool` | b7708165-db7a-48aa-8852-0244ae7fa755 | `quote` |
-| 26 | `drftNoteInformationDef` | drftNoteInformationDef | `drftnoteinformation_def` | 433716b8-04bf-43db-802d-699bca23f7a8 | `UserDefine` |
-| 27 | `hasUsedExclusiveBillPool` | hasUsedExclusiveBillPool | `hasUsedExclusiveBillPool` | Boolean | `switch` |
-| 28 | `impawnAmount` | impawnAmount | `impawnAmount` | Decimal | `number` |
-| 29 | `impawnRate` | impawnRate | `impawnRate` | Decimal | `number` |
-| 30 | `impawntype` | impawntype | `impawntype` | Short | `short` |
-| 31 | `innerDate` | innerDate | `innerDate` | Date | `date` |
-| 32 | `inpoolorg` | inpoolorg | `inpoolorg` | b7708165-db7a-48aa-8852-0244ae7fa755 | `quote` |
-| 33 | `inpooluse` | inpooluse | `inpooluse` | Short | `short` |
-| 34 | `holdbalance` | holdbalance | `holdbalance` | Decimal | `number` |
-| 35 | `innerMarginPayIdentCode` | innerMarginPayIdent编码 | `inner_margin_pay_ident_code` | String | `text` |
-| 36 | `identificationCode` | identification编码 | `identification_code` | String | `text` |
-| 37 | `innerSettleAccount` | innerSettleAccount | `inner_settle_account` | fbc20885-a507-45bd-a986-74d3fc28d38a | `quote` |
-| 38 | `settleAmount` | settleAmount | `settle_amount` | Decimal | `number` |
-| 39 | `innerMarginRecIdentCode` | innerMarginRecIdent编码 | `inner_margin_rec_ident_code` | String | `text` |
-| 40 | `agentSecuritySettlementStatus` | agentSecuritySettlementStatus | `agent_security_settlement_status` | Short | `short` |
-| 41 | `payInternalUnitId` | payInternalUnitID | `pay_internal_unit_id` | 60bf293e-5593-454b-be50-5a5fa016e4a6 | `quote` |
-| 42 | `payInternalUnitAccountId` | payInternalUnitAccountID | `pay_internal_unit_account_id` | fbc20885-a507-45bd-a986-74d3fc28d38a | `quote` |
-| 43 | `olcRateOps` | olcRateOps | `olc_rate_ops` | Short | `short` |
-| 44 | `bankPoundageIdentCode` | bankPoundageIdent编码 | `bank_poundage_ident_code` | String | `text` |
-| 45 | `innerPoundageIdentCode` | innerPoundageIdent编码 | `inner_poundage_ident_code` | String | `text` |
-| 46 | `agentMarginIdentCode` | agentMarginIdent编码 | `agent_margin_ident_code` | String | `text` |
-| 47 | `costCenter` | costCenter | `cost_center` | 872630ba-e8f4-4080-817d-8fc9a6958733 | `quote` |
-| 48 | `profitCenter` | profitCenter | `profit_center` | e33ec72a-3857-4167-89e2-a437168ed3bb | `quote` |
-| 49 | `ticketbalance` | ticketbalance | `ticketbalance` | Decimal | `number` |
-| 50 | `acceptancebalance` | acceptancebalance | `acceptancebalance` | Decimal | `number` |
-| 51 | `einnerSecurityPayeeRoles` | einnerSecurityPayeeRoles | `einner_security_payee_roles` | Short | `short` |
-| 52 | `innerSecurityPoundageAmount` | innerSecurityPoundageAmount | `inner_security_poundage_amount` | Decimal | `number` |
-| 53 | `ninnerSecurityPoundageRate` | ninnerSecurityPoundageRate | `ninner_security_poundage_rate` | Decimal | `number` |
-| 54 | `einnerSecuritySettlementStatus` | einnerSecuritySettlementStatus | `einner_security_settlement_status` | Short | `short` |
-| 55 | `acceptcreditcode` | acceptcreditcode | `acceptcreditcode` | String | `text` |
-| 56 | `securityType` | securityType | `securityType` | Short | `short` |
-| 57 | `poundageRate` | poundageRate | `poundageRate` | Decimal | `number` |
-| 58 | `settledSupplementType` | settledSupplementType | `settledSupplementType` | Short | `short` |
-| 59 | `settleSuccBizTime` | settleSuccBizTime | `settleSuccBizTime` | Date | `date` |
-| 60 | `circulateid` | circulateid | `circulateid` | 850c830c-e2fb-4730-b819-f30d5efce4b4 | `quote` |
-| 61 | `pushSecurity` | pushSecurity | `pushSecurity` | Boolean | `switch` |
-| 62 | `acceptancerbyfundobjecttpye` | acceptancerbyfundobjecttpye | `acceptancerbyfundobjecttpye` | String | `text` |
-| 63 | `useStwb` | useStwb | `useStwb` | Boolean | `switch` |
-| 64 | `olcusemoney` | olcusemoney | `olcusemoney` | Decimal | `number` |
-| 65 | `occupyCreditAmount` | occupyCreditAmount | `occupycreditamount` | Decimal | `number` |
-| 66 | `olcOccupyCreditAmount` | olcOccupyCreditAmount | `olcoccupycreditamount` | Decimal | `number` |
-| 67 | `occupyContractAmount` | occupyContractAmount | `occupycontractamount` | Decimal | `number` |
-| 68 | `olcoccupyContractAmount` | olcoccupyContractAmount | `olcoccupycontractamount` | Decimal | `number` |
-| 69 | `integratestatus` | integratestatus | `integratestatus` | Short | `short` |
-| 70 | `billRangeStart` | billRangeStart | `bill_range_start` | Long | `long` |
-| 71 | `billRangeEnd` | billRangeEnd | `bill_range_end` | Long | `long` |
-| 72 | `billRange` | billRange | `bill_range` | String | `text` |
-| 73 | `availableRange` | availableRange | `available_range` | String | `text` |
-| 74 | `availableMoney` | availableMoney | `available_money` | Decimal | `number` |
-| 75 | `oneAvailableMoney` | oneAvailableMoney | `one_available_money` | Decimal | `number` |
-| 76 | `srcFlag` | srcFlag | `src_flag` | Short | `short` |
-| 77 | `srcPkRegister` | srcPkRegister | `src_pk_register` | Long | `long` |
-| 78 | `newNoteFlag` | newNoteFlag | `new_note_flag` | Boolean | `switch` |
-| 79 | `ifsepFlow` | ifsepFlow | `ifsepFlow` | Boolean | `switch` |
-| 80 | `payPeriodUnit` | payPeriodUnit | `payperiodunit` | Short | `short` |
-| 81 | `paymentDate` | paymentDate | `paymentdate` | String | `text` |
-| 82 | `signnoteInstructType` | signnoteInstructType | `signnoteinstructtype` | Short | `short` |
-| 83 | `vouchersEntryDate` | vouchersEntryDate | `vouchersEntryDate` | Date | `date` |
-| 84 | `businessAccountDate` | businessAccountDate | `businessAccountDate` | Date | `date` |
-| 85 | `entrustedPaybillroles` | entrustedPaybillroles | `entrustedPaybillroles` | Short | `short` |
-| 86 | `entrustedPaycustomer` | entrustedPaycustomer | `entrustedPaycustomer` | 94b3280a-27a4-485a-b90b-b7bce57c6df2 | `quote` |
-| 87 | `entrustedPaysupplier` | entrustedPaysupplier | `entrustedPaysupplier` | 89bf026e-cc49-4fe7-9a7b-3e8fdcc77c1e | `quote` |
-| 88 | `entrustedPaybyfundobject` | entrustedPaybyfundobject | `entrustedPaybyfundobject` | e969728a-efe8-49db-86b0-5f8e18c2f098 | `quote` |
-| 89 | `entrustedShowpayunit` | entrustedShowpayunit | `entrustedShowpayunit` | String | `text` |
-| 90 | `whitebill` | whitebill | `whitebill` | Boolean | `switch` |
-| 91 | `invoiceno` | invoiceno | `invoiceno` | String | `text` |
-| 92 | `acceptanceInBlackList` | acceptanceInBlackList | `acceptanceInBlackList` | Boolean | `switch` |
-| 93 | `acceptanceInWhiteList` | acceptanceInWhiteList | `acceptanceInWhiteList` | Boolean | `switch` |
-| 94 | `ticketCollectionEnd` | ticketCollectionEnd | `ticketCollectionEnd` | Boolean | `switch` |
-| 95 | `settleEndDate` | settleEndDate | `settleEndDate` | Date | `date` |
-| 96 | `surplusBillRange` | surplusBillRange | `surplus_bill_range` | String | `text` |
-| 97 | `surplusMoney` | surplusMoney | `surplus_money` | Decimal | `number` |
-| 98 | `srcPkImpawn` | srcPkImpawn | `src_pk_impawn` | 86a5af80-5358-4af9-8408-4a20e65ca366 | `quote` |
-| 99 | `collecticketstatus` | collecticketstatus | `collecticketstatus` | Short | `short` |
-| 100 | `auditsettlementdrive` | auditsettlementdrive | `auditsettlementdrive` | Boolean | `switch` |
-| 101 | `checkresult` | checkresult | `checkresult` | Short | `short` |
-| 102 | `pk_bankmsg2` | pk_bankmsg2 | `pk_bankmsg2` | a8e8326a-317f-4dae-8e68-d372b1437163 | `quote` |
-| 103 | `signDate` | signDate | `signDate` | Date | `date` |
-| 104 | `bankmsg2Status` | bankmsg2Status | `bankmsg2Status` | Short | `short` |
-| 105 | `inPoolRange` | inPoolRange | `in_pool_range` | String | `text` |
-| 106 | `inPoolMoney` | inPoolMoney | `in_pool_money` | Decimal | `number` |
-| 107 | `securitySettlementStatus` | securitySettlementStatus | `securitySettlementStatus` | Short | `short` |
-| 108 | `paymentway` | paymentway | `paymentway` | Short | `short` |
-| 109 | `signRefuse` | signRefuse | `signRefuse` | Short | `short` |
-| 110 | `refuseReason` | refuseReason | `refuseReason` | String | `text` |
-| 111 | `sameAccentity` | sameAccentity | `sameAccentity` | Boolean | `switch` |
-| 112 | `riskPriority` | riskPriority | `riskPriority` | Short | `short` |
-| 113 | `oriPaybillroles` | oriPaybillroles | `oriPaybillroles` | Short | `short` |
-| 114 | `oriPaycustomer` | oriPaycustomer | `oriPaycustomer` | 94b3280a-27a4-485a-b90b-b7bce57c6df2 | `quote` |
-| 115 | `oriPaysupplier` | oriPaysupplier | `oriPaysupplier` | 89bf026e-cc49-4fe7-9a7b-3e8fdcc77c1e | `quote` |
-| 116 | `oriPaybyfundobject` | oriPaybyfundobject | `oriPaybyfundobject` | e969728a-efe8-49db-86b0-5f8e18c2f098 | `quote` |
-| 117 | `oriShowpayunit` | oriShowpayunit | `oriShowpayunit` | String | `text` |
-| 118 | `oripk_register` | oripk_register | `oripk_register` | 737084eb-cf3b-49c1-a37a-bc1caf8ebd63 | `quote` |
-| 119 | `receivebilltype` | receivebilltype | `receivebilltype` | Short | `short` |
-| 120 | `agentopennote` | agentopennote | `agentopennote` | Boolean | `switch` |
-| 121 | `principalAccentity` | principalAccentity | `principalAccentity` | eaa75c14-e58f-4b35-9ae5-0032f4a98f54 | `quote` |
-| 122 | `principalBillAccount` | principalBillAccount | `principalBillAccount` | fbc20885-a507-45bd-a986-74d3fc28d38a | `quote` |
-| 123 | `payTime` | payTime | `payTime` | Short | `short` |
-| 124 | `principalPayAccount` | principalPayAccount | `principalPayAccount` | fbc20885-a507-45bd-a986-74d3fc28d38a | `quote` |
-| 125 | `ticketHoldingMode` | ticketHoldingMode | `ticket_holding_mode` | Short | `short` |
-| 126 | `ticketCollectionCompleted` | ticketCollectionCompleted | `ticket_collection_completed` | Boolean | `switch` |
-| 127 | `initialRegister` | initialRegister | `initialRegister` | 737084eb-cf3b-49c1-a37a-bc1caf8ebd63 | `quote` |
-| 128 | `namelistType` | namelistType | `namelistType` | String | `text` |
-| 129 | `controlType` | controlType | `controlType` | String | `text` |
-| 130 | `issuercreditcode` | 是否suercreditcode | `issuercreditcode` | String | `text` |
-| 131 | `payeecreditcode` | payeecreditcode | `payeecreditcode` | String | `text` |
-| 132 | `nextmerchantdesignated` | nextmerchantdesignated | `nextmerchantdesignated` | Boolean | `switch` |
-| 133 | `designatedparty` | designatedparty | `designatedparty` | Short | `short` |
-| 134 | `designatedperson` | designatedperson | `designatedperson` | String | `text` |
-| 135 | `designatedpersoncreditcode` | designatedpersoncreditcode | `designatedpersoncreditcode` | String | `text` |
-| 136 | `interestpaymentmode` | interestpaymentmode | `interestpaymentmode` | Short | `short` |
-| 137 | `paymentcommitmentletternumber` | paymentcommitmentletternumber | `paymentcommitmentletternumber` | String | `text` |
-| 138 | `paymenttermtype` | paymenttermtype | `paymenttermtype` | Short | `short` |
-| 139 | `designatedpersonsupp` | designatedpersonsupp | `designatedpersonsupp` | 89bf026e-cc49-4fe7-9a7b-3e8fdcc77c1e | `quote` |
-| 140 | `designatedpersoncust` | designatedpersoncust | `designatedpersoncust` | 94b3280a-27a4-485a-b90b-b7bce57c6df2 | `quote` |
-| 141 | `designatedpersonfund` | designatedpersonfund | `designatedpersonfund` | e969728a-efe8-49db-86b0-5f8e18c2f098 | `quote` |
-| 142 | `checkresultacceptance` | checkresultacceptance | `checkresultacceptance` | Short | `short` |
-| 143 | `poolresiduerelease` | poolresiduerelease | `poolresiduerelease` | Decimal | `number` |
-| 144 | `oldnoteno` | oldnoteno | `oldnoteno` | String | `text` |
-| 145 | `residuenoteno` | residuenoteno | `residuenoteno` | String | `text` |
-| 146 | `securitypushtiming` | securitypushtiming | `securitypushtiming` | Short | `short` |
-| 147 | `mainid` | mainid | `mainid` | 0b1d4ce9-842f-48c1-b832-05b8e0cf5b30 | `quote` |
-| 148 | `budgetstatus` | budgetstatus | `budgetstatus` | Short | `short` |
-| 149 | `budgetactualaction` | budgetactualaction | `budgetactualaction` | Short | `short` |
-| 150 | `isHandledSupplement` | 是否HandledSupplement | `isHandledSupplement` | Boolean | `switch` |
-| 151 | `handleResult` | handleResult | `handleResult` | Short | `short` |
-| 152 | `settlesignstatus` | settlesignstatus | `settlesignstatus` | Short | `short` |
-| 153 | `settlementOrg` | settlementOrg | `settlementOrg` | c8022140-b5fa-4f19-a0b2-2be0192eac18 | `quote` |
-| 154 | `waitsettleoper` | waitsettleoper | `waitsettleoper` | Boolean | `switch` |
-| 155 | `accentityRaw` | accentityRaw | `accentity_raw` | eaa75c14-e58f-4b35-9ae5-0032f4a98f54 | `quote` |
-| 156 | `reasonname` | reasonname | `reasonname` | String | `text` |
-| 157 | `agentquicktype` | agentquicktype | `agentquicktype` | 14b092f3-5d27-4a47-82a0-d6bad074c9f1 | `quote` |
-| 158 | `agentsettlemode` | agentsettlemode | `agentsettlemode` | 95f34e90-897c-4bf5-958c-b1c2deaa8aff | `quote` |
-| 159 | `innersecurityaccount` | innersecurityaccount | `innersecurityaccount` | fbc20885-a507-45bd-a986-74d3fc28d38a | `quote` |
-| 160 | `innerreceiveraccount` | innerreceiveraccount | `innerreceiveraccount` | fbc20885-a507-45bd-a986-74d3fc28d38a | `quote` |
-| 161 | `innersecurityaccsum` | innersecurityaccsum | `innersecurityaccsum` | Decimal | `number` |
-| 162 | `noteSettlementStatus` | noteSettlementStatus | `noteSettlementStatus` | Integer | `int` |
-| 163 | `agentSettleDetailId` | agentSettleDetailID | `agentSettleDetailId` | Long | `long` |
-| 164 | `wbs` | wbs | `wbs` | 145cc7d2-79cf-4f3a-934c-c03b46d0fd42 | `quote` |
-| 165 | `activity` | activity | `activity` | b4a90beb-49ed-4301-b12e-9221d0d12fd1 | `quote` |
-| 166 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 167 | `iscontributelimit` | 是否contributelimit | `iscontributelimit` | Boolean | `switch` |
-| 168 | `remainEndDate` | remainEndDate | `remainEndDate` | Date | `date` |
-| 169 | `signacc` | signacc | `signacc` | 96da623d-ced9-44d0-8448-45c389add0a1 | `quote` |
-| 170 | `signaccopenbank` | signaccopenbank | `signaccopenbank` | 47a69dfe-37ef-4ad1-aa19-1d61797a7821 | `quote` |
-| 171 | `acceptStatus` | acceptStatus | `accept_status` | Short | `short` |
-| 172 | `acceptancerbycust` | acceptancerbycust | `acceptancerbycust` | 94b3280a-27a4-485a-b90b-b7bce57c6df2 | `quote` |
-| 173 | `acceptancerbysupp` | acceptancerbysupp | `acceptancerbysupp` | 89bf026e-cc49-4fe7-9a7b-3e8fdcc77c1e | `quote` |
-| 174 | `acceptbankaccbycust` | acceptbankaccbycust | `acceptbankaccbycust` | 60cc421e-5605-475b-a829-02fd75c0b189 | `quote` |
-| 175 | `applyType` | applyType | `applytype` | Short | `short` |
-| 176 | `acceptbankaccbysupp` | acceptbankaccbysupp | `acceptbankaccbysupp` | 4b6dcfa2-1d07-407d-a35a-9b219fadf37c | `quote` |
-| 177 | `acceptdate` | acceptdate | `acceptdate` | Date | `date` |
-| 178 | `acceptopenbanknumber` | acceptopenbanknumber | `acceptopenbanknumber` | String | `text` |
-| 179 | `auditorId` | auditorID | `auditorId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 180 | `billdirection` | billdirection | `billdirection` | Short | `short` |
-| 181 | `canuseflow` | canuseflow | `canuseflow` | Boolean | `switch` |
-| 182 | `changecount` | changecount | `changecount` | Integer | `int` |
-| 183 | `creatorId` | 创建人ID | `creatorId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 184 | `gatherdate` | gatherdate | `gatherdate` | Date | `date` |
-| 185 | `hasimpawn` | hasimpawn | `hasimpawn` | Boolean | `switch` |
-| 186 | `hasused` | hasused | `hasused` | Boolean | `switch` |
-| 187 | `holddays` | holddays | `holddays` | Long | `long` |
-| 188 | `impawnbankaccbybank` | impawnbankaccbybank | `impawnbankaccbybank` | fbc20885-a507-45bd-a986-74d3fc28d38a | `quote` |
-| 189 | `protocolno` | protocolno | `protocolno` | String | `text` |
-| 190 | `impawnbankaccbycust` | impawnbankaccbycust | `impawnbankaccbycust` | 60cc421e-5605-475b-a829-02fd75c0b189 | `quote` |
-| 191 | `disabletime` | disabletime | `disabletime` | DateTime | `timestamp` |
-| 192 | `impawnbankaccbysupp` | impawnbankaccbysupp | `impawnbankaccbysupp` | 4b6dcfa2-1d07-407d-a35a-9b219fadf37c | `quote` |
-| 193 | `disabledate` | disabledate | `disabledate` | Date | `date` |
-| 194 | `impawnbankdot` | impawnbankdot | `impawnbankdot` | 47a69dfe-37ef-4ad1-aa19-1d61797a7821 | `quote` |
-| 195 | `disablenote` | disablenote | `disablenote` | String | `text` |
-| 196 | `impawndate` | impawndate | `impawndate` | Date | `date` |
-| 197 | `billstatus` | billstatus | `billstatus` | Short | `short` |
-| 198 | `impawnenddate` | impawnenddate | `impawnenddate` | Date | `date` |
-| 199 | `impawnerbank` | impawnerbank | `impawnerbank` | 47a69dfe-37ef-4ad1-aa19-1d61797a7821 | `quote` |
-| 200 | `disableuserid` | disableuserid | `disableuserid` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 201 | `impawnercust` | impawnercust | `impawnercust` | 94b3280a-27a4-485a-b90b-b7bce57c6df2 | `quote` |
-| 202 | `impawnerother` | impawnerother | `impawnerother` | String | `text` |
-| 203 | `disableusername` | disableusername | `disableusername` | String | `text` |
-| 204 | `impawnersupp` | impawnersupp | `impawnersupp` | 89bf026e-cc49-4fe7-9a7b-3e8fdcc77c1e | `quote` |
-| 205 | `impawnroles` | impawnroles | `impawnroles` | Short | `short` |
-| 206 | `invoiceOpenbankname` | invoiceOpenbankname | `invoiceOpenbankname` | 47a69dfe-37ef-4ad1-aa19-1d61797a7821 | `quote` |
-| 207 | `invoicerbankaccbycust` | invoicerbankaccbycust | `invoicerbankaccbycust` | 60cc421e-5605-475b-a829-02fd75c0b189 | `quote` |
-| 208 | `invoicerbankaccbyorg` | invoicerbankaccbyorg | `invoicerbankaccbyorg` | fbc20885-a507-45bd-a986-74d3fc28d38a | `quote` |
-| 209 | `invoicerbankaccbysupp` | invoicerbankaccbysupp | `invoicerbankaccbysupp` | 4b6dcfa2-1d07-407d-a35a-9b219fadf37c | `quote` |
-| 210 | `invoicerbycust` | invoicerbycust | `invoicerbycust` | 94b3280a-27a4-485a-b90b-b7bce57c6df2 | `quote` |
-| 211 | `invoicerbysupp` | invoicerbysupp | `invoicerbysupp` | 89bf026e-cc49-4fe7-9a7b-3e8fdcc77c1e | `quote` |
-| 212 | `isAutoAccept` | 是否AutoAccept | `is_auto_accept` | Boolean | `switch` |
-| 213 | `isEcdsSign` | 是否EcdsSign | `isEcdsSign` | Boolean | `switch` |
-| 214 | `ispaybill` | 是否paybill | `ispaybill` | Boolean | `switch` |
-| 215 | `modifierId` | 修改人ID | `modifierId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 216 | `paybilldate` | paybilldate | `paybilldate` | Date | `date` |
-| 217 | `paybillroles` | paybillroles | `paybillroles` | Short | `short` |
-| 218 | `paycustomer` | paycustomer | `paycustomer` | 94b3280a-27a4-485a-b90b-b7bce57c6df2 | `quote` |
-| 219 | `paysupplier` | paysupplier | `paysupplier` | 89bf026e-cc49-4fe7-9a7b-3e8fdcc77c1e | `quote` |
-| 220 | `receiveOpenbankname` | receiveOpenbankname | `receiveOpenbankname` | 47a69dfe-37ef-4ad1-aa19-1d61797a7821 | `quote` |
-| 221 | `receiverbankaccbyorg` | receiverbankaccbyorg | `receiverbankaccbyorg` | fbc20885-a507-45bd-a986-74d3fc28d38a | `quote` |
-| 222 | `receiverbyorg` | receiverbyorg | `receiverbyorg` | eaa75c14-e58f-4b35-9ae5-0032f4a98f54 | `quote` |
-| 223 | `returncount` | returncount | `returncount` | Short | `short` |
-| 224 | `securitymode` | securitymode | `securitymode` | Short | `short` |
-| 225 | `recallStatus` | recallStatus | `recallstatus` | Short | `short` |
-| 226 | `senddate` | senddate | `senddate` | Date | `date` |
-| 227 | `withdrticketStatus` | withdrticketStatus | `withdrticketstatus` | Short | `short` |
-| 228 | `senderid` | senderid | `senderid` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 229 | `sendername` | sendername | `sendername` | String | `text` |
-| 230 | `sendtime` | sendtime | `sendtime` | DateTime | `timestamp` |
-| 231 | `serialNum` | serialNum | `serial_num` | String | `text` |
-| 232 | `settleamt` | settleamt | `settleamt` | Decimal | `number` |
-| 233 | `showInvoiceOpenbankname` | showInvoiceOpenbankname | `showInvoiceOpenbankname` | String | `text` |
-| 234 | `showReceiveOpenbankname` | showReceiveOpenbankname | `showReceiveOpenbankname` | String | `text` |
-| 235 | `showimpawnbankacc` | showimpawnbankacc | `showimpawnbankacc` | String | `text` |
-| 236 | `showpayunit` | showpayunit | `showpayunit` | String | `text` |
-| 237 | `signtype` | signtype | `signtype` | Short | `short` |
-| 238 | `srcbillid` | srcbillid | `srcbillid` | Long | `long` |
-| 239 | `tenant` | tenant | `tenant_id` | c213cd56-d5de-421f-bae7-d77455b557cd | `quote` |
-| 240 | `tplid` | tplid | `tplid` | Long | `long` |
-| 241 | `accentity` | accentity | `accentity` | eaa75c14-e58f-4b35-9ae5-0032f4a98f54 | `quote` |
-| 242 | `applydate` | applydate | `applydate` | Date | `date` |
-| 243 | `impawnmode` | impawnmode | `impawnmode` | Short | `short` |
-| 244 | `returnbill` | returnbill | `returnbill` | Boolean | `switch` |
-| 245 | `org` | org | `org` | eaa75c14-e58f-4b35-9ae5-0032f4a98f54 | `quote` |
-| 246 | `blackbill` | blackbill | `blackbill` | Boolean | `switch` |
-| 247 | `dept` | dept | `dept` | 8e8fa65a-f8d9-454d-a8f8-4b7af543cdd5 | `quote` |
-| 248 | `operator` | operator | `operator` | 4effed83-35f5-4e3b-9be1-092b5ae602e8 | `quote` |
-| 249 | `costproject` | costproject | `costproject` | d78cdbfa-0424-4dc3-a995-5c8624e1a560 | `quote` |
-| 250 | `project` | project | `project` | b1e7cbf6-094a-4200-b451-36bfa3ac3ff4 | `quote` |
-| 251 | `description` | description | `description` | String | `text` |
-| 252 | `bustype` | bustype | `tradetype` | 19f9264d-28d1-4b47-9d28-f2e82654f3a9 | `quote` |
-| 253 | `srcitem` | srcitem | `srcitem` | Short | `short` |
-| 254 | `srcbilltype` | srcbilltype | `srcbilltype` | Short | `short` |
-| 255 | `billtype` | billtype | `billtype` | Short | `short` |
-| 256 | `verifystate` | verifystate | `verifystate` | Short | `short` |
-| 257 | `isWfControlled` | 是否WfControlled | `isWfControlled` | Boolean | `switch` |
-| 258 | `code` | 编码 | `code` | String | `text` |
-| 259 | `vouchdate` | vouchdate | `vouchdate` | Date | `date` |
-| 260 | `status` | 状态 | `status` | Short | `short` |
-| 261 | `auditstatus` | auditstatus | `auditstatus` | Short | `short` |
-| 262 | `auditDate` | auditDate | `audit_date` | Date | `date` |
-| 263 | `voucherstatus` | voucherstatus | `voucherstatus` | Short | `short` |
-| 264 | `isinit` | 是否init | `isinit` | Boolean | `switch` |
-| 265 | `pushbill` | pushbill | `pushbill` | Boolean | `switch` |
-| 266 | `olccurrency` | olccurrency | `olccurrency` | 02b45339-eb4a-4a31-a8b5-d32f494f4e8e | `quote` |
-| 267 | `olcratetype` | olcratetype | `olcratetype` | 1eb63781-e244-464d-b9ba-a7a4e1685295 | `quote` |
-| 268 | `olcrate` | olcrate | `olcrate` | Decimal | `number` |
-| 269 | `olcnotemoney` | olcnotemoney | `olcnotemoney` | Decimal | `number` |
-| 270 | `olcsecuritymoney` | olcsecuritymoney | `olcsecuritymoney` | Decimal | `number` |
-| 271 | `olcpoundageamount` | olcpoundageamount | `olcpoundageamount` | Decimal | `number` |
-| 272 | `iselec` | 是否elec | `iselec` | Boolean | `switch` |
-| 273 | `elecsignacc` | elecsignacc | `elecsignacc` | 96da623d-ced9-44d0-8448-45c389add0a1 | `quote` |
-| 274 | `elecinvoicemode` | elecinvoicemode | `elecinvoicemode` | String | `text` |
-| 275 | `elecplanstatus` | elecplanstatus | `elecplanstatus` | String | `text` |
-| 276 | `instructStatus` | instructStatus | `instruct_status` | Short | `short` |
-| 277 | `ecdsStatus` | ecdsStatus | `ecds_status` | String | `text` |
-| 278 | `notetype` | notetype | `notetype` | 1ffb45b4-f3e9-4e02-8fa0-d3429c8d7fb4 | `quote` |
-| 279 | `noteno` | noteno | `noteno` | String | `text` |
-| 280 | `currency` | currency | `currency` | 02b45339-eb4a-4a31-a8b5-d32f494f4e8e | `quote` |
-| 281 | `invoicedate` | invoicedate | `invoicedate` | Date | `date` |
-| 282 | `enddate` | enddate | `enddate` | Date | `date` |
-| 283 | `notemoney` | notemoney | `notemoney` | Decimal | `number` |
-| 284 | `elecinvoicetype` | elecinvoicetype | `elecinvoicetype` | String | `text` |
-| 285 | `invoiceroles` | invoiceroles | `invoiceroles` | Short | `short` |
-| 286 | `invoicerbyorg` | invoicerbyorg | `invoicerbyorg` | eaa75c14-e58f-4b35-9ae5-0032f4a98f54 | `quote` |
-| 287 | `showinvoicer` | showinvoicer | `showinvoicer` | String | `text` |
-| 288 | `invoicerbankacc` | invoicerbankacc | `invoicerbankacc` | fbc20885-a507-45bd-a986-74d3fc28d38a | `quote` |
-| 289 | `showinvoicerbankacc` | showinvoicerbankacc | `showinvoicerbankacc` | String | `text` |
-| 290 | `elecinvoiceaccname` | elecinvoiceaccname | `elecinvoiceaccname` | String | `text` |
-| 291 | `elecinvoicebankname` | elecinvoicebankname | `elecinvoicebankname` | String | `text` |
-| 292 | `elecinvoicebanknum` | elecinvoicebanknum | `elecinvoicebanknum` | String | `text` |
-| 293 | `receiveroles` | receiveroles | `receiveroles` | Short | `short` |
-| 294 | `elecreceivetype` | elecreceivetype | `elecreceivetype` | String | `text` |
-| 295 | `receiverbycust` | receiverbycust | `receiverbycust` | 94b3280a-27a4-485a-b90b-b7bce57c6df2 | `quote` |
-| 296 | `receiverbysupp` | receiverbysupp | `receiverbysupp` | 89bf026e-cc49-4fe7-9a7b-3e8fdcc77c1e | `quote` |
-| 297 | `showreceiver` | showreceiver | `showreceiver` | String | `text` |
-| 298 | `receiverbankacc` | receiverbankacc | `receiverbankacc` | fbc20885-a507-45bd-a986-74d3fc28d38a | `quote` |
-| 299 | `receiverbankaccbycust` | receiverbankaccbycust | `receiverbankaccbycust` | 60cc421e-5605-475b-a829-02fd75c0b189 | `quote` |
-| 300 | `receiverbankaccbysupp` | receiverbankaccbysupp | `receiverbankaccbysupp` | 4b6dcfa2-1d07-407d-a35a-9b219fadf37c | `quote` |
-| 301 | `showreceiverbankacc` | showreceiverbankacc | `showreceiverbankacc` | String | `text` |
-| 302 | `elecreceiveaccname` | elecreceiveaccname | `elecreceiveaccname` | String | `text` |
-| 303 | `elecreceivebankname` | elecreceivebankname | `elecreceivebankname` | String | `text` |
-| 304 | `elecreceivebanknum` | elecreceivebanknum | `elecreceivebanknum` | String | `text` |
-| 305 | `elecreceiveotherbank` | elecreceiveotherbank | `elecreceiveotherbank` | String | `text` |
-| 306 | `acceptanceroles` | acceptanceroles | `acceptanceroles` | Short | `short` |
-| 307 | `elecaccepttype` | elecaccepttype | `elecaccepttype` | String | `text` |
-| 308 | `acceptancerbybank` | acceptancerbybank | `acceptancerbybank` | 47a69dfe-37ef-4ad1-aa19-1d61797a7821 | `quote` |
-| 309 | `acceptancerbyorg` | acceptancerbyorg | `acceptancerbyorg` | eaa75c14-e58f-4b35-9ae5-0032f4a98f54 | `quote` |
-| 310 | `showacceptancer` | showacceptancer | `showacceptancer` | String | `text` |
-| 311 | `acceptbankacc` | acceptbankacc | `acceptbankacc` | fbc20885-a507-45bd-a986-74d3fc28d38a | `quote` |
-| 312 | `showacceptbankacc` | showacceptbankacc | `showacceptbankacc` | String | `text` |
-| 313 | `elecacceptaccname` | elecacceptaccname | `elecacceptaccname` | String | `text` |
-| 314 | `elecacceptbankname` | elecacceptbankname | `elecacceptbankname` | String | `text` |
-| 315 | `elecacceptbanknum` | elecacceptbanknum | `elecacceptbanknum` | String | `text` |
-| 316 | `acceptopenbank` | acceptopenbank | `acceptopenbank` | 47a69dfe-37ef-4ad1-aa19-1d61797a7821 | `quote` |
-| 317 | `showacceptopenbank` | showacceptopenbank | `showacceptopenbank` | String | `text` |
-| 318 | `acceptopenbankname` | acceptopenbankname | `acceptopenbankname` | 47a69dfe-37ef-4ad1-aa19-1d61797a7821 | `quote` |
-| 319 | `showacceptopenbankname` | showacceptopenbankname | `showacceptopenbankname` | String | `text` |
-| 320 | `acceptanceno` | acceptanceno | `acceptanceno` | String | `text` |
-| 321 | `contractno` | contractno | `contractno` | String | `text` |
-| 322 | `elecacceptowner` | elecacceptowner | `elecacceptowner` | Boolean | `switch` |
-| 323 | `elecacceptotherbank` | elecacceptotherbank | `elecacceptotherbank` | String | `text` |
-| 324 | `notedescription` | notedescription | `notedescription` | String | `text` |
-| 325 | `noteflag` | noteflag | `noteflag` | Short | `short` |
-| 326 | `istransfer` | 是否transfer | `istransfer` | Boolean | `switch` |
-| 327 | `buyerinterest` | buyerinterest | `buyerinterest` | Boolean | `switch` |
-| 328 | `notestatus` | notestatus | `notestatus` | Short | `short` |
-| 329 | `securityflag` | securityflag | `securityflag` | Boolean | `switch` |
-| 330 | `securityaccount` | securityaccount | `securityaccount` | fbc20885-a507-45bd-a986-74d3fc28d38a | `quote` |
-| 331 | `securityrate` | securityrate | `securityrate` | Decimal | `number` |
-| 332 | `securitymoney` | securitymoney | `securitymoney` | Decimal | `number` |
-| 333 | `transoutaccount` | transoutaccount | `transoutaccount` | fbc20885-a507-45bd-a986-74d3fc28d38a | `quote` |
-| 334 | `settlemodesec` | settlemodesec | `settlemodesec` | 95f34e90-897c-4bf5-958c-b1c2deaa8aff | `quote` |
-| 335 | `poundageflag` | poundageflag | `poundageflag` | Boolean | `switch` |
-| 336 | `poundageamount` | poundageamount | `poundageamount` | Decimal | `number` |
-| 337 | `poundageaccount` | poundageaccount | `poundageaccount` | fbc20885-a507-45bd-a986-74d3fc28d38a | `quote` |
-| 338 | `openserialno` | openserialno | `openserialno` | String | `text` |
-| 339 | `settlemodepound` | settlemodepound | `settlemodepound` | 95f34e90-897c-4bf5-958c-b1c2deaa8aff | `quote` |
-| 340 | `id` | ID | `id` | Long | `long` |
-| 341 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 342 | `creator` | 创建人 | `creator` | String | `text` |
-| 343 | `createTime` | 创建时间 | `create_time` | DateTime | `timestamp` |
-| 344 | `createDate` | createDate | `create_date` | Date | `date` |
-| 345 | `modifier` | 修改人 | `modifier` | String | `text` |
-| 346 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `timestamp` |
-| 347 | `modifyDate` | modifyDate | `modify_date` | Date | `date` |
-| 348 | `auditor` | auditor | `auditor` | String | `text` |
-| 349 | `auditTime` | auditTime | `audit_time` | DateTime | `timestamp` |
-| 350 | `pk_bankmsg` | pk_bankmsg | `pk_bankmsg` | a8e8326a-317f-4dae-8e68-d372b1437163 | `quote` |
-| 351 | `usemoney` | usemoney | `usemoney` | Decimal | `number` |
-| 352 | `defines` | defines | `` | 35d14c1c-9c69-47d8-87e1-18c169326a44 | `` |
-| 353 | `drftNoteInformationAgreement` | drftNoteInformationAgreement | `` | 920f918a-6d49-4ea1-9ade-8a5ff35cb07b | `` |
-| 354 | `drftNoteInformationContract` | drftNoteInformationContract | `` | fa4b58aa-1f7d-4a4a-bbac-64c4730b29af | `` |
-| 355 | `drftNoteInformationListReasons` | drftNoteInformationListReasons | `` | 034a4297-2e16-426e-989a-0d9373c3c348 | `` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 票据信息 |
+| 物理表 | `drft_noteinformation` |
+| 数据库 schema | `drft` |
+| 所属应用 | `DRFT` |
+| 直连字段 | 355 个 |
+| 子表 | 4 个 |
+| 关联引用 | 116 个 |
 
-## 关联（116 个）
+## 子表
 
-- `impawnersupp` -> `aa.vendor.Vendor` () 
-- `modifierId` -> `base.user.User` () 
-- `drftNoteInformationAgreement` -> `drft.drftnoteinformation.DrftNoteInformationAgreement` (0..n) 
-- `wbs` -> `BGDM.wbs.wbs_doc` () 
-- `accentity` -> `aa.baseorg.OrgMV` () 
-- `settlemodepound` -> `aa.settlemethod.SettleMethod` () 
-- `defines` -> `drft.drftnoteinformation.DrftNoteInformationDefine` (1) 
-- `acceptopenbankname` -> `bd.bank.BankDotVO` () 
-- `designatedpersoncust` -> `aa.merchant.Merchant` () 
-- `principalPayAccount` -> `bd.enterprise.OrgFinBankacctVO` () 
-- `receiverbankaccbysupp` -> `aa.vendor.VendorBank` () 
-- `acceptbankacc` -> `bd.enterprise.OrgFinBankacctVO` () 
-- `invoicerbyfundobject` -> `tmsp.fundbusinobjarchives.FundBusinObjArchives` () 
-- `invoicerbycust` -> `aa.merchant.Merchant` () 
-- `mainid` -> `drft.drftbatchsignnote.BatchSignNote` () 
-- `entrustedPaycustomer` -> `aa.merchant.Merchant` () 
-- `invoicerbyorg` -> `aa.baseorg.OrgMV` () 
-- `tenant` -> `base.tenant.Tenant` () 
-- `costCenter` -> `bd.costcenter.CostCenter` () 
-- `signaccopenbank` -> `bd.bank.BankDotVO` () 
-- `transoutaccount` -> `bd.enterprise.OrgFinBankacctVO` () 
-- `acceptancerbyorg` -> `aa.baseorg.OrgMV` () 
-- `impawneraccbyfundobject` -> `tmsp.fundbusinobjarchives.FundBusinObjArchivesItem` () 
-- `oriPaybyfundobject` -> `tmsp.fundbusinobjarchives.FundBusinObjArchives` () 
-- `receiverbyorg` -> `aa.baseorg.OrgMV` () 
-- `paybankaccbyobject` -> `tmsp.fundbusinobjarchives.FundBusinObjArchivesItem` () 
-- `quicktype` -> `bd.paymenttype.PaymentTypeVO` () 
-- `costproject` -> `bd.expenseitem.ExpenseItem` () 
-- `auditorId` -> `base.user.User` () 
-- `acceptopenbank` -> `bd.bank.BankDotVO` () 
-- `receiverbankacc` -> `bd.enterprise.OrgFinBankacctVO` () 
-- `activity` -> `pgrm.projecttask.ProjectScheduleTask` () 
-- `paybankaccbysupp` -> `aa.vendor.VendorBank` () 
-- `oriPaysupplier` -> `aa.vendor.Vendor` () 
-- `invoicerbankaccbyorg` -> `bd.enterprise.OrgFinBankacctVO` () 
-- `invoicerbankacc` -> `bd.enterprise.OrgFinBankacctVO` () 
-- `currency` -> `bd.currencytenant.CurrencyTenantVO` () 
-- `agentsettlemode` -> `aa.settlemethod.SettleMethod` () 
-- `notetype` -> `drft.billtype.BillType` () 
-- `acceptancerbysupp` -> `aa.vendor.Vendor` () 
-- `paysupplier` -> `aa.vendor.Vendor` () 
-- `acceptbankaccbycust` -> `aa.merchant.AgentFinancial` () 
-- `poundageaccount` -> `bd.enterprise.OrgFinBankacctVO` () 
-- `payInternalUnitAccountId` -> `bd.enterprise.OrgFinBankacctVO` () 
-- `dept` -> `aa.baseorg.DeptMV` () 
-- `acceptancerbyfundobject` -> `tmsp.fundbusinobjarchives.FundBusinObjArchives` () 
-- `invoicerbankaccbycust` -> `aa.merchant.AgentFinancial` () 
-- `entrustedPaybyfundobject` -> `tmsp.fundbusinobjarchives.FundBusinObjArchives` () 
-- `impawnbankaccbycust` -> `aa.merchant.AgentFinancial` () 
-- `senderid` -> `base.user.User` () 
-- `designatedpersonsupp` -> `aa.vendor.Vendor` () 
-- `entrustedPaysupplier` -> `aa.vendor.Vendor` () 
-- `chargetype` -> `bd.paymenttype.PaymentTypeVO` () 
-- `impawnbankaccbybank` -> `bd.enterprise.OrgFinBankacctVO` () 
-- `invoicerbysupp` -> `aa.vendor.Vendor` () 
-- `withdrticketBankmsg` -> `drft.bankResMsg.BankResMsg` () 
-- `drftNoteInformationDef` -> `drft.drftnoteinformation.DrftNoteInformationDef` () 
-- `designatedpersonfund` -> `tmsp.fundbusinobjarchives.FundBusinObjArchives` () 
-- `receiveOpenbankname` -> `bd.bank.BankDotVO` () 
-- `project` -> `bd.project.ProjectVO` () 
-- `operator` -> `bd.staff.Staff` () 
-- `settlemodesec` -> `aa.settlemethod.SettleMethod` () 
-- `receiverbankaccbycust` -> `aa.merchant.AgentFinancial` () 
-- `receiverbyfundobject` -> `tmsp.fundbusinobjarchives.FundBusinObjArchives` () 
-- `olcratetype` -> `bd.exchangeRate.ExchangeRateTypeVO` () 
-- `impawnercust` -> `aa.merchant.Merchant` () 
-- `acceptaccbyfundobject` -> `tmsp.fundbusinobjarchives.FundBusinObjArchivesItem` () 
-- `principalAccentity` -> `aa.baseorg.OrgMV` () 
-- `principalBillAccount` -> `bd.enterprise.OrgFinBankacctVO` () 
-- `oripk_register` -> `drft.drftnoteinformation.DrftNoteInformation` () 
-- `receiverbycust` -> `aa.merchant.Merchant` () 
-- `impawnerbank` -> `bd.bank.BankDotVO` () 
-- `drftNoteInformationContract` -> `drft.drftnoteinformation.DrftNoteInformationContract` (0..n) 
-- `innersecurityaccount` -> `bd.enterprise.OrgFinBankacctVO` () 
-- `pk_bankmsg2` -> `drft.bankResMsg.BankResMsg` () 
-- `receiverbankaccbyorg` -> `bd.enterprise.OrgFinBankacctVO` () 
-- `pk_bankmsg` -> `drft.bankResMsg.BankResMsg` () 
-- `receiveraccbyobject` -> `tmsp.fundbusinobjarchives.FundBusinObjArchivesItem` () 
-- `agentquicktype` -> `bd.paymenttype.PaymentTypeVO` () 
-- `initialRegister` -> `drft.drftnoteinformation.DrftNoteInformation` () 
-- `innerSettleAccount` -> `bd.enterprise.OrgFinBankacctVO` () 
-- `elecsignacc` -> `tmsp.elebankaccountset.EleBankAccountSet` () 
-- `innerreceiveraccount` -> `bd.enterprise.OrgFinBankacctVO` () 
-- `acceptancerbybank` -> `bd.bank.BankDotVO` () 
-- `disableuserid` -> `base.user.User` () 
-- `securityaccount` -> `bd.enterprise.OrgFinBankacctVO` () 
-- `inpoolorg` -> `drft.drftbillpoolagreemen.DrftBillPoolagreemen` () 
-- `billPool` -> `drft.drftbillpoolagreemen.DrftBillPoolagreemen` () 
-- `recallBankmsg` -> `drft.bankResMsg.BankResMsg` () 
-- `creatorId` -> `base.user.User` () 
-- `paybyfundobject` -> `tmsp.fundbusinobjarchives.FundBusinObjArchives` () 
-- `bankName` -> `bd.bank.BankVO` () 
-- `drftNoteInformationListReasons` -> `drft.drftnoteinformation.DrftNoteInformationListReasons` (0..n) 
-- `profitCenter` -> `bd.virtualaccbody.VirtualAccbody` () 
-- `srcPkImpawn` -> `drft.impawnBean.ImpawnBean` () 
-- `payInternalUnitId` -> `org.func.FundsOrg` () 
-- `settlementOrg` -> `org.func.SettlementOrg` () 
-- `circulateid` -> `drft.drftbillcirculate.DrftBillCirculate` () 
-- `invoiceOpenbankname` -> `bd.bank.BankDotVO` () 
-- `paybankaccbycust` -> `aa.merchant.AgentFinancial` () 
-- `paycustomer` -> `aa.merchant.Merchant` () 
-- `impawnbankdot` -> `bd.bank.BankDotVO` () 
-- `signacc` -> `tmsp.elebankaccountset.EleBankAccountSet` () 
-- `olccurrency` -> `bd.currencytenant.CurrencyTenantVO` () 
-- `org` -> `aa.baseorg.OrgMV` () 
-- `oriPaycustomer` -> `aa.merchant.Merchant` () 
-- `ytenant` -> `yht.tenant.YhtTenant` () 
-- `accentityRaw` -> `aa.baseorg.OrgMV` () 
-- `impawnbankaccbysupp` -> `aa.vendor.VendorBank` () 
-- `acceptancerbycust` -> `aa.merchant.Merchant` () 
-- `invoiceraccbyobject` -> `tmsp.fundbusinobjarchives.FundBusinObjArchivesItem` () 
-- `receiverbysupp` -> `aa.vendor.Vendor` () 
-- `bustype` -> `bd.bill.TransType` () 
-- `impawnerfundobject` -> `tmsp.fundbusinobjarchives.FundBusinObjArchives` () 
-- `invoicerbankaccbysupp` -> `aa.vendor.VendorBank` () 
-- `acceptbankaccbysupp` -> `aa.vendor.VendorBank` () 
+| 字段名 | URI | 关系 |
+|--------|-----|------|
+| `drftNoteInformationAgreement` | `drft.drftnoteinformation.DrftNoteInformationAgreement` | composition |
+| `drftNoteInformationListReasons` | `drft.drftnoteinformation.DrftNoteInformationListReasons` | composition |
+| `drftNoteInformationContract` | `drft.drftnoteinformation.DrftNoteInformationContract` | composition |
+| `defines` | `drft.drftnoteinformation.DrftNoteInformationDefine` | composition |
+
+## 关联引用 (116个)
+
+| 字段名 | 引用类型 |
+|--------|---------|
+| `impawnersupp` | `yssupplier.aa_vendor` |
+| `` | `` |
+| `wbs` | `` |
+| `accentity` | `ucf-org-center.bd_fundsorg_na` |
+| `settlemodepound` | `productcenter.aa_settlemethodref` |
+| `acceptopenbankname` | `ucfbasedoc.bd_bankdotref` |
+| `designatedpersoncust` | `` |
+| `principalPayAccount` | `` |
+| `receiverbankaccbysupp` | `yssupplier.aa_vendorbankref` |
+| `acceptbankacc` | `ucfbasedoc.bd_enterprisebankacctref` |
+| `invoicerbyfundobject` | `yonbip-fi-ctmtmsp.tmsp_fundbusinobj_Ref` |
+| `invoicerbycust` | `productcenter.aa_merchantref` |
+| `mainid` | `` |
+| `entrustedPaycustomer` | `productcenter.aa_merchantref` |
+| `invoicerbyorg` | `ucf-org-center.bd_financeorgtreeref_na` |
+| `tenant_id` | `` |
+| `cost_center` | `` |
+| `signaccopenbank` | `ucfbasedoc.bd_bankdotref` |
+| `transoutaccount` | `ucfbasedoc.bd_enterprisebankacctref` |
+| `acceptancerbyorg` | `ucf-org-center.bd_financeorgtreeref_na` |
+| `impawneraccbyfundobject` | `yonbip-fi-ctmtmsp.tmsp_fundbusinobjbank_Ref` |
+| `oriPaybyfundobject` | `` |
+| `receiverbyorg` | `	ucf-org-center.bd_financeorgtreeref_na` |
+| `paybankaccbyobject` | `yonbip-fi-ctmtmsp.tmsp_fundbusinobjbank_Ref` |
+| `quicktype` | `finbd.bd_paymenttyperef` |
+| `costproject` | `finbd.bd_expenseitemref` |
+| `acceptopenbank` | `ucfbasedoc.bd_bankcardref` |
+| `receiverbankacc` | `bd_enterprisebankacctref` |
+| `activity` | `` |
+| `paybankaccbysupp` | `productcenter.aa_vendorbankref` |
+| `oriPaysupplier` | `` |
+| `invoicerbankaccbyorg` | `` |
+| `invoicerbankacc` | `ucfbasedoc.bd_enterprisebankacctref` |
+| `currency` | `ucfbasedoc.bd_currencytenantreflist` |
+| `agentsettlemode` | `` |
+| `notetype` | `drft.drft_billtyperef` |
+| `acceptancerbysupp` | `yssupplier.aa_vendor` |
+| `paysupplier` | `yssupplier.aa_vendor` |
+| `acceptbankaccbycust` | `productcenter.aa_merchantbankref` |
+| `poundageaccount` | `ucfbasedoc.bd_enterprisebankacctref` |
+| `pay_internal_unit_account_id` | `` |
+| `dept` | `ucf-org-center.bd_adminorgsharetreeref` |
+| `acceptancerbyfundobject` | `yonbip-fi-ctmtmsp.tmsp_fundbusinobj_Ref` |
+| `invoicerbankaccbycust` | `productcenter.aa_merchantbankref` |
+| `entrustedPaybyfundobject` | `yonbip-fi-ctmtmsp.tmsp_fundbusinobj_Ref` |
+| `impawnbankaccbycust` | `productcenter.aa_merchantbankref` |
+| `senderid` | `` |
+| `designatedpersonsupp` | `` |
+| `entrustedPaysupplier` | `yssupplier.aa_vendor` |
+| `chargetype` | `finbd.bd_paymenttyperef` |
+| `impawnbankaccbybank` | `bd_enterprisebankacctref` |
+| `invoicerbysupp` | `yssupplier.aa_vendor` |
+| `withdrticketbankmsg` | `drft.drft_instructRef` |
+| `drftnoteinformation_def` | `` |
+| `designatedpersonfund` | `` |
+| `receiveOpenbankname` | `ucfbasedoc.bd_bankdotref` |
+| `project` | `ucfbasedoc.bd_projectNewRef` |
+| `operator` | `aa_operator` |
+| `settlemodesec` | `productcenter.aa_settlemethodref` |
+| `receiverbankaccbycust` | `yssupplier.aa_merchantbankref` |
+| `receiverbyfundobject` | `yonbip-fi-ctmtmsp.tmsp_fundbusinobj_Ref` |
+| `olcratetype` | `ucfbasedoc.bd_exchangeratetyperef` |
+| `impawnercust` | `productcenter.aa_merchantref` |
+| `acceptaccbyfundobject` | `yonbip-fi-ctmtmsp.tmsp_fundbusinobjbank_Ref` |
+| `principalAccentity` | `` |
+| `principalBillAccount` | `` |
+| `oripk_register` | `` |
+| `receiverbycust` | `productcenter.aa_merchantref` |
+| `impawnerbank` | `ucfbasedoc.bd_bankdotref` |
+| `innersecurityaccount` | `` |
+| `pk_bankmsg2` | `drft.drft_instructRef` |
+| `receiverbankaccbyorg` | `ucfbasedoc.bd_enterprisebankacctref` |
+| `pk_bankmsg` | `drft.drft_instructRef` |
+| `receiveraccbyobject` | `yonbip-fi-ctmtmsp.tmsp_fundbusinobjbank_Ref` |
+| `agentquicktype` | `` |
+| `initialRegister` | `` |
+| `inner_settle_account` | `` |
+| `elecsignacc` | `yonbip-fi-ctmtmsp.tmsp_elebankaccountref` |
+| `innerreceiveraccount` | `` |
+| `acceptancerbybank` | `ucfbasedoc.bd_bankdotref` |
+| `disableuserid` | `` |
+| `securityaccount` | `ucfbasedoc.bd_enterprisebankacctref` |
+| `inpoolorg` | `drft.drft_billpoolagreemenref` |
+| `bill_pool` | `drft.drft_billpoolagreemenref` |
+| `recallbankmsg` | `drft.drft_instructRef` |
+| `paybyfundobject` | `yonbip-fi-ctmtmsp.tmsp_fundbusinobj_Ref` |
+| `bankName` | `` |
+| `profit_center` | `` |
+| `src_pk_impawn` | `` |
+| `pay_internal_unit_id` | `` |
+| `settlementOrg` | `` |
+| `circulateid` | `` |
+| `invoiceOpenbankname` | `ucfbasedoc.bd_bankdotref` |
+| `paybankaccbycust` | `productcenter.aa_merchantbankref` |
+| `paycustomer` | `productcenter.aa_merchantref` |
+| `impawnbankdot` | `ucfbasedoc.bd_bankdotref` |
+| `signacc` | `yonbip-fi-ctmtmsp.tmsp_elebankaccountref` |
+| `olccurrency` | `ucfbasedoc.bd_currencytenantreflist` |
+| `org` | `aa_org` |
+| `oriPaycustomer` | `` |
+| `ytenant_id` | `` |
+| `accentity_raw` | `ucf-org-center.bd_financeorgtreeref_na` |
+| `impawnbankaccbysupp` | `aa_vendorbankref` |
+| `acceptancerbycust` | `productcenter.aa_merchantref` |
+| `invoiceraccbyobject` | `yonbip-fi-ctmtmsp.tmsp_fundbusinobjbank_Ref` |
+| `receiverbysupp` | `yssupplier.aa_vendor` |
+| `tradetype` | `transtype.bd_billtyperef` |
+| `impawnerfundobject` | `yonbip-fi-ctmtmsp.tmsp_fundbusinobj_Ref` |
+| `invoicerbankaccbysupp` | `productcenter.aa_vendorbankref` |
+| `acceptbankaccbysupp` | `productcenter.aa_vendorbankref` |
+
+## 继承接口 (4个, 10字段)
+
+- **审批信息** (`base.itf.IApprovalInfo`)
+  - `audit_date` → `audit_date`
+  - `` → ``
+  - `` → ``
+  - `audit_time` → `audit_time`
+- **审批流信息** (`base.itf.IApprovalFlow`)
+  - `` → ``
+  - `` → ``
+  - `` → ``
+- **项目结构属性** (`BGDM.wbs.projectStructureProperties`)
+  - `activity` → `activity`
+  - `wbs` → `wbs`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 355 个直连字段
+
+### 文本字段 (78个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `impawnerfundobjecttpye` | `impawnerfundobjecttpye` | `impawnerfundobjecttpye` | 质权人资金业务对象类型 |
+| `invoicerbyfundobjecttpye` | `invoicerbyfundobjecttpye` | `invoicerbyfundobjecttpye` | 出票人资金业务对象类型 |
+| `paybyfundobjecttpye` | `paybyfundobjecttpye` | `paybyfundobjecttpye` | 付票人资金业务对象类型 |
+| `receiverbyfundobjecttpye` | `receiverbyfundobjecttpye` | `receiverbyfundobjecttpye` | 收票人资金业务对象类型 |
+| `showpaybankacc` | `showpaybankacc` | `showpaybankacc` | 显示付票人银行账号 |
+| `inner_margin_pay_ident_code` | `inner_margin_pay_ident_code` | `innerMarginPayIdentCode` | 内部保证金付款对账码 |
+| `identification_code` | `identification_code` | `identificationCode` | 财资统一对账码 |
+| `inner_margin_rec_ident_code` | `inner_margin_rec_ident_code` | `innerMarginRecIdentCode` | 内部保证金收款对账码 |
+| `bank_poundage_ident_code` | `bank_poundage_ident_code` | `bankPoundageIdentCode` | 银行手续费财资对账码 |
+| `inner_poundage_ident_code` | `inner_poundage_ident_code` | `innerPoundageIdentCode` | 内部手续费财资对账码 |
+| `agent_margin_ident_code` | `agent_margin_ident_code` | `agentMarginIdentCode` | 代理票款财资对账码 |
+| `acceptcreditcode` | `acceptcreditcode` | `acceptcreditcode` | 承兑人统一社会信用代码 |
+| `acceptancerbyfundobjecttpye` | `acceptancerbyfundobjecttpye` | `acceptancerbyfundobjecttpye` | 承兑人资金业务对象类型 |
+| `bill_range` | `bill_range` | `billRange` | 显示区间 |
+| `available_range` | `available_range` | `availableRange` | 可用区间/可用子票号 |
+| `paymentdate` | `paymentdate` | `paymentDate` | 付款期 |
+| `entrustedShowpayunit` | `entrustedShowpayunit` | `entrustedShowpayunit` | 被委托付票单位 |
+| `invoiceno` | `invoiceno` | `invoiceno` | 发票号码 |
+| `surplus_bill_range` | `surplus_bill_range` | `surplusBillRange` | 剩余质押区间 |
+| `in_pool_range` | `in_pool_range` | `inPoolRange` | 在池区间 |
+| `refuseReason` | `refuseReason` | `refuseReason` | 拒收原因 |
+| `oriShowpayunit` | `oriShowpayunit` | `oriShowpayunit` | 显示最初付票单位 |
+| `namelistType` | `namelistType` | `namelistType` | 名单类型 |
+| `controlType` | `controlType` | `controlType` | 名单控制方式 |
+| `issuercreditcode` | `issuercreditcode` | `issuercreditcode` | 出票人统一社会信用代码 |
+| `payeecreditcode` | `payeecreditcode` | `payeecreditcode` | 收票人统一社会信用代码 |
+| `designatedperson` | `designatedperson` | `designatedperson` | 被指定人 |
+| `designatedpersoncreditcode` | `designatedpersoncreditcode` | `designatedpersoncreditcode` | 被指定人统一社会信用代码 |
+| `paymentcommitmentletternumber` | `paymentcommitmentletternumber` | `paymentcommitmentletternumber` | 付款承诺函编号 |
+| `oldnoteno` | `oldnoteno` | `oldnoteno` | 原供票编号 |
+| `residuenoteno` | `residuenoteno` | `residuenoteno` | 剩余供票最新编号 |
+| `reasonname` | `reasonname` | `reasonname` | 名单来源 |
+| `acceptopenbanknumber` | `acceptopenbanknumber` | `acceptopenbanknumber` | 承兑人开户行行号(银行提供) |
+| `protocolno` | `protocolno` | `protocolno` | 协议编号 |
+| `disablenote` | `disablenote` | `disablenote` | 作废原因 |
+| `impawnerother` | `impawnerother` | `impawnerother` | 质押人其他 |
+| `disableusername` | `disableusername` | `disableusername` | 作废人 |
+| `sendername` | `sendername` | `sendername` | 发送人名称 |
+| `serial_num` | `serial_num` | `serialNum` | 业务流水号 |
+| `showInvoiceOpenbankname` | `showInvoiceOpenbankname` | `showInvoiceOpenbankname` | 显示出票人开户行名 |
+| `showReceiveOpenbankname` | `showReceiveOpenbankname` | `showReceiveOpenbankname` | 显示收票人开户行名 |
+| `showimpawnbankacc` | `showimpawnbankacc` | `showimpawnbankacc` | 质权人账号其他 |
+| `showpayunit` | `showpayunit` | `showpayunit` | 付票单位 |
+| `description` | `description` | `description` | 备注 |
+| `` | `code` | `code` | 单据编号 |
+| `elecinvoicemode` | `elecinvoicemode` | `elecinvoicemode` | 票据方式 |
+| `elecplanstatus` | `elecplanstatus` | `elecplanstatus` | 计划开票状态 |
+| `ecds_status` | `ecds_status` | `ecdsStatus` | 银企联电票状态 |
+| `noteno` | `noteno` | `noteno` | 票据号 |
+| `elecinvoicetype` | `elecinvoicetype` | `elecinvoicetype` | 出票人类别 |
+| `showinvoicer` | `showinvoicer` | `showinvoicer` | 出票人 |
+| `showinvoicerbankacc` | `showinvoicerbankacc` | `showinvoicerbankacc` | 出票人银行账号 |
+| `elecinvoiceaccname` | `elecinvoiceaccname` | `elecinvoiceaccname` | 出票人账户名称 |
+| `elecinvoicebankname` | `elecinvoicebankname` | `elecinvoicebankname` | 出票人银行名称 |
+| `elecinvoicebanknum` | `elecinvoicebanknum` | `elecinvoicebanknum` | 出票人银行代码 |
+| `elecreceivetype` | `elecreceivetype` | `elecreceivetype` | 收款人类别 |
+| `showreceiver` | `showreceiver` | `showreceiver` | 收款人 |
+| `showreceiverbankacc` | `showreceiverbankacc` | `showreceiverbankacc` | 收款人银行账号 |
+| `elecreceiveaccname` | `elecreceiveaccname` | `elecreceiveaccname` | 收款人账户名称 |
+| `elecreceivebankname` | `elecreceivebankname` | `elecreceivebankname` | 收款人银行名称 |
+| `elecreceivebanknum` | `elecreceivebanknum` | `elecreceivebanknum` | 收款人银行代码 |
+| `elecreceiveotherbank` | `elecreceiveotherbank` | `elecreceiveotherbank` | 收款人跨行标志 |
+| `elecaccepttype` | `elecaccepttype` | `elecaccepttype` | 承兑人类别 |
+| `showacceptancer` | `showacceptancer` | `showacceptancer` | 承兑人 |
+| `showacceptbankacc` | `showacceptbankacc` | `showacceptbankacc` | 承兑人银行账号 |
+| `elecacceptaccname` | `elecacceptaccname` | `elecacceptaccname` | 承兑人账户名称 |
+| `elecacceptbankname` | `elecacceptbankname` | `elecacceptbankname` | 承兑人银行名称 |
+| `elecacceptbanknum` | `elecacceptbanknum` | `elecacceptbanknum` | 承兑人银行代码 |
+| `showacceptopenbank` | `showacceptopenbank` | `showacceptopenbank` | 承兑人开户银行 |
+| `showacceptopenbankname` | `showacceptopenbankname` | `showacceptopenbankname` | 承兑人开户行名 |
+| `acceptanceno` | `acceptanceno` | `acceptanceno` | 承兑协议号 |
+| `contractno` | `contractno` | `contractno` | 交易合同号 |
+| `elecacceptotherbank` | `elecacceptotherbank` | `elecacceptotherbank` | 承兑人跨行标志 |
+| `notedescription` | `notedescription` | `notedescription` | 票据备注 |
+| `openserialno` | `openserialno` | `openserialno` | 开票线索号 |
+| `` | `creator` | `creator` | 创建人 |
+| `` | `modifier` | `modifier` | 修改人 |
+| `` | `auditor` | `auditor` | 审批人 |
+
+### 引用字段 (111个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `acceptaccbyfundobject` | `acceptaccbyfundobject` | `acceptaccbyfundobject` | 承兑人资金业务对象账号 |
+| `acceptancerbyfundobject` | `acceptancerbyfundobject` | `acceptancerbyfundobject` | 承兑人资金业务对象 |
+| `chargetype` | `chargetype` | `chargetype` | 手续费款项类型 |
+| `impawneraccbyfundobject` | `impawneraccbyfundobject` | `impawneraccbyfundobject` | 质权人资金业务对象账号 |
+| `impawnerfundobject` | `impawnerfundobject` | `impawnerfundobject` | 质权人资金业务对象 |
+| `invoiceraccbyobject` | `invoiceraccbyobject` | `invoiceraccbyobject` | 出票人资金业务对象账号 |
+| `invoicerbyfundobject` | `invoicerbyfundobject` | `invoicerbyfundobject` | 出票人资金业务对象 |
+| `paybankaccbycust` | `paybankaccbycust` | `paybankaccbycust` | 付票人客户银行账号 |
+| `paybankaccbyobject` | `paybankaccbyobject` | `paybankaccbyobject` | 付票人资金业务对象账号 |
+| `paybankaccbysupp` | `paybankaccbysupp` | `paybankaccbysupp` | 付票人供应商银行账号 |
+| `paybyfundobject` | `paybyfundobject` | `paybyfundobject` | 付票人资金业务对象 |
+| `quicktype` | `quicktype` | `quicktype` | 保证金款项类型 |
+| `receiveraccbyobject` | `receiveraccbyobject` | `receiveraccbyobject` | 收票人资金业务对象账号 |
+| `receiverbyfundobject` | `receiverbyfundobject` | `receiverbyfundobject` | 收票人资金业务对象 |
+| `recallbankmsg` | `recallbankmsg` | `recallBankmsg` | 撤回指令信息主键 |
+| `withdrticketbankmsg` | `withdrticketbankmsg` | `withdrticketBankmsg` | 撤票指令信息主键 |
+| `bankName` | `bankName` | `bankName` | 签约银行 |
+| `bill_pool` | `bill_pool` | `billPool` | 票据池 |
+| `inpoolorg` | `inpoolorg` | `inpoolorg` | 入池机构 |
+| `inner_settle_account` | `inner_settle_account` | `innerSettleAccount` | 内部清算账号 |
+| `pay_internal_unit_id` | `pay_internal_unit_id` | `payInternalUnitId` | 付票方内部单位ID |
+| `pay_internal_unit_account_id` | `pay_internal_unit_account_id` | `payInternalUnitAccountId` | 付票方内部单位账号ID |
+| `cost_center` | `cost_center` | `costCenter` | 成本中心 |
+| `profit_center` | `profit_center` | `profitCenter` | 利润中心 |
+| `circulateid` | `circulateid` | `circulateid` | 票据流转信息 |
+| `entrustedPaycustomer` | `entrustedPaycustomer` | `entrustedPaycustomer` | 被委托付票单位客户 |
+| `entrustedPaysupplier` | `entrustedPaysupplier` | `entrustedPaysupplier` | 被委托付票单位供应商 |
+| `entrustedPaybyfundobject` | `entrustedPaybyfundobject` | `entrustedPaybyfundobject` | 被委托付票人资金业务对象 |
+| `src_pk_impawn` | `src_pk_impawn` | `srcPkImpawn` | 原始质押组件 |
+| `pk_bankmsg2` | `pk_bankmsg2` | `pk_bankmsg2` | 不得转让撤销指令信息主键.ID |
+| `oriPaycustomer` | `oriPaycustomer` | `oriPaycustomer` | 最初付票单位客户 |
+| `oriPaysupplier` | `oriPaysupplier` | `oriPaysupplier` | 最初付票单位供应商 |
+| `oriPaybyfundobject` | `oriPaybyfundobject` | `oriPaybyfundobject` | 最初付票人资金业务对象 |
+| `oripk_register` | `oripk_register` | `oripk_register` | 业务收票主键 |
+| `principalAccentity` | `principalAccentity` | `principalAccentity` | 实际用票单位 |
+| `principalBillAccount` | `principalBillAccount` | `principalBillAccount` | 内部票据户 |
+| `principalPayAccount` | `principalPayAccount` | `principalPayAccount` | 内部扣款账户 |
+| `initialRegister` | `initialRegister` | `initialRegister` | 最初业务收票主键 |
+| `designatedpersonsupp` | `designatedpersonsupp` | `designatedpersonsupp` | 被指定人供应商 |
+| `designatedpersoncust` | `designatedpersoncust` | `designatedpersoncust` | 被指定人客户 |
+| `designatedpersonfund` | `designatedpersonfund` | `designatedpersonfund` | 被指定人资金伙伴 |
+| `mainid` | `mainid` | `mainid` | 票据签发id |
+| `settlementOrg` | `settlementOrg` | `settlementOrg` | 结算中心 |
+| `accentity_raw` | `accentity_raw` | `accentityRaw` | 核算会计主体 |
+| `agentquicktype` | `agentquicktype` | `agentquicktype` | 代理款项类型 |
+| `agentsettlemode` | `agentsettlemode` | `agentsettlemode` | 代理结算方式 |
+| `innersecurityaccount` | `innersecurityaccount` | `innersecurityaccount` | 内部保证金账号 |
+| `innerreceiveraccount` | `innerreceiveraccount` | `innerreceiveraccount` | 本方收款账号 |
+| `wbs` | `wbs` | `wbs` | WBS |
+| `activity` | `activity` | `activity` | 活动 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+| `signacc` | `signacc` | `signacc` | 签约账号 |
+| `signaccopenbank` | `signaccopenbank` | `signaccopenbank` | 签约账号开户行 |
+| `acceptancerbycust` | `acceptancerbycust` | `acceptancerbycust` | 承兑人客户 |
+| `acceptancerbysupp` | `acceptancerbysupp` | `acceptancerbysupp` | 承兑人供应商 |
+| `acceptbankaccbycust` | `acceptbankaccbycust` | `acceptbankaccbycust` | 承兑人客户银行账号 |
+| `acceptbankaccbysupp` | `acceptbankaccbysupp` | `acceptbankaccbysupp` | 承兑人供应商银行账号 |
+| `` | `auditorId` | `auditorId` | 审批人 |
+| `` | `creatorId` | `creatorId` | 创建人 |
+| `impawnbankaccbybank` | `impawnbankaccbybank` | `impawnbankaccbybank` | 质权人账号银行 |
+| `impawnbankaccbycust` | `impawnbankaccbycust` | `impawnbankaccbycust` | 质权人账号客户 |
+| `impawnbankaccbysupp` | `impawnbankaccbysupp` | `impawnbankaccbysupp` | 质权人账号供应商 |
+| `impawnbankdot` | `impawnbankdot` | `impawnbankdot` | 质权人银行名称 |
+| `impawnerbank` | `impawnerbank` | `impawnerbank` | 质押人银行 |
+| `disableuserid` | `disableuserid` | `disableuserid` | 作废人id |
+| `impawnercust` | `impawnercust` | `impawnercust` | 质押人客户 |
+| `impawnersupp` | `impawnersupp` | `impawnersupp` | 质押人供应商 |
+| `invoiceOpenbankname` | `invoiceOpenbankname` | `invoiceOpenbankname` | 出票人开户行名 |
+| `invoicerbankaccbycust` | `invoicerbankaccbycust` | `invoicerbankaccbycust` | 出票人客户银行账号 |
+| `invoicerbankaccbyorg` | `invoicerbankaccbyorg` | `invoicerbankaccbyorg` | 出票人企业银行账号 |
+| `invoicerbankaccbysupp` | `invoicerbankaccbysupp` | `invoicerbankaccbysupp` | 出票人供应商银行账号 |
+| `invoicerbycust` | `invoicerbycust` | `invoicerbycust` | 出票人客户 |
+| `invoicerbysupp` | `invoicerbysupp` | `invoicerbysupp` | 出票人供应商 |
+| `` | `modifierId` | `modifierId` | 修改人 |
+| `paycustomer` | `paycustomer` | `paycustomer` | 付票单位客户 |
+| `paysupplier` | `paysupplier` | `paysupplier` | 付票单位供应商 |
+| `receiveOpenbankname` | `receiveOpenbankname` | `receiveOpenbankname` | 收票人开户行名 |
+| `receiverbankaccbyorg` | `receiverbankaccbyorg` | `receiverbankaccbyorg` | 收款人会计主体银行账号 |
+| `receiverbyorg` | `receiverbyorg` | `receiverbyorg` | 收款人会计主体 |
+| `senderid` | `senderid` | `senderid` | 发送人id |
+| `tenant_id` | `tenant_id` | `tenant` | 租户 |
+| `accentity` | `accentity` | `accentity` | 资金组织 |
+| `org` | `org` | `org` | 业务组织id |
+| `dept` | `dept` | `dept` | 部门id |
+| `operator` | `operator` | `operator` | 业务员id |
+| `costproject` | `costproject` | `costproject` | 费用项目id |
+| `project` | `project` | `project` | 项目id |
+| `tradetype` | `tradetype` | `bustype` | 交易类型id |
+| `olccurrency` | `olccurrency` | `olccurrency` | 组织本币id |
+| `olcratetype` | `olcratetype` | `olcratetype` | 组织本币汇率类型id |
+| `elecsignacc` | `elecsignacc` | `elecsignacc` | 电票签约账户id |
+| `notetype` | `notetype` | `notetype` | 票据类型id |
+| `currency` | `currency` | `currency` | 币种id |
+| `invoicerbyorg` | `invoicerbyorg` | `invoicerbyorg` | 出票人id |
+| `invoicerbankacc` | `invoicerbankacc` | `invoicerbankacc` | 出票人银行账号id |
+| `receiverbycust` | `receiverbycust` | `receiverbycust` | 收款人id |
+| `receiverbysupp` | `receiverbysupp` | `receiverbysupp` | 收款人id |
+| `receiverbankacc` | `receiverbankacc` | `receiverbankacc` | 收款人银行账号id |
+| `receiverbankaccbycust` | `receiverbankaccbycust` | `receiverbankaccbycust` | 收款人银行账号id |
+| `receiverbankaccbysupp` | `receiverbankaccbysupp` | `receiverbankaccbysupp` | 收款人银行账号id |
+| `acceptancerbybank` | `acceptancerbybank` | `acceptancerbybank` | 承兑人id |
+| `acceptancerbyorg` | `acceptancerbyorg` | `acceptancerbyorg` | 承兑人id |
+| `acceptbankacc` | `acceptbankacc` | `acceptbankacc` | 承兑人银行账号id |
+| `acceptopenbank` | `acceptopenbank` | `acceptopenbank` | 承兑人开户银行id |
+| `acceptopenbankname` | `acceptopenbankname` | `acceptopenbankname` | 承兑人开户行名id |
+| `securityaccount` | `securityaccount` | `securityaccount` | 保证金账户id |
+| `transoutaccount` | `transoutaccount` | `transoutaccount` | 转出银行账号 |
+| `settlemodesec` | `settlemodesec` | `settlemodesec` | 结算方式ID |
+| `poundageaccount` | `poundageaccount` | `poundageaccount` | 手续费账户 |
+| `settlemodepound` | `settlemodepound` | `settlemodepound` | 结算方式ID |
+| `pk_bankmsg` | `pk_bankmsg` | `pk_bankmsg` | 指令信息主键 |
+
+### 日期字段 (21个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `innerDate` | `innerDate` | `innerDate` | 入池日期 |
+| `settleSuccBizTime` | `settleSuccBizTime` | `settleSuccBizTime` | 结算成功业务时间 |
+| `vouchersEntryDate` | `vouchersEntryDate` | `vouchersEntryDate` | 凭证登账日期 |
+| `businessAccountDate` | `businessAccountDate` | `businessAccountDate` | 收票成功日期 |
+| `settleEndDate` | `settleEndDate` | `settleEndDate` | 结算完成日期 |
+| `signDate` | `signDate` | `signDate` | 签收日期 |
+| `remainEndDate` | `remainEndDate` | `remainEndDate` | 距离到期日期 |
+| `acceptdate` | `acceptdate` | `acceptdate` | 承兑日期 |
+| `gatherdate` | `gatherdate` | `gatherdate` | 收票日期 |
+| `disabledate` | `disabledate` | `disabledate` | 作废日期 |
+| `impawndate` | `impawndate` | `impawndate` | 质押日期 |
+| `impawnenddate` | `impawnenddate` | `impawnenddate` | 质押到期日 |
+| `paybilldate` | `paybilldate` | `paybilldate` | 付票日期 |
+| `senddate` | `senddate` | `senddate` | 发送日期 |
+| `applydate` | `applydate` | `applydate` | 签发日期 |
+| `` | `vouchdate` | `vouchdate` | 单据日期 |
+| `audit_date` | `audit_date` | `auditDate` | 审批日期 |
+| `invoicedate` | `invoicedate` | `invoicedate` | 出票日期 |
+| `enddate` | `enddate` | `enddate` | 到期日期 |
+| `create_date` | `create_date` | `createDate` | 创建日期 |
+| `modify_date` | `modify_date` | `modifyDate` | 修改日期 |
+
+### 布尔字段 (34个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `hasUsedExclusiveBillPool` | `hasUsedExclusiveBillPool` | `hasUsedExclusiveBillPool` | 已使用(票据池独有字段) |
+| `pushSecurity` | `pushSecurity` | `pushSecurity` | 是否推送保证金台账 |
+| `useStwb` | `useStwb` | `useStwb` | 是否集成资金结算 |
+| `new_note_flag` | `new_note_flag` | `newNoteFlag` | 新一代票据 |
+| `ifsepFlow` | `ifsepFlow` | `ifsepFlow` | 设置能否分包流转 |
+| `whitebill` | `whitebill` | `whitebill` | 是否白名单 |
+| `acceptanceInBlackList` | `acceptanceInBlackList` | `acceptanceInBlackList` | 承兑人黑名单 |
+| `acceptanceInWhiteList` | `acceptanceInWhiteList` | `acceptanceInWhiteList` | 承兑人白名单 |
+| `ticketCollectionEnd` | `ticketCollectionEnd` | `ticketCollectionEnd` | 收票完成 |
+| `auditsettlementdrive` | `auditsettlementdrive` | `auditsettlementdrive` | 审批流程是否由结算单驱动 |
+| `sameAccentity` | `sameAccentity` | `sameAccentity` | 同会计主体收票 |
+| `agentopennote` | `agentopennote` | `agentopennote` | 代理开票 |
+| `ticket_collection_completed` | `ticket_collection_completed` | `ticketCollectionCompleted` | 收票完成 |
+| `nextmerchantdesignated` | `nextmerchantdesignated` | `nextmerchantdesignated` | 是否指定下一手客商 |
+| `isHandledSupplement` | `isHandledSupplement` | `isHandledSupplement` | 已办理补单 |
+| `waitsettleoper` | `waitsettleoper` | `waitsettleoper` | 待取消结算 |
+| `iscontributelimit` | `iscontributelimit` | `iscontributelimit` | 是否贡献额度 |
+| `canuseflow` | `canuseflow` | `canuseflow` | 是否走审批流 |
+| `hasimpawn` | `hasimpawn` | `hasimpawn` | 已质押 |
+| `hasused` | `hasused` | `hasused` | 已使用 |
+| `is_auto_accept` | `is_auto_accept` | `isAutoAccept` | 是否自动承兑 |
+| `isEcdsSign` | `isEcdsSign` | `isEcdsSign` | 由电票签收生成 |
+| `ispaybill` | `ispaybill` | `ispaybill` | 已付票 |
+| `returnbill` | `returnbill` | `returnbill` | 回头票 |
+| `blackbill` | `blackbill` | `blackbill` | 黑名单 |
+| `` | `isWfControlled` | `isWfControlled` | 审批流控制 |
+| `isinit` | `isinit` | `isinit` | 是否期初 |
+| `pushbill` | `pushbill` | `pushbill` | 已推单 |
+| `iselec` | `iselec` | `iselec` | 是否直联 |
+| `elecacceptowner` | `elecacceptowner` | `elecacceptowner` | 是否本人承兑 |
+| `istransfer` | `istransfer` | `istransfer` | 可转让 |
+| `buyerinterest` | `buyerinterest` | `buyerinterest` | 买方付息 |
+| `securityflag` | `securityflag` | `securityflag` | 保证金 |
+| `poundageflag` | `poundageflag` | `poundageflag` | 手续费 |
+
+### 整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `noteSettlementStatus` | `noteSettlementStatus` | `noteSettlementStatus` | 代理票款结算状态 |
+| `changecount` | `changecount` | `changecount` | 转手次数 |
+
+### 短整数 (59个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `settlementStatus` | `settlementStatus` | `settlementStatus` | 结算状态 |
+| `impawntype` | `impawntype` | `impawntype` | 质押方式 |
+| `inpooluse` | `inpooluse` | `inpooluse` | 入池用途 |
+| `agent_security_settlement_status` | `agent_security_settlement_status` | `agentSecuritySettlementStatus` | 代理保证金结算状态 |
+| `olc_rate_ops` | `olc_rate_ops` | `olcRateOps` | 组织本币汇率折算方式 |
+| `einner_security_payee_roles` | `einner_security_payee_roles` | `einnerSecurityPayeeRoles` | 内部保证金收款方 |
+| `einner_security_settlement_status` | `einner_security_settlement_status` | `einnerSecuritySettlementStatus` | 内部手续费结算状态 |
+| `securityType` | `securityType` | `securityType` | 保证金分类 |
+| `settledSupplementType` | `settledSupplementType` | `settledSupplementType` | 保证金结算处理模式 |
+| `integratestatus` | `integratestatus` | `integratestatus` | 集成使用状态 |
+| `src_flag` | `src_flag` | `srcFlag` | 来源标识 |
+| `payperiodunit` | `payperiodunit` | `payPeriodUnit` | 付款期单位 |
+| `signnoteinstructtype` | `signnoteinstructtype` | `signnoteInstructType` | 指令类型 |
+| `entrustedPaybillroles` | `entrustedPaybillroles` | `entrustedPaybillroles` | 被委托付票方 |
+| `collecticketstatus` | `collecticketstatus` | `collecticketstatus` | 集票宝状态 |
+| `checkresult` | `checkresult` | `checkresult` | 集票宝对账结果出票 |
+| `bankmsg2Status` | `bankmsg2Status` | `bankmsg2Status` | 不得转让撤销指令状态 |
+| `securitySettlementStatus` | `securitySettlementStatus` | `securitySettlementStatus` | 保证金结算状态 |
+| `paymentway` | `paymentway` | `paymentway` | 付款方式 |
+| `signRefuse` | `signRefuse` | `signRefuse` | 签收/拒收 |
+| `riskPriority` | `riskPriority` | `riskPriority` | 风险策略 |
+| `oriPaybillroles` | `oriPaybillroles` | `oriPaybillroles` | 最初付票方 |
+| `receivebilltype` | `receivebilltype` | `receivebilltype` | 收票类型 |
+| `payTime` | `payTime` | `payTime` | 扣款时机 |
+| `ticket_holding_mode` | `ticket_holding_mode` | `ticketHoldingMode` | 持票模式 |
+| `designatedparty` | `designatedparty` | `designatedparty` | 被指定方 |
+| `interestpaymentmode` | `interestpaymentmode` | `interestpaymentmode` | 付息模式 |
+| `paymenttermtype` | `paymenttermtype` | `paymenttermtype` | 承诺付款期类型 |
+| `checkresultacceptance` | `checkresultacceptance` | `checkresultacceptance` | 集票宝对账结果承兑 |
+| `securitypushtiming` | `securitypushtiming` | `securitypushtiming` | 推送保证金时机 |
+| `budgetstatus` | `budgetstatus` | `budgetstatus` | 预算占用状态 |
+| `budgetactualaction` | `budgetactualaction` | `budgetactualaction` | 预算实占动作 |
+| `handleResult` | `handleResult` | `handleResult` | 办理结果 |
+| `settlesignstatus` | `settlesignstatus` | `settlesignstatus` | 结算选择签发单状态 |
+| `accept_status` | `accept_status` | `acceptStatus` | 承兑状态 |
+| `applytype` | `applytype` | `applyType` | 申请方式 |
+| `billdirection` | `billdirection` | `billdirection` | 票据方向 |
+| `billstatus` | `billstatus` | `billstatus` | 单据状态 |
+| `impawnroles` | `impawnroles` | `impawnroles` | 质押方 |
+| `paybillroles` | `paybillroles` | `paybillroles` | 付票方 |
+| `` | `returncount` | `returncount` | 退回次数 |
+| `securitymode` | `securitymode` | `securitymode` | 保证金来源 |
+| `recallstatus` | `recallstatus` | `recallStatus` | 撤回指令状态 |
+| `withdrticketstatus` | `withdrticketstatus` | `withdrticketStatus` | 撤票指令状态 |
+| `signtype` | `signtype` | `signtype` | 签收类型 |
+| `impawnmode` | `impawnmode` | `impawnmode` | 担保方式 |
+| `srcitem` | `srcitem` | `srcitem` | 事项来源 |
+| `srcbilltype` | `srcbilltype` | `srcbilltype` | 事项类型 |
+| `billtype` | `billtype` | `billtype` | 单据类型 |
+| `` | `verifystate` | `verifystate` | 审批状态 |
+| `` | `status` | `status` | 单据状态 |
+| `auditstatus` | `auditstatus` | `auditstatus` | 审批状态 |
+| `voucherstatus` | `voucherstatus` | `voucherstatus` | 凭证状态 |
+| `instruct_status` | `instruct_status` | `instructStatus` | 指令状态 |
+| `invoiceroles` | `invoiceroles` | `invoiceroles` | 出票方 |
+| `receiveroles` | `receiveroles` | `receiveroles` | 收款方 |
+| `acceptanceroles` | `acceptanceroles` | `acceptanceroles` | 承兑方 |
+| `noteflag` | `noteflag` | `noteflag` | 票据标识 |
+| `notestatus` | `notestatus` | `notestatus` | 票据状态 |
+
+### 长整数 (8个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `bill_range_start` | `bill_range_start` | `billRangeStart` | 开始区间 |
+| `bill_range_end` | `bill_range_end` | `billRangeEnd` | 结束区间 |
+| `src_pk_register` | `src_pk_register` | `srcPkRegister` | 原始票据主键 |
+| `agentSettleDetailId` | `agentSettleDetailId` | `agentSettleDetailId` | 代理待结算明细ID |
+| `holddays` | `holddays` | `holddays` | 持票天数 |
+| `srcbillid` | `srcbillid` | `srcbillid` | 来源单据id |
+| `` | `tplid` | `tplid` | 模板id |
+| `id` | `id` | `id` | ID |
+
+### 数值字段 (31个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `available_quota` | `available_quota` | `availableQuota` | 可用额度 |
+| `impawnAmount` | `impawnAmount` | `impawnAmount` | 质押额度 |
+| `impawnRate` | `impawnRate` | `impawnRate` | 质押率 |
+| `holdbalance` | `holdbalance` | `holdbalance` | 持票余额 |
+| `settle_amount` | `settle_amount` | `settleAmount` | 清算金额 |
+| `ticketbalance` | `ticketbalance` | `ticketbalance` | 出票余额 |
+| `acceptancebalance` | `acceptancebalance` | `acceptancebalance` | 承兑余额 |
+| `inner_security_poundage_amount` | `inner_security_poundage_amount` | `innerSecurityPoundageAmount` | 内部手续费金额 |
+| `ninner_security_poundage_rate` | `ninner_security_poundage_rate` | `ninnerSecurityPoundageRate` | 内部手续费比例% |
+| `poundageRate` | `poundageRate` | `poundageRate` | 手续费比例% |
+| `olcusemoney` | `olcusemoney` | `olcusemoney` | 组织本币可用金额 |
+| `occupycreditamount` | `occupycreditamount` | `occupyCreditAmount` | 占授信金额 |
+| `olcoccupycreditamount` | `olcoccupycreditamount` | `olcOccupyCreditAmount` | 组织本币占授信金额 |
+| `occupycontractamount` | `occupycontractamount` | `occupyContractAmount` | 占担保金额 |
+| `olcoccupycontractamount` | `olcoccupycontractamount` | `olcoccupyContractAmount` | 组织本币占担保金额 |
+| `available_money` | `available_money` | `availableMoney` | 可用金额 |
+| `one_available_money` | `one_available_money` | `oneAvailableMoney` | 最大单笔可操作金额 |
+| `surplus_money` | `surplus_money` | `surplusMoney` | 剩余质押金额 |
+| `in_pool_money` | `in_pool_money` | `inPoolMoney` | 在池金额 |
+| `poolresiduerelease` | `poolresiduerelease` | `poolresiduerelease` | 票据池剩余可释放额度 |
+| `innersecurityaccsum` | `innersecurityaccsum` | `innersecurityaccsum` | 保证金存入金额 |
+| `settleamt` | `settleamt` | `settleamt` | 结算金额 |
+| `olcrate` | `olcrate` | `olcrate` | 组织本币汇率 |
+| `olcnotemoney` | `olcnotemoney` | `olcnotemoney` | 组织本币票面金额 |
+| `olcsecuritymoney` | `olcsecuritymoney` | `olcsecuritymoney` | 组织本币保证金 |
+| `olcpoundageamount` | `olcpoundageamount` | `olcpoundageamount` | 组织本币手续费 |
+| `notemoney` | `notemoney` | `notemoney` | 票面金额 |
+| `securityrate` | `securityrate` | `securityrate` | 保证金比例% |
+| `securitymoney` | `securitymoney` | `securitymoney` | 保证金金额 |
+| `poundageamount` | `poundageamount` | `poundageamount` | 手续费金额 |
+| `usemoney` | `usemoney` | `usemoney` | 可兑付金额 |
+
+### UserDefine (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `drftnoteinformation_def` | `drftnoteinformation_def` | `drftNoteInformationDef` | 票据信息自定义项 |
+
+### timestamp (6个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `disabletime` | `disabletime` | `disabletime` | 作废时间 |
+| `sendtime` | `sendtime` | `sendtime` | 发送时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+| `audit_time` | `audit_time` | `auditTime` | 审批时间 |
+
+### other (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `` | `defines` | 票据信息自由自定义项 |
+| `` | `` | `drftNoteInformationAgreement` | 授信信息 |
+| `` | `` | `drftNoteInformationContract` | 担保信息 |
+| `` | `` | `drftNoteInformationListReasons` | 名单来源 |

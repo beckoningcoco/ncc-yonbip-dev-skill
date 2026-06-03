@@ -1,5 +1,5 @@
 ---
-tags: [BIP, 元数据, 数据字典, vc, vc.variantConfiguration.VariantConfiguration]
+tags: [BIP, 元数据, 数据字典, vc.variantConfiguration.VariantConfiguration]
 created: 2026-06-03
 updated: 2026-06-03
 sources: [元数据API queryByUri]
@@ -9,10 +9,11 @@ last_verified: 2026-06-03
 status: verified
 source_type: api_response
 ---
+
 # 选配参数文件 (`vc.variantConfiguration.VariantConfiguration`)
 
-> ⚡ **平台版本：BIP 旗舰版 V5** — 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `vc_variant_configuration` | 应用: `ED` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`vc_variant_configuration` | domain：`engineeringdata` | 应用：`ED` | 业务对象ID：`351d49a7-d5ff-4d4e-8072-bb656f304f0e`
 
 ## 基本信息
 
@@ -20,101 +21,143 @@ source_type: api_response
 |------|-----|
 | 显示名 | 选配参数文件 |
 | 物理表 | `vc_variant_configuration` |
-| 应用 | `ED` |
-| 元数据类型 | `Class` |
+| 数据库 schema | `engineeringdata` |
+| 所属应用 | `ED` |
+| 直连字段 | 39 个 |
+| 子表 | 2 个 |
+| 关联引用 | 12 个 |
 
-## 主键与编码
+## 子表
 
-| 角色 | 字段 | 列 | 类型 |
-|------|------|-----|------|
-| 主键 | `id` | `id` | Long |
-| 编码 | `code` | `code` | |
+| 字段名 | URI | 关系 |
+|--------|-----|------|
+| `VCComponent` | `vc.variantConfiguration.VariantConfigurationComponent` | composition |
+| `VCAttr` | `vc.variantConfiguration.VariantConfigurationAttr` | composition |
 
-## 部署信息
+## 关联引用 (12个)
 
-- 部署时间: 2026-05-22 23:54:50:000
-- 安装来源: `/app/project_dir/src/manufacturing-server/scripts/db/patch/mongodb/V5_R0_2507/0001_engineeringdata/0010_iuap_common/DML/0270_iuap_metadata/0020_metadata/202604/202603242045_metadata_vc-variantConfiguration_delta.zip`
+| 字段名 | 引用类型 |
+|--------|---------|
+| `bom_id` | `` |
+| `vc_free_cts` | `` |
+| `productId` | `productcenter.productref` |
+| `ytenant_id` | `` |
+| `` | `` |
+| `vc_free_characteristics` | `` |
+| `character_id` | `` |
+| `org_id` | `` |
+| `tenant_id` | `` |
 
-## 术语标记
+## 继承接口 (3个, 10字段)
 
-`isAssigned`, `isExtend`, `ConfigData`
+- **自动编号** (`voucher.base.IAutoCode`)
+  - `` → ``
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+- **审计信息** (`base.itf.IAuditInfo`)
+  - `create_date` → `create_date`
+  - `create_time` → `create_time`
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `modify_date` → `modify_date`
+  - `modify_time` → `modify_time`
 
-## 依赖接口（3 个）
+## 字段列表（按类型分组）
 
-| 接口 | URI | 版本 | 属性数 |
-|------|-----|------|--------|
-| IAuto编码 (`IAutoCode`) | `voucher.base.IAutoCode` | 49 | 1 |
-| IYTenant (`IYTenant`) | `ucfbase.ucfbaseItf.IYTenant` | 40 | 1 |
-| IAuditInfo (`IAuditInfo`) | `base.itf.IAuditInfo` | 340 | 8 |
+> 共 39 个直连字段
 
----
+### 文本字段 (10个)
 
-## 全部属性（39 个）
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `code` | `code` | `code` | 参数文件编号 |
+| `check_derived_material` | `check_derived_material` | `checkDerivedMaterial` | 派生物料检查 |
+| `replace_derived_material` | `replace_derived_material` | `replaceDerivedMaterial` | 替换派生物料环节 |
+| `` | `creator` | `creator` | 创建人 |
+| `` | `modifier` | `modifier` | 最后修改人 |
+| `create_config_type` | `create_config_type` | `createConfigType` | 组件选配文件创建方式 |
+| `sub_version` | `sub_version` | `subVersion` | 替代版本 |
+| `substitute_flag` | `substitute_flag` | `substituteFlag` | 替代版本标识 |
+| `vc_config_type` | `vc_config_type` | `vcConfigType` | 选配文件类型 |
+| `version` | `version` | `version` | 版本 |
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype | 必填 | 可空 |
-|---|--------|--------|-----|------|---------|------|------|
-| 1 | `id` | 主键ID | `id` | Long | `long` |  | true |
-| 2 | `description` | 描述 | `description` | String | `multiLanguage` |  | true |
-| 3 | `productId` | productId | `productId` | 89f3b06e-23df-4403-b4a7-19f99eeeae72 | `quote` |  | true |
-| 4 | `code` | 编码 | `code` | String | `text` |  | true |
-| 5 | `effectiveDate` | effectiveDate(日期) | `effectiveDate` | DateTime | `timestamp` |  | true |
-| 6 | `purpose` | purpose | `purpose` | PurposeEnum | `` |  | true |
-| 7 | `checkDerivedMaterial` | heckDerivedMaterial | `check_derived_material` | String | `text` |  | true |
-| 8 | `replaceDerivedMaterial` | replaceDerivedMaterial | `replace_derived_material` | String | `text` |  | true |
-| 9 | `expiryDate` | expiryDate(日期) | `expiryDate` | DateTime | `timestamp` |  | true |
-| 10 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |  | true |
-| 11 | `creatorId` | 创建人ID | `creatorId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |  | true |
-| 12 | `creator` | 创建人 | `creator` | String | `text` |  | true |
-| 13 | `createTime` | 创建时间 | `create_time` | DateTime | `timestamp` |  | true |
-| 14 | `createDate` | 创建日期 | `create_date` | Date | `date` |  | true |
-| 15 | `modifierId` | 修改人ID | `modifierId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |  | true |
-| 16 | `modifier` | 修改人 | `modifier` | String | `text` |  | true |
-| 17 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `timestamp` |  | true |
-| 18 | `modifyDate` | 修改日期 | `modify_date` | Date | `date` |  | true |
-| 19 | `vcFreeCharacteristics` | vcFreeCharacteristics | `vc_free_characteristics` | 39f8975e-3ec5-4295-90a9-0da6b833e5e6 | `OptionCT` |  | true |
-| 20 | `vouchdate` | vouchdate | `vouchdate` | Date | `date` |  | true |
-| 21 | `VCAttr` | VCAttr | `` | db6dc82c-2be2-4a8b-bafc-f98d76c2fe7b | `` |  |  |
-| 22 | `VCComponent` | VCComponent | `` | b0268271-cf88-4d00-bcff-07c7c70a92ff | `` |  |  |
-| 23 | `bomId` | bomId | `bom_id` | f494c08f-f466-474b-937a-4773d56696ed | `quote` |  | true |
-| 24 | `characterId` | characterId | `character_id` | 1a5d304f-40a4-47a2-a075-f8b5ab6af37b | `quote` |  | true |
-| 25 | `createConfigType` | createConfigType(类型) | `create_config_type` | String | `text` |  | true |
-| 26 | `newVersion` | newVersion | `new_version` | Integer | `int` |  | true |
-| 27 | `orgId` | 组织ID | `org_id` | eaa75c14-e58f-4b35-9ae5-0032f4a98f54 | `quote` |  | true |
-| 28 | `refSupperBom` | refSupperBom | `ref_supper_bom` | Short | `short` |  | true |
-| 29 | `showGroup` | showGroup | `show_group` | Short | `short` |  | true |
-| 30 | `status` | 状态 | `status` | Short | `short` |  | true |
-| 31 | `subVersion` | subVersion | `sub_version` | String | `text` |  | true |
-| 32 | `substituteFlag` | substituteFlag | `substitute_flag` | String | `text` |  | true |
-| 33 | `tenant` | tenant | `tenant_id` | c213cd56-d5de-421f-bae7-d77455b557cd | `quote` | true | true |
-| 34 | `tplid` | tplid | `tplid` | Long | `long` |  | true |
-| 35 | `vcConfigType` | vcConfigType(类型) | `vc_config_type` | String | `text` |  | true |
-| 36 | `vcFreeCts` | vcFreeCts | `vc_free_cts` | 4f52bf42-3815-40fa-b91f-b9039441c1e6 | `UserDefine` |  | true |
-| 37 | `vcType` | vcType(类型) | `vc_type` | Short | `short` |  | true |
-| 38 | `version` | 版本号 | `version` | String | `text` |  | true |
-| 39 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` | true | true |
+### 引用字段 (8个)
 
-## 关联属性（12 个）
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `productId` | `productId` | `productId` | 物料ID |
+| `` | `creatorId` | `creatorId` | 创建人id |
+| `` | `modifierId` | `modifierId` | 最后修改人id |
+| `bom_id` | `bom_id` | `bomId` | BOMID |
+| `character_id` | `character_id` | `characterId` | 特征ID |
+| `org_id` | `org_id` | `orgId` | 组织 |
+| `tenant_id` | `tenant_id` | `tenant` | 租户 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
 
-| # | 字段 | 显示名 | 目标实体 | 列 | 关系 | 多重性 | 组合 | 隔离 | 废弃 |
-|---|------|--------|---------|-----|------|--------|------|------|------|
-| 1 | `bomId` | bomId | `ed.bom.Bom` | `bom_id` | 外键 |  |  | None |  |
-| 2 | `vcFreeCts` | vcFreeCts | `vc.variantConfiguration.VariantConfigFCT` | `vc_free_cts` | 外键 |  |  | None |  |
-| 3 | `productId` | productId | `pc.product.Product` | `productId` | 外键 |  |  | Service |  |
-| 4 | `ytenant` | ytenant | `yht.tenant.YhtTenant` | `ytenant_id` | 外键 |  |  | Service |  |
-| 5 | `creatorId` | 创建人ID | `base.user.User` | `creatorId` | 外键 |  |  | Service |  |
-| 6 | `modifierId` | 修改人ID | `base.user.User` | `modifierId` | 外键 |  |  | Service |  |
-| 7 | `vcFreeCharacteristics` | vcFreeCharacteristics | `vc.variantConfiguration.VcFreeCharacteristics` | `vc_free_characteristics` | 外键 |  |  | None |  |
-| 8 | `characterId` | characterId | `base.character.Character` | `character_id` | 外键 |  |  | Service |  |
-| 9 | `VCComponent` | VCComponent | `vc.variantConfiguration.VariantConfigurationComponent` | `` | VCComponent → variantConfiguration | 0..n | Y | None |  |
-| 10 | `orgId` | 组织ID | `aa.baseorg.OrgMV` | `org_id` | 外键 |  |  | Service |  |
-| 11 | `tenant` | tenant | `base.tenant.Tenant` | `tenant_id` | 外键 |  |  | Service |  |
-| 12 | `VCAttr` | VCAttr | `vc.variantConfiguration.VariantConfigurationAttr` | `` | VCAttr → variantConfiguration | 0..n | Y | None |  |
+### 日期字段 (3个)
 
----
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_date` | `create_date` | `createDate` | 创建日期 |
+| `modify_date` | `modify_date` | `modifyDate` | 最后修改日期 |
+| `` | `vouchdate` | `vouchdate` | 单据日期 |
 
-## SQL 示例
+### 整数 (1个)
 
-```sql
-SELECT id, description, productId, code, effectiveDate, purpose, check_derived_material, replace_derived_material
-FROM vc_variant_configuration
-```
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `new_version` | `new_version` | `newVersion` | 是否最新版本 |
+
+### 短整数 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `ref_supper_bom` | `ref_supper_bom` | `refSupperBom` | 参照超级BOM组件选配 |
+| `show_group` | `show_group` | `showGroup` | 显示分组信息 |
+| `` | `status` | `status` | 单据状态 |
+| `vc_type` | `vc_type` | `vcType` | 选配类型 |
+
+### 长整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+| `` | `tplid` | `tplid` | 模板id |
+
+### multiLanguage (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `description` | `description` | `description` | 参数文件描述 |
+
+### timestamp (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `effectiveDate` | `effectiveDate` | `effectiveDate` | 生效日期 |
+| `expiryDate` | `expiryDate` | `expiryDate` | 失效日期 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 最后修改时间 |
+
+### other (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `purpose` | `purpose` | `purpose` | 用途 |
+| `` | `` | `VCAttr` | 选配参数文件属性模版 |
+| `` | `` | `VCComponent` | 选配参数文件组件模版 |
+
+### OptionCT (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `vc_free_characteristics` | `vc_free_characteristics` | `vcFreeCharacteristics` | 特征组 |
+
+### UserDefine (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `vc_free_cts` | `vc_free_cts` | `vcFreeCts` | 自由项特征组 |

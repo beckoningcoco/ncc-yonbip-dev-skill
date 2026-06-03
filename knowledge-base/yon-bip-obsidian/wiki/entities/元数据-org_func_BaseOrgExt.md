@@ -12,63 +12,101 @@ source_type: api_response
 
 # 业务单元扩展信息 (`org.func.BaseOrgExt`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `org_orgs_ext` | 应用: `GZTORG` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`org_orgs_ext` | domain：`ucf-org-center` | 应用：`GZTORG` | 业务对象ID：`2674508f-710f-4f14-a0ce-940053e8ed05`
 
-## 属性（39 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `id` | ID | `id` | 14302233-1394-4a70-94e1-bed51636f312 | `quote` |
-| 2 | `country` | country | `country` | 8e9602ac-5ca2-4d06-aede-4a0af4c316bf | `quote` |
-| 3 | `addressthree2` | addressthree2 | `addressthree2` | String | `text` |
-| 4 | `addressthree3` | addressthree3 | `addressthree3` | String | `text` |
-| 5 | `addressthree4` | addressthree4 | `addressthree4` | String | `text` |
-| 6 | `addressthree5` | addressthree5 | `addressthree5` | String | `text` |
-| 7 | `addressthree6` | addressthree6 | `addressthree6` | String | `text` |
-| 8 | `establishmentDate` | establishmentDate | `establishment_date` | Date | `date` |
-| 9 | `businessSegment` | businessSegment | `business_segment` | 80da2c28-e9b3-4881-9781-eaa8653ac121 | `quote` |
-| 10 | `industry` | industry | `industry` | cfbad025-2f4a-410a-b0ec-eb67cdf5c89d | `quote` |
-| 11 | `enterpriseSize` | enterpriseSize | `enterprise_size` | 922eac62-07c4-468d-a483-d00e85ee0525 | `quote` |
-| 12 | `creditCode` | credit编码 | `credit_code` | String | `text` |
-| 13 | `fax` | fax | `fax` | String | `text` |
-| 14 | `addresstwo6` | addresstwo6 | `addresstwo6` | String | `text` |
-| 15 | `otherPrincipal` | otherPrincipal | `other_principal` | 4effed83-35f5-4e3b-9be1-092b5ae602e8 | `quote` |
-| 16 | `addresstwo5` | addresstwo5 | `addresstwo5` | String | `text` |
-| 17 | `economyType` | economyType | `economy_type` | b1943fd6-92b8-426f-afa8-074e1d67940c | `quote` |
-| 18 | `addresstwo4` | addresstwo4 | `addresstwo4` | String | `text` |
-| 19 | `addresstwo3` | addresstwo3 | `addresstwo3` | String | `text` |
-| 20 | `addresstwo2` | addresstwo2 | `addresstwo2` | String | `text` |
-| 21 | `addressone6` | addressone6 | `addressone6` | String | `text` |
-| 22 | `addressone2` | addressone2 | `addressone2` | String | `text` |
-| 23 | `addressone3` | addressone3 | `addressone3` | String | `text` |
-| 24 | `addressone4` | addressone4 | `addressone4` | String | `text` |
-| 25 | `addressone5` | addressone5 | `addressone5` | String | `text` |
-| 26 | `addressfour3` | addressfour3 | `addressfour3` | String | `text` |
-| 27 | `addressfour2` | addressfour2 | `addressfour2` | String | `text` |
-| 28 | `addressfour5` | addressfour5 | `addressfour5` | String | `text` |
-| 29 | `addressfour4` | addressfour4 | `addressfour4` | String | `text` |
-| 30 | `addressfour6` | addressfour6 | `addressfour6` | String | `text` |
-| 31 | `province` | province | `province` | 95577e23-979f-4f09-a629-61fea93e576d | `quote` |
-| 32 | `city` | city | `city` | 95577e23-979f-4f09-a629-61fea93e576d | `quote` |
-| 33 | `county` | county | `county` | 95577e23-979f-4f09-a629-61fea93e576d | `quote` |
-| 34 | `addressone` | addressone | `addressone` | String | `multiLanguage` |
-| 35 | `addresstwo` | addresstwo | `addresstwo` | String | `multiLanguage` |
-| 36 | `addressthree` | addressthree | `addressthree` | String | `multiLanguage` |
-| 37 | `addressfour` | addressfour | `addressfour` | String | `multiLanguage` |
-| 38 | `postcode` | postcode | `postcode` | String | `text` |
-| 39 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 业务单元扩展信息 |
+| 物理表 | `org_orgs_ext` |
+| 数据库 schema | `ucf-org-center` |
+| 所属应用 | `GZTORG` |
+| 直连字段 | 39 个 |
+| 子表 | 0 个 |
+| 关联引用 | 11 个 |
 
-## 关联（11 个）
+## 关联引用 (11个)
 
-- `country` -> `bd.country.CountryVO` ()
-- `enterpriseSize` -> `bd.company.CompanyScaleVO` ()
-- `province` -> `bd.region.BaseRegionVO` ()
-- `city` -> `bd.region.BaseRegionVO` ()
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `businessSegment` -> `bd.businessSegment.BusinessSegment` ()
-- `county` -> `bd.region.BaseRegionVO` ()
-- `industry` -> `bd.industry.IndustryCategoryVO` ()
-- `otherPrincipal` -> `bd.staff.Staff` ()
-- `economyType` -> `bd.economics.EconomicsTypeVO` ()
-- `id` -> `org.func.BaseOrg` (1)
+| 字段名 | 引用类型 |
+|--------|---------|
+| `country` | `ucfbasedoc.bd_countryref` |
+| `enterprise_size` | `ucfbasedoc.bd_companyscale_ref` |
+| `province` | `ucfbasedoc.bd_realregionprovinceref` |
+| `city` | `ucfbasedoc.bd_regioncityref` |
+| `ytenant_id` | `` |
+| `business_segment` | `ucf-staff-center.bd_business_segment_ref` |
+| `county` | `ucfbasedoc.bd_regioncityref` |
+| `industry` | `ucfbasedoc.bd_industrycategory_ref` |
+| `other_principal` | `ucf-staff-center.bd_staff_ref` |
+| `economy_type` | `ucfbasedoc.bd_economicstype_ref` |
+| `id` | `` |
+
+## 继承接口 (1个, 1字段)
+
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 39 个直连字段
+
+### 文本字段 (23个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `addressthree2` | `addressthree2` | `addressthree2` | 地址3英文 |
+| `addressthree3` | `addressthree3` | `addressthree3` | 地址3繁体 |
+| `addressthree4` | `addressthree4` | `addressthree4` | 备用地址 |
+| `addressthree5` | `addressthree5` | `addressthree5` | 备用地址 |
+| `addressthree6` | `addressthree6` | `addressthree6` | 备用地址 |
+| `credit_code` | `credit_code` | `creditCode` | 社会统一信用代码 |
+| `fax` | `fax` | `fax` | 传真 |
+| `addresstwo6` | `addresstwo6` | `addresstwo6` | 备用地址 |
+| `addresstwo5` | `addresstwo5` | `addresstwo5` | 备用地址 |
+| `addresstwo4` | `addresstwo4` | `addresstwo4` | 备用地址 |
+| `addresstwo3` | `addresstwo3` | `addresstwo3` | 地址2繁体 |
+| `addresstwo2` | `addresstwo2` | `addresstwo2` | 地址2英文 |
+| `addressone6` | `addressone6` | `addressone6` | 备用地址 |
+| `addressone2` | `addressone2` | `addressone2` | 地址1英文 |
+| `addressone3` | `addressone3` | `addressone3` | 地址1繁体 |
+| `addressone4` | `addressone4` | `addressone4` | 备用地址 |
+| `addressone5` | `addressone5` | `addressone5` | 备用地址 |
+| `addressfour3` | `addressfour3` | `addressfour3` | 地址4繁体 |
+| `addressfour2` | `addressfour2` | `addressfour2` | 地址4英文 |
+| `addressfour5` | `addressfour5` | `addressfour5` | 备用地址 |
+| `addressfour4` | `addressfour4` | `addressfour4` | 备用地址 |
+| `addressfour6` | `addressfour6` | `addressfour6` | 备用地址 |
+| `postcode` | `postcode` | `postcode` | 邮编 |
+
+### 引用字段 (11个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | 主键 |
+| `country` | `country` | `country` | 国家/地区 |
+| `business_segment` | `business_segment` | `businessSegment` | 业务板块 |
+| `industry` | `industry` | `industry` | 所属行业 |
+| `enterprise_size` | `enterprise_size` | `enterpriseSize` | 企业规模 |
+| `other_principal` | `other_principal` | `otherPrincipal` | 其他负责人 |
+| `economy_type` | `economy_type` | `economyType` | 经济类型 |
+| `province` | `province` | `province` | 省/州 |
+| `city` | `city` | `city` | 城市 |
+| `county` | `county` | `county` | 区县 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 日期字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `establishment_date` | `establishment_date` | `establishmentDate` | 设立日期 |
+
+### multiLanguage (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `addressone` | `addressone` | `addressone` | 地址1 |
+| `addresstwo` | `addresstwo` | `addresstwo` | 地址2 |
+| `addressthree` | `addressthree` | `addressthree` | 地址3 |
+| `addressfour` | `addressfour` | `addressfour` | 地址4 |

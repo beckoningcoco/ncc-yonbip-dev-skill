@@ -12,22 +12,56 @@ source_type: api_response
 
 # 项目适用范围 (`bd.project.ProjectApplyRange`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `bd_project_applyrange` | 应用: `DPMPRJ` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`bd_project_applyrange` | domain：`ucfbasedoc` | 应用：`DPMPRJ` | 业务对象ID：``
 
-## 属性（6 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `id` | ID | `id` | String | `text` |
-| 2 | `rangeOrgId` | rangeOrgID | `org_id` | 14302233-1394-4a70-94e1-bed51636f312 | `quote` |
-| 3 | `projectId` | projectID | `project_id` | b1e7cbf6-094a-4200-b451-36bfa3ac3ff4 | `quote` |
-| 4 | `isCreator` | 是否Creator | `iscreator` | Integer | `int` |
-| 5 | `dr` | 逻辑删除 | `dr` | Integer | `int` |
-| 6 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 项目适用范围 |
+| 物理表 | `bd_project_applyrange` |
+| 数据库 schema | `ucfbasedoc` |
+| 所属应用 | `DPMPRJ` |
+| 直连字段 | 6 个 |
+| 子表 | 0 个 |
+| 关联引用 | 3 个 |
 
-## 关联（3 个）
+## 关联引用 (3个)
 
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `projectId` -> `bd.project.ProjectVO` (0..n)
-- `rangeOrgId` -> `org.func.BaseOrg` ()
+| 字段名 | 引用类型 |
+|--------|---------|
+| `ytenant_id` | `` |
+| `project_id` | `` |
+| `org_id` | `ucf-org-center.org_pure_tree_ref` |
+
+## 继承接口 (2个, 1字段)
+
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+- **逻辑删除(待废除)** (`basedoc.basedocItf.LogicDelete`)
+
+## 字段列表（按类型分组）
+
+> 共 6 个直连字段
+
+### 文本字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+
+### 引用字段 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `org_id` | `org_id` | `rangeOrgId` | 组织 |
+| `project_id` | `project_id` | `projectId` | 项目 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户 |
+
+### 整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iscreator` | `iscreator` | `isCreator` | 是否创建人名称 |
+| `dr` | `dr` | `dr` | 删除状态 |

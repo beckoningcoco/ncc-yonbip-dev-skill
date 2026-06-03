@@ -12,117 +12,206 @@ source_type: api_response
 
 # 营销活动活动费用 (`mka.activity.ActivityInfo`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `mka_activity_info` | 应用: `MKA` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`mka_activity_info` | domain：`yycrm` | 应用：`MKA` | 业务对象ID：``
 
-## 属性（72 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `allowOverage` | allowOverage | `allowOverage` | Boolean | `switch` |
-| 2 | `amountsIncurred` | amountsIncurred | `amountsIncurred` | Decimal | `number` |
-| 3 | `activityInfoDefineCharacter` | activityInfoDefineCharacter | `activityInfoDefineCharacter` | dd8d10d3-a350-43c7-a9a9-262e5726fbd5 | `UserDefine` |
-| 4 | `advanceCustomer` | advanceCustomer | `advanceCustomer` | 94b3280a-27a4-485a-b90b-b7bce57c6df2 | `quote` |
-| 5 | `advancePayMode` | advancePayMode | `advancePayMode` | String | `singleOption` |
-| 6 | `source` | source | `source` | String | `text` |
-| 7 | `isReplenishGoods` | 是否ReplenishGoods | `is_replenish_goods` | Boolean | `switch` |
-| 8 | `bankAccountCustomer` | bankAccountCustomer | `bank_account_cust` | 60cc421e-5605-475b-a829-02fd75c0b189 | `quote` |
-| 9 | `allowSettle` | allowSettle | `allow_settle` | Boolean | `switch` |
-| 10 | `settleStatus` | settleStatus | `settle_status` | Short | `short` |
-| 11 | `sourceid` | sourceid | `sourceid` | Long | `long` |
-| 12 | `sourceautoid` | sourceautoid | `sourceautoid` | Long | `long` |
-| 13 | `upcode` | upcode | `upcode` | String | `text` |
-| 14 | `makeRuleCode` | makeRule编码 | `makerule_code` | String | `text` |
-| 15 | `sourceMainPubts` | sourceMainPubts | `sourceMainPubts` | DateTime | `timestamp` |
-| 16 | `groupTaskKey` | groupTaskKey | `groupTaskKey` | String | `text` |
-| 17 | `advanceSettledAmount` | advanceSettledAmount | `advanceSettledAmount` | Decimal | `number` |
-| 18 | `bNeedSettle` | bNeedSettle | `bNeedSettle` | Boolean | `switch` |
-| 19 | `activityPlanCost` | activityPlanCost | `activity_plan_cost` | 79306112-3428-443d-9f29-c82391f812fc | `quote` |
-| 20 | `productDefineCharacter` | productDefineCharacter | `productDefineCharacter` | 605799f4-0df2-4bae-91b0-4cdb20fe3285 | `FreeCT` |
-| 21 | `materialClass` | materialClass | `materialClass` | b295ef54-c421-4865-aca3-f5a9207a8d50 | `quote` |
-| 22 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 23 | `businessPeriod` | businessPeriod | `businessPeriod` | 420990f0-03d4-400a-b15f-bda5ebf94edf | `quote` |
-| 24 | `assumeCustomer` | assumeCustomer | `assumeCustomer` | 94b3280a-27a4-485a-b90b-b7bce57c6df2 | `quote` |
-| 25 | `attachmentId` | 附件ID | `attachmentId` | String | `text` |
-| 26 | `bankAccountPerson` | bankAccountPerson | `bankAccountPerson` | e1db328d-c25b-49de-8aad-33400dc10e4b | `quote` |
-| 27 | `bankAccountVendor` | bankAccountVendor | `bankAccountVendor` | 4b6dcfa2-1d07-407d-a35a-9b219fadf37c | `quote` |
-| 28 | `consultExpenseAmount` | consultExpenseAmount | `consultExpenseAmount` | Decimal | `number` |
-| 29 | `consultExpenseRate` | consultExpenseRate | `consultExpenseRate` | Decimal | `number` |
-| 30 | `consultSaleAmount` | consultSaleAmount | `consultSaleAmount` | Decimal | `number` |
-| 31 | `isSettleComplated` | 是否SettleComplated | `isSettleComplated` | Boolean | `switch` |
-| 32 | `standardExpenseRate` | standardExpenseRate | `standardExpenseRate` | Decimal | `number` |
-| 33 | `tenant` | tenant | `tenant_id` | c213cd56-d5de-421f-bae7-d77455b557cd | `quote` |
-| 34 | `id` | ID | `id` | Long | `long` |
-| 35 | `activityId` | activityID | `activityId` | 924ae32c-2a09-4ec0-aff9-5959ec1f8024 | `quote` |
-| 36 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 37 | `lineNo` | lineNo | `lineNo` | Decimal | `number` |
-| 38 | `dimension_terminal` | dimension_terminal | `dimension_terminal` | 16e4e14c-ab05-4ee5-bbb8-c67351c9a8b3 | `quote` |
-| 39 | `dimension_customer` | dimension_customer | `dimension_customer` | 94b3280a-27a4-485a-b90b-b7bce57c6df2 | `quote` |
-| 40 | `dimension_region` | dimension_region | `dimension_region` | 75fb7b76-fdb5-4e87-ab0d-e4215a299634 | `quote` |
-| 41 | `dimension_terminal_chain` | dimension_terminal_chain | `dimension_terminal_chain` | ba7bad3b-8619-4d8c-8659-5d1bf82cc9f9 | `quote` |
-| 42 | `dimension_expense_item` | dimension_expense_item | `dimension_expense_item` | d78cdbfa-0424-4dc3-a995-5c8624e1a560 | `quote` |
-| 43 | `dimension_expense_itemType` | dimension_expense_itemType | `dimension_expense_itemType` | f21b5eab-a129-49f6-ae72-9f9a2f415134 | `quote` |
-| 44 | `product` | product | `product` | 89f3b06e-23df-4403-b4a7-19f99eeeae72 | `quote` |
-| 45 | `productClass` | productClass | `productClass` | 5ad8fc93-4e6b-409f-a70f-462efa6fcee9 | `quote` |
-| 46 | `unit` | unit | `unit` | 9ea02a0b-3a48-4051-bcbe-59c7bcc7a25b | `quote` |
-| 47 | `unitInvest` | unitInvest | `unitInvest` | Decimal | `number` |
-| 48 | `quality` | quality | `quality` | Decimal | `number` |
-| 49 | `applyAmount` | applyAmount | `applyAmount` | Decimal | `number` |
-| 50 | `approveAmount` | approveAmount | `approveAmount` | Decimal | `number` |
-| 51 | `settlementType` | settlementType | `settlementType` | CustomerTypeEnum | `singleOption` |
-| 52 | `settle_customer` | settle_customer | `settle_customer` | 94b3280a-27a4-485a-b90b-b7bce57c6df2 | `quote` |
-| 53 | `settle_vendor` | settle_vendor | `settle_vendor` | 89bf026e-cc49-4fe7-9a7b-3e8fdcc77c1e | `quote` |
-| 54 | `settle_person` | settle_person | `settle_person` | 4effed83-35f5-4e3b-9be1-092b5ae602e8 | `quote` |
-| 55 | `bankAccount` | bankAccount | `bankAccount` | String | `text` |
-| 56 | `bankType` | bankType | `bankType` | b7ee7189-ed97-48d5-91e4-808228664429 | `quote` |
-| 57 | `assumeOrg` | assumeOrg | `assumeOrg` | 14302233-1394-4a70-94e1-bed51636f312 | `quote` |
-| 58 | `asumeDept` | asumeDept | `asumeDept` | a4352e3c-3eda-4539-a7a9-ec00799be118 | `quote` |
-| 59 | `assumeRate` | assumeRate | `assumeRate` | Decimal | `number` |
-| 60 | `assumeAmount` | assumeAmount | `assumeAmount` | Decimal | `number` |
-| 61 | `settledAmount` | settledAmount | `settledAmount` | Decimal | `number` |
-| 62 | `freezeAmount` | freezeAmount | `freezeAmount` | Decimal | `number` |
-| 63 | `payMode` | payMode | `payMode` | String | `singleOption` |
-| 64 | `productLine` | productLine | `productLine` | fcdf5213-a995-4874-928f-ff97bcfa4b91 | `quote` |
-| 65 | `expectedSaleAmount` | expectedSaleAmount | `expectedSaleAmount` | Decimal | `number` |
-| 66 | `expectedExpenseRate` | expectedExpenseRate | `expectedExpenseRate` | Decimal | `number` |
-| 67 | `isRejected` | 是否Rejected | `isRejected` | Boolean | `switch` |
-| 68 | `rejectReason` | rejectReason | `rejectReason` | String | `text` |
-| 69 | `planExpenseInfo` | planExpenseInfo | `planExpenseInfo` | bc854c2f-71eb-4157-ac77-bc3fe9868baf | `quote` |
-| 70 | `planExpenseInfo_lineNo` | planExpenseInfo_lineNo | `planExpenseInfo_lineNo` | String | `text` |
-| 71 | `activityInfoProperty` | activityInfoProperty | `` | defeaf94-8167-4d58-bb2e-0acd7332b36c | `` |
-| 72 | `freeDefine` | freeDefine | `` | 4ff9ac6d-35e1-4b9e-96a9-938dec7d0fd7 | `` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 营销活动活动费用 |
+| 物理表 | `mka_activity_info` |
+| 数据库 schema | `yycrm` |
+| 所属应用 | `MKA` |
+| 直连字段 | 72 个 |
+| 子表 | 2 个 |
+| 关联引用 | 32 个 |
 
-## 关联（32 个）
+## 子表
 
-- `dimension_region` -> `aa.salearea.SaleArea` ()
-- `planExpenseInfo` -> `mka.marketingplan.EstimateCost` ()
-- `dimension_expense_item` -> `bd.expenseitem.ExpenseItem` ()
-- `assumeOrg` -> `org.func.BaseOrg` ()
-- `dimension_customer` -> `aa.merchant.Merchant` ()
-- `productLine` -> `pc.productline.ProductLine` ()
-- `activityId` -> `mka.activity.Activity` (0..n)
-- `assumeCustomer` -> `aa.merchant.Merchant` ()
-- `activityInfoDefineCharacter` -> `mka.activity.ActivityInfoDefineCharacter` ()
-- `activityPlanCost` -> `mka.activityplan.ActivityPlanCost` ()
-- `tenant` -> `base.tenant.Tenant` ()
-- `bankAccountVendor` -> `aa.vendor.VendorBank` ()
-- `advanceCustomer` -> `aa.merchant.Merchant` ()
-- `materialClass` -> `pc.cls.ManagementClass` ()
-- `product` -> `pc.product.Product` ()
-- `settle_vendor` -> `aa.vendor.Vendor` ()
-- `productClass` -> `pc.cls.PresentationClass` ()
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `bankType` -> `bd.bank.BankVO` ()
-- `productDefineCharacter` -> `mka.activity.ActivityFeeProductDefineCharacter` ()
-- `settle_person` -> `bd.staff.Staff` ()
-- `bankAccountPerson` -> `bd.staff.StaffBankAcct` ()
-- `businessPeriod` -> `bd.business.BusinessPeriodVO` ()
-- `unit` -> `pc.unit.Unit` ()
-- `freeDefine` -> `mka.activity.ActivityInfoFreeDefine` (1)
-- `dimension_expense_itemType` -> `bd.expenseitem.ExpenseItemType` ()
-- `settle_customer` -> `aa.merchant.Merchant` ()
-- `dimension_terminal_chain` -> `aa.store.ChainSystem` ()
-- `dimension_terminal` -> `aa.store.Store` ()
-- `bankAccountCustomer` -> `aa.merchant.AgentFinancial` ()
-- `activityInfoProperty` -> `mka.activity.ActivityInfoProperty` (1)
-- `asumeDept` -> `bd.adminOrg.AdminOrgVO` ()
+| 字段名 | URI | 关系 |
+|--------|-----|------|
+| `freeDefine` | `mka.activity.ActivityInfoFreeDefine` | composition |
+| `activityInfoProperty` | `mka.activity.ActivityInfoProperty` | composition |
+
+## 关联引用 (32个)
+
+| 字段名 | 引用类型 |
+|--------|---------|
+| `dimension_region` | `productcenter.aa_salearearef` |
+| `planExpenseInfo` | `` |
+| `dimension_expense_item` | `finbd.bd_expenseitemref` |
+| `assumeOrg` | `ucf-org-center.bd_salesorg_na` |
+| `dimension_customer` | `yycrm.cust_customerref` |
+| `productLine` | `productcenter.pc_productlineref` |
+| `activityId` | `` |
+| `assumeCustomer` | `` |
+| `activityInfoDefineCharacter` | `` |
+| `activity_plan_cost` | `` |
+| `tenant_id` | `` |
+| `bankAccountVendor` | `yssupplier.aa_vendorbankref` |
+| `advanceCustomer` | `` |
+| `materialClass` | `` |
+| `product` | `productcenter.pc_productquerytreeref` |
+| `settle_vendor` | `yssupplier.aa_vendor` |
+| `productClass` | `productcenter.pc_presentationclassref` |
+| `ytenant_id` | `` |
+| `bankType` | `ucfbasedoc.bd_bankcard` |
+| `productDefineCharacter` | `` |
+| `settle_person` | `ucf-staff-center.bd_staff_ref` |
+| `bankAccountPerson` | `ucf-staff-center.bd_staffbankaccref` |
+| `businessPeriod` | `` |
+| `unit` | `productcenter.pc_unitref` |
+| `` | `` |
+| `dimension_expense_itemType` | `finbd.bd_expenseitemtyperef` |
+| `settle_customer` | `yycrm.cust_customerref` |
+| `dimension_terminal_chain` | `yxybase.aa_chainsystemref` |
+| `dimension_terminal` | `yxybase.aa_storeterminal` |
+| `bank_account_cust` | `productcenter.aa_merchantagentfinancialref` |
+| `asumeDept` | `ucf-org-center.bd_adminorgsharetreeref` |
+
+## 继承接口 (3个, 9字段)
+
+- **租户相关** (`base.itf.ITenant`)
+  - `tenant_id` → `tenant_id`
+- **统一租户接口(扩展)** (`ucfbase.ucfbaseItf.IYTenantExt`)
+  - `ytenant_id` → `ytenant_id`
+- **生单回写** (`base.itf.IBackWrite`)
+  - `groupTaskKey` → `groupTaskKey`
+  - `makerule_code` → `makerule_code`
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `sourceMainPubts` → `sourceMainPubts`
+  - `` → ``
+
+## 字段列表（按类型分组）
+
+> 共 72 个直连字段
+
+### 文本字段 (8个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `source` | `source` | `source` | 父级单据类型 |
+| `` | `upcode` | `upcode` | 上游单据号 |
+| `makerule_code` | `makerule_code` | `makeRuleCode` | 生单规则编号 |
+| `groupTaskKey` | `groupTaskKey` | `groupTaskKey` | 分组任务KEY |
+| `attachmentId` | `attachmentId` | `attachmentId` | 附件 |
+| `bankAccount` | `bankAccount` | `bankAccount` | 银行账号 |
+| `rejectReason` | `rejectReason` | `rejectReason` | 批复意见 |
+| `planExpenseInfo_lineNo` | `planExpenseInfo_lineNo` | `planExpenseInfo_lineNo` | 方案费用行 |
+
+### 引用字段 (28个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `advanceCustomer` | `advanceCustomer` | `advanceCustomer` | 代垫商家 |
+| `bank_account_cust` | `bank_account_cust` | `bankAccountCustomer` | 客户银行账户 |
+| `activity_plan_cost` | `activity_plan_cost` | `activityPlanCost` | 计划活动费用主键 |
+| `materialClass` | `materialClass` | `materialClass` | 物料分类 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+| `businessPeriod` | `businessPeriod` | `businessPeriod` | 费用期间 |
+| `assumeCustomer` | `assumeCustomer` | `assumeCustomer` | 承担商家 |
+| `bankAccountPerson` | `bankAccountPerson` | `bankAccountPerson` | 个人银行账号 |
+| `bankAccountVendor` | `bankAccountVendor` | `bankAccountVendor` | 供应商银行账号 |
+| `tenant_id` | `tenant_id` | `tenant` | 租户 |
+| `activityId` | `activityId` | `activityId` | 主表id |
+| `dimension_terminal` | `dimension_terminal` | `dimension_terminal` | 终端id |
+| `dimension_customer` | `dimension_customer` | `dimension_customer` | 客户id |
+| `dimension_region` | `dimension_region` | `dimension_region` | 区域id |
+| `dimension_terminal_chain` | `dimension_terminal_chain` | `dimension_terminal_chain` | 所属系统id |
+| `dimension_expense_item` | `dimension_expense_item` | `dimension_expense_item` | 费用项id |
+| `dimension_expense_itemType` | `dimension_expense_itemType` | `dimension_expense_itemType` | 费用项类别id |
+| `product` | `product` | `product` | 商品id |
+| `productClass` | `productClass` | `productClass` | 商品分类id |
+| `unit` | `unit` | `unit` | 计量单位id |
+| `settle_customer` | `settle_customer` | `settle_customer` | 结算客户id |
+| `settle_vendor` | `settle_vendor` | `settle_vendor` | 结算供应商id |
+| `settle_person` | `settle_person` | `settle_person` | 结算个人id |
+| `bankType` | `bankType` | `bankType` | 银行类别 |
+| `assumeOrg` | `assumeOrg` | `assumeOrg` | 承担组织id |
+| `asumeDept` | `asumeDept` | `asumeDept` | 承担部门id |
+| `productLine` | `productLine` | `productLine` | 产品线id |
+| `planExpenseInfo` | `planExpenseInfo` | `planExpenseInfo` | 方案费用子表id |
+
+### 布尔字段 (6个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `allowOverage` | `allowOverage` | `allowOverage` | 允许超额发生 |
+| `is_replenish_goods` | `is_replenish_goods` | `isReplenishGoods` | 货补商品 |
+| `allow_settle` | `allow_settle` | `allowSettle` | 允许超额结算 |
+| `bNeedSettle` | `bNeedSettle` | `bNeedSettle` | 需结算 |
+| `isSettleComplated` | `isSettleComplated` | `isSettleComplated` | 已结算完毕 |
+| `isRejected` | `isRejected` | `isRejected` | 驳回标识 |
+
+### 枚举字段 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `advancePayMode` | `advancePayMode` | `advancePayMode` | 代垫兑付方式 |
+| `settlementType` | `settlementType` | `settlementType` | 结算对象类型 |
+| `payMode` | `payMode` | `payMode` | 兑付方式 |
+
+### 短整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `settle_status` | `settle_status` | `settleStatus` | 结算状态 |
+
+### 长整数 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `sourceid` | `sourceid` | 上游单据主表id |
+| `` | `sourceautoid` | `sourceautoid` | 上游单据子表id |
+| `id` | `id` | `id` | id |
+
+### 数值字段 (17个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `amountsIncurred` | `amountsIncurred` | `amountsIncurred` | 发生金额 |
+| `advanceSettledAmount` | `advanceSettledAmount` | `advanceSettledAmount` | 代垫已结算金额 |
+| `consultExpenseAmount` | `consultExpenseAmount` | `consultExpenseAmount` | 参考费用额 |
+| `consultExpenseRate` | `consultExpenseRate` | `consultExpenseRate` | 参考费率 |
+| `consultSaleAmount` | `consultSaleAmount` | `consultSaleAmount` | 参考销售额 |
+| `standardExpenseRate` | `standardExpenseRate` | `standardExpenseRate` | 标准费率 |
+| `lineNo` | `lineNo` | `lineNo` | 子表行号 |
+| `unitInvest` | `unitInvest` | `unitInvest` | 单位投入 |
+| `quality` | `quality` | `quality` | 数量 |
+| `applyAmount` | `applyAmount` | `applyAmount` | 申请金额 |
+| `approveAmount` | `approveAmount` | `approveAmount` | 批复金额 |
+| `assumeRate` | `assumeRate` | `assumeRate` | 承担比例(%) |
+| `assumeAmount` | `assumeAmount` | `assumeAmount` | 承担金额 |
+| `settledAmount` | `settledAmount` | `settledAmount` | 已结算金额 |
+| `freezeAmount` | `freezeAmount` | `freezeAmount` | 冻结金额 |
+| `expectedSaleAmount` | `expectedSaleAmount` | `expectedSaleAmount` | 预计销售金额 |
+| `expectedExpenseRate` | `expectedExpenseRate` | `expectedExpenseRate` | 预计费率(%) |
+
+### UserDefine (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `activityInfoDefineCharacter` | `activityInfoDefineCharacter` | `activityInfoDefineCharacter` | 自定义项特征属性组 |
+
+### timestamp (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `sourceMainPubts` | `sourceMainPubts` | `sourceMainPubts` | 时间戳 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+
+### FreeCT (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `productDefineCharacter` | `productDefineCharacter` | `productDefineCharacter` | 活动费用物料自定义项 |
+
+### other (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `` | `activityInfoProperty` | 实际费用子表填报明细 |
+| `` | `` | `freeDefine` | 营销活动子表自由自定义项 |

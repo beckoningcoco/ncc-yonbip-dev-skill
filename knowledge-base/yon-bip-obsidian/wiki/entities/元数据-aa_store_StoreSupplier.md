@@ -12,23 +12,58 @@ source_type: api_response
 
 # 供货商家 (`aa.store.StoreSupplier`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `mp_storesupplier` | 应用: `Marketingpublic` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`mp_storesupplier` | domain：`yxybase` | 应用：`Marketingpublic` | 业务对象ID：``
 
-## 属性（6 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `id` | ID | `id` | Long | `long` |
-| 2 | `supplier` | supplier | `iSupplierID` | 94b3280a-27a4-485a-b90b-b7bce57c6df2 | `quote` |
-| 3 | `store` | store | `iStoreId` | 16e4e14c-ab05-4ee5-bbb8-c67351c9a8b3 | `quote` |
-| 4 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 5 | `tenant` | tenant | `tenant_id` | c213cd56-d5de-421f-bae7-d77455b557cd | `quote` |
-| 6 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 供货商家 |
+| 物理表 | `mp_storesupplier` |
+| 数据库 schema | `yxybase` |
+| 所属应用 | `Marketingpublic` |
+| 直连字段 | 6 个 |
+| 子表 | 0 个 |
+| 关联引用 | 4 个 |
 
-## 关联（4 个）
+## 关联引用 (4个)
 
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `supplier` -> `aa.merchant.Merchant` ()
-- `store` -> `aa.store.Store` (0..n)
-- `tenant` -> `base.tenant.Tenant` ()
+| 字段名 | 引用类型 |
+|--------|---------|
+| `ytenant_id` | `` |
+| `iSupplierID` | `productcenter.aa_merchantoutref` |
+| `iStoreId` | `` |
+| `tenant_id` | `` |
+
+## 继承接口 (2个, 2字段)
+
+- **租户相关** (`base.itf.ITenant`)
+  - `tenant_id` → `tenant_id`
+- **统一租户接口(扩展)** (`ucfbase.ucfbaseItf.IYTenantExt`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 6 个直连字段
+
+### 引用字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iSupplierID` | `iSupplierID` | `supplier` | 供货商家 |
+| `iStoreId` | `iStoreId` | `store` | 主表主键 |
+| `tenant_id` | `tenant_id` | `tenant` | 租户 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 长整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+
+### timestamp (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubts` | `pubts` | `pubts` | 时间戳 |

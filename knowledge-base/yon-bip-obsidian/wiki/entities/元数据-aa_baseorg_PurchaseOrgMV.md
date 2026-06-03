@@ -12,46 +12,101 @@ source_type: api_response
 
 # 采购组织 (`aa.baseorg.PurchaseOrgMV`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `org_purchase` | 应用: `GZTORG` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`org_purchase` | domain：`ucf-org-center` | 应用：`GZTORG` | 业务对象ID：``
 
-## 属性（30 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `code` | 编码 | `code` | String | `text` |
-| 2 | `createDate` | 创建日期 | `creationtime` | Date | `date` |
-| 3 | `createTime` | 创建时间 | `creationtime` | DateTime | `timestamp` |
-| 4 | `creator` | 创建人 | `creator` | String | `text` |
-| 5 | `customerId` | customerID | `dr` | Integer | `int` |
-| 6 | `dr` | 逻辑删除 | `dr` | Short | `short` |
-| 7 | `eaiCode` | eai编码 | `tenantid` | String | `text` |
-| 8 | `erpCode` | erp编码 | `tenantid` | String | `text` |
-| 9 | `externalorg` | externalorg | `external_org` | Integer | `int` |
-| 10 | `fullname` | fullname | `name` | String | `multiLanguage` |
-| 11 | `id` | ID | `id` | String | `text` |
-| 12 | `isEnd` | 是否End | `isEnd` | Integer | `int` |
-| 13 | `isGlobal` | 是否Global | `isEnd` | Integer | `int` |
-| 14 | `level` | 层级 | `level` | Integer | `int` |
-| 15 | `modifier` | 修改人 | `modifier` | String | `text` |
-| 16 | `modifyDate` | 修改日期 | `modifiedtime` | Date | `date` |
-| 17 | `modifyTime` | 修改时间 | `modifiedtime` | DateTime | `timestamp` |
-| 18 | `name` | 名称 | `name` | String | `multiLanguage` |
-| 19 | `org` | org | `orgid` | eaa75c14-e58f-4b35-9ae5-0032f4a98f54 | `quote` |
-| 20 | `orgFunc` | orgFunc | `tenantid` | String | `text` |
-| 21 | `parent` | parent | `parentid` | 528ae807-a9d3-4f2a-9ee7-1db3e5eddc01 | `quote` |
-| 22 | `path` | path | `id` | String | `text` |
-| 23 | `principal` | principal | `principal` | String | `text` |
-| 24 | `shortname` | shortname | `shortname` | String | `multiLanguage` |
-| 25 | `sort` | 排序 | `displayorder` | Integer | `int` |
-| 26 | `stopstatus` | stopstatus | `enable` | Integer | `int` |
-| 27 | `stoptime` | stoptime | `modifiedtime` | DateTime | `timestamp` |
-| 28 | `tenant` | tenant | `tenantid` | String | `text` |
-| 29 | `tenantid` | tenantid | `tenantid` | String | `text` |
-| 30 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 采购组织 |
+| 物理表 | `org_purchase` |
+| 数据库 schema | `ucf-org-center` |
+| 所属应用 | `GZTORG` |
+| 直连字段 | 30 个 |
+| 子表 | 0 个 |
+| 关联引用 | 3 个 |
 
-## 关联（3 个）
+## 关联引用 (3个)
 
-- `parent` -> `aa.baseorg.PurchaseOrgMV` ()
-- `org` -> `aa.baseorg.OrgMV` ()
-- `ytenant` -> `yht.tenant.YhtTenant` ()
+| 字段名 | 引用类型 |
+|--------|---------|
+| `parentid` | `` |
+| `orgid` | `` |
+| `ytenant_id` | `` |
+
+## 继承接口 (2个, 2字段)
+
+- **UCF公共租户相关** (`basedoc.basedocItf.BasedocITenant`)
+  - `tenantid` → `tenantid`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 30 个直连字段
+
+### 文本字段 (11个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `code` | `code` | `code` | 编码 |
+| `creator` | `creator` | `creator` | 创建人 |
+| `tenantid` | `tenantid` | `eaiCode` | EAI编码 |
+| `tenantid` | `tenantid` | `erpCode` | erp编码 |
+| `id` | `id` | `id` | 主键id |
+| `modifier` | `modifier` | `modifier` | 修改人 |
+| `tenantid` | `tenantid` | `orgFunc` | 组织职能 |
+| `id` | `id` | `path` | 路径 |
+| `principal` | `principal` | `principal` | 负责人 |
+| `tenantid` | `tenantid` | `tenant` | 租户标识 |
+| `tenantid` | `tenantid` | `tenantid` | 租户标识 |
+
+### 引用字段 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `orgid` | `orgid` | `org` | 基础组织ID |
+| `parentid` | `parentid` | `parent` | 上级组织 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 日期字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `creationtime` | `creationtime` | `createDate` | 创建日期 |
+| `modifiedtime` | `modifiedtime` | `modifyDate` | 修改日期 |
+
+### 整数 (7个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dr` | `dr` | `customerId` | 客户ID |
+| `external_org` | `external_org` | `externalorg` | 外部组织 |
+| `isEnd` | `isEnd` | `isEnd` | 是否末级 |
+| `isEnd` | `isEnd` | `isGlobal` | 是否全局 |
+| `level` | `level` | `level` | 层级 |
+| `displayorder` | `displayorder` | `sort` | 排序号 |
+| `enable` | `enable` | `stopstatus` | 停用状态 |
+
+### 短整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dr` | `dr` | `dr` | 逻辑删除标识 |
+
+### timestamp (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `creationtime` | `creationtime` | `createTime` | 创建时间 |
+| `modifiedtime` | `modifiedtime` | `modifyTime` | 修改时间 |
+| `modifiedtime` | `modifiedtime` | `stoptime` | 停用时间 |
+
+### multiLanguage (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `name` | `name` | `fullname` | 组织名称 |
+| `name` | `name` | `name` | 名称 |
+| `shortname` | `shortname` | `shortname` | 简称 |

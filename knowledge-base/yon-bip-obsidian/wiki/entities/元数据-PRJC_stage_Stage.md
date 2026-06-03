@@ -12,31 +12,90 @@ source_type: api_response
 
 # 项目阶段档案 (`PRJC.stage.Stage`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `prjc_project_stage` | 应用: `PRJC` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`prjc_project_stage` | domain：`yonbip-pm-projectme` | 应用：`PRJC` | 业务对象ID：`c2534282-a9bf-4bfd-b825-fc7b070fe68d`
 
-## 属性（15 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `code` | 编码 | `code` | String | `text` |
-| 2 | `createTime` | 创建时间 | `create_time` | DateTime | `dateTime` |
-| 3 | `creator` | 创建人 | `creator` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 4 | `defaultFlag` | defaultFlag | `default_flag` | Integer | `int` |
-| 5 | `disablets` | disablets | `disablets` | DateTime | `dateTime` |
-| 6 | `dr` | 逻辑删除 | `dr` | Short | `short` |
-| 7 | `enable` | enable | `enable` | sys_intboolean | `singleOption` |
-| 8 | `enablets` | enablets | `enablets` | DateTime | `dateTime` |
-| 9 | `id` | ID | `id` | String | `text` |
-| 10 | `memo` | 备注 | `memo` | String | `text` |
-| 11 | `modifier` | 修改人 | `modifier` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 12 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `dateTime` |
-| 13 | `name` | 名称 | `name` | String | `text` |
-| 14 | `pubts` | 时间戳 | `pubts` | DateTime | `dateTime` |
-| 15 | `ytenantId` | ytenantID | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 项目阶段档案 |
+| 物理表 | `prjc_project_stage` |
+| 数据库 schema | `yonbip-pm-projectme` |
+| 所属应用 | `PRJC` |
+| 直连字段 | 15 个 |
+| 子表 | 0 个 |
+| 关联引用 | 3 个 |
 
-## 关联（3 个）
+## 关联引用 (3个)
 
-- `creator` -> `base.user.BipUser` ()
-- `modifier` -> `base.user.BipUser` ()
-- `ytenantId` -> `yht.tenant.YhtTenant` ()
+| 字段名 | 引用类型 |
+|--------|---------|
+| `creator` | `bip-usercenter.bip_user_ref` |
+| `modifier` | `bip-usercenter.bip_user_ref` |
+| `ytenant_id` | `` |
+
+## 继承接口 (4个, 9字段)
+
+- **逻辑删除** (`iuap.busiObj.LogicDelete`)
+  - `dr` → `dr`
+- **统一租户接口** (`iuap.busiObj.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+- **审计信息** (`iuap.busiObj.IAuditInfo`)
+  - `create_time` → `create_time`
+  - `creator` → `creator`
+  - `modifier` → `modifier`
+  - `modify_time` → `modify_time`
+- **档案状态** (`iuap.busiObj.IEnable`)
+  - `disablets` → `disablets`
+  - `enable` → `enable`
+  - `enablets` → `enablets`
+
+## 字段列表（按类型分组）
+
+> 共 15 个直连字段
+
+### 文本字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `code` | `code` | `code` | 编码 |
+| `id` | `id` | `id` | 主键 |
+| `memo` | `memo` | `memo` | 备注 |
+| `name` | `name` | `name` | 名称 |
+
+### 引用字段 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `creator` | `creator` | `creator` | 创建人 |
+| `modifier` | `modifier` | `modifier` | 修改人 |
+| `ytenant_id` | `ytenant_id` | `ytenantId` | 租户id |
+
+### 日期时间 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `disablets` | `disablets` | `disablets` | 停用时间 |
+| `enablets` | `enablets` | `enablets` | 启用时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+
+### 枚举字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `enable` | `enable` | `enable` | 档案状态 |
+
+### 整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `default_flag` | `default_flag` | `defaultFlag` | 是否默认 |
+
+### 短整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dr` | `dr` | `dr` | 逻辑删除 |

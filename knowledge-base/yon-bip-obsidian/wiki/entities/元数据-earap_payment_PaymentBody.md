@@ -9,165 +9,263 @@ last_verified: 2026-06-03
 status: verified
 source_type: api_response
 ---
+
 # 付款单明细信息 (`earap.payment.PaymentBody`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBip），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `ap_payment_b` | 应用: `EAP`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`ap_payment_b` | domain：`yonbip-fi-earapbill` | 应用：`EAP` | 业务对象ID：`548e9989-20b1-473c-ba02-9284b575a695`
 
-## 属性（111 个）
+## 基本信息
 
-| # | 字段 | 显示名 | 列 | 类型 | biztype |
-|---|------|--------|-----|------|---------|
-| 1 | `taxCodeId` | tax编码ID | `tax_code_id` | 3f7c3856-5b00-4506-b458-a64eed0d3bfb | `quote` |
-| 2 | `clmContractLibId` | clmContractLibID | `clm_contract_lib_id` | a2b72a3c-8c65-4b56-8e8f-35821ac27556 | `quote` |
-| 3 | `bizFlowMakeBillCode` | bizFlowMakeBill编码 | `bizflow_makebillcode` | String | `text` |
-| 4 | `blnSettlePatch` | blnSettlePatch | `bln_settle_patch` | Boolean | `switch` |
-| 5 | `blnSettleRefund` | blnSettleRefund | `bln_settle_refund` | BlnSettleRefundEnum | `singleOption` |
-| 6 | `checkNo` | checkNo | `check_no` | String | `text` |
-| 7 | `contractNo` | contractNo | `contract_no` | String | `text` |
-| 8 | `cooperateNo` | cooperateNo | `cooperate_no` | String | `text` |
-| 9 | `costCenter` | costCenter | `cost_center_id` | 872630ba-e8f4-4080-817d-8fc9a6958733 | `quote` |
-| 10 | `demanderProCenter` | demanderProCenter | `demander_procenter_id` | e33ec72a-3857-4167-89e2-a437168ed3bb | `quote` |
-| 11 | `dept` | dept | `dept_id` | a4352e3c-3eda-4539-a7a9-ec00799be118 | `quote` |
-| 12 | `dtcGtxId` | dtcGtxID | `dtc_gtxid` | String | `text` |
-| 13 | `dtcStatus` | dtcStatus | `dtc_status` | Integer | `int` |
-| 14 | `employee` | employee | `employee_id` | 78bff1de-ddf1-4814-90de-b0b5f1eac78a | `quote` |
-| 15 | `employeeBankAccount` | employeeBankAccount | `employee_bank_account_id` | e1db328d-c25b-49de-8aad-33400dc10e4b | `quote` |
-| 16 | `enterpriseBankAccount` | enterpriseBankAccount | `enterprise_bank_account_id` | fbc20885-a507-45bd-a986-74d3fc28d38a | `quote` |
-| 17 | `enterpriseCashAccount` | enterpriseCashAccount | `enterprise_cash_account_id` | 39f4ff02-fea2-4a92-adf2-37d02207f799 | `quote` |
-| 18 | `exchangeRate` | exchangeRate | `exchange_rate` | Decimal | `number` |
-| 19 | `exchangeRateDate` | exchangeRate日期 | `exchange_rate_date` | String | `date` |
-| 20 | `exchangeRateType` | exchangeRateType | `exchange_rate_type_id` | 1eb63781-e244-464d-b9ba-a7a4e1685295 | `quote` |
-| 21 | `expenseItem` | expenseItem | `expense_item_id` | d78cdbfa-0424-4dc3-a995-5c8624e1a560 | `quote` |
-| 22 | `expireDate` | expire日期 | `expire_date` | String | `date` |
-| 23 | `extRowNo` | extRowNo | `ext_row_no` | String | `text` |
-| 24 | `freeChId` | freeChID | `free_ch_id` | 8719faa9-1ade-4b68-8248-a30a024f4cf9 | `UserDefine` |
-| 25 | `funder` | funder | `funder_id` | e969728a-efe8-49db-86b0-5f8e18c2f098 | `quote` |
-| 26 | `funderBankAccount` | funderBankAccount | `funder_bank_account_id` | c5eba128-e930-4602-897a-30d3a049390e | `quote` |
-| 27 | `headerId` | headerID | `header_id` | f49cb723-973a-4687-b17d-bd37178b92b3 | `quote` |
-| 28 | `invoiceNo` | invoiceNo | `invoice_no` | String | `text` |
-| 29 | `issueNo` | 是否sueNo | `issue_no` | Integer | `int` |
-| 30 | `localSettleAmount` | localSettleAmount | `local_settle_amount` | Decimal | `number` |
-| 31 | `localTaxAmount` | localTaxAmount | `local_tax_amount` | Decimal | `number` |
-| 32 | `localTaxExcludedAmount` | localTaxExcludedAmount | `local_tax_excluded_amount` | Decimal | `number` |
-| 33 | `localTaxIncludedAmount` | localTaxIncludedAmount | `local_tax_included_amount` | Decimal | `number` |
-| 34 | `localWhtaxAmount` | localWhtaxAmount | `local_whtax_amount` | Decimal | `number` |
-| 35 | `material` | material | `material_id` | 89f3b06e-23df-4403-b4a7-19f99eeeae72 | `quote` |
-| 36 | `noteDate` | note日期 | `note_date` | String | `date` |
-| 37 | `noteNo` | noteNo | `note_no` | 188a8035-1815-4024-b1f9-e60be16249fc | `quote` |
-| 38 | `noteType` | noteType | `note_type_id` | 1ffb45b4-f3e9-4e02-8fa0-d3429c8d7fb4 | `quote` |
-| 39 | `objectBankAccountNo` | objectBankAccountNo | `object_bank_account_no` | String | `text` |
-| 40 | `objectType` | objectType | `object_type` | ObjectTypeApEnum | `singleOption` |
-| 41 | `orderNo` | orderNo | `order_no` | String | `text` |
-| 42 | `org` | org | `org_id` | 14302233-1394-4a70-94e1-bed51636f312 | `quote` |
-| 43 | `orgCurrency` | orgCurrency | `org_currency_id` | 02b45339-eb4a-4a31-a8b5-d32f494f4e8e | `quote` |
-| 44 | `oriBillId` | oriBillID | `ori_bill_id` | String | `text` |
-| 45 | `oriBillNo` | oriBillNo | `ori_bill_no` | String | `text` |
-| 46 | `oriBillRowId` | oriBillRowID | `ori_bill_row_id` | String | `text` |
-| 47 | `oriBillType` | oriBillType | `ori_bill_type` | String | `text` |
-| 48 | `oriCurrency` | oriCurrency | `ori_currency_id` | 02b45339-eb4a-4a31-a8b5-d32f494f4e8e | `quote` |
-| 49 | `oriOccupyAmount` | oriOccupyAmount | `ori_occupy_amount` | Decimal | `number` |
-| 50 | `oriSettleAmount` | oriSettleAmount | `ori_settle_amount` | Decimal | `number` |
-| 51 | `oriSettleRefundAmount` | oriSettleRefundAmount | `ori_settle_refund_amount` | Decimal | `number` |
-| 52 | `oriSettleRejectAmount` | oriSettleRejectAmount | `ori_settle_reject_amount` | Decimal | `number` |
-| 53 | `oriTaxAmount` | oriTaxAmount | `ori_tax_amount` | Decimal | `number` |
-| 54 | `oriTaxExcludedAmount` | oriTaxExcludedAmount | `ori_tax_excluded_amount` | Decimal | `number` |
-| 55 | `oriTaxIncludedAmount` | oriTaxIncludedAmount | `ori_tax_included_amount` | Decimal | `number` |
-| 56 | `oriWhtaxAmount` | oriWhtaxAmount | `ori_whtax_amount` | Decimal | `number` |
-| 57 | `partner` | partner | `partner_id` | c1627369-6457-4828-883d-756b79bd0f46 | `quote` |
-| 58 | `project` | project | `project_id` | b1e7cbf6-094a-4200-b451-36bfa3ac3ff4 | `quote` |
-| 59 | `quickType` | quickType | `quick_type_id` | 14b092f3-5d27-4a47-82a0-d6bad074c9f1 | `quote` |
-| 60 | `quickTypeCode` | quickType编码 | `quick_type_code` | String | `text` |
-| 61 | `relateCheckBill` | relateCheckBill | `brelate_check_bill` | Boolean | `switch` |
-| 62 | `remarks` | remarks | `remarks` | String | `text` |
-| 63 | `retailer` | retailer | `retailer_name` | String | `text` |
-| 64 | `rowNo` | rowNo | `row_no` | Decimal | `number` |
-| 65 | `settleDate` | settle日期 | `settle_date` | Date | `dateTime` |
-| 66 | `settleMode` | settleMode | `settle_mode_id` | 95f34e90-897c-4bf5-958c-b1c2deaa8aff | `quote` |
-| 67 | `settleRejectType` | settleRejectType | `settle_reject_type` | SettleRejectTypeEnum | `singleOption` |
-| 68 | `settleState` | settleState | `settle_state` | SettleStateEnum | `singleOption` |
-| 69 | `shop` | shop | `shop_id` | String | `text` |
-| 70 | `sourceGrandId` | sourceGrandID | `sourcegrand_id` | String | `text` |
-| 71 | `srcBillId` | srcBillID | `src_bill_id` | String | `text` |
-| 72 | `srcBillNo` | srcBillNo | `src_bill_no` | String | `text` |
-| 73 | `srcBillRowAmount` | srcBillRowAmount | `src_bill_row_amount` | Decimal | `number` |
-| 74 | `srcBillRowId` | srcBillRowID | `src_bill_row_id` | String | `text` |
-| 75 | `srcBillType` | srcBillType | `src_bill_type` | String | `text` |
-| 76 | `srcClaimId` | srcClaimID | `src_claim_id` | String | `text` |
-| 77 | `srcExeDetailId` | srcExeDetailID | `src_exe_detail_id` | String | `text` |
-| 78 | `srcOrderRowNo` | srcOrderRowNo | `src_order_row_no` | Decimal | `number` |
-| 79 | `staff` | staff | `staff_id` | 78bff1de-ddf1-4814-90de-b0b5f1eac78a | `quote` |
-| 80 | `supplier` | supplier | `supplier_id` | 89bf026e-cc49-4fe7-9a7b-3e8fdcc77c1e | `quote` |
-| 81 | `supplierBankAccount` | supplierBankAccount | `supplier_bank_account_id` | 4b6dcfa2-1d07-407d-a35a-9b219fadf37c | `quote` |
-| 82 | `supplierProCenter` | supplierProCenter | `supplier_procenter_id` | e33ec72a-3857-4167-89e2-a437168ed3bb | `quote` |
-| 83 | `taxRate` | taxRate | `tax_rate` | Decimal | `number` |
-| 84 | `taxSubject` | taxSubject | `tax_subject_id` | 709cd092-3dd4-49ca-9eb9-7b8888551810 | `quote` |
-| 85 | `verifyAmount` | verifyAmount | `verify_amount` | Decimal | `number` |
-| 86 | `verifyCurrency` | verifyCurrency | `verify_currency_id` | 02b45339-eb4a-4a31-a8b5-d32f494f4e8e | `quote` |
-| 87 | `whtax` | whtax | `whtax_id` | aaae292d-ebbc-4b8f-a9f7-b67bff16c947 | `quote` |
-| 88 | `exchangeRateOps` | exchangeRateOps | `exchange_rate_ops` | Integer | `int` |
-| 89 | `activity` | activity | `activity` | b4a90beb-49ed-4301-b12e-9221d0d12fd1 | `quote` |
-| 90 | `wbs` | wbs | `wbs` | 145cc7d2-79cf-4f3a-934c-c03b46d0fd42 | `quote` |
-| 91 | `withHoldingTaxItem` | withHoldingTaxItem | `` | 88867866-b3dc-49ba-821f-73aa6719dd7e | `` |
-| 92 | `id` | ID | `id` | String | `text` |
-| 93 | `pubts` | 时间戳 | `pubts` | DateTime | `dateTime` |
-| 94 | `bizFlowInstanceId` | bizFlowInstanceID | `bizflowinstance_id` | String | `text` |
-| 95 | `bizflowId` | bizflowID | `bizflow_id` | String | `text` |
-| 96 | `bizflowName` | bizflow名称 | `bizflowname` | String | `text` |
-| 97 | `sourceBusiObj` | sourceBusiObj | `sourcebusiobj` | String | `text` |
-| 98 | `sourceChildId` | sourceChildID | `sourcechild_id` | String | `text` |
-| 99 | `sourceCode` | source编码 | `sourcecode` | String | `text` |
-| 100 | `sourceId` | sourceID | `source_id` | String | `text` |
-| 101 | `firstBusiObj` | firstBusiObj | `firstbusiobj` | String | `text` |
-| 102 | `firstChildId` | firstChildID | `firstchild_id` | String | `text` |
-| 103 | `firstCode` | first编码 | `firstcode` | String | `text` |
-| 104 | `firstId` | firstID | `first_id` | String | `text` |
-| 105 | `createTime` | 创建时间 | `create_time` | DateTime | `dateTime` |
-| 106 | `creator` | 创建人 | `creator` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 107 | `modifier` | 修改人 | `modifier` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 108 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `dateTime` |
-| 109 | `ytenantId` | ytenantID | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 110 | `dr` | 逻辑删除 | `dr` | Short | `short` |
-| 111 | `taxCalculationResultList` | taxCalculationResultList | `` | 08a46952-2d1c-44ab-b444-7e0571e3f66a | `` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 付款单明细信息 |
+| 物理表 | `ap_payment_b` |
+| 数据库 schema | `yonbip-fi-earapbill` |
+| 所属应用 | `EAP` |
+| 直连字段 | 111 个 |
+| 子表 | 2 个 |
+| 关联引用 | 39 个 |
 
-## 关联（39 个）
+## 子表
 
-- `expenseItem` -> `bd.expenseitem.ExpenseItem` () [废]
-- `funder` -> `tmsp.fundbusinobjarchives.FundBusinObjArchives` () [废]
-- `oriCurrency` -> `bd.currencytenant.CurrencyTenantVO` () [废]
-- `activity` -> `pgrm.projecttask.ProjectScheduleTask` () [废]
-- `whtax` -> `taxpubdoc.taxWithholding.taxWithholdingCode` () [废]
-- `modifier` -> `base.user.BipUser` () 
-- `employeeBankAccount` -> `bd.staff.StaffBankAcct` () [废]
-- `project` -> `bd.project.ProjectVO` () [废]
-- `wbs` -> `BGDM.wbs.wbs_doc` () 
-- `employee` -> `bd.staff.StaffNew` () [废]
-- `headerId` -> `earap.payment.PaymentHeader` (0..n) [废]
-- `quickType` -> `bd.paymenttype.PaymentTypeVO` () [废]
-- `supplierProCenter` -> `bd.virtualaccbody.VirtualAccbody` () [废]
-- `funderBankAccount` -> `tmsp.fundbusinobjarchives.FundBusinObjArchivesItem` () [废]
-- `noteNo` -> `drft.billno.Billno` () [废]
-- `settleMode` -> `aa.settlemethod.SettleMethod` () [废]
-- `supplier` -> `aa.vendor.Vendor` () [废]
-- `orgCurrency` -> `bd.currencytenant.CurrencyTenantVO` () [废]
-- `demanderProCenter` -> `bd.virtualaccbody.VirtualAccbody` () [废]
-- `withHoldingTaxItem` -> `earap.payment.PaymentWithHoldingTax` (0..n) 
-- `creator` -> `base.user.BipUser` () 
-- `taxSubject` -> `archive.taxArchives.TaxRateArchive` () [废]
-- `org` -> `org.func.BaseOrg` () [废]
-- `clmContractLibId` -> `CLM.clmContract.contractLib` () [废]
-- `costCenter` -> `bd.costcenter.CostCenter` () [废]
-- `enterpriseBankAccount` -> `bd.enterprise.OrgFinBankacctVO` () [废]
-- `staff` -> `bd.staff.StaffNew` () [废]
-- `dept` -> `bd.adminOrg.AdminOrgVO` () [废]
-- `freeChId` -> `earap.payment.PaymentBodyfreeChIdUserDefine` () [废]
-- `ytenantId` -> `yht.tenant.YhtTenant` () 
-- `supplierBankAccount` -> `aa.vendor.VendorBank` () [废]
-- `taxCodeId` -> `taxpubdoc.taxengine.TaxCode` () [废]
-- `exchangeRateType` -> `bd.exchangeRate.ExchangeRateTypeVO` () [废]
-- `noteType` -> `drft.billtype.BillType` () [废]
-- `enterpriseCashAccount` -> `bd.enterprise.OrgFinCashacctVO` () [废]
-- `material` -> `pc.product.Product` () [废]
-- `partner` -> `base.businesspartner.BusinessPartner` () [废]
-- `taxCalculationResultList` -> `earap.payment.TaxCalculationResult` (0..n) 
-- `verifyCurrency` -> `bd.currencytenant.CurrencyTenantVO` () [废]
+| 字段名 | URI | 关系 |
+|--------|-----|------|
+| `taxCalculationResultList` | `earap.payment.TaxCalculationResult` | composition |
+| `withHoldingTaxItem` | `earap.payment.PaymentWithHoldingTax` | composition |
+
+## 关联引用 (39个)
+
+| 字段名 | 引用类型 |
+|--------|---------|
+| `expense_item_id` | `finbd.bd_expenseitemref` |
+| `funder_id` | `yonbip-fi-ctmtmsp.tmsp_fundbusinobj_Ref` |
+| `ori_currency_id` | `ucfbasedoc.bd_currencytenantref` |
+| `activity` | `yonbip-pm-projectme.RefTable_ebcf54ed61` |
+| `whtax_id` | `yonbip-fi-taxpubdoc.RefTable_6e574b3619` |
+| `modifier` | `bip-usercenter.bip_user_ref` |
+| `employee_bank_account_id` | `ucf-staff-center.bd_staffbankaccref` |
+| `project_id` | `ucfbasedoc.bd_projectNewRef` |
+| `wbs` | `` |
+| `employee_id` | `ucf-staff-center.bd_staff_leave_ref` |
+| `header_id` | `` |
+| `quick_type_id` | `finbd.bd_paymenttyperef` |
+| `supplier_procenter_id` | `finbd.bd_allaccbodyref_inner` |
+| `funder_bank_account_id` | `yonbip-fi-ctmtmsp.tmsp_fundbusinobjbank_Ref` |
+| `note_no` | `drft.drft_billnoref` |
+| `settle_mode_id` | `productcenter.aa_settlemethodref` |
+| `supplier_id` | `yssupplier.aa_vendorSimpleRef` |
+| `org_currency_id` | `ucfbasedoc.bd_currencytenantref` |
+| `demander_procenter_id` | `finbd.bd_allaccbodyref_inner` |
+| `` | `` |
+| `creator` | `bip-usercenter.bip_user_ref` |
+| `tax_subject_id` | `yonbip-fi-taxpubdoc.RefTable_55c5b82f11` |
+| `org_id` | `ucf-org-center.org_pure_tree_ref` |
+| `clm_contract_lib_id` | `yonbip-ec-contract.clmContractLibRef` |
+| `cost_center_id` | `finbd.bd_costcenterref` |
+| `enterprise_bank_account_id` | `ucfbasedoc.bd_enterprisebank` |
+| `staff_id` | `ucf-staff-center.bd_staff_leave_ref` |
+| `dept_id` | `ucf-org-center.admin_dept_tree_ref_na` |
+| `free_ch_id` | `` |
+| `ytenant_id` | `` |
+| `supplier_bank_account_id` | `yssupplier.aa_vendorbankref` |
+| `tax_code_id` | `yonbip-fi-taxpubdoc.RefTable_832e0ffa60` |
+| `exchange_rate_type_id` | `ucfbasedoc.bd_exchangeratetyperef` |
+| `note_type_id` | `drft.drft_billtyperef` |
+| `enterprise_cash_account_id` | `ucfbasedoc.bd_enterprisecashacct` |
+| `material_id` | `productcenter.baseProductRef` |
+| `partner_id` | `productcenter.base_businesspartnerref` |
+| `verify_currency_id` | `ucfbasedoc.bd_currencytenantref` |
+
+## 继承接口 (4个, 16字段)
+
+- **逻辑删除** (`iuap.busiObj.LogicDelete`)
+  - `dr` → `dr`
+- **业务流多来源** (`iuap.busiObj.BusinessFlowSourcesItf`)
+  - `firstbusiobj` → `firstbusiobj`
+  - `firstchild_id` → `firstchild_id`
+  - `firstcode` → `firstcode`
+  - `first_id` → `first_id`
+  - `sourcegrand_id` → `sourcegrand_id`
+- **业务流基础** (`iuap.busiObj.BusinessFlowItf`)
+  - `bizflow_id` → `bizflow_id`
+  - `bizflowinstance_id` → `bizflowinstance_id`
+  - `bizflow_makebillcode` → `bizflow_makebillcode`
+  - `bizflowname` → `bizflowname`
+  - `sourcebusiobj` → `sourcebusiobj`
+  - `sourcechild_id` → `sourcechild_id`
+  - `sourcecode` → `sourcecode`
+  - `source_id` → `source_id`
+- **项目结构属性** (`BGDM.wbs.projectStructureProperties`)
+  - `activity` → `activity`
+  - `wbs` → `wbs`
+
+## 字段列表（按类型分组）
+
+> 共 111 个直连字段
+
+### 文本字段 (36个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `bizflow_makebillcode` | `bizflow_makebillcode` | `bizFlowMakeBillCode` | 单据转换规则编码 |
+| `check_no` | `check_no` | `checkNo` | 勾兑号 |
+| `contract_no` | `contract_no` | `contractNo` | 合同编号 |
+| `cooperate_no` | `cooperate_no` | `cooperateNo` | 协同号 |
+| `dtc_gtxid` | `dtc_gtxid` | `dtcGtxId` | 全局事务ID |
+| `ext_row_no` | `ext_row_no` | `extRowNo` | 外部系统子单号 |
+| `invoice_no` | `invoice_no` | `invoiceNo` | 发票编号 |
+| `object_bank_account_no` | `object_bank_account_no` | `objectBankAccountNo` | 往来对象银行账号 |
+| `order_no` | `order_no` | `orderNo` | 订单编号 |
+| `ori_bill_id` | `ori_bill_id` | `oriBillId` | 源头单据ID |
+| `ori_bill_no` | `ori_bill_no` | `oriBillNo` | 源头单据号 |
+| `ori_bill_row_id` | `ori_bill_row_id` | `oriBillRowId` | 源头单据行ID |
+| `ori_bill_type` | `ori_bill_type` | `oriBillType` | 源头单据类型 |
+| `quick_type_code` | `quick_type_code` | `quickTypeCode` | 款项类型编码 |
+| `remarks` | `remarks` | `remarks` | 备注 |
+| `retailer_name` | `retailer_name` | `retailer` | 散户 |
+| `shop_id` | `shop_id` | `shop` | 商家 |
+| `sourcegrand_id` | `sourcegrand_id` | `sourceGrandId` | 来源孙表id |
+| `src_bill_id` | `src_bill_id` | `srcBillId` | 来源单据ID |
+| `src_bill_no` | `src_bill_no` | `srcBillNo` | 来源单据号 |
+| `src_bill_row_id` | `src_bill_row_id` | `srcBillRowId` | 来源单据行ID |
+| `src_bill_type` | `src_bill_type` | `srcBillType` | 来源单据类型 |
+| `src_claim_id` | `src_claim_id` | `srcClaimId` | 关联流水 |
+| `src_exe_detail_id` | `src_exe_detail_id` | `srcExeDetailId` | 来源单据执行明细ID |
+| `id` | `id` | `id` | 主键 |
+| `bizflowinstance_id` | `bizflowinstance_id` | `bizFlowInstanceId` | 业务流实例id |
+| `bizflow_id` | `bizflow_id` | `bizflowId` | 业务流id |
+| `bizflowname` | `bizflowname` | `bizflowName` | 流程名称 |
+| `sourcebusiobj` | `sourcebusiobj` | `sourceBusiObj` | 上游业务对象 |
+| `sourcechild_id` | `sourcechild_id` | `sourceChildId` | 上游单据子表id |
+| `sourcecode` | `sourcecode` | `sourceCode` | 上游单据号 |
+| `source_id` | `source_id` | `sourceId` | 上游单据主表id |
+| `firstbusiobj` | `firstbusiobj` | `firstBusiObj` | 来源业务对象 |
+| `firstchild_id` | `firstchild_id` | `firstChildId` | 来源单据子表id |
+| `firstcode` | `firstcode` | `firstCode` | 来源单据号 |
+| `first_id` | `first_id` | `firstId` | 来源单据主表id |
+
+### 引用字段 (36个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `tax_code_id` | `tax_code_id` | `taxCodeId` | 税码 |
+| `clm_contract_lib_id` | `clm_contract_lib_id` | `clmContractLibId` | 合同库id |
+| `cost_center_id` | `cost_center_id` | `costCenter` | 成本中心 |
+| `demander_procenter_id` | `demander_procenter_id` | `demanderProCenter` | 需方利润中心 |
+| `dept_id` | `dept_id` | `dept` | 部门 |
+| `employee_id` | `employee_id` | `employee` | 员工 |
+| `employee_bank_account_id` | `employee_bank_account_id` | `employeeBankAccount` | 员工银行账户 |
+| `enterprise_bank_account_id` | `enterprise_bank_account_id` | `enterpriseBankAccount` | 企业银行账户 |
+| `enterprise_cash_account_id` | `enterprise_cash_account_id` | `enterpriseCashAccount` | 企业现金账户 |
+| `exchange_rate_type_id` | `exchange_rate_type_id` | `exchangeRateType` | 汇率类型 |
+| `expense_item_id` | `expense_item_id` | `expenseItem` | 费用项目 |
+| `funder_id` | `funder_id` | `funder` | 资金业务伙伴 |
+| `funder_bank_account_id` | `funder_bank_account_id` | `funderBankAccount` | 资金业务伙伴银行账户 |
+| `header_id` | `header_id` | `headerId` | 付款基本信息ID |
+| `material_id` | `material_id` | `material` | 物料 |
+| `note_no` | `note_no` | `noteNo` | 票据号 |
+| `note_type_id` | `note_type_id` | `noteType` | 票据类型 |
+| `org_id` | `org_id` | `org` | 业务组织 |
+| `org_currency_id` | `org_currency_id` | `orgCurrency` | 本币 |
+| `ori_currency_id` | `ori_currency_id` | `oriCurrency` | 原币币种 |
+| `partner_id` | `partner_id` | `partner` | 业务伙伴 |
+| `project_id` | `project_id` | `project` | 项目 |
+| `quick_type_id` | `quick_type_id` | `quickType` | 款项类型 |
+| `settle_mode_id` | `settle_mode_id` | `settleMode` | 结算方式 |
+| `staff_id` | `staff_id` | `staff` | 业务员 |
+| `supplier_id` | `supplier_id` | `supplier` | 供应商 |
+| `supplier_bank_account_id` | `supplier_bank_account_id` | `supplierBankAccount` | 供应商银行账户 |
+| `supplier_procenter_id` | `supplier_procenter_id` | `supplierProCenter` | 供方利润中心 |
+| `tax_subject_id` | `tax_subject_id` | `taxSubject` | 税目税率 |
+| `verify_currency_id` | `verify_currency_id` | `verifyCurrency` | 应核销币种 |
+| `whtax_id` | `whtax_id` | `whtax` | 代扣税税码	 |
+| `activity` | `activity` | `activity` | 活动 |
+| `wbs` | `wbs` | `wbs` | WBS |
+| `creator` | `creator` | `creator` | 创建人 |
+| `modifier` | `modifier` | `modifier` | 修改人 |
+| `ytenant_id` | `ytenant_id` | `ytenantId` | 租户id |
+
+### 日期字段 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `exchange_rate_date` | `exchange_rate_date` | `exchangeRateDate` | 汇率日期exchange_rate_dateexchange_rate_date |
+| `expire_date` | `expire_date` | `expireDate` | 到期日 |
+| `note_date` | `note_date` | `noteDate` | 票据日期 |
+
+### 日期时间 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `settle_date` | `settle_date` | `settleDate` | 结算时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+
+### 布尔字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `bln_settle_patch` | `bln_settle_patch` | `blnSettlePatch` | 是否结算补单 |
+| `brelate_check_bill` | `brelate_check_bill` | `relateCheckBill` | 是否已关联流水 |
+
+### 枚举字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `bln_settle_refund` | `bln_settle_refund` | `blnSettleRefund` | 退票标识 |
+| `object_type` | `object_type` | `objectType` | 往来对象类型 |
+| `settle_reject_type` | `settle_reject_type` | `settleRejectType` | 止付类型 |
+| `settle_state` | `settle_state` | `settleState` | 结算状态 |
+
+### 整数 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dtc_status` | `dtc_status` | `dtcStatus` | 全局事务状态 |
+| `issue_no` | `issue_no` | `issueNo` | 期号 |
+| `exchange_rate_ops` | `exchange_rate_ops` | `exchangeRateOps` | 汇率折算方式 |
+
+### 短整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dr` | `dr` | `dr` | 逻辑删除 |
+
+### 数值字段 (19个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `exchange_rate` | `exchange_rate` | `exchangeRate` | 汇率 |
+| `local_settle_amount` | `local_settle_amount` | `localSettleAmount` | 本币应结算款 |
+| `local_tax_amount` | `local_tax_amount` | `localTaxAmount` | 本币税额 |
+| `local_tax_excluded_amount` | `local_tax_excluded_amount` | `localTaxExcludedAmount` | 本币无税金额 |
+| `local_tax_included_amount` | `local_tax_included_amount` | `localTaxIncludedAmount` | 本币金额 |
+| `local_whtax_amount` | `local_whtax_amount` | `localWhtaxAmount` | 本币代扣税税额 |
+| `ori_occupy_amount` | `ori_occupy_amount` | `oriOccupyAmount` | 预占用金额 |
+| `ori_settle_amount` | `ori_settle_amount` | `oriSettleAmount` | 应结算款 |
+| `ori_settle_refund_amount` | `ori_settle_refund_amount` | `oriSettleRefundAmount` | 退票金额 |
+| `ori_settle_reject_amount` | `ori_settle_reject_amount` | `oriSettleRejectAmount` | 止付金额 |
+| `ori_tax_amount` | `ori_tax_amount` | `oriTaxAmount` | 税额 |
+| `ori_tax_excluded_amount` | `ori_tax_excluded_amount` | `oriTaxExcludedAmount` | 无税金额 |
+| `ori_tax_included_amount` | `ori_tax_included_amount` | `oriTaxIncludedAmount` | 付款金额 |
+| `ori_whtax_amount` | `ori_whtax_amount` | `oriWhtaxAmount` | 代扣税税额 |
+| `row_no` | `row_no` | `rowNo` | 行号 |
+| `src_bill_row_amount` | `src_bill_row_amount` | `srcBillRowAmount` | 来源单据行总金额 |
+| `src_order_row_no` | `src_order_row_no` | `srcOrderRowNo` | 来源订单行号 |
+| `tax_rate` | `tax_rate` | `taxRate` | 税率 |
+| `verify_amount` | `verify_amount` | `verifyAmount` | 应核销金额 |
+
+### UserDefine (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `free_ch_id` | `free_ch_id` | `freeChId` | 自定义特征 |
+
+### other (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `` | `withHoldingTaxItem` | 付款单代扣税信息 |
+| `` | `` | `taxCalculationResultList` | 计税结果 |

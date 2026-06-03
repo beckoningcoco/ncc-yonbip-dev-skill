@@ -12,30 +12,82 @@ source_type: api_response
 
 # 选配参数文件属性模版 (`vc.variantConfiguration.VariantConfigurationAttr`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `vc_attr` | 应用: `ED` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`vc_attr` | domain：`engineeringdata` | 应用：`ED` | 业务对象ID：``
 
-## 属性（12 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `id` | ID | `id` | Long | `long` |
-| 2 | `characteristic` | characteristic | `characteristic` | String | `text` |
-| 3 | `createTime` | 创建时间 | `create_time` | DateTime | `dateTime` |
-| 4 | `creator` | 创建人 | `creator` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 5 | `modifier` | 修改人 | `modifier` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 6 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `dateTime` |
-| 7 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 8 | `seq` | seq | `seq` | Short | `short` |
-| 9 | `variantConfiguration` | variantConfiguration | `variant_configuration_id` | f4984814-116e-4188-ab12-1b922a40f2cc | `quote` |
-| 10 | `variantConfigurationAttrGroup` | variantConfigurationAttrGroup | `variant_configuration_attr_group_id` | 4bbdf6d9-0f0a-4a83-8f81-c210e9170ca0 | `quote` |
-| 11 | `visible` | visible | `visible` | Short | `short` |
-| 12 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 选配参数文件属性模版 |
+| 物理表 | `vc_attr` |
+| 数据库 schema | `engineeringdata` |
+| 所属应用 | `ED` |
+| 直连字段 | 12 个 |
+| 子表 | 0 个 |
+| 关联引用 | 5 个 |
 
-## 关联（5 个）
+## 关联引用 (5个)
 
-- `creator` -> `base.user.BipUser` ()
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `modifier` -> `base.user.BipUser` ()
-- `variantConfiguration` -> `vc.variantConfiguration.VariantConfiguration` (0..n)
-- `variantConfigurationAttrGroup` -> `vc.variantConfiguration.VariantConfigurationAttrGroup` ()
+| 字段名 | 引用类型 |
+|--------|---------|
+| `` | `` |
+| `ytenant_id` | `` |
+| `variant_configuration_id` | `` |
+| `variant_configuration_attr_group_id` | `` |
+
+## 继承接口 (2个, 5字段)
+
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+- **审计信息** (`ucfbase.ucfbaseItf.IAuditInfo`)
+  - `create_time` → `create_time`
+  - `` → ``
+  - `` → ``
+  - `modify_time` → `modify_time`
+
+## 字段列表（按类型分组）
+
+> 共 12 个直连字段
+
+### 文本字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `characteristic` | `characteristic` | `characteristic` | 特征编码 |
+
+### 引用字段 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `creator` | `creator` | 创建人 |
+| `` | `modifier` | `modifier` | 修改人 |
+| `variant_configuration_id` | `variant_configuration_id` | `variantConfiguration` | 选配参数文件 |
+| `variant_configuration_attr_group_id` | `variant_configuration_attr_group_id` | `variantConfigurationAttrGroup` | 选配参数文件属性组 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 日期时间 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+
+### 短整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `seq` | `seq` | `seq` | 排序 |
+| `visible` | `visible` | `visible` | 是否可见 |
+
+### 长整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+
+### timestamp (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubts` | `pubts` | `pubts` | 时间戳 |

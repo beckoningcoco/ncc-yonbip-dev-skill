@@ -12,26 +12,71 @@ source_type: api_response
 
 # 物料适用范围组 (`pc.product.ProductApplyRangeGroup`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `product_apply_range_group` | 应用: `GZTBDM` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`product_apply_range_group` | domain：`productcenter` | 应用：`GZTBDM` | 业务对象ID：``
 
-## 属性（9 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `id` | ID | `id` | String | `text` |
-| 2 | `productId` | productID | `product_id` | 89f3b06e-23df-4403-b4a7-19f99eeeae72 | `quote` |
-| 3 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 4 | `orgGroupType` | orgGroupType | `org_group_type` | String | `text` |
-| 5 | `orgGroupId` | orgGroupID | `org_group_id` | 6a8af5af-0687-4254-ab87-c07e00fc8398 | `quote` |
-| 6 | `productDetailId` | productDetailID | `product_detail_id` | 04616b02-47f8-4821-8c02-2e7a6d3264a8 | `quote` |
-| 7 | `controlRuleVersion` | controlRuleVersion | `control_rule_version` | Integer | `int` |
-| 8 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 9 | `tenant` | tenant | `tenant_id` | Long | `long` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 物料适用范围组 |
+| 物理表 | `product_apply_range_group` |
+| 数据库 schema | `productcenter` |
+| 所属应用 | `GZTBDM` |
+| 直连字段 | 9 个 |
+| 子表 | 0 个 |
+| 关联引用 | 4 个 |
 
-## 关联（4 个）
+## 关联引用 (4个)
 
-- `productId` -> `pc.product.Product` (0..n)
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `orgGroupId` -> `pc.pub_org_group.PubOrgGroup` ()
-- `productDetailId` -> `pc.product.ProductDetail` ()
+| 字段名 | 引用类型 |
+|--------|---------|
+| `product_id` | `` |
+| `ytenant_id` | `` |
+| `org_group_id` | `` |
+| `product_detail_id` | `` |
+
+## 继承接口 (2个, 2字段)
+
+- **租户相关** (`coredoc.pub.TenantObselete`)
+  - `tenant_id` → `tenant_id`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 9 个直连字段
+
+### 文本字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+| `org_group_type` | `org_group_type` | `orgGroupType` | 组织组类别 |
+
+### 引用字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `product_id` | `product_id` | `productId` | 物料 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户 |
+| `org_group_id` | `org_group_id` | `orgGroupId` | 组织组 |
+| `product_detail_id` | `product_detail_id` | `productDetailId` | 物料组织级表 |
+
+### 整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `control_rule_version` | `control_rule_version` | `controlRuleVersion` | 管控规则版本号 |
+
+### 长整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `tenant_id` | `tenant_id` | `tenant` | 租户(废弃) |
+
+### timestamp (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubts` | `pubts` | `pubts` | 时间戳 |

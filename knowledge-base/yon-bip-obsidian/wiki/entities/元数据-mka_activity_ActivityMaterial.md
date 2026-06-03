@@ -12,59 +12,140 @@ source_type: api_response
 
 # 营销活动活动物料 (`mka.activity.ActivityMaterial`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `mka_activity_material` | 应用: `MKA` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`mka_activity_material` | domain：`yycrm` | 应用：`MKA` | 业务对象ID：``
 
-## 属性（34 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `lineNo` | lineNo | `lineNo` | Decimal | `number` |
-| 2 | `id` | ID | `id` | Long | `long` |
-| 3 | `activityPlanMaterial` | activityPlanMaterial | `activity_plan_material` | a77c0558-66a4-44b8-a78c-ccbfcefc0cc6 | `quote` |
-| 4 | `mainUnit` | mainUnit | `main_unit` | 9ea02a0b-3a48-4051-bcbe-59c7bcc7a25b | `quote` |
-| 5 | `mainQuantity` | mainQuantity | `main_quantity` | Decimal | `number` |
-| 6 | `mainUnitRate` | mainUnitRate | `main_unit_rate` | Decimal | `number` |
-| 7 | `unitExchangeType` | unitExchangeType | `unit_exchange_type` | Integer | `int` |
-| 8 | `applyMainQuantity` | applyMainQuantity | `apply_main_quantity` | Decimal | `number` |
-| 9 | `applyOrderQuantity` | applyOrderQuantity | `apply_order_quantity` | Decimal | `number` |
-| 10 | `productDefineCharacter` | productDefineCharacter | `productDefineCharacter` | cb2cca54-d63d-4fb9-9467-851d22411581 | `FreeCT` |
-| 11 | `productSensCode` | productSens编码 | `productSensCode` | String | `text` |
-| 12 | `createTime` | 创建时间 | `create_time` | DateTime | `timestamp` |
-| 13 | `createDate` | 创建日期 | `create_date` | Date | `date` |
-| 14 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `timestamp` |
-| 15 | `modifyDate` | 修改日期 | `modify_date` | Date | `date` |
-| 16 | `creator` | 创建人 | `creator` | String | `text` |
-| 17 | `modifier` | 修改人 | `modifier` | String | `text` |
-| 18 | `creatorId` | 创建人ID | `creatorId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 19 | `modifierId` | 修改人ID | `modifierId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 20 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 21 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 22 | `activityId` | activityID | `activityId` | 924ae32c-2a09-4ec0-aff9-5959ec1f8024 | `quote` |
-| 23 | `product` | product | `product` | 89f3b06e-23df-4403-b4a7-19f99eeeae72 | `quote` |
-| 24 | `unit` | unit | `unit` | 9ea02a0b-3a48-4051-bcbe-59c7bcc7a25b | `quote` |
-| 25 | `quantity` | quantity | `quantity` | Decimal | `number` |
-| 26 | `productPrice` | productPrice | `product_price` | Decimal | `number` |
-| 27 | `productAmount` | productAmount | `product_amount` | Decimal | `number` |
-| 28 | `applyQuantity` | applyQuantity | `apply_quantity` | Decimal | `number` |
-| 29 | `useQuantity` | useQuantity | `use_quantity` | Decimal | `number` |
-| 30 | `expenseItem` | expenseItem | `expenseItem` | d78cdbfa-0424-4dc3-a995-5c8624e1a560 | `quote` |
-| 31 | `activityMaterialDefineCharacter` | activityMaterialDefineCharacter | `activityMaterialDefineCharacter` | 16c7ef01-9b93-4f1c-b3f0-df6544e1836d | `UserDefine` |
-| 32 | `mainUnitRateDen` | mainUnitRateDen | `main_unit_rate_den` | Decimal | `number` |
-| 33 | `mainUnitRateNum` | mainUnitRateNum | `main_unit_rate_num` | Decimal | `number` |
-| 34 | `materialBodyDef` | materialBodyDef | `` | a04aef88-6aab-44d3-be8f-5c72edb7b045 | `` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 营销活动活动物料 |
+| 物理表 | `mka_activity_material` |
+| 数据库 schema | `yycrm` |
+| 所属应用 | `MKA` |
+| 直连字段 | 34 个 |
+| 子表 | 1 个 |
+| 关联引用 | 12 个 |
 
-## 关联（12 个）
+## 子表
 
-- `expenseItem` -> `bd.expenseitem.ExpenseItem` ()
-- `activityId` -> `mka.activity.Activity` (0..n)
-- `materialBodyDef` -> `mka.activity.ActivityMaterialDef` (1)
-- `activityPlanMaterial` -> `mka.activityplan.ActivityPlanMaterial` ()
-- `mainUnit` -> `pc.unit.Unit` ()
-- `product` -> `pc.product.Product` ()
-- `unit` -> `pc.unit.Unit` ()
-- `activityMaterialDefineCharacter` -> `mka.activity.ActivityMaterialDefineCharacter` ()
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `creatorId` -> `base.user.User` ()
-- `modifierId` -> `base.user.User` ()
-- `productDefineCharacter` -> `mka.activity.ActivityMaterialProductDefineCharacter` ()
+| 字段名 | URI | 关系 |
+|--------|-----|------|
+| `materialBodyDef` | `mka.activity.ActivityMaterialDef` | composition |
+
+## 关联引用 (12个)
+
+| 字段名 | 引用类型 |
+|--------|---------|
+| `expenseItem` | `finbd.bd_expenseitemref` |
+| `activityId` | `` |
+| `` | `` |
+| `activity_plan_material` | `` |
+| `main_unit` | `productcenter.pc_unitref` |
+| `product` | `productcenter.pc_productquerytreeref` |
+| `unit` | `productcenter.pc_unitref` |
+| `activityMaterialDefineCharacter` | `` |
+| `ytenant_id` | `` |
+| `productDefineCharacter` | `` |
+
+## 继承接口 (2个, 9字段)
+
+- **审计信息** (`base.itf.IAuditInfo`)
+  - `create_date` → `create_date`
+  - `create_time` → `create_time`
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `modify_date` → `modify_date`
+  - `modify_time` → `modify_time`
+- **统一租户接口(扩展)** (`ucfbase.ucfbaseItf.IYTenantExt`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 34 个直连字段
+
+### 文本字段 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `productSensCode` | `productSensCode` | `productSensCode` | 物料敏感编码 |
+| `` | `creator` | `creator` | 创建人名称 |
+| `` | `modifier` | `modifier` | 修改人名称 |
+
+### 引用字段 (9个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `activity_plan_material` | `activity_plan_material` | `activityPlanMaterial` | 计划活动物料主键 |
+| `main_unit` | `main_unit` | `mainUnit` | 主单位 |
+| `` | `creatorId` | `creatorId` | 创建人 |
+| `` | `modifierId` | `modifierId` | 修改人 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+| `activityId` | `activityId` | `activityId` | 活动ID |
+| `product` | `product` | `product` | 物料ID |
+| `unit` | `unit` | `unit` | 计量单位ID |
+| `expenseItem` | `expenseItem` | `expenseItem` | 费用项ID |
+
+### 日期字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_date` | `create_date` | `createDate` | 创建日期 |
+| `modify_date` | `modify_date` | `modifyDate` | 修改日期 |
+
+### 整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `unit_exchange_type` | `unit_exchange_type` | `unitExchangeType` | 换算类型 |
+
+### 长整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+
+### 数值字段 (12个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `lineNo` | `lineNo` | `lineNo` | 行号 |
+| `main_quantity` | `main_quantity` | `mainQuantity` | 主数量 |
+| `main_unit_rate` | `main_unit_rate` | `mainUnitRate` | 换算率 |
+| `apply_main_quantity` | `apply_main_quantity` | `applyMainQuantity` | 已请购主数量 |
+| `apply_order_quantity` | `apply_order_quantity` | `applyOrderQuantity` | 已请购数量 |
+| `quantity` | `quantity` | `quantity` | 数量 |
+| `product_price` | `product_price` | `productPrice` | 单价 |
+| `product_amount` | `product_amount` | `productAmount` | 金额 |
+| `apply_quantity` | `apply_quantity` | `applyQuantity` | 申领数量 |
+| `use_quantity` | `use_quantity` | `useQuantity` | 使用数量 |
+| `main_unit_rate_den` | `main_unit_rate_den` | `mainUnitRateDen` | 换算率分母 |
+| `main_unit_rate_num` | `main_unit_rate_num` | `mainUnitRateNum` | 换算率分子 |
+
+### FreeCT (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `productDefineCharacter` | `productDefineCharacter` | `productDefineCharacter` | 物料自定义项 |
+
+### timestamp (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+
+### UserDefine (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `activityMaterialDefineCharacter` | `activityMaterialDefineCharacter` | `activityMaterialDefineCharacter` | 活动物料自定义特征组 |
+
+### other (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `` | `materialBodyDef` | 活动物料自定义项 |

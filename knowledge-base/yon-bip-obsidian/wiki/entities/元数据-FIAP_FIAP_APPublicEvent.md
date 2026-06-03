@@ -1,5 +1,5 @@
 ---
-tags: [BIP, 元数据, 数据字典, FIAP, 应付, FIAP.FIAP.APPublicEvent]
+tags: [BIP, 元数据, 数据字典, FIAP.FIAP.APPublicEvent]
 created: 2026-06-03
 updated: 2026-06-03
 sources: [元数据API queryByUri]
@@ -9,173 +9,270 @@ last_verified: 2026-06-03
 status: verified
 source_type: api_response
 ---
+
 # 应付公共基本信息 (`FIAP.FIAP.APPublicEvent`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBip），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `arap_ledger_h` | 应用: `EAP` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`arap_ledger_h` | domain：`yonbip-fi-earap` | 应用：`EAP` | 业务对象ID：`6f3a826c-6d66-48f5-a6ac-9f0f605b3c2a`
 
-## 主键与编码
+## 基本信息
 
-| 角色 | 字段 | 列 | 类型 |
-|------|------|-----|------|
-| 主键 | `id` | `id` | String |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 应付公共基本信息 |
+| 物理表 | `arap_ledger_h` |
+| 数据库 schema | `yonbip-fi-earap` |
+| 所属应用 | `EAP` |
+| 直连字段 | 109 个 |
+| 子表 | 1 个 |
+| 关联引用 | 31 个 |
 
-## 依赖接口（7 个）
+## 子表
 
-- `IAuditInfo` -> `iuap.busiObj.IAuditInfo` (v679)
-- `BusinessFlowItf` -> `iuap.busiObj.BusinessFlowItf` (v1221)
-- `ApprovalFlowItf` -> `iuap.busiObj.ApprovalFlowItf` (v830)
-- `BusinessFlowSourcesItf` -> `iuap.busiObj.BusinessFlowSourcesItf` (v800)
-- `IEARAPCarryover` -> `FIAP.FIAP.IEARAPCarryover` (v45)
-- `IYTenant` -> `iuap.busiObj.IYTenant` (v214)
-- `LogicDelete` -> `iuap.busiObj.LogicDelete` (v211)
+| 字段名 | URI | 关系 |
+|--------|-----|------|
+| `bodyItem` | `FIAP.FIAP.APPublicEventBody` | composition |
 
-## 属性（109 个）
+## 关联引用 (31个)
 
-| # | 字段 | 显示名 | 列 | 类型 | biztype |
-|---|------|--------|-----|------|---------|
-| 1 | `accAmount` | accAmount | `acc_amount` | Decimal | `number` |
-| 2 | `accBalance` | accBalance | `acc_balance` | Decimal | `number` |
-| 3 | `accBook` | accBook | `acc_book_id` | 5df8e763-5595-4a87-9ff9-a7ac3bd1e81e | `quote` |
-| 4 | `accConvertParam` | accConvertParam | `acc_convert_param` | ConvertParamEnum | `singleOption` |
-| 5 | `accCurrency` | accCurrency | `acc_currency_id` | 02b45339-eb4a-4a31-a8b5-d32f494f4e8e | `quote` |
-| 6 | `accDate` | acc日期 | `acc_date` | String | `date` |
-| 7 | `accPeriod` | accPeriod | `acc_period_id` | 0028813f-135a-485e-a5c3-c15a3d18168b | `quote` |
-| 8 | `accPeriodCode` | accPeriod编码 | `acc_period_code` | String | `text` |
-| 9 | `accPurpose` | accPurpose | `acc_purpose` | 637f4637-0862-4167-a2bf-ef52818ca9d9 | `quote` |
-| 10 | `accYear` | accYear | `acc_year_id` | 0028813f-135a-485e-a5c3-c15a3d18168b | `quote` |
-| 11 | `accYearCode` | accYear编码 | `acc_year_code` | String | `text` |
-| 12 | `arapEventType` | arapEventType | `arap_event_type` | EventTypeEnum | `singleOption` |
-| 13 | `auditNote` | auditNote | `auditnote` | String | `text` |
-| 14 | `balanceState` | balanceState | `balance_state` | eap_balanceState | `multipleOption` |
-| 15 | `batchNo` | batchNo | `batch_no` | String | `text` |
-| 16 | `bizBillCode` | bizBill编码 | `biz_bill_code` | String | `text` |
-| 17 | `bizBillId` | bizBillID | `biz_bill_id` | String | `text` |
-| 18 | `bizBillType` | bizBillType | `biz_bill_type_id` | 4a227650-b866-4f4c-a6ca-2433297a1713 | `quote` |
-| 19 | `bizTradeType` | bizTradeType | `biz_bill_trade_type_id` | 19f9264d-28d1-4b47-9d28-f2e82654f3a9 | `quote` |
-| 20 | `blnEffect` | blnEffect | `bln_effect` | EffectEnum | `singleOption` |
-| 21 | `blnWriteOff` | blnWriteOff | `bln_write_off` | earap_boolean_writeOff | `singleOption` |
-| 22 | `checkErrorMsg` | checkErrorMsg | `check_error_msg` | String | `text` |
-| 23 | `clearTime` | clearTime | `clear_time` | String | `date` |
-| 24 | `code` | 编码 | `event_code` | String | `text` |
-| 25 | `dtcGtxid` | dtcGtxid | `dtc_gtxid` | String | `text` |
-| 26 | `dtcStatus` | dtcStatus | `dtc_status` | Integer | `int` |
-| 27 | `employee` | employee | `employee_id` | 4effed83-35f5-4e3b-9be1-092b5ae602e8 | `quote` |
-| 28 | `entry` | entry | `entry_id` | String | `text` |
-| 29 | `entryCode` | entry编码 | `entry_code` | String | `text` |
-| 30 | `eventType` | eventType | `event_type_id` | ff8c5979-f9dc-4259-8b9f-6fe69da87bf6 | `quote` |
-| 31 | `financeOrg` | financeOrg | `finance_org_id` | 5d4c5590-da40-4b50-80a1-8d04da2f79e0 | `quote` |
-| 32 | `firstBusiObj` | firstBusiObj | `firstbusiobj` | String | `text` |
-| 33 | `firstChildId` | firstChildID | `firstchild_id` | String | `text` |
-| 34 | `firstCode` | first编码 | `firstcode` | String | `text` |
-| 35 | `firstId` | firstID | `first_id` | String | `text` |
-| 36 | `freeChId` | freeChID | `free_ch_id` | 63d88602-7cfa-42b8-9b38-ce0d9d09bf11 | `UserDefine` |
-| 37 | `funder` | funder | `funder_id` | e969728a-efe8-49db-86b0-5f8e18c2f098 | `quote` |
-| 38 | `gblAmount` | gblAmount | `gbl_amount` | Decimal | `number` |
-| 39 | `gblBalance` | gblBalance | `gbl_balance` | Decimal | `number` |
-| 40 | `gblConvertParam` | gblConvertParam | `gbl_convert_param` | ConvertParamEnum | `singleOption` |
-| 41 | `gblCurrency` | gblCurrency | `gbl_currency_id` | 02b45339-eb4a-4a31-a8b5-d32f494f4e8e | `quote` |
-| 42 | `grpAmount` | grpAmount | `grp_amount` | Decimal | `number` |
-| 43 | `grpBalance` | grpBalance | `grp_balance` | Decimal | `number` |
-| 44 | `grpConvertParam` | grpConvertParam | `grp_convert_param` | ConvertParamEnum | `singleOption` |
-| 45 | `grpCurrency` | grpCurrency | `grp_currency_id` | 02b45339-eb4a-4a31-a8b5-d32f494f4e8e | `quote` |
-| 46 | `modifyTime` | 修改时间 | `modify_time` | Date | `dateTime` |
-| 47 | `objectType` | objectType | `object_type` | ObjectTypeApEnum | `singleOption` |
-| 48 | `oppBillId` | oppBillID | `opp_bill_id` | String | `text` |
-| 49 | `org` | org | `org_id` | 14302233-1394-4a70-94e1-bed51636f312 | `quote` |
-| 50 | `orgAmount` | orgAmount | `org_amount` | Decimal | `number` |
-| 51 | `orgBalance` | orgBalance | `org_balance` | Decimal | `number` |
-| 52 | `orgConvertParam` | orgConvertParam | `org_convert_param` | ConvertParamEnum | `singleOption` |
-| 53 | `orgCurrency` | orgCurrency | `org_currency_id` | 02b45339-eb4a-4a31-a8b5-d32f494f4e8e | `quote` |
-| 54 | `oriAmount` | oriAmount | `ori_amount` | Decimal | `number` |
-| 55 | `oriBalance` | oriBalance | `ori_balance` | Decimal | `number` |
-| 56 | `oriCurrency` | oriCurrency | `ori_currency_id` | 02b45339-eb4a-4a31-a8b5-d32f494f4e8e | `quote` |
-| 57 | `oriOcupyAmount` | oriOcupyAmount | `ori_ocupy_amount` | Decimal | `number` |
-| 58 | `partner` | partner | `partner_id` | c1627369-6457-4828-883d-756b79bd0f46 | `quote` |
-| 59 | `postState` | postState | `post_state` | ArApPostStatusEnum | `singleOption` |
-| 60 | `postStatusCode` | postStatus编码 | `post_status_code` | String | `text` |
-| 61 | `remarks` | remarks | `remarks` | String | `text` |
-| 62 | `retailer` | retailer | `retailer_name` | String | `text` |
-| 63 | `settleState` | settleState | `settle_state` | SettleStateEnum | `singleOption` |
-| 64 | `sourceBusiObj` | sourceBusiObj | `sourcebusiobj` | String | `text` |
-| 65 | `sourceChildId` | sourceChildID | `sourcechild_id` | String | `text` |
-| 66 | `sourceCode` | source编码 | `sourcecode` | String | `text` |
-| 67 | `sourceId` | sourceID | `source_id` | String | `text` |
-| 68 | `srcApp` | srcApp | `src_app_id` | d5737052-9d1e-4cfa-9cab-bee31d88dd8b | `quote` |
-| 69 | `srcBillCode` | srcBill编码 | `src_bill_code` | String | `text` |
-| 70 | `srcBillDate` | srcBill日期 | `src_bill_date` | String | `date` |
-| 71 | `srcBillId` | srcBillID | `src_bill_id` | String | `text` |
-| 72 | `srcBillType` | srcBillType | `src_bill_type_id` | 4a227650-b866-4f4c-a6ca-2433297a1713 | `quote` |
-| 73 | `srcDataId` | srcDataID | `src_data_id` | String | `text` |
-| 74 | `srcDataType` | srcDataType | `src_data_type` | String | `text` |
-| 75 | `srcEvent` | srcEvent | `src_event_id` | String | `text` |
-| 76 | `srcSystem` | srcSystem | `src_system` | eap_srcSystem | `multipleOption` |
-| 77 | `srcTradeType` | srcTradeType | `src_trade_type_id` | 19f9264d-28d1-4b47-9d28-f2e82654f3a9 | `quote` |
-| 78 | `status` | 状态 | `status` | EventStatusEnum | `singleOption` |
-| 79 | `supplier` | supplier | `supplier_id` | 89bf026e-cc49-4fe7-9a7b-3e8fdcc77c1e | `quote` |
-| 80 | `voucher` | voucher | `voucher_id` | String | `text` |
-| 81 | `voucherCode` | voucher编码 | `voucher_code` | String | `text` |
-| 82 | `voucherType` | voucherType | `voucher_type_id` | 4a2cdeef-16cd-46c6-91b6-629eaf7be9e1 | `quote` |
-| 83 | `writeOffReason` | writeOffReason | `write_off_reason` | 75cfe910-ecb0-4392-b67c-c22e0d6129d0 | `quote` |
-| 84 | `writeOffSrcDataCode` | writeOffSrcData编码 | `write_off_src_data_code` | String | `text` |
-| 85 | `writeOffSrcDataId` | writeOffSrcDataID | `write_off_src_data_id` | String | `text` |
-| 86 | `writeOffState` | writeOffState | `write_off_state` | WriteOffStateEnum | `singleOption` |
-| 87 | `auditTime` | auditTime | `audit_time` | DateTime | `dateTime` |
-| 88 | `auditor` | auditor | `auditor` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 89 | `bizFlowInstanceId` | bizFlowInstanceID | `bizflowinstance_id` | String | `text` |
-| 90 | `bizFlowMakeBillCode` | bizFlowMakeBill编码 | `bizflow_makebillcode` | String | `text` |
-| 91 | `bizflowId` | bizflowID | `bizflow_id` | String | `text` |
-| 92 | `bizflowName` | bizflow名称 | `bizflowname` | String | `text` |
-| 93 | `blnCarryover` | blnCarryover | `bln_carryover` | Short | `short` |
-| 94 | `bodyItem` | bodyItem | `` | 11df05ba-d92b-4e64-a061-e083057642a8 | `` |
-| 95 | `carryoverEvent` | carryoverEvent | `carryover_event_id` | String | `text` |
-| 96 | `carryoverPeriod` | carryoverPeriod | `carryover_period_id` | 0028813f-135a-485e-a5c3-c15a3d18168b | `quote` |
-| 97 | `carryoverPeriodCode` | carryoverPeriod编码 | `carryover_period_code` | String | `text` |
-| 98 | `carryoverYear` | carryoverYear | `carryover_year_id` | 0028813f-135a-485e-a5c3-c15a3d18168b | `quote` |
-| 99 | `carryoverYearCode` | carryoverYear编码 | `carryover_year_code` | String | `text` |
-| 100 | `createTime` | 创建时间 | `create_time` | DateTime | `dateTime` |
-| 101 | `creator` | 创建人 | `creator` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 102 | `dr` | 逻辑删除 | `dr` | Short | `short` |
-| 103 | `id` | ID | `id` | String | `text` |
-| 104 | `modifier` | 修改人 | `modifier` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 105 | `procinstId` | procinstID | `procinst_id` | String | `text` |
-| 106 | `pubts` | 时间戳 | `pubts` | DateTime | `dateTime` |
-| 107 | `sourceGrandId` | sourceGrandID | `sourcegrand_id` | String | `text` |
-| 108 | `verifyState` | verifyState | `verifystate` | sys_verifystate | `singleOption` |
-| 109 | `ytenantId` | ytenantID | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 字段名 | 引用类型 |
+|--------|---------|
+| `funder_id` | `yonbip-fi-ctmtmsp.tmsp_fundbusinobj_Ref` |
+| `ori_currency_id` | `ucfbasedoc.bd_currencytenantref` |
+| `finance_org_id` | `ucf-org-center.bd_financeorgtreeref` |
+| `gbl_currency_id` | `ucfbasedoc.bd_currencytenantref` |
+| `modifier` | `bip-usercenter.bip_user_ref` |
+| `biz_bill_trade_type_id` | `ucfbasedoc.bd_billtyperef` |
+| `employee_id` | `iuap-ptc-yoncmm.sattUuser` |
+| `write_off_reason` | `productcenter.aa_reasonref` |
+| `acc_year_id` | `finbd.bd_period` |
+| `supplier_id` | `yssupplier.aa_vendor` |
+| `acc_currency_id` | `ucfbasedoc.bd_currencytenantref` |
+| `grp_currency_id` | `ucfbasedoc.bd_currencytenantref` |
+| `org_currency_id` | `ucfbasedoc.bd_currencytenantref` |
+| `creator` | `bip-usercenter.bip_user_ref` |
+| `` | `` |
+| `src_trade_type_id` | `ucfbasedoc.bd_billtyperef` |
+| `org_id` | `ucf-org-center.org_pure_tree_ref` |
+| `voucher_type_id` | `fiepub.epub_vouchertype_ref` |
+| `carryover_year_id` | `` |
+| `auditor` | `bip-usercenter.bip_user_ref` |
+| `carryover_period_id` | `` |
+| `event_type_id` | `yonbip-fi-eaai2.RefTable_a70ca2f048` |
+| `free_ch_id` | `` |
+| `ytenant_id` | `` |
+| `src_app_id` | `fiepub.fiepub_sourceapplicationref` |
+| `src_bill_type_id` | `ucfbasedoc.bd_billtypetreeref` |
+| `acc_purpose` | `finbd.bd_accpurposeref` |
+| `acc_period_id` | `finbd.bd_period` |
+| `acc_book_id` | `fiepub.fiepub_accountbookref` |
+| `partner_id` | `productcenter.base_businesspartnerref` |
+| `biz_bill_type_id` | `ucfbasedoc.bd_billtypetreeref` |
 
-## 关联（31 个）
+## 继承接口 (7个, 30字段)
 
-| # | 字段 | 目标实体 | 多重性 | 组合 | 废弃 |
-|---|------|---------|--------|------|------|
-| 1 | `funder` | `tmsp.fundbusinobjarchives.FundBusinObjArchives` |  |  | false |
-| 2 | `oriCurrency` | `bd.currencytenant.CurrencyTenantVO` |  |  | false |
-| 3 | `financeOrg` | `org.func.FinanceOrg` |  |  | false |
-| 4 | `gblCurrency` | `bd.currencytenant.CurrencyTenantVO` |  |  | false |
-| 5 | `modifier` | `base.user.BipUser` |  |  |  |
-| 6 | `bizTradeType` | `bd.bill.TransType` |  |  | false |
-| 7 | `employee` | `bd.staff.Staff` |  |  | false |
-| 8 | `writeOffReason` | `aa.reason.Reason` |  |  | false |
-| 9 | `accYear` | `bd.period.Period` |  |  | false |
-| 10 | `supplier` | `aa.vendor.Vendor` |  |  | false |
-| 11 | `accCurrency` | `bd.currencytenant.CurrencyTenantVO` |  |  | false |
-| 12 | `grpCurrency` | `bd.currencytenant.CurrencyTenantVO` |  |  | false |
-| 13 | `orgCurrency` | `bd.currencytenant.CurrencyTenantVO` |  |  | false |
-| 14 | `creator` | `base.user.BipUser` |  |  |  |
-| 15 | `bodyItem` | `FIAP.FIAP.APPublicEventBody` | 0..n | Y |  |
-| 16 | `srcTradeType` | `bd.bill.TransType` |  |  | false |
-| 17 | `org` | `org.func.BaseOrg` |  |  | false |
-| 18 | `voucherType` | `epub.vouchertype.VoucherType` |  |  | false |
-| 19 | `carryoverYear` | `bd.period.Period` |  |  |  |
-| 20 | `auditor` | `base.user.BipUser` |  |  |  |
-| 21 | `carryoverPeriod` | `bd.period.Period` |  |  |  |
-| 22 | `eventType` | `eeac.fievent.FiEventDO` |  |  | false |
-| 23 | `freeChId` | `FIAP.FIAP.APPublicEventfreeItemUserDefine` |  |  | false |
-| 24 | `ytenantId` | `yht.tenant.YhtTenant` |  |  |  |
-| 25 | `srcApp` | `epub.sourceapplication.SourceApplication` |  |  | false |
-| 26 | `srcBillType` | `bd.bill.BillTypeVO` |  |  | false |
-| 27 | `accPurpose` | `bd.accpurpose.AccPurposeVO` |  |  | false |
-| 28 | `accPeriod` | `bd.period.Period` |  |  | false |
-| 29 | `accBook` | `epub.accountbook.AccountBook` |  |  | false |
-| 30 | `partner` | `base.businesspartner.BusinessPartner` |  |  | false |
-| 31 | `bizBillType` | `bd.bill.BillTypeVO` |  |  | false |
+- **审计信息** (`iuap.busiObj.IAuditInfo`)
+  - `create_time` → `create_time`
+  - `creator` → `creator`
+  - `modifier` → `modifier`
+  - `modify_time` → `modify_time`
+- **业务流基础** (`iuap.busiObj.BusinessFlowItf`)
+  - `bizflow_id` → `bizflow_id`
+  - `bizflowinstance_id` → `bizflowinstance_id`
+  - `bizflow_makebillcode` → `bizflow_makebillcode`
+  - `bizflowname` → `bizflowname`
+  - `sourcebusiobj` → `sourcebusiobj`
+  - `sourcechild_id` → `sourcechild_id`
+  - `sourcecode` → `sourcecode`
+  - `source_id` → `source_id`
+- **审批流接口** (`iuap.busiObj.ApprovalFlowItf`)
+  - `auditnote` → `auditnote`
+  - `auditor` → `auditor`
+  - `audit_time` → `audit_time`
+  - `procinst_id` → `procinst_id`
+  - `verifystate` → `verifystate`
+- **业务流多来源** (`iuap.busiObj.BusinessFlowSourcesItf`)
+  - `firstbusiobj` → `firstbusiobj`
+  - `firstchild_id` → `firstchild_id`
+  - `firstcode` → `firstcode`
+  - `first_id` → `first_id`
+  - `sourcegrand_id` → `sourcegrand_id`
+- **收付结转主表** (`FIAP.FIAP.IEARAPCarryover`)
+  - `bln_carryover` → `bln_carryover`
+  - `carryover_event_id` → `carryover_event_id`
+  - `carryover_period_id` → `carryover_period_id`
+  - `carryover_period_code` → `carryover_period_code`
+  - `carryover_year_id` → `carryover_year_id`
+  - `carryover_year_code` → `carryover_year_code`
+- **统一租户接口** (`iuap.busiObj.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+- **逻辑删除** (`iuap.busiObj.LogicDelete`)
+  - `dr` → `dr`
+
+## 字段列表（按类型分组）
+
+> 共 109 个直连字段
+
+### 文本字段 (42个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `acc_period_code` | `acc_period_code` | `accPeriodCode` | 会计期间 |
+| `acc_year_code` | `acc_year_code` | `accYearCode` | 会计年度 |
+| `auditnote` | `auditnote` | `auditNote` | 审批批语 |
+| `batch_no` | `batch_no` | `batchNo` | 批次号 |
+| `biz_bill_code` | `biz_bill_code` | `bizBillCode` | 业务单据编号 |
+| `biz_bill_id` | `biz_bill_id` | `bizBillId` | 业务单据ID |
+| `check_error_msg` | `check_error_msg` | `checkErrorMsg` | 会计事务校验异常信息 |
+| `event_code` | `event_code` | `code` | 事务记录号 |
+| `dtc_gtxid` | `dtc_gtxid` | `dtcGtxid` | 全局分布式事务ID |
+| `entry_id` | `entry_id` | `entry` | 事项分录 |
+| `entry_code` | `entry_code` | `entryCode` | 事项分录编码 |
+| `firstbusiobj` | `firstbusiobj` | `firstBusiObj` | 来源业务对象 |
+| `firstchild_id` | `firstchild_id` | `firstChildId` | 来源单据子表ID |
+| `firstcode` | `firstcode` | `firstCode` | 来源单据号 |
+| `first_id` | `first_id` | `firstId` | 来源单据主表ID |
+| `opp_bill_id` | `opp_bill_id` | `oppBillId` | 对应单据ID |
+| `post_status_code` | `post_status_code` | `postStatusCode` | 事项分录生成状态编码 |
+| `remarks` | `remarks` | `remarks` | 备注 |
+| `retailer_name` | `retailer_name` | `retailer` | 散户 |
+| `sourcebusiobj` | `sourcebusiobj` | `sourceBusiObj` | 上游业务对象 |
+| `sourcechild_id` | `sourcechild_id` | `sourceChildId` | 上游单据子表id |
+| `sourcecode` | `sourcecode` | `sourceCode` | 上游单据号 |
+| `source_id` | `source_id` | `sourceId` | 上游单据主表ID |
+| `src_bill_code` | `src_bill_code` | `srcBillCode` | 来源单据编号 |
+| `src_bill_id` | `src_bill_id` | `srcBillId` | 来源单据ID |
+| `src_data_id` | `src_data_id` | `srcDataId` | 来源数据标识 |
+| `src_data_type` | `src_data_type` | `srcDataType` | 来源数据类型(fullname) |
+| `src_event_id` | `src_event_id` | `srcEvent` | 来源事务ID |
+| `voucher_id` | `voucher_id` | `voucher` | 凭证 |
+| `voucher_code` | `voucher_code` | `voucherCode` | 凭证编码 |
+| `write_off_src_data_code` | `write_off_src_data_code` | `writeOffSrcDataCode` | 被冲销会计事务编号 |
+| `write_off_src_data_id` | `write_off_src_data_id` | `writeOffSrcDataId` | 冲销来源数据标识 |
+| `bizflowinstance_id` | `bizflowinstance_id` | `bizFlowInstanceId` | 业务流实例id |
+| `bizflow_makebillcode` | `bizflow_makebillcode` | `bizFlowMakeBillCode` | 单据转换规则编码 |
+| `bizflow_id` | `bizflow_id` | `bizflowId` | 业务流id |
+| `bizflowname` | `bizflowname` | `bizflowName` | 流程名称 |
+| `carryover_event_id` | `carryover_event_id` | `carryoverEvent` | 结转事务 |
+| `carryover_period_code` | `carryover_period_code` | `carryoverPeriodCode` | 结转期间编码 |
+| `carryover_year_code` | `carryover_year_code` | `carryoverYearCode` | 结转年度编码 |
+| `id` | `id` | `id` | 主键 |
+| `procinst_id` | `procinst_id` | `procinstId` | 流程实例ID |
+| `sourcegrand_id` | `sourcegrand_id` | `sourceGrandId` | 来源孙表id |
+
+### 引用字段 (29个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `acc_book_id` | `acc_book_id` | `accBook` | 财务账簿 |
+| `acc_currency_id` | `acc_currency_id` | `accCurrency` | 账簿本币 |
+| `acc_period_id` | `acc_period_id` | `accPeriod` | 会计期间ID |
+| `acc_purpose` | `acc_purpose` | `accPurpose` | 核算目的 |
+| `acc_year_id` | `acc_year_id` | `accYear` | 会计年度ID |
+| `biz_bill_type_id` | `biz_bill_type_id` | `bizBillType` | 业务单据类型 |
+| `biz_bill_trade_type_id` | `biz_bill_trade_type_id` | `bizTradeType` | 业务单据交易类型 |
+| `employee_id` | `employee_id` | `employee` | 员工 |
+| `event_type_id` | `event_type_id` | `eventType` | 会计事务类型 |
+| `finance_org_id` | `finance_org_id` | `financeOrg` | 会计主体 |
+| `funder_id` | `funder_id` | `funder` | 资金业务伙伴 |
+| `gbl_currency_id` | `gbl_currency_id` | `gblCurrency` | 全局本币 |
+| `grp_currency_id` | `grp_currency_id` | `grpCurrency` | 集团本币 |
+| `org_id` | `org_id` | `org` | 业务组织 |
+| `org_currency_id` | `org_currency_id` | `orgCurrency` | 组织本币 |
+| `ori_currency_id` | `ori_currency_id` | `oriCurrency` | 原币 |
+| `partner_id` | `partner_id` | `partner` | 业务伙伴 |
+| `src_app_id` | `src_app_id` | `srcApp` | 来源应用 |
+| `src_bill_type_id` | `src_bill_type_id` | `srcBillType` | 业务事项 |
+| `src_trade_type_id` | `src_trade_type_id` | `srcTradeType` | 来源单据交易类型 |
+| `supplier_id` | `supplier_id` | `supplier` | 供应商 |
+| `voucher_type_id` | `voucher_type_id` | `voucherType` | 凭证类型 |
+| `write_off_reason` | `write_off_reason` | `writeOffReason` | 冲销原因 |
+| `auditor` | `auditor` | `auditor` | 审批人 |
+| `carryover_period_id` | `carryover_period_id` | `carryoverPeriod` | 结转期间 |
+| `carryover_year_id` | `carryover_year_id` | `carryoverYear` | 结转年度 |
+| `creator` | `creator` | `creator` | 创建人 |
+| `modifier` | `modifier` | `modifier` | 修改人 |
+| `ytenant_id` | `ytenant_id` | `ytenantId` | 租户id |
+
+### 日期字段 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `acc_date` | `acc_date` | `accDate` | 记账日期 |
+| `clear_time` | `clear_time` | `clearTime` | 清账时间 |
+| `src_bill_date` | `src_bill_date` | `srcBillDate` | 来源单据日期 |
+
+### 日期时间 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+| `audit_time` | `audit_time` | `auditTime` | 审批日期 |
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+
+### 枚举字段 (13个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `acc_convert_param` | `acc_convert_param` | `accConvertParam` | 本币折算参数 |
+| `arap_event_type` | `arap_event_type` | `arapEventType` | 收付会计事务 |
+| `bln_effect` | `bln_effect` | `blnEffect` | 生效状态 |
+| `bln_write_off` | `bln_write_off` | `blnWriteOff` | 是否冲销 |
+| `gbl_convert_param` | `gbl_convert_param` | `gblConvertParam` | 全局币折算参数 |
+| `grp_convert_param` | `grp_convert_param` | `grpConvertParam` | 集团币折算参数 |
+| `object_type` | `object_type` | `objectType` | 往来对象类型 |
+| `org_convert_param` | `org_convert_param` | `orgConvertParam` | 组织币折算参数 |
+| `post_state` | `post_state` | `postState` | 事项分录生成状态 |
+| `settle_state` | `settle_state` | `settleState` | 结算状态 |
+| `status` | `status` | `status` | 事务状态 |
+| `write_off_state` | `write_off_state` | `writeOffState` | 冲销状态 |
+| `verifystate` | `verifystate` | `verifyState` | 单据状态 |
+
+### 整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dtc_status` | `dtc_status` | `dtcStatus` | 全局事务状态 |
+
+### 短整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `bln_carryover` | `bln_carryover` | `blnCarryover` | 是否结转 |
+| `dr` | `dr` | `dr` | 逻辑删除 |
+
+### 数值字段 (11个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `acc_amount` | `acc_amount` | `accAmount` | 本币金额 |
+| `acc_balance` | `acc_balance` | `accBalance` | 本币余额 |
+| `gbl_amount` | `gbl_amount` | `gblAmount` | 全局币金额 |
+| `gbl_balance` | `gbl_balance` | `gblBalance` | 全局币余额 |
+| `grp_amount` | `grp_amount` | `grpAmount` | 集团币金额 |
+| `grp_balance` | `grp_balance` | `grpBalance` | 集团币余额 |
+| `org_amount` | `org_amount` | `orgAmount` | 组织币金额 |
+| `org_balance` | `org_balance` | `orgBalance` | 组织币余额 |
+| `ori_amount` | `ori_amount` | `oriAmount` | 金额 |
+| `ori_balance` | `ori_balance` | `oriBalance` | 余额 |
+| `ori_ocupy_amount` | `ori_ocupy_amount` | `oriOcupyAmount` | 预占用金额 |
+
+### multipleOption (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `balance_state` | `balance_state` | `balanceState` | 清账状态 |
+| `src_system` | `src_system` | `srcSystem` | 来源系统 |
+
+### UserDefine (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `free_ch_id` | `free_ch_id` | `freeChId` | 自定义特征 |
+
+### other (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `` | `bodyItem` | 应付公共明细信息 |

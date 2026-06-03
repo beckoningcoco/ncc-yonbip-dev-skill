@@ -12,69 +12,130 @@ source_type: api_response
 
 # 物料适用范围 (`pc.product.ProductApplyRange`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `productapplyrange` | 应用: `GZTBDM` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`productapplyrange` | domain：`productcenter` | 应用：`GZTBDM` | 业务对象ID：``
 
-## 属性（33 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `id` | ID | `id` | Long | `long` |
-| 2 | `productId` | productID | `productId` | 89f3b06e-23df-4403-b4a7-19f99eeeae72 | `quote` |
-| 3 | `orgId` | 组织ID | `orgId` | 8aaf4bce-2eb3-443c-bce1-0fb94fec3c0c | `quote` |
-| 4 | `isCreator` | 是否Creator | `isCreator` | Boolean | `switch` |
-| 5 | `customerId` | customerID | `customerId` | 94b3280a-27a4-485a-b90b-b7bce57c6df2 | `quote` |
-| 6 | `shopId` | shopID | `shopId` | 94b3280a-27a4-485a-b90b-b7bce57c6df2 | `quote` |
-| 7 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 8 | `rangeType` | rangeType | `iRangeType` | Integer | `int` |
-| 9 | `productDetailId` | productDetailID | `productDetailId` | 04616b02-47f8-4821-8c02-2e7a6d3264a8 | `quote` |
-| 10 | `isApplied` | 是否Applied | `isApplied` | Boolean | `switch` |
-| 11 | `controlRuleVersion` | controlRuleVersion | `control_rule_version` | Integer | `int` |
-| 12 | `productDepositTimeDetailId` | productDepositTimeDetailID | `productDepositTimeDetailId` | 50af4617-0d26-41d3-a575-2fda1f544f2d | `quote` |
-| 13 | `allocatorId` | allocatorID | `allocator_id` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 14 | `allocatorName` | allocator名称 | `allocator_name` | String | `text` |
-| 15 | `allocateTime` | allocateTime | `allocate_time` | DateTime | `timestamp` |
-| 16 | `allocateSource` | allocateSource | `allocate_source` | String | `text` |
-| 17 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 18 | `tenant` | tenant | `tenant_id` | Long | `long` |
-| 19 | `defaultSKUAppliedOrderProperties` | defaultSKUAppliedOrderProperties | `` | 61b929f0-9b2e-438e-82d4-a4e978a184b9 | `` |
-| 20 | `productAppliedCheckFrees` | productAppliedCheckFrees | `` | bcb694ee-d969-4710-bb46-08706acc274d | `` |
-| 21 | `productAppliedDetail` | productAppliedDetail | `` | e873b2d5-4a69-482e-8a7a-c73169af0141 | `` |
-| 22 | `productAppliedParams` | productAppliedParams | `` | 46da793c-26de-428f-a75a-a4d667dd5730 | `` |
-| 23 | `productAppliedSpecFrees` | productAppliedSpecFrees | `` | bcb694ee-d969-4710-bb46-08706acc274d | `` |
-| 24 | `productAppliedTags` | productAppliedTags | `` | 989442f5-0227-438b-8de5-9aa2bdbf9b71 | `` |
-| 25 | `productAppliedTime` | productAppliedTime | `` | 88c5a1fa-bafc-452a-a76b-f611f76cb30f | `` |
-| 26 | `productCheckFreeNew` | productCheckFreeNew | `` | 0c671a67-be50-4853-af7d-34a328fbbe7d | `` |
-| 27 | `productLoadWay` | productLoadWay | `` | 3c00f201-5ce7-4cfc-bc56-d214ae327f98 | `` |
-| 28 | `productParameters` | productParameters | `` | a17ec282-d9c6-4beb-bdd2-e810bf87ce73 | `` |
-| 29 | `productSkuOrderProperty` | productSkuOrderProperty | `` | a810167f-b9ce-465d-ae5d-de40bc42b82f | `` |
-| 30 | `productSpecFreeNew` | productSpecFreeNew | `` | 0c671a67-be50-4853-af7d-34a328fbbe7d | `` |
-| 31 | `productTagNew` | productTagNew | `` | c77e6af7-abba-4d81-9421-c276c46aab7f | `` |
-| 32 | `skuAppliedTags` | skuAppliedTags | `` | 2a8fa712-87c2-4673-b2de-338c09dc73d3 | `` |
-| 33 | `skuTagNew` | skuTagNew | `` | 3fa4d3ea-fbf8-4f49-8b4f-9af7d282a8f6 | `` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 物料适用范围 |
+| 物理表 | `productapplyrange` |
+| 数据库 schema | `productcenter` |
+| 所属应用 | `GZTBDM` |
+| 直连字段 | 33 个 |
+| 子表 | 15 个 |
+| 关联引用 | 23 个 |
 
-## 关联（23 个）
+## 子表
 
-- `productAppliedTags` -> `pc.product.ProductTag` (0..n)
-- `productAppliedCheckFrees` -> `pc.product.ProductCheckFree` (0..n)
-- `productSpecFreeNew` -> `pc.product.ProductCheckFreeNew` (0..n)
-- `productTagNew` -> `pc.product.ProductTagNew` (0..n)
-- `productId` -> `pc.product.Product` (0..n)
-- `productCheckFreeNew` -> `pc.product.ProductCheckFreeNew` (0..n)
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `productAppliedDetail` -> `pc.product.ProductApplyRangeDetail` (1)
-- `defaultSKUAppliedOrderProperties` -> `pc.product.SKUOrderProperty` (0..n)
-- `productDepositTimeDetailId` -> `pc.product.ProductDepositTimeDetail` ()
-- `allocatorId` -> `base.user.User` ()
-- `productLoadWay` -> `pc.product.ProductLoadWay` (0..n)
-- `productAppliedSpecFrees` -> `pc.product.ProductCheckFree` (0..n)
-- `orgId` -> `bd.adminOrg.BaseOrgVO` ()
-- `productAppliedParams` -> `pc.product.ProductParameter` (0..n)
-- `productSkuOrderProperty` -> `pc.product.ProductSkuOrderProperty` (0..n)
-- `skuTagNew` -> `pc.product.SkuTagNew` (0..n)
-- `skuAppliedTags` -> `pc.product.SKUTag` (0..n)
-- `productParameters` -> `pc.product.ProductParameters` (0..n)
-- `customerId` -> `aa.merchant.Merchant` ()
-- `shopId` -> `aa.merchant.Merchant` ()
-- `productAppliedTime` -> `pc.product.ProductDepositTime` (1)
-- `productDetailId` -> `pc.product.ProductDetail` ()
+| 字段名 | URI | 关系 |
+|--------|-----|------|
+| `productAppliedTags` | `pc.product.ProductTag` | composition |
+| `productAppliedCheckFrees` | `pc.product.ProductCheckFree` | composition |
+| `productSpecFreeNew` | `pc.product.ProductCheckFreeNew` | composition |
+| `productTagNew` | `pc.product.ProductTagNew` | composition |
+| `productCheckFreeNew` | `pc.product.ProductCheckFreeNew` | composition |
+| `productAppliedDetail` | `pc.product.ProductApplyRangeDetail` | composition |
+| `defaultSKUAppliedOrderProperties` | `pc.product.SKUOrderProperty` | composition |
+| `productLoadWay` | `pc.product.ProductLoadWay` | composition |
+| `productAppliedSpecFrees` | `pc.product.ProductCheckFree` | composition |
+| `productAppliedParams` | `pc.product.ProductParameter` | composition |
+| `productSkuOrderProperty` | `pc.product.ProductSkuOrderProperty` | composition |
+| `skuTagNew` | `pc.product.SkuTagNew` | composition |
+| `skuAppliedTags` | `pc.product.SKUTag` | composition |
+| `productParameters` | `pc.product.ProductParameters` | composition |
+| `productAppliedTime` | `pc.product.ProductDepositTime` | composition |
+
+## 关联引用 (23个)
+
+| 字段名 | 引用类型 |
+|--------|---------|
+| `` | `` |
+| `productId` | `` |
+| `ytenant_id` | `` |
+| `productDepositTimeDetailId` | `` |
+| `allocator_id` | `` |
+| `orgId` | `ucf-org-center.org_pure_tree_ref` |
+| `customerId` | `` |
+| `shopId` | `productcenter.pc_mallordershopref` |
+| `productDetailId` | `` |
+
+## 继承接口 (2个, 2字段)
+
+- **租户相关** (`coredoc.pub.TenantObselete`)
+  - `tenant_id` → `tenant_id`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 33 个直连字段
+
+### 文本字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `allocator_name` | `allocator_name` | `allocatorName` | 分配人 |
+| `allocate_source` | `allocate_source` | `allocateSource` | 分配来源 |
+
+### 引用字段 (8个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `productId` | `productId` | `productId` | 物料 |
+| `orgId` | `orgId` | `orgId` | 组织 |
+| `customerId` | `customerId` | `customerId` | 客户 |
+| `shopId` | `shopId` | `shopId` | 加盟商 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户 |
+| `productDetailId` | `productDetailId` | `productDetailId` | 物料组织级表 |
+| `productDepositTimeDetailId` | `productDepositTimeDetailId` | `productDepositTimeDetailId` | 物料定金明细表 |
+| `allocator_id` | `allocator_id` | `allocatorId` | 分配人 |
+
+### 布尔字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `isCreator` | `isCreator` | `isCreator` | 是否物料管理组织 |
+| `isApplied` | `isApplied` | `isApplied` | 使用组织是否修改数据 |
+
+### 整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iRangeType` | `iRangeType` | `rangeType` | 物料分配范围类型 |
+| `control_rule_version` | `control_rule_version` | `controlRuleVersion` | 管控规则版本号 |
+
+### 长整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+| `tenant_id` | `tenant_id` | `tenant` | 租户(废弃) |
+
+### timestamp (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `allocate_time` | `allocate_time` | `allocateTime` | 分配时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+
+### other (15个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `` | `defaultSKUAppliedOrderProperties` | (停用)物料订单属性(使用组织) |
+| `` | `` | `productAppliedCheckFrees` | (停用)指定核算的规格 |
+| `` | `` | `productAppliedDetail` | （停用）物料适用范围详情 |
+| `` | `` | `productAppliedParams` | (停用)物料参数表(使用组织) |
+| `` | `` | `productAppliedSpecFrees` | (停用)指定核算的规格 |
+| `` | `` | `productAppliedTags` | (停用)物料标签关联表(使用组织) |
+| `` | `` | `productAppliedTime` | (停用)物料定金时间关联(使用组织) |
+| `` | `` | `productCheckFreeNew` | 指定核算的规格(整合) |
+| `` | `` | `productLoadWay` | 物料装载方式(整合) |
+| `` | `` | `productParameters` | 物料参数表(整合) |
+| `` | `` | `productSkuOrderProperty` | 物料订单属性(整合) |
+| `` | `` | `productSpecFreeNew` | 指定核算的规格(整合) |
+| `` | `` | `productTagNew` | 物料标签关联表(整合) |
+| `` | `` | `skuAppliedTags` | (停用)SKU标签关联表(使用组织) |
+| `` | `` | `skuTagNew` | SKU标签关联表(整合) |

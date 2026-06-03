@@ -12,26 +12,69 @@ source_type: api_response
 
 # 企业 (`cpu-privilege.enterprise.EnterprisePOJO`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `cpu_enterprise` | 应用: `` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`cpu_enterprise` | domain：`cpu-privilege-service` | 应用：`` | 业务对象ID：``
 
-## 属性（12 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `address` | address | `address` | String | `text` |
-| 2 | `code` | 编码 | `code` | String | `text` |
-| 3 | `dr` | 逻辑删除 | `dr` | Integer | `int` |
-| 4 | `id` | ID | `id` | Long | `long` |
-| 5 | `loginChannl` | loginChannl | `login_channel` | String | `text` |
-| 6 | `name` | 名称 | `name` | String | `text` |
-| 7 | `pubts` | 时间戳 | `ts` | DateTime | `timestamp` |
-| 8 | `supply` | supply | `supply` | String | `text` |
-| 9 | `tenantid` | tenantid | `tenant_id` | String | `text` |
-| 10 | `ts` | ts | `ts` | DateTime | `timestamp` |
-| 11 | `ycnCode` | ycn编码 | `ycn_code` | String | `text` |
-| 12 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 企业 |
+| 物理表 | `cpu_enterprise` |
+| 数据库 schema | `cpu-privilege-service` |
+| 所属应用 | `` |
+| 直连字段 | 12 个 |
+| 子表 | 0 个 |
+| 关联引用 | 1 个 |
 
-## 关联（1 个）
+## 关联引用 (1个)
 
-- `ytenant` -> `yht.tenant.YhtTenant` ()
+| 字段名 | 引用类型 |
+|--------|---------|
+| `ytenant_id` | `` |
+
+## 继承接口 (1个, 1字段)
+
+- **统一租户接口(扩展)** (`ucfbase.ucfbaseItf.IYTenantExt`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 12 个直连字段
+
+### 文本字段 (7个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `address` | `address` | `address` | 公司地址 |
+| `code` | `code` | `code` | 企业编码 |
+| `login_channel` | `login_channel` | `loginChannl` | 登录途径 |
+| `name` | `name` | `name` | 企业名称 |
+| `supply` | `supply` | `supply` | 是否供应商 |
+| `tenant_id` | `tenant_id` | `tenantid` | 租户id |
+| `ycn_code` | `ycn_code` | `ycnCode` | ycn码 |
+
+### 引用字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dr` | `dr` | `dr` | dr |
+
+### 长整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+
+### timestamp (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `ts` | `ts` | `pubts` | 时间戳 |
+| `ts` | `ts` | `ts` | 时间戳 |

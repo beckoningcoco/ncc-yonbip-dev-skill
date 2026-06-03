@@ -12,31 +12,76 @@ source_type: api_response
 
 # 门店所属仓库 (`aa.store.StoreOweWarehouse`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `mp_storeowewarehouse` | 应用: `Marketingpublic` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`mp_storeowewarehouse` | domain：`yxybase` | 应用：`Marketingpublic` | 业务对象ID：``
 
-## 属性（14 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `warehouse` | warehouse | `iWarehouseID` | 4256da1b-7d9f-49d6-b510-a05e771d17b0 | `quote` |
-| 2 | `isDefault` | 是否Default | `iDefault` | Short | `short` |
-| 3 | `isDefaultEc` | 是否DefaultEc | `iDefaultEc` | Short | `short` |
-| 4 | `store` | store | `iStoreID` | 16e4e14c-ab05-4ee5-bbb8-c67351c9a8b3 | `quote` |
-| 5 | `id` | ID | `id` | Long | `long` |
-| 6 | `isDefaultMaterial` | 是否DefaultMaterial | `iDefaultMaterial` | Short | `short` |
-| 7 | `isDefaultRequire` | 是否DefaultRequire | `isDefaultRequire` | Short | `short` |
-| 8 | `priorityLevel` | priorityLevel | `iPriorityLevel` | PriorityLevel | `` |
-| 9 | `isPlatformWarehouse` | 是否PlatformWarehouse | `isPlatformWarehouse` | Short | `short` |
-| 10 | `isDefaultBack` | 是否DefaultBack | `isDefaultBack` | Short | `short` |
-| 11 | `bCanSellWarehouse` | bCanSellWarehouse | `bCanSellWarehouse` | Short | `short` |
-| 12 | `pubts` | 时间戳 | `ts` | DateTime | `timestamp` |
-| 13 | `tenant` | tenant | `tenant_id` | c213cd56-d5de-421f-bae7-d77455b557cd | `quote` |
-| 14 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 门店所属仓库 |
+| 物理表 | `mp_storeowewarehouse` |
+| 数据库 schema | `yxybase` |
+| 所属应用 | `Marketingpublic` |
+| 直连字段 | 14 个 |
+| 子表 | 0 个 |
+| 关联引用 | 4 个 |
 
-## 关联（4 个）
+## 关联引用 (4个)
 
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `store` -> `aa.store.Store` (0..n)
-- `warehouse` -> `aa.warehouse.Warehouse` ()
-- `tenant` -> `base.tenant.Tenant` ()
+| 字段名 | 引用类型 |
+|--------|---------|
+| `ytenant_id` | `` |
+| `iStoreID` | `` |
+| `iWarehouseID` | `productcenter.aa_warehouse_stocksref` |
+| `tenant_id` | `` |
+
+## 继承接口 (2个, 2字段)
+
+- **租户相关** (`base.itf.ITenant`)
+  - `tenant_id` → `tenant_id`
+- **统一租户接口(扩展)** (`ucfbase.ucfbaseItf.IYTenantExt`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 14 个直连字段
+
+### 引用字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iWarehouseID` | `iWarehouseID` | `warehouse` | 仓库 |
+| `iStoreID` | `iStoreID` | `store` | 门店id |
+| `tenant_id` | `tenant_id` | `tenant` | 租户 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 短整数 (7个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iDefault` | `iDefault` | `isDefault` | 默认销售仓 |
+| `iDefaultEc` | `iDefaultEc` | `isDefaultEc` | 默认电商销售仓 |
+| `iDefaultMaterial` | `iDefaultMaterial` | `isDefaultMaterial` | 默认材料仓 |
+| `isDefaultRequire` | `isDefaultRequire` | `isDefaultRequire` | 默认要货仓 |
+| `isPlatformWarehouse` | `isPlatformWarehouse` | `isPlatformWarehouse` | 是否平台仓 |
+| `isDefaultBack` | `isDefaultBack` | `isDefaultBack` | 默认退货仓 |
+| `bCanSellWarehouse` | `bCanSellWarehouse` | `bCanSellWarehouse` | 门店可销售仓 |
+
+### 长整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+
+### other (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iPriorityLevel` | `iPriorityLevel` | `priorityLevel` | 优先级 |
+
+### timestamp (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `ts` | `ts` | `pubts` | 时间戳 |

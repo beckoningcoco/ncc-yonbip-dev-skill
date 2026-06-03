@@ -12,30 +12,75 @@ source_type: api_response
 
 # 卡券商品SKU例外表 (`uhybase.coupon.CouponGoodsSKUExclude`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `mp_goodsscopeexception` | 应用: `SDMB` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`mp_goodsscopeexception` | domain：`uhy` | 应用：`SDMB` | 业务对象ID：``
 
-## 属性（14 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `id` | ID | `id` | Long | `long` |
-| 2 | `iGoodsSKUID` | iGoodsSKUID | `iGoodsSKUID` | 3e9ddc6d-edd0-4508-afcc-e4a20535f2f9 | `quote` |
-| 3 | `cOuterGoodsSKUCode` | cOuterGoodsSKU编码 | `cOuterGoodsSKUCode` | String | `text` |
-| 4 | `iGoodsID` | iGoodsID | `iGoodsID` | Long | `long` |
-| 5 | `cOuterGoodsCode` | cOuterGoods编码 | `cOuterGoodsCode` | String | `text` |
-| 6 | `cAppID` | cAppID | `cAppID` | String | `text` |
-| 7 | `cGoodsCode` | cGoods编码 | `cGoodsCode` | String | `text` |
-| 8 | `cGoodsSKUName` | cGoodsSKU名称 | `cGoodsSKUName` | String | `text` |
-| 9 | `iDocID` | iDocID | `iDocID` | 01269572-184b-47c7-ad59-d4125d0f8cce | `quote` |
-| 10 | `iScopeCategory` | iScopeCategory | `iScopeCategory` | Integer | `int` |
-| 11 | `iScopeType` | iScopeType | `iScopeType` | Integer | `int` |
-| 12 | `membercorp` | membercorp | `iCorpId` | Long | `long` |
-| 13 | `pubts` | 时间戳 | `ts` | DateTime | `timestamp` |
-| 14 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 卡券商品SKU例外表 |
+| 物理表 | `mp_goodsscopeexception` |
+| 数据库 schema | `uhy` |
+| 所属应用 | `SDMB` |
+| 直连字段 | 14 个 |
+| 子表 | 0 个 |
+| 关联引用 | 3 个 |
 
-## 关联（3 个）
+## 关联引用 (3个)
 
-- `iGoodsSKUID` -> `pc.product.ProductSKU` ()
-- `iDocID` -> `uhybase.coupon.Coupon` (0..n)
-- `ytenant` -> `yht.tenant.YhtTenant` ()
+| 字段名 | 引用类型 |
+|--------|---------|
+| `iGoodsSKUID` | `productcenter.pc_productskuquerymaintreeref` |
+| `iDocID` | `` |
+| `ytenant_id` | `` |
+
+## 继承接口 (2个, 2字段)
+
+- **会员租户相关** (`base.itf.IMembercorp`)
+  - `iCorpId` → `iCorpId`
+- **统一租户接口(扩展)** (`ucfbase.ucfbaseItf.IYTenantExt`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 14 个直连字段
+
+### 文本字段 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `cOuterGoodsSKUCode` | `cOuterGoodsSKUCode` | `cOuterGoodsSKUCode` | 外部系统商品SKU编码 |
+| `cOuterGoodsCode` | `cOuterGoodsCode` | `cOuterGoodsCode` | 外部系统商品编码 |
+| `cAppID` | `cAppID` | `cAppID` | cAppID |
+| `cGoodsCode` | `cGoodsCode` | `cGoodsCode` | 商品编码 |
+| `cGoodsSKUName` | `cGoodsSKUName` | `cGoodsSKUName` | 商品名称 |
+
+### 引用字段 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iGoodsSKUID` | `iGoodsSKUID` | `iGoodsSKUID` | 适用商品SKUID |
+| `iDocID` | `iDocID` | `iDocID` | 卡券ID |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iScopeCategory` | `iScopeCategory` | `iScopeCategory` | 按商品分类 |
+| `iScopeType` | `iScopeType` | `iScopeType` | 类型 |
+
+### 长整数 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | 适用商品分类ID |
+| `iGoodsID` | `iGoodsID` | `iGoodsID` | 例外商品ID |
+| `iCorpId` | `iCorpId` | `membercorp` | 租户 |
+
+### timestamp (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `ts` | `ts` | `pubts` | 时间戳 |

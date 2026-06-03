@@ -12,32 +12,100 @@ source_type: api_response
 
 # 成本中心虚拟父表基本档案 (`bd.costcenter.virtually`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `bd_costcenter_virtually` | 应用: `DPMACCT` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`bd_costcenter_virtually` | domain：`finbd` | 应用：`DPMACCT` | 业务对象ID：`8b6c35e0-1ba3-4d24-a74c-3cd34ac72aef`
 
-## 属性（15 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `code` | 编码 | `code` | String | `text` |
-| 2 | `createDate` | 创建日期 | `create_date` | Date | `date` |
-| 3 | `createTime` | 创建时间 | `create_time` | DateTime | `timestamp` |
-| 4 | `creator` | 创建人 | `creator` | String | `text` |
-| 5 | `creatorId` | 创建人ID | `creatorId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 6 | `dr` | 逻辑删除 | `dr` | Short | `short` |
-| 7 | `id` | ID | `id` | Long | `long` |
-| 8 | `modifier` | 修改人 | `modifier` | String | `text` |
-| 9 | `modifierId` | 修改人ID | `modifierId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 10 | `modifyDate` | 修改日期 | `modify_date` | Date | `date` |
-| 11 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `timestamp` |
-| 12 | `name` | 名称 | `name` | String | `text` |
-| 13 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 14 | `virtually` | virtually | `` | 872630ba-e8f4-4080-817d-8fc9a6958733 | `` |
-| 15 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 成本中心虚拟父表基本档案 |
+| 物理表 | `bd_costcenter_virtually` |
+| 数据库 schema | `finbd` |
+| 所属应用 | `DPMACCT` |
+| 直连字段 | 15 个 |
+| 子表 | 1 个 |
+| 关联引用 | 4 个 |
 
-## 关联（4 个）
+## 子表
 
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `virtually` -> `bd.costcenter.CostCenter` (0..n)
-- `creatorId` -> `base.user.User` ()
-- `modifierId` -> `base.user.User` ()
+| 字段名 | URI | 关系 |
+|--------|-----|------|
+| `virtually` | `bd.costcenter.CostCenter` | composition |
+
+## 关联引用 (4个)
+
+| 字段名 | 引用类型 |
+|--------|---------|
+| `ytenant_id` | `` |
+| `` | `` |
+
+## 继承接口 (3个, 10字段)
+
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+- **审计信息** (`base.itf.IAuditInfo`)
+  - `create_date` → `create_date`
+  - `create_time` → `create_time`
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `modify_date` → `modify_date`
+  - `modify_time` → `modify_time`
+- **逻辑删除相关** (`ucfbase.ucfbaseItf.LogicDelete`)
+  - `dr` → `dr`
+
+## 字段列表（按类型分组）
+
+> 共 15 个直连字段
+
+### 文本字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `code` | `code` | 编码 |
+| `` | `creator` | `creator` | 创建人名称 |
+| `` | `modifier` | `modifier` | 修改人名称 |
+| `` | `name` | `name` | 名称 |
+
+### 引用字段 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `creatorId` | `creatorId` | 创建人 |
+| `` | `modifierId` | `modifierId` | 修改人 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 日期字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_date` | `create_date` | `createDate` | 创建日期 |
+| `modify_date` | `modify_date` | `modifyDate` | 修改日期 |
+
+### 短整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dr` | `dr` | `dr` | 逻辑删除标记 |
+
+### 长整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | 主键 |
+
+### timestamp (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+
+### other (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `` | `virtually` | 成本中心基本档案 |

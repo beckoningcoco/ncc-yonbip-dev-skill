@@ -12,24 +12,64 @@ source_type: api_response
 
 # 优惠券商品标签关系 (`uhybase.coupon.CouponGoodsTag`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `mp_coupongoodstag` | 应用: `SDMB` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`mp_coupongoodstag` | domain：`uhy` | 应用：`SDMB` | 业务对象ID：`a3595085-828e-48ea-b609-c9dc644c4a25`
 
-## 属性（8 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `id` | ID | `id` | Long | `long` |
-| 2 | `iGoodsTagID` | iGoodsTagID | `iGoodsTagID` | 554a526a-26a3-42fa-a579-c795401e0e09 | `quote` |
-| 3 | `cAppID` | cAppID | `cAppID` | String | `text` |
-| 4 | `cGoodsTagName` | cGoodsTag名称 | `cGoodsTagName` | String | `text` |
-| 5 | `iCouponID` | iCouponID | `iCouponID` | 01269572-184b-47c7-ad59-d4125d0f8cce | `quote` |
-| 6 | `membercorp` | membercorp | `iCorpId` | Long | `long` |
-| 7 | `pubts` | 时间戳 | `ts` | DateTime | `timestamp` |
-| 8 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 优惠券商品标签关系 |
+| 物理表 | `mp_coupongoodstag` |
+| 数据库 schema | `uhy` |
+| 所属应用 | `SDMB` |
+| 直连字段 | 8 个 |
+| 子表 | 0 个 |
+| 关联引用 | 3 个 |
 
-## 关联（3 个）
+## 关联引用 (3个)
 
-- `iCouponID` -> `uhybase.coupon.Coupon` (0..n)
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `iGoodsTagID` -> `pc.tag.Tag` ()
+| 字段名 | 引用类型 |
+|--------|---------|
+| `iCouponID` | `` |
+| `ytenant_id` | `` |
+| `iGoodsTagID` | `productcenter.pc_tagref` |
+
+## 继承接口 (2个, 2字段)
+
+- **会员租户相关** (`base.itf.IMembercorp`)
+  - `iCorpId` → `iCorpId`
+- **统一租户接口(扩展)** (`ucfbase.ucfbaseItf.IYTenantExt`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 8 个直连字段
+
+### 文本字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `cAppID` | `cAppID` | `cAppID` | cAppID |
+| `cGoodsTagName` | `cGoodsTagName` | `cGoodsTagName` | 商品标签名称 |
+
+### 引用字段 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iGoodsTagID` | `iGoodsTagID` | `iGoodsTagID` | 适用商品标签ID |
+| `iCouponID` | `iCouponID` | `iCouponID` | 卡券ID |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 长整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | 适用商品标签ID |
+| `iCorpId` | `iCorpId` | `membercorp` | 租户 |
+
+### timestamp (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `ts` | `ts` | `pubts` | 时间戳 |

@@ -12,45 +12,115 @@ source_type: api_response
 
 # 门店经营范围 (`aa.productsofstore.ProductsofStore`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `aa_products_of_store` | 应用: `` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`aa_products_of_store` | domain：`yxybase` | 应用：`` | 业务对象ID：`4e072e28-7fcf-4fc9-a2f0-26281a62629a`
 
-## 属性（22 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `code` | 编码 | `code` | String | `text` |
-| 2 | `name` | 名称 | `name` | String | `multiLanguage` |
-| 3 | `memo` | 备注 | `memo` | String | `multiLanguage` |
-| 4 | `cust` | cust | `iCustID` | 94b3280a-27a4-485a-b90b-b7bce57c6df2 | `quote` |
-| 5 | `id` | ID | `id` | Long | `long` |
-| 6 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 7 | `createDate` | 创建日期 | `create_date` | Date | `date` |
-| 8 | `createTime` | 创建时间 | `create_time` | DateTime | `timestamp` |
-| 9 | `creator` | 创建人 | `creator` | String | `text` |
-| 10 | `creatorId` | 创建人ID | `creatorId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 11 | `excludeProducts` | excludeProducts | `` | 742714af-c4a2-4a90-a812-1511f29cc4ae | `` |
-| 12 | `modifier` | 修改人 | `modifier` | String | `text` |
-| 13 | `modifierId` | 修改人ID | `modifierId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 14 | `modifyDate` | 修改日期 | `modify_date` | Date | `date` |
-| 15 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `timestamp` |
-| 16 | `productBrands` | productBrands | `` | 33fdcd0b-9b46-46e2-b575-d696f3e7bffa | `` |
-| 17 | `productClass` | productClass | `` | ea943049-5411-4437-a5d4-4b7a708dcf7c | `` |
-| 18 | `productClassDES` | productClassDES | `productClassDES` | String | `text` |
-| 19 | `productbrand` | productbrand | `product_brand_id` | 33fdcd0b-9b46-46e2-b575-d696f3e7bffa | `quote` |
-| 20 | `productclass` | productclass | `product_class_id` | ea943049-5411-4437-a5d4-4b7a708dcf7c | `quote` |
-| 21 | `tenant` | tenant | `tenant_id` | c213cd56-d5de-421f-bae7-d77455b557cd | `quote` |
-| 22 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 门店经营范围 |
+| 物理表 | `aa_products_of_store` |
+| 数据库 schema | `yxybase` |
+| 所属应用 | `` |
+| 直连字段 | 22 个 |
+| 子表 | 3 个 |
+| 关联引用 | 10 个 |
 
-## 关联（10 个）
+## 子表
 
-- `productBrands` -> `aa.productsofstore.ProductBrandChild` (0..n)
-- `productClass` -> `aa.productsofstore.ProductClassChild` (0..n)
-- `productclass` -> `aa.productsofstore.ProductClassChild` ()
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `creatorId` -> `base.user.User` ()
-- `modifierId` -> `base.user.User` ()
-- `productbrand` -> `aa.productsofstore.ProductBrandChild` ()
-- `cust` -> `aa.merchant.Merchant` ()
-- `tenant` -> `base.tenant.Tenant` ()
-- `excludeProducts` -> `aa.productsofstore.ExcludeProducts` (0..n)
+| 字段名 | URI | 关系 |
+|--------|-----|------|
+| `productBrands` | `aa.productsofstore.ProductBrandChild` | composition |
+| `productClass` | `aa.productsofstore.ProductClassChild` | composition |
+| `excludeProducts` | `aa.productsofstore.ExcludeProducts` | composition |
+
+## 关联引用 (10个)
+
+| 字段名 | 引用类型 |
+|--------|---------|
+| `` | `` |
+| `product_class_id` | `` |
+| `ytenant_id` | `` |
+| `product_brand_id` | `` |
+| `iCustID` | `` |
+| `tenant_id` | `` |
+
+## 继承接口 (5个, 10字段)
+
+- **审计信息** (`base.itf.IAuditInfo`)
+  - `create_date` → `create_date`
+  - `create_time` → `create_time`
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `modify_date` → `modify_date`
+  - `modify_time` → `modify_time`
+- **客户接口** (`aa.itf.ICust`)
+  - `iCustID` → `iCustID`
+- **客户接口** (`aa.itf.ICustAll`)
+- **客户接口平台档案对加盟店可见** (`aa.itf.ICustExtend`)
+- **统一租户接口(扩展)** (`ucfbase.ucfbaseItf.IYTenantExt`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 22 个直连字段
+
+### 文本字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `code` | `code` | 编码 |
+| `` | `creator` | `creator` | 创建人名称 |
+| `` | `modifier` | `modifier` | 修改人名称 |
+| `productClassDES` | `productClassDES` | `productClassDES` | 指定商品分类 |
+
+### 引用字段 (7个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iCustID` | `iCustID` | `cust` | cust |
+| `` | `creatorId` | `creatorId` | 创建人 |
+| `` | `modifierId` | `modifierId` | 修改人 |
+| `product_brand_id` | `product_brand_id` | `productbrand` | 品牌 |
+| `product_class_id` | `product_class_id` | `productclass` | 分类 |
+| `tenant_id` | `tenant_id` | `tenant` | 租户 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 日期字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_date` | `create_date` | `createDate` | 创建日期 |
+| `modify_date` | `modify_date` | `modifyDate` | 修改日期 |
+
+### 长整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+
+### multiLanguage (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `name` | `name` | `name` | 名称 |
+| `memo` | `memo` | `memo` | 备注 |
+
+### timestamp (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+
+### other (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `` | `excludeProducts` | 例外商品 |
+| `` | `` | `productBrands` | 商品品牌子表 |
+| `` | `` | `productClass` | 商品分类子表 |

@@ -12,22 +12,62 @@ source_type: api_response
 
 # 适用范围 (`hrcm.location.LocationScopeOrg`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `cs_location_scope_org` | 应用: `HRCM` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`cs_location_scope_org` | domain：`hrcloud-contract` | 应用：`HRCM` | 业务对象ID：``
 
-## 属性（6 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `tenant` | tenant | `tenant_id` | String | `text` |
-| 2 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 3 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 4 | `id` | ID | `id` | Long | `long` |
-| 5 | `orgId` | 组织ID | `orgId` | a4352e3c-3eda-4539-a7a9-ec00799be118 | `quote` |
-| 6 | `locationId` | locationID | `cs_location_id` | 95256905-1d37-4ca6-a37f-ddbdab4d1c25 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 适用范围 |
+| 物理表 | `cs_location_scope_org` |
+| 数据库 schema | `hrcloud-contract` |
+| 所属应用 | `HRCM` |
+| 直连字段 | 6 个 |
+| 子表 | 0 个 |
+| 关联引用 | 3 个 |
 
-## 关联（3 个）
+## 关联引用 (3个)
 
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `locationId` -> `hrcm.location.Location` (0..n)
-- `orgId` -> `bd.adminOrg.AdminOrgVO` ()
+| 字段名 | 引用类型 |
+|--------|---------|
+| `ytenant_id` | `` |
+| `cs_location_id` | `hrcloud-contract.hrcm_location_ref` |
+| `orgId` | `ucf-org-center.org_admin_dept_tree_ref` |
+
+## 继承接口 (2个, 2字段)
+
+- **租户接口** (`ucfbase.ucfbaseItf.ITenant`)
+  - `tenant_id` → `tenant_id`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 6 个直连字段
+
+### 文本字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `tenant_id` | `tenant_id` | `tenant` | 租户ID |
+
+### 引用字段 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+| `orgId` | `orgId` | `orgId` | 组织ID |
+| `cs_location_id` | `cs_location_id` | `locationId` | 工作地点手工码 |
+
+### 长整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+
+### timestamp (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubts` | `pubts` | `pubts` | 时间戳 |

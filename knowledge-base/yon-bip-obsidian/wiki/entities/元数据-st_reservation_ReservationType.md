@@ -12,24 +12,83 @@ source_type: api_response
 
 # 跟踪线索类型主表 (`st.reservation.ReservationType`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `st_reservationtype` | 应用: `ST` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`st_reservationtype` | domain：`ustock` | 应用：`ST` | 业务对象ID：`fa8b448c-fac5-4328-9b5b-ba2311b7571c`
 
-## 属性（8 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `code` | 编码 | `code` | String | `text` |
-| 2 | `details` | details | `` | 6b3f95a7-dc06-4253-8745-74d6cf34ab09 | `` |
-| 3 | `id` | ID | `id` | Long | `long` |
-| 4 | `isSystem` | 是否System | `isSystem` | Short | `short` |
-| 5 | `name` | 名称 | `name` | String | `multiLanguage` |
-| 6 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 7 | `tenant` | tenant | `tenant_id` | c213cd56-d5de-421f-bae7-d77455b557cd | `quote` |
-| 8 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 跟踪线索类型主表 |
+| 物理表 | `st_reservationtype` |
+| 数据库 schema | `ustock` |
+| 所属应用 | `ST` |
+| 直连字段 | 8 个 |
+| 子表 | 1 个 |
+| 关联引用 | 3 个 |
 
-## 关联（3 个）
+## 子表
 
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `details` -> `st.reservation.ReservationTypes` (1..n)
-- `tenant` -> `base.tenant.Tenant` ()
+| 字段名 | URI | 关系 |
+|--------|-----|------|
+| `details` | `st.reservation.ReservationTypes` | composition |
+
+## 关联引用 (3个)
+
+| 字段名 | 引用类型 |
+|--------|---------|
+| `ytenant_id` | `` |
+| `` | `` |
+| `tenant_id` | `` |
+
+## 继承接口 (1个, 1字段)
+
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 8 个直连字段
+
+### 文本字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `code` | `code` | `code` | 编码 |
+
+### 引用字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `tenant_id` | `tenant_id` | `tenant` | 租户 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 短整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `isSystem` | `isSystem` | `isSystem` | 是否是系统预制 |
+
+### 长整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+
+### other (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `` | `details` | 跟踪线索类型子表 |
+
+### multiLanguage (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `name` | `name` | `name` | 名称 |
+
+### timestamp (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubts` | `pubts` | `pubts` | 时间戳 |

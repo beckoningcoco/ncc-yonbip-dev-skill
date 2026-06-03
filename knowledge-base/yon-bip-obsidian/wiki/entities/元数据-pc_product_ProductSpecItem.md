@@ -12,30 +12,91 @@ source_type: api_response
 
 # 物料关联的规格值明细 (`pc.product.ProductSpecItem`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `productspecitem` | 应用: `GZTBDM` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`productspecitem` | domain：`productcenter` | 应用：`GZTBDM` | 业务对象ID：``
 
-## 属性（12 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `id` | ID | `id` | Long | `long` |
-| 2 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 3 | `tenant` | tenant | `tenant_id` | Long | `long` |
-| 4 | `productId` | productID | `productId` | 89f3b06e-23df-4403-b4a7-19f99eeeae72 | `quote` |
-| 5 | `iSpecId` | iSpecID | `iSpecId` | 8420b5e5-7919-41ca-a192-7b8c4fb1d8b8 | `quote` |
-| 6 | `lsSpecItems_id` | lsSpecItems_id | `lsSpecItems_id` | ea8eef91-08ab-4b54-8359-92eed26877e7 | `quote` |
-| 7 | `specValue` | specValue | `specValue` | String | `text` |
-| 8 | `haveImg` | haveImg | `haveImg` | Boolean | `switch` |
-| 9 | `imgBusinessId` | imgBusinessID | `img_business_id` | String | `text` |
-| 10 | `iOrder` | iOrder | `iOrder` | Integer | `int` |
-| 11 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 12 | `productspecitemalbums` | productspecitemalbums | `` | 569dedab-cf16-4941-a465-bebab8b58900 | `` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 物料关联的规格值明细 |
+| 物理表 | `productspecitem` |
+| 数据库 schema | `productcenter` |
+| 所属应用 | `GZTBDM` |
+| 直连字段 | 12 个 |
+| 子表 | 1 个 |
+| 关联引用 | 5 个 |
 
-## 关联（5 个）
+## 子表
 
-- `lsSpecItems_id` -> `pc.userdef.Userdefine` ()
-- `productspecitemalbums` -> `pc.product.ProductSpecItemAlbum` (0..n)
-- `productId` -> `pc.product.Product` (0..n)
-- `iSpecId` -> `pc.userdef.UserDefineClass` ()
-- `ytenant` -> `yht.tenant.YhtTenant` ()
+| 字段名 | URI | 关系 |
+|--------|-----|------|
+| `productspecitemalbums` | `pc.product.ProductSpecItemAlbum` | composition |
+
+## 关联引用 (5个)
+
+| 字段名 | 引用类型 |
+|--------|---------|
+| `lsSpecItems_id` | `` |
+| `` | `` |
+| `productId` | `` |
+| `iSpecId` | `` |
+| `ytenant_id` | `` |
+
+## 继承接口 (2个, 2字段)
+
+- **租户相关** (`coredoc.pub.TenantObselete`)
+  - `tenant_id` → `tenant_id`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 12 个直连字段
+
+### 文本字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `specValue` | `specValue` | `specValue` | 规格值 |
+| `img_business_id` | `img_business_id` | `imgBusinessId` | 规格值图片ID |
+
+### 引用字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户ID |
+| `productId` | `productId` | `productId` | 物料ID |
+| `iSpecId` | `iSpecId` | `iSpecId` | 规格ID |
+| `lsSpecItems_id` | `lsSpecItems_id` | `lsSpecItems_id` | 规格值ID |
+
+### 布尔字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `haveImg` | `haveImg` | `haveImg` | 是否有图片 |
+
+### 整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iOrder` | `iOrder` | `iOrder` | 规格值排序 |
+
+### 长整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | 主键ID |
+| `tenant_id` | `tenant_id` | `tenant` | 租户ID(旧) |
+
+### timestamp (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+
+### other (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `` | `productspecitemalbums` | 物料关联的规格值明细的相册 |

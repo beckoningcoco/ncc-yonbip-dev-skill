@@ -12,44 +12,113 @@ source_type: api_response
 
 # 成本分类 (`pc.cls.CostClass`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `product_cost_class` | 应用: `GZTBDM` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`product_cost_class` | domain：`productcenter` | 应用：`GZTBDM` | 业务对象ID：`c92f7527-8a55-4890-ac24-27f4986a5dd0`
 
-## 属性（24 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `id` | ID | `id` | Long | `long` |
-| 2 | `orgId` | 组织ID | `orgId` | 8aaf4bce-2eb3-443c-bce1-0fb94fec3c0c | `quote` |
-| 3 | `code` | 编码 | `code` | String | `text` |
-| 4 | `name` | 名称 | `name` | String | `multiLanguage` |
-| 5 | `erpCode` | erp编码 | `erpCode` | String | `text` |
-| 6 | `parent` | parent | `parent_id` | 80e9c421-f9e9-4752-b1e9-7c240cb2fc1f | `quote` |
-| 7 | `order` | order | `iOrder` | Integer | `int` |
-| 8 | `remark` | remark | `remark` | String | `multiLanguage` |
-| 9 | `stopstatus` | stopstatus | `stopstatus` | Boolean | `switch` |
-| 10 | `stoptime` | stoptime | `stop_time` | DateTime | `timestamp` |
-| 11 | `isEnd` | 是否End | `isEnd` | Boolean | `switch` |
-| 12 | `level` | 层级 | `level` | Integer | `int` |
-| 13 | `path` | path | `path` | String | `text` |
-| 14 | `fullPath` | fullPath | `cFullPath` | String | `text` |
-| 15 | `template` | template | `tpl_id` | c40d564b-d166-4e0e-875f-1fafdab28955 | `quote` |
-| 16 | `productCount` | productCount | `productCount` | Decimal | `number` |
-| 17 | `sociCoreArchive` | sociCoreArchive | `sociCoreArchive_id` | Long | `long` |
-| 18 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 19 | `isDeleted` | 是否Deleted | `iDeleted` | Boolean | `switch` |
-| 20 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 21 | `orgGroupId` | orgGroupID | `org_group_id` | 6a8af5af-0687-4254-ab87-c07e00fc8398 | `quote` |
-| 22 | `sort` | 排序 | `sort_num` | Integer | `int` |
-| 23 | `tenant` | tenant | `tenant_id` | c213cd56-d5de-421f-bae7-d77455b557cd | `quote` |
-| 24 | `costClassApplyRanges` | costClassApplyRanges | `` | f0df4641-fb14-467c-b39c-7488cef88954 | `` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 成本分类 |
+| 物理表 | `product_cost_class` |
+| 数据库 schema | `productcenter` |
+| 所属应用 | `GZTBDM` |
+| 直连字段 | 24 个 |
+| 子表 | 1 个 |
+| 关联引用 | 7 个 |
 
-## 关联（7 个）
+## 子表
 
-- `template` -> `pc.tpl.ProductTpl` ()
-- `parent` -> `pc.cls.CostClass` ()
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `orgGroupId` -> `pc.pub_org_group.PubOrgGroup` ()
-- `costClassApplyRanges` -> `pc.cls.CostClassApplyRange` (0..n)
-- `orgId` -> `bd.adminOrg.BaseOrgVO` ()
-- `tenant` -> `base.tenant.Tenant` ()
+| 字段名 | URI | 关系 |
+|--------|-----|------|
+| `costClassApplyRanges` | `pc.cls.CostClassApplyRange` | composition |
+
+## 关联引用 (7个)
+
+| 字段名 | 引用类型 |
+|--------|---------|
+| `tpl_id` | `` |
+| `parent_id` | `` |
+| `ytenant_id` | `` |
+| `org_group_id` | `` |
+| `` | `` |
+| `orgId` | `` |
+| `tenant_id` | `` |
+
+## 继承接口 (1个, 1字段)
+
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 24 个直连字段
+
+### 文本字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `code` | `code` | `code` | 分类编码 |
+| `erpCode` | `erpCode` | `erpCode` | 外部编码 |
+| `path` | `path` | `path` | 路径 |
+| `cFullPath` | `cFullPath` | `fullPath` | 全路径 |
+
+### 引用字段 (6个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `orgId` | `orgId` | `orgId` | 管理组织 |
+| `parent_id` | `parent_id` | `parent` | 上级分类 |
+| `tpl_id` | `tpl_id` | `template` | 物料模板 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户 |
+| `org_group_id` | `org_group_id` | `orgGroupId` | 组织组 |
+| `tenant_id` | `tenant_id` | `tenant` | 租户(废弃) |
+
+### 布尔字段 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `stopstatus` | `stopstatus` | `stopstatus` | 启用状态 |
+| `` | `isEnd` | `isEnd` | 是否末级 |
+| `iDeleted` | `iDeleted` | `isDeleted` | 逻辑删除标记 |
+
+### 整数 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iOrder` | `iOrder` | `order` | 排序号 |
+| `level` | `level` | `level` | 层级 |
+| `sort_num` | `sort_num` | `sort` | 排序号(废弃) |
+
+### 长整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+| `sociCoreArchive_id` | `sociCoreArchive_id` | `sociCoreArchive` | 社会化核心企业档案 |
+
+### 数值字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `productCount` | `productCount` | `productCount` | 物料数量 |
+
+### multiLanguage (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `name` | `name` | `name` | 分类名称 |
+| `remark` | `remark` | `remark` | 备注 |
+
+### timestamp (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `stop_time` | `stop_time` | `stoptime` | 停用时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+
+### other (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `` | `costClassApplyRanges` | 成本分类适用范围 |

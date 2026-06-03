@@ -9,85 +9,152 @@ last_verified: 2026-06-03
 status: verified
 source_type: api_response
 ---
+
 # 银行返回数据实体 (`drft.bankResMsg.BankResMsg`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBip），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `drft_bankResMsg` | 应用: `DRFT`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`drft_bankResMsg` | domain：`drft` | 应用：`DRFT` | 业务对象ID：`5f8098a3-34b7-4996-8eae-9cba16b1ecd5`
 
-## 属性（61 个）
+## 基本信息
 
-| # | 字段 | 显示名 | 列 | 类型 | biztype |
-|---|------|--------|-----|------|---------|
-| 1 | `accentity` | accentity | `accentity` | eaa75c14-e58f-4b35-9ae5-0032f4a98f54 | `quote` |
-| 2 | `accto` | accto | `accto` | String | `text` |
-| 3 | `auditDate` | auditDate | `audit_date` | Date | `date` |
-| 4 | `auditTime` | auditTime | `audit_time` | DateTime | `timestamp` |
-| 5 | `auditor` | auditor | `auditor` | String | `text` |
-| 6 | `billrangestart` | billrangestart | `billrangestart` | Long | `long` |
-| 7 | `billrangeend` | billrangeend | `billrangeend` | Long | `long` |
-| 8 | `billrange` | billrange | `billrange` | String | `text` |
-| 9 | `circulateflag` | circulateflag | `circulateflag` | String | `text` |
-| 10 | `transmoney` | transmoney | `transmoney` | Decimal | `number` |
-| 11 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 12 | `auditorId` | auditorID | `auditorId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 13 | `bankCode` | 银行编码 | `bank_code` | String | `text` |
-| 14 | `bankNum` | bankNum | `bank_num` | String | `text` |
-| 15 | `basebilltype` | basebilltype | `basebilltype` | BaseBillType | `` |
-| 16 | `batNo` | batNo | `bat_no` | String | `text` |
-| 17 | `billType` | 票据类型 | `bill_type` | String | `text` |
-| 18 | `bill_id` | bill_id | `bill_id` | String | `text` |
-| 19 | `bussDate` | bussDate | `buss_date` | Date | `date` |
-| 20 | `bussTime` | bussTime | `buss_time` | DateTime | `timestamp` |
-| 21 | `code` | 编码 | `code` | String | `text` |
-| 22 | `createDate` | createDate | `create_date` | Date | `date` |
-| 23 | `createTime` | 创建时间 | `create_time` | DateTime | `timestamp` |
-| 24 | `creator` | 创建人 | `creator` | String | `text` |
-| 25 | `creatorId` | 创建人ID | `creatorId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 26 | `ecdsStatus` | ecdsStatus | `ecds_status` | String | `text` |
-| 27 | `electronicbill` | electronicbill | `electronicbill` | 96da623d-ced9-44d0-8448-45c389add0a1 | `quote` |
-| 28 | `id` | ID | `id` | Long | `long` |
-| 29 | `instructStatus` | instructStatus | `instruct_status` | Short | `short` |
-| 30 | `instructionCode` | instruction编码 | `instruction_code` | String | `text` |
-| 31 | `instructionMsg` | instructionMsg | `instruction_msg` | String | `text` |
-| 32 | `instructionType` | instructionType | `instruction_type` | String | `text` |
-| 33 | `isNew` | 是否New | `is_new` | Integer | `int` |
-| 34 | `modifier` | 修改人 | `modifier` | String | `text` |
-| 35 | `modifierId` | 修改人ID | `modifierId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 36 | `modifyDate` | modifyDate | `modify_date` | Date | `date` |
-| 37 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `timestamp` |
-| 38 | `noteno` | noteno | `noteno` | String | `text` |
-| 39 | `notestatus` | notestatus | `notestatus` | Short | `short` |
-| 40 | `payResult` | payResult | `pay_result` | String | `text` |
-| 41 | `pk_register` | pk_register | `pk_register` | 188a8035-1815-4024-b1f9-e60be16249fc | `quote` |
-| 42 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 43 | `requestNo` | requestNo | `request_no` | String | `text` |
-| 44 | `respondCode` | respond编码 | `respond_code` | String | `text` |
-| 45 | `respondMsg` | respondMsg | `respond_msg` | String | `text` |
-| 46 | `respondTime` | respondTime | `respond_time` | DateTime | `timestamp` |
-| 47 | `resultStatus` | resultStatus | `result_status` | Short | `short` |
-| 48 | `sendTime` | sendTime | `send_time` | DateTime | `timestamp` |
-| 49 | `serialNum` | serialNum | `serial_num` | String | `text` |
-| 50 | `srcitem` | srcitem | `srcitem` | Short | `short` |
-| 51 | `status` | 状态 | `status` | Short | `short` |
-| 52 | `tenant` | tenant | `tenant_id` | c213cd56-d5de-421f-bae7-d77455b557cd | `quote` |
-| 53 | `tplid` | tplid | `tplid` | Long | `long` |
-| 54 | `tranNo` | tranNo | `tran_no` | String | `text` |
-| 55 | `vouchdate` | vouchdate | `vouchdate` | Date | `date` |
-| 56 | `changestatus` | changestatus | `change_status` | Short | `short` |
-| 57 | `changetime` | changetime | `change_time` | DateTime | `timestamp` |
-| 58 | `changeuserid` | changeuserid | `change_user_id` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 59 | `changeusername` | changeusername | `change_user_name` | String | `text` |
-| 60 | `dr` | 逻辑删除 | `dr` | Short | `short` |
-| 61 | `instructionNo` | instructionNo | `instruction_no` | Long | `long` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 银行返回数据实体 |
+| 物理表 | `drft_bankResMsg` |
+| 数据库 schema | `drft` |
+| 所属应用 | `DRFT` |
+| 直连字段 | 61 个 |
+| 子表 | 0 个 |
+| 关联引用 | 9 个 |
 
-## 关联（9 个）
+## 关联引用 (9个)
 
-- `auditorId` -> `base.user.User` () 
-- `ytenant` -> `yht.tenant.YhtTenant` () 
-- `changeuserid` -> `base.user.User` () 
-- `pk_register` -> `drft.billno.Billno` () 
-- `creatorId` -> `base.user.User` () 
-- `modifierId` -> `base.user.User` () 
-- `accentity` -> `aa.baseorg.OrgMV` () 
-- `electronicbill` -> `tmsp.elebankaccountset.EleBankAccountSet` () 
-- `tenant` -> `base.tenant.Tenant` () 
+| 字段名 | 引用类型 |
+|--------|---------|
+| `` | `` |
+| `ytenant_id` | `` |
+| `change_user_id` | `` |
+| `pk_register` | `` |
+| `accentity` | `` |
+| `electronicbill` | `` |
+| `tenant_id` | `` |
+
+## 继承接口 (2个, 5字段)
+
+- **审批信息** (`base.itf.IApprovalInfo`)
+  - `audit_date` → `audit_date`
+  - `` → ``
+  - `` → ``
+  - `audit_time` → `audit_time`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 61 个直连字段
+
+### 文本字段 (24个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `accto` | `accto` | `accto` | 会计主体账户 |
+| `` | `auditor` | `auditor` | 审批人名称 |
+| `billrange` | `billrange` | `billrange` | 子票区间 |
+| `circulateflag` | `circulateflag` | `circulateflag` | 流通标志 |
+| `bank_code` | `bank_code` | `bankCode` | 会计主体银行编码 |
+| `bank_num` | `bank_num` | `bankNum` | 银行流水号 |
+| `bat_no` | `bat_no` | `batNo` | 批处理号 |
+| `bill_type` | `bill_type` | `billType` | 票据类型 |
+| `bill_id` | `bill_id` | `bill_id` | 单据主键 |
+| `` | `code` | `code` | 编码 |
+| `` | `creator` | `creator` | 创建人名称 |
+| `ecds_status` | `ecds_status` | `ecdsStatus` | 电票状态 |
+| `instruction_code` | `instruction_code` | `instructionCode` | 指令编码 |
+| `instruction_msg` | `instruction_msg` | `instructionMsg` | 指令结果 |
+| `instruction_type` | `instruction_type` | `instructionType` | 指令类型 |
+| `` | `modifier` | `modifier` | 修改人名称 |
+| `noteno` | `noteno` | `noteno` | 票据号 |
+| `pay_result` | `pay_result` | `payResult` | 交易结果 |
+| `request_no` | `request_no` | `requestNo` | 请求流水号 |
+| `respond_code` | `respond_code` | `respondCode` | 响应码 |
+| `respond_msg` | `respond_msg` | `respondMsg` | 响应信息 |
+| `serial_num` | `serial_num` | `serialNum` | 收付云业务流水号 |
+| `tran_no` | `tran_no` | `tranNo` | 交易明细号 |
+| `change_user_name` | `change_user_name` | `changeusername` | 变更人名称 |
+
+### 引用字段 (9个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `accentity` | `accentity` | `accentity` | 资金组织 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+| `` | `auditorId` | `auditorId` | 审批人 |
+| `` | `creatorId` | `creatorId` | 创建人 |
+| `electronicbill` | `electronicbill` | `electronicbill` | 电票账户 |
+| `` | `modifierId` | `modifierId` | 修改人 |
+| `pk_register` | `pk_register` | `pk_register` | 票据信息主键 |
+| `tenant_id` | `tenant_id` | `tenant` | 租户 |
+| `change_user_id` | `change_user_id` | `changeuserid` | 变更人 |
+
+### 日期字段 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `audit_date` | `audit_date` | `auditDate` | 审批日期 |
+| `buss_date` | `buss_date` | `bussDate` | 业务日期 |
+| `create_date` | `create_date` | `createDate` | 创建日期 |
+| `modify_date` | `modify_date` | `modifyDate` | 修改日期 |
+| `` | `vouchdate` | `vouchdate` | 单据日期 |
+
+### 整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `is_new` | `is_new` | `isNew` | 是否最新 |
+
+### 短整数 (7个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `instruct_status` | `instruct_status` | `instructStatus` | 指令状态 |
+| `notestatus` | `notestatus` | `notestatus` | 票据状态 |
+| `result_status` | `result_status` | `resultStatus` | 交易结果 |
+| `srcitem` | `srcitem` | `srcitem` | 事项来源 |
+| `` | `status` | `status` | 单据状态 |
+| `change_status` | `change_status` | `changestatus` | 变更状态 |
+| `dr` | `dr` | `dr` | 删除标识 |
+
+### 长整数 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `billrangestart` | `billrangestart` | `billrangestart` | 子票区间起始 |
+| `billrangeend` | `billrangeend` | `billrangeend` | 子票区间终止 |
+| `id` | `id` | `id` | ID |
+| `` | `tplid` | `tplid` | 模板id |
+| `instruction_no` | `instruction_no` | `instructionNo` | 指令序号 |
+
+### 数值字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `transmoney` | `transmoney` | `transmoney` | 交易金额 |
+
+### timestamp (8个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `audit_time` | `audit_time` | `auditTime` | 审批时间 |
+| `buss_time` | `buss_time` | `bussTime` | 银行营业时间 |
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+| `respond_time` | `respond_time` | `respondTime` | 响应时间 |
+| `send_time` | `send_time` | `sendTime` | 发送时间 |
+| `change_time` | `change_time` | `changetime` | 变更时间 |
+
+### other (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `basebilltype` | `basebilltype` | `basebilltype` | 单据类型 |

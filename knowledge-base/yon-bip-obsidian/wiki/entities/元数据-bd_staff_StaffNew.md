@@ -12,118 +12,202 @@ source_type: api_response
 
 # 员工(新) (`bd.staff.StaffNew`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `bd_staff` | 应用: `DPMSTF` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`bd_staff` | domain：`ucf-staff-center` | 应用：`DPMSTF` | 业务对象ID：`ec712a95-3316-4686-973e-59a531a84124`
 
-## 属性（77 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `photo` | photo | `photo` | String | `text` |
-| 2 | `name` | 名称 | `name` | String | `text` |
-| 3 | `shortname` | shortname | `shortname` | String | `text` |
-| 4 | `code` | 编码 | `code` | String | `text` |
-| 5 | `cert_type` | cert_type | `cert_type` | 59ff90b4-adcb-4cf7-942f-8fa060e22943 | `quote` |
-| 6 | `cert_no` | cert_no | `cert_no` | String | `text` |
-| 7 | `current_job` | current_job | `current_job` | 76db97b3-04ef-4b53-9cc1-35edab1586ba | `quote` |
-| 8 | `sex` | sex | `sex` | Integer | `int` |
-| 9 | `birthdate` | birthdate | `birthdate` | Date | `date` |
-| 10 | `mobile` | mobile | `mobile` | String | `text` |
-| 11 | `email` | email | `email` | String | `text` |
-| 12 | `officetel` | officetel | `officetel` | String | `text` |
-| 13 | `shop_assis_tag` | shop_assis_tag | `shop_assis_tag` | Boolean | `switch` |
-| 14 | `biz_man_tag` | biz_man_tag | `biz_man_tag` | Boolean | `switch` |
-| 15 | `enable` | enable | `enable` | Integer | `int` |
-| 16 | `remark` | remark | `remark` | String | `text` |
-| 17 | `user_define_character` | user_define_character | `user_define_character` | da2c9039-3d71-437c-b445-533a2a2163fa | `UserDefine` |
-| 18 | `ordernumber` | ordernumber | `ordernumber` | Integer | `int` |
-| 19 | `user_id` | user_id | `user_id` | String | `text` |
-| 20 | `id` | ID | `id` | String | `text` |
-| 21 | `userrlatid` | userrlatid | `userrlatid` | String | `text` |
-| 22 | `objid` | objid | `objid` | String | `text` |
-| 23 | `bu_id` | bu_id | `bu_id` | String | `text` |
-| 24 | `businessid` | businessid | `businessid` | String | `text` |
-| 25 | `sysid` | sysid | `sysid` | String | `text` |
-| 26 | `synchts` | synchts | `synchts` | DateTime | `timestamp` |
-| 27 | `tenantid` | tenantid | `tenantid` | String | `text` |
-| 28 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 29 | `tenant` | tenant | `tenantid` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 30 | `createTime` | 创建时间 | `creationtime` | DateTime | `timestamp` |
-| 31 | `creator` | 创建人 | `creator` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 32 | `modifyTime` | 修改时间 | `modifiedtime` | DateTime | `timestamp` |
-| 33 | `modifier` | 修改人 | `modifier` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 34 | `is_outer_staff` | 是否_outer_staff | `is_outer_staff` | Integer | `int` |
-| 35 | `unit_id` | unit_id | `unit_id` | c3b96360-c57f-455b-9728-2ca499d9922a | `quote` |
-| 36 | `dept_id` | dept_id | `dept_id` | a4352e3c-3eda-4539-a7a9-ec00799be118 | `quote` |
-| 37 | `dr` | 逻辑删除 | `dr` | Integer | `int` |
-| 38 | `org_id` | org_id | `org_id` | String | `text` |
-| 39 | `log` | log | `log` | String | `text` |
-| 40 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 41 | `ts` | ts | `ts` | DateTime | `timestamp` |
-| 42 | `country` | country | `country` | 8e9602ac-5ca2-4d06-aede-4a0af4c316bf | `quote` |
-| 43 | `creationtime` | creationtime | `creationtime` | DateTime | `timestamp` |
-| 44 | `education` | education | `education` | e0ee0128-06d8-4e1a-b440-63f6ca95fa2e | `quote` |
-| 45 | `political` | political | `political` | 5d917a02-153f-4482-b3dc-b445e7639ca3 | `quote` |
-| 46 | `name2` | name2 | `name2` | String | `text` |
-| 47 | `name3` | name3 | `name3` | String | `text` |
-| 48 | `name4` | name4 | `name4` | String | `text` |
-| 49 | `name5` | name5 | `name5` | String | `text` |
-| 50 | `name6` | name6 | `name6` | String | `text` |
-| 51 | `psncl_id` | psncl_id | `psncl_id` | 03a11361-aad7-416c-95cd-ccd64f14d503 | `quote` |
-| 52 | `jobgrade_id` | jobgrade_id | `jobgrade_id` | 7dfa7985-5073-4394-8f4f-cea8d1829b84 | `quote` |
-| 53 | `addr_id` | addr_id | `addr_id` | 95256905-1d37-4ca6-a37f-ddbdab4d1c25 | `quote` |
-| 54 | `majorcorpid` | majorcorpid | `majorcorpid` | a754b1bb-3377-4617-922e-a6108548cd73 | `quote` |
-| 55 | `post_id` | post_id | `post_id` | a06cee30-92b1-4a03-b399-3886f55e4ba1 | `quote` |
-| 56 | `jobrank_id` | jobrank_id | `jobrank_id` | e00dd36a-aace-43d2-9e87-156b36799fef | `quote` |
-| 57 | `wagegroup` | wagegroup | `wagegroup` | 37a55216-a021-4ef3-ad48-ae1e5afe49c6 | `quote` |
-| 58 | `bloodtype` | bloodtype | `bloodtype` | String | `text` |
-| 59 | `qq` | qq | `qq` | String | `text` |
-| 60 | `degree` | degree | `degree` | 06cea802-4237-4a00-9e90-ea9b48236892 | `quote` |
-| 61 | `joinworkdate` | joinworkdate | `joinworkdate` | Date | `date` |
-| 62 | `permanreside` | permanreside | `permanreside` | 985b8390-5d0f-404c-a925-053bf0189831 | `quote` |
-| 63 | `weixin` | weixin | `weixin` | String | `text` |
-| 64 | `nationality` | nationality | `nationality` | 4eb1b162-f46d-4a74-857a-10880d5a0f89 | `quote` |
-| 65 | `origin` | origin | `origin` | 95577e23-979f-4f09-a629-61fea93e576d | `quote` |
-| 66 | `linkedin` | linkedin | `linkedin` | String | `text` |
-| 67 | `characterrpr` | characterrpr | `characterrpr` | 30bb2bbb-5903-4ab9-b806-eda3d3cd86fb | `quote` |
-| 68 | `joinpolitydate` | joinpolitydate | `joinpolitydate` | Date | `date` |
-| 69 | `modifiedtime` | modifiedtime | `modifiedtime` | Date | `date` |
-| 70 | `selfemail` | selfemail | `selfemail` | String | `text` |
-| 71 | `linkaddr` | linkaddr | `linkaddr` | String | `text` |
-| 72 | `jsonextattr` | jsonextattr | `jsonextattr` | String | `text` |
-| 73 | `marital` | marital | `marital` | 2c294cd9-fcec-4c4f-99e5-4b55534a08e0 | `quote` |
-| 74 | `candidate_flag` | candidate_flag | `candidate_flag` | Boolean | `switch` |
-| 75 | `mainJobList` | mainJobList | `` | 2ebd4f69-7558-48d0-a38d-fdedcabdf921 | `` |
-| 76 | `outerStaffInfo` | outerStaffInfo | `` | 028ec646-cf5e-4c41-830d-053dfe730127 | `` |
-| 77 | `quoteInfo` | quoteInfo | `` | 2e5aa220-4623-44bf-b49e-27d37a27b5c3 | `` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 员工(新) |
+| 物理表 | `bd_staff` |
+| 数据库 schema | `ucf-staff-center` |
+| 所属应用 | `DPMSTF` |
+| 直连字段 | 77 个 |
+| 子表 | 3 个 |
+| 关联引用 | 28 个 |
 
-## 关联（28 个）
+## 子表
 
-- `country` -> `bd.country.CountryVO` ()
-- `cert_type` -> `bd.IDtype.IDTypeVO` ()
-- `education` -> `socialmdm.social.EduQualification` ()
-- `mainJobList` -> `bd.staff.StaffNewJob` (0..n)
-- `modifier` -> `base.user.BipUser` ()
-- `origin` -> `bd.region.BaseRegionVO` ()
-- `political` -> `bd.customerdoc_0004.0004` ()
-- `majorcorpid` -> `hrcm.contractentity.ContractEntity` ()
-- `psncl_id` -> `bd.staff.PsnlCatg` ()
-- `outerStaffInfo` -> `bd.staff.outerinfo` (0..n)
-- `characterrpr` -> `socialmdm.social.HouseholdType` ()
-- `user_define_character` -> `bd.staff.StaffDefineCharacter` ()
-- `jobgrade_id` -> `bd.duty.Rank` ()
-- `quoteInfo` -> `bd.staff.QuoteStaffNew` (0..n)
-- `unit_id` -> `org.func.AdminOrg` ()
-- `tenant` -> `yht.tenant.YhtTenant` ()
-- `creator` -> `base.user.BipUser` ()
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `jobrank_id` -> `bd.duty.Grade` ()
-- `degree` -> `socialmdm.social.Degree` ()
-- `wagegroup` -> `hrxc.mddGroupDoc.waGroupDoc` ()
-- `current_job` -> `bd.staff.StaffMainJob` ()
-- `permanreside` -> `socialmdm.social.SpiderBase` ()
-- `marital` -> `bd.customerdoc_0003.0003` ()
-- `nationality` -> `socialmdm.social.Nation` ()
-- `post_id` -> `bd.duty.Position` ()
-- `dept_id` -> `bd.adminOrg.AdminOrgVO` ()
-- `addr_id` -> `hrcm.location.Location` ()
+| 字段名 | URI | 关系 |
+|--------|-----|------|
+| `mainJobList` | `bd.staff.StaffNewJob` | composition |
+| `quoteInfo` | `bd.staff.QuoteStaffNew` | composition |
+| `outerStaffInfo` | `bd.staff.outerinfo` | composition |
+
+## 关联引用 (28个)
+
+| 字段名 | 引用类型 |
+|--------|---------|
+| `country` | `ucfbasedoc.bd_countryref` |
+| `cert_type` | `ucfbasedoc.bd_IDtyperef` |
+| `education` | `hrcloud-staff-mgr.hred_educationref` |
+| `` | `` |
+| `modifier` | `` |
+| `origin` | `ucfbasedoc.bd_baseregiontreeref` |
+| `political` | `ucfbasedoc.0004` |
+| `majorcorpid` | `` |
+| `psncl_id` | `ucf-staff-center.bd_psnl_catg_ref` |
+| `characterrpr` | `` |
+| `user_define_character` | `` |
+| `jobgrade_id` | `` |
+| `unit_id` | `` |
+| `tenantid` | `` |
+| `creator` | `` |
+| `ytenant_id` | `` |
+| `jobrank_id` | `` |
+| `degree` | `hrcloud-staff-mgr.hred_degreeref` |
+| `wagegroup` | `` |
+| `current_job` | `` |
+| `permanreside` | `` |
+| `marital` | `ucfbasedoc.0003` |
+| `nationality` | `` |
+| `post_id` | `` |
+| `dept_id` | `` |
+| `addr_id` | `` |
+
+## 继承接口 (8个, 14字段)
+
+- **审批信息** (`bd.itf.ISystemInfo`)
+  - `dr` → `dr`
+  - `enable` → `enable`
+  - `sysid` → `sysid`
+  - `tenantid` → `tenantid`
+  - `ts` → `ts`
+- **UCF公共状态** (`basedoc.basedocItf.BasedocIState`)
+  - `enable` → `enable`
+- **自动编号** (`voucher.base.IAutoCode`)
+  - `` → ``
+- **UCF公共租户相关** (`basedoc.basedocItf.BasedocITenant`)
+  - `tenantid` → `tenantid`
+- **审计信息** (`bd.itf.IAuditInfo`)
+  - `creationtime` → `creationtime`
+  - `creator` → `creator`
+  - `modifiedtime` → `modifiedtime`
+  - `modifier` → `modifier`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+- **逻辑删除(待废除)** (`basedoc.basedocItf.LogicDelete`)
+- **逻辑删除相关** (`ucfbase.ucfbaseItf.LogicDelete`)
+  - `dr` → `dr`
+
+## 字段列表（按类型分组）
+
+> 共 77 个直连字段
+
+### 文本字段 (31个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `photo` | `photo` | `photo` | 头像 |
+| `name` | `name` | `name` | 姓名 |
+| `shortname` | `shortname` | `shortname` | 姓名简拼 |
+| `code` | `code` | `code` | 编码 |
+| `cert_no` | `cert_no` | `cert_no` | 证件号 |
+| `mobile` | `mobile` | `mobile` | 手机号 |
+| `email` | `email` | `email` | 邮箱 |
+| `officetel` | `officetel` | `officetel` | 办公电话 |
+| `remark` | `remark` | `remark` | 备注 |
+| `user_id` | `user_id` | `user_id` | 关联用户 |
+| `id` | `id` | `id` | 主键 |
+| `userrlatid` | `userrlatid` | `userrlatid` | 友企联用户关联主键 |
+| `objid` | `objid` | `objid` | 混合云ID |
+| `bu_id` | `bu_id` | `bu_id` | 所属业务群 |
+| `businessid` | `businessid` | `businessid` | 友企联同步业务主键 |
+| `sysid` | `sysid` | `sysid` | 来源系统标识 |
+| `tenantid` | `tenantid` | `tenantid` | 租户ID |
+| `org_id` | `org_id` | `org_id` | 所属组织 |
+| `log` | `log` | `log` | 删除引用日志(隐藏) |
+| `name2` | `name2` | `name2` | 姓名 |
+| `name3` | `name3` | `name3` | 姓名 |
+| `name4` | `name4` | `name4` | 姓名 |
+| `name5` | `name5` | `name5` | 姓名 |
+| `name6` | `name6` | `name6` | 姓名 |
+| `bloodtype` | `bloodtype` | `bloodtype` | 血型(隐藏) |
+| `qq` | `qq` | `qq` | QQ(隐藏) |
+| `weixin` | `weixin` | `weixin` | 微信(隐藏) |
+| `linkedin` | `linkedin` | `linkedin` | 领英 |
+| `selfemail` | `selfemail` | `selfemail` | 个人邮箱(隐藏) |
+| `linkaddr` | `linkaddr` | `linkaddr` | 通讯地址(隐藏) |
+| `jsonextattr` | `jsonextattr` | `jsonextattr` | 扩展属性(隐藏) |
+
+### 引用字段 (24个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `cert_type` | `cert_type` | `cert_type` | 证件类型 |
+| `current_job` | `current_job` | `current_job` | 当前任职 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户ID |
+| `tenantid` | `tenantid` | `tenant` | 租户ID |
+| `creator` | `creator` | `creator` | 创建人 |
+| `modifier` | `modifier` | `modifier` | 修改人 |
+| `unit_id` | `unit_id` | `unit_id` | 组织 |
+| `dept_id` | `dept_id` | `dept_id` | 部门 |
+| `country` | `country` | `country` | 国家地区(隐藏) |
+| `education` | `education` | `education` | 学历(隐藏) |
+| `political` | `political` | `political` | 政治面貌(隐藏) |
+| `psncl_id` | `psncl_id` | `psncl_id` | 人员类别 |
+| `jobgrade_id` | `jobgrade_id` | `jobgrade_id` | 职级 |
+| `addr_id` | `addr_id` | `addr_id` | 工作地点 |
+| `majorcorpid` | `majorcorpid` | `majorcorpid` | 合同主体 |
+| `post_id` | `post_id` | `post_id` | 岗位 |
+| `jobrank_id` | `jobrank_id` | `jobrank_id` | 职等  |
+| `wagegroup` | `wagegroup` | `wagegroup` | 薪资组  |
+| `degree` | `degree` | `degree` | 学位(隐藏) |
+| `permanreside` | `permanreside` | `permanreside` | 户口所在地(隐藏) |
+| `nationality` | `nationality` | `nationality` | 民族(隐藏) |
+| `origin` | `origin` | `origin` | 籍贯(隐藏) |
+| `characterrpr` | `characterrpr` | `characterrpr` | 户口性质(隐藏) |
+| `marital` | `marital` | `marital` | 婚姻状况(隐藏) |
+
+### 日期字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `birthdate` | `birthdate` | `birthdate` | 出生日期 |
+| `joinworkdate` | `joinworkdate` | `joinworkdate` | 参加工作日期(隐藏) |
+| `joinpolitydate` | `joinpolitydate` | `joinpolitydate` | 加入党团时间(隐藏) |
+| `modifiedtime` | `modifiedtime` | `modifiedtime` | 修改时间 |
+
+### 布尔字段 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `shop_assis_tag` | `shop_assis_tag` | `shop_assis_tag` | 店员 |
+| `biz_man_tag` | `biz_man_tag` | `biz_man_tag` | 业务员 |
+| `candidate_flag` | `candidate_flag` | `candidate_flag` | 是否候选人 |
+
+### 整数 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `sex` | `sex` | `sex` | 性别 |
+| `enable` | `enable` | `enable` | 状态 |
+| `ordernumber` | `ordernumber` | `ordernumber` | 排序号 |
+| `is_outer_staff` | `is_outer_staff` | `is_outer_staff` | 是否外部用户 |
+| `dr` | `dr` | `dr` | 逻辑删除标记 |
+
+### UserDefine (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `user_define_character` | `user_define_character` | `user_define_character` | 特征 |
+
+### timestamp (6个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `synchts` | `synchts` | `synchts` | 友企联同步时间戳 |
+| `creationtime` | `creationtime` | `createTime` | 创建时间 |
+| `modifiedtime` | `modifiedtime` | `modifyTime` | 修改时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+| `ts` | `ts` | `ts` | 时间戳 |
+| `creationtime` | `creationtime` | `creationtime` | 创建时间(隐藏) |
+
+### other (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `` | `mainJobList` | 员工任职兼职 |
+| `` | `` | `outerStaffInfo` | 人员性质具体信息 |
+| `` | `` | `quoteInfo` | 员工引入人员(新) |

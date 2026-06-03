@@ -12,45 +12,130 @@ source_type: api_response
 
 # 民族 (`socialmdm.social.Nation`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `mdm_nationtb` | 应用: `HRED` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`mdm_nationtb` | domain：`hrcloud-staff-mgr` | 应用：`HRED` | 业务对象ID：`a26c5374-70d5-4a99-9b36-9315bfcb8dec`
 
-## 属性（27 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `naid` | naid | `naid` | String | `text` |
-| 2 | `updateAt` | updateAt | `update_at` | String | `text` |
-| 3 | `ytenantId` | ytenantID | `ytenant_id` | String | `text` |
-| 4 | `sysid` | sysid | `sys_id` | String | `text` |
-| 5 | `userDefineCharacter` | userDefineCharacter | `user_define_character` | 19ddfc5b-4881-46c1-9740-0463221e2de9 | `UserDefine` |
-| 6 | `code` | 编码 | `code` | String | `text` |
-| 7 | `treeRefForeignKey` | treeRefForeignKey | `treeref_foreignkey` | String | `text` |
-| 8 | `name` | 名称 | `name` | String | `multiLanguage` |
-| 9 | `nameResId` | nameResID | `name_resid` | String | `text` |
-| 10 | `id` | ID | `pk_mdm` | String | `text` |
-| 11 | `mdmParentCode` | mdmParent编码 | `mdm_parentcode` | String | `text` |
-| 12 | `description` | description | `description` | String | `multiLanguage` |
-| 13 | `sortnum` | sortnum | `sortnum` | Integer | `int` |
-| 14 | `mdmCode` | mdm编码 | `mdm_code` | String | `text` |
-| 15 | `ispreset` | 是否preset | `ispreset` | Boolean | `switch` |
-| 16 | `country` | country | `` | 0c22ce74-1f98-43b8-8295-334e0100108b | `` |
-| 17 | `createTime` | 创建时间 | `create_time` | DateTime | `dateTime` |
-| 18 | `creator` | 创建人 | `creator` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 19 | `disablets` | disablets | `disablets` | DateTime | `dateTime` |
-| 20 | `dr` | 逻辑删除 | `dr` | Short | `short` |
-| 21 | `enable` | enable | `enable` | sys_intboolean | `singleOption` |
-| 22 | `enablets` | enablets | `enablets` | DateTime | `dateTime` |
-| 23 | `modifier` | 修改人 | `modifier` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 24 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `dateTime` |
-| 25 | `pubts` | 时间戳 | `pubts` | DateTime | `dateTime` |
-| 26 | `tenant` | tenant | `tenant_id` | String | `text` |
-| 27 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 民族 |
+| 物理表 | `mdm_nationtb` |
+| 数据库 schema | `hrcloud-staff-mgr` |
+| 所属应用 | `HRED` |
+| 直连字段 | 27 个 |
+| 子表 | 1 个 |
+| 关联引用 | 5 个 |
 
-## 关联（5 个）
+## 子表
 
-- `country` -> `hred.ethnicgroup.Country` (0..n)
-- `creator` -> `base.user.BipUser` ()
-- `userDefineCharacter` -> `hred.ethnicgroup.UserDefineCharacter` ()
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `modifier` -> `base.user.BipUser` ()
+| 字段名 | URI | 关系 |
+|--------|-----|------|
+| `country` | `hred.ethnicgroup.Country` | composition |
+
+## 关联引用 (5个)
+
+| 字段名 | 引用类型 |
+|--------|---------|
+| `` | `` |
+| `user_define_character` | `` |
+| `ytenant_id` | `` |
+
+## 继承接口 (5个, 10字段)
+
+- **逻辑删除相关** (`ucfbase.ucfbaseItf.LogicDelete`)
+  - `dr` → `dr`
+- **租户接口** (`ucfbase.ucfbaseItf.ITenant`)
+  - `tenant_id` → `tenant_id`
+- **审计信息** (`ucfbase.ucfbaseItf.IAuditInfo`)
+  - `create_time` → `create_time`
+  - `` → ``
+  - `` → ``
+  - `modify_time` → `modify_time`
+- **启用** (`ucfbase.ucfbaseItf.IEnable`)
+  - `disablets` → `disablets`
+  - `enable` → `enable`
+  - `enablets` → `enablets`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 27 个直连字段
+
+### 文本字段 (11个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `naid` | `naid` | `naid` | 民族UUID（废弃） |
+| `update_at` | `update_at` | `updateAt` | 更新时间（废弃） |
+| `ytenant_id` | `ytenant_id` | `ytenantId` | 友户通租户id（废弃） |
+| `sys_id` | `sys_id` | `sysid` | 系统标识 |
+| `code` | `code` | `code` | 编码 |
+| `treeref_foreignkey` | `treeref_foreignkey` | `treeRefForeignKey` | 树外键（废弃） |
+| `name_resid` | `name_resid` | `nameResId` | 多语平台资源编码（废弃） |
+| `pk_mdm` | `pk_mdm` | `id` | ID |
+| `mdm_parentcode` | `mdm_parentcode` | `mdmParentCode` | 父编码（废弃） |
+| `mdm_code` | `mdm_code` | `mdmCode` | 编码（废弃） |
+| `tenant_id` | `tenant_id` | `tenant` | 租户ID |
+
+### 引用字段 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `creator` | `creator` | 创建人 |
+| `` | `modifier` | `modifier` | 修改人 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 日期时间 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `disablets` | `disablets` | `disablets` | 停用时间 |
+| `enablets` | `enablets` | `enablets` | 启用时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+
+### 布尔字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `ispreset` | `ispreset` | `ispreset` | 是否预置 |
+
+### 枚举字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `enable` | `enable` | `enable` | 启用 |
+
+### 整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `sortnum` | `sortnum` | `sortnum` | 序号 |
+
+### 短整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dr` | `dr` | `dr` | 逻辑删除标记 |
+
+### UserDefine (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `user_define_character` | `user_define_character` | `userDefineCharacter` | 特征 |
+
+### multiLanguage (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `name` | `name` | `name` | 名称 |
+| `description` | `description` | `description` | 描述 |
+
+### other (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `` | `country` | 国家/地区 |

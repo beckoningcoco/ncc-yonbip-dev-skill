@@ -12,48 +12,98 @@ source_type: api_response
 
 # 部门 (`aa.baseorg.DeptMV`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `org_orgs` | 应用: `GZTORG` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`org_orgs` | domain：`ucf-org-center` | 应用：`GZTORG` | 业务对象ID：`ea477d91-20e6-458f-923e-908b39cb54d1`
 
-## 属性（31 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `parent` | parent | `parentid` | 8e8fa65a-f8d9-454d-a8f8-4b7af543cdd5 | `quote` |
-| 2 | `code` | 编码 | `code` | String | `text` |
-| 3 | `modifier` | 修改人 | `modifier` | String | `text` |
-| 4 | `deptid` | deptid | `id` | a4352e3c-3eda-4539-a7a9-ec00799be118 | `quote` |
-| 5 | `memo` | 备注 | `path` | String | `text` |
-| 6 | `stoptime` | stoptime | `modifiedtime` | DateTime | `timestamp` |
-| 7 | `dr` | 逻辑删除 | `dr` | Integer | `int` |
-| 8 | `orgId` | 组织ID | `parentorgid` | eaa75c14-e58f-4b35-9ae5-0032f4a98f54 | `quote` |
-| 9 | `principal` | principal | `principal` | String | `text` |
-| 10 | `path` | path | `path` | String | `text` |
-| 11 | `membercorp` | membercorp | `external_org` | Integer | `int` |
-| 12 | `modifyTime` | 修改时间 | `modifiedtime` | DateTime | `timestamp` |
-| 13 | `erpCode` | erp编码 | `path` | String | `text` |
-| 14 | `id` | ID | `id` | String | `text` |
-| 15 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 16 | `tenant` | tenant | `tenantid` | String | `text` |
-| 17 | `stopstatus` | stopstatus | `enable` | Integer | `int` |
-| 18 | `createDate` | 创建日期 | `creationtime` | Date | `date` |
-| 19 | `orgtype` | orgtype | `orgtype` | Integer | `int` |
-| 20 | `cAppID` | cAppID | `path` | String | `text` |
-| 21 | `creator` | 创建人 | `creator` | String | `text` |
-| 22 | `modifyDate` | 修改日期 | `modifiedtime` | Date | `date` |
-| 23 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 24 | `level` | 层级 | `level` | Integer | `int` |
-| 25 | `sort` | 排序 | `displayorder` | Integer | `int` |
-| 26 | `isEnd` | 是否End | `isEnd` | Integer | `int` |
-| 27 | `createTime` | 创建时间 | `creationtime` | DateTime | `timestamp` |
-| 28 | `name` | 名称 | `name` | String | `multiLanguage` |
-| 29 | `fullname` | fullname | `name` | String | `multiLanguage` |
-| 30 | `externalorg` | externalorg | `external_org` | Integer | `int` |
-| 31 | `depttype` | depttype | `depttype` | String | `text` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 部门 |
+| 物理表 | `org_orgs` |
+| 数据库 schema | `ucf-org-center` |
+| 所属应用 | `GZTORG` |
+| 直连字段 | 31 个 |
+| 子表 | 0 个 |
+| 关联引用 | 4 个 |
 
-## 关联（4 个）
+## 关联引用 (4个)
 
-- `parent` -> `aa.baseorg.DeptMV` ()
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `deptid` -> `bd.adminOrg.AdminOrgVO` ()
-- `orgId` -> `aa.baseorg.OrgMV` ()
+| 字段名 | 引用类型 |
+|--------|---------|
+| `parentid` | `ucf-org-center.bd_adminorgtreeref` |
+| `ytenant_id` | `` |
+| `id` | `` |
+| `parentorgid` | `ucf-org-center.orgcenter_admin_tree_ref` |
+
+## 继承接口 (2个, 2字段)
+
+- **UCF公共租户相关** (`basedoc.basedocItf.BasedocITenant`)
+  - `tenantid` → `tenantid`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 31 个直连字段
+
+### 文本字段 (11个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `code` | `code` | `code` | 编码 |
+| `modifier` | `modifier` | `modifier` | 修改人 |
+| `path` | `path` | `memo` | 备注 |
+| `principal` | `principal` | `principal` | 负责人 |
+| `path` | `path` | `path` | 路径 |
+| `path` | `path` | `erpCode` | ERP编码 |
+| `id` | `id` | `id` | 主键id |
+| `tenantid` | `tenantid` | `tenant` | 租户标识 |
+| `path` | `path` | `cAppID` | 会员体系ID |
+| `creator` | `creator` | `creator` | 创建人 |
+| `depttype` | `depttype` | `depttype` | 部门性质 |
+
+### 引用字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `parentid` | `parentid` | `parent` | 上级节点ID |
+| `id` | `id` | `deptid` | 主键 |
+| `parentorgid` | `parentorgid` | `orgId` | 基础组织ID |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 日期字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `creationtime` | `creationtime` | `createDate` | 创建日期 |
+| `modifiedtime` | `modifiedtime` | `modifyDate` | 修改日期 |
+
+### 整数 (8个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dr` | `dr` | `dr` | 逻辑删除标识 |
+| `external_org` | `external_org` | `membercorp` | 租户 |
+| `enable` | `enable` | `stopstatus` | 停用状态 |
+| `orgtype` | `orgtype` | `orgtype` | 组织类型 |
+| `level` | `level` | `level` | 层级 |
+| `displayorder` | `displayorder` | `sort` | 排序号 |
+| `isEnd` | `isEnd` | `isEnd` | 是否末级 |
+| `external_org` | `external_org` | `externalorg` | 外部组织 |
+
+### timestamp (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `modifiedtime` | `modifiedtime` | `stoptime` | 停用时间 |
+| `modifiedtime` | `modifiedtime` | `modifyTime` | 修改时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+| `creationtime` | `creationtime` | `createTime` | 创建时间 |
+
+### multiLanguage (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `name` | `name` | `name` | 简称 |
+| `name` | `name` | `fullname` | 名称 |

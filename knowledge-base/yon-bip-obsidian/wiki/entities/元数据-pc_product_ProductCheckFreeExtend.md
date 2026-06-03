@@ -12,27 +12,72 @@ source_type: api_response
 
 # (停用)指定核算的规格 (`pc.product.ProductCheckFreeExtend`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `productcheckfreenew` | 应用: `GZTBDM` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`productcheckfreenew` | domain：`productcenter` | 应用：`GZTBDM` | 业务对象ID：``
 
-## 属性（10 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `id` | ID | `id` | Long | `long` |
-| 2 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 3 | `tenant` | tenant | `tenant_id` | Long | `long` |
-| 4 | `productId` | productID | `productId` | 89f3b06e-23df-4403-b4a7-19f99eeeae72 | `quote` |
-| 5 | `productApplyRangeId` | productApplyRangeID | `productApplyRangeId` | ed1f55f2-a3f7-4617-8bd2-7f2f404843ab | `quote` |
-| 6 | `freeType` | freeType | `iFreeType` | Short | `short` |
-| 7 | `freeId` | freeID | `freeId` | 8420b5e5-7919-41ca-a192-7b8c4fb1d8b8 | `quote` |
-| 8 | `checked` | checked | `bChecked` | Boolean | `switch` |
-| 9 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 10 | `isCreator` | 是否Creator | `isCreator` | Boolean | `switch` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | (停用)指定核算的规格 |
+| 物理表 | `productcheckfreenew` |
+| 数据库 schema | `productcenter` |
+| 所属应用 | `GZTBDM` |
+| 直连字段 | 10 个 |
+| 子表 | 0 个 |
+| 关联引用 | 4 个 |
 
-## 关联（4 个）
+## 关联引用 (4个)
 
-- `freeId` -> `pc.userdef.UserDefineClass` ()
-- `productApplyRangeId` -> `pc.product.ProductApplyRange` ()
-- `productId` -> `pc.product.Product` (0..n)
-- `ytenant` -> `yht.tenant.YhtTenant` ()
+| 字段名 | 引用类型 |
+|--------|---------|
+| `freeId` | `` |
+| `productApplyRangeId` | `` |
+| `productId` | `` |
+| `ytenant_id` | `` |
+
+## 继承接口 (2个, 2字段)
+
+- **租户相关** (`coredoc.pub.TenantObselete`)
+  - `tenant_id` → `tenant_id`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 10 个直连字段
+
+### 引用字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户ID |
+| `productId` | `productId` | `productId` | 物料ID |
+| `productApplyRangeId` | `productApplyRangeId` | `productApplyRangeId` | 物料分配范围ID |
+| `freeId` | `freeId` | `freeId` | 核算规格ID |
+
+### 布尔字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `bChecked` | `bChecked` | `checked` | 是否选中 |
+| `isCreator` | `isCreator` | `isCreator` | 是否创建者 |
+
+### 短整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iFreeType` | `iFreeType` | `freeType` | 规格领域类型 |
+
+### 长整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | 按规格核算ID |
+| `tenant_id` | `tenant_id` | `tenant` | 租户ID(旧) |
+
+### timestamp (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubts` | `pubts` | `pubts` | 时间戳 |

@@ -1,5 +1,5 @@
 ---
-tags: [BIP, 元数据, 数据字典, bd, bd.puborggroup.PubOrgGroup]
+tags: [BIP, 元数据, 数据字典, bd.puborggroup.PubOrgGroup]
 created: 2026-06-03
 updated: 2026-06-03
 sources: [元数据API queryByUri]
@@ -9,43 +9,64 @@ last_verified: 2026-06-03
 status: verified
 source_type: api_response
 ---
+
 # 分级管理组织集合 (`bd.puborggroup.PubOrgGroup`)
 
-> ⚡ **平台版本：BIP 旗舰版 V5** — 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `pub_org_group` | 应用: `DPMPI`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`pub_org_group` | domain：`ucfbasedoc` | 应用：`DPMPI` | 业务对象ID：`88f3172e-8bcf-4177-9d4d-f5784d1c04f3`
 
-## 主键与编码
+## 基本信息
 
-| 角色 | 字段 | 列 | 类型 |
-|------|------|-----|------|
-| 主键 | `id` | `id` | String |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 分级管理组织集合 |
+| 物理表 | `pub_org_group` |
+| 数据库 schema | `ucfbasedoc` |
+| 所属应用 | `DPMPI` |
+| 直连字段 | 7 个 |
+| 子表 | 1 个 |
+| 关联引用 | 2 个 |
 
-## 全部属性（7 个）
+## 子表
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype | 必填 | 可空 |
-|---|--------|--------|-----|------|---------|------|------|
-| 1 | `code` | 编码 | `code` | String | `text` |  |  |
-| 2 | `hashCode` | hash编码 | `hash_code` | String | `text` |  |  |
-| 3 | `id` | 主键ID | `id` | String | `text` |  |  |
-| 4 | `name` | 名称 | `name` | String | `text` |  |  |
-| 5 | `orgGroupDetailList` | orgGroupDetailList | `` | 46389fc6-e2c9-422e-a0cd-c638de2a7f82 | `` |  |  |
-| 6 | `tenant` | tenant | `tenantid` | String | `text` |  | true |
-| 7 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` | true | true |
+| 字段名 | URI | 关系 |
+|--------|-----|------|
+| `orgGroupDetailList` | `bd.puborggroup.PubOrgGroupDetail` | composition |
 
-## 关联属性（2 个）
+## 关联引用 (2个)
 
-| # | 字段 | 目标实体 | 列 | 多重性 | 组合 | 废弃 |
-|---|------|---------|-----|--------|------|------|
-| 1 | `ytenant` | `yht.tenant.YhtTenant` | `ytenant_id` |  |  |  |
-| 2 | `orgGroupDetailList` | `bd.puborggroup.PubOrgGroupDetail` | `` | 0..n | Y |  |
+| 字段名 | 引用类型 |
+|--------|---------|
+| `ytenant_id` | `` |
+| `` | `` |
 
-## 依赖接口（1 个）
+## 继承接口 (1个, 1字段)
 
-- `IYTenant` → `ucfbase.ucfbaseItf.IYTenant` (v40)
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
 
-## SQL 示例
+## 字段列表（按类型分组）
 
-```sql
-SELECT code, hash_code, id, name, tenantid, ytenant_id
-FROM pub_org_group
-```
+> 共 7 个直连字段
+
+### 文本字段 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `code` | `code` | `code` | 编码 |
+| `hash_code` | `hash_code` | `hashCode` | 集合hash值 |
+| `id` | `id` | `id` | 主键 |
+| `name` | `name` | `name` | 名称 |
+| `tenantid` | `tenantid` | `tenant` | 租户废弃 |
+
+### 引用字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### other (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `` | `orgGroupDetailList` | 分级管理集合详情 |

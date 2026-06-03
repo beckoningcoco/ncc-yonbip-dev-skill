@@ -12,53 +12,107 @@ source_type: api_response
 
 # 客户分配关系(CRM) (`aa.merchant.MerchantApplyRangeExt`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `merchantapplyrange` | 应用: `DPMCUS` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`merchantapplyrange` | domain：`productcenter` | 应用：`DPMCUS` | 业务对象ID：``
 
-## 属性（28 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `id` | ID | `id` | Long | `long` |
-| 2 | `allocateSource` | allocateSource | `allocate_source` | String | `text` |
-| 3 | `merchantId` | merchantID | `merchantid` | 94b3280a-27a4-485a-b90b-b7bce57c6df2 | `quote` |
-| 4 | `shopId` | shopID | `ishopId` | 94b3280a-27a4-485a-b90b-b7bce57c6df2 | `quote` |
-| 5 | `shop` | shop | `iShopID` | Long | `long` |
-| 6 | `orgId` | 组织ID | `orgId` | eaa75c14-e58f-4b35-9ae5-0032f4a98f54 | `quote` |
-| 7 | `controlRuleVersion` | controlRuleVersion | `control_rule_version` | Integer | `int` |
-| 8 | `rangeType` | rangeType | `iRangeType` | Integer | `int` |
-| 9 | `allocatorId` | allocatorID | `allocator_id` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 10 | `allocatorName` | allocator名称 | `allocator_name` | String | `text` |
-| 11 | `allocateTime` | allocateTime | `allocate_time` | DateTime | `timestamp` |
-| 12 | `isCreator` | 是否Creator | `isCreator` | Boolean | `switch` |
-| 13 | `isApplied` | 是否Applied | `isApplied` | Boolean | `switch` |
-| 14 | `isSalesOrg` | 是否SalesOrg | `isSalesOrg` | Boolean | `switch` |
-| 15 | `isPotential` | 是否Potential | `ispotential` | Boolean | `switch` |
-| 16 | `noFollowTime` | noFollowTime | `nofollowtime` | String | `text` |
-| 17 | `recentlyFollowTime` | recentlyFollowTime | `recentlyfollowtime` | DateTime | `timestamp` |
-| 18 | `positivePeople` | positivePeople | `positivepeople` | String | `text` |
-| 19 | `positiveTime` | positiveTime | `positivetime` | DateTime | `timestamp` |
-| 20 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 21 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 22 | `tenant` | tenant | `tenant_id` | c213cd56-d5de-421f-bae7-d77455b557cd | `quote` |
-| 23 | `merchantDetailId` | merchantDetailID | `merchant_detail_id` | 1f145dee-55c4-4ad6-a699-873c8ecc096e | `quote` |
-| 24 | `customerAreas` | customerAreas | `` | 978ad259-ade5-4fb3-8aba-cecf550ec9d6 | `` |
-| 25 | `invoicingCustomerss` | invoicingCustomerss | `` | d26147af-40a2-464a-a1d5-ff65a15918d3 | `` |
-| 26 | `merchantAppliedDetailExt` | merchantAppliedDetailExt | `` | 0b0dd8bc-6aa8-4eed-96d2-4a105e8df8fc | `` |
-| 27 | `merchantDetailForCrm` | merchantDetailForCrm | `` | 6972f9fb-67ad-4183-a43d-dbf1cd61cf10 | `` |
-| 28 | `principals` | principals | `` | 7fdf2726-3ab2-4540-aa0c-4856d76467af | `` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 客户分配关系(CRM) |
+| 物理表 | `merchantapplyrange` |
+| 数据库 schema | `productcenter` |
+| 所属应用 | `DPMCUS` |
+| 直连字段 | 28 个 |
+| 子表 | 5 个 |
+| 关联引用 | 12 个 |
 
-## 关联（12 个）
+## 子表
 
-- `invoicingCustomerss` -> `aa.merchant.InvoicingCustomers` (0..n)
-- `merchantAppliedDetailExt` -> `aa.merchant.MerchantApplyRangeDetail` (1)
-- `merchantId` -> `aa.merchant.Merchant` (0..n)
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `merchantDetailForCrm` -> `aa.merchant.MerchantDetailForCRM` (1)
-- `principals` -> `aa.merchant.Principal` (0..n)
-- `merchantDetailId` -> `aa.merchant.MerchantDetail` ()
-- `shopId` -> `aa.merchant.Merchant` ()
-- `customerAreas` -> `aa.merchant.CustomerArea` (0..n)
-- `allocatorId` -> `base.user.User` ()
-- `orgId` -> `aa.baseorg.OrgMV` ()
-- `tenant` -> `base.tenant.Tenant` ()
+| 字段名 | URI | 关系 |
+|--------|-----|------|
+| `invoicingCustomerss` | `aa.merchant.InvoicingCustomers` | composition |
+| `merchantAppliedDetailExt` | `aa.merchant.MerchantApplyRangeDetail` | composition |
+| `merchantDetailForCrm` | `aa.merchant.MerchantDetailForCRM` | composition |
+| `principals` | `aa.merchant.Principal` | composition |
+| `customerAreas` | `aa.merchant.CustomerArea` | composition |
+
+## 关联引用 (12个)
+
+| 字段名 | 引用类型 |
+|--------|---------|
+| `` | `` |
+| `merchantid` | `` |
+| `ytenant_id` | `` |
+| `merchant_detail_id` | `` |
+| `ishopId` | `` |
+| `allocator_id` | `` |
+| `orgId` | `productcenter.aa_adminorgrangeref` |
+| `tenant_id` | `` |
+
+## 字段列表（按类型分组）
+
+> 共 28 个直连字段
+
+### 文本字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `allocate_source` | `allocate_source` | `allocateSource` | 来源 |
+| `allocator_name` | `allocator_name` | `allocatorName` | 分配人名称 |
+| `nofollowtime` | `nofollowtime` | `noFollowTime` | 未跟进时间 |
+| `positivepeople` | `positivepeople` | `positivePeople` | 转正人 |
+
+### 引用字段 (7个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `merchantid` | `merchantid` | `merchantId` | 所属客户 |
+| `ishopId` | `ishopId` | `shopId` | 商家ID |
+| `orgId` | `orgId` | `orgId` | 组织ID |
+| `allocator_id` | `allocator_id` | `allocatorId` | 分配人id |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+| `tenant_id` | `tenant_id` | `tenant` | 租户 |
+| `merchant_detail_id` | `merchant_detail_id` | `merchantDetailId` | 客户适用范围组详情 |
+
+### 布尔字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `isCreator` | `isCreator` | `isCreator` | 是否创建者 |
+| `isApplied` | `isApplied` | `isApplied` | 是否被分配者使用 |
+| `isSalesOrg` | `isSalesOrg` | `isSalesOrg` | 是否销售组织 |
+| `ispotential` | `ispotential` | `isPotential` | 是否潜客 |
+
+### 整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `control_rule_version` | `control_rule_version` | `controlRuleVersion` | 管控规则版本号 |
+| `iRangeType` | `iRangeType` | `rangeType` | 适用范围类型 |
+
+### 长整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+| `iShopID` | `iShopID` | `shop` | 商家 |
+
+### timestamp (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `allocate_time` | `allocate_time` | `allocateTime` | 分配时间 |
+| `recentlyfollowtime` | `recentlyfollowtime` | `recentlyFollowTime` | 最近跟进时间 |
+| `positivetime` | `positivetime` | `positiveTime` | 转正时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+
+### other (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `` | `customerAreas` | 销售区域 |
+| `` | `` | `invoicingCustomerss` | 开票客户 |
+| `` | `` | `merchantAppliedDetailExt` | (停用)客户适用范围详情 |
+| `` | `` | `merchantDetailForCrm` | 客户适用范围组详情(CRM) |
+| `` | `` | `principals` | 负责人 |

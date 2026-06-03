@@ -12,328 +12,419 @@ source_type: api_response
 
 # （停用）物料详情（管理组织） (`pc.product.ProductExtend`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `productdetail` | 应用: `GZTBDM` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`productdetail` | domain：`productcenter` | 应用：`GZTBDM` | 业务对象ID：``
 
-## 属性（275 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `id` | ID | `productId` | 89f3b06e-23df-4403-b4a7-19f99eeeae72 | `quote` |
-| 2 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 3 | `tenant` | tenant | `tenant_id` | Long | `long` |
-| 4 | `demandPlanningUnit` | demandPlanningUnit | `demandPlanningUnitId` | 9ea02a0b-3a48-4051-bcbe-59c7bcc7a25b | `quote` |
-| 5 | `barCode` | bar编码 | `cBarCode` | String | `text` |
-| 6 | `businessAttribute` | businessAttribute | `businessAttribute` | String | `text` |
-| 7 | `businessAttributePurchase` | businessAttributePurchase | `business_attr_purchase` | Integer | `int` |
-| 8 | `businessAttributeSale` | businessAttributeSale | `business_attr_sale` | Integer | `int` |
-| 9 | `businessAttributeSelfCreate` | businessAttributeSelfCreate | `business_attr_self_create` | Integer | `int` |
-| 10 | `businessAttributeOutSourcing` | businessAttributeOutSourcing | `business_attr_outsourcing` | Integer | `int` |
-| 11 | `batchUnit` | batchUnit | `batchUnitId` | 9ea02a0b-3a48-4051-bcbe-59c7bcc7a25b | `quote` |
-| 12 | `batchPriceUnit` | batchPriceUnit | `batchPriceUnitId` | 9ea02a0b-3a48-4051-bcbe-59c7bcc7a25b | `quote` |
-| 13 | `batchPrice` | batchPrice | `batchPrice` | Decimal | `number` |
-| 14 | `BOMSource` | BOMSource | `BOMSource` | 89f3b06e-23df-4403-b4a7-19f99eeeae72 | `quote` |
-| 15 | `BOMType` | BOMType | `iBOMType` | Short | `short` |
-| 16 | `ECNControl` | ECNControl | `bECNControl` | Boolean | `switch` |
-| 17 | `accountingByItem` | accountingByItem | `bAccountingByItem` | Boolean | `switch` |
-| 18 | `allowNegativeInventory` | allowNegativeInventory | `bAllowNegativeInventory` | Boolean | `switch` |
-| 19 | `allowStorePurchase` | allowStorePurchase | `allowStorePurchase` | Boolean | `switch` |
-| 20 | `arrivalAllowErrorLimit` | arrivalAllowErrorLimit | `fArrivalAllowErrorLimit` | Decimal | `number` |
-| 21 | `batchDouble` | batchDouble | `iBatchDouble` | Decimal | `number` |
-| 22 | `batchPolicy` | batchPolicy | `batchPolicy` | Short | `short` |
-| 23 | `batchRule` | batchRule | `iBatchRule` | Short | `short` |
-| 24 | `beUpTime` | beUpTime | `beUpTime` | DateTime | `timestamp` |
-| 25 | `behindLeadTime` | behindLeadTime | `iBehindLeadTime` | Integer | `int` |
-| 26 | `singleInspection` | singleInspection | `single_Inspection` | Integer | `int` |
-| 27 | `productionMode` | productionMode | `production_mode` | ProductionMode | `` |
-| 28 | `billingUnit` | billingUnit | `billingUnitId` | 9ea02a0b-3a48-4051-bcbe-59c7bcc7a25b | `quote` |
-| 29 | `inspectionControlPoint` | inspectionControlPoint | `inspectionControlPoint` | Integer | `int` |
-| 30 | `manageByInventory` | manageByInventory | `manageByInventory` | Integer | `int` |
-| 31 | `overSigning` | overSigning | `overSigning` | Integer | `int` |
-| 32 | `projectTrackStrategy` | projectTrackStrategy | `projectTrackStrategy` | Integer | `int` |
-| 33 | `doublePick` | doublePick | `doublePick` | Decimal | `number` |
-| 34 | `atpInspection` | atpInspection | `atpInspection` | Integer | `int` |
-| 35 | `checkByProject` | checkByProject | `checkByProject` | Integer | `int` |
-| 36 | `checkBySalesOrders` | checkBySalesOrders | `checkBySalesOrders` | Integer | `int` |
-| 37 | `checkByClient` | checkByClient | `checkByClient` | Integer | `int` |
-| 38 | `checkByOutsourcing` | checkByOutsourcing | `checkByOutsourcing` | Integer | `int` |
-| 39 | `checkByRevenueManagement` | checkByRevenueManagement | `checkByRevenueManagement` | Integer | `int` |
-| 40 | `turnoverMaterials` | turnoverMaterials | `turnover_materials` | Integer | `int` |
-| 41 | `amortizationMethod` | amortizationMethod | `amortization_method` | Integer | `int` |
-| 42 | `measurementCount` | measurementCount | `measurement_count` | Decimal | `number` |
-| 43 | `measurementUnit` | measurementUnit | `measurement_unit` | 9ea02a0b-3a48-4051-bcbe-59c7bcc7a25b | `quote` |
-| 44 | `compensationAmount` | compensationAmount | `compensation_amount` | Decimal | `number` |
-| 45 | `moldingTime` | moldingTime | `molding_time` | Decimal | `number` |
-| 46 | `moldCavities` | moldCavities | `mold_cavities` | Decimal | `number` |
-| 47 | `productInspection` | productInspection | `productInspection` | Integer | `int` |
-| 48 | `productInspectionCtrlPoint` | productInspectionCtrlPoint | `productInspectionCtrlPoint` | Integer | `int` |
-| 49 | `outSourceInspection` | outSourceInspection | `outSourceInspection` | Integer | `int` |
-| 50 | `outSourceInspectionCtrlPoint` | outSourceInspectionCtrlPoint | `outSourceInspectionCtrlPoint` | Integer | `int` |
-| 51 | `transferInspection` | transferInspection | `transferInspection` | Integer | `int` |
-| 52 | `transferInspectionCtrlPoint` | transferInspectionCtrlPoint | `transferInspectionCtrlPoint` | Integer | `int` |
-| 53 | `productFirstInspection` | productFirstInspection | `productFirstInspection` | Integer | `int` |
-| 54 | `firstInspectionCtrlMethod` | firstInspectionCtrlMethod | `firstInspectionCtrlMethod` | Integer | `int` |
-| 55 | `sendInspectionCtrlPoint` | sendInspectionCtrlPoint | `sendInspectionCtrlPoint` | Integer | `int` |
-| 56 | `returnInspectionCtrlPoint` | returnInspectionCtrlPoint | `returnInspectionCtrlPoint` | Integer | `int` |
-| 57 | `costItems` | costItems | `costItems` | d78cdbfa-0424-4dc3-a995-5c8624e1a560 | `quote` |
-| 58 | `beyondSupplyDays` | beyondSupplyDays | `iBeyondSupplyDays` | Integer | `int` |
-| 59 | `bindCarrier` | bindCarrier | `bBindCarrier` | Boolean | `switch` |
-| 60 | `canOrder` | canOrder | `bCanOrder` | Boolean | `switch` |
-| 61 | `canSale` | canSale | `canSale` | Boolean | `switch` |
-| 62 | `checkByBatch` | checkByBatch | `checkByBatch` | Boolean | `switch` |
-| 63 | `checkByCost` | checkByCost | `bCheckByCost` | Boolean | `switch` |
-| 64 | `checkReminderLeadTime` | checkReminderLeadTime | `check_reminder_lead_time` | Integer | `int` |
-| 65 | `costValuation` | costValuation | `iCostValuation` | Short | `short` |
-| 66 | `customerId` | customerID | `customerId` | 94b3280a-27a4-485a-b90b-b7bce57c6df2 | `quote` |
-| 67 | `daysBeforeValidityReject` | daysBeforeValidityReject | `iDaysBeforeValidityReject` | Integer | `int` |
-| 68 | `deliverQuantityChange` | deliverQuantityChange | `deliverQuantityChange` | Short | `short` |
-| 69 | `deliveryDays` | deliveryDays | `deliveryDays` | Integer | `int` |
-| 70 | `deliveryWarehouse` | deliveryWarehouse | `deliveryWarehouse` | 4256da1b-7d9f-49d6-b510-a05e771d17b0 | `quote` |
-| 71 | `demandConsolidation` | demandConsolidation | `iDemandConsolidation` | Short | `short` |
-| 72 | `demandConsolidationDateType` | demandConsolidationDateType | `iDemandConsolidationDateType` | Short | `short` |
-| 73 | `demandConsolidationNumber` | demandConsolidationNumber | `iDemandConsolidationNumber` | Integer | `int` |
-| 74 | `demandConsolidationType` | demandConsolidationType | `iDemandConsolidationType` | Short | `short` |
-| 75 | `demandConsolidationUnit` | demandConsolidationUnit | `iDemandConsolidationUnit` | Short | `short` |
-| 76 | `depositDealPayType` | depositDealPayType | `depositDealPayType` | Integer | `int` |
-| 77 | `depositPayType` | depositPayType | `depositPayType` | Integer | `int` |
-| 78 | `depositPercentage` | depositPercentage | `depositPercentage` | Decimal | `number` |
-| 79 | `deposits` | deposits | `deposits` | Decimal | `number` |
-| 80 | `directProduction` | directProduction | `direct_production` | Integer | `int` |
-| 81 | `displayName` | display名称 | `cDisplayName` | String | `multiLanguage` |
-| 82 | `dlyFeeRuleId` | dlyFeeRuleID | `dlyFeeRuleId` | b4505671-79b1-4593-8be4-ddc7eed18484 | `quote` |
-| 83 | `doubleReplenish` | doubleReplenish | `doubleReplenish` | Decimal | `number` |
-| 84 | `economicQuantity` | economicQuantity | `iEconomicQuantity` | Decimal | `number` |
-| 85 | `effectiveLeadTime` | effectiveLeadTime | `effective_lead_time` | Integer | `int` |
-| 86 | `enableDeposit` | enableDeposit | `enableDeposit` | Boolean | `switch` |
-| 87 | `enableSparePartsManagement` | enableSparePartsManagement | `enable_spare_parts_management` | Integer | `int` |
-| 88 | `enableStockExpireCheck` | enableStockExpireCheck | `enable_stock_expire_check` | Integer | `int` |
-| 89 | `enableStockPeriodRecheck` | enableStockPeriodRecheck | `enable_stock_period_recheck` | Integer | `int` |
-| 90 | `enableSubscribe` | enableSubscribe | `bEnableSubscribe` | Boolean | `switch` |
-| 91 | `enablemodifyDeposit` | enablemodifyDeposit | `enablemodifyDeposit` | Boolean | `switch` |
-| 92 | `engineeringDrawingNo` | engineeringDrawingNo | `cEngineeringDrawingNo` | String | `text` |
-| 93 | `erpOuterCode` | erpOuter编码 | `cErpOuterCode` | String | `text` |
-| 94 | `exemption` | exemption | `bExemption` | Boolean | `switch` |
-| 95 | `expireDateNo` | expireDateNo | `expireDateNo` | Integer | `int` |
-| 96 | `expireDateUnit` | expireDateUnit | `expireDateUnit` | Short | `short` |
-| 97 | `fLowestMarkPrice` | fLowestMarkPrice | `fLowestMarkPrice` | Decimal | `number` |
-| 98 | `fMarkPrice` | fMarkPrice | `fMarkPrice` | Decimal | `number` |
-| 99 | `fMarketPrice` | fMarketPrice | `fMarketPrice` | Decimal | `number` |
-| 100 | `fNoTaxCostPrice` | fNoTaxCostPrice | `fNoTaxCostPrice` | Decimal | `number` |
-| 101 | `fPrimeCosts` | fPrimeCosts | `fPrimeCosts` | Decimal | `number` |
-| 102 | `fSalePrice` | fSalePrice | `fSalePrice` | Decimal | `number` |
-| 103 | `fSettleAccountsRate` | fSettleAccountsRate | `fSettleAccountsRate` | Decimal | `number` |
-| 104 | `fixedLeadTime` | fixedLeadTime | `iFixedLeadTime` | Integer | `int` |
-| 105 | `fixedQuantity` | fixedQuantity | `iFixedQuantity` | Decimal | `number` |
-| 106 | `fixedReturn` | fixedReturn | `bFixedReturn` | Boolean | `switch` |
-| 107 | `fixedWastage` | fixedWastage | `iFixedWastage` | Decimal | `number` |
-| 108 | `frontLeadTime` | frontLeadTime | `iFrontLeadTime` | Integer | `int` |
-| 109 | `fullSetInspection` | fullSetInspection | `full_set_inspection` | Integer | `int` |
-| 110 | `highestStock` | highestStock | `highestStock` | Decimal | `number` |
-| 111 | `iABCClass` | iABCClass | `iABCClass` | Integer | `int` |
-| 112 | `iBaseSaleCount` | iBaseSaleCount | `iBaseSaleCount` | Integer | `int` |
-| 113 | `iDoubleSale` | iDoubleSale | `iDoubleSale` | Decimal | `number` |
-| 114 | `iEnableCyclePurchase` | iEnableCyclePurchase | `iEnableCyclePurchase` | Boolean | `switch` |
-| 115 | `iEnableEcontract` | iEnableEcontract | `iEnableEcontract` | Boolean | `switch` |
-| 116 | `iMinOrderQuantity` | iMinOrderQuantity | `iMinOrderQuantity` | Decimal | `number` |
-| 117 | `iOrder` | iOrder | `iOrder` | Integer | `int` |
-| 118 | `iStatus` | iStatus | `iStatus` | Boolean | `switch` |
-| 119 | `iUOrderStatus` | iUOrderStatus | `iUOrderStatus` | Boolean | `switch` |
-| 120 | `inStoreExcessLimit` | inStoreExcessLimit | `fInStoreExcessLimit` | Decimal | `number` |
-| 121 | `inStoreLessLimit` | inStoreLessLimit | `fInStoreLessLimit` | Decimal | `number` |
-| 122 | `inTaxrate` | inTaxrate | `inTaxrate` | 709cd092-3dd4-49ca-9eb9-7b8888551810 | `quote` |
-| 123 | `inspectionType` | inspectionType | `inspectionType` | Integer | `int` |
-| 124 | `inspectionUnit` | inspectionUnit | `inspectionUnitId` | 9ea02a0b-3a48-4051-bcbe-59c7bcc7a25b | `quote` |
-| 125 | `inventoryPlanStrategy` | inventoryPlanStrategy | `inventoryPlanStrategy` | Short | `short` |
-| 126 | `invoiceAllowErrorLimit` | invoiceAllowErrorLimit | `fInvoiceAllowErrorLimit` | Decimal | `number` |
-| 127 | `isAllArea` | 是否AllArea | `isAllArea` | Boolean | `switch` |
-| 128 | `isBarcodeManage` | 是否BarcodeManage | `isBarcodeManage` | Boolean | `switch` |
-| 129 | `isBatchManage` | 是否BatchManage | `isBatchManage` | Boolean | `switch` |
-| 130 | `isCheckFree` | 是否CheckFree | `isCheckFree` | Short | `short` |
-| 131 | `isCreator` | 是否Creator | `isCreator` | Boolean | `switch` |
-| 132 | `isDisplayPrice` | 是否DisplayPrice | `isDisplayPrice` | Boolean | `switch` |
-| 133 | `isExpiryDateCalculationMethod` | 是否ExpiryDateCalculationMethod | `expirydate_calculation_method` | Short | `short` |
-| 134 | `isExpiryDateManage` | 是否ExpiryDateManage | `isExpiryDateManage` | Boolean | `switch` |
-| 135 | `isMaterial` | 是否Material | `isMaterial` | Boolean | `switch` |
-| 136 | `isOfflineStoreOrder` | 是否OfflineStoreOrder | `isOfflineStoreOrder` | Boolean | `switch` |
-| 137 | `isOfflineStoreReturn` | 是否OfflineStoreReturn | `isOfflineStoreReturn` | Boolean | `switch` |
-| 138 | `isPriceChangeAllowed` | 是否PriceChangeAllowed | `isPriceChangeAllowed` | Boolean | `switch` |
-| 139 | `isProcess` | 是否Process | `isProcess` | Boolean | `switch` |
-| 140 | `isRecommend` | 是否Recommend | `isRecommend` | Boolean | `switch` |
-| 141 | `isSaleInOfflineStore` | 是否SaleInOfflineStore | `isSaleInOfflineStore` | Boolean | `switch` |
-| 142 | `isSerialNoManage` | 是否SerialNoManage | `isSerialNoManage` | Boolean | `switch` |
-| 143 | `isWeight` | 是否Weight | `isWeight` | Boolean | `switch` |
-| 144 | `keySubPart` | keySubPart | `bKeySubPart` | Boolean | `switch` |
-| 145 | `lInventoryCount` | lInventoryCount | `lInventoryCount` | Decimal | `number` |
-| 146 | `leadTimeCoefficient` | leadTimeCoefficient | `iLeadTimeCoefficient` | Decimal | `number` |
-| 147 | `leadTimeQuantity` | leadTimeQuantity | `iLeadTimeQuantity` | Decimal | `number` |
-| 148 | `logisticsRelated` | logisticsRelated | `bLogisticsRelated` | Boolean | `switch` |
-| 149 | `lossType` | lossType | `lossType` | Short | `short` |
-| 150 | `lowestStock` | lowestStock | `lowestStock` | Decimal | `number` |
-| 151 | `mallDownTime` | mallDownTime | `mallDownTime` | DateTime | `timestamp` |
-| 152 | `mallUpTime` | mallUpTime | `mallUpTime` | DateTime | `timestamp` |
-| 153 | `malldowncount` | malldowncount | `malldowncount` | Integer | `int` |
-| 154 | `mallupcount` | mallupcount | `mallupcount` | Integer | `int` |
-| 155 | `manufacturePlanner` | manufacturePlanner | `manufacturePlanner` | 4effed83-35f5-4e3b-9be1-092b5ae602e8 | `quote` |
-| 156 | `manufacturingStrategy` | manufacturingStrategy | `manufacturing_strategy` | String | `text` |
-| 157 | `materialCost` | materialCost | `bMaterialCost` | Boolean | `switch` |
-| 158 | `materialStatus` | materialStatus | `material_status` | 84a32a36-3aa1-444f-8155-79e7ce0869c8 | `quote` |
-| 159 | `maxBatchPrice` | maxBatchPrice | `maxBatchPrice` | Decimal | `number` |
-| 160 | `maxPrimeCosts` | maxPrimeCosts | `fMaxPrimeCosts` | Decimal | `number` |
-| 161 | `maximumTurnoverDays` | maximumTurnoverDays | `iMaximumTurnoverDays` | Integer | `int` |
-| 162 | `metaDescription` | metaDescription | `metaDescription` | String | `multiLanguage` |
-| 163 | `minBatchPrice` | minBatchPrice | `minBatchPrice` | Decimal | `number` |
-| 164 | `minimumDeposits` | minimumDeposits | `minimumDeposits` | Decimal | `number` |
-| 165 | `mnemonicCode` | mnemonic编码 | `mnemonicCode` | String | `text` |
-| 166 | `modifier` | 修改人 | `modifier` | String | `text` |
-| 167 | `modifierId` | 修改人ID | `modifierId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 168 | `modifyDate` | 修改日期 | `modify_date` | Date | `date` |
-| 169 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `timestamp` |
-| 170 | `mtoStrategy` | mtoStrategy | `mto_strategy` | Integer | `int` |
-| 171 | `offlineUnit` | offlineUnit | `offlineUnitId` | 9ea02a0b-3a48-4051-bcbe-59c7bcc7a25b | `quote` |
-| 172 | `omsWarehouse` | omsWarehouse | `OMSWarehouse` | 4256da1b-7d9f-49d6-b510-a05e771d17b0 | `quote` |
-| 173 | `onlineUnit` | onlineUnit | `onlineUnitId` | 9ea02a0b-3a48-4051-bcbe-59c7bcc7a25b | `quote` |
-| 174 | `onlyOrder` | onlyOrder | `bOnlyOrder` | Boolean | `switch` |
-| 175 | `orderAdvanceTime` | orderAdvanceTime | `iOrderAdvanceTime` | Short | `short` |
-| 176 | `orgId` | 组织ID | `orgId` | 8aaf4bce-2eb3-443c-bce1-0fb94fec3c0c | `quote` |
-| 177 | `outStoreExcessLimit` | outStoreExcessLimit | `fOutStoreExcessLimit` | Decimal | `number` |
-| 178 | `outStoreLessLimit` | outStoreLessLimit | `fOutStoreLessLimit` | Decimal | `number` |
-| 179 | `outTaxrate` | outTaxrate | `outTaxrate` | 709cd092-3dd4-49ca-9eb9-7b8888551810 | `quote` |
-| 180 | `pageTitle` | pageTitle | `pageTitle` | String | `text` |
-| 181 | `periodicalInspection` | periodicalInspection | `bPeriodicalInspection` | Boolean | `switch` |
-| 182 | `periodicalInspectionCycle` | periodicalInspectionCycle | `iPeriodicalInspectionCycle` | Integer | `int` |
-| 183 | `planCheckDays` | planCheckDays | `plan_check_days` | Integer | `int` |
-| 184 | `planDefaultAttribute` | planDefaultAttribute | `planDefaultAttribute` | Short | `short` |
-| 185 | `planMethod` | planMethod | `planMethod` | Short | `short` |
-| 186 | `planOrderLimit` | planOrderLimit | `fPlanOrderLimit` | Decimal | `number` |
-| 187 | `planProduceLimit` | planProduceLimit | `iPlanProduceLimit` | Decimal | `number` |
-| 188 | `planStrategy` | planStrategy | `planStrategy` | Long | `long` |
-| 189 | `preferentialPolicyType` | preferentialPolicyType | `preferentialPolicyType` | 18c954fe-5588-4eae-bd1a-c66fd1f6dc7f | `quote` |
-| 190 | `prepareFeed` | prepareFeed | `bPrepareFeed` | Boolean | `switch` |
-| 191 | `priceAreaMessage` | priceAreaMessage | `priceAreaMessage` | String | `text` |
-| 192 | `processType` | processType | `iProcessType` | Short | `short` |
-| 193 | `produceDepartment` | produceDepartment | `produceDepartment` | a4352e3c-3eda-4539-a7a9-ec00799be118 | `quote` |
-| 194 | `produceRate` | produceRate | `produceRate` | Decimal | `number` |
-| 195 | `produceUnit` | produceUnit | `produceUnitId` | 9ea02a0b-3a48-4051-bcbe-59c7bcc7a25b | `quote` |
-| 196 | `productApplyRangeId` | productApplyRangeID | `productApplyRangeId` | ed1f55f2-a3f7-4617-8bd2-7f2f404843ab | `quote` |
-| 197 | `productBuyer` | productBuyer | `productBuyer` | 4effed83-35f5-4e3b-9be1-092b5ae602e8 | `quote` |
-| 198 | `productExtendCharacterDef` | productExtendCharacterDef | `product_detail_character_def` | 3b04e9c2-ab66-48b0-a1e5-57a2b48cd767 | `UserDefine` |
-| 199 | `productVendor` | productVendor | `productVendor` | 89bf026e-cc49-4fe7-9a7b-3e8fdcc77c1e | `quote` |
-| 200 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 201 | `purchaseOrderQuantity` | purchaseOrderQuantity | `purchase_order_quantity` | Decimal | `number` |
-| 202 | `purchasePriceUnit` | purchasePriceUnit | `purchasePriceUnitId` | 9ea02a0b-3a48-4051-bcbe-59c7bcc7a25b | `quote` |
-| 203 | `purchaseTimes` | purchaseTimes | `purchase_times` | Decimal | `number` |
-| 204 | `purchaseUnit` | purchaseUnit | `purchaseUnitId` | 9ea02a0b-3a48-4051-bcbe-59c7bcc7a25b | `quote` |
-| 205 | `purpose` | purpose | `iPurpose` | Short | `short` |
-| 206 | `rangeType` | rangeType | `iRangeType` | Integer | `int` |
-| 207 | `receiptModel` | receiptModel | `receiptModel` | String | `multiLanguage` |
-| 208 | `receiptName` | receipt名称 | `receiptName` | String | `multiLanguage` |
-| 209 | `receiptSpec` | receiptSpec | `receiptSpec` | String | `multiLanguage` |
-| 210 | `receiptWarehouse` | receiptWarehouse | `receiptWarehouse` | 4256da1b-7d9f-49d6-b510-a05e771d17b0 | `quote` |
-| 211 | `recheckReminderLeadTime` | recheckReminderLeadTime | `recheck_reminder_lead_time` | Integer | `int` |
-| 212 | `rejectRate` | rejectRate | `iRejectRate` | Decimal | `number` |
-| 213 | `remark` | remark | `remark` | String | `multiLanguage` |
-| 214 | `requestOrderLimit` | requestOrderLimit | `fRequestOrderLimit` | Decimal | `number` |
-| 215 | `requireUnit` | requireUnit | `requireUnitId` | 9ea02a0b-3a48-4051-bcbe-59c7bcc7a25b | `quote` |
-| 216 | `requirementTrackingMethod` | requirementTrackingMethod | `requirementTrackingMethod` | Short | `short` |
-| 217 | `reservation` | reservation | `reservation` | Boolean | `switch` |
-| 218 | `resetBackwardDays` | resetBackwardDays | `iResetBackwardDays` | Integer | `int` |
-| 219 | `resetForwardDays` | resetForwardDays | `iResetForwardDays` | Integer | `int` |
-| 220 | `retailPriceDimension` | retailPriceDimension | `retailPriceDimension` | Short | `short` |
-| 221 | `returnInspection` | returnInspection | `return_inspection` | Integer | `int` |
-| 222 | `returnWarehouse` | returnWarehouse | `returnWarehouse` | 4256da1b-7d9f-49d6-b510-a05e771d17b0 | `quote` |
-| 223 | `returnsWarehousingByResult` | returnsWarehousingByResult | `bReturnsWarehousingByResult` | Boolean | `switch` |
-| 224 | `reviewCycle` | reviewCycle | `review_cycle` | Integer | `int` |
-| 225 | `reviewGrossWeight` | reviewGrossWeight | `bReviewGrossWeight` | Boolean | `switch` |
-| 226 | `ropStock` | ropStock | `ropStock` | Decimal | `number` |
-| 227 | `safetyStock` | safetyStock | `safetyStock` | Decimal | `number` |
-| 228 | `saleChannel` | saleChannel | `saleChannel` | String | `text` |
-| 229 | `saleChannelOfDistribution` | saleChannelOfDistribution | `saleChannelOfDistribution` | Boolean | `switch` |
-| 230 | `saleChannelOfOfflineRetail` | saleChannelOfOfflineRetail | `saleChannelOfOfflineRetail` | Boolean | `switch` |
-| 231 | `saleChannelOfOnlineBatch` | saleChannelOfOnlineBatch | `saleChannelOfOnlineBatch` | Boolean | `switch` |
-| 232 | `saleChannelOfOnlineRetail` | saleChannelOfOnlineRetail | `saleChannelOfOnlineRetail` | Boolean | `switch` |
-| 233 | `salePoints` | salePoints | `salePoints` | Integer | `int` |
-| 234 | `saleStyle` | saleStyle | `productAttribute` | String | `text` |
-| 235 | `salesReturnsExemption` | salesReturnsExemption | `bSalesReturnsExemption` | Boolean | `switch` |
-| 236 | `scanCountUnit` | scanCountUnit | `scanCountUnit` | Short | `short` |
-| 237 | `sendInspection` | sendInspection | `send_inspection` | Integer | `int` |
-| 238 | `serviceDuration` | serviceDuration | `iServiceDuration` | Decimal | `number` |
-| 239 | `serviceDurationUnit` | serviceDurationUnit | `iServiceDurationUnit` | Short | `short` |
-| 240 | `shopId` | shopID | `shopId` | 94b3280a-27a4-485a-b90b-b7bce57c6df2 | `quote` |
-| 241 | `shortName` | short名称 | `shortName` | String | `text` |
-| 242 | `specialCarTransport` | specialCarTransport | `bSpecialCarTransport` | Boolean | `switch` |
-| 243 | `specialMaterials` | specialMaterials | `bSpecialMaterials` | Boolean | `switch` |
-| 244 | `stockUnit` | stockUnit | `stockUnitId` | 9ea02a0b-3a48-4051-bcbe-59c7bcc7a25b | `quote` |
-| 245 | `stopstatus` | stopstatus | `stopstatus` | Boolean | `switch` |
-| 246 | `stoptime` | stoptime | `stop_time` | DateTime | `timestamp` |
-| 247 | `storageLossRate` | storageLossRate | `storageLossRate` | Decimal | `number` |
-| 248 | `strategyComparisonRule` | strategyComparisonRule | `strategy_comparison_rule` | Integer | `int` |
-| 249 | `supplyDemandPolicy` | supplyDemandPolicy | `supplyDemandPolicy` | Short | `short` |
-| 250 | `supplyTimes` | supplyTimes | `iSupplyTimes` | Integer | `int` |
-| 251 | `supplyType` | supplyType | `supplyType` | Short | `short` |
-| 252 | `testRule` | testRule | `testRule` | TestRule | `` |
-| 253 | `titleMemo` | titleMemo | `cTitleMemo` | String | `multiLanguage` |
-| 254 | `uorderDlyFeeRuleId` | uorderDlyFeeRuleID | `uorderDlyFeeRuleId` | Long | `long` |
-| 255 | `uorderDownTime` | uorderDownTime | `uorderDownTime` | DateTime | `timestamp` |
-| 256 | `uorderUpTime` | uorderUpTime | `uorderUpTime` | DateTime | `timestamp` |
-| 257 | `uorderdowncount` | uorderdowncount | `uorderdowncount` | Integer | `int` |
-| 258 | `uorderupcount` | uorderupcount | `uorderupcount` | Integer | `int` |
-| 259 | `utility` | utility | `bUtility` | Boolean | `switch` |
-| 260 | `validityWarningDays` | validityWarningDays | `iValidityWarningDays` | Integer | `int` |
-| 261 | `valueManageType` | valueManageType | `iValueManageType` | Short | `short` |
-| 262 | `virtualPart` | virtualPart | `bVirtualPart` | Boolean | `switch` |
-| 263 | `warehouseManager` | warehouseManager | `warehouseManager` | 4effed83-35f5-4e3b-9be1-092b5ae602e8 | `quote` |
-| 264 | `warehousingByResult` | warehousingByResult | `bWarehousingByResult` | Boolean | `switch` |
-| 265 | `wastageRate` | wastageRate | `iWastageRate` | Decimal | `number` |
-| 266 | `weigh` | weigh | `bWeigh` | Boolean | `switch` |
-| 267 | `weighingMode` | weighingMode | `iWeighingMode` | Short | `short` |
-| 268 | `workingPlan` | workingPlan | `bWorkingPlan` | Boolean | `switch` |
-| 269 | `createDate` | 创建日期 | `create_date` | Date | `date` |
-| 270 | `createTime` | 创建时间 | `create_time` | DateTime | `timestamp` |
-| 271 | `creator` | 创建人 | `creator` | String | `text` |
-| 272 | `creatorId` | 创建人ID | `creatorId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 273 | `costClass` | costClass | `costClass` | 80e9c421-f9e9-4752-b1e9-7c240cb2fc1f | `quote` |
-| 274 | `deliveryMethod` | deliveryMethod | `delivery_method` | String | `text` |
-| 275 | `taxClass` | taxClass | `taxClass` | d81afee5-cdcb-4c02-b2ac-054f55275897 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | （停用）物料详情（管理组织） |
+| 物理表 | `productdetail` |
+| 数据库 schema | `productcenter` |
+| 所属应用 | `GZTBDM` |
+| 直连字段 | 275 个 |
+| 子表 | 0 个 |
+| 关联引用 | 40 个 |
 
-## 关联（40 个）
+## 关联引用 (40个)
 
-- `costItems` -> `bd.expenseitem.ExpenseItem` ()
-- `materialStatus` -> `pc.manage.MaterialStatus` ()
-- `produceUnit` -> `pc.unit.Unit` ()
-- `demandPlanningUnit` -> `pc.unit.Unit` ()
-- `batchPriceUnit` -> `pc.unit.Unit` ()
-- `productExtendCharacterDef` -> `pc.product.ProductDetailCharacterDef` ()
-- `warehouseManager` -> `bd.staff.Staff` ()
-- `creatorId` -> `base.user.User` ()
-- `modifierId` -> `base.user.User` ()
-- `BOMSource` -> `pc.product.Product` ()
-- `offlineUnit` -> `pc.unit.Unit` ()
-- `orgId` -> `bd.adminOrg.BaseOrgVO` ()
-- `inTaxrate` -> `archive.taxArchives.TaxRateArchive` ()
-- `productApplyRangeId` -> `pc.product.ProductApplyRange` ()
-- `outTaxrate` -> `archive.taxArchives.TaxRateArchive` ()
-- `requireUnit` -> `pc.unit.Unit` ()
-- `customerId` -> `aa.merchant.Merchant` ()
-- `purchasePriceUnit` -> `pc.unit.Unit` ()
-- `id` -> `pc.product.Product` (1)
-- `shopId` -> `aa.merchant.Merchant` ()
-- `billingUnit` -> `pc.unit.Unit` ()
-- `taxClass` -> `taxpubdoc.taxesClassification.TaxesClassification` ()
-- `manufacturePlanner` -> `bd.staff.Staff` ()
-- `receiptWarehouse` -> `aa.warehouse.Warehouse` ()
-- `dlyFeeRuleId` -> `um.logisticssetting.Deliverytype` ()
-- `productBuyer` -> `bd.staff.Staff` ()
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `produceDepartment` -> `bd.adminOrg.AdminOrgVO` ()
-- `omsWarehouse` -> `aa.warehouse.Warehouse` ()
-- `measurementUnit` -> `pc.unit.Unit` ()
-- `onlineUnit` -> `pc.unit.Unit` ()
-- `productVendor` -> `aa.vendor.Vendor` ()
-- `stockUnit` -> `pc.unit.Unit` ()
-- `costClass` -> `pc.cls.CostClass` ()
-- `purchaseUnit` -> `pc.unit.Unit` ()
-- `deliveryWarehouse` -> `aa.warehouse.Warehouse` ()
-- `batchUnit` -> `pc.unit.Unit` ()
-- `preferentialPolicyType` -> `taxpubdoc.taxesClassification.TaxClassPolicy` ()
-- `inspectionUnit` -> `pc.unit.Unit` ()
-- `returnWarehouse` -> `aa.warehouse.Warehouse` ()
+| 字段名 | 引用类型 |
+|--------|---------|
+| `costItems` | `` |
+| `material_status` | `` |
+| `produceUnitId` | `` |
+| `demandPlanningUnitId` | `` |
+| `batchPriceUnitId` | `` |
+| `product_detail_character_def` | `` |
+| `warehouseManager` | `` |
+| `` | `` |
+| `BOMSource` | `` |
+| `offlineUnitId` | `` |
+| `orgId` | `` |
+| `inTaxrate` | `` |
+| `productApplyRangeId` | `` |
+| `outTaxrate` | `` |
+| `requireUnitId` | `` |
+| `customerId` | `` |
+| `purchasePriceUnitId` | `` |
+| `productId` | `` |
+| `shopId` | `` |
+| `billingUnitId` | `` |
+| `taxClass` | `productcenter.pc_taxrevenueref` |
+| `manufacturePlanner` | `` |
+| `receiptWarehouse` | `` |
+| `dlyFeeRuleId` | `` |
+| `productBuyer` | `` |
+| `ytenant_id` | `` |
+| `produceDepartment` | `` |
+| `OMSWarehouse` | `` |
+| `measurement_unit` | `` |
+| `onlineUnitId` | `` |
+| `productVendor` | `` |
+| `stockUnitId` | `` |
+| `costClass` | `productcenter.pc_costclassref` |
+| `purchaseUnitId` | `` |
+| `deliveryWarehouse` | `` |
+| `batchUnitId` | `` |
+| `preferentialPolicyType` | `` |
+| `inspectionUnitId` | `` |
+| `returnWarehouse` | `` |
+
+## 继承接口 (4个, 12字段)
+
+- **审计信息** (`base.itf.IAuditInfo`)
+  - `create_date` → `create_date`
+  - `create_time` → `create_time`
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `modify_date` → `modify_date`
+  - `modify_time` → `modify_time`
+- **停用信息** (`base.itf.IStopping`)
+  - `stopstatus` → `stopstatus`
+  - `stop_time` → `stop_time`
+- **租户相关** (`coredoc.pub.TenantObselete`)
+  - `tenant_id` → `tenant_id`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 275 个直连字段
+
+### 文本字段 (14个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `cBarCode` | `cBarCode` | `barCode` | 条形码 |
+| `businessAttribute` | `businessAttribute` | `businessAttribute` | 业务属性 |
+| `cEngineeringDrawingNo` | `cEngineeringDrawingNo` | `engineeringDrawingNo` | 制造-工程图号 |
+| `cErpOuterCode` | `cErpOuterCode` | `erpOuterCode` | 商家外部编码 |
+| `manufacturing_strategy` | `manufacturing_strategy` | `manufacturingStrategy` | 制造-制造策略 |
+| `mnemonicCode` | `mnemonicCode` | `mnemonicCode` | 助记码 |
+| `` | `modifier` | `modifier` | 修改人名称 |
+| `pageTitle` | `pageTitle` | `pageTitle` | 商城-SEO设置相关 |
+| `priceAreaMessage` | `priceAreaMessage` | `priceAreaMessage` | 线上不显示价格时,需要显示的提示信息 |
+| `saleChannel` | `saleChannel` | `saleChannel` | 销售渠道 |
+| `productAttribute` | `productAttribute` | `saleStyle` | 销售方式 |
+| `shortName` | `shortName` | `shortName` | 物料简称 |
+| `` | `creator` | `creator` | 创建人名称 |
+| `delivery_method` | `delivery_method` | `deliveryMethod` | 商城-配送方式 |
+
+### 引用字段 (39个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `productId` | `productId` | `id` | ID主键 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户ID |
+| `demandPlanningUnitId` | `demandPlanningUnitId` | `demandPlanningUnit` | 需求计划单位 |
+| `batchUnitId` | `batchUnitId` | `batchUnit` | 批发销售单位 |
+| `batchPriceUnitId` | `batchPriceUnitId` | `batchPriceUnit` | 批发计价单位 |
+| `BOMSource` | `BOMSource` | `BOMSource` | 制造-共享BOM来源 |
+| `billingUnitId` | `billingUnitId` | `billingUnit` | 开票单位 |
+| `measurement_unit` | `measurement_unit` | `measurementUnit` | 计量项目单位 |
+| `costItems` | `costItems` | `costItems` | 费用项目 |
+| `customerId` | `customerId` | `customerId` | 客户ID |
+| `deliveryWarehouse` | `deliveryWarehouse` | `deliveryWarehouse` | 库存-发货仓库 |
+| `dlyFeeRuleId` | `dlyFeeRuleId` | `dlyFeeRuleId` | 商城-运费模板 |
+| `inTaxrate` | `inTaxrate` | `inTaxrate` | 进项税率(%) |
+| `inspectionUnitId` | `inspectionUnitId` | `inspectionUnit` | 检验单位 |
+| `manufacturePlanner` | `manufacturePlanner` | `manufacturePlanner` | 制造-计划员 |
+| `material_status` | `material_status` | `materialStatus` | 物料状态 |
+| `` | `modifierId` | `modifierId` | 修改人 |
+| `offlineUnitId` | `offlineUnitId` | `offlineUnit` | 线下零售单位 |
+| `OMSWarehouse` | `OMSWarehouse` | `omsWarehouse` | 库存-电商仓 |
+| `onlineUnitId` | `onlineUnitId` | `onlineUnit` | 线上零售单位 |
+| `orgId` | `orgId` | `orgId` | 组织ID |
+| `outTaxrate` | `outTaxrate` | `outTaxrate` | 销项税率(%) |
+| `preferentialPolicyType` | `preferentialPolicyType` | `preferentialPolicyType` | 优惠政策类型 |
+| `produceDepartment` | `produceDepartment` | `produceDepartment` | 制造-生产部门 |
+| `produceUnitId` | `produceUnitId` | `produceUnit` | 生产单位 |
+| `productApplyRangeId` | `productApplyRangeId` | `productApplyRangeId` | 物料分配范围ID |
+| `productBuyer` | `productBuyer` | `productBuyer` | 采购员 |
+| `productVendor` | `productVendor` | `productVendor` | 供应商 |
+| `purchasePriceUnitId` | `purchasePriceUnitId` | `purchasePriceUnit` | 采购计价单位 |
+| `purchaseUnitId` | `purchaseUnitId` | `purchaseUnit` | 采购单位 |
+| `receiptWarehouse` | `receiptWarehouse` | `receiptWarehouse` | 采购-收货仓库 |
+| `requireUnitId` | `requireUnitId` | `requireUnit` | 要货单位 |
+| `returnWarehouse` | `returnWarehouse` | `returnWarehouse` | 库存-退货仓库 |
+| `shopId` | `shopId` | `shopId` | 商家ID |
+| `stockUnitId` | `stockUnitId` | `stockUnit` | 库存单位 |
+| `warehouseManager` | `warehouseManager` | `warehouseManager` | 库存-库管员 |
+| `` | `creatorId` | `creatorId` | 创建人 |
+| `costClass` | `costClass` | `costClass` | 成本分类 |
+| `taxClass` | `taxClass` | `taxClass` | 税收分类码 |
+
+### 日期字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `modify_date` | `modify_date` | `modifyDate` | 修改日期 |
+| `create_date` | `create_date` | `createDate` | 创建日期 |
+
+### 布尔字段 (55个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `bECNControl` | `bECNControl` | `ECNControl` | 制造-ECN管控 |
+| `bAccountingByItem` | `bAccountingByItem` | `accountingByItem` | 成本-按单品核算 |
+| `bAllowNegativeInventory` | `bAllowNegativeInventory` | `allowNegativeInventory` | 库存-允许负库存 |
+| `allowStorePurchase` | `allowStorePurchase` | `allowStorePurchase` | 零售-允许门店自采 |
+| `bBindCarrier` | `bBindCarrier` | `bindCarrier` | 制造-绑定载具 |
+| `bCanOrder` | `bCanOrder` | `canOrder` | 商城-可预约 |
+| `canSale` | `canSale` | `canSale` | 批发-可售状态 |
+| `checkByBatch` | `checkByBatch` | `checkByBatch` | 成本-按批次核算 |
+| `bCheckByCost` | `bCheckByCost` | `checkByCost` | 成本-按费用核算 |
+| `enableDeposit` | `enableDeposit` | `enableDeposit` | 商城-启用定金业务 |
+| `bEnableSubscribe` | `bEnableSubscribe` | `enableSubscribe` | 商城-启用预订业务 |
+| `enablemodifyDeposit` | `enablemodifyDeposit` | `enablemodifyDeposit` | 商城-订单改价时可修改定金 |
+| `bExemption` | `bExemption` | `exemption` | 质检-免检 |
+| `bFixedReturn` | `bFixedReturn` | `fixedReturn` | 制造-固定回空 |
+| `iEnableCyclePurchase` | `iEnableCyclePurchase` | `iEnableCyclePurchase` | 商城-启用周期购 |
+| `iEnableEcontract` | `iEnableEcontract` | `iEnableEcontract` | 商城-是否启用合同管理 |
+| `iStatus` | `iStatus` | `iStatus` | 商城上下架状态 |
+| `iUOrderStatus` | `iUOrderStatus` | `iUOrderStatus` | U订货上下架状态 |
+| `isAllArea` | `isAllArea` | `isAllArea` | 商城-是否适用所有区域 |
+| `isBarcodeManage` | `isBarcodeManage` | `isBarcodeManage` | 库存-条码管理 |
+| `isBatchManage` | `isBatchManage` | `isBatchManage` | 库存-是否批次管理 |
+| `isCreator` | `isCreator` | `isCreator` | 是否创建者 |
+| `isDisplayPrice` | `isDisplayPrice` | `isDisplayPrice` | 线上显示价格 |
+| `isExpiryDateManage` | `isExpiryDateManage` | `isExpiryDateManage` | 库存-是否有效期管理 |
+| `isMaterial` | `isMaterial` | `isMaterial` | 零售-材料 |
+| `isOfflineStoreOrder` | `isOfflineStoreOrder` | `isOfflineStoreOrder` | 零售-允许门店要货 |
+| `isOfflineStoreReturn` | `isOfflineStoreReturn` | `isOfflineStoreReturn` | 零售-允许门店退货 |
+| `isPriceChangeAllowed` | `isPriceChangeAllowed` | `isPriceChangeAllowed` | 零售-允许开单改价 |
+| `isProcess` | `isProcess` | `isProcess` | 零售-加工 |
+| `isRecommend` | `isRecommend` | `isRecommend` | 推荐物料 |
+| `isSaleInOfflineStore` | `isSaleInOfflineStore` | `isSaleInOfflineStore` | 零售-允许门店销售 |
+| `isSerialNoManage` | `isSerialNoManage` | `isSerialNoManage` | 库存-是否序列号管理 |
+| `isWeight` | `isWeight` | `isWeight` | 零售-是否称重 |
+| `bKeySubPart` | `bKeySubPart` | `keySubPart` | 制造-关键子件 |
+| `bLogisticsRelated` | `bLogisticsRelated` | `logisticsRelated` | 制造-物流相关 |
+| `bMaterialCost` | `bMaterialCost` | `materialCost` | 成本-材料费用化 |
+| `bOnlyOrder` | `bOnlyOrder` | `onlyOrder` | 商城-仅预约 |
+| `bPeriodicalInspection` | `bPeriodicalInspection` | `periodicalInspection` | 质检-定期检验 |
+| `bPrepareFeed` | `bPrepareFeed` | `prepareFeed` | 制造-是否长周期备料 |
+| `reservation` | `reservation` | `reservation` | 库存-可预留 |
+| `bReturnsWarehousingByResult` | `bReturnsWarehousingByResult` | `returnsWarehousingByResult` | 质检-退货根据检验结果入库 |
+| `bReviewGrossWeight` | `bReviewGrossWeight` | `reviewGrossWeight` | 制造-复核毛重 |
+| `saleChannelOfDistribution` | `saleChannelOfDistribution` | `saleChannelOfDistribution` | 销售渠道-微分销 |
+| `saleChannelOfOfflineRetail` | `saleChannelOfOfflineRetail` | `saleChannelOfOfflineRetail` | 销售渠道-线下零售 |
+| `saleChannelOfOnlineBatch` | `saleChannelOfOnlineBatch` | `saleChannelOfOnlineBatch` | 销售渠道-线上批发 |
+| `saleChannelOfOnlineRetail` | `saleChannelOfOnlineRetail` | `saleChannelOfOnlineRetail` | 销售渠道-线上零售 |
+| `bSalesReturnsExemption` | `bSalesReturnsExemption` | `salesReturnsExemption` | 质检-销售退货免检 |
+| `bSpecialCarTransport` | `bSpecialCarTransport` | `specialCarTransport` | 制造-专车运输 |
+| `bSpecialMaterials` | `bSpecialMaterials` | `specialMaterials` | 制造-是否专用料 |
+| `stopstatus` | `stopstatus` | `stopstatus` | 停用状态 |
+| `bUtility` | `bUtility` | `utility` | 制造-公用工程 |
+| `bVirtualPart` | `bVirtualPart` | `virtualPart` | 制造-是否虚拟件 |
+| `bWarehousingByResult` | `bWarehousingByResult` | `warehousingByResult` | 质检-根据检验结果入库 |
+| `bWeigh` | `bWeigh` | `weigh` | 制造-是否过磅 |
+| `bWorkingPlan` | `bWorkingPlan` | `workingPlan` | 制造-排工序计划 |
+
+### 整数 (67个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `business_attr_purchase` | `business_attr_purchase` | `businessAttributePurchase` | 业务属性-采购 |
+| `business_attr_sale` | `business_attr_sale` | `businessAttributeSale` | 业务属性-销售 |
+| `business_attr_self_create` | `business_attr_self_create` | `businessAttributeSelfCreate` | 业务属性-自制 |
+| `business_attr_outsourcing` | `business_attr_outsourcing` | `businessAttributeOutSourcing` | 业务属性-委外 |
+| `iBehindLeadTime` | `iBehindLeadTime` | `behindLeadTime` | 制造-后段提前期 |
+| `single_Inspection` | `single_Inspection` | `singleInspection` | 质检-单件检验 |
+| `inspectionControlPoint` | `inspectionControlPoint` | `inspectionControlPoint` | 质检-采购检验控制点 |
+| `manageByInventory` | `manageByInventory` | `manageByInventory` | 库存-项目库存 |
+| `overSigning` | `overSigning` | `overSigning` | 销售-超量签收 |
+| `projectTrackStrategy` | `projectTrackStrategy` | `projectTrackStrategy` | 计划-项目跟踪策略 |
+| `atpInspection` | `atpInspection` | `atpInspection` | 库存-ATP检查 |
+| `checkByProject` | `checkByProject` | `checkByProject` | 成本-按项目核算 |
+| `checkBySalesOrders` | `checkBySalesOrders` | `checkBySalesOrders` | 成本-按销售订单核算 |
+| `checkByClient` | `checkByClient` | `checkByClient` | 成本-按客户核算 |
+| `checkByOutsourcing` | `checkByOutsourcing` | `checkByOutsourcing` | 成本-按委外商核算 |
+| `checkByRevenueManagement` | `checkByRevenueManagement` | `checkByRevenueManagement` | 成本-收入管理核算 |
+| `turnover_materials` | `turnover_materials` | `turnoverMaterials` | 周转材 |
+| `amortization_method` | `amortization_method` | `amortizationMethod` | 摊销方式 |
+| `productInspection` | `productInspection` | `productInspection` | 质检-产品检验 |
+| `productInspectionCtrlPoint` | `productInspectionCtrlPoint` | `productInspectionCtrlPoint` | 质检-产品检验控制点 |
+| `outSourceInspection` | `outSourceInspection` | `outSourceInspection` | 质检-委外检验 |
+| `outSourceInspectionCtrlPoint` | `outSourceInspectionCtrlPoint` | `outSourceInspectionCtrlPoint` | 质检-委外检验控制点 |
+| `transferInspection` | `transferInspection` | `transferInspection` | 质检-调拨检验 |
+| `transferInspectionCtrlPoint` | `transferInspectionCtrlPoint` | `transferInspectionCtrlPoint` | 质检-调拨检验控制点 |
+| `productFirstInspection` | `productFirstInspection` | `productFirstInspection` | 质检-产品首检 |
+| `firstInspectionCtrlMethod` | `firstInspectionCtrlMethod` | `firstInspectionCtrlMethod` | 质检-首检控制方式 |
+| `sendInspectionCtrlPoint` | `sendInspectionCtrlPoint` | `sendInspectionCtrlPoint` | 质检-发货检验控制点 |
+| `returnInspectionCtrlPoint` | `returnInspectionCtrlPoint` | `returnInspectionCtrlPoint` | 质检-退货检验控制点 |
+| `iBeyondSupplyDays` | `iBeyondSupplyDays` | `beyondSupplyDays` | 制造-超期供给天数 |
+| `check_reminder_lead_time` | `check_reminder_lead_time` | `checkReminderLeadTime` | 质检-检验提醒提前期 |
+| `iDaysBeforeValidityReject` | `iDaysBeforeValidityReject` | `daysBeforeValidityReject` | 库存-近有效期拒收天数 |
+| `deliveryDays` | `deliveryDays` | `deliveryDays` | 批发-交货周期(天) |
+| `iDemandConsolidationNumber` | `iDemandConsolidationNumber` | `demandConsolidationNumber` | 制造-需求合并时格数 |
+| `depositDealPayType` | `depositDealPayType` | `depositDealPayType` | 商城-定金设置类型 |
+| `depositPayType` | `depositPayType` | `depositPayType` | 商城-支付尾款方式 |
+| `direct_production` | `direct_production` | `directProduction` | 计划-是否直接生产 |
+| `effective_lead_time` | `effective_lead_time` | `effectiveLeadTime` | 质检-有效期提前期 |
+| `enable_spare_parts_management` | `enable_spare_parts_management` | `enableSparePartsManagement` | 资产服务-启用备件管理 |
+| `enable_stock_expire_check` | `enable_stock_expire_check` | `enableStockExpireCheck` | 质检-启用库存临期检验 |
+| `enable_stock_period_recheck` | `enable_stock_period_recheck` | `enableStockPeriodRecheck` | 质检-启用库存周期复检 |
+| `expireDateNo` | `expireDateNo` | `expireDateNo` | 库存-保质期 |
+| `iFixedLeadTime` | `iFixedLeadTime` | `fixedLeadTime` | 制造-固定提前期 |
+| `iFrontLeadTime` | `iFrontLeadTime` | `frontLeadTime` | 制造-前段提前期 |
+| `full_set_inspection` | `full_set_inspection` | `fullSetInspection` | 制造-齐套检查 |
+| `iABCClass` | `iABCClass` | `iABCClass` | 库存-ABC分类 |
+| `iBaseSaleCount` | `iBaseSaleCount` | `iBaseSaleCount` | 商城-初始销量 |
+| `iOrder` | `iOrder` | `iOrder` | 排序号 |
+| `inspectionType` | `inspectionType` | `inspectionType` | 质检-采购检验 |
+| `malldowncount` | `malldowncount` | `malldowncount` | 商城下架数量 |
+| `mallupcount` | `mallupcount` | `mallupcount` | 商城上架数量 |
+| `iMaximumTurnoverDays` | `iMaximumTurnoverDays` | `maximumTurnoverDays` | 库存-最大周转天数 |
+| `mto_strategy` | `mto_strategy` | `mtoStrategy` | 制造-MTO策略 |
+| `iPeriodicalInspectionCycle` | `iPeriodicalInspectionCycle` | `periodicalInspectionCycle` | 质检-定期检验周期 |
+| `plan_check_days` | `plan_check_days` | `planCheckDays` | 质检-计划检验天数 |
+| `iRangeType` | `iRangeType` | `rangeType` | 物料适用范围类型 |
+| `recheck_reminder_lead_time` | `recheck_reminder_lead_time` | `recheckReminderLeadTime` | 质检-复检提醒提前期 |
+| `iResetBackwardDays` | `iResetBackwardDays` | `resetBackwardDays` | 制造-重排后移天数 |
+| `iResetForwardDays` | `iResetForwardDays` | `resetForwardDays` | 制造-重排前移天数 |
+| `return_inspection` | `return_inspection` | `returnInspection` | 质检-退货检验 |
+| `review_cycle` | `review_cycle` | `reviewCycle` | 质检-复检周期 |
+| `salePoints` | `salePoints` | `salePoints` | 商城-销售积分 |
+| `send_inspection` | `send_inspection` | `sendInspection` | 质检-发货检验 |
+| `strategy_comparison_rule` | `strategy_comparison_rule` | `strategyComparisonRule` | 制造-策略对比规则 |
+| `iSupplyTimes` | `iSupplyTimes` | `supplyTimes` | 制造-供应倍数 |
+| `uorderdowncount` | `uorderdowncount` | `uorderdowncount` | U订货下架数量 |
+| `uorderupcount` | `uorderupcount` | `uorderupcount` | U订货上架数量 |
+| `iValidityWarningDays` | `iValidityWarningDays` | `validityWarningDays` | 库存-效期预警天数 |
+
+### 短整数 (27个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iBOMType` | `iBOMType` | `BOMType` | 制造-物料BOM类型 |
+| `batchPolicy` | `batchPolicy` | `batchPolicy` | 制造-批量政策 |
+| `iBatchRule` | `iBatchRule` | `batchRule` | 制造-批量规则 |
+| `iCostValuation` | `iCostValuation` | `costValuation` | 成本-成本计价方法 |
+| `deliverQuantityChange` | `deliverQuantityChange` | `deliverQuantityChange` | 零售-交货数量改变时 |
+| `iDemandConsolidation` | `iDemandConsolidation` | `demandConsolidation` | 制造-物料需求合并 |
+| `iDemandConsolidationDateType` | `iDemandConsolidationDateType` | `demandConsolidationDateType` | 制造-需求合并日 |
+| `iDemandConsolidationType` | `iDemandConsolidationType` | `demandConsolidationType` | 制造-需求合并类型 |
+| `iDemandConsolidationUnit` | `iDemandConsolidationUnit` | `demandConsolidationUnit` | 制造-需求合并时格 |
+| `expireDateUnit` | `expireDateUnit` | `expireDateUnit` | 库存-保质期单位 |
+| `inventoryPlanStrategy` | `inventoryPlanStrategy` | `inventoryPlanStrategy` | 库存规划策略 |
+| `isCheckFree` | `isCheckFree` | `isCheckFree` | 成本-按规格核算 |
+| `expirydate_calculation_method` | `expirydate_calculation_method` | `isExpiryDateCalculationMethod` | 库存-有效期推算方式 |
+| `lossType` | `lossType` | `lossType` | 制造-损耗类型 |
+| `iOrderAdvanceTime` | `iOrderAdvanceTime` | `orderAdvanceTime` | 商城-预约提前期 |
+| `planDefaultAttribute` | `planDefaultAttribute` | `planDefaultAttribute` | 制造-计划默认属性 |
+| `planMethod` | `planMethod` | `planMethod` | 制造-计划方法 |
+| `iProcessType` | `iProcessType` | `processType` | 零售-加工方式 |
+| `iPurpose` | `iPurpose` | `purpose` | 制造-用途 |
+| `requirementTrackingMethod` | `requirementTrackingMethod` | `requirementTrackingMethod` | 库存-需求跟踪方式 |
+| `retailPriceDimension` | `retailPriceDimension` | `retailPriceDimension` | 零售-零售取价维度 |
+| `scanCountUnit` | `scanCountUnit` | `scanCountUnit` | 库存-扫码计数单位 |
+| `iServiceDurationUnit` | `iServiceDurationUnit` | `serviceDurationUnit` | 商城-服务时长单位 |
+| `supplyDemandPolicy` | `supplyDemandPolicy` | `supplyDemandPolicy` | 制造-供需政策 |
+| `supplyType` | `supplyType` | `supplyType` | 制造-供应类型 |
+| `iValueManageType` | `iValueManageType` | `valueManageType` | 成本-价值管理模式 |
+| `iWeighingMode` | `iWeighingMode` | `weighingMode` | 制造-称重方式 |
+
+### 长整数 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `tenant_id` | `tenant_id` | `tenant` | 租户ID(旧) |
+| `planStrategy` | `planStrategy` | `planStrategy` | 制造-时界 |
+| `uorderDlyFeeRuleId` | `uorderDlyFeeRuleId` | `uorderDlyFeeRuleId` | 订货-运费模板 |
+
+### 数值字段 (49个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `batchPrice` | `batchPrice` | `batchPrice` | 批发价 |
+| `fArrivalAllowErrorLimit` | `fArrivalAllowErrorLimit` | `arrivalAllowErrorLimit` | 到货入库允差上下比例% |
+| `iBatchDouble` | `iBatchDouble` | `batchDouble` | 制造-批量倍增 |
+| `doublePick` | `doublePick` | `doublePick` | 制造-领料倍量 |
+| `measurement_count` | `measurement_count` | `measurementCount` | 计量项目数量 |
+| `compensation_amount` | `compensation_amount` | `compensationAmount` | 赔偿金额 |
+| `molding_time` | `molding_time` | `moldingTime` | 成型时间 |
+| `mold_cavities` | `mold_cavities` | `moldCavities` | 模具腔数 |
+| `depositPercentage` | `depositPercentage` | `depositPercentage` | 商城-预付定金百分比 |
+| `deposits` | `deposits` | `deposits` | 商城-预付定金金额 |
+| `doubleReplenish` | `doubleReplenish` | `doubleReplenish` | 制造-补货倍量 |
+| `iEconomicQuantity` | `iEconomicQuantity` | `economicQuantity` | 制造-经济批量 |
+| `fLowestMarkPrice` | `fLowestMarkPrice` | `fLowestMarkPrice` | 最低零售价 |
+| `fMarkPrice` | `fMarkPrice` | `fMarkPrice` | 建议零售价 |
+| `fMarketPrice` | `fMarketPrice` | `fMarketPrice` | 市场价 |
+| `fNoTaxCostPrice` | `fNoTaxCostPrice` | `fNoTaxCostPrice` | 成本-参考成本 |
+| `fPrimeCosts` | `fPrimeCosts` | `fPrimeCosts` | 采购参考价 |
+| `fSalePrice` | `fSalePrice` | `fSalePrice` | 线上零售价 |
+| `fSettleAccountsRate` | `fSettleAccountsRate` | `fSettleAccountsRate` | 商城-结算费率 |
+| `iFixedQuantity` | `iFixedQuantity` | `fixedQuantity` | 制造-固定批量 |
+| `iFixedWastage` | `iFixedWastage` | `fixedWastage` | 制造-固定损耗量 |
+| `highestStock` | `highestStock` | `highestStock` | 库存-最高库存 |
+| `iDoubleSale` | `iDoubleSale` | `iDoubleSale` | 销售倍量 |
+| `iMinOrderQuantity` | `iMinOrderQuantity` | `iMinOrderQuantity` | 批发-起订量 |
+| `fInStoreExcessLimit` | `fInStoreExcessLimit` | `inStoreExcessLimit` | 库存-入库超量上限% |
+| `fInStoreLessLimit` | `fInStoreLessLimit` | `inStoreLessLimit` | 库存-入库下限比例% |
+| `fInvoiceAllowErrorLimit` | `fInvoiceAllowErrorLimit` | `invoiceAllowErrorLimit` | 开票允差上下比例% |
+| `lInventoryCount` | `lInventoryCount` | `lInventoryCount` | 商城-线上库存量 |
+| `iLeadTimeCoefficient` | `iLeadTimeCoefficient` | `leadTimeCoefficient` | 制造-提前期系数 |
+| `iLeadTimeQuantity` | `iLeadTimeQuantity` | `leadTimeQuantity` | 制造-提前期批量 |
+| `lowestStock` | `lowestStock` | `lowestStock` | 库存-最低库存 |
+| `maxBatchPrice` | `maxBatchPrice` | `maxBatchPrice` | 最高批发价格 |
+| `fMaxPrimeCosts` | `fMaxPrimeCosts` | `maxPrimeCosts` | 最高进价 |
+| `minBatchPrice` | `minBatchPrice` | `minBatchPrice` | 最低批发价格 |
+| `minimumDeposits` | `minimumDeposits` | `minimumDeposits` | 商城-最低定金金额 |
+| `fOutStoreExcessLimit` | `fOutStoreExcessLimit` | `outStoreExcessLimit` | 库存-出库超量上限% |
+| `fOutStoreLessLimit` | `fOutStoreLessLimit` | `outStoreLessLimit` | 库存-出库下限比例% |
+| `fPlanOrderLimit` | `fPlanOrderLimit` | `planOrderLimit` | 计划订货超量上限% |
+| `iPlanProduceLimit` | `iPlanProduceLimit` | `planProduceLimit` | 制造-计划下达生产允超上限% |
+| `produceRate` | `produceRate` | `produceRate` | 生产单位换算率 |
+| `purchase_order_quantity` | `purchase_order_quantity` | `purchaseOrderQuantity` | 采购-采购起订量 |
+| `purchase_times` | `purchase_times` | `purchaseTimes` | 采购-采购倍量 |
+| `iRejectRate` | `iRejectRate` | `rejectRate` | 制造-废品率 |
+| `fRequestOrderLimit` | `fRequestOrderLimit` | `requestOrderLimit` | 请购订货超量上限% |
+| `ropStock` | `ropStock` | `ropStock` | 库存-再订货点 |
+| `safetyStock` | `safetyStock` | `safetyStock` | 库存-安全库存 |
+| `iServiceDuration` | `iServiceDuration` | `serviceDuration` | 商城-服务时长 |
+| `storageLossRate` | `storageLossRate` | `storageLossRate` | 库存-保管损耗率 |
+| `iWastageRate` | `iWastageRate` | `wastageRate` | 制造-损耗率 |
+
+### timestamp (9个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `beUpTime` | `beUpTime` | `beUpTime` | 批发-预约上架时间 |
+| `mallDownTime` | `mallDownTime` | `mallDownTime` | 商城下架时间 |
+| `mallUpTime` | `mallUpTime` | `mallUpTime` | 商城上架时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+| `stop_time` | `stop_time` | `stoptime` | 停用时间 |
+| `uorderDownTime` | `uorderDownTime` | `uorderDownTime` | U订货下架时间 |
+| `uorderUpTime` | `uorderUpTime` | `uorderUpTime` | U订货上架时间 |
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+
+### other (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `production_mode` | `production_mode` | `productionMode` | 制造-生产模式 |
+| `testRule` | `testRule` | `testRule` | 质检-检验规则 |
+
+### multiLanguage (7个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `cDisplayName` | `cDisplayName` | `displayName` | 显示名称 |
+| `metaDescription` | `metaDescription` | `metaDescription` | 商城-搜索简介 |
+| `receiptModel` | `receiptModel` | `receiptModel` | 开票型号 |
+| `receiptName` | `receiptName` | `receiptName` | 开票名称 |
+| `receiptSpec` | `receiptSpec` | `receiptSpec` | 开票规格 |
+| `remark` | `remark` | `remark` | 备注 |
+| `cTitleMemo` | `cTitleMemo` | `titleMemo` | 卖点 |
+
+### UserDefine (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `product_detail_character_def` | `product_detail_character_def` | `productExtendCharacterDef` | 物料详情自定义项 |

@@ -1,0 +1,900 @@
+{
+  "version": 1,
+  "entries": {
+    "raw\\articles\\2026-05-28-bip-frontend-script-mdf.md": {
+      "hash": "sha256:7f4b0e4fa438768ec7439b5b319d184bc5d1c27de4446ef48ce38a8591bbcb1d",
+      "ingested_at": "2026-05-27T16:37:50Z",
+      "source_page": "wiki/sources/2026-05-28-bip-frontend-script-mdf.md"
+    },
+    "raw\\articles\\2026-05-28-bip-backend-script-intro.md": {
+      "hash": "sha256:7ba0a93d78a047d5b122dad2a14df787be93455f4ddba8dc9ac8e4c590165ff8",
+      "ingested_at": "2026-05-27T16:39:21Z",
+      "source_page": "wiki/sources/2026-05-28-bip-backend-script-intro.md"
+    },
+    "raw\\articles\\2026-05-28-bip-entity-operations.md": {
+      "hash": "sha256:9fc2085841776c08b0132048ebcdf7d91cc6d51a83cb543c4750ed2d8be6f90e",
+      "ingested_at": "2026-05-27T16:39:23Z",
+      "source_page": "wiki/sources/2026-05-28-bip-entity-operations.md"
+    },
+    "raw\\articles\\2026-05-28-bip-backend-script-advanced.md": {
+      "hash": "sha256:0995740639375036fd2e6e6ba640eb868972960eece3e593cbeef55dc9a7cbcd",
+      "ingested_at": "2026-05-27T16:40:44Z",
+      "source_page": "wiki/sources/2026-05-28-bip-backend-script-advanced.md"
+    },
+    "raw\\articles\\2026-05-28-bip-api-publish.md": {
+      "hash": "sha256:9977f1c37198d567a5bc4a53a7fb42bafdcb5c8bcd00e71dede03df636dc2e7c",
+      "ingested_at": "2026-05-27T16:40:45Z",
+      "source_page": "wiki/sources/2026-05-28-bip-api-publish.md"
+    },
+    "raw\\articles\\2026-05-28-bip-config-migration.md": {
+      "hash": "sha256:2a21547b872a1cd3ab6dba0841866b2e7b0d65fa0c73d814a84540a18ff49b34",
+      "ingested_at": "2026-05-27T16:56:35Z",
+      "source_page": "wiki/sources/2026-05-28-bip-config-migration.md"
+    },
+    "raw\\articles\\2026-05-28-bip-pro-dev-intro.md": {
+      "hash": "sha256:55ceb0b2f3bf10bd4688d68996a30d9cc4900841ac7a4caa1f8f5fc85d47c9be",
+      "ingested_at": "2026-05-28T12:10:29Z",
+      "source_page": "wiki/sources/2026-05-28-bip-pro-dev-intro.md"
+    },
+    "raw\\articles\\2026-05-28-bip-dev-system.md": {
+      "hash": "sha256:5c3419ef891a99dd8ea228515d5bcf520779228bb0c3c08b9aec2e59f2343ebb",
+      "ingested_at": "2026-05-28T12:17:30Z",
+      "source_page": "wiki/sources/2026-05-28-bip-dev-system.md"
+    },
+    "raw\\articles\\2026-05-28-bip-env-prep.md": {
+      "hash": "sha256:9bd0895dc7aedb8a48fceaf0a60e51af9a874fccce02037bb33d3e743003a05a",
+      "ingested_at": "2026-05-28T12:21:19Z",
+      "source_page": "wiki/sources/2026-05-28-bip-env-prep.md"
+    },
+    "raw\\articles\\2026-05-28-bip-upgrade-yds.md": {
+      "hash": "sha256:2426e1e5043024b3fc00b16498f55e4801ed42f36bcbf3cfbc52b3510830af84",
+      "ingested_at": "2026-05-28T12:26:00Z",
+      "source_page": "wiki/sources/2026-05-28-bip-upgrade-yds.md"
+    },
+    "raw\\articles\\2026-05-28-bip-yds-setup.md": {
+      "hash": "sha256:bd8307a081da072fe44e0475083f0d7323eca27e8fce575ac11031421fc374b8",
+      "ingested_at": "2026-05-28T12:30:10Z",
+      "source_page": "wiki/sources/2026-05-28-bip-yds-setup.md"
+    },
+    "raw\\articles\\2026-05-28-bip-r6-engine-deploy.md": {
+      "hash": "sha256:22ccd81a093069b7e231c846ba7245bd482acf8b9322f1068882b71c5a01a04c",
+      "ingested_at": "2026-05-28T12:38:55Z",
+      "source_page": "wiki/sources/2026-05-28-bip-r6-engine-deploy.md"
+    },
+    "raw\\articles\\2026-05-28-bip-app-creation.md": {
+      "hash": "sha256:96a43c84c1f83c0f3dc279078abfc9f9377d6e96bcc92576e43a1f87c0f29d3e",
+      "ingested_at": "2026-05-28T12:42:15Z",
+      "source_page": "wiki/sources/2026-05-28-bip-app-creation.md"
+    },
+    "raw\\articles\\2026-05-28-bip-dev-entry.md": {
+      "hash": "sha256:1cbf49c164ef23aa9987eee4494b912cd3cc943d112dd6834c82727a4bd6d952",
+      "ingested_at": "2026-05-28T12:45:12Z",
+      "source_page": "wiki/sources/2026-05-28-bip-dev-entry.md"
+    },
+    "raw\\articles\\2026-05-28-bip-app-publish.md": {
+      "hash": "sha256:523ec764a0636926eb54e5e86be3ecba5714c939402c081a6165358731380694",
+      "ingested_at": "2026-05-28T12:48:03Z",
+      "source_page": "wiki/sources/2026-05-28-bip-app-publish.md"
+    },
+    "raw\\articles\\2026-05-28-bip-yds-app-dev.md": {
+      "hash": "sha256:54eee8b6f6d2c8f0deed4527ec30d69402f9916f1738cc5b8aab4d0657d5c8e7",
+      "ingested_at": "2026-05-28T12:50:54Z",
+      "source_page": "wiki/sources/2026-05-28-bip-yds-app-dev.md"
+    },
+    "raw\\articles\\2026-05-28-bip-backend-plugin.md": {
+      "hash": "sha256:cce5547b7f3fffaa981e2591ee2bd3df53dae6a7a60fde6097f2af1ee5c5089c",
+      "ingested_at": "2026-05-28T12:53:02Z",
+      "source_page": "wiki/sources/2026-05-28-bip-backend-plugin.md"
+    },
+    "raw\\articles\\2026-05-28-bip-mdf-frontend.md": {
+      "hash": "sha256:2ee083b452d8d515c7a540e177dd9a25ceff82d3d4ae065ebe93588ae3f83c91",
+      "ingested_at": "2026-05-28T12:59:01Z",
+      "source_page": "wiki/sources/2026-05-28-bip-mdf-frontend.md"
+    },
+    "raw\\articles\\2026-05-28-bip-mdf-example.md": {
+      "hash": "sha256:76b301a3eb3048008ab6eb0b6ca68495f89e6507030118cc4ee7255d33379094",
+      "ingested_at": "2026-05-28T13:14:43Z",
+      "source_page": "wiki/sources/2026-05-28-bip-mdf-example.md"
+    },
+    "raw\\articles\\2026-05-28-bip-ynf-app-dev.md": {
+      "hash": "sha256:cd2c532ad5dd7b4f22310073b26335da41c6c97723493aa059ca95bae344c811",
+      "ingested_at": "2026-05-28T13:19:10Z",
+      "source_page": "wiki/sources/2026-05-28-bip-ynf-app-dev.md"
+    },
+    "raw\\articles\\2026-05-28-bip-ynf-env-setup.md": {
+      "hash": "sha256:455a74e66c6ff5ce96bacb3cb2347c4890d3207e1a1718f8585e8eae090d1ba3",
+      "ingested_at": "2026-05-28T13:21:32Z",
+      "source_page": "wiki/sources/2026-05-28-bip-ynf-env-setup.md"
+    },
+    "raw\\articles\\2026-05-28-bip-ynf-frontend.md": {
+      "hash": "sha256:040ae31bb33b9a017ce792d123924985cf5fb24d5ed9982e09c4a909cfb0354a",
+      "ingested_at": "2026-05-28T13:30:20Z",
+      "source_page": "wiki/sources/2026-05-28-bip-ynf-frontend.md"
+    },
+    "raw\\articles\\2026-05-28-bip-ynf-example.md": {
+      "hash": "sha256:9496181ed35d2009d9fc5d2e228891c67c84e31da0b5343775f6a58e20b94dd7",
+      "ingested_at": "2026-05-28T13:33:53Z",
+      "source_page": "wiki/sources/2026-05-28-bip-ynf-example.md"
+    },
+    "raw\\articles\\2026-05-28-bip-customer-archive-ext.md": {
+      "hash": "sha256:c4e7cf6fe37ce1ca081f4d740368a968280e7ca1648d7ab29672570b67f9d470",
+      "ingested_at": "2026-05-28T13:34:04Z",
+      "source_page": "wiki/sources/2026-05-28-bip-customer-archive-ext.md"
+    },
+    "raw\\articles\\2026-05-28-bip-i18n.md": {
+      "hash": "sha256:1b3e3500bfa79399c9b2370d0103e9d4a8368630235f0e247eff1be96e9d072d",
+      "ingested_at": "2026-05-28T13:34:07Z",
+      "source_page": "wiki/sources/2026-05-28-bip-i18n.md"
+    },
+    "raw\\articles\\2026-05-28-bip-multi-lang-dev.md": {
+      "hash": "sha256:c9d3e0bf848767cc6312898b7e7af01e13cf4f1030bb0d69d493f0d8235a2057",
+      "ingested_at": "2026-05-28T13:37:10Z",
+      "source_page": "wiki/sources/2026-05-28-bip-multi-lang-dev.md"
+    },
+    "raw\\articles\\2026-05-28-bip-exchange-rate.md": {
+      "hash": "sha256:9b8fc5a686e693e305eacc9a9e51122627ac04ba6a8309b70dae374d8a854c03",
+      "ingested_at": "2026-05-28T13:38:55Z",
+      "source_page": "wiki/sources/2026-05-28-bip-exchange-rate.md"
+    },
+    "raw\\articles\\2026-05-28-bip-main-org-config.md": {
+      "hash": "sha256:314a777d9132e4924ec3dfad4af7a9bc8d0337cbb516cad459babe04b3d72905",
+      "ingested_at": "2026-05-28T13:40:40Z",
+      "source_page": "wiki/sources/2026-05-28-bip-main-org-config.md"
+    },
+    "raw\\articles\\2026-05-28-bip-org-management.md": {
+      "hash": "sha256:9bad46c50fba352fe2e2651887a369101188c27cc6badb01c86fe7bf64a1beac",
+      "ingested_at": "2026-05-28T13:41:43Z",
+      "source_page": "wiki/sources/2026-05-28-bip-org-management.md"
+    },
+    "raw\\articles\\2026-05-28-bip-auth-management.md": {
+      "hash": "sha256:3ca1fd9b004e722bca836dade2a8f83d32457d9af286a8877254804f4c223b2d",
+      "ingested_at": "2026-05-28T13:43:12Z",
+      "source_page": "wiki/sources/2026-05-28-bip-auth-management.md"
+    },
+    "raw\\articles\\2026-05-28-bip-field-permission.md": {
+      "hash": "sha256:1beba7f34409d3939ace2aaebdc18769eeaaf4b9ad3bf217c8b20c1913e81e5c",
+      "ingested_at": "2026-05-28T13:45:44Z",
+      "source_page": "wiki/sources/2026-05-28-bip-field-permission.md"
+    },
+    "raw\\articles\\2026-05-28-bip-sjqxkk11.md": {
+      "hash": "sha256:352f724cd9bd73e35fe7045db32877d83f70411c3a0f24cd38d9fb80a6c5dee4",
+      "ingested_at": "2026-05-28T13:45:46Z",
+      "source_page": "wiki/sources/2026-05-28-bip-data-permission.md"
+    },
+    "raw\\articles\\2026-05-28-bip-zzqxkk11.md": {
+      "hash": "sha256:2a0160ae9d257406d70f8726fa282148688a2c1facf8b44929bdc30c817cc5e2",
+      "ingested_at": "2026-05-28T13:45:48Z",
+      "source_page": "wiki/sources/2026-05-28-bip-org-permission.md"
+    },
+    "raw\\articles\\2026-05-28-bip-feature-dev.md": {
+      "hash": "sha256:d8b8374f51d53ed6a9386a5856141662dc687df748e3af64d4171e935122489a",
+      "ingested_at": "2026-05-28T13:47:11Z",
+      "source_page": "wiki/sources/2026-05-28-bip-feature-dev.md"
+    },
+    "raw\\articles\\2026-05-28-bip-data-hierarchy.md": {
+      "hash": "sha256:35621a7721578bbf7781b1b1f59fab92609f694e511795e3e3a4ec25b8b9b734",
+      "ingested_at": "2026-05-28T13:47:13Z",
+      "source_page": "wiki/sources/2026-05-28-bip-data-hierarchy.md"
+    },
+    "raw\\articles\\2026-05-28-bip-cloud-approval.md": {
+      "hash": "sha256:9efa7d1595d4fefcbb4f86b7c5a092a727e8994b52a2795b0e544871481c191b",
+      "ingested_at": "2026-05-28T13:47:14Z",
+      "source_page": "wiki/sources/2026-05-28-bip-cloud-approval.md"
+    },
+    "raw\\articles\\2026-05-28-bip-workflow-dev.md": {
+      "hash": "sha256:d34fe4e57efc91d35839b686b2a90ca551d2f44443aa5ede5ebe908257e15e85",
+      "ingested_at": "2026-05-28T13:47:15Z",
+      "source_page": "wiki/sources/2026-05-28-bip-workflow-dev.md"
+    },
+    "raw\\articles\\2026-05-28-bip-business-flow.md": {
+      "hash": "sha256:85b03df35f813a7c115879cdb9875b8755c3eb2875d2143f28c20bd05dc38719",
+      "ingested_at": "2026-05-28T13:48:37Z",
+      "source_page": "wiki/sources/2026-05-28-bip-business-flow.md"
+    },
+    "raw\\articles\\2026-05-28-bip-dev-push-dev.md": {
+      "hash": "sha256:79d74b21eef61a38e57937b4c7f86e0fbecbb21584e68031f47f7e8e310fd842",
+      "ingested_at": "2026-05-28T13:51:13Z",
+      "source_page": "wiki/sources/2026-05-28-bip-dev-push-dev.md"
+    },
+    "raw\\articles\\2026-05-28-bip-dev-push-std.md": {
+      "hash": "sha256:1309b3fc045d4cfa2885bad00412e7f6a5023cfc914142f5ea602f9cd6f44e45",
+      "ingested_at": "2026-05-28T13:51:15Z",
+      "source_page": "wiki/sources/2026-05-28-bip-dev-push-std.md"
+    },
+    "raw\\articles\\2026-05-28-bip-std-push-dev.md": {
+      "hash": "sha256:be57426cd002c635d652e2111cdbcd9b07366fa9bd13bab499f20e0acfccf937",
+      "ingested_at": "2026-05-28T13:51:16Z",
+      "source_page": "wiki/sources/2026-05-28-bip-std-push-dev.md"
+    },
+    "raw\\articles\\2026-05-28-bip-rule-engine.md": {
+      "hash": "sha256:b106f613402496f2db17a7297eade703d5ddf04bc1e8ca8a03481fbf151e92ee",
+      "ingested_at": "2026-05-28T13:51:17Z",
+      "source_page": "wiki/sources/2026-05-28-bip-rule-engine.md"
+    },
+    "raw\\articles\\2026-05-28-bip-rule-engine-dev.md": {
+      "hash": "sha256:b2e793877d7fdc35936a3ccf33d32a9c12eebd241928b456398d846078e1b191",
+      "ingested_at": "2026-05-28T13:51:18Z",
+      "source_page": "wiki/sources/2026-05-28-bip-rule-engine-dev.md"
+    },
+    "raw\\articles\\2026-05-28-bip-formula-component.md": {
+      "hash": "sha256:491be61112c930c27dad42c1f0dd3259644d2ace675386ae2cc60a8018bf7c6c",
+      "ingested_at": "2026-05-28T13:53:06Z",
+      "source_page": "wiki/sources/2026-05-28-bip-formula-component.md"
+    },
+    "raw\\articles\\2026-05-28-bip-formula-dev.md": {
+      "hash": "sha256:e71d3021fc12a28df7b8ba6d2163f999bff994f88881e2e82a1b47b2bbd654cf",
+      "ingested_at": "2026-05-28T13:53:08Z",
+      "source_page": "wiki/sources/2026-05-28-bip-formula-dev.md"
+    },
+    "raw\\articles\\2026-05-28-bip-ui-template.md": {
+      "hash": "sha256:9b51195cc2b588be84df37d2dc8f67a354c89a5d6763b6f7ecab05af2aded196",
+      "ingested_at": "2026-05-28T14:02:10Z",
+      "source_page": "wiki/sources/2026-05-28-bip-ui-template.md"
+    },
+    "raw\\articles\\2026-05-28-bip-refer-ext-intro.md": {
+      "hash": "sha256:d260ab940d5855d62c82daf617e668e970589fa46c9abe6b50eb57aa8e8ceb26",
+      "ingested_at": "2026-05-28T14:02:11Z",
+      "source_page": "wiki/sources/2026-05-28-bip-refer-ext-intro.md"
+    },
+    "raw\\articles\\2026-05-28-bip-import-workbench.md": {
+      "hash": "sha256:91b01694da200111c2ee2f7da20f5a7c95be0e041a0547d37a03f07707a01102",
+      "ingested_at": "2026-05-28T14:02:12Z",
+      "source_page": "wiki/sources/2026-05-28-bip-import-workbench.md"
+    },
+    "raw\\articles\\2026-05-28-bip-export-workbench.md": {
+      "hash": "sha256:8dd8d807d173055be14b98e47b8dc8f4e2cce033b0d36d310d981c9359a5b8e4",
+      "ingested_at": "2026-05-28T14:02:14Z",
+      "source_page": "wiki/sources/2026-05-28-bip-export-workbench.md"
+    },
+    "raw\\articles\\2026-05-28-bip-cloud-print.md": {
+      "hash": "sha256:53fed0493b734e70a08d1be3a8f611dff90f4ceb35e3f92191643a3b5d7463c7",
+      "ingested_at": "2026-05-28T14:04:30Z",
+      "source_page": "wiki/sources/2026-05-28-bip-cloud-print.md"
+    },
+    "raw\\articles\\2026-05-28-bip-print-ext-dev.md": {
+      "hash": "sha256:ac7782b47074d7086aad70c0f01534fe5cf0c1f3d1bc109981f9f8a83f6aa280",
+      "ingested_at": "2026-05-28T14:04:32Z",
+      "source_page": "wiki/sources/2026-05-28-bip-print-ext-dev.md"
+    },
+    "raw\\articles\\2026-05-28-bip-metadata-bizobj.md": {
+      "hash": "sha256:00f3b4be1380ee7d48ac6ccb10615380789bdfad8d2b6b303c26cdaf929a47ef",
+      "ingested_at": "2026-05-28T14:04:34Z",
+      "source_page": "wiki/sources/2026-05-28-bip-metadata-bizobj.md"
+    },
+    "raw\\articles\\2026-05-28-bip-custom-archive.md": {
+      "hash": "sha256:b621c8628b62c3a62b78d88446fa6733ee242ebaf44ae36041f2cac6e9567574",
+      "ingested_at": "2026-05-28T14:04:36Z",
+      "source_page": "wiki/sources/2026-05-28-bip-custom-archive.md"
+    },
+    "raw\\articles\\2026-05-28-bip-transaction-type.md": {
+      "hash": "sha256:e9d083d415d9e2a29801a6f3d2bfed1e0a6bb68917b24deaf4122bc570b7e5de",
+      "ingested_at": "2026-05-28T14:04:38Z",
+      "source_page": "wiki/sources/2026-05-28-bip-transaction-type.md"
+    },
+    "raw\\articles\\2026-05-28-bip-coding-rules.md": {
+      "hash": "sha256:5c59f0717218a39b9c0373542714bea048ce5c39ae20ac2bea457fa9ee949ba0",
+      "ingested_at": "2026-05-28T14:07:49Z",
+      "source_page": "wiki/sources/2026-05-28-bip-coding-rules.md"
+    },
+    "raw\\articles\\2026-05-28-bip-coding-rules-dev.md": {
+      "hash": "sha256:0764cce8820b3d7c3cfdceb8b8dd6e75295ef953fe941b8fd1a71d0a5ec351a1",
+      "ingested_at": "2026-05-28T14:07:50Z",
+      "source_page": "wiki/sources/2026-05-28-bip-coding-rules-dev.md"
+    },
+    "raw\\notes\\2026-05-29-低代码开发能力介绍.md": {
+      "hash": "sha256:63a6457839b60415e86d78312004d5bdc2858a94681a6b2a9488170d02fae05c",
+      "ingested_at": "2026-05-29T12:37:17Z",
+      "source_page": "wiki/sources/2026-05-29-低代码开发能力介绍.md"
+    },
+    "raw\\notes\\2026-05-29-环境准备.md": {
+      "hash": "sha256:46e077ab538f3a0d9bd106708023a7d80905d3d12f093a282a01084f14953ae8",
+      "ingested_at": "2026-05-29T16:31:03Z",
+      "source_page": "wiki/sources/2026-05-29-环境准备.md"
+    },
+    "raw\\notes\\2026-05-29-单据入门.md": {
+      "hash": "sha256:ea83e661c6e382e9e85eabbde09e7e908f1e784091b0267b8f76eedc5f782f1a",
+      "ingested_at": "2026-05-29T16:31:13Z",
+      "source_page": "wiki/sources/2026-05-29-单据入门.md"
+    },
+    "raw\\notes\\2026-05-29-业务流入门.md": {
+      "hash": "sha256:3d0167f04da35128f617b605f83d9c61445e2d4bdfa4ef3449fd78bdb1884459",
+      "ingested_at": "2026-05-29T16:31:24Z",
+      "source_page": "wiki/sources/2026-05-29-业务流入门.md"
+    },
+    "raw\\notes\\2026-05-29-审批流入门.md": {
+      "hash": "sha256:142041430b5674577d9a8823cc70166d629f3a2110c4dbe341f5be4ec27ea02c",
+      "ingested_at": "2026-05-29T16:31:32Z",
+      "source_page": "wiki/sources/2026-05-29-审批流入门.md"
+    },
+    "raw\\notes\\2026-05-29-应用构建升级版快速入门.md": {
+      "hash": "sha256:2539e1c17d1fffdf3e5318599d6117252edd3857cffcf93ae941854bbe2a0fe8",
+      "ingested_at": "2026-05-29T16:31:41Z",
+      "source_page": "wiki/sources/2026-05-29-应用构建升级版快速入门.md"
+    },
+    "raw\\notes\\2026-05-29-创建应用.md": {
+      "hash": "sha256:0df13fa765605e12592013fa3d6ee75d297be6632f4f68d8fcbcdca82ff39ee8",
+      "ingested_at": "2026-05-29T16:31:50Z",
+      "source_page": "wiki/sources/2026-05-29-创建应用.md"
+    },
+    "raw\\notes\\2026-05-29-对象建模.md": {
+      "hash": "sha256:d917526d5a9105d0420a9adc7a7a11bf44c0e05dfd12e898e133eeabf8b608fb",
+      "ingested_at": "2026-05-29T16:32:04Z",
+      "source_page": "wiki/sources/2026-05-29-对象建模.md"
+    },
+    "raw\\notes\\2026-05-30-系统预置模板.md": {
+      "hash": "sha256:cc29a2caa1aa1db4315c5537c02916ac2942734e5c18433d9eb451b666c51365",
+      "ingested_at": "2026-05-29T16:47:32Z",
+      "source_page": "wiki/sources/2026-05-30-系统预置模板.md"
+    },
+    "raw\\notes\\2026-05-30-页面设计器介绍.md": {
+      "hash": "sha256:1269f627ae82cf3762f2c8c1dce856cc9f1b19c9370924e03558233f71c28e9a",
+      "ingested_at": "2026-05-29T16:47:39Z",
+      "source_page": "wiki/sources/2026-05-30-页面设计器介绍.md"
+    },
+    "raw\\notes\\2026-05-30-参照页面建模.md": {
+      "hash": "sha256:36c283ffa58717dcc41a957cb9a7a528fdca6e28e389fad45e9d0d43b278d625",
+      "ingested_at": "2026-05-29T16:47:47Z",
+      "source_page": "wiki/sources/2026-05-30-参照页面建模.md"
+    },
+    "raw\\notes\\2026-05-30-公式.md": {
+      "hash": "sha256:14e005a3bc64bf6a2c243064baccae83b781c640663d29bf3e8efd255c191894",
+      "ingested_at": "2026-05-29T16:47:51Z",
+      "source_page": "wiki/sources/2026-05-30-公式.md"
+    },
+    "raw\\notes\\2026-05-30-业务流.md": {
+      "hash": "sha256:73b91c9f8f8e00bedae699c724ef201bb9d724e057eb5c29774da937bba76fb3",
+      "ingested_at": "2026-05-29T16:51:49Z",
+      "source_page": "wiki/sources/2026-05-30-业务流.md"
+    },
+    "raw\\notes\\2026-05-30-API发布.md": {
+      "hash": "sha256:69fb11da3ee44bb2f8b98e09d2c03f4c746cedb1de949b5ab92cb31384322b83",
+      "ingested_at": "2026-05-29T16:51:52Z",
+      "source_page": "wiki/sources/2026-05-30-API发布.md"
+    },
+    "raw\\notes\\2026-05-30-发布管理.md": {
+      "hash": "sha256:474903a3b11bef174a805bfae3853c75a1f34972bc9120361e3e364993d1d9be",
+      "ingested_at": "2026-05-29T16:51:57Z",
+      "source_page": "wiki/sources/2026-05-30-发布管理.md"
+    },
+    "raw\\notes\\2026-05-30-配置迁移.md": {
+      "hash": "sha256:23ff62ab7be37ac8f4d7df5aa043ec193b95b3ed2dc3ac764c60f5b4822a5149",
+      "ingested_at": "2026-05-29T16:52:01Z",
+      "source_page": "wiki/sources/2026-05-30-配置迁移.md"
+    },
+    "raw\\notes\\2026-05-30-打印模板.md": {
+      "hash": "sha256:74d931083b913cd24435ea074f196c54b7456a336534eab06726ea1e8fc638ba",
+      "ingested_at": "2026-05-29T16:52:05Z",
+      "source_page": "wiki/sources/2026-05-30-打印模板.md"
+    },
+    "raw\\notes\\2026-05-30-聚合及数学公式使用.md": {
+      "hash": "sha256:83199d15552145dce7d5a97245e87c2bba884cb5df8fc88c8bbbab0dbcfddc53",
+      "ingested_at": "2026-05-29T16:52:09Z",
+      "source_page": "wiki/sources/2026-05-30-聚合及数学公式使用.md"
+    },
+    "raw\\notes\\2026-05-30-字符串及时间公式.md": {
+      "hash": "sha256:bf983b62e3c36528869d2ade8e424298015dcdf78c9d7daf5c668f9a328fd5b6",
+      "ingested_at": "2026-05-29T16:52:12Z",
+      "source_page": "wiki/sources/2026-05-30-字符串及时间公式.md"
+    },
+    "raw\\notes\\2026-05-30-系统及业务函数使用.md": {
+      "hash": "sha256:d3235030be28a506b319e96c47eb179329eb93ae36b57a5b4a1f8aba508e20c9",
+      "ingested_at": "2026-05-29T16:52:16Z",
+      "source_page": "wiki/sources/2026-05-30-系统及业务函数使用.md"
+    },
+    "raw\\notes\\2026-05-30-数据权限.md": {
+      "hash": "sha256:69b57f0787259f1860557f0c44197fd9c8f9824760dac09999f028e3a1955fc4",
+      "ingested_at": "2026-05-29T16:52:19Z",
+      "source_page": "wiki/sources/2026-05-30-数据权限.md"
+    },
+    "raw\\notes\\2026-05-30-应用构建升级版操作指南.md": {
+      "hash": "sha256:616deedfde8aeb0a355c9dadb78c15a0cbfdbff7e7805eb74d5d46d31f78492b",
+      "ingested_at": "2026-05-29T16:52:24Z",
+      "source_page": "wiki/sources/2026-05-30-应用构建升级版操作指南.md"
+    },
+    "raw\\notes\\2026-05-30-入门必读.md": {
+      "hash": "sha256:658983971d2f5f0d1c97761658fbe7a59169eac41823b05d5b82f6482cd63a3e",
+      "ingested_at": "2026-05-29T16:55:33Z",
+      "source_page": "wiki/sources/2026-05-30-入门必读.md"
+    },
+    "raw\\notes\\2026-05-30-生命周期和监听事件.md": {
+      "hash": "sha256:a9a6490962f2b2f00e9e670396784e5229bfa13d88bee16482755b02e76b4ed6",
+      "ingested_at": "2026-05-29T16:55:38Z",
+      "source_page": "wiki/sources/2026-05-30-生命周期和监听事件.md"
+    },
+    "raw\\notes\\2026-05-30-表格模型GridModel.md": {
+      "hash": "sha256:58933dfd0ab32abfc2f7132f370e26dc74d2804a8746b6e9f56b9bbb7aaceffb",
+      "ingested_at": "2026-05-29T16:55:43Z",
+      "source_page": "wiki/sources/2026-05-30-表格模型GridModel.md"
+    },
+    "raw\\notes\\2026-05-30-树模型TreeModel.md": {
+      "hash": "sha256:7cea5ec9ea0f8a21bb14dfb58bdf2433f5879c4c4c8f18d464e8be9fa803422a",
+      "ingested_at": "2026-05-29T17:01:13Z",
+      "source_page": "wiki/sources/2026-05-30-树模型TreeModel.md"
+    },
+    "raw\\notes\\2026-05-30-枚举模型ListModel.md": {
+      "hash": "sha256:ad821089611c22e4d8236fd0ef7a722c687d9a27b5854cedc9d44dffb6b9c909",
+      "ingested_at": "2026-05-29T17:01:14Z",
+      "source_page": "wiki/sources/2026-05-30-枚举模型ListModel.md"
+    },
+    "raw\\notes\\2026-05-30-过滤模型FilterModel.md": {
+      "hash": "sha256:6efd9c2b9214a047594c654d57b2319303803128a73231a93b502ea4d4b1c64c",
+      "ingested_at": "2026-05-29T17:01:15Z",
+      "source_page": "wiki/sources/2026-05-30-过滤模型FilterModel.md"
+    },
+    "raw\\notes\\2026-05-30-参照模型ReferModel.md": {
+      "hash": "sha256:119eb919a226d901bc7dc37e5c16bce17dcd98aa545121e3dfcdfee7605deb6a",
+      "ingested_at": "2026-05-29T17:01:17Z",
+      "source_page": "wiki/sources/2026-05-30-参照模型ReferModel.md"
+    },
+    "raw\\notes\\2026-05-30-标签模型TagModel.md": {
+      "hash": "sha256:74d69b1fe2a53afd6c875b64fce337cb9a5c3f2136d53392c38de1f7faf48b9d",
+      "ingested_at": "2026-05-29T17:01:18Z",
+      "source_page": "wiki/sources/2026-05-30-标签模型TagModel.md"
+    },
+    "raw\\notes\\2026-05-30-工具类.md": {
+      "hash": "sha256:8ab433d66adad114e69d2f13e5ca6286a9b6e70c2cbcd18950800f538b79f03f",
+      "ingested_at": "2026-05-29T17:01:20Z",
+      "source_page": "wiki/sources/2026-05-30-工具类.md"
+    },
+    "raw\\notes\\2026-05-30-上下文.md": {
+      "hash": "sha256:61c6f047a9423572f8830bf05c1f4682081f0170ca2ec582c18005222c2b5982",
+      "ingested_at": "2026-05-29T17:01:21Z",
+      "source_page": "wiki/sources/2026-05-30-上下文.md"
+    },
+    "raw\\notes\\2026-05-30-模态框.md": {
+      "hash": "sha256:d46ec45a3702efa41e60fba1f7637117ba5b69ffe5f5a667415c6a5d948dcd08",
+      "ingested_at": "2026-05-29T17:02:11Z",
+      "source_page": "wiki/sources/2026-05-30-模态框.md"
+    },
+    "raw\\notes\\2026-05-30-前端开发场景示例.md": {
+      "hash": "sha256:e8c6d74f560e3c86994bde9581e0958d1b835f0a97f2fcd6a11a903822667797",
+      "ingested_at": "2026-05-29T17:02:12Z",
+      "source_page": "wiki/sources/2026-05-30-前端开发场景示例.md"
+    },
+    "raw\\notes\\2026-05-30-入门必读-后端.md": {
+      "hash": "sha256:72cc1d4eeb8aea44cf72cb73dfa3748193139c92ea54e3a0bdf4c3791f7576fe",
+      "ingested_at": "2026-05-29T17:06:06Z",
+      "source_page": "wiki/sources/2026-05-30-入门必读-后端.md"
+    },
+    "raw\\notes\\2026-05-30-后端脚本进阶开发.md": {
+      "hash": "sha256:45b62ebf8739696c1ed17c0b2690816fa3dda7dd910ed9f67d52efb6c369732f",
+      "ingested_at": "2026-05-29T17:06:14Z",
+      "source_page": "wiki/sources/2026-05-30-后端脚本进阶开发.md"
+    },
+    "raw\\notes\\2026-05-30-实体操作.md": {
+      "hash": "sha256:bc0050b4ffae28c2a1b3d039312464787fc0dd4538447e224dcb77de43ebf56a",
+      "ingested_at": "2026-05-29T17:11:12Z",
+      "source_page": "wiki/sources/2026-05-30-实体操作.md"
+    },
+    "raw\\notes\\2026-05-30-客户档案扩展开发.md": {
+      "hash": "sha256:024f01115ec96686f5b0caae32214cfeb57bf50adc563b02bdc32a7e3681d3c1",
+      "ingested_at": "2026-05-29T17:11:13Z",
+      "source_page": "wiki/sources/2026-05-30-客户档案扩展开发.md"
+    },
+    "raw\\notes\\2026-05-30-其他扩展技巧.md": {
+      "hash": "sha256:da638009d54d966b76607b556511d84385763b416491e720015d5ac76ed78fba",
+      "ingested_at": "2026-05-29T17:11:15Z",
+      "source_page": "wiki/sources/2026-05-30-其他扩展技巧.md"
+    },
+    "raw\\notes\\2026-05-30-应用构建升级版开发指南.md": {
+      "hash": "sha256:129029d85075768e79fbd33838bc55a924cfe33d2d278d686d3af355a6c6b21f",
+      "ingested_at": "2026-05-29T17:11:16Z",
+      "source_page": "wiki/sources/2026-05-30-应用构建升级版开发指南.md"
+    },
+    "raw\\notes\\2026-05-30-子表控制行按钮显示.md": {
+      "hash": "sha256:5403ba543d1cd5f856caaa82975b803237bcd71e700303a13d0e87a94396a382",
+      "ingested_at": "2026-05-29T17:30:33Z",
+      "source_page": "wiki/sources/2026-05-30-子表控制行按钮显示.md"
+    },
+    "raw\\notes\\2026-05-30-自建参照控制数据权限.md": {
+      "hash": "sha256:6c6631d242b846d000aff3f150ce91523c19de1df9a756942f71c891a7775052",
+      "ingested_at": "2026-05-29T17:34:57Z",
+      "source_page": "wiki/sources/2026-05-30-自建参照控制数据权限.md"
+    },
+    "raw\\notes\\2026-05-30-左树右卡左树过滤.md": {
+      "hash": "sha256:9750d57125d4f22a2dfd064a924a822e6a4b95fdc34db903283d8e84bb811b4a",
+      "ingested_at": "2026-05-29T17:34:58Z",
+      "source_page": "wiki/sources/2026-05-30-左树右卡左树过滤.md"
+    },
+    "raw\\notes\\2026-05-30-YDS下载脚本报NULL异常.md": {
+      "hash": "sha256:d9c438c20c8bd8f64177fad85d64f1d5e8f0a3b969e18a6c501d6cac26036f2c",
+      "ingested_at": "2026-05-29T17:37:16Z",
+      "source_page": "wiki/sources/2026-05-30-YDS下载脚本报NULL异常.md"
+    },
+    "raw\\notes\\2026-05-30-详情导出排序.md": {
+      "hash": "sha256:67110fe311fb609d05b9809a6d138e412e0fd23a36972c31b2e0fc46bbec05c9",
+      "ingested_at": "2026-05-29T17:38:21Z",
+      "source_page": "wiki/sources/2026-05-30-详情导出排序.md"
+    },
+    "raw\\notes\\2026-05-30-卡片表格自动增行.md": {
+      "hash": "sha256:a42b6a1e9e476af60aa575abab91146c59f64665d3e7e464c765bb0be2932426",
+      "ingested_at": "2026-05-29T17:38:23Z",
+      "source_page": "wiki/sources/2026-05-30-卡片表格自动增行.md"
+    },
+    "raw\\notes\\2026-05-30-自定义按钮防止重复点击.md": {
+      "hash": "sha256:ea0af1ffd8d6db5eb0e6aebab4775dbf7c402d2db63be05b21a35f792d548ec8",
+      "ingested_at": "2026-05-29T17:39:01Z",
+      "source_page": "wiki/sources/2026-05-30-自定义按钮防止重复点击.md"
+    },
+    "raw\\notes\\2026-05-30-全局缓存Cache.md": {
+      "hash": "sha256:bef1d254661dcd417aa9dba893711950f2908f82d883d9d7e1003b6dfe691a6e",
+      "ingested_at": "2026-05-29T17:39:24Z",
+      "source_page": "wiki/sources/2026-05-30-全局缓存Cache.md"
+    },
+    "raw\\notes\\2026-05-30-网络请求Proxy.md": {
+      "hash": "sha256:82e9350ae84e5dc5badba14d27d137a0b5837eb798b8497240dbd7bb7452b22e",
+      "ingested_at": "2026-05-29T17:40:31Z",
+      "source_page": "wiki/sources/2026-05-30-网络请求Proxy.md"
+    },
+    "raw\\notes\\2026-05-30-常用工具Utils.md": {
+      "hash": "sha256:b127d44122d22ea3cfbf9b10f41fda9677294c86f5698919833ab2cde755dcc1",
+      "ingested_at": "2026-05-29T17:43:29Z",
+      "source_page": "wiki/sources/2026-05-30-常用工具Utils.md"
+    },
+    "raw\\notes\\2026-05-30-获取上下文方法.md": {
+      "hash": "sha256:b0b8b774df6679160d44a5caa90966bfdd327a1d7b7d22e37671b67ae4fc0945",
+      "ingested_at": "2026-05-29T17:43:31Z",
+      "source_page": "wiki/sources/2026-05-30-获取上下文方法.md"
+    },
+    "raw\\notes\\2026-05-30-提示信息ToastConfirm.md": {
+      "hash": "sha256:162d30cf689420d9af99b768eeff5e7aab104c2553320a2e2dcb80fe8afdf0a8",
+      "ingested_at": "2026-05-29T17:43:32Z",
+      "source_page": "wiki/sources/2026-05-30-提示信息ToastConfirm.md"
+    },
+    "raw\\notes\\2026-05-30-弹窗Modal.md": {
+      "hash": "sha256:d7fb60e3f28321ddd4580e6bba55e1634b1c7ab3f52c2de82dc221cbd0f8fb72",
+      "ingested_at": "2026-05-29T17:43:34Z",
+      "source_page": "wiki/sources/2026-05-30-弹窗Modal.md"
+    },
+    "raw\\notes\\2026-05-30-页面管理Page.md": {
+      "hash": "sha256:9d390278dcc2e65e211c802bd9cabc2970a8cfab029fb7854e3e3fd9c0863b7b",
+      "ingested_at": "2026-05-29T17:43:36Z",
+      "source_page": "wiki/sources/2026-05-30-页面管理Page.md"
+    },
+    "raw\\notes\\2026-05-30-参照单选引用选择参考.md": {
+      "hash": "sha256:b4460ae9ac14c973bf9c625a61f4e2e7556b5626321265ee2d85947515797fd9",
+      "ingested_at": "2026-05-29T17:49:13Z",
+      "source_page": "wiki/sources/2026-05-30-参照单选引用选择参考.md"
+    },
+    "raw\\notes\\2026-05-30-上下文Context.md": {
+      "hash": "sha256:a8b5d94a7257b3df6829f9c24bf7e36db9f4af049954338c7b8460617f1e5dcb",
+      "ingested_at": "2026-05-29T17:49:14Z",
+      "source_page": "wiki/sources/2026-05-30-上下文Context.md"
+    },
+    "raw\\notes\\2026-05-30-白名单.md": {
+      "hash": "sha256:6105e3cf70464c0d4693e8a72e0b94430955cfcc9a43002862b246cdb9274e0f",
+      "ingested_at": "2026-05-29T17:49:15Z",
+      "source_page": "wiki/sources/2026-05-30-白名单.md"
+    },
+    "raw\\notes\\2026-05-30-新增字段后保存不上.md": {
+      "hash": "sha256:8d6d3d7116c6158701c356b95270013389d543f376b6c5fc2fad9577499d3cdf",
+      "ingested_at": "2026-05-29T17:49:17Z",
+      "source_page": "wiki/sources/2026-05-30-新增字段后保存不上.md"
+    },
+    "raw\\notes\\2026-05-30-常见入口类.md": {
+      "hash": "sha256:c1eaa1e26dba16c3be849ac85cee6336371f48c32989bcc29e43c01a2b1a124e",
+      "ingested_at": "2026-05-29T17:49:18Z",
+      "source_page": "wiki/sources/2026-05-30-常见入口类.md"
+    },
+    "raw\\notes\\2026-05-30-获取开放平台Token.md": {
+      "hash": "sha256:792a3e9681713123e97bbb6607f5460e50d133514c8236da76207a01b1762f31",
+      "ingested_at": "2026-05-29T17:49:42Z",
+      "source_page": "wiki/sources/2026-05-30-获取开放平台Token.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-前后端调试技巧.md": {
+      "hash": "sha256:7e8741b95002b6432170d2fefa7915746a0ae63b543bade57e658e74bf15b550",
+      "ingested_at": "2026-05-29T18:04:52Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-前后端调试技巧.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-开发环境搭建.md": {
+      "hash": "sha256:2d11159b9fe6aa4a872d09193460862bf6e89adffef2037795587b293ce88153",
+      "ingested_at": "2026-05-29T18:04:53Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-开发环境搭建.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-数据库设计及SQL规范.md": {
+      "hash": "sha256:43e9b9d1a8e6f5b62055ea28bcd44ad0218ad54717bbc5c3d8ef87c26d820e57",
+      "ingested_at": "2026-05-29T18:04:55Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-数据库设计及SQL规范.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-前言.md": {
+      "hash": "sha256:f3cab49da175bce09f11bba9a8ab70c6b7c254409c6ee3663d2688fc096474df",
+      "ingested_at": "2026-05-29T18:04:56Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-前言.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-总体架构.md": {
+      "hash": "sha256:79fa8b44203d301bf5894f229b01b3a11175b369baae6d5c7a4236460450121f",
+      "ingested_at": "2026-05-29T18:04:57Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-总体架构.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-Java编码规范.md": {
+      "hash": "sha256:326a6861d135ccc47cc2fbae19523c0df8bdbc2c88e76296355c769b89cd27f3",
+      "ingested_at": "2026-05-29T18:04:59Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-Java编码规范.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-系统升级.md": {
+      "hash": "sha256:f4a80cfa201312289555a9d0ed0a042a965c580098ebaa21ee1e4879c6b52469",
+      "ingested_at": "2026-05-29T18:05:00Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-系统升级.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-多语言.md": {
+      "hash": "sha256:35fad8940adde6b4e832ad6fc9cd416b11e1d51d5e692f222821614358314890",
+      "ingested_at": "2026-05-29T18:05:01Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-多语言.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-常用数据表.md": {
+      "hash": "sha256:6b545f5db04c46a2fcf0efc41e15d689b8734172acd9b03fb6f4733e796344fb",
+      "ingested_at": "2026-05-29T18:05:03Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-常用数据表.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-正则表达式.md": {
+      "hash": "sha256:541120dcf04575f8a100a5a36f1b877e04704d2f8facd62e22399821870db304",
+      "ingested_at": "2026-05-29T18:05:04Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-正则表达式.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-业务参数设置.md": {
+      "hash": "sha256:a7ad2a20e72d796e3f4e53b09a81f0841d4c3a422cbcb42a72eb0bfc1900c6bb",
+      "ingested_at": "2026-05-29T18:26:08Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-业务参数设置.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-预警.md": {
+      "hash": "sha256:5fc990442a022185aeb4efc9b13afe7eee4d84887d1863225c13085bd9b342e9",
+      "ingested_at": "2026-05-29T18:26:09Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-预警.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-参照.md": {
+      "hash": "sha256:cf3f27854502b23710da5c46e9f480ac6a38a112b106d6848ed0af3f7cb241f0",
+      "ingested_at": "2026-05-29T18:26:11Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-参照.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-元数据建模.md": {
+      "hash": "sha256:503bb66c4cdd0c621ec1a860679fed37be5c50758e653177301c4e009c34d2e9",
+      "ingested_at": "2026-05-29T18:26:12Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-元数据建模.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-小应用小部件.md": {
+      "hash": "sha256:38a7fbaf4d9c4d2d63c3f84b1b4b2b174d491f50596c24a95a1a66c8aa9861a6",
+      "ingested_at": "2026-05-29T18:26:14Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-小应用小部件.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-ES6与React基础.md": {
+      "hash": "sha256:d6c72b87dec4082e221a55e18fc870b28bd568803ac91c6cbb6982e969dbaa1d",
+      "ingested_at": "2026-05-29T18:26:15Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-ES6与React基础.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-模板设置.md": {
+      "hash": "sha256:82045129c148dd3426ce99673929f5a00e1812fdc1c89c5521c46143dded6372",
+      "ingested_at": "2026-05-29T18:26:16Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-模板设置.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-自定义项开发及配置.md": {
+      "hash": "sha256:8b01ec72f2799ca4148969408033ee68316a1d490693581de5fea319ec2ac749",
+      "ingested_at": "2026-05-29T18:26:17Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-自定义项开发及配置.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-公式.md": {
+      "hash": "sha256:b7ffe433d1b0f02f2ed567e524e97c2639cde9ea45a4a4b5c34941cf18541495",
+      "ingested_at": "2026-05-29T18:26:19Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-公式.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-平台常用高阶组件.md": {
+      "hash": "sha256:d9eee5b9b485e95d74787132a5c3de18e2f6ef76c858125cfb501c92879f6c97",
+      "ingested_at": "2026-05-29T18:26:20Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-平台常用高阶组件.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-输出及打印.md": {
+      "hash": "sha256:96154608ffa8b48ad6022fbf28ae08e6f7efcac23df4b01622e22bd853c09dfb",
+      "ingested_at": "2026-05-29T18:26:22Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-输出及打印.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-基础数据常用接口.md": {
+      "hash": "sha256:0378d76bd7ec3170095599b26d90d8740678d84eb8177a44d943ed9870561c6e",
+      "ingested_at": "2026-05-29T18:26:23Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-基础数据常用接口.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-平台常用基础组件.md": {
+      "hash": "sha256:15f18a7e91e05bf87a71552a0a2e28a7a27605d3ee75701fd990f235e36fe12c",
+      "ingested_at": "2026-05-29T18:26:25Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-平台常用基础组件.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-业务日志.md": {
+      "hash": "sha256:6e907dfdb0c9d63dd3002e332e8efbdb270311b3fae58ce84958a3b8a2ffb0a1",
+      "ingested_at": "2026-05-29T18:26:26Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-业务日志.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-拉单.md": {
+      "hash": "sha256:f7c1c5a757ecdbad400ea7f45dc9bc968660557432ce75d75f4c216499df2ded",
+      "ingested_at": "2026-05-29T18:32:30Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-拉单.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-交易类型扩展.md": {
+      "hash": "sha256:ef2e1a5933940c94f118947de662b96fd6080d19fe14caf52cbc213355d2ebb4",
+      "ingested_at": "2026-05-29T18:32:32Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-交易类型扩展.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-编码规则.md": {
+      "hash": "sha256:bae88570c4c05a936f625427189aab54d7a9f303384b32ef8d26180bd8f1f15f",
+      "ingested_at": "2026-05-29T18:32:34Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-编码规则.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-流程平台概述.md": {
+      "hash": "sha256:b2d35883daaf4eb80c4f79a0a2a6cb56c304fa45cee3ece558be2ca8524d91be",
+      "ingested_at": "2026-05-29T18:32:36Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-流程平台概述.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-业务流开发介绍.md": {
+      "hash": "sha256:5778d2f8c7b6aa28af66f3fbef0a73279dd33eca503b5fac692361cf44a0d07f",
+      "ingested_at": "2026-05-29T18:32:37Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-业务流开发介绍.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-审批流开发介绍.md": {
+      "hash": "sha256:05963fd4a8fce4be5f50eb108ede64a51c7c265dbb8ac0f9e5d758aa0e50b1d9",
+      "ingested_at": "2026-05-29T18:32:39Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-审批流开发介绍.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-OpenAPI.md": {
+      "hash": "sha256:4917377b5627d5e23bfdcd4ed36af3338cbb233f1e3c286445c9e71ebeaf06f2",
+      "ingested_at": "2026-05-29T18:32:41Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-OpenAPI.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-单点登录.md": {
+      "hash": "sha256:58a9248e45dc6fdd69a42248c69c93b134b454df6c94fe0923d65f214019c7ee",
+      "ingested_at": "2026-05-29T18:32:42Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-单点登录.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-业务插件.md": {
+      "hash": "sha256:d6e26d068be17dcca5977d80057fcdbe479de6c637fe9d6d73fa3463038cc7d0",
+      "ingested_at": "2026-05-29T18:32:44Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-业务插件.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-数据报表开发.md": {
+      "hash": "sha256:89899a678e5e3a8454d3ffc05d55a5059880bf391c77f238d6efc1104dcc9a41",
+      "ingested_at": "2026-05-29T18:32:46Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-数据报表开发.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-导入导出.md": {
+      "hash": "sha256:a7ce0dd556137e6024627ab2f3ac7fbd951e826e2709f0f550e7333097770707",
+      "ingested_at": "2026-05-29T18:32:47Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-导入导出.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-业务消息.md": {
+      "hash": "sha256:34f5937a24a1745948820152b2e74a6caeb85c7046440b0dd55a4eed4b98deed",
+      "ingested_at": "2026-05-29T18:32:49Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-业务消息.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-外部交换平台.md": {
+      "hash": "sha256:101a0f0b284c157bc0b3a100d504556514e3fadb0300dc824ae70ade14af9f00",
+      "ingested_at": "2026-05-29T18:32:51Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-外部交换平台.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-后台任务.md": {
+      "hash": "sha256:957838bfbcf8f35accf8f909db015639283e3c643e8facac27ccd190f766f88a",
+      "ingested_at": "2026-05-29T18:32:52Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-后台任务.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-数据权限.md": {
+      "hash": "sha256:6b86f92c398bff0a60af73820159032717e8bd9cc38b16d21a42f4145f2af19e",
+      "ingested_at": "2026-05-29T18:32:54Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-数据权限.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-管控模式.md": {
+      "hash": "sha256:24b9f4205d330d745ff2ca5a02395ada62ff1a91e781cd14d69b7cda19ebf691",
+      "ingested_at": "2026-05-29T18:32:56Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-管控模式.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-Action鉴权注册.md": {
+      "hash": "sha256:77302f881351ff4ff2461a69ff435ffe4dfc92f0239cd0949f4b7d3968f60886",
+      "ingested_at": "2026-05-29T18:32:57Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-Action鉴权注册.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-分层开发总览.md": {
+      "hash": "sha256:53cb6882d27d332b53feabb24603895ae164921f1a6d801fc05711b2e516e566",
+      "ingested_at": "2026-05-29T18:55:57Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-分层开发总览.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-前端多层扩展.md": {
+      "hash": "sha256:bec43b40a1d7d29afde57ff6bd5baeca722ee9154e00f7fcd055c71fb5e5f5a0",
+      "ingested_at": "2026-05-29T18:55:59Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-前端多层扩展.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-后端BP业务规则扩展.md": {
+      "hash": "sha256:88cdc4886f3bad47330793e7b3ac11b27af1b50384368a607be19c597920114f",
+      "ingested_at": "2026-05-29T18:56:01Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-后端BP业务规则扩展.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-流程扩展开发.md": {
+      "hash": "sha256:b38f57d56d2d34441441f0cb68db7143d69857f5a522ffc4b079cc2c732e7742",
+      "ingested_at": "2026-05-29T18:56:02Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-流程扩展开发.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-场景化开发.md": {
+      "hash": "sha256:07db8974dc90278a17c49c5b6542d8ba85e60defb84ef6f6a50b8a5bfd81e618",
+      "ingested_at": "2026-05-29T18:56:04Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-场景化开发.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-云原生及NCC分布式事务.md": {
+      "hash": "sha256:ef5cf5c978135332a82d9884238ef5255f4d2c1ff6e0538cfc38fc6102039cbc",
+      "ingested_at": "2026-05-29T18:56:06Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-云原生及NCC分布式事务.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-如何导脚本.md": {
+      "hash": "sha256:51af6bc30ab2cfeb680401fc5d1abdeed2a46653537f06ebdf6f9d7fcc6b22fd",
+      "ingested_at": "2026-05-29T18:56:07Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-如何导脚本.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-移动应用开发.md": {
+      "hash": "sha256:4afcf7f408b1a322779c3eace81be8e218de6eaa9916005738c72b038c538a72",
+      "ingested_at": "2026-05-29T18:56:09Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-移动应用开发.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-主从单据开发.md": {
+      "hash": "sha256:211279d1811af2b002f4900f427720f72932a34fca369ec46f5a7f0c3769f8f1",
+      "ingested_at": "2026-05-29T18:56:11Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-主从单据开发.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-树表单据开发.md": {
+      "hash": "sha256:3afe3cbf2063f1d1b460355e2c4edefd42f1e0f4402243d015d010e94ebcf315",
+      "ingested_at": "2026-05-29T18:56:12Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-树表单据开发.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-树卡单据开发.md": {
+      "hash": "sha256:84e0e1ad9acced630c47668cb7a176ac86e73eb6f45f90b7a1600b7f79c6ac75",
+      "ingested_at": "2026-05-29T18:56:14Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-树卡单据开发.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-低代码平台总体介绍.md": {
+      "hash": "sha256:60e01c916d201bb7b3a3b4d12ef77685bacb6b37c4237ad6a5a935113019cab2",
+      "ingested_at": "2026-05-29T18:56:16Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-低代码平台总体介绍.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-低代码与标品代码对比.md": {
+      "hash": "sha256:3f360862f3fd1e83b9b97827506359979d7d61b036efd16473781339f5f62347",
+      "ingested_at": "2026-05-29T18:56:17Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-低代码与标品代码对比.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-单表单据开发.md": {
+      "hash": "sha256:04900d2b308a0a2cc6a936db22061e08393ede80a091546478a622674f79932a",
+      "ingested_at": "2026-05-29T18:56:19Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-单表单据开发.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-多版本多时区多币种.md": {
+      "hash": "sha256:41a060efc3d36cb8ad44d75aefb73df170f1df6d7a4b3b09523827ca9e36776c",
+      "ingested_at": "2026-05-29T18:56:21Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-多版本多时区多币种.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-业务形态开发介绍.md": {
+      "hash": "sha256:0f4f00c2aebdbadbd6a785b86e094c41fba86965c62636044bbb23ec92bc9f4d",
+      "ingested_at": "2026-05-29T18:56:22Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-业务形态开发介绍.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-常见问题100问.md": {
+      "hash": "sha256:8b714cb61afad6079fad5ca37d0c014dd33cc629236f1cf77f890cc2d29a1a49",
+      "ingested_at": "2026-05-29T19:03:29Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-常见问题100问.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-IUFO函数开发实战.md": {
+      "hash": "sha256:cafce933bcb1d575b605f2df770e528c5217843e01adb9f5ccaead0b5fed79df",
+      "ingested_at": "2026-05-29T19:03:31Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-IUFO函数开发实战.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-财务自助分析开发实战.md": {
+      "hash": "sha256:462fa4e7cd47452357fa25c3964e8d140964ae261ad29647f5fb354a6b25feff",
+      "ingested_at": "2026-05-29T19:03:32Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-财务自助分析开发实战.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-主子开发实战.md": {
+      "hash": "sha256:f74be1d32b9aee0bf4655851d60ff8ddf03d2a5e08d1a385d289bd1141b886fb",
+      "ingested_at": "2026-05-29T19:03:34Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-主子开发实战.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-基本档案开发实战.md": {
+      "hash": "sha256:642bee40042acf399ffd7ca299603c10076d4d16e3568884959a81a557a752b1",
+      "ingested_at": "2026-05-29T19:03:36Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-基本档案开发实战.md"
+    },
+    "raw\\notes\\2026-05-30-NCC-UFIND函数开发实战.md": {
+      "hash": "sha256:fa60b0109cdaf368abbbf3f44796ceeccb399443e272599dc773fa06badda3fa",
+      "ingested_at": "2026-05-29T19:03:37Z",
+      "source_page": "wiki/sources/2026-05-30-NCC-UFIND函数开发实战.md"
+    }
+  }
+}

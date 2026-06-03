@@ -12,30 +12,80 @@ source_type: api_response
 
 # 累进税率 (`archive.taxArchives.progressiveTaxRate`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `progressive_tax_rate` | 应用: `DPMTAX` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`progressive_tax_rate` | domain：`yonbip-fi-taxpubdoc` | 应用：`DPMTAX` | 业务对象ID：`eef18317-c20c-46f8-9408-416f8e938a19`
 
-## 属性（13 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `accumulateTaxInBegin` | accumulateTaxInBegin | `accumulate_tax_in_begin` | Decimal | `number` |
-| 2 | `accumulateTaxInEnd` | accumulateTaxInEnd | `accumulate_tax_in_end` | Decimal | `number` |
-| 3 | `progressiveTaxRate` | progressiveTaxRate | `progressive_tax_rate` | Decimal | `number` |
-| 4 | `quickDeduction` | quickDeduction | `quick_deduction` | Decimal | `number` |
-| 5 | `taxRateArchiveId` | taxRateArchiveID | `tax_rate_archive_id` | 709cd092-3dd4-49ca-9eb9-7b8888551810 | `quote` |
-| 6 | `createTime` | 创建时间 | `create_time` | DateTime | `dateTime` |
-| 7 | `creator` | 创建人 | `creator` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 8 | `dr` | 逻辑删除 | `dr` | Short | `short` |
-| 9 | `id` | ID | `id` | String | `text` |
-| 10 | `modifier` | 修改人 | `modifier` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 11 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `dateTime` |
-| 12 | `pubts` | 时间戳 | `pubts` | DateTime | `dateTime` |
-| 13 | `ytenantId` | ytenantID | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 累进税率 |
+| 物理表 | `progressive_tax_rate` |
+| 数据库 schema | `yonbip-fi-taxpubdoc` |
+| 所属应用 | `DPMTAX` |
+| 直连字段 | 13 个 |
+| 子表 | 0 个 |
+| 关联引用 | 4 个 |
 
-## 关联（4 个）
+## 关联引用 (4个)
 
-- `creator` -> `base.user.BipUser` ()
-- `modifier` -> `base.user.BipUser` ()
-- `taxRateArchiveId` -> `archive.taxArchives.TaxRateArchive` (0..n)
-- `ytenantId` -> `yht.tenant.YhtTenant` ()
+| 字段名 | 引用类型 |
+|--------|---------|
+| `creator` | `bip-usercenter.bip_user_ref` |
+| `modifier` | `bip-usercenter.bip_user_ref` |
+| `tax_rate_archive_id` | `` |
+| `ytenant_id` | `` |
+
+## 继承接口 (3个, 6字段)
+
+- **逻辑删除** (`iuap.busiObj.LogicDelete`)
+  - `dr` → `dr`
+- **统一租户接口** (`iuap.busiObj.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+- **审计信息** (`iuap.busiObj.IAuditInfo`)
+  - `create_time` → `create_time`
+  - `creator` → `creator`
+  - `modifier` → `modifier`
+  - `modify_time` → `modify_time`
+
+## 字段列表（按类型分组）
+
+> 共 13 个直连字段
+
+### 文本字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | 主键 |
+
+### 引用字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `tax_rate_archive_id` | `tax_rate_archive_id` | `taxRateArchiveId` | 税率档案ID |
+| `creator` | `creator` | `creator` | 创建人 |
+| `modifier` | `modifier` | `modifier` | 修改人 |
+| `ytenant_id` | `ytenant_id` | `ytenantId` | 租户id |
+
+### 日期时间 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+
+### 短整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dr` | `dr` | `dr` | 逻辑删除 |
+
+### 数值字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `accumulate_tax_in_begin` | `accumulate_tax_in_begin` | `accumulateTaxInBegin` | 累计应纳税所得额> |
+| `accumulate_tax_in_end` | `accumulate_tax_in_end` | `accumulateTaxInEnd` | 累计应纳税所得额≤ |
+| `progressive_tax_rate` | `progressive_tax_rate` | `progressiveTaxRate` | 累进税率 |
+| `quick_deduction` | `quick_deduction` | `quickDeduction` | 速算扣除数 |

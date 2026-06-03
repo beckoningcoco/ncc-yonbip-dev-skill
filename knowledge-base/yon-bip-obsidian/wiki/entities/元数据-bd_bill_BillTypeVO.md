@@ -1,5 +1,5 @@
 ---
-tags: [BIP, 元数据, 数据字典, bd, bd.bill.BillTypeVO]
+tags: [BIP, 元数据, 数据字典, bd.bill.BillTypeVO]
 created: 2026-06-03
 updated: 2026-06-03
 sources: [元数据API queryByUri]
@@ -9,59 +9,127 @@ last_verified: 2026-06-03
 status: verified
 source_type: api_response
 ---
+
 # 单据类型 (`bd.bill.BillTypeVO`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `bd_billtype` | 应用: `BMMMM`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`bd_billtype` | domain：`transtype` | 应用：`BMMMM` | 业务对象ID：`19600445-becc-4d81-8321-4676c8ea23c9`
 
-## 全部属性（37 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype | 必填 | 可空 |
-|---|--------|--------|-----|------|---------|------|------|
-| 1 | `busiobjCode` | busiobj编码 | `busiobj_code` | String | `text` | false | true |
-| 2 | `busiprocess` | busiprocess | `busiprocess` | String | `text` | false | true |
-| 3 | `class_id` | class_id | `class_id` | String | `text` | false | true |
-| 4 | `code` | 编码 | `code` | String | `text` | false | true |
-| 5 | `dr` | dr | `dr` | Integer | `int` | false | true |
-| 6 | `form_id` | form_id | `form_id` | String | `text` | false | true |
-| 7 | `id` | 主键ID | `id` | String | `text` | false | true |
-| 8 | `isEnd` | 是否End | `isEnd` | Boolean | `switch` | false | true |
-| 9 | `is_core_bill` | 是否_core_bill | `is_core_bill` | Integer | `int` | false | true |
-| 10 | `is_nosupport_transtypadd` | 是否_nosupport_transtypadd | `is_nosupport_transtypadd` | Integer | `int` | false | true |
-| 11 | `is_nosupport_transtypdel` | 是否_nosupport_transtypdel | `is_nosupport_transtypdel` | Integer | `int` | false | true |
-| 12 | `is_nosupport_transtypmodify` | 是否_nosupport_transtypmodify | `is_nosupport_transtypmodify` | Integer | `int` | false | true |
-| 13 | `is_support_multi_org` | 是否_support_multi_org | `is_support_multi_org` | Integer | `int` | false | true |
-| 14 | `is_support_transtype` | 是否_support_transtype | `is_support_transtype` | Integer | `int` | false | true |
-| 15 | `is_support_workflow` | 是否_support_workflow | `is_support_workflow` | Integer | `int` | false | true |
-| 16 | `istranstype` | 是否transtype | `istranstype` | String | `text` | false | true |
-| 17 | `level` | level | `level` | Integer | `int` | false | true |
-| 18 | `log` | log | `log` | String | `text` | false | true |
-| 19 | `meta_type` | meta_type | `meta_type` | String | `text` | false | true |
-| 20 | `microServiceCode` | microService编码 | `micro_service_code` | String | `text` | false | true |
-| 21 | `name` | 名称 | `name` | String | `multiLanguage` | false | true |
-| 22 | `parent` | parent | `parent_id` | 4a227650-b866-4f4c-a6ca-2433297a1713 | `quote` | false | true |
-| 23 | `path` | path | `path` | String | `text` | false | true |
-| 24 | `printAfterApproval` | printAfterApproval | `print_after_approval` | Integer | `int` | false | true |
-| 25 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` | false | true |
-| 26 | `serviceCodeMobile` | serviceCodeMobile | `service_code_mobile` | String | `text` | false | true |
-| 27 | `service_code` | service_code | `service_code` | String | `text` | false | true |
-| 28 | `shareType` | shareType | `share_type` | Integer | `int` | false | true |
-| 29 | `socialMctype` | socialMctype | `social_mctype` | Integer | `int` |  | true |
-| 30 | `socialSrcid` | socialSrcid | `social_srcid` | String | `text` |  | true |
-| 31 | `socialTenantid` | socialTenantid | `social_tenantid` | String | `text` |  | true |
-| 32 | `sort` | sort | `sort_num` | Integer | `int` |  | true |
-| 33 | `sort_num` | sort_num | `sort_num` | Integer | `int` | false | true |
-| 34 | `sysid` | sysid | `sysid` | String | `text` | false | true |
-| 35 | `tenant` | tenant | `tenantid` | String | `text` | false | true |
-| 36 | `tenantid` | tenantid | `tenantid` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` | false | true |
-| 37 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` | true | true |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 单据类型 |
+| 物理表 | `bd_billtype` |
+| 数据库 schema | `transtype` |
+| 所属应用 | `BMMMM` |
+| 直连字段 | 37 个 |
+| 子表 | 0 个 |
+| 关联引用 | 3 个 |
 
-## 关联属性（3 个）
+## 关联引用 (3个)
 
-- `parent` -> `bd.bill.BillTypeVO` ()
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `tenantid` -> `yht.tenant.YhtTenant` ()
+| 字段名 | 引用类型 |
+|--------|---------|
+| `parent_id` | `bd_billtypetreeref` |
+| `ytenant_id` | `` |
+| `tenantid` | `` |
 
-```sql
-SELECT busiobj_code, busiprocess, class_id, code, dr, form_id FROM bd_billtype
-```
+## 继承接口 (5个, 20字段)
+
+- **树型结构** (`ucfbase.ucfbaseItf.ITree`)
+  - `` → ``
+  - `level` → `level`
+  - `name` → `name`
+  - `parent_id` → `parent_id`
+  - `path` → `path`
+  - `sort_num` → `sort_num`
+- **树型结构** (`base.itf.ITree`)
+  - `` → ``
+  - `level` → `level`
+  - `parent_id` → `parent_id`
+  - `path` → `path`
+  - `sort_num` → `sort_num`
+- **树型结构** (`basedoc.basedocItf.ITree`)
+  - `` → ``
+  - `level` → `level`
+  - `parent_id` → `parent_id`
+  - `path` → `path`
+  - `sort_num` → `sort_num`
+- **社会化企业群档案** (`bd.social.ISocialMcType`)
+  - `social_mctype` → `social_mctype`
+  - `social_srcid` → `social_srcid`
+  - `social_tenantid` → `social_tenantid`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 37 个直连字段
+
+### 文本字段 (17个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `busiobj_code` | `busiobj_code` | `busiobjCode` | 业务对象编码 |
+| `busiprocess` | `busiprocess` | `busiprocess` | 业务流程 |
+| `class_id` | `class_id` | `class_id` | 元数据主键 |
+| `code` | `code` | `code` | 单据类型编码 |
+| `form_id` | `form_id` | `form_id` | 单据元数据编码uri |
+| `id` | `id` | `id` | 主键 |
+| `istranstype` | `istranstype` | `istranstype` | 单据是否是交易类型 |
+| `log` | `log` | `log` | 操作日志 |
+| `meta_type` | `meta_type` | `meta_type` | 元数据类型 |
+| `micro_service_code` | `micro_service_code` | `microServiceCode` | 微服务编码 |
+| `path` | `path` | `path` | 路径 |
+| `service_code_mobile` | `service_code_mobile` | `serviceCodeMobile` | 移动端服务编码 |
+| `service_code` | `service_code` | `service_code` | 原子服务编码 |
+| `social_srcid` | `social_srcid` | `socialSrcid` | 社会化来源id |
+| `social_tenantid` | `social_tenantid` | `socialTenantid` | 社会化来源租户 |
+| `sysid` | `sysid` | `sysid` | 应用标识 |
+| `tenantid` | `tenantid` | `tenant` | 租户废弃 |
+
+### 引用字段 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `parent_id` | `parent_id` | `parent` | 上级分类 |
+| `tenantid` | `tenantid` | `tenantid` | 租户id |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 布尔字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `isEnd` | `isEnd` | `isEnd` | 排序号 |
+
+### 整数 (14个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dr` | `dr` | `dr` | 逻辑删除标识 |
+| `is_core_bill` | `is_core_bill` | `is_core_bill` | 是否是核心单据 |
+| `is_nosupport_transtypadd` | `is_nosupport_transtypadd` | `is_nosupport_transtypadd` | 关联交易类型不支持新增标志 |
+| `is_nosupport_transtypdel` | `is_nosupport_transtypdel` | `is_nosupport_transtypdel` | 关联交易类型不支持删除标志 |
+| `is_nosupport_transtypmodify` | `is_nosupport_transtypmodify` | `is_nosupport_transtypmodify` | 关联交易类型不支持修改标志 |
+| `is_support_multi_org` | `is_support_multi_org` | `is_support_multi_org` | 是否支持单多组织 |
+| `is_support_transtype` | `is_support_transtype` | `is_support_transtype` | 是否支持交易类型 |
+| `is_support_workflow` | `is_support_workflow` | `is_support_workflow` | 是否支持流程 |
+| `level` | `level` | `level` | 层级 |
+| `print_after_approval` | `print_after_approval` | `printAfterApproval` | 是否审核后打印 |
+| `share_type` | `share_type` | `shareType` | 共享类型 |
+| `social_mctype` | `social_mctype` | `socialMctype` | 社会化管控类型 |
+| `sort_num` | `sort_num` | `sort` | 排序号 |
+| `sort_num` | `sort_num` | `sort_num` | 排序号 |
+
+### multiLanguage (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `name` | `name` | `name` | 单据类型名称 |
+
+### timestamp (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubts` | `pubts` | `pubts` | 时间戳 |

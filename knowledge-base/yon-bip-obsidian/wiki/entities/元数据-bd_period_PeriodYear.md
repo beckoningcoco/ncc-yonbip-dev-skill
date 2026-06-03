@@ -12,49 +12,125 @@ source_type: api_response
 
 # 会计期间年 (`bd.period.PeriodYear`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `bd_periodyear` | 应用: `FP` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`bd_periodyear` | domain：`finbd` | 应用：`FP` | 业务对象ID：`ec870b84-73ea-4b9c-86b2-48d871f1e650`
 
-## 属性（28 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `code` | 编码 | `code` | String | `text` |
-| 2 | `name` | 名称 | `name` | String | `text` |
-| 3 | `objId` | objID | `obj_id` | String | `text` |
-| 4 | `begindate` | begindate | `begindate` | Date | `date` |
-| 5 | `enddate` | enddate | `enddate` | Date | `date` |
-| 6 | `num` | num | `num` | Integer | `int` |
-| 7 | `accperiodscheme` | accperiodscheme | `accperiodscheme` | e7bb3d2b-b288-4696-b5f0-a9b0626cded8 | `quote` |
-| 8 | `description` | description | `description` | String | `text` |
-| 9 | `createDate` | 创建日期 | `create_date` | Date | `date` |
-| 10 | `createTime` | 创建时间 | `create_time` | DateTime | `timestamp` |
-| 11 | `creator` | 创建人 | `creator` | String | `text` |
-| 12 | `creatorId` | 创建人ID | `creatorId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 13 | `halfYearCount` | halfYearCount | `half_year_count` | Integer | `int` |
-| 14 | `id` | ID | `id` | Long | `long` |
-| 15 | `modifier` | 修改人 | `modifier` | String | `text` |
-| 16 | `modifierId` | 修改人ID | `modifierId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 17 | `modifyDate` | 修改日期 | `modify_date` | Date | `date` |
-| 18 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `timestamp` |
-| 19 | `period` | period | `` | 0028813f-135a-485e-a5c3-c15a3d18168b | `` |
-| 20 | `periodAdjust` | periodAdjust | `` | a6284b47-4c60-434a-baa1-7f1ad1dac2c6 | `` |
-| 21 | `periodCount` | periodCount | `period_count` | Integer | `int` |
-| 22 | `periodSegment` | periodSegment | `` | c2e7f025-3174-4160-8361-6de4677c328b | `` |
-| 23 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 24 | `quarterCount` | quarterCount | `quarter_count` | Integer | `int` |
-| 25 | `stopstatus` | stopstatus | `stopstatus` | Boolean | `switch` |
-| 26 | `stoptime` | stoptime | `stop_time` | DateTime | `timestamp` |
-| 27 | `tenant` | tenant | `tenant_id` | c213cd56-d5de-421f-bae7-d77455b557cd | `quote` |
-| 28 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 会计期间年 |
+| 物理表 | `bd_periodyear` |
+| 数据库 schema | `finbd` |
+| 所属应用 | `FP` |
+| 直连字段 | 28 个 |
+| 子表 | 3 个 |
+| 关联引用 | 8 个 |
 
-## 关联（8 个）
+## 子表
 
-- `period` -> `bd.period.Period` (0..n)
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `accperiodscheme` -> `bd.period.AccPeriodScheme` (0..n)
-- `creatorId` -> `base.user.User` ()
-- `modifierId` -> `base.user.User` ()
-- `periodAdjust` -> `bd.period.PeriodAdjust` (0..n)
-- `periodSegment` -> `bd.period.PeriodSegment` (0..n)
-- `tenant` -> `base.tenant.Tenant` ()
+| 字段名 | URI | 关系 |
+|--------|-----|------|
+| `period` | `bd.period.Period` | composition |
+| `periodAdjust` | `bd.period.PeriodAdjust` | composition |
+| `periodSegment` | `bd.period.PeriodSegment` | composition |
+
+## 关联引用 (8个)
+
+| 字段名 | 引用类型 |
+|--------|---------|
+| `` | `` |
+| `ytenant_id` | `` |
+| `accperiodscheme` | `` |
+| `tenant_id` | `` |
+
+## 继承接口 (4个, 12字段)
+
+- **租户相关** (`base.itf.ITenant`)
+  - `tenant_id` → `tenant_id`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+- **停用信息** (`base.itf.IStopping`)
+  - `stopstatus` → `stopstatus`
+  - `stop_time` → `stop_time`
+- **审计信息** (`base.itf.IAuditInfo`)
+  - `create_date` → `create_date`
+  - `create_time` → `create_time`
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `modify_date` → `modify_date`
+  - `modify_time` → `modify_time`
+
+## 字段列表（按类型分组）
+
+> 共 28 个直连字段
+
+### 文本字段 (6个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `code` | `code` | `code` | 编码 |
+| `name` | `name` | `name` | 名称 |
+| `obj_id` | `obj_id` | `objId` | 友企连id |
+| `description` | `description` | `description` | 描述 |
+| `` | `creator` | `creator` | 创建人名称 |
+| `` | `modifier` | `modifier` | 修改人名称 |
+
+### 引用字段 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `accperiodscheme` | `accperiodscheme` | `accperiodscheme` | 会计日历 |
+| `` | `creatorId` | `creatorId` | 创建人 |
+| `` | `modifierId` | `modifierId` | 修改人 |
+| `tenant_id` | `tenant_id` | `tenant` | 租户 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 日期字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `begindate` | `begindate` | `begindate` | 开始时间 |
+| `enddate` | `enddate` | `enddate` | 结束时间 |
+| `create_date` | `create_date` | `createDate` | 创建日期 |
+| `modify_date` | `modify_date` | `modifyDate` | 修改日期 |
+
+### 布尔字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `stopstatus` | `stopstatus` | `stopstatus` | 停用状态 |
+
+### 整数 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `num` | `num` | `num` | 期间数量 |
+| `half_year_count` | `half_year_count` | `halfYearCount` | 期间半年个数 |
+| `period_count` | `period_count` | `periodCount` | 期间个数 |
+| `quarter_count` | `quarter_count` | `quarterCount` | 期间季度个数 |
+
+### 长整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+
+### timestamp (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+| `stop_time` | `stop_time` | `stoptime` | 停用时间 |
+
+### other (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `` | `period` | 会计期间 |
+| `` | `` | `periodAdjust` | 期间调整期 |
+| `` | `` | `periodSegment` | 会计期间段(季度、半年) |

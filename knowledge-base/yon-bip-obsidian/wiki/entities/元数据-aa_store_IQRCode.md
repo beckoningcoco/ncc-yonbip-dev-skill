@@ -12,28 +12,73 @@ source_type: api_response
 
 # 渠道 (`aa.store.IQRCode`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `mp_entchannel` | 应用: `Marketingpublic` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`mp_entchannel` | domain：`yxybase` | 应用：`Marketingpublic` | 业务对象ID：``
 
-## 属性（12 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `cAppID` | cAppID | `cAppID` | String | `text` |
-| 2 | `cChannelCode` | cChannel编码 | `cChannelCode` | String | `text` |
-| 3 | `cChannelName` | cChannel名称 | `cChannelName` | String | `text` |
-| 4 | `cChannelScope` | cChannelScope | `cChannelScope` | String | `text` |
-| 5 | `iBizId` | iBizID | `iBizId` | String | `text` |
-| 6 | `iChannelType` | iChannelType | `iChannelType` | Integer | `int` |
-| 7 | `iQRCodeSceneId` | iQRCodeSceneID | `iQRCodeSceneId` | Integer | `int` |
-| 8 | `iQRCodeType` | iQRCodeType | `iQRCodeType` | IQRCodeType | `` |
-| 9 | `iStoreId` | iStoreID | `iStoreId` | 16e4e14c-ab05-4ee5-bbb8-c67351c9a8b3 | `quote` |
-| 10 | `id` | ID | `id` | Long | `long` |
-| 11 | `tenant` | tenant | `tenant_id` | c213cd56-d5de-421f-bae7-d77455b557cd | `quote` |
-| 12 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 渠道 |
+| 物理表 | `mp_entchannel` |
+| 数据库 schema | `yxybase` |
+| 所属应用 | `Marketingpublic` |
+| 直连字段 | 12 个 |
+| 子表 | 0 个 |
+| 关联引用 | 3 个 |
 
-## 关联（3 个）
+## 关联引用 (3个)
 
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `iStoreId` -> `aa.store.Store` (1)
-- `tenant` -> `base.tenant.Tenant` ()
+| 字段名 | 引用类型 |
+|--------|---------|
+| `ytenant_id` | `` |
+| `iStoreId` | `` |
+| `tenant_id` | `` |
+
+## 继承接口 (2个, 2字段)
+
+- **租户相关** (`base.itf.ITenant`)
+  - `tenant_id` → `tenant_id`
+- **统一租户接口(扩展)** (`ucfbase.ucfbaseItf.IYTenantExt`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 12 个直连字段
+
+### 文本字段 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `cAppID` | `cAppID` | `cAppID` | 会员体系ID |
+| `cChannelCode` | `cChannelCode` | `cChannelCode` | 渠道编码 |
+| `cChannelName` | `cChannelName` | `cChannelName` | 渠道名称 |
+| `cChannelScope` | `cChannelScope` | `cChannelScope` | 渠道类型补充 |
+| `iBizId` | `iBizId` | `iBizId` | 主表主键 |
+
+### 引用字段 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iStoreId` | `iStoreId` | `iStoreId` | 门店主键 |
+| `tenant_id` | `tenant_id` | `tenant` | 租户 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iChannelType` | `iChannelType` | `iChannelType` | 渠道类型 |
+| `iQRCodeSceneId` | `iQRCodeSceneId` | `iQRCodeSceneId` | 码值 |
+
+### 长整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+
+### other (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iQRCodeType` | `iQRCodeType` | `iQRCodeType` | 二维码类型 |

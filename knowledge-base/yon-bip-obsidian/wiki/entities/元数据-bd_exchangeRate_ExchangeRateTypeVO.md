@@ -1,5 +1,5 @@
 ---
-tags: [BIP, 元数据, 数据字典, bd, bd.exchangeRate.ExchangeRateTypeVO]
+tags: [BIP, 元数据, 数据字典, bd.exchangeRate.ExchangeRateTypeVO]
 created: 2026-06-03
 updated: 2026-06-03
 sources: [元数据API queryByUri]
@@ -9,10 +9,11 @@ last_verified: 2026-06-03
 status: verified
 source_type: api_response
 ---
+
 # 汇率类型 (`bd.exchangeRate.ExchangeRateTypeVO`)
 
-> ⚡ **平台版本：BIP 旗舰版 V5** — 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `bd_exchangerate_type` | 应用: `DPMPI` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`bd_exchangerate_type` | domain：`ucfbasedoc` | 应用：`DPMPI` | 业务对象ID：`acbae55b-e6ce-4a0e-86bf-6455b915e3a3`
 
 ## 基本信息
 
@@ -20,83 +21,98 @@ source_type: api_response
 |------|-----|
 | 显示名 | 汇率类型 |
 | 物理表 | `bd_exchangerate_type` |
-| 应用 | `DPMPI` |
-| 元数据类型 | `Class` |
+| 数据库 schema | `ucfbasedoc` |
+| 所属应用 | `DPMPI` |
+| 直连字段 | 28 个 |
+| 子表 | 1 个 |
+| 关联引用 | 4 个 |
 
-## 主键与编码
+## 子表
 
-| 角色 | 字段 | 列 | 类型 |
-|------|------|-----|------|
-| 主键 | `id` | `id` | String |
-| 编码 | `code` | `code` | |
+| 字段名 | URI | 关系 |
+|--------|-----|------|
+| `exchangeRateTypeConfigDefineVO` | `bd.exchangeRate.ExchangeRateTypeConfigDefineVO` | composition |
 
-## 部署信息
+## 关联引用 (4个)
 
-- 部署时间: 2026-01-23 22:42:29:000
-- 安装来源: `/app/apdoc-basedoc/iuap-apdoc-basedoc/iuap-apdoc-basedoc/scripts/db/patch/mongodb/V7_R0_2507/0001_iuap-apdoc-basedoc_basedoc/0010_iuap_common/DML/0270_iuap_metadata/20260115-itr/202512051102_metadata_bd-exchangeRate.zip`
+| 字段名 | 引用类型 |
+|--------|---------|
+| `creator` | `` |
+| `ytenant_id` | `` |
+| `modifier` | `` |
+| `` | `` |
 
-## 术语标记
+## 继承接口 (4个, 6字段)
 
-`MasterData`, `isMain`, `doc`, `DirectConnection`, `state_tag`
+- **UCF公共状态** (`basedoc.basedocItf.BasedocIState`)
+  - `enable` → `enable`
+- **逻辑删除(待废除)** (`basedoc.basedocItf.LogicDelete`)
+- **审计信息** (`basedoc.basedocItf.AuditInfo`)
+  - `creationtime` → `creationtime`
+  - `creator` → `creator`
+  - `modifiedtime` → `modifiedtime`
+  - `modifier` → `modifier`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
 
-## 依赖接口（4 个）
+## 字段列表（按类型分组）
 
-| 接口 | URI | 版本 | 属性数 |
-|------|-----|------|--------|
-| BasedocIState (`BasedocIState`) | `basedoc.basedocItf.BasedocIState` | 101 | 1 |
-| LogicDelete (`LogicDelete`) | `basedoc.basedocItf.LogicDelete` | 31 | 0 |
-| AuditInfo (`AuditInfo`) | `basedoc.basedocItf.AuditInfo` | 289 | 4 |
-| IYTenant (`IYTenant`) | `ucfbase.ucfbaseItf.IYTenant` | 40 | 1 |
+> 共 28 个直连字段
 
----
+### 文本字段 (11个)
 
-## 全部属性（28 个）
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+| `code` | `code` | `code` | 编码 |
+| `objid` | `objid` | `objid` | 外系统主键 |
+| `description` | `description` | `description` | 描述 |
+| `sync_origin_bank` | `sync_origin_bank` | `syncOriginBank` | 请选择同步源 |
+| `sync_rule` | `sync_rule` | `syncRule` | 同步规则 |
+| `tipsName` | `tipsName` | `tipsName` | 提示隐藏字段 |
+| `sysid` | `sysid` | `sysid` | 应用标识 |
+| `log` | `log` | `log` | 操作日志 |
+| `sourceid` | `sourceid` | `sourceid` | 来源 |
+| `tenantid` | `tenantid` | `tenant` | 租户(废弃) |
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype | 必填 | 可空 |
-|---|--------|--------|-----|------|---------|------|------|
-| 1 | `exchangeRateTypeConfigDefineVO` | exchangeRateTypeConfigDefineVO | `` | 83f4f50c-d8ae-44f7-a941-c75472cb917c | `` |  |  |
-| 2 | `id` | 主键ID | `id` | String | `text` |  | true |
-| 3 | `code` | 编码 | `code` | String | `text` | true | true |
-| 4 | `name` | 名称 | `name` | String | `multiLanguage` | true | true |
-| 5 | `objid` | objid | `objid` | String | `text` |  | true |
-| 6 | `digit` | igit(日期) | `digit` | Integer | `int` |  | true |
-| 7 | `description` | 描述 | `description` | String | `text` |  | true |
-| 8 | `isMapHistoryDate` | isMapHistoryDate(日期) | `isMapHistoryDate` | Integer | `int` |  | true |
-| 9 | `isSupportRevCalculate` | 是否SupportRevCalculate | `isSupportRevCalculate` | Integer | `int` |  | true |
-| 10 | `enable` | enable | `enable` | Integer | `int` |  | true |
-| 11 | `autoUpdate` | autoUpdate | `auto_update` | Integer | `int` |  | true |
-| 12 | `syncOriginBank` | syncOriginBank | `sync_origin_bank` | String | `text` |  | true |
-| 13 | `syncOriginExchangeRate` | syncOriginExchangeRate | `sync_origin_exchangerate` | Integer | `int` |  | true |
-| 14 | `syncScope` | syncScope | `sync_scope` | Integer | `int` |  | true |
-| 15 | `syncRule` | syncRule | `sync_rule` | String | `text` |  | true |
-| 16 | `isDefault` | 是否Default | `isDefault` | Integer | `int` |  | true |
-| 17 | `tipsName` | tips名称 | `tipsName` | String | `text` |  | true |
-| 18 | `sysid` | sysid | `sysid` | String | `text` |  | true |
-| 19 | `dr` | 逻辑删除 | `dr` | Integer | `int` |  | true |
-| 20 | `log` | log | `log` | String | `text` |  | true |
-| 21 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |  | true |
-| 22 | `sourceid` | sourceid | `sourceid` | String | `text` |  | true |
-| 23 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` | true | true |
-| 24 | `tenant` | tenant | `tenantid` | String | `text` |  | true |
-| 25 | `creator` | 创建人 | `creator` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |  | true |
-| 26 | `creationtime` | reationtime | `creationtime` | DateTime | `timestamp` |  | true |
-| 27 | `modifier` | 修改人 | `modifier` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |  | true |
-| 28 | `modifiedtime` | modifiedtime | `modifiedtime` | DateTime | `timestamp` |  | true |
+### 引用字段 (3个)
 
-## 关联属性（4 个）
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户 |
+| `creator` | `creator` | `creator` | 创建人 |
+| `modifier` | `modifier` | `modifier` | 修改人 |
 
-| # | 字段 | 显示名 | 目标实体 | 列 | 关系 | 多重性 | 组合 | 隔离 | 废弃 |
-|---|------|--------|---------|-----|------|--------|------|------|------|
-| 1 | `creator` | 创建人 | `base.user.BipUser` | `creator` | 外键 |  |  | Service |  |
-| 2 | `ytenant` | ytenant | `yht.tenant.YhtTenant` | `ytenant_id` | 外键 |  |  | Service |  |
-| 3 | `modifier` | 修改人 | `base.user.BipUser` | `modifier` | 外键 |  |  | Service |  |
-| 4 | `exchangeRateTypeConfigDefineVO` | exchangeRateTypeConfigDefineVO | `bd.exchangeRate.ExchangeRateTypeConfigDefineVO` | `` | exchangeRateTypeConfigDefineVO → exchangeratetype | 0..n | Y | None |  |
+### 整数 (9个)
 
----
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `digit` | `digit` | `digit` | 精度 |
+| `isMapHistoryDate` | `isMapHistoryDate` | `isMapHistoryDate` | 是否向历史日期匹配 |
+| `isSupportRevCalculate` | `isSupportRevCalculate` | `isSupportRevCalculate` | 是否支持反向折算 |
+| `enable` | `enable` | `enable` | 启用状态 |
+| `auto_update` | `auto_update` | `autoUpdate` | 是否自动更新 |
+| `sync_origin_exchangerate` | `sync_origin_exchangerate` | `syncOriginExchangeRate` | 同步牌价 |
+| `sync_scope` | `sync_scope` | `syncScope` | 请选择同步范围 |
+| `isDefault` | `isDefault` | `isDefault` | 是否默认 |
+| `dr` | `dr` | `dr` | 删除状态 |
 
-## SQL 示例
+### other (1个)
 
-```sql
-SELECT id, code, name, objid, digit, description, isMapHistoryDate, isSupportRevCalculate
-FROM bd_exchangerate_type
-```
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `` | `exchangeRateTypeConfigDefineVO` | 汇率类型同步配置自定义表 |
+
+### multiLanguage (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `name` | `name` | `name` | 名称 |
+
+### timestamp (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubts` | `pubts` | `pubts` | 配置基本表的ts |
+| `creationtime` | `creationtime` | `creationtime` | 创建时间 |
+| `modifiedtime` | `modifiedtime` | `modifiedtime` | 修改时间 |

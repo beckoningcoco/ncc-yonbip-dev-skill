@@ -9,35 +9,74 @@ last_verified: 2026-06-03
 status: verified
 source_type: api_response
 ---
+
 # 付款单业务阶段信息 (`earap.payment.PaymentBpmStep`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBip），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `ap_payment_b_bpmstep` | 应用: `EAP`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`ap_payment_b_bpmstep` | domain：`yonbip-fi-earapbill` | 应用：`EAP` | 业务对象ID：`548e9989-20b1-473c-ba02-9284b575a695`
 
-## 属性（15 个）
+## 基本信息
 
-| # | 字段 | 显示名 | 列 | 类型 | biztype |
-|---|------|--------|-----|------|---------|
-| 1 | `createTime` | 创建时间 | `create_time` | DateTime | `dateTime` |
-| 2 | `creator` | 创建人 | `creator` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 3 | `dr` | 逻辑删除 | `dr` | Short | `short` |
-| 4 | `flag` | flag | `flag` | String | `text` |
-| 5 | `headerId` | headerID | `header_id` | f49cb723-973a-4687-b17d-bd37178b92b3 | `quote` |
-| 6 | `id` | ID | `id` | String | `text` |
-| 7 | `modifier` | 修改人 | `modifier` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 8 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `dateTime` |
-| 9 | `processinstId` | processinstID | `processinstid` | String | `text` |
-| 10 | `pubts` | 时间戳 | `pubts` | DateTime | `dateTime` |
-| 11 | `stepId` | stepID | `stepid` | 9bcecb5a-ff80-4e82-9b49-67af93c7db82 | `quote` |
-| 12 | `stepLastModify` | stepLastModify | `stepcode_lastmodify` | DateTime | `dateTime` |
-| 13 | `stepparam` | stepparam | `stepparam` | String | `text` |
-| 14 | `taskId` | taskID | `taskid` | String | `text` |
-| 15 | `ytenantId` | ytenantID | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 付款单业务阶段信息 |
+| 物理表 | `ap_payment_b_bpmstep` |
+| 数据库 schema | `yonbip-fi-earapbill` |
+| 所属应用 | `EAP` |
+| 直连字段 | 15 个 |
+| 子表 | 0 个 |
+| 关联引用 | 5 个 |
 
-## 关联（5 个）
+## 关联引用 (5个)
 
-- `creator` -> `base.user.BipUser` () 
-- `modifier` -> `base.user.BipUser` () 
-- `stepId` -> `bd.businessstep.BusinessStep` () 
-- `ytenantId` -> `yht.tenant.YhtTenant` () 
-- `headerId` -> `earap.payment.PaymentHeader` (0..n) 
+| 字段名 | 引用类型 |
+|--------|---------|
+| `creator` | `bip-usercenter.bip_user_ref` |
+| `modifier` | `bip-usercenter.bip_user_ref` |
+| `stepid` | `transtype.bd_businessstep_ref` |
+| `ytenant_id` | `` |
+| `header_id` | `` |
+
+## 继承接口 (1个, 1字段)
+
+- **逻辑删除** (`iuap.busiObj.LogicDelete`)
+  - `dr` → `dr`
+
+## 字段列表（按类型分组）
+
+> 共 15 个直连字段
+
+### 文本字段 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `flag` | `flag` | `flag` | 状态标志位 |
+| `id` | `id` | `id` | 主键 |
+| `processinstid` | `processinstid` | `processinstId` | 流程实例 |
+| `stepparam` | `stepparam` | `stepparam` | 业务阶段参数 |
+| `taskid` | `taskid` | `taskId` | 任务ID |
+
+### 引用字段 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `creator` | `creator` | `creator` | 创建人 |
+| `header_id` | `header_id` | `headerId` | 付款单基本信息 |
+| `modifier` | `modifier` | `modifier` | 修改人 |
+| `stepid` | `stepid` | `stepId` | 业务阶段ID |
+| `ytenant_id` | `ytenant_id` | `ytenantId` | 租户id |
+
+### 日期时间 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+| `stepcode_lastmodify` | `stepcode_lastmodify` | `stepLastModify` | 业务阶段编码最后修改时间 |
+
+### 短整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dr` | `dr` | `dr` | 逻辑删除 |

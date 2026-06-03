@@ -12,55 +12,147 @@ source_type: api_response
 
 # 专业类别 (`bd.customerdoc_0024.0024`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `hred_refer_majorcategory` | 应用: `HRED` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`hred_refer_majorcategory` | domain：`hrcloud-staff-mgr` | 应用：`HRED` | 业务对象ID：`886e91ed-b1dd-49c3-80bb-e0e3bc7f94a5`
 
-## 属性（35 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `sortnum` | sortnum | `sortnum` | Integer | `int` |
-| 2 | `modifiedtime` | modifiedtime | `modifiedtime` | DateTime | `timestamp` |
-| 3 | `mnecode` | mnecode | `mnecode` | String | `text` |
-| 4 | `parent` | parent | `parent_id` | 8935eea7-a8ae-456e-85a4-59f1abc98510 | `quote` |
-| 5 | `dr` | 逻辑删除 | `dr` | Short | `short` |
-| 6 | `path` | path | `path` | String | `text` |
-| 7 | `objid` | objid | `objid` | String | `text` |
-| 8 | `pubts` | 时间戳 | `pubts` | DateTime | `dateTime` |
-| 9 | `tenant` | tenant | `tenantid` | String | `text` |
-| 10 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 11 | `level` | 层级 | `level` | Integer | `int` |
-| 12 | `sort` | 排序 | `sort_num` | Integer | `int` |
-| 13 | `isEnd` | 是否End | `isEnd` | Boolean | `switch` |
-| 14 | `orgid` | orgid | `orgid` | 100943a5-df56-4ec1-8105-c4b448afa02b | `quote` |
-| 15 | `innercode` | innercode | `innercode` | String | `text` |
-| 16 | `buid` | buid | `buid` | String | `text` |
-| 17 | `ispreset` | 是否preset | `ispreset` | Boolean | `switch` |
-| 18 | `enable` | enable | `enable` | Integer | `int` |
-| 19 | `creator` | 创建人 | `creator` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 20 | `code` | 编码 | `code` | String | `text` |
-| 21 | `name` | 名称 | `name` | String | `multiLanguage` |
-| 22 | `shortname` | shortname | `shortname` | String | `text` |
-| 23 | `creationtime` | creationtime | `creationtime` | DateTime | `timestamp` |
-| 24 | `modifier` | 修改人 | `modifier` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 25 | `parentid` | parentid | `parentid` | String | `text` |
-| 26 | `description` | description | `description` | String | `multiLanguage` |
-| 27 | `sysid` | sysid | `sysid` | String | `text` |
-| 28 | `custdocdefid` | custdocdefid | `custdocdefid` | String | `text` |
-| 29 | `id` | ID | `id` | String | `text` |
-| 30 | `country` | country | `` | 62661199-d1e6-43bc-97e4-a7976b7cef72 | `` |
-| 31 | `createTime` | 创建时间 | `creationtime` | DateTime | `timestamp` |
-| 32 | `disablets` | disablets | `disablets` | DateTime | `dateTime` |
-| 33 | `enablets` | enablets | `enablets` | DateTime | `dateTime` |
-| 34 | `modifyTime` | 修改时间 | `modifiedtime` | DateTime | `timestamp` |
-| 35 | `userDefineCharacter` | userDefineCharacter | `user_define_character` | 4540b9cd-1022-486b-bf21-adf7cbde007a | `UserDefine` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 专业类别 |
+| 物理表 | `hred_refer_majorcategory` |
+| 数据库 schema | `hrcloud-staff-mgr` |
+| 所属应用 | `HRED` |
+| 直连字段 | 35 个 |
+| 子表 | 1 个 |
+| 关联引用 | 7 个 |
 
-## 关联（7 个）
+## 子表
 
-- `parent` -> `bd.customerdoc_0024.0024` ()
-- `country` -> `bd.customerdoc_0024.Country` (0..n)
-- `creator` -> `base.user.BipUser` ()
-- `userDefineCharacter` -> `bd.customerdoc_0024.UserDefineCharacter` ()
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `modifier` -> `base.user.BipUser` ()
-- `orgid` -> `org.view.AdminOrgGlobalView` ()
+| 字段名 | URI | 关系 |
+|--------|-----|------|
+| `country` | `bd.customerdoc_0024.Country` | composition |
+
+## 关联引用 (7个)
+
+| 字段名 | 引用类型 |
+|--------|---------|
+| `parent_id` | `` |
+| `` | `` |
+| `user_define_character` | `` |
+| `ytenant_id` | `` |
+| `orgid` | `ucf-org-center.org_pure_tree_ref` |
+
+## 继承接口 (6个, 16字段)
+
+- **启用** (`ucfbase.ucfbaseItf.IEnable`)
+  - `disablets` → `disablets`
+  - `enable` → `enable`
+  - `enablets` → `enablets`
+- **审计信息** (`ucfbase.ucfbaseItf.IAuditInfo`)
+  - `create_time` → `create_time`
+  - `` → ``
+  - `` → ``
+  - `modify_time` → `modify_time`
+- **逻辑删除相关** (`ucfbase.ucfbaseItf.LogicDelete`)
+  - `dr` → `dr`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+- **树型结构** (`ucfbase.ucfbaseItf.ITree`)
+  - `` → ``
+  - `level` → `level`
+  - `name` → `name`
+  - `parent_id` → `parent_id`
+  - `path` → `path`
+  - `sort_num` → `sort_num`
+- **租户接口** (`ucfbase.ucfbaseItf.ITenant`)
+  - `tenant_id` → `tenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 35 个直连字段
+
+### 文本字段 (12个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `mnecode` | `mnecode` | `mnecode` | 助记码 |
+| `path` | `path` | `path` | 路径 |
+| `objid` | `objid` | `objid` | 友企联id |
+| `tenantid` | `tenantid` | `tenant` | 租户 |
+| `innercode` | `innercode` | `innercode` | 内部编码 |
+| `buid` | `buid` | `buid` | 所属业务群 |
+| `code` | `code` | `code` | 编码 |
+| `shortname` | `shortname` | `shortname` | 简称 |
+| `parentid` | `parentid` | `parentid` | 上级档案 |
+| `sysid` | `sysid` | `sysid` | 应用标识 |
+| `custdocdefid` | `custdocdefid` | `custdocdefid` | 所属档案 |
+| `id` | `id` | `id` | ID |
+
+### 引用字段 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `parent_id` | `parent_id` | `parent` | 上级分类 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+| `orgid` | `orgid` | `orgid` | 所属组织 |
+| `` | `creator` | `creator` | 创建人 |
+| `` | `modifier` | `modifier` | 修改人 |
+
+### 日期时间 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+| `disablets` | `disablets` | `disablets` | 停用时间 |
+| `enablets` | `enablets` | `enablets` | 启用时间 |
+
+### 布尔字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `isEnd` | `isEnd` | 是否末级 |
+| `ispreset` | `ispreset` | `ispreset` | 是否预置 |
+
+### 整数 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `sortnum` | `sortnum` | `sortnum` | 序号 |
+| `level` | `level` | `level` | 层级 |
+| `sort_num` | `sort_num` | `sort` | 排序号 |
+| `enable` | `enable` | `enable` | 启用状态 |
+
+### 短整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dr` | `dr` | `dr` | 逻辑删除标记 |
+
+### timestamp (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `modifiedtime` | `modifiedtime` | `modifiedtime` | 修改时间 |
+| `creationtime` | `creationtime` | `creationtime` | 创建时间 |
+| `creationtime` | `creationtime` | `createTime` | 创建时间 |
+| `modifiedtime` | `modifiedtime` | `modifyTime` | 修改时间 |
+
+### multiLanguage (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `name` | `name` | `name` | 名称 |
+| `description` | `description` | `description` | 描述 |
+
+### other (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `` | `country` | 国家/地区 |
+
+### UserDefine (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `user_define_character` | `user_define_character` | `userDefineCharacter` | 特征 |

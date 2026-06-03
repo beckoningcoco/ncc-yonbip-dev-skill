@@ -12,149 +12,238 @@ source_type: api_response
 
 # 成品信息 (`ed.bom.Bom`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `ed_bom` | 应用: `ED` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`ed_bom` | domain：`engineeringdata` | 应用：`ED` | 业务对象ID：`f17dc38c-af3c-4f1e-aca9-95b3aa38b0c9`
 
-## 属性（106 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `auditDate` | auditDate | `audit_date` | Date | `date` |
-| 2 | `engineeringDrawNumber` | engineeringDrawNumber | `engineering_draw_number` | String | `text` |
-| 3 | `fromQuantity` | fromQuantity | `from_quantity` | Decimal | `number` |
-| 4 | `productId` | productID | `product_id` | 89f3b06e-23df-4403-b4a7-19f99eeeae72 | `quote` |
-| 5 | `quantityControl` | quantityControl | `quantity_control` | Short | `singleOption` |
-| 6 | `sourceCode` | source编码 | `source_code` | String | `text` |
-| 7 | `sourceLineNo` | sourceLineNo | `source_line_no` | String | `text` |
-| 8 | `sourceSrcDocId` | sourceSrcDocID | `source_src_doc_id` | String | `text` |
-| 9 | `variantconfigctsId` | variantconfigctsID | `variantconfigcts_id` | c28a3b13-02ed-4cba-85f3-bd29e5b5dc40 | `quote` |
-| 10 | `fromSrcDocId` | fromSrcDocID | `from_src_doc_id` | String | `text` |
-| 11 | `fromCode` | from编码 | `from_code` | String | `text` |
-| 12 | `fromLineNo` | fromLineNo | `from_line_no` | String | `text` |
-| 13 | `transTypeId` | transTypeID | `trans_type_id` | 19f9264d-28d1-4b47-9d28-f2e82654f3a9 | `quote` |
-| 14 | `configNo` | configNo | `config_no` | String | `text` |
-| 15 | `variantconfigctsVersion` | variantconfigctsVersion | `variantconfigcts_version` | String | `text` |
-| 16 | `wbs` | wbs | `wbs` | 145cc7d2-79cf-4f3a-934c-c03b46d0fd42 | `quote` |
-| 17 | `agentId` | agentID | `agent_id` | 94b3280a-27a4-485a-b90b-b7bce57c6df2 | `quote` |
-| 18 | `allocationSourceId` | allocationSourceID | `allocation_source_id` | Long | `long` |
-| 19 | `isProcess` | 是否Process | `is_process` | Short | `short` |
-| 20 | `adminOrgId` | adminOrgID | `admin_org_id` | eaa75c14-e58f-4b35-9ae5-0032f4a98f54 | `quote` |
-| 21 | `vendorAuth` | vendorAuth | `subcontract_vendor_id` | 4267e0aa-1efb-4b5e-b921-25dca8392171 | `quote` |
-| 22 | `isRevising` | 是否Revising | `is_revising` | Short | `short` |
-| 23 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 24 | `subcontractVendorId` | subcontractVendorID | `subcontract_vendor_id` | 89bf026e-cc49-4fe7-9a7b-3e8fdcc77c1e | `quote` |
-| 25 | `originalId` | originalID | `original_id` | Long | `long` |
-| 26 | `isChange` | 是否Change | `is_change` | Short | `short` |
-| 27 | `sourceSrcDocType` | sourceSrcDocType | `source_src_doc_type` | Integer | `int` |
-| 28 | `toQuantity` | toQuantity | `to_quantity` | Decimal | `number` |
-| 29 | `bomClassify` | bomClassify | `bom_classify` | Short | `singleOption` |
-| 30 | `code` | 编码 | `code` | String | `text` |
-| 31 | `bomDefineCharacter` | bomDefineCharacter | `bom_define_character` | 6beb46c9-1483-4cf4-b674-72d7f1c1c326 | `UserDefine` |
-| 32 | `bomFreeCts` | bomFreeCts | `bom_free_cts` | 4340f2dd-0ae5-4599-a78a-25374110a095 | `FreeCT` |
-| 33 | `bomSensitive` | bomSensitive | `bom_sensitive` | b965523d-0044-4a47-9d03-9e275b330807 | `FreeCT` |
-| 34 | `orgId` | 组织ID | `org_id` | eaa75c14-e58f-4b35-9ae5-0032f4a98f54 | `quote` |
-| 35 | `changeRate` | changeRate | `change_rate` | Decimal | `number` |
-| 36 | `changeType` | changeType | `change_type` | Short | `short` |
-| 37 | `erpCode` | erp编码 | `erpcode` | String | `text` |
-| 38 | `newestVer` | newestVer | `newest_ver` | Short | `short` |
-| 39 | `produceBatch` | produceBatch | `produce_batch` | Decimal | `number` |
-| 40 | `produceUnit` | produceUnit | `produce_unit_id` | 9ea02a0b-3a48-4051-bcbe-59c7bcc7a25b | `quote` |
-| 41 | `sensitiveUID` | sensitiveUID | `sensitive_uid` | String | `text` |
-| 42 | `vouchdate` | vouchdate | `vouchdate` | Date | `date` |
-| 43 | `id` | ID | `id` | Long | `long` |
-| 44 | `bomType` | bomType | `bom_type` | Integer | `int` |
-| 45 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 46 | `materialId` | materialID | `material_id` | Long | `long` |
-| 47 | `skuId` | skuID | `sku_id` | 3e9ddc6d-edd0-4508-afcc-e4a20535f2f9 | `quote` |
-| 48 | `bomUnit` | bomUnit | `bom_unit_id` | 9ea02a0b-3a48-4051-bcbe-59c7bcc7a25b | `quote` |
-| 49 | `scrap` | scrap | `scrap` | Decimal | `number` |
-| 50 | `substituteFlag` | substituteFlag | `substitute_flag` | String | `text` |
-| 51 | `substituteDescription` | substituteDescription | `substitute_description` | String | `text` |
-| 52 | `remark` | remark | `remark` | String | `text` |
-| 53 | `status` | 状态 | `status` | Short | `short` |
-| 54 | `creator` | 创建人 | `creator` | String | `text` |
-| 55 | `createTime` | 创建时间 | `create_time` | DateTime | `timestamp` |
-| 56 | `modifier` | 修改人 | `modifier` | String | `text` |
-| 57 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `timestamp` |
-| 58 | `auditor` | auditor | `auditor` | String | `text` |
-| 59 | `auditTime` | auditTime | `audit_time` | DateTime | `timestamp` |
-| 60 | `versionCode` | version编码 | `version_code` | String | `text` |
-| 61 | `effectiveDate` | effectiveDate | `effective_date` | DateTime | `timestamp` |
-| 62 | `expiryDate` | expiryDate | `expiry_date` | DateTime | `timestamp` |
-| 63 | `isWholeSend` | 是否WholeSend | `is_whole_send` | Short | `singleOption` |
-| 64 | `isWholeReport` | 是否WholeReport | `is_whole_report` | Short | `short` |
-| 65 | `batch` | batch | `batch` | Decimal | `number` |
-| 66 | `isWfControlled` | 是否WfControlled | `isWfControlled` | Boolean | `switch` |
-| 67 | `useTypeId` | useTypeID | `use_type` | b4c8abe8-998a-421e-b12a-bf6b14121b4d | `quote` |
-| 68 | `verifystate` | verifystate | `verifystate` | Short | `short` |
-| 69 | `returncount` | returncount | `returncount` | Short | `short` |
-| 70 | `sourceType` | sourceType | `source_type` | Short | `short` |
-| 71 | `sourceId` | sourceID | `source_id` | String | `text` |
-| 72 | `rollup` | rollup | `rollup` | Short | `singleOption` |
-| 73 | `tplid` | tplid | `tplid` | Long | `long` |
-| 74 | `receiveStatu` | receiveStatu | `receive_statu` | String | `text` |
-| 75 | `version` | 版本号 | `version` | String | `text` |
-| 76 | `ecnOrderId` | ecnOrderID | `ecn_order_id` | Long | `long` |
-| 77 | `productAuth` | productAuth | `product_id` | 19097936-a02d-4ea4-8fa2-d3c7cb555913 | `quote` |
-| 78 | `stopstatus` | stopstatus | `stopstatus` | Boolean | `switch` |
-| 79 | `printCount` | printCount | `printCount` | Integer | `int` |
-| 80 | `isRevised` | 是否Revised | `is_revised` | Short | `short` |
-| 81 | `modifierId` | 修改人ID | `modifierId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 82 | `tenant` | tenant | `tenant_id` | c213cd56-d5de-421f-bae7-d77455b557cd | `quote` |
-| 83 | `ecnLineNo` | ecnLineNo | `ecn_line_no` | Decimal | `number` |
-| 84 | `ecnOrderDetailId` | ecnOrderDetailID | `ecn_order_detail_id` | Long | `long` |
-| 85 | `auditorId` | auditorID | `auditorId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 86 | `versionMemo` | versionMemo | `version_memo` | String | `text` |
-| 87 | `createDate` | 创建日期 | `create_date` | Date | `date` |
-| 88 | `parentId` | 上级ID | `parent_id` | Long | `long` |
-| 89 | `ecnOrderCode` | ecnOrder编码 | `ecn_order_code` | String | `text` |
-| 90 | `stoptime` | stoptime | `stop_time` | DateTime | `timestamp` |
-| 91 | `modifyDate` | 修改日期 | `modify_date` | Date | `date` |
-| 92 | `creatorId` | 创建人ID | `creatorId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 93 | `activity` | activity | `activity` | Long | `long` |
-| 94 | `bomApplyrange` | bomApplyrange | `` | f92eebac-847d-4533-8888-8e30ca4cc6f1 | `` |
-| 95 | `bomAttrextItem` | bomAttrextItem | `` | 7574bb5e-343c-413f-8875-c417cf7675b2 | `` |
-| 96 | `bomByproduct` | bomByproduct | `` | 0445cbea-e503-4d98-83bb-4761d390762b | `` |
-| 97 | `bomComponent` | bomComponent | `` | f78e2b2f-0634-41d3-a002-c5a68f3e9992 | `` |
-| 98 | `bomComponentRuleDetail` | bomComponentRuleDetail | `` | afd6cbb2-89cb-4a49-95d2-03cf9a4849f1 | `` |
-| 99 | `bomUserdefItem` | bomUserdefItem | `` | 86723d82-3639-484b-967b-a4d5ffae56c3 | `` |
-| 100 | `changeRateDen` | changeRateDen | `change_rate_den` | Decimal | `number` |
-| 101 | `changeRateNum` | changeRateNum | `change_rate_num` | Decimal | `number` |
-| 102 | `dr` | 逻辑删除 | `dr` | Short | `short` |
-| 103 | `submitTime` | submitTime | `submit_time` | DateTime | `dateTime` |
-| 104 | `submitter` | submitter | `submitter` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 105 | `withdrawTime` | withdrawTime | `withdraw_time` | DateTime | `dateTime` |
-| 106 | `withdrawpp` | withdrawpp | `withdrawpp` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 成品信息 |
+| 物理表 | `ed_bom` |
+| 数据库 schema | `engineeringdata` |
+| 所属应用 | `ED` |
+| 直连字段 | 106 个 |
+| 子表 | 6 个 |
+| 关联引用 | 30 个 |
 
-## 关联（30 个）
+## 子表
 
-- `produceUnit` -> `pc.unit.Unit` ()
-- `submitter` -> `base.user.BipUser` ()
-- `agentId` -> `aa.merchant.Merchant` ()
-- `creatorId` -> `base.user.User` ()
-- `modifierId` -> `base.user.User` ()
-- `bomByproduct` -> `ed.bom.BomByproduct` (0..n)
-- `wbs` -> `BGDM.wbs.wbs_doc` ()
-- `vendorAuth` -> `pb.dataauth.VendorDataAuth` ()
-- `orgId` -> `aa.baseorg.OrgMV` ()
-- `bomUnit` -> `pc.unit.Unit` ()
-- `variantconfigctsId` -> `vc.variantconfigcts.VariantConfigCts` ()
-- `bomFreeCts` -> `ed.bom.EdBomCt` ()
-- `withdrawpp` -> `base.user.BipUser` ()
-- `bomApplyrange` -> `ed.bom.BomApplyrange` (0..n)
-- `transTypeId` -> `bd.bill.TransType` ()
-- `bomComponentRuleDetail` -> `ed.bom.BomComponentRuleDetail` (0..n)
-- `skuId` -> `pc.product.ProductSKU` ()
-- `tenant` -> `base.tenant.Tenant` ()
-- `productId` -> `pc.product.Product` ()
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `bomSensitive` -> `ed.bom.EdBomBomaffec` ()
-- `useTypeId` -> `ed.usetype.UseType` ()
-- `bomComponent` -> `ed.bom.BomComponent` (0..n)
-- `bomDefineCharacter` -> `ed.bom.BomDefineCharacter` ()
-- `subcontractVendorId` -> `aa.vendor.Vendor` ()
-- `adminOrgId` -> `aa.baseorg.OrgMV` ()
-- `auditorId` -> `base.user.User` ()
-- `productAuth` -> `pb.dataauth.ProductDataAuth` ()
-- `bomAttrextItem` -> `ed.bom.BomAttrextItem` (1)
-- `bomUserdefItem` -> `ed.bom.BomUserdefItem` (1)
+| 字段名 | URI | 关系 |
+|--------|-----|------|
+| `bomApplyrange` | `ed.bom.BomApplyrange` | composition |
+| `bomByproduct` | `ed.bom.BomByproduct` | composition |
+| `bomAttrextItem` | `ed.bom.BomAttrextItem` | composition |
+| `bomUserdefItem` | `ed.bom.BomUserdefItem` | composition |
+| `bomComponentRuleDetail` | `ed.bom.BomComponentRuleDetail` | composition |
+| `bomComponent` | `ed.bom.BomComponent` | composition |
+
+## 关联引用 (30个)
+
+| 字段名 | 引用类型 |
+|--------|---------|
+| `produce_unit_id` | `productcenter.pc_productassitunitsref` |
+| `submitter` | `` |
+| `agent_id` | `` |
+| `` | `` |
+| `wbs` | `` |
+| `subcontract_vendor_id` | `` |
+| `org_id` | `ucf-org-center.bd_factoryorg` |
+| `bom_unit_id` | `` |
+| `variantconfigcts_id` | `` |
+| `bom_free_cts` | `` |
+| `withdrawpp` | `` |
+| `trans_type_id` | `` |
+| `sku_id` | `productcenter.productskuref` |
+| `tenant_id` | `` |
+| `product_id` | `` |
+| `ytenant_id` | `` |
+| `bom_sensitive` | `` |
+| `use_type` | `engineeringdata.ed_use_type_ref` |
+| `bom_define_character` | `` |
+| `admin_org_id` | `` |
+
+## 继承接口 (1个, 1字段)
+
+- **逻辑删除相关** (`ucfbase.ucfbaseItf.LogicDelete`)
+  - `dr` → `dr`
+
+## 字段列表（按类型分组）
+
+> 共 106 个直连字段
+
+### 文本字段 (24个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `engineering_draw_number` | `engineering_draw_number` | `engineeringDrawNumber` | 工程图号 |
+| `source_code` | `source_code` | `sourceCode` | 来源单据编码 |
+| `source_line_no` | `source_line_no` | `sourceLineNo` | 来源单据行号 |
+| `source_src_doc_id` | `source_src_doc_id` | `sourceSrcDocId` | 来源单据ID |
+| `from_src_doc_id` | `from_src_doc_id` | `fromSrcDocId` | 来源单据ID |
+| `from_code` | `from_code` | `fromCode` | 来源单据编码 |
+| `from_line_no` | `from_line_no` | `fromLineNo` | 来源单据行号 |
+| `config_no` | `config_no` | `configNo` | 配置号 |
+| `variantconfigcts_version` | `variantconfigcts_version` | `variantconfigctsVersion` | 选配结果清单版本 |
+| `code` | `code` | `code` | code |
+| `erpcode` | `erpcode` | `erpCode` | erpCode |
+| `sensitive_uid` | `sensitive_uid` | `sensitiveUID` | BOM敏感域唯一性ID |
+| `substitute_flag` | `substitute_flag` | `substituteFlag` | 替代标识 |
+| `substitute_description` | `substitute_description` | `substituteDescription` | 替代说明 |
+| `remark` | `remark` | `remark` | 备注 |
+| `` | `creator` | `creator` | 创建人 |
+| `` | `modifier` | `modifier` | 最后修改人 |
+| `` | `auditor` | `auditor` | 审核人 |
+| `version_code` | `version_code` | `versionCode` | 版本号 |
+| `source_id` | `source_id` | `sourceId` | 来源Id |
+| `receive_statu` | `receive_statu` | `receiveStatu` | 接收状态 |
+| `version` | `version` | `version` | 版本代号 |
+| `version_memo` | `version_memo` | `versionMemo` | 版本说明 |
+| `ecn_order_code` | `ecn_order_code` | `ecnOrderCode` | 工程变更单据号 |
+
+### 引用字段 (21个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `product_id` | `product_id` | `productId` | 物料 |
+| `variantconfigcts_id` | `variantconfigcts_id` | `variantconfigctsId` | 选配结果清单ID |
+| `trans_type_id` | `trans_type_id` | `transTypeId` | 交易类型 |
+| `wbs` | `wbs` | `wbs` | wbs |
+| `agent_id` | `agent_id` | `agentId` | 客户id |
+| `admin_org_id` | `admin_org_id` | `adminOrgId` | 管理组织 |
+| `subcontract_vendor_id` | `subcontract_vendor_id` | `vendorAuth` | 委外供应商权限 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+| `subcontract_vendor_id` | `subcontract_vendor_id` | `subcontractVendorId` | 委外供应商 |
+| `org_id` | `org_id` | `orgId` | 组织id |
+| `produce_unit_id` | `produce_unit_id` | `produceUnit` | 生产单位 |
+| `sku_id` | `sku_id` | `skuId` | 母件SKUid |
+| `bom_unit_id` | `bom_unit_id` | `bomUnit` | 主计量单位id |
+| `use_type` | `use_type` | `useTypeId` | 用途ID |
+| `product_id` | `product_id` | `productAuth` | 物料权限 |
+| `` | `modifierId` | `modifierId` | 修改人 |
+| `tenant_id` | `tenant_id` | `tenant` | 租户 |
+| `` | `auditorId` | `auditorId` | 审批人 |
+| `` | `creatorId` | `creatorId` | 创建人 |
+| `submitter` | `submitter` | `submitter` | 提交人 |
+| `withdrawpp` | `withdrawpp` | `withdrawpp` | 撤回提交的人 |
+
+### 日期字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `audit_date` | `audit_date` | `auditDate` | 审批日期 |
+| `vouchdate` | `vouchdate` | `vouchdate` | 单据日期 |
+| `create_date` | `create_date` | `createDate` | 创建日期 |
+| `modify_date` | `modify_date` | `modifyDate` | 修改日期 |
+
+### 日期时间 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `submit_time` | `submit_time` | `submitTime` | 提交时间 |
+| `withdraw_time` | `withdraw_time` | `withdrawTime` | 撤回提交时间 |
+
+### 布尔字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `isWfControlled` | `isWfControlled` | 是否审批流控制 |
+| `stopstatus` | `stopstatus` | `stopstatus` | 停用状态 |
+
+### 枚举字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `quantity_control` | `quantity_control` | `quantityControl` | 按数量控制 |
+| `bom_classify` | `bom_classify` | `bomClassify` | bom类别 |
+| `is_whole_send` | `is_whole_send` | `isWholeSend` | 整单齐套发料 |
+| `rollup` | `rollup` | `rollup` | 默认卷积 |
+
+### 整数 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `source_src_doc_type` | `source_src_doc_type` | `sourceSrcDocType` | 来源单据类型 |
+| `bom_type` | `bom_type` | `bomType` | BOM类别 |
+| `printCount` | `printCount` | `printCount` | 打印次数 |
+
+### 短整数 (12个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `is_process` | `is_process` | `isProcess` | 是否过程中bom |
+| `is_revising` | `is_revising` | `isRevising` | 是否展示 |
+| `is_change` | `is_change` | `isChange` | 变更中 |
+| `change_type` | `change_type` | `changeType` | 换算方式 |
+| `newest_ver` | `newest_ver` | `newestVer` | 是否最新版本 |
+| `` | `status` | `status` | 状态 |
+| `is_whole_report` | `is_whole_report` | `isWholeReport` | 齐套分析 |
+| `` | `verifystate` | `verifystate` | 审批状态 |
+| `` | `returncount` | `returncount` | 退回次数 |
+| `source_type` | `source_type` | `sourceType` | 来源类型 |
+| `is_revised` | `is_revised` | `isRevised` | 是否经过修订 |
+| `dr` | `dr` | `dr` | 逻辑删除标记 |
+
+### 长整数 (9个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `allocation_source_id` | `allocation_source_id` | `allocationSourceId` | 分配来源Id |
+| `original_id` | `original_id` | `originalId` | 修订源 |
+| `id` | `id` | `id` | 母件信息表关联标识 |
+| `material_id` | `material_id` | `materialId` | 母件id |
+| `` | `tplid` | `tplid` | 模板id |
+| `ecn_order_id` | `ecn_order_id` | `ecnOrderId` | 工程变更单id |
+| `ecn_order_detail_id` | `ecn_order_detail_id` | `ecnOrderDetailId` | 变更明细id  |
+| `parent_id` | `parent_id` | `parentId` | 公用BOMId |
+| `activity` | `activity` | `activity` | 项目活动id |
+
+### 数值字段 (9个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `from_quantity` | `from_quantity` | `fromQuantity` | 从数量 |
+| `to_quantity` | `to_quantity` | `toQuantity` | 到数量 |
+| `change_rate` | `change_rate` | `changeRate` | 换算率 |
+| `produce_batch` | `produce_batch` | `produceBatch` | 生产单位批量 |
+| `scrap` | `scrap` | `scrap` | 废品率(%) |
+| `batch` | `batch` | `batch` | 批量 |
+| `ecn_line_no` | `ecn_line_no` | `ecnLineNo` | 工厂变更单行号 |
+| `change_rate_den` | `change_rate_den` | `changeRateDen` | 换算率分母 |
+| `change_rate_num` | `change_rate_num` | `changeRateNum` | 换算率分子 |
+
+### UserDefine (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `bom_define_character` | `bom_define_character` | `bomDefineCharacter` | 自定义项特征属性组 |
+
+### FreeCT (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `bom_free_cts` | `bom_free_cts` | `bomFreeCts` | BOM自由项特征组自定义项实体 |
+| `bom_sensitive` | `bom_sensitive` | `bomSensitive` | BOM敏感域自定义项实体 |
+
+### timestamp (7个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 最后修改时间 |
+| `audit_time` | `audit_time` | `auditTime` | 审核时间 |
+| `effective_date` | `effective_date` | `effectiveDate` | 生效时间 |
+| `expiry_date` | `expiry_date` | `expiryDate` | 失效时间 |
+| `stop_time` | `stop_time` | `stoptime` | 停用时间 |
+
+### other (6个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `` | `bomApplyrange` | BOM适用范围 |
+| `` | `` | `bomAttrextItem` | 表头自由自定义项 |
+| `` | `` | `bomByproduct` | 产出品 |
+| `` | `` | `bomComponent` | 子件信息 |
+| `` | `` | `bomComponentRuleDetail` | BOM子件规则明细 |
+| `` | `` | `bomUserdefItem` | 表头固定自定义项 |

@@ -12,33 +12,80 @@ source_type: api_response
 
 # 承运关系 (`les.carrier.carrierRelation`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `ils_les_c_relation` | 应用: `DPMSI` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`ils_les_c_relation` | domain：`IMP-ILSBD` | 应用：`DPMSI` | 业务对象ID：``
 
-## 属性（13 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `id` | ID | `id` | String | `text` |
-| 2 | `logistics_org` | logistics_org | `logistics_org` | 14302233-1394-4a70-94e1-bed51636f312 | `quote` |
-| 3 | `pk_carrier` | pk_carrier | `pk_carrier` | 1b03840a-b023-48e5-8ef4-0e613721e2d0 | `quote` |
-| 4 | `dr` | 逻辑删除 | `dr` | Integer | `int` |
-| 5 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 6 | `definect` | definect | `definect` | 775a2938-31c2-4afe-b677-a1542512ba36 | `UserDefine` |
-| 7 | `pubts` | 时间戳 | `pubts` | DateTime | `dateTime` |
-| 8 | `tenant` | tenant | `tenant_id` | String | `text` |
-| 9 | `modifier` | 修改人 | `modifier` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 10 | `creator` | 创建人 | `creator` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 11 | `createTime` | 创建时间 | `create_time` | DateTime | `dateTime` |
-| 12 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `dateTime` |
-| 13 | `bodydefines` | bodydefines | `` | b7386892-a5be-495e-b86f-0187c7c11ed1 | `` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 承运关系 |
+| 物理表 | `ils_les_c_relation` |
+| 数据库 schema | `IMP-ILSBD` |
+| 所属应用 | `DPMSI` |
+| 直连字段 | 13 个 |
+| 子表 | 1 个 |
+| 关联引用 | 7 个 |
 
-## 关联（7 个）
+## 子表
 
-- `pk_carrier` -> `les.carrier.carrier` (0..n)
-- `creator` -> `base.user.BipUser` ()
-- `bodydefines` -> `les.carrier.carrierRelationDefine` (1)
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `modifier` -> `base.user.BipUser` ()
-- `definect` -> `les.carrier.carrierRelationDefinect` ()
-- `logistics_org` -> `org.func.BaseOrg` ()
+| 字段名 | URI | 关系 |
+|--------|-----|------|
+| `bodydefines` | `les.carrier.carrierRelationDefine` | composition |
+
+## 关联引用 (7个)
+
+| 字段名 | 引用类型 |
+|--------|---------|
+| `pk_carrier` | `` |
+| `` | `` |
+| `ytenant_id` | `` |
+| `definect` | `` |
+| `logistics_org` | `ucf-org-center.org_pure_tree_ref` |
+
+## 字段列表（按类型分组）
+
+> 共 13 个直连字段
+
+### 文本字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+| `tenant_id` | `tenant_id` | `tenant` | 租户(废弃) |
+
+### 引用字段 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `logistics_org` | `logistics_org` | `logistics_org` | 物流组织编码 |
+| `pk_carrier` | `pk_carrier` | `pk_carrier` | 关联主表数据 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户 |
+| `` | `modifier` | `modifier` | 修改人 |
+| `` | `creator` | `creator` | 创建人 |
+
+### 日期时间 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+
+### 整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dr` | `dr` | `dr` | 删除状态 |
+
+### UserDefine (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `definect` | `definect` | `definect` | 自定义项特征组 |
+
+### other (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `` | `bodydefines` | 承运关系自定义项 |

@@ -12,41 +12,111 @@ source_type: api_response
 
 # 项目活动检查项 (`pgrm.projecttask.ProjectTaskCheckitem`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `pgrm_activity_checkitem` | 应用: `PGRM` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`pgrm_activity_checkitem` | domain：`yonbip-pm-projectme` | 应用：`PGRM` | 业务对象ID：`f76a015a-f5ed-4916-8354-47da523fbe1f`
 
-## 属性（21 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `actualEndDate` | actualEndDate | `actual_end_date` | String | `date` |
-| 2 | `actualStartDate` | actualStartDate | `actual_start_date` | String | `date` |
-| 3 | `checkFlag` | checkFlag | `checkFlag` | Short | `short` |
-| 4 | `content` | content | `content` | String | `text` |
-| 5 | `createTime` | 创建时间 | `create_time` | DateTime | `dateTime` |
-| 6 | `creator` | 创建人 | `creator` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 7 | `defineCharacter` | defineCharacter | `define_character` | ad294703-45e7-44f9-914e-479df643e490 | `UserDefine` |
-| 8 | `dr` | 逻辑删除 | `dr` | Short | `short` |
-| 9 | `iOrder` | iOrder | `iorder` | Integer | `int` |
-| 10 | `id` | ID | `id` | String | `text` |
-| 11 | `modifier` | 修改人 | `modifier` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 12 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `dateTime` |
-| 13 | `orgId` | 组织ID | `org_id` | 14302233-1394-4a70-94e1-bed51636f312 | `quote` |
-| 14 | `planEndDate` | planEndDate | `plan_end_date` | Date | `date` |
-| 15 | `projectDocumentUrl` | projectDocumentUrl | `project_document_url` | String | `link` |
-| 16 | `projectId` | projectID | `project_id` | b1e7cbf6-094a-4200-b451-36bfa3ac3ff4 | `quote` |
-| 17 | `pubts` | 时间戳 | `pubts` | DateTime | `dateTime` |
-| 18 | `taskId` | taskID | `task_id` | b4a90beb-49ed-4301-b12e-9221d0d12fd1 | `quote` |
-| 19 | `weight` | weight | `weight` | Decimal | `number` |
-| 20 | `weightPercent` | weightPercent | `weight_percent` | Decimal | `number` |
-| 21 | `ytenantId` | ytenantID | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 项目活动检查项 |
+| 物理表 | `pgrm_activity_checkitem` |
+| 数据库 schema | `yonbip-pm-projectme` |
+| 所属应用 | `PGRM` |
+| 直连字段 | 21 个 |
+| 子表 | 0 个 |
+| 关联引用 | 7 个 |
 
-## 关联（7 个）
+## 关联引用 (7个)
 
-- `creator` -> `base.user.BipUser` ()
-- `modifier` -> `base.user.BipUser` ()
-- `ytenantId` -> `yht.tenant.YhtTenant` ()
-- `defineCharacter` -> `pgrm.projecttask.ProjectTaskCheckitemdefineCharacterUserDefine` ()
-- `projectId` -> `bd.project.ProjectVO` ()
-- `orgId` -> `org.func.BaseOrg` ()
-- `taskId` -> `pgrm.projecttask.ProjectScheduleTask` (0..n)
+| 字段名 | 引用类型 |
+|--------|---------|
+| `creator` | `bip-usercenter.bip_user_ref` |
+| `modifier` | `bip-usercenter.bip_user_ref` |
+| `ytenant_id` | `` |
+| `define_character` | `` |
+| `project_id` | `` |
+| `org_id` | `` |
+| `task_id` | `yonbip-pm-projectme.RefTable_ebcf54ed61` |
+
+## 继承接口 (3个, 6字段)
+
+- **逻辑删除** (`iuap.busiObj.LogicDelete`)
+  - `dr` → `dr`
+- **统一租户接口** (`iuap.busiObj.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+- **审计信息** (`iuap.busiObj.IAuditInfo`)
+  - `create_time` → `create_time`
+  - `creator` → `creator`
+  - `modifier` → `modifier`
+  - `modify_time` → `modify_time`
+
+## 字段列表（按类型分组）
+
+> 共 21 个直连字段
+
+### 文本字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `content` | `content` | `content` | 检查项内容 |
+| `id` | `id` | `id` | 主键 |
+
+### 引用字段 (6个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `creator` | `creator` | `creator` | 创建人 |
+| `modifier` | `modifier` | `modifier` | 修改人 |
+| `org_id` | `org_id` | `orgId` | 主组织 |
+| `project_id` | `project_id` | `projectId` | 项目 |
+| `task_id` | `task_id` | `taskId` | 主表外键 |
+| `ytenant_id` | `ytenant_id` | `ytenantId` | 租户id |
+
+### 日期字段 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `actual_end_date` | `actual_end_date` | `actualEndDate` | 实际结束日期 |
+| `actual_start_date` | `actual_start_date` | `actualStartDate` | 实际开始时间 |
+| `plan_end_date` | `plan_end_date` | `planEndDate` | 计划完成日期 |
+
+### 日期时间 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+
+### 整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iorder` | `iorder` | `iOrder` | 序号 |
+
+### 短整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `checkFlag` | `checkFlag` | `checkFlag` | 是否已检查 |
+| `dr` | `dr` | `dr` | 逻辑删除 |
+
+### 数值字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `weight` | `weight` | `weight` | 权重 |
+| `weight_percent` | `weight_percent` | `weightPercent` | 权重百分比 |
+
+### UserDefine (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `define_character` | `define_character` | `defineCharacter` | 自定义项特征 |
+
+### link (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `project_document_url` | `project_document_url` | `projectDocumentUrl` | 项目文档地址 |

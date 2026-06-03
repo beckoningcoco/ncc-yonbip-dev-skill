@@ -9,135 +9,255 @@ last_verified: 2026-06-03
 status: verified
 source_type: api_response
 ---
+
 # 应付结算清单基本信息 (`earap.payable.PayableHeader`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBip），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `ap_payable_h` | 应用: `STB`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`ap_payable_h` | domain：`yonbip-ec-contract` | 应用：`STB` | 业务对象ID：`d610a7e5-78db-461c-a39c-57d3d42a26b8`
 
-## 属性（92 个）
+## 基本信息
 
-| # | 字段 | 显示名 | 列 | 类型 | biztype |
-|---|------|--------|-----|------|---------|
-| 1 | `invoiceType` | invoiceType | `invoice_type_id` | 3a762abb-858d-4fc4-a60e-4850edf0ab1b | `quote` |
-| 2 | `supplier` | supplier | `supplier_id` | 89bf026e-cc49-4fe7-9a7b-3e8fdcc77c1e | `quote` |
-| 3 | `org` | org | `org_id` | 14302233-1394-4a70-94e1-bed51636f312 | `quote` |
-| 4 | `cooperater` | cooperater | `cooperater` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 5 | `freeChId` | freeChID | `free_ch_id` | 403a5724-3f14-481f-86d5-147147eda49b | `UserDefine` |
-| 6 | `oriTaxExcludedAmount` | oriTaxExcludedAmount | `ori_tax_excluded_amount` | Decimal | `number` |
-| 7 | `partner` | partner | `partner_id` | c1627369-6457-4828-883d-756b79bd0f46 | `quote` |
-| 8 | `invoiceCode` | invoice编码 | `invoice_code` | String | `text` |
-| 9 | `cooperateState` | cooperateState | `cooperate_state` | STB_BillCooperationConfirmStateEnum | `singleOption` |
-| 10 | `invoiceDate` | invoiceDate | `invoice_date` | String | `date` |
-| 11 | `contractNo` | 合同编号 | `contract_no` | String | `text` |
-| 12 | `cooperateFlag` | cooperateFlag | `cooperate_flag` | STB_BillCooperationFlagEnum | `singleOption` |
-| 13 | `retailer` | retailer | `retailer_name` | String | `text` |
-| 14 | `bustype` | bustype | `bus_type_id` | 19f9264d-28d1-4b47-9d28-f2e82654f3a9 | `quote` |
-| 15 | `srcSystem` | srcSystem | `src_system` | STB_SrcSystemEnum | `singleOption` |
-| 16 | `businessType` | businessType | `business_type` | STB_BusinessTypeEnum | `singleOption` |
-| 17 | `cooperateTime` | cooperateTime | `cooperate_time` | Date | `dateTime` |
-| 18 | `billType` | 票据类型 | `bill_type_id` | 4a227650-b866-4f4c-a6ca-2433297a1713 | `quote` |
-| 19 | `staff` | staff | `staff_id` | 78bff1de-ddf1-4814-90de-b0b5f1eac78a | `quote` |
-| 20 | `orderNo` | orderNo | `order_no` | String | `text` |
-| 21 | `oriTaxIncludedAmount` | oriTaxIncludedAmount | `ori_tax_included_amount` | Decimal | `number` |
-| 22 | `agreement` | agreement | `pay_agreement_id` | 3cce8052-512e-4e51-9b6e-57adff40948c | `quote` |
-| 23 | `srcBillId` | srcBillID | `src_bill_id` | String | `text` |
-| 24 | `creator` | 创建人 | `creator` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 25 | `objectType` | objectType | `object_type` | STB_ObjectTypeApEnum | `singleOption` |
-| 26 | `funder` | funder | `funder_id` | e969728a-efe8-49db-86b0-5f8e18c2f098 | `quote` |
-| 27 | `financeOrg` | financeOrg | `finance_org_id` | 5d4c5590-da40-4b50-80a1-8d04da2f79e0 | `quote` |
-| 28 | `employee` | employee | `employee_id` | 78bff1de-ddf1-4814-90de-b0b5f1eac78a | `quote` |
-| 29 | `dept` | dept | `dept_id` | a4352e3c-3eda-4539-a7a9-ec00799be118 | `quote` |
-| 30 | `srcBillType` | srcBillType | `src_bill_type` | String | `text` |
-| 31 | `project` | project | `project_id` | b1e7cbf6-094a-4200-b451-36bfa3ac3ff4 | `quote` |
-| 32 | `localTaxExcludedAmount` | localTaxExcludedAmount | `local_tax_excluded_amount` | Decimal | `number` |
-| 33 | `extSystemCode` | extSystem编码 | `ext_system_code` | String | `text` |
-| 34 | `code` | 编码 | `bill_code` | String | `text` |
-| 35 | `localTaxIncludedAmount` | localTaxIncludedAmount | `local_tax_included_amount` | Decimal | `number` |
-| 36 | `direction` | direction | `direction` | STB_DirectionEnum | `singleOption` |
-| 37 | `extVouchCode` | extVouch编码 | `ext_vouch_code` | String | `text` |
-| 38 | `invoiceNo` | invoiceNo | `invoice_no` | String | `text` |
-| 39 | `billDate` | billDate | `bill_date` | String | `text` |
-| 40 | `srcApp` | srcApp | `src_app_id` | a38a641a-6992-46cc-b8b8-55da8d2d07c9 | `quote` |
-| 41 | `status` | 状态 | `status` | STB_BillStatusEnum | `singleOption` |
-| 42 | `postStatus` | postStatus | `busi_post_status` | STB_PostStatusEnum | `singleOption` |
-| 43 | `oriCurrency` | oriCurrency | `ori_currency_id` | 02b45339-eb4a-4a31-a8b5-d32f494f4e8e | `quote` |
-| 44 | `orgCurrency` | orgCurrency | `org_currency_id` | 02b45339-eb4a-4a31-a8b5-d32f494f4e8e | `quote` |
-| 45 | `exchangeRateType` | exchangeRateType | `exchange_rate_type_id` | 1eb63781-e244-464d-b9ba-a7a4e1685295 | `quote` |
-| 46 | `exchangeRateDate` | exchangeRateDate | `exchange_rate_date` | String | `date` |
-| 47 | `exchangeRate` | exchangeRate | `exchange_rate` | Decimal | `number` |
-| 48 | `blnWriteOff` | blnWriteOff | `bln_write_off` | Boolean | `switch` |
-| 49 | `writeOffState` | writeOffState | `write_off_state` | STB_WriteOffStateEnum | `singleOption` |
-| 50 | `effectState` | effectState | `effect_state` | STB_EffectEnum | `singleOption` |
-| 51 | `effectTime` | effectTime | `effect_time` | Date | `dateTime` |
-| 52 | `auditDate` | auditDate | `audit_date` | Date | `dateTime` |
-| 53 | `remarks` | remarks | `remarks` | String | `text` |
-| 54 | `dtcStatus` | dtcStatus | `dtc_status` | Integer | `int` |
-| 55 | `dtcGtxId` | dtcGtxID | `dtc_gtxid` | String | `text` |
-| 56 | `eeacVersion` | eeacVersion | `eeac_version` | Integer | `int` |
-| 57 | `accountingMethod` | accountingMethod | `accounting_method` | AccountingMethodEnum | `singleOption` |
-| 58 | `taxMethod` | taxMethod | `tax_method` | TaxMethod_C | `singleOption` |
-| 59 | `printCount` | printCount | `print_count` | Integer | `int` |
-| 60 | `previewPrintCount` | previewPrintCount | `preview_print_count` | Integer | `int` |
-| 61 | `directPrintCount` | directPrintCount | `direct_print_count` | Integer | `int` |
-| 62 | `exchangeRateOps` | exchangeRateOps | `exchange_rate_ops` | STB_ExchangeRateOpsEnum | `singleOption` |
-| 63 | `activity` | activity | `activity` | b4a90beb-49ed-4301-b12e-9221d0d12fd1 | `quote` |
-| 64 | `approvalTasks` | approvalTasks | `` | 26c26c12-1e81-4bdc-b4c1-374f3f1a3d11 | `` |
-| 65 | `auditNote` | auditNote | `auditnote` | String | `text` |
-| 66 | `auditTime` | auditTime | `audit_time` | DateTime | `dateTime` |
-| 67 | `auditor` | auditor | `auditor` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 68 | `bizFlowInstanceId` | bizFlowInstanceID | `bizflowinstance_id` | String | `text` |
-| 69 | `bizFlowMakeBillCode` | bizFlowMakeBill编码 | `bizflow_makebillcode` | String | `text` |
-| 70 | `bizflowId` | bizflowID | `bizflow_id` | String | `text` |
-| 71 | `bizflowName` | bizflow名称 | `bizflowname` | String | `text` |
-| 72 | `bodyItem` | bodyItem | `` | b32666f6-353f-4f31-bca7-d17de7bb53e8 | `` |
-| 73 | `bpmSteps` | bpmSteps | `` | 4a8b1611-ab2a-426d-a173-a3cc1716b4f3 | `` |
-| 74 | `createTime` | 创建时间 | `create_time` | DateTime | `dateTime` |
-| 75 | `dr` | 逻辑删除 | `dr` | Short | `short` |
-| 76 | `firstBusiObj` | firstBusiObj | `firstbusiobj` | String | `text` |
-| 77 | `firstChildId` | firstChildID | `firstchild_id` | String | `text` |
-| 78 | `firstCode` | first编码 | `firstcode` | String | `text` |
-| 79 | `firstId` | firstID | `first_id` | String | `text` |
-| 80 | `id` | ID | `id` | String | `text` |
-| 81 | `modifier` | 修改人 | `modifier` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 82 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `dateTime` |
-| 83 | `procinstId` | procinstID | `procinst_id` | String | `text` |
-| 84 | `pubts` | 时间戳 | `pubts` | DateTime | `dateTime` |
-| 85 | `sourceBusiObj` | sourceBusiObj | `sourcebusiobj` | String | `text` |
-| 86 | `sourceChildId` | sourceChildID | `sourcechild_id` | String | `text` |
-| 87 | `sourceCode` | source编码 | `sourcecode` | String | `text` |
-| 88 | `sourceGrandId` | sourceGrandID | `sourcegrand_id` | String | `text` |
-| 89 | `sourceId` | sourceID | `source_id` | String | `text` |
-| 90 | `verifyState` | verifyState | `verifystate` | sys_verifystate | `singleOption` |
-| 91 | `wbs` | wbs | `wbs` | 145cc7d2-79cf-4f3a-934c-c03b46d0fd42 | `quote` |
-| 92 | `ytenantId` | ytenantID | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 应付结算清单基本信息 |
+| 物理表 | `ap_payable_h` |
+| 数据库 schema | `yonbip-ec-contract` |
+| 所属应用 | `STB` |
+| 直连字段 | 92 个 |
+| 子表 | 3 个 |
+| 关联引用 | 28 个 |
 
-## 关联（28 个）
+## 子表
 
-- `funder` -> `tmsp.fundbusinobjarchives.FundBusinObjArchives` () [废]
-- `oriCurrency` -> `bd.currencytenant.CurrencyTenantVO` () [废]
-- `financeOrg` -> `org.func.FinanceOrg` () [废]
-- `activity` -> `pgrm.projecttask.ProjectScheduleTask` () 
-- `modifier` -> `base.user.BipUser` () 
-- `project` -> `bd.project.ProjectVO` () [废]
-- `wbs` -> `BGDM.wbs.wbs_doc` () 
-- `employee` -> `bd.staff.StaffNew` () [废]
-- `supplier` -> `aa.vendor.Vendor` () [废]
-- `invoiceType` -> `bd.invoice.InvoiceTypeVO` () [废]
-- `orgCurrency` -> `bd.currencytenant.CurrencyTenantVO` () [废]
-- `creator` -> `base.user.BipUser` () [废]
-- `bodyItem` -> `earap.payable.PayableBody` (0..n) 
-- `agreement` -> `bd.payments.PayAgreement` () [废]
-- `org` -> `org.func.BaseOrg` () [废]
-- `billType` -> `bd.bill.BillTypeVO` () [废]
-- `cooperater` -> `base.user.BipUser` () [废]
-- `approvalTasks` -> `earap.payable.PayableApprovalTask` (0..n) 
-- `auditor` -> `base.user.BipUser` () 
-- `staff` -> `bd.staff.StaffNew` () [废]
-- `dept` -> `bd.adminOrg.AdminOrgVO` () [废]
-- `freeChId` -> `earap.payable.PayableHeaderfreeChIdUserDefine` () [废]
-- `ytenantId` -> `yht.tenant.YhtTenant` () 
-- `srcApp` -> `STB.sourceapplication.SourceApplication` () [废]
-- `bustype` -> `bd.bill.TransType` () [废]
-- `exchangeRateType` -> `bd.exchangeRate.ExchangeRateTypeVO` () [废]
-- `partner` -> `base.businesspartner.BusinessPartner` () [废]
-- `bpmSteps` -> `earap.payable.PayableBpmStep` (0..n) 
+| 字段名 | URI | 关系 |
+|--------|-----|------|
+| `bodyItem` | `earap.payable.PayableBody` | composition |
+| `approvalTasks` | `earap.payable.PayableApprovalTask` | composition |
+| `bpmSteps` | `earap.payable.PayableBpmStep` | composition |
+
+## 关联引用 (28个)
+
+| 字段名 | 引用类型 |
+|--------|---------|
+| `funder_id` | `yonbip-fi-ctmtmsp.tmsp_fundbusinobj_Ref` |
+| `ori_currency_id` | `ucfbasedoc.bd_currencytenantref` |
+| `finance_org_id` | `ucf-org-center.bd_financeorgtreeref` |
+| `activity` | `` |
+| `modifier` | `bip-usercenter.bip_user_ref` |
+| `project_id` | `ucfbasedoc.bd_projectcardref` |
+| `wbs` | `` |
+| `employee_id` | `ucf-staff-center.bd_staff_all_ref` |
+| `supplier_id` | `yssupplier.aa_vendor` |
+| `invoice_type_id` | `ucfbasedoc.bd_invoiceref` |
+| `org_currency_id` | `ucfbasedoc.bd_currencytenantref` |
+| `creator` | `bip-usercenter.bip_user_ref` |
+| `` | `` |
+| `pay_agreement_id` | `ucfbasedoc.bd_payagreementref` |
+| `org_id` | `ucf-org-center.org_pure_tree_ref` |
+| `bill_type_id` | `ucfbasedoc.bd_billtypetreeref` |
+| `cooperater` | `bip-usercenter.bip_user_ref` |
+| `auditor` | `bip-usercenter.bip_user_ref` |
+| `staff_id` | `ucf-staff-center.bd_staff_all_ref` |
+| `dept_id` | `ucf-org-center.org_unit_tree_ref` |
+| `free_ch_id` | `` |
+| `ytenant_id` | `` |
+| `src_app_id` | `yonbip-ec-contract.stb_sourceapplicationref` |
+| `bus_type_id` | `ucfbasedoc.bd_billtyperef` |
+| `exchange_rate_type_id` | `ucfbasedoc.bd_exchangeratetyperef` |
+| `partner_id` | `productcenter.base_businesspartnerref` |
+
+## 继承接口 (11个, 31字段)
+
+- **项目结构属性** (`BGDM.wbs.projectStructureProperties`)
+  - `activity` → `activity`
+  - `wbs` → `wbs`
+- **审批流接口** (`iuap.busiObj.ApprovalFlowItf`)
+  - `auditnote` → `auditnote`
+  - `auditor` → `auditor`
+  - `audit_time` → `audit_time`
+  - `procinst_id` → `procinst_id`
+  - `verifystate` → `verifystate`
+- **业务流基础** (`iuap.busiObj.BusinessFlowItf`)
+  - `bizflow_id` → `bizflow_id`
+  - `bizflowinstance_id` → `bizflowinstance_id`
+  - `bizflow_makebillcode` → `bizflow_makebillcode`
+  - `bizflowname` → `bizflowname`
+  - `sourcebusiobj` → `sourcebusiobj`
+  - `sourcechild_id` → `sourcechild_id`
+  - `sourcecode` → `sourcecode`
+  - `source_id` → `source_id`
+- **业务流多来源** (`iuap.busiObj.BusinessFlowSourcesItf`)
+  - `firstbusiobj` → `firstbusiobj`
+  - `firstchild_id` → `firstchild_id`
+  - `firstcode` → `firstcode`
+  - `first_id` → `first_id`
+  - `sourcegrand_id` → `sourcegrand_id`
+- **交易类型** (`iuap.busiObj.BustypeItf`)
+  - `bustype` → `bustype`
+- **编码** (`iuap.busiObj.Code`)
+  - `code` → `code`
+- **逻辑删除** (`iuap.busiObj.LogicDelete`)
+  - `dr` → `dr`
+- **打印次数** (`base.itf.IPrintCount`)
+  - `printCount` → `printCount`
+- **打印次数拆分** (`base.itf.IPrintCountSplit`)
+  - `directPrintCount` → `directPrintCount`
+  - `previewPrintCount` → `previewPrintCount`
+- **审计信息** (`iuap.busiObj.IAuditInfo`)
+  - `create_time` → `create_time`
+  - `creator` → `creator`
+  - `modifier` → `modifier`
+  - `modify_time` → `modify_time`
+- **统一租户接口** (`iuap.busiObj.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 92 个直连字段
+
+### 文本字段 (29个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `invoice_code` | `invoice_code` | `invoiceCode` | 发票代码 |
+| `contract_no` | `contract_no` | `contractNo` | 合同编号 |
+| `retailer_name` | `retailer_name` | `retailer` | 散户 |
+| `order_no` | `order_no` | `orderNo` | 订单编号 |
+| `src_bill_id` | `src_bill_id` | `srcBillId` | 来源单据ID |
+| `src_bill_type` | `src_bill_type` | `srcBillType` | 来源单据类型 |
+| `ext_system_code` | `ext_system_code` | `extSystemCode` | 外部系统编码 |
+| `bill_code` | `bill_code` | `code` | 编码 |
+| `ext_vouch_code` | `ext_vouch_code` | `extVouchCode` | 外部系统单号 |
+| `invoice_no` | `invoice_no` | `invoiceNo` | 发票编号 |
+| `bill_date` | `bill_date` | `billDate` | 单据日期 |
+| `remarks` | `remarks` | `remarks` | 备注 |
+| `dtc_gtxid` | `dtc_gtxid` | `dtcGtxId` | 全局事务ID |
+| `auditnote` | `auditnote` | `auditNote` | 审批批语 |
+| `bizflowinstance_id` | `bizflowinstance_id` | `bizFlowInstanceId` | 业务流实例id |
+| `bizflow_makebillcode` | `bizflow_makebillcode` | `bizFlowMakeBillCode` | 单据转换规则编码 |
+| `bizflow_id` | `bizflow_id` | `bizflowId` | 业务流id |
+| `bizflowname` | `bizflowname` | `bizflowName` | 流程名称 |
+| `firstbusiobj` | `firstbusiobj` | `firstBusiObj` | 来源业务对象 |
+| `firstchild_id` | `firstchild_id` | `firstChildId` | 来源单据子表id |
+| `firstcode` | `firstcode` | `firstCode` | 来源单据号 |
+| `first_id` | `first_id` | `firstId` | 来源单据主表id |
+| `id` | `id` | `id` | 主键 |
+| `procinst_id` | `procinst_id` | `procinstId` | 流程实例ID |
+| `sourcebusiobj` | `sourcebusiobj` | `sourceBusiObj` | 上游业务对象 |
+| `sourcechild_id` | `sourcechild_id` | `sourceChildId` | 上游单据子表id |
+| `sourcecode` | `sourcecode` | `sourceCode` | 上游单据号 |
+| `sourcegrand_id` | `sourcegrand_id` | `sourceGrandId` | 来源孙表id |
+| `source_id` | `source_id` | `sourceId` | 上游单据主表id |
+
+### 引用字段 (24个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `invoice_type_id` | `invoice_type_id` | `invoiceType` | 发票类型 |
+| `supplier_id` | `supplier_id` | `supplier` | 供应商 |
+| `org_id` | `org_id` | `org` | 业务组织 |
+| `cooperater` | `cooperater` | `cooperater` | 协同确认人 |
+| `partner_id` | `partner_id` | `partner` | 业务伙伴 |
+| `bus_type_id` | `bus_type_id` | `bustype` | 交易类型 |
+| `bill_type_id` | `bill_type_id` | `billType` | 单据类型 |
+| `staff_id` | `staff_id` | `staff` | 业务员 |
+| `pay_agreement_id` | `pay_agreement_id` | `agreement` | 付款协议 |
+| `creator` | `creator` | `creator` | 创建人 |
+| `funder_id` | `funder_id` | `funder` | 资金业务对象 |
+| `finance_org_id` | `finance_org_id` | `financeOrg` | 收票组织 |
+| `employee_id` | `employee_id` | `employee` | 员工 |
+| `dept_id` | `dept_id` | `dept` | 部门 |
+| `project_id` | `project_id` | `project` | 项目 |
+| `src_app_id` | `src_app_id` | `srcApp` | 来源应用 |
+| `ori_currency_id` | `ori_currency_id` | `oriCurrency` | 原币币种 |
+| `org_currency_id` | `org_currency_id` | `orgCurrency` | 本币 |
+| `exchange_rate_type_id` | `exchange_rate_type_id` | `exchangeRateType` | 汇率类型 |
+| `activity` | `activity` | `activity` | 活动 |
+| `auditor` | `auditor` | `auditor` | 审批人 |
+| `modifier` | `modifier` | `modifier` | 修改人 |
+| `wbs` | `wbs` | `wbs` | WBS |
+| `ytenant_id` | `ytenant_id` | `ytenantId` | 租户id |
+
+### 日期字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `invoice_date` | `invoice_date` | `invoiceDate` | 发票日期 |
+| `exchange_rate_date` | `exchange_rate_date` | `exchangeRateDate` | 汇率日期 |
+
+### 日期时间 (7个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `cooperate_time` | `cooperate_time` | `cooperateTime` | 协同确认时间 |
+| `effect_time` | `effect_time` | `effectTime` | 生效时间 |
+| `audit_date` | `audit_date` | `auditDate` | 审核日期 |
+| `audit_time` | `audit_time` | `auditTime` | 审批日期 |
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+
+### 布尔字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `bln_write_off` | `bln_write_off` | `blnWriteOff` | 是否冲销单 |
+
+### 枚举字段 (14个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `cooperate_state` | `cooperate_state` | `cooperateState` | 协同确认状态 |
+| `cooperate_flag` | `cooperate_flag` | `cooperateFlag` | 协同标识 |
+| `src_system` | `src_system` | `srcSystem` | 来源系统 |
+| `business_type` | `business_type` | `businessType` | 业务类型 |
+| `object_type` | `object_type` | `objectType` | 往来对象类型 |
+| `direction` | `direction` | `direction` | 单据方向 |
+| `status` | `status` | `status` | 单据状态 |
+| `busi_post_status` | `busi_post_status` | `postStatus` | 过账状态 |
+| `write_off_state` | `write_off_state` | `writeOffState` | 冲销状态 |
+| `effect_state` | `effect_state` | `effectState` | 生效状态 |
+| `accounting_method` | `accounting_method` | `accountingMethod` | 立账方式 |
+| `tax_method` | `tax_method` | `taxMethod` | 计税方式 |
+| `exchange_rate_ops` | `exchange_rate_ops` | `exchangeRateOps` | 汇率折算方式 |
+| `verifystate` | `verifystate` | `verifyState` | 单据状态 |
+
+### 整数 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dtc_status` | `dtc_status` | `dtcStatus` | 全局事务状态 |
+| `eeac_version` | `eeac_version` | `eeacVersion` | 事项中心版本号 |
+| `print_count` | `print_count` | `printCount` | 打印次数 |
+| `preview_print_count` | `preview_print_count` | `previewPrintCount` | 预览打印次数 |
+| `direct_print_count` | `direct_print_count` | `directPrintCount` | 直接打印次数 |
+
+### 短整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dr` | `dr` | `dr` | 逻辑删除 |
+
+### 数值字段 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `ori_tax_excluded_amount` | `ori_tax_excluded_amount` | `oriTaxExcludedAmount` | 无税金额 |
+| `ori_tax_included_amount` | `ori_tax_included_amount` | `oriTaxIncludedAmount` | 含税金额 |
+| `local_tax_excluded_amount` | `local_tax_excluded_amount` | `localTaxExcludedAmount` | 本币无税金额 |
+| `local_tax_included_amount` | `local_tax_included_amount` | `localTaxIncludedAmount` | 本币含税金额 |
+| `exchange_rate` | `exchange_rate` | `exchangeRate` | 汇率 |
+
+### UserDefine (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `free_ch_id` | `free_ch_id` | `freeChId` | 自定义特征 |
+
+### other (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `` | `approvalTasks` | 应付结算清单审批任务信息 |
+| `` | `` | `bodyItem` | 应付结算清单明细信息 |
+| `` | `` | `bpmSteps` | 应付结算清单业务阶段信息 |

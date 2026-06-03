@@ -12,25 +12,72 @@ source_type: api_response
 
 # 业务伙伴客户对照 (`base.businesspartner.PartnerMerchantComparison`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `base_partnermerchantcomparison` | 应用: `DPMBP` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`base_partnermerchantcomparison` | domain：`productcenter` | 应用：`DPMBP` | 业务对象ID：``
 
-## 属性（8 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `id` | ID | `id` | String | `text` |
-| 2 | `merchantId` | merchantID | `merchant_id` | 94b3280a-27a4-485a-b90b-b7bce57c6df2 | `quote` |
-| 3 | `partnerId` | partnerID | `partnerId` | c1627369-6457-4828-883d-756b79bd0f46 | `quote` |
-| 4 | `isDefault` | 是否Default | `isDefault` | Boolean | `switch` |
-| 5 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 6 | `dr` | 逻辑删除 | `dr` | Short | `short` |
-| 7 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 8 | `tenant` | tenant | `tenant_id` | c213cd56-d5de-421f-bae7-d77455b557cd | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 业务伙伴客户对照 |
+| 物理表 | `base_partnermerchantcomparison` |
+| 数据库 schema | `productcenter` |
+| 所属应用 | `DPMBP` |
+| 直连字段 | 8 个 |
+| 子表 | 0 个 |
+| 关联引用 | 4 个 |
 
-## 关联（4 个）
+## 关联引用 (4个)
 
-- `merchantId` -> `aa.merchant.Merchant` ()
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `partnerId` -> `base.businesspartner.BusinessPartner` (0..n)
-- `tenant` -> `base.tenant.Tenant` ()
+| 字段名 | 引用类型 |
+|--------|---------|
+| `merchant_id` | `productcenter.aa_custcategoryref` |
+| `ytenant_id` | `` |
+| `partnerId` | `` |
+| `tenant_id` | `` |
+
+## 继承接口 (3个, 3字段)
+
+- **租户相关** (`base.itf.ITenant`)
+  - `tenant_id` → `tenant_id`
+- **逻辑删除相关** (`ucfbase.ucfbaseItf.LogicDelete`)
+  - `dr` → `dr`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 8 个直连字段
+
+### 文本字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+
+### 引用字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `merchant_id` | `merchant_id` | `merchantId` | 客户 |
+| `partnerId` | `partnerId` | `partnerId` | 业务伙伴 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户 |
+| `tenant_id` | `tenant_id` | `tenant` | 租户(废弃) |
+
+### 布尔字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `isDefault` | `isDefault` | `isDefault` | 默认客户 |
+
+### 短整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dr` | `dr` | `dr` | 删除状态 |
+
+### timestamp (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubts` | `pubts` | `pubts` | 时间戳 |

@@ -158,6 +158,22 @@ description: >
 
 > **排重规则**：判断一个实体是否已消化，**以知识库 wiki/entities/ 为准，不依赖桌面 JSON 文件**。
 > 每个实体页的标题行格式为 `# 显示名 (`voucher.order.OrderDetail`)`，提取括号内的 URI 即可做精确排重。
+>
+> **Domain 完整性检查**：命中已有实体页后，还需检查页面"基本信息"表中是否包含 `数据库 schema`（即 `domain` 字段）。若缺失，说明之前消化时漏掉了 domain，需要重新调用元数据查询脚本获取 domain，并补充到知识库页面中。
+
+### 字段术语对照
+
+> **核心约定**：BIP 元数据中同一个字段有多个标识，用户使用的术语对应关系如下：
+
+| 用户术语 | 元数据字段 | 含义 | 示例 |
+|----------|-----------|------|------|
+| **字段编码** | `name` | Java 类中的驼峰属性名，代码中 `do.getXxx()` / `do.setXxx()` 用的名 | `bankId` |
+| 字段名 / 数据库列 | `fieldName` / `columnName` | 数据库表列名（snake_case） | `bank_id` |
+| 显示名 | `displayName` | 界面上显示的中文名称 | 银行网点 |
+| 字段URI | `uri` | 元数据中字段的完整标识 | `eaai.eventvoucher.EventVoucherDetailsDO.bankId` |
+| 类型URI | `typeUri` | 引用类型字段指向的实体 URI | `bd.bank.BankDotVO` |
+
+> ⚠️ **`fieldName` 和 `name` 在简单字段上经常相同（都是 snake_case），但在引用字段上不同：`fieldName`=数据库列名（如 `bank_id`），`name`=Java 驼峰名（如 `bankId`）。**
 
 ### 脚本用法
 

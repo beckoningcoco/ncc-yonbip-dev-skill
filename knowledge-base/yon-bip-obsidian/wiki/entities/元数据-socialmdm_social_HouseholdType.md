@@ -12,48 +12,123 @@ source_type: api_response
 
 # 户口性质 (`socialmdm.social.HouseholdType`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `mdm_householdtypetbcode` | 应用: `HRED` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`mdm_householdtypetbcode` | domain：`hrcloud-staff-mgr` | 应用：`HRED` | 业务对象ID：`203534b0-0cd3-469a-885d-29d3de207f1d`
 
-## 属性（31 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `mdmSeal` | mdmSeal | `mdm_seal` | Integer | `int` |
-| 2 | `linkFieldValue` | linkFieldValue | `link_fieldvalue` | String | `text` |
-| 3 | `updateAt` | updateAt | `update_at` | String | `text` |
-| 4 | `mdmCode` | mdm编码 | `mdm_code` | String | `text` |
-| 5 | `nameResId` | nameResID | `name_resid` | String | `text` |
-| 6 | `treeParentId` | treeParentID | `treeparentid` | String | `text` |
-| 7 | `description` | description | `description` | String | `multiLanguage` |
-| 8 | `treeMasterId` | treeMasterID | `treemasterid` | String | `text` |
-| 9 | `name` | 名称 | `name` | String | `multiLanguage` |
-| 10 | `ytenantId` | ytenantID | `ytenant_id` | String | `text` |
-| 11 | `treeRefForeignKey` | treeRefForeignKey | `treeref_foreignkey` | String | `text` |
-| 12 | `ispreset` | 是否preset | `ispreset` | Boolean | `switch` |
-| 13 | `sortnum` | sortnum | `sortnum` | Integer | `int` |
-| 14 | `code` | 编码 | `code` | String | `text` |
-| 15 | `id` | ID | `pk_mdm` | String | `text` |
-| 16 | `mdmParentCode` | mdmParent编码 | `mdm_parentcode` | String | `text` |
-| 17 | `userDefineCharacter` | userDefineCharacter | `user_define_character` | 8e0bd013-a83d-4615-892b-6ee4f5173418 | `UserDefine` |
-| 18 | `hid` | hid | `hid` | String | `text` |
-| 19 | `mdmDuplicate` | mdmDuplicate | `mdm_duplicate` | Integer | `int` |
-| 20 | `sysid` | sysid | `sys_id` | String | `text` |
-| 21 | `createTime` | 创建时间 | `create_time` | DateTime | `dateTime` |
-| 22 | `creator` | 创建人 | `creator` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 23 | `disablets` | disablets | `disablets` | DateTime | `dateTime` |
-| 24 | `dr` | 逻辑删除 | `dr` | Short | `short` |
-| 25 | `enable` | enable | `enable` | sys_intboolean | `singleOption` |
-| 26 | `enablets` | enablets | `enablets` | DateTime | `dateTime` |
-| 27 | `modifier` | 修改人 | `modifier` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 28 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `dateTime` |
-| 29 | `pubts` | 时间戳 | `pubts` | DateTime | `dateTime` |
-| 30 | `tenant` | tenant | `tenant_id` | String | `text` |
-| 31 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 户口性质 |
+| 物理表 | `mdm_householdtypetbcode` |
+| 数据库 schema | `hrcloud-staff-mgr` |
+| 所属应用 | `HRED` |
+| 直连字段 | 31 个 |
+| 子表 | 0 个 |
+| 关联引用 | 4 个 |
 
-## 关联（4 个）
+## 关联引用 (4个)
 
-- `creator` -> `base.user.BipUser` ()
-- `userDefineCharacter` -> `hred.residregistnat.UserDefineCharacter` ()
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `modifier` -> `base.user.BipUser` ()
+| 字段名 | 引用类型 |
+|--------|---------|
+| `` | `` |
+| `user_define_character` | `` |
+| `ytenant_id` | `` |
+
+## 继承接口 (5个, 10字段)
+
+- **逻辑删除相关** (`ucfbase.ucfbaseItf.LogicDelete`)
+  - `dr` → `dr`
+- **租户接口** (`ucfbase.ucfbaseItf.ITenant`)
+  - `tenant_id` → `tenant_id`
+- **审计信息** (`ucfbase.ucfbaseItf.IAuditInfo`)
+  - `create_time` → `create_time`
+  - `` → ``
+  - `` → ``
+  - `modify_time` → `modify_time`
+- **启用** (`ucfbase.ucfbaseItf.IEnable`)
+  - `disablets` → `disablets`
+  - `enable` → `enable`
+  - `enablets` → `enablets`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 31 个直连字段
+
+### 文本字段 (14个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `link_fieldvalue` | `link_fieldvalue` | `linkFieldValue` | 新增8（废弃） |
+| `update_at` | `update_at` | `updateAt` | 更新时间（废弃） |
+| `mdm_code` | `mdm_code` | `mdmCode` | 编码（废弃） |
+| `name_resid` | `name_resid` | `nameResId` | 多语平台资源编码（废弃） |
+| `treeparentid` | `treeparentid` | `treeParentId` | 新增7（废弃） |
+| `treemasterid` | `treemasterid` | `treeMasterId` | 新增6（废弃） |
+| `ytenant_id` | `ytenant_id` | `ytenantId` | 友户通租户id（废弃） |
+| `treeref_foreignkey` | `treeref_foreignkey` | `treeRefForeignKey` | 新增5（废弃） |
+| `code` | `code` | `code` | 编码 |
+| `pk_mdm` | `pk_mdm` | `id` | ID |
+| `mdm_parentcode` | `mdm_parentcode` | `mdmParentCode` | 父编码（废弃） |
+| `hid` | `hid` | `hid` | 户口性质id（废弃） |
+| `sys_id` | `sys_id` | `sysid` | 系统标识 |
+| `tenant_id` | `tenant_id` | `tenant` | 租户ID |
+
+### 引用字段 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `creator` | `creator` | 创建人 |
+| `` | `modifier` | `modifier` | 修改人 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 日期时间 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `disablets` | `disablets` | `disablets` | 停用时间 |
+| `enablets` | `enablets` | `enablets` | 启用时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+
+### 布尔字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `ispreset` | `ispreset` | `ispreset` | 是否预置 |
+
+### 枚举字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `enable` | `enable` | `enable` | 启用 |
+
+### 整数 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `mdm_seal` | `mdm_seal` | `mdmSeal` | 新增10（废弃） |
+| `sortnum` | `sortnum` | `sortnum` | 序号 |
+| `mdm_duplicate` | `mdm_duplicate` | `mdmDuplicate` | 新增9（废弃） |
+
+### 短整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dr` | `dr` | `dr` | 逻辑删除标记 |
+
+### multiLanguage (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `description` | `description` | `description` | 描述 |
+| `name` | `name` | `name` | 名称 |
+
+### UserDefine (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `user_define_character` | `user_define_character` | `userDefineCharacter` | 特征 |

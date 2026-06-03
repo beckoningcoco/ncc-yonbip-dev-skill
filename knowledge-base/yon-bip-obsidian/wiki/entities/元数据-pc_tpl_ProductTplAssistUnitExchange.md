@@ -12,32 +12,89 @@ source_type: api_response
 
 # 物料模板辅计量换算对照 (`pc.tpl.ProductTplAssistUnitExchange`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `producttpl_assist_unitexchange` | 应用: `GZTBDM` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`producttpl_assist_unitexchange` | domain：`productcenter` | 应用：`GZTBDM` | 业务对象ID：``
 
-## 属性（15 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `id` | ID | `id` | Long | `long` |
-| 2 | `assistUnit` | assistUnit | `assistUnitId` | 9ea02a0b-3a48-4051-bcbe-59c7bcc7a25b | `quote` |
-| 3 | `assistUnitCount` | assistUnitCount | `fAssistUnitCount` | Decimal | `number` |
-| 4 | `assistVersValue` | assistVersValue | `assistVersValue` | String | `text` |
-| 5 | `balance` | balance | `balance` | Integer | `int` |
-| 6 | `iOrder` | iOrder | `iOrder` | Integer | `int` |
-| 7 | `mainUnitCount` | mainUnitCount | `fMainUnitCount` | Decimal | `number` |
-| 8 | `mainUnitCountNew` | mainUnitCountNew | `mainUnitCount` | Decimal | `number` |
-| 9 | `mainUnitRate` | mainUnitRate | `mainUnitRate` | Decimal | `number` |
-| 10 | `template` | template | `tpl_id` | c40d564b-d166-4e0e-875f-1fafdab28955 | `quote` |
-| 11 | `unitExchangeType` | unitExchangeType | `unitExchangeType` | UnitExchangeType | `` |
-| 12 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 13 | `erpCode` | erp编码 | `erpCode` | String | `text` |
-| 14 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 15 | `tenant` | tenant | `tenant_id` | c213cd56-d5de-421f-bae7-d77455b557cd | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 物料模板辅计量换算对照 |
+| 物理表 | `producttpl_assist_unitexchange` |
+| 数据库 schema | `productcenter` |
+| 所属应用 | `GZTBDM` |
+| 直连字段 | 15 个 |
+| 子表 | 0 个 |
+| 关联引用 | 4 个 |
 
-## 关联（4 个）
+## 关联引用 (4个)
 
-- `template` -> `pc.tpl.ProductTpl` (0..n)
-- `assistUnit` -> `pc.unit.Unit` ()
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `tenant` -> `base.tenant.Tenant` ()
+| 字段名 | 引用类型 |
+|--------|---------|
+| `tpl_id` | `` |
+| `assistUnitId` | `` |
+| `ytenant_id` | `` |
+| `tenant_id` | `` |
+
+## 继承接口 (3个, 3字段)
+
+- **租户相关** (`base.itf.ITenant`)
+  - `tenant_id` → `tenant_id`
+- **erp编码** (`base.itf.IErpCode`)
+  - `erpCode` → `erpCode`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 15 个直连字段
+
+### 文本字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `assistVersValue` | `assistVersValue` | `assistVersValue` | 主辅计量换算比 |
+| `erpCode` | `erpCode` | `erpCode` | 商家编码 |
+
+### 引用字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `assistUnitId` | `assistUnitId` | `assistUnit` | 辅计量单位 |
+| `tpl_id` | `tpl_id` | `template` | 物料模板 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户 |
+| `tenant_id` | `tenant_id` | `tenant` | 租户(废弃) |
+
+### 整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `balance` | `balance` | `balance` | 结存 |
+| `iOrder` | `iOrder` | `iOrder` | 排序号 |
+
+### 长整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+
+### 数值字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `fAssistUnitCount` | `fAssistUnitCount` | `assistUnitCount` | 辅计量数量 |
+| `fMainUnitCount` | `fMainUnitCount` | `mainUnitCount` | 主计量数量 |
+| `mainUnitCount` | `mainUnitCount` | `mainUnitCountNew` | 主计量数量(新) |
+| `mainUnitRate` | `mainUnitRate` | `mainUnitRate` | 主辅计量换算率 |
+
+### other (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `unitExchangeType` | `unitExchangeType` | `unitExchangeType` | 换算类型 |
+
+### timestamp (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubts` | `pubts` | `pubts` | 时间戳 |

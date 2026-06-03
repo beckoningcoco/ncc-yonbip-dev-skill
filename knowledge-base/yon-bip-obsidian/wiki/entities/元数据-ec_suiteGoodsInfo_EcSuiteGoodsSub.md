@@ -12,55 +12,125 @@ source_type: api_response
 
 # 套件货品 (`ec.suiteGoodsInfo.EcSuiteGoodsSub`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `ec_suite_goods_sub` | 应用: `SDOC` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`ec_suite_goods_sub` | domain：`dst` | 应用：`SDOC` | 业务对象ID：``
 
-## 属性（31 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `product` | product | `product_id` | 89f3b06e-23df-4403-b4a7-19f99eeeae72 | `quote` |
-| 2 | `productSku` | productSku | `productsku_id` | 3e9ddc6d-edd0-4508-afcc-e4a20535f2f9 | `quote` |
-| 3 | `goodsRange` | goodsRange | `goodsRange` | String | `text` |
-| 4 | `amount` | amount | `amount` | Decimal | `number` |
-| 5 | `maxFee` | maxFee | `maxFee` | Decimal | `number` |
-| 6 | `priceWeight` | priceWeight | `price_weight` | Decimal | `number` |
-| 7 | `assistUnitId` | assistUnitID | `assistUnitId` | 9ea02a0b-3a48-4051-bcbe-59c7bcc7a25b | `quote` |
-| 8 | `assistUnitNum` | assistUnitNum | `assistUnitNum` | Decimal | `number` |
-| 9 | `rate` | rate | `rate` | Decimal | `number` |
-| 10 | `id` | ID | `id` | Long | `long` |
-| 11 | `suiteGood` | suiteGood | `suite_good` | bd6ceb9e-378b-4e63-8b2c-75712bdc84ee | `quote` |
-| 12 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 13 | `createDate` | 创建日期 | `create_date` | Date | `date` |
-| 14 | `createTime` | 创建时间 | `create_time` | DateTime | `timestamp` |
-| 15 | `creator` | 创建人 | `creator` | String | `text` |
-| 16 | `creatorId` | 创建人ID | `creatorId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 17 | `cust` | cust | `i_cust_id` | 94b3280a-27a4-485a-b90b-b7bce57c6df2 | `quote` |
-| 18 | `ecSuiteGoodsDetailCustomCharacter` | ecSuiteGoodsDetailCustomCharacter | `oms_suiteGoods_detail_custom_character` | 91d041e2-c005-40f4-a1f6-b97f4eb16bef | `UserDefine` |
-| 19 | `groupName` | group名称 | `group_name` | String | `text` |
-| 20 | `modifier` | 修改人 | `modifier` | String | `text` |
-| 21 | `modifierId` | 修改人ID | `modifierId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 22 | `modifyDate` | 修改日期 | `modify_date` | Date | `date` |
-| 23 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `timestamp` |
-| 24 | `org` | org | `org_id` | 8aaf4bce-2eb3-443c-bce1-0fb94fec3c0c | `quote` |
-| 25 | `price` | price | `price` | Decimal | `number` |
-| 26 | `rateDen` | rateDen | `rateden` | Decimal | `number` |
-| 27 | `rateNum` | rateNum | `ratenum` | Decimal | `number` |
-| 28 | `skuType` | skuType | `sku_type` | Integer | `int` |
-| 29 | `stockSensClue` | stockSensClue | `stockSensClue` | String | `text` |
-| 30 | `tenant` | tenant | `tenant_id` | c213cd56-d5de-421f-bae7-d77455b557cd | `quote` |
-| 31 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 套件货品 |
+| 物理表 | `ec_suite_goods_sub` |
+| 数据库 schema | `dst` |
+| 所属应用 | `SDOC` |
+| 直连字段 | 31 个 |
+| 子表 | 0 个 |
+| 关联引用 | 11 个 |
 
-## 关联（11 个）
+## 关联引用 (11个)
 
-- `product` -> `pc.product.Product` ()
-- `productSku` -> `pc.product.ProductSKU` ()
-- `org` -> `bd.adminOrg.BaseOrgVO` ()
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `assistUnitId` -> `pc.unit.Unit` ()
-- `creatorId` -> `base.user.User` ()
-- `modifierId` -> `base.user.User` ()
-- `suiteGood` -> `ec.suiteGoodsInfo.EcSuiteGoods` (1..n)
-- `cust` -> `aa.merchant.Merchant` ()
-- `tenant` -> `base.tenant.Tenant` ()
-- `ecSuiteGoodsDetailCustomCharacter` -> `ec.suiteGoodsInfo.EcSuiteGoodsDetailCustomCharacter` ()
+| 字段名 | 引用类型 |
+|--------|---------|
+| `product_id` | `ec_productskuref` |
+| `productsku_id` | `ec_productskuref` |
+| `org_id` | `` |
+| `ytenant_id` | `` |
+| `assistUnitId` | `` |
+| `` | `` |
+| `suite_good` | `` |
+| `i_cust_id` | `` |
+| `tenant_id` | `` |
+| `oms_suiteGoods_detail_custom_character` | `` |
+
+## 继承接口 (4个, 11字段)
+
+- **审计信息** (`base.itf.IAuditInfo`)
+  - `create_date` → `create_date`
+  - `create_time` → `create_time`
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `modify_date` → `modify_date`
+  - `modify_time` → `modify_time`
+- **租户相关** (`base.itf.ITenant`)
+  - `tenant_id` → `tenant_id`
+- **特征适配相关信息** (`gscm.itf.CharacterInfo`)
+  - `stockSensClue` → `stockSensClue`
+- **统一租户接口(扩展)** (`ucfbase.ucfbaseItf.IYTenantExt`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 31 个直连字段
+
+### 文本字段 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `goodsRange` | `goodsRange` | `goodsRange` | 商品范围 |
+| `` | `creator` | `creator` | 创建人名称 |
+| `group_name` | `group_name` | `groupName` | 组名称 |
+| `` | `modifier` | `modifier` | 修改人名称 |
+| `stockSensClue` | `stockSensClue` | `stockSensClue` | 现存量特征敏感线索 |
+
+### 引用字段 (10个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `product_id` | `product_id` | `product` | 商品 |
+| `productsku_id` | `productsku_id` | `productSku` | SKUId |
+| `assistUnitId` | `assistUnitId` | `assistUnitId` | 销售单位ID |
+| `suite_good` | `suite_good` | `suiteGood` | 表头主键 |
+| `` | `creatorId` | `creatorId` | 创建人 |
+| `i_cust_id` | `i_cust_id` | `cust` | 客户 |
+| `` | `modifierId` | `modifierId` | 修改人 |
+| `org_id` | `org_id` | `org` | 销售组织 |
+| `tenant_id` | `tenant_id` | `tenant` | 租户 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 日期字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_date` | `create_date` | `createDate` | 创建日期 |
+| `modify_date` | `modify_date` | `modifyDate` | 修改日期 |
+
+### 整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `sku_type` | `sku_type` | `skuType` | 类型 |
+
+### 长整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | 行ID |
+
+### 数值字段 (8个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `amount` | `amount` | `amount` | 数量 |
+| `maxFee` | `maxFee` | `maxFee` | 最大金额 |
+| `price_weight` | `price_weight` | `priceWeight` | 金额权重比(%) |
+| `assistUnitNum` | `assistUnitNum` | `assistUnitNum` | 件数 |
+| `rate` | `rate` | `rate` | 换算率 |
+| `price` | `price` | `price` | 零售价 |
+| `rateden` | `rateden` | `rateDen` | 换算率分母 |
+| `ratenum` | `ratenum` | `rateNum` | 换算率分子 |
+
+### timestamp (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+
+### UserDefine (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `oms_suiteGoods_detail_custom_character` | `oms_suiteGoods_detail_custom_character` | `ecSuiteGoodsDetailCustomCharacter` | 表体自定义项特征属性组 |

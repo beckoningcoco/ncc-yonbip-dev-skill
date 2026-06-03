@@ -1,0 +1,93 @@
+---
+tags: [BIP, 元数据, 数据字典, voucher.invoice.RebateDetail]
+created: 2026-06-03
+updated: 2026-06-03
+sources: [元数据API queryByUri]
+platform_version: "BIP V5"
+project: ""
+last_verified: 2026-06-03
+status: verified
+source_type: api_response
+---
+
+# 返利明细 (`voucher.invoice.RebateDetail`)
+
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`invoicerebatedetail` | domain：`udinghuo` | 应用：`SCMSA` | 业务对象ID：``
+
+## 基本信息
+
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 返利明细 |
+| 物理表 | `invoicerebatedetail` |
+| 数据库 schema | `udinghuo` |
+| 所属应用 | `SCMSA` |
+| 直连字段 | 13 个 |
+| 子表 | 0 个 |
+| 关联引用 | 4 个 |
+
+## 关联引用 (4个)
+
+| 字段名 | 引用类型 |
+|--------|---------|
+| `iSaleInvoiceDetailId` | `` |
+| `ytenant_id` | `` |
+| `mainid` | `` |
+| `irebateId` | `` |
+
+## 继承接口 (3个, 3字段)
+
+- **U订货租户相关** (`base.itf.IUordercorp`)
+  - `iCorpId` → `iCorpId`
+- **逻辑删除相关** (`base.itf.Deletable`)
+  - `iDeleted` → `iDeleted`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 13 个直连字段
+
+### 文本字段 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `cRebateType` | `cRebateType` | `rebateType` | 返利类型 |
+| `crebatecode` | `crebatecode` | `rebatecode` | 返利单编号 |
+| `cSaleInvoiceDetailIdKey` | `cSaleInvoiceDetailIdKey` | `saleInvoiceDetailIdKey` |  |
+
+### 引用字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `mainid` | `mainid` | `mainid` | 发票id |
+| `irebateId` | `irebateId` | `rebateId` | 返利单id |
+| `iSaleInvoiceDetailId` | `iSaleInvoiceDetailId` | `saleInvoiceDetailId` | 发票详情id |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 布尔字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iDeleted` | `iDeleted` | `isDeleted` | 逻辑删除标记 |
+
+### 长整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | id |
+| `iCorpId` | `iCorpId` | `uordercorp` | 租户 |
+
+### 数值字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `fSaleInvoiceRebateMoney` | `fSaleInvoiceRebateMoney` | `saleInvoiceRebateMoney` | 返利金额 |
+| `fSaleInvoiceRebateQty` | `fSaleInvoiceRebateQty` | `saleInvoiceRebateQty` | 返利数量 |
+
+### timestamp (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubuts` | `pubuts` | `pubts` | 时间戳 |

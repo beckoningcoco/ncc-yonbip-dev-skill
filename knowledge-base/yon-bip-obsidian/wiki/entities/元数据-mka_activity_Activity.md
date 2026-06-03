@@ -1,5 +1,5 @@
 ---
-tags: [BIP, 元数据, 数据字典, mka, mka.activity.Activity]
+tags: [BIP, 元数据, 数据字典, mka.activity.Activity]
 created: 2026-06-03
 updated: 2026-06-03
 sources: [元数据API queryByUri]
@@ -9,172 +9,257 @@ last_verified: 2026-06-03
 status: verified
 source_type: api_response
 ---
+
 # 营销活动 (`mka.activity.Activity`)
 
-> ⚡ **平台版本：BIP 旗舰版 V5** — 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `mka_activity` | 应用: `MKA`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`mka_activity` | domain：`yycrm` | 应用：`MKA` | 业务对象ID：`46d7f2a7-b700-4896-bb6b-2276e763a6eb`
 
-## 主键与编码
+## 基本信息
 
-| 角色 | 字段 | 列 | 类型 |
-|------|------|-----|------|
-| 主键 | `id` | `id` | Long |
-| 编码 | `code` | `code` | |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 营销活动 |
+| 物理表 | `mka_activity` |
+| 数据库 schema | `yycrm` |
+| 所属应用 | `MKA` |
+| 直连字段 | 95 个 |
+| 子表 | 5 个 |
+| 关联引用 | 35 个 |
 
-## 全部属性（95 个）
+## 子表
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype | 必填 | 可空 |
-|---|--------|--------|-----|------|---------|------|------|
-| 1 | `activityPoints` | activityPoints | `activity_points` | Decimal | `number` |  | true |
-| 2 | `integralCriterion` | integralCriterion | `integral_criterion` | Decimal | `number` |  | true |
-| 3 | `partnerPerson` | partnerPerson | `partner_person` | 4effed83-35f5-4e3b-9be1-092b5ae602e8 | `quote` |  | true |
-| 4 | `amountsIncurred` | amountsIncurred | `amountsIncurred` | Decimal | `number` |  | true |
-| 5 | `versionNo` | versionNo | `version_no` | String | `text` |  | true |
-| 6 | `activityDefineCharacter` | activityDefineCharacter | `activityDefineCharacter` | 88238235-109e-4880-8548-0285b4fe4c48 | `UserDefine` |  | true |
-| 7 | `applyTime` | applyTime | `apply_time` | DateTime | `timestamp` |  | true |
-| 8 | `auditDate` | auditDate | `audit_date` | Date | `date` |  | true |
-| 9 | `closeReason` | closeReason | `close_reason` | b6eaed9b-5240-4fdb-aefe-e90f68a20f9f | `quote` |  | true |
-| 10 | `closeStatement` | closeStatement | `close_statement` | String | `text` |  | true |
-| 11 | `pcUrl` | pcUrl | `pc_url` | String | `text` |  | true |
-| 12 | `couponStandard` | couponStandard | `coupon_standard` | String | `text` |  | true |
-| 13 | `peopleNum` | peopleNum | `people_num` | Integer | `int` |  | true |
-| 14 | `waitSettleAmount` | waitSettleAmount | `waitSettleAmount` | Decimal | `number` |  | true |
-| 15 | `synClaimMaterial` | synClaimMaterial | `syn_claim_material` | Boolean | `switch` |  | true |
-| 16 | `activityPlanInfo` | activityPlanInfo | `activity_plan_info` | a1e91e79-31c7-4d4e-a357-3dbc69523da1 | `quote` |  | true |
-| 17 | `isBudgetOver` | 是否BudgetOver | `isBudgetOver` | Boolean | `switch` |  | true |
-| 18 | `activityPlan` | activityPlan | `activity_plan` | ac48ac5e-aab9-45c7-b50b-3f0938ca8ded | `quote` |  | true |
-| 19 | `mobileUrl` | mobileUrl | `mobile_url` | String | `text` |  | true |
-| 20 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |  | true |
-| 21 | `rewardCoupon` | rewardCoupon | `reward_coupon` | String | `text` |  | true |
-| 22 | `realityNum` | realityNum | `reality_num` | Integer | `int` |  | true |
-| 23 | `createDate` | 创建日期 | `create_date` | Date | `date` |  | true |
-| 24 | `cust` | cust | `iCustID` | 94b3280a-27a4-485a-b90b-b7bce57c6df2 | `quote` |  | true |
-| 25 | `defaultAssumeOrg` | defaultAssumeOrg | `defaultAssumeOrg` | 14302233-1394-4a70-94e1-bed51636f312 | `quote` |  | true |
-| 26 | `defaultAsumeDept` | defaultAsumeDept | `defaultAsumeDept` | a4352e3c-3eda-4539-a7a9-ec00799be118 | `quote` |  | true |
-| 27 | `defaultDimension_region` | defaultDimension_region | `defaultDimension_region` | 75fb7b76-fdb5-4e87-ab0d-e4215a299634 | `quote` |  | true |
-| 28 | `defaultDimension_terminal_chain` | defaultDimension_terminal_chain | `defaultDimension_terminal_chain` | ba7bad3b-8619-4d8c-8659-5d1bf82cc9f9 | `quote` |  | true |
-| 29 | `freezeAmountTotal` | freezeAmountTotal | `freezeAmountTotal` | Decimal | `number` |  | true |
-| 30 | `modifyDate` | 修改日期 | `modify_date` | Date | `date` |  | true |
-| 31 | `tenant` | tenant | `tenant_id` | c213cd56-d5de-421f-bae7-d77455b557cd | `quote` | true | true |
-| 32 | `id` | 主键ID | `id` | Long | `long` |  | true |
-| 33 | `materialApplyDate` | materialApplyDate | `materialapply_date` | DateTime | `timestamp` |  | true |
-| 34 | `org` | org | `org` | 14302233-1394-4a70-94e1-bed51636f312 | `quote` |  | true |
-| 35 | `marketingPlan` | marketingPlan | `marketing_plan` | 3defa5fd-999d-4eac-8798-9008f68c8758 | `quote` |  | true |
-| 36 | `path` | path | `path` | String | `text` |  | true |
-| 37 | `code` | 编码 | `code` | String | `text` |  | true |
-| 38 | `bustype` | bustype | `bustype` | 19f9264d-28d1-4b47-9d28-f2e82654f3a9 | `quote` | false | true |
-| 39 | `theme` | theme | `theme` | String | `text` |  | true |
-| 40 | `startDate` | startDate | `start_date` | DateTime | `timestamp` |  | true |
-| 41 | `endDate` | endDate | `end_date` | DateTime | `timestamp` |  | true |
-| 42 | `terminal` | terminal | `terminal` | 16e4e14c-ab05-4ee5-bbb8-c67351c9a8b3 | `quote` |  | true |
-| 43 | `customer` | customer | `customer` | 94b3280a-27a4-485a-b90b-b7bce57c6df2 | `quote` |  | true |
-| 44 | `productLine` | productLine | `product_line` | fcdf5213-a995-4874-928f-ff97bcfa4b91 | `quote` |  | true |
-| 45 | `supplyCustomer` | supplyCustomer | `supply_customer` | 94b3280a-27a4-485a-b90b-b7bce57c6df2 | `quote` |  | true |
-| 46 | `country` | country | `cCountry` | 8e9602ac-5ca2-4d06-aede-4a0af4c316bf | `quote` |  | true |
-| 47 | `regionCode` | 区域编码 | `cRegionCode` | String | `text` |  | true |
-| 48 | `longitude` | longitude | `iLNG` | Decimal | `number` |  | true |
-| 49 | `creatorId` | 创建人ID | `creatorId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |  | true |
-| 50 | `latitude` | latitude | `iLAT` | Decimal | `number` |  | true |
-| 51 | `address` | address | `address` | String | `text` |  | true |
-| 52 | `currency` | currency | `currency` | 02b45339-eb4a-4a31-a8b5-d32f494f4e8e | `quote` |  | true |
-| 53 | `applyAmountTotal` | applyAmountTotal | `applyAmountTotal` | Decimal | `number` |  | true |
-| 54 | `modifierId` | 修改人ID | `modifierId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |  | true |
-| 55 | `expectedSaleAmountTotal` | expectedSaleAmountTotal | `expectedSaleAmountTotal` | Decimal | `number` |  | true |
-| 56 | `expectFee` | expectFee | `expect_fee` | Decimal | `number` |  | true |
-| 57 | `expectSales` | expectSales | `expect_sales` | Decimal | `number` |  | true |
-| 58 | `expectedExpenseRate` | expectedExpenseRate | `expectedExpenseRate` | Decimal | `number` |  | true |
-| 59 | `expectSalesRate` | expectSalesRate | `expect_sales_rate` | Decimal | `number` |  | true |
-| 60 | `settleAmount` | settleAmount | `settle_amount` | Decimal | `number` |  | true |
-| 61 | `settledAmountTotal` | settledAmountTotal | `settledAmountTotal` | Decimal | `number` |  | true |
-| 62 | `executionFrequency` | executionFrequency | `execution_frequency` | Integer | `int` |  | true |
-| 63 | `assumeAmountTotal` | assumeAmountTotal | `assumeAmountTotal` | Decimal | `number` |  | true |
-| 64 | `executionTime` | executionTime | `execution_time` | DateTime | `timestamp` |  | true |
-| 65 | `content` | content | `content` | String | `text` |  | true |
-| 66 | `ower` | ower | `ower` | 4effed83-35f5-4e3b-9be1-092b5ae602e8 | `quote` |  | true |
-| 67 | `dept` | dept | `dept` | ca871996-b447-42f9-8dac-dd7c21ee0662 | `quote` |  | true |
-| 68 | `saleArea` | saleArea | `salearea` | 75fb7b76-fdb5-4e87-ab0d-e4215a299634 | `quote` |  | true |
-| 69 | `verifystate` | verifystate | `verifystate` | Short | `short` |  | true |
-| 70 | `auditor` | auditor | `auditor` | String | `text` |  | true |
-| 71 | `auditTime` | auditTime | `audit_time` | DateTime | `timestamp` |  | true |
-| 72 | `isWfControlled` | 是否WfControlled | `isWfControlled` | Boolean | `switch` |  | true |
-| 73 | `returncount` | returncount | `returncount` | Short | `short` |  | true |
-| 74 | `closeState` | closeState | `close_state` | ActivityCloseStateEnum | `singleOption` |  | true |
-| 75 | `closeTime` | closeTime | `close_time` | DateTime | `timestamp` |  | true |
-| 76 | `settleState` | settleState | `settle_state` | Short | `singleOption` |  | true |
-| 77 | `bizFlow` | bizFlow | `bizFlowId` | 58dd3dad-7eb7-47ea-a5b1-1f89d1709528 | `quote` |  | true |
-| 78 | `settleTime` | settleTime | `settle_time` | DateTime | `timestamp` |  | true |
-| 79 | `auditorId` | auditorID | `auditorId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |  | true |
-| 80 | `creator` | 创建人 | `creator` | String | `text` |  | true |
-| 81 | `createTime` | 创建时间 | `create_time` | DateTime | `timestamp` |  | true |
-| 82 | `modifier` | 修改人 | `modifier` | String | `text` |  | true |
-| 83 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `timestamp` |  | true |
-| 84 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |  | true |
-| 85 | `accountingPeriod` | accountingPeriod | `accounting_period` | 0028813f-135a-485e-a5c3-c15a3d18168b | `quote` |  | true |
-| 86 | `partnerExecute` | partnerExecute | `partner_execute` | Boolean | `switch` |  | true |
-| 87 | `openingActivity` | openingActivity | `opening_activity` | Short | `short` |  | true |
-| 88 | `isFlowCoreBill` | 是否FlowCoreBill | `isFlowCoreBill` | Boolean | `switch` |  | true |
-| 89 | `isAutoGenerate` | 是否AutoGenerate | `isAutoGenerate` | Boolean | `switch` |  | true |
-| 90 | `activityDisplays` | activityDisplays | `` | f5b18631-0da8-43ed-9c73-2225ebe44ecc | `` |  |  |
-| 91 | `activityInfs` | activityInfs | `` | efb595da-64fa-401e-a39a-64d5820d23d1 | `` |  |  |
-| 92 | `activityMaterialList` | activityMaterialList | `` | 03c8abab-f494-4eb1-bbd6-f636c2aae05f | `` |  |  |
-| 93 | `activityParticipantList` | activityParticipantList | `` | 76945e50-5e68-4f8c-95f5-b3e1779a0cb5 | `` |  |  |
-| 94 | `headDef` | headDef | `` | 374f5474-5a56-42ff-94ed-90c21af4c0ac | `` |  |  |
-| 95 | `partnerDept` | partnerDept | `partner_dept` | b54fc393-1d66-4f6e-806b-c8a50b5e788b | `quote` |  | true |
+| 字段名 | URI | 关系 |
+|--------|-----|------|
+| `activityInfs` | `mka.activity.ActivityInfo` | composition |
+| `headDef` | `mka.activity.ActivityDef` | composition |
+| `activityDisplays` | `mka.activity.ActivityDisplay` | composition |
+| `activityMaterialList` | `mka.activity.ActivityMaterial` | composition |
+| `activityParticipantList` | `mka.activity.ActivityParticipant` | composition |
 
-## 关联属性（35 个）
+## 关联引用 (35个)
 
-| # | 字段 | 目标实体 | 列 | 多重性 | 组合 | 废弃 |
-|---|------|---------|-----|--------|------|------|
-| 1 | `country` | `bd.country.CountryVO` | `cCountry` |  |  |  |
-| 2 | `activityMaterialList` | `mka.activity.ActivityMaterial` | `` | 0..n | Y |  |
-| 3 | `activityPlanInfo` | `mka.activityplan.ActivityPlanInfo` | `activity_plan_info` |  |  |  |
-| 4 | `creatorId` | `base.user.User` | `creatorId` |  |  |  |
-| 5 | `modifierId` | `base.user.User` | `modifierId` |  |  |  |
-| 6 | `bizFlow` | `bf.bizflow.BusinessFlow` | `bizFlowId` |  |  |  |
-| 7 | `defaultDimension_terminal_chain` | `aa.store.ChainSystem` | `defaultDimension_terminal_chain` |  |  |  |
-| 8 | `activityPlan` | `mka.activityplan.ActivityPlan` | `activity_plan` |  |  |  |
-| 9 | `defaultAsumeDept` | `bd.adminOrg.AdminOrgVO` | `defaultAsumeDept` |  |  |  |
-| 10 | `activityParticipantList` | `mka.activity.ActivityParticipant` | `` | 0..n | Y |  |
-| 11 | `marketingPlan` | `mka.marketingplan.MarketingPlan` | `marketing_plan` |  |  |  |
-| 12 | `productLine` | `pc.productline.ProductLine` | `product_line` |  |  |  |
-| 13 | `currency` | `bd.currencytenant.CurrencyTenantVO` | `currency` |  |  |  |
-| 14 | `accountingPeriod` | `bd.period.Period` | `accounting_period` |  |  |  |
-| 15 | `defaultAssumeOrg` | `org.func.BaseOrg` | `defaultAssumeOrg` |  |  |  |
-| 16 | `closeReason` | `crmc.custdoc.CustDoc` | `close_reason` |  |  |  |
-| 17 | `activityDefineCharacter` | `mka.activity.ActivityDefineCharacter` | `activityDefineCharacter` |  |  |  |
-| 18 | `tenant` | `base.tenant.Tenant` | `tenant_id` |  |  |  |
-| 19 | `ower` | `bd.staff.Staff` | `ower` |  |  |  |
-| 20 | `headDef` | `mka.activity.ActivityDef` | `` | 1 | Y |  |
-| 21 | `activityDisplays` | `mka.activity.ActivityDisplay` | `` | 0..n | Y |  |
-| 22 | `org` | `org.func.BaseOrg` | `org` |  |  |  |
-| 23 | `ytenant` | `yht.tenant.YhtTenant` | `ytenant_id` |  |  |  |
-| 24 | `saleArea` | `aa.salearea.SaleArea` | `salearea` |  |  |  |
-| 25 | `terminal` | `aa.store.Store` | `terminal` |  |  |  |
-| 26 | `dept` | `bd.adminOrg.DeptOrgVO` | `dept` |  |  |  |
-| 27 | `bustype` | `bd.bill.TransType` | `bustype` |  |  |  |
-| 28 | `activityInfs` | `mka.activity.ActivityInfo` | `` | 0..n | Y |  |
-| 29 | `defaultDimension_region` | `aa.salearea.SaleArea` | `defaultDimension_region` |  |  |  |
-| 30 | `partnerPerson` | `bd.staff.Staff` | `partner_person` |  |  |  |
-| 31 | `auditorId` | `base.user.User` | `auditorId` |  |  |  |
-| 32 | `supplyCustomer` | `aa.merchant.Merchant` | `supply_customer` |  |  |  |
-| 33 | `partnerDept` | `cust.custoperateinfo.CustTechnologyDepartment` | `partner_dept` |  |  |  |
-| 34 | `cust` | `aa.merchant.Merchant` | `iCustID` |  |  |  |
-| 35 | `customer` | `aa.merchant.Merchant` | `customer` |  |  |  |
+| 字段名 | 引用类型 |
+|--------|---------|
+| `cCountry` | `ucfbasedoc.bd_countryref` |
+| `` | `` |
+| `activity_plan_info` | `` |
+| `bizFlowId` | `` |
+| `defaultDimension_terminal_chain` | `yxybase.aa_chainsystemref` |
+| `activity_plan` | `yycrm.mka_activityplanref` |
+| `defaultAsumeDept` | `ucf-org-center.bd_adminorgsharetreeref` |
+| `marketing_plan` | `yycrm.mka_marketingplanref` |
+| `product_line` | `productcenter.pc_productlineref` |
+| `currency` | `ucfbasedoc.bd_currencytenantref` |
+| `accounting_period` | `finbd.bd_period` |
+| `defaultAssumeOrg` | `ucf-org-center.bd_salesorg_na` |
+| `close_reason` | `yycrm.crmc_custdocref` |
+| `activityDefineCharacter` | `` |
+| `tenant_id` | `` |
+| `ower` | `ucf-staff-center.bd_staff_ref` |
+| `org` | `ucf-org-center.bd_salesorg_na` |
+| `ytenant_id` | `` |
+| `salearea` | `productcenter.aa_salearearef` |
+| `terminal` | `yxybase.aa_storeterminal` |
+| `dept` | `ucf-org-center.bd_adminorgsharetreeref` |
+| `bustype` | `transtype.bd_billtyperef` |
+| `defaultDimension_region` | `productcenter.aa_salearearef` |
+| `partner_person` | `ucf-staff-center.bd_outerstaff_info` |
+| `supply_customer` | `yycrm.cust_customerref` |
+| `partner_dept` | `` |
+| `iCustID` | `yycrm.cust_customerref` |
+| `customer` | `yycrm.cust_customerref` |
 
-## 依赖接口（8 个）
+## 继承接口 (8个, 24字段)
 
-- `IAuditInfo` → `base.itf.IAuditInfo` (v340)
-- `IAutoCode` → `voucher.base.IAutoCode` (v49)
-- `ITenant` → `base.itf.ITenant` (v73)
-- `IDataPermissions` → `crmc.base.IDataPermissions` (v117)
-- `IApprovalFlow` → `base.itf.IApprovalFlow` (v134)
-- `IApprovalInfo` → `base.itf.IApprovalInfo` (v172)
-- `IBusinessFlow` → `base.itf.IBusinessFlow` (v77)
-- `IYTenantExt` → `ucfbase.ucfbaseItf.IYTenantExt` (v24)
+- **审计信息** (`base.itf.IAuditInfo`)
+  - `create_date` → `create_date`
+  - `create_time` → `create_time`
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `modify_date` → `modify_date`
+  - `modify_time` → `modify_time`
+- **自动编号** (`voucher.base.IAutoCode`)
+  - `` → ``
+- **租户相关** (`base.itf.ITenant`)
+  - `tenant_id` → `tenant_id`
+- **数字营销数据权限** (`crmc.base.IDataPermissions`)
+  - `dept` → `dept`
+  - `org` → `org`
+  - `ower` → `ower`
+  - `salearea` → `salearea`
+- **审批流信息** (`base.itf.IApprovalFlow`)
+  - `` → ``
+  - `` → ``
+  - `` → ``
+- **审批信息** (`base.itf.IApprovalInfo`)
+  - `audit_date` → `audit_date`
+  - `` → ``
+  - `` → ``
+  - `audit_time` → `audit_time`
+- **流程接口** (`base.itf.IBusinessFlow`)
+  - `bizFlowId` → `bizFlowId`
+  - `isFlowCoreBill` → `isFlowCoreBill`
+- **统一租户接口(扩展)** (`ucfbase.ucfbaseItf.IYTenantExt`)
+  - `ytenant_id` → `ytenant_id`
 
-## SQL 示例
+## 字段列表（按类型分组）
 
-```sql
-SELECT activity_points, integral_criterion, partner_person, amountsIncurred, version_no, activityDefineCharacter, apply_time, audit_date
-FROM mka_activity
-```
+> 共 95 个直连字段
+
+### 文本字段 (15个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `version_no` | `version_no` | `versionNo` | 版本号 |
+| `close_statement` | `close_statement` | `closeStatement` | 结案说明 |
+| `pc_url` | `pc_url` | `pcUrl` | pc端链接地址 |
+| `coupon_standard` | `coupon_standard` | `couponStandard` | 卡券标准 |
+| `mobile_url` | `mobile_url` | `mobileUrl` | app端链接地址 |
+| `reward_coupon` | `reward_coupon` | `rewardCoupon` | 奖励卡券 |
+| `path` | `path` | `path` | 营销活动路径 |
+| `code` | `code` | `code` | 活动编号 |
+| `theme` | `theme` | `theme` | 活动主题 |
+| `cRegionCode` | `cRegionCode` | `regionCode` | 行政区划编码 |
+| `address` | `address` | `address` | 活动地点 |
+| `content` | `content` | `content` | 活动内容 |
+| `` | `auditor` | `auditor` | 审批人 |
+| `` | `creator` | `creator` | 创建人 |
+| `` | `modifier` | `modifier` | 修改人 |
+
+### 引用字段 (29个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `partner_person` | `partner_person` | `partnerPerson` | 伙伴人员 |
+| `close_reason` | `close_reason` | `closeReason` | 结案原因 |
+| `activity_plan_info` | `activity_plan_info` | `activityPlanInfo` | 计划明细主键 |
+| `activity_plan` | `activity_plan` | `activityPlan` | 活动计划主键 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+| `iCustID` | `iCustID` | `cust` | 客户ID |
+| `defaultAssumeOrg` | `defaultAssumeOrg` | `defaultAssumeOrg` | 默认承担组织 |
+| `defaultAsumeDept` | `defaultAsumeDept` | `defaultAsumeDept` | 默认承担部门 |
+| `defaultDimension_region` | `defaultDimension_region` | `defaultDimension_region` | 默认区域 |
+| `defaultDimension_terminal_chain` | `defaultDimension_terminal_chain` | `defaultDimension_terminal_chain` | 默认所属系统 |
+| `tenant_id` | `tenant_id` | `tenant` | 租户 |
+| `org` | `org` | `org` | 销售组织ID |
+| `marketing_plan` | `marketing_plan` | `marketingPlan` | 营销方案ID |
+| `bustype` | `bustype` | `bustype` | 交易类型ID |
+| `terminal` | `terminal` | `terminal` | 活动终端ID |
+| `customer` | `customer` | `customer` | 活动客户ID |
+| `product_line` | `product_line` | `productLine` | 产品线ID |
+| `supply_customer` | `supply_customer` | `supplyCustomer` | 供货客户ID |
+| `cCountry` | `cCountry` | `country` | 国家id |
+| `` | `creatorId` | `creatorId` | 创建人ID |
+| `currency` | `currency` | `currency` | 币种ID |
+| `` | `modifierId` | `modifierId` | 修改人ID |
+| `ower` | `ower` | `ower` | 负责人ID |
+| `dept` | `dept` | `dept` | 部门ID |
+| `salearea` | `salearea` | `saleArea` | 销售区域ID |
+| `bizFlowId` | `bizFlowId` | `bizFlow` | 流程Id |
+| `` | `auditorId` | `auditorId` | 审批人ID |
+| `accounting_period` | `accounting_period` | `accountingPeriod` | 费用期间ID |
+| `partner_dept` | `partner_dept` | `partnerDept` | 伙伴部门 |
+
+### 日期字段 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `audit_date` | `audit_date` | `auditDate` | 审批日期 |
+| `create_date` | `create_date` | `createDate` | 创建日期 |
+| `modify_date` | `modify_date` | `modifyDate` | 修改日期 |
+
+### 布尔字段 (6个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `syn_claim_material` | `syn_claim_material` | `synClaimMaterial` | 同步申领物料 |
+| `isBudgetOver` | `isBudgetOver` | `isBudgetOver` | 预算超额 |
+| `` | `isWfControlled` | `isWfControlled` | 是否审批流控制 |
+| `partner_execute` | `partner_execute` | `partnerExecute` | 伙伴执行 |
+| `isFlowCoreBill` | `isFlowCoreBill` | `isFlowCoreBill` | 是否核心单据 |
+| `isAutoGenerate` | `isAutoGenerate` | `isAutoGenerate` | 活动是否自动生成 |
+
+### 枚举字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `close_state` | `close_state` | `closeState` | 结案状态 |
+| `settle_state` | `settle_state` | `settleState` | 关闭状态 |
+
+### 整数 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `people_num` | `people_num` | `peopleNum` | 预计人数 |
+| `reality_num` | `reality_num` | `realityNum` | 实际人数 |
+| `execution_frequency` | `execution_frequency` | `executionFrequency` | 执行频率 |
+
+### 短整数 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `verifystate` | `verifystate` | `verifystate` | 审批状态 |
+| `` | `returncount` | `returncount` | 退回次数 |
+| `opening_activity` | `opening_activity` | `openingActivity` | 期初活动 |
+
+### 长整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+
+### 数值字段 (16个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `activity_points` | `activity_points` | `activityPoints` | 活动积分 |
+| `integral_criterion` | `integral_criterion` | `integralCriterion` | 积分标准 |
+| `amountsIncurred` | `amountsIncurred` | `amountsIncurred` | 发生金额 |
+| `waitSettleAmount` | `waitSettleAmount` | `waitSettleAmount` | 应结算金额 |
+| `freezeAmountTotal` | `freezeAmountTotal` | `freezeAmountTotal` | 已冻结金额 |
+| `iLNG` | `iLNG` | `longitude` | 经度 |
+| `iLAT` | `iLAT` | `latitude` | 纬度 |
+| `applyAmountTotal` | `applyAmountTotal` | `applyAmountTotal` | 申请金额 |
+| `expectedSaleAmountTotal` | `expectedSaleAmountTotal` | `expectedSaleAmountTotal` | 预计销售额 |
+| `expect_fee` | `expect_fee` | `expectFee` | 预计费用 |
+| `expect_sales` | `expect_sales` | `expectSales` | 预计销量 |
+| `expectedExpenseRate` | `expectedExpenseRate` | `expectedExpenseRate` | 预计费率 |
+| `expect_sales_rate` | `expect_sales_rate` | `expectSalesRate` | 预计费率 |
+| `settle_amount` | `settle_amount` | `settleAmount` | 结算费用 |
+| `settledAmountTotal` | `settledAmountTotal` | `settledAmountTotal` | 已结算金额 |
+| `assumeAmountTotal` | `assumeAmountTotal` | `assumeAmountTotal` | 承担金额 |
+
+### UserDefine (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `activityDefineCharacter` | `activityDefineCharacter` | `activityDefineCharacter` | 自定义项特征属性组 |
+
+### timestamp (11个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `apply_time` | `apply_time` | `applyTime` | 申请时间 |
+| `materialapply_date` | `materialapply_date` | `materialApplyDate` | 物料申领截止日期 |
+| `start_date` | `start_date` | `startDate` | 开始日期 |
+| `end_date` | `end_date` | `endDate` | 结束日期 |
+| `execution_time` | `execution_time` | `executionTime` | 执行时间 |
+| `audit_time` | `audit_time` | `auditTime` | 审批时间 |
+| `close_time` | `close_time` | `closeTime` | 结案时间 |
+| `settle_time` | `settle_time` | `settleTime` | 关闭时间 |
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+
+### other (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `` | `activityDisplays` | 营销活动活动陈列 |
+| `` | `` | `activityInfs` | 营销活动活动费用 |
+| `` | `` | `activityMaterialList` | 营销活动活动物料 |
+| `` | `` | `activityParticipantList` | 营销活动参与人 |
+| `` | `` | `headDef` | 营销活动主表自定义项 |

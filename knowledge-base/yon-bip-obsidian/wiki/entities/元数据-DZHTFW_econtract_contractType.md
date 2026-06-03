@@ -9,48 +9,139 @@ last_verified: 2026-06-03
 status: verified
 source_type: api_response
 ---
+
 # 合同类型 (`DZHTFW.econtract.contractType`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBip），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `clm_contract_type` | 应用: `DZHTFW`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`clm_contract_type` | domain：`iuap-apcom-contract` | 应用：`DZHTFW` | 业务对象ID：`f82bdbf7-cf87-4c16-b8dd-192d992a2949`
 
-## 属性（24 个）
+## 基本信息
 
-| # | 字段 | 显示名 | 列 | 类型 | biztype |
-|---|------|--------|-----|------|---------|
-| 1 | `adaptallorgs` | adaptallorgs | `adaptallorgs` | Boolean | `switch` |
-| 2 | `billTypeId` | 票据类型ID | `bill_type_id` | 4a227650-b866-4f4c-a6ca-2433297a1713 | `quote` |
-| 3 | `code` | 编码 | `code` | String | `text` |
-| 4 | `contractGroupId` | contractGroupID | `contract_group_id` | 4c202967-83b6-4bc2-8c87-739ebb342000 | `quote` |
-| 5 | `iOrder` | iOrder | `i_order` | Integer | `int` |
-| 6 | `icon` | icon | `icon` | String | `text` |
-| 7 | `name` | 名称 | `name` | String | `multiLanguage` |
-| 8 | `outerSysId` | outerSysID | `outer_sys_id` | String | `text` |
-| 9 | `remark` | remark | `remark` | String | `multiLanguage` |
-| 10 | `transTypeId` | transTypeID | `trans_type_id` | 19f9264d-28d1-4b47-9d28-f2e82654f3a9 | `quoteList` |
-| 11 | `feature` | feature | `feature` | 1ad5f961-6782-40aa-bad4-f94902c62de9 | `UserDefine` |
-| 12 | `contracttypescopeList` | contracttypescopeList | `` | 85822a42-bf72-41b7-a68b-19fb6439498a | `` |
-| 13 | `contractType_transTypeIdList` | contractType_transTypeIdList | `` | e7ce076d-a36b-4629-998b-e7048a2e2050 | `` |
-| 14 | `id` | ID | `id` | String | `text` |
-| 15 | `pubts` | 时间戳 | `pubts` | DateTime | `dateTime` |
-| 16 | `createTime` | 创建时间 | `create_time` | DateTime | `dateTime` |
-| 17 | `creator` | 创建人 | `creator` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 18 | `modifier` | 修改人 | `modifier` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 19 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `dateTime` |
-| 20 | `disablets` | disablets | `disablets` | DateTime | `dateTime` |
-| 21 | `enable` | enable | `enable` | sys_intboolean | `singleOption` |
-| 22 | `enablets` | enablets | `enablets` | DateTime | `dateTime` |
-| 23 | `ytenantId` | ytenantID | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 24 | `dr` | 逻辑删除 | `dr` | Short | `short` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 合同类型 |
+| 物理表 | `clm_contract_type` |
+| 数据库 schema | `iuap-apcom-contract` |
+| 所属应用 | `DZHTFW` |
+| 直连字段 | 24 个 |
+| 子表 | 2 个 |
+| 关联引用 | 9 个 |
 
-## 关联（9 个）
+## 子表
 
-- `creator` -> `base.user.BipUser` () 
-- `feature` -> `DZHTFW.econtract.ContractTypeFeature` () [废]
-- `modifier` -> `base.user.BipUser` () 
-- `contractGroupId` -> `DZHTFW.econtract.contractTypeGroup` () [废]
-- `transTypeId` -> `bd.bill.TransType` () [废]
-- `contracttypescopeList` -> `DZHTFW.econtract.contracttypescope` (0..n) 
-- `ytenantId` -> `yht.tenant.YhtTenant` () 
-- `billTypeId` -> `bd.bill.BillTypeVO` () [废]
-- `contractType_transTypeIdList` -> `DZHTFW.econtract.contractType_transTypeId` (0..n) 
+| 字段名 | URI | 关系 |
+|--------|-----|------|
+| `contracttypescopeList` | `DZHTFW.econtract.contracttypescope` | composition |
+| `contractType_transTypeIdList` | `DZHTFW.econtract.contractType_transTypeId` | composition |
+
+## 关联引用 (9个)
+
+| 字段名 | 引用类型 |
+|--------|---------|
+| `creator` | `bip-usercenter.bip_user_ref` |
+| `feature` | `` |
+| `modifier` | `bip-usercenter.bip_user_ref` |
+| `contract_group_id` | `iuap-apcom-contract.contractTypeGroupRef` |
+| `trans_type_id` | `transtype.bd_billtyperef` |
+| `` | `` |
+| `ytenant_id` | `` |
+| `bill_type_id` | `transtype.bd_billtypetreeref` |
+
+## 继承接口 (4个, 9字段)
+
+- **档案状态** (`iuap.busiObj.IEnable`)
+  - `disablets` → `disablets`
+  - `enable` → `enable`
+  - `enablets` → `enablets`
+- **审计信息** (`iuap.busiObj.IAuditInfo`)
+  - `create_time` → `create_time`
+  - `creator` → `creator`
+  - `modifier` → `modifier`
+  - `modify_time` → `modify_time`
+- **统一租户接口** (`iuap.busiObj.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+- **逻辑删除** (`iuap.busiObj.LogicDelete`)
+  - `dr` → `dr`
+
+## 字段列表（按类型分组）
+
+> 共 24 个直连字段
+
+### 文本字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `code` | `code` | `code` | 编码 |
+| `icon` | `icon` | `icon` | 图标 |
+| `outer_sys_id` | `outer_sys_id` | `outerSysId` | 外部系统来源ID |
+| `id` | `id` | `id` | 主键 |
+
+### 引用字段 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `bill_type_id` | `bill_type_id` | `billTypeId` | 单据类型 |
+| `contract_group_id` | `contract_group_id` | `contractGroupId` | 合同分组 |
+| `creator` | `creator` | `creator` | 创建人 |
+| `modifier` | `modifier` | `modifier` | 修改人 |
+| `ytenant_id` | `ytenant_id` | `ytenantId` | 租户id |
+
+### 日期时间 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+| `disablets` | `disablets` | `disablets` | 停用时间 |
+| `enablets` | `enablets` | `enablets` | 启用时间 |
+
+### 布尔字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `adaptallorgs` | `adaptallorgs` | `adaptallorgs` | 适配所有组织 |
+
+### 枚举字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `enable` | `enable` | `enable` | 档案状态 |
+
+### 整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `i_order` | `i_order` | `iOrder` | 排序号 |
+
+### 短整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dr` | `dr` | `dr` | 逻辑删除 |
+
+### multiLanguage (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `name` | `name` | `name` | 名称 |
+| `remark` | `remark` | `remark` | 说明 |
+
+### quoteList (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `trans_type_id` | `trans_type_id` | `transTypeId` | 交易类型 |
+
+### UserDefine (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `feature` | `feature` | `feature` | 自定义特征 |
+
+### other (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `` | `contracttypescopeList` | 合同类型适用组织 |
+| `` | `` | `contractType_transTypeIdList` | 适用交易类型多选引用子实体 |

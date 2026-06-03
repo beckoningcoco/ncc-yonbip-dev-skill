@@ -12,122 +12,205 @@ source_type: api_response
 
 # 供应商业务属性(管理组织) (`aa.vendor.VendorExtend`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `aa_vendorextend_new` | 应用: `DPMSPL` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`aa_vendorextend_new` | domain：`yssupplier` | 应用：`DPMSPL` | 业务对象ID：``
 
-## 属性（76 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `id` | ID | `id` | Long | `long` |
-| 2 | `belongOrg` | belongOrg | `cBelongOrg` | 8aaf4bce-2eb3-443c-bce1-0fb94fec3c0c | `quote` |
-| 3 | `vendor` | vendor | `iVendorId` | 89bf026e-cc49-4fe7-9a7b-3e8fdcc77c1e | `quote` |
-| 4 | `simplename` | simplename | `cSimpleName` | String | `multiLanguage` |
-| 5 | `helpcode` | helpcode | `cHelpCode` | String | `text` |
-| 6 | `invoicevendor` | invoicevendor | `iInvoiceVendorId` | 89bf026e-cc49-4fe7-9a7b-3e8fdcc77c1e | `quote` |
-| 7 | `invoiceBizType` | invoiceBizType | `invoice_biz_type` | Short | `short` |
-| 8 | `vendorExtendCharacterDefine` | vendorExtendCharacterDefine | `vendorExtendCharacterDefine` | 54e570e4-9ed9-4b61-9100-d333882349b5 | `UserDefine` |
-| 9 | `financialSynergy` | financialSynergy | `financial_synergy` | Boolean | `switch` |
-| 10 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 11 | `lifecycleStatus` | lifecycleStatus | `lifecycleStatus` | 5ffdc7d3-9e62-4b5f-8668-eb39ddd20dd5 | `quote` |
-| 12 | `blackTime` | blackTime | `blackTime` | DateTime | `timestamp` |
-| 13 | `cooperationLevel` | cooperationLevel | `cooperationLevel` | 5ffdc7d3-9e62-4b5f-8668-eb39ddd20dd5 | `quote` |
-| 14 | `blackReason` | blackReason | `blackReason` | String | `text` |
-| 15 | `org` | org | `org` | 8aaf4bce-2eb3-443c-bce1-0fb94fec3c0c | `quote` |
-| 16 | `priceTag` | priceTag | `price_tag` | String | `text` |
-| 17 | `taxitems` | taxitems | `iTaxItem` | 709cd092-3dd4-49ca-9eb9-7b8888551810 | `quote` |
-| 18 | `taxrate` | taxrate | `fTaxRate` | Decimal | `number` |
-| 19 | `paymentagreement` | paymentagreement | `iPaymentAgreementId` | 3cce8052-512e-4e51-9b6e-57adff40948c | `quote` |
-| 20 | `paymentTerms` | paymentTerms | `paymentTerms` | f4c80a3e-e324-4009-a2ff-269d5099f7b0 | `quote` |
-| 21 | `creditServiceDay` | creditServiceDay | `iCreditServiceDay` | Long | `long` |
-| 22 | `exchangeratetype` | exchangeratetype | `cExchangeratetypeId` | 1eb63781-e244-464d-b9ba-a7a4e1685295 | `quote` |
-| 23 | `settlemethod` | settlemethod | `iSettleMethodId` | 95f34e90-897c-4bf5-958c-b1c2deaa8aff | `quote` |
-| 24 | `currency` | currency | `iCurrencyId` | 02b45339-eb4a-4a31-a8b5-d32f494f4e8e | `quote` |
-| 25 | `currencyname` | currencyname | `cCurrencyName` | String | `text` |
-| 26 | `transactionCurrency` | transactionCurrency | `transactionCurrency` | f4c80a3e-e324-4009-a2ff-269d5099f7b0 | `quote` |
-| 27 | `department` | department | `iDepartmentId` | 8e8fa65a-f8d9-454d-a8f8-4b7af543cdd5 | `quote` |
-| 28 | `person` | person | `iPersonId` | 78bff1de-ddf1-4814-90de-b0b5f1eac78a | `quote` |
-| 29 | `accountingStaff` | accountingStaff | `accountingStaff` | f4c80a3e-e324-4009-a2ff-269d5099f7b0 | `quote` |
-| 30 | `shipvia` | shipvia | `iShipViaId` | aa2f6845-347d-499f-a5b2-964b84747d99 | `quote` |
-| 31 | `deliveryvendor` | deliveryvendor | `iDeliveryVendorId` | 89bf026e-cc49-4fe7-9a7b-3e8fdcc77c1e | `quote` |
-| 32 | `shipregion` | shipregion | `iShipregionId` | 373171f0-f497-4bab-bda7-ff4b6489c13e | `quote` |
-| 33 | `remark` | remark | `cRemark` | String | `multiLanguage` |
-| 34 | `stopstatus` | stopstatus | `stopstatus` | Boolean | `switch` |
-| 35 | `stoptime` | stoptime | `stop_time` | DateTime | `timestamp` |
-| 36 | `creator` | 创建人 | `creator` | String | `text` |
-| 37 | `creatorId` | 创建人ID | `creatorId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 38 | `createDate` | 创建日期 | `create_date` | Date | `date` |
-| 39 | `createTime` | 创建时间 | `create_time` | DateTime | `timestamp` |
-| 40 | `modifier` | 修改人 | `modifier` | String | `text` |
-| 41 | `modifierId` | 修改人ID | `modifierId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 42 | `modifyDate` | 修改日期 | `modify_date` | Date | `date` |
-| 43 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `timestamp` |
-| 44 | `internationalTradTerms` | internationalTradTerms | `internationalTradTerms` | f4c80a3e-e324-4009-a2ff-269d5099f7b0 | `quote` |
-| 45 | `internationalTradTerms2` | internationalTradTerms2 | `internationalTradTerms2` | f4c80a3e-e324-4009-a2ff-269d5099f7b0 | `quote` |
-| 46 | `paymentMethod` | paymentMethod | `paymentMethod` | f4c80a3e-e324-4009-a2ff-269d5099f7b0 | `quote` |
-| 47 | `paymentMethod2` | paymentMethod2 | `paymentMethod2` | f4c80a3e-e324-4009-a2ff-269d5099f7b0 | `quote` |
-| 48 | `paymentMethod3` | paymentMethod3 | `paymentMethod3` | f4c80a3e-e324-4009-a2ff-269d5099f7b0 | `quote` |
-| 49 | `paymentMethod4` | paymentMethod4 | `paymentMethod4` | f4c80a3e-e324-4009-a2ff-269d5099f7b0 | `quote` |
-| 50 | `paymentMethod5` | paymentMethod5 | `paymentMethod5` | f4c80a3e-e324-4009-a2ff-269d5099f7b0 | `quote` |
-| 51 | `evaAbility` | evaAbility | `eva_ability_id` | Long | `long` |
-| 52 | `evaAbilityName` | evaAbility名称 | `eva_ability_name` | String | `text` |
-| 53 | `abilityDetial` | abilityDetial | `ability_detial_id` | Long | `long` |
-| 54 | `abilityDetialName` | abilityDetial名称 | `ability_detial_name` | String | `text` |
-| 55 | `evaScore` | evaScore | `eva_score` | Decimal | `number` |
-| 56 | `abilityStatus` | abilityStatus | `ability_status` | Boolean | `switch` |
-| 57 | `evaSourceBillid` | evaSourceBillid | `eva_source_billid` | Long | `long` |
-| 58 | `evaSourceBillname` | evaSourceBillname | `eva_source_Billname` | String | `text` |
-| 59 | `evaSourceType` | evaSourceType | `eva_source_type` | Short | `short` |
-| 60 | `evaUpdateDate` | evaUpdateDate | `eva_update_date` | Date | `date` |
-| 61 | `accessstatus` | accessstatus | `cAccessStatus` | Short | `short` |
-| 62 | `freezeStep` | freezeStep | `freeze_step` | String | `text` |
-| 63 | `freezestatus` | freezestatus | `bFreezeStatus` | Short | `short` |
-| 64 | `purchaseFreezeMark` | purchaseFreezeMark | `purchaseFreezeMark` | Boolean | `switch` |
-| 65 | `purchaseInterfaceFeedback` | purchaseInterfaceFeedback | `purchaseInterfaceFeedback` | String | `text` |
-| 66 | `purchaseIsTransfer` | purchaseIsTransfer | `purchaseIsTransfer` | Boolean | `switch` |
-| 67 | `receiptInvoiceVerification` | receiptInvoiceVerification | `receiptInvoiceVerification` | Boolean | `switch` |
-| 68 | `serviceBillingVerification` | serviceBillingVerification | `serviceBillingVerification` | Boolean | `switch` |
-| 69 | `erpCode` | erp编码 | `erpCode` | String | `text` |
-| 70 | `customerFreezingSign` | customerFreezingSign | `customerFreezingSign` | Boolean | `switch` |
-| 71 | `customerInterfaceFeedback` | customerInterfaceFeedback | `customerInterfaceFeedback` | String | `text` |
-| 72 | `customerIsTransfer` | customerIsTransfer | `customerIsTransfer` | Boolean | `switch` |
-| 73 | `belongMerchant` | belongMerchant | `cBelongMerchant` | 94b3280a-27a4-485a-b90b-b7bce57c6df2 | `quote` |
-| 74 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 75 | `vendororg` | vendororg | `iVendorOrgId` | 884766bb-f155-42a2-93fd-2e90d1903c9a | `quote` |
-| 76 | `tenant` | tenant | `tenant_id` | c213cd56-d5de-421f-bae7-d77455b557cd | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 供应商业务属性(管理组织) |
+| 物理表 | `aa_vendorextend_new` |
+| 数据库 schema | `yssupplier` |
+| 所属应用 | `DPMSPL` |
+| 直连字段 | 76 个 |
+| 子表 | 0 个 |
+| 关联引用 | 33 个 |
 
-## 关联（33 个）
+## 关联引用 (33个)
 
-- `lifecycleStatus` -> `aa.supplyability.SupplyAbilityDetail` ()
-- `cooperationLevel` -> `aa.supplyability.SupplyAbilityDetail` ()
-- `settlemethod` -> `aa.settlemethod.SettleMethod` ()
-- `internationalTradTerms` -> `bd.basedocdef.CustomerDocVO` ()
-- `creatorId` -> `base.user.User` ()
-- `modifierId` -> `base.user.User` ()
-- `accountingStaff` -> `bd.basedocdef.CustomerDocVO` ()
-- `paymentMethod2` -> `bd.basedocdef.CustomerDocVO` ()
-- `internationalTradTerms2` -> `bd.basedocdef.CustomerDocVO` ()
-- `paymentMethod5` -> `bd.basedocdef.CustomerDocVO` ()
-- `paymentMethod4` -> `bd.basedocdef.CustomerDocVO` ()
-- `vendor` -> `aa.vendor.Vendor` (1)
-- `paymentMethod3` -> `bd.basedocdef.CustomerDocVO` ()
-- `shipregion` -> `base.shipregion.ShipRegion` ()
-- `vendororg` -> `aa.vendor.VendorOrg` ()
-- `currency` -> `bd.currencytenant.CurrencyTenantVO` ()
-- `invoicevendor` -> `aa.vendor.Vendor` ()
-- `paymentagreement` -> `bd.payments.PayAgreement` ()
-- `department` -> `aa.baseorg.DeptMV` ()
-- `paymentTerms` -> `bd.basedocdef.CustomerDocVO` ()
-- `tenant` -> `base.tenant.Tenant` ()
-- `deliveryvendor` -> `aa.vendor.Vendor` ()
-- `belongMerchant` -> `aa.merchant.Merchant` ()
-- `transactionCurrency` -> `bd.basedocdef.CustomerDocVO` ()
-- `org` -> `bd.adminOrg.BaseOrgVO` ()
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `shipvia` -> `aa.sendtrans.SendTransWay` ()
-- `vendorExtendCharacterDefine` -> `aa.vendor.VendorExtendCharacterDefine` ()
-- `person` -> `bd.staff.StaffNew` ()
-- `belongOrg` -> `bd.adminOrg.BaseOrgVO` ()
-- `paymentMethod` -> `bd.basedocdef.CustomerDocVO` ()
-- `exchangeratetype` -> `bd.exchangeRate.ExchangeRateTypeVO` ()
-- `taxitems` -> `archive.taxArchives.TaxRateArchive` ()
+| 字段名 | 引用类型 |
+|--------|---------|
+| `lifecycleStatus` | `yssupplier.aa_supplyabilitylist_business_ref` |
+| `cooperationLevel` | `yssupplier.aa_supplyabilitylist_cooperation_ref` |
+| `iSettleMethodId` | `yssupplier.aa_settlemethodref` |
+| `internationalTradTerms` | `` |
+| `` | `` |
+| `accountingStaff` | `` |
+| `paymentMethod2` | `` |
+| `internationalTradTerms2` | `` |
+| `paymentMethod5` | `` |
+| `paymentMethod4` | `` |
+| `iVendorId` | `` |
+| `paymentMethod3` | `` |
+| `iShipregionId` | `productcenter.base_shipregionref` |
+| `iVendorOrgId` | `aa_adminorgrangeref` |
+| `iCurrencyId` | `ucfbasedoc.bd_currencytenantref` |
+| `iInvoiceVendorId` | `yssupplier.aa_vendorCreatorref` |
+| `iPaymentAgreementId` | `ucfbasedoc.bd_payagreementref` |
+| `iDepartmentId` | `ucf-org-center.bd_dept_list_ref` |
+| `paymentTerms` | `` |
+| `tenant_id` | `` |
+| `iDeliveryVendorId` | `yssupplier.aa_vendorCreatorref` |
+| `cBelongMerchant` | `productcenter.aa_merchantinorganizationref` |
+| `transactionCurrency` | `` |
+| `org` | `aa_adminorgrangeref` |
+| `ytenant_id` | `` |
+| `iShipViaId` | `yssupplier.aa_sendtranswayref` |
+| `vendorExtendCharacterDefine` | `` |
+| `iPersonId` | `ucf-staff-center.bd_staff_ref` |
+| `cBelongOrg` | `aa_adminorgrangeref` |
+| `paymentMethod` | `` |
+| `cExchangeratetypeId` | `ucfbasedoc.bd_exchangeratetyperef` |
+| `iTaxItem` | `yonbip-fi-taxpubdoc.RefTable_839443ba26` |
+
+## 继承接口 (5个, 13字段)
+
+- **租户相关** (`base.itf.ITenant`)
+  - `tenant_id` → `tenant_id`
+- **停用信息** (`base.itf.IStopping`)
+  - `stopstatus` → `stopstatus`
+  - `stop_time` → `stop_time`
+- **审计信息** (`base.itf.IAuditInfo`)
+  - `create_date` → `create_date`
+  - `create_time` → `create_time`
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `modify_date` → `modify_date`
+  - `modify_time` → `modify_time`
+- **erp编码** (`base.itf.IErpCode`)
+  - `erpCode` → `erpCode`
+- **统一租户接口(扩展)** (`ucfbase.ucfbaseItf.IYTenantExt`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 76 个直连字段
+
+### 文本字段 (13个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `cHelpCode` | `cHelpCode` | `helpcode` | 供应商助记码 |
+| `blackReason` | `blackReason` | `blackReason` | 加入黑名单原因 |
+| `price_tag` | `price_tag` | `priceTag` | 价格标识 |
+| `cCurrencyName` | `cCurrencyName` | `currencyname` | 交易币种名称 |
+| `` | `creator` | `creator` | 创建人名称 |
+| `` | `modifier` | `modifier` | 修改人名称 |
+| `eva_ability_name` | `eva_ability_name` | `evaAbilityName` | 评价等级体系名称 |
+| `ability_detial_name` | `ability_detial_name` | `abilityDetialName` | 评价等级名称 |
+| `eva_source_Billname` | `eva_source_Billname` | `evaSourceBillname` | 评价来源名称 |
+| `freeze_step` | `freeze_step` | `freezeStep` | 冻结环节 |
+| `purchaseInterfaceFeedback` | `purchaseInterfaceFeedback` | `purchaseInterfaceFeedback` | 采购接口反馈 |
+| `erpCode` | `erpCode` | `erpCode` | 商家编码 |
+| `customerInterfaceFeedback` | `customerInterfaceFeedback` | `customerInterfaceFeedback` | 客商接口反馈 |
+
+### 引用字段 (32个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `cBelongOrg` | `cBelongOrg` | `belongOrg` | 所属组织 |
+| `iVendorId` | `iVendorId` | `vendor` | 供应商档案主键 |
+| `iInvoiceVendorId` | `iInvoiceVendorId` | `invoicevendor` | 开票供应商 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+| `lifecycleStatus` | `lifecycleStatus` | `lifecycleStatus` | 生命周期状态 |
+| `cooperationLevel` | `cooperationLevel` | `cooperationLevel` | 合作等级 |
+| `org` | `org` | `org` | 使用组织 |
+| `iTaxItem` | `iTaxItem` | `taxitems` | 税目税率主键 |
+| `iPaymentAgreementId` | `iPaymentAgreementId` | `paymentagreement` | 付款协议 |
+| `paymentTerms` | `paymentTerms` | `paymentTerms` | 默认付款条件(供应商) |
+| `cExchangeratetypeId` | `cExchangeratetypeId` | `exchangeratetype` | 汇率类型 |
+| `iSettleMethodId` | `iSettleMethodId` | `settlemethod` | 结算方式 |
+| `iCurrencyId` | `iCurrencyId` | `currency` | 交易币种 |
+| `transactionCurrency` | `transactionCurrency` | `transactionCurrency` | 默认交易货币 |
+| `iDepartmentId` | `iDepartmentId` | `department` | 专管部门 |
+| `iPersonId` | `iPersonId` | `person` | 专管业务员 |
+| `accountingStaff` | `accountingStaff` | `accountingStaff` | 会计职员 |
+| `iShipViaId` | `iShipViaId` | `shipvia` | 发运方式 |
+| `iDeliveryVendorId` | `iDeliveryVendorId` | `deliveryvendor` | 发货供应商 |
+| `iShipregionId` | `iShipregionId` | `shipregion` | 运输区域 |
+| `` | `creatorId` | `creatorId` | 创建人 |
+| `` | `modifierId` | `modifierId` | 修改人 |
+| `internationalTradTerms` | `internationalTradTerms` | `internationalTradTerms` | 默认国际贸易条件 |
+| `internationalTradTerms2` | `internationalTradTerms2` | `internationalTradTerms2` | 默认国际贸易条件2 |
+| `paymentMethod` | `paymentMethod` | `paymentMethod` | 默认支付方式 |
+| `paymentMethod2` | `paymentMethod2` | `paymentMethod2` | 默认支付方式2 |
+| `paymentMethod3` | `paymentMethod3` | `paymentMethod3` | 默认支付方式3 |
+| `paymentMethod4` | `paymentMethod4` | `paymentMethod4` | 默认支付方式4 |
+| `paymentMethod5` | `paymentMethod5` | `paymentMethod5` | 默认支付方式5 |
+| `cBelongMerchant` | `cBelongMerchant` | `belongMerchant` | 所属商家 |
+| `iVendorOrgId` | `iVendorOrgId` | `vendororg` | 供应商适用范围表主键 |
+| `tenant_id` | `tenant_id` | `tenant` | 租户 |
+
+### 日期字段 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_date` | `create_date` | `createDate` | 创建日期 |
+| `modify_date` | `modify_date` | `modifyDate` | 修改日期 |
+| `eva_update_date` | `eva_update_date` | `evaUpdateDate` | 评价结果更新时间 |
+
+### 布尔字段 (9个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `financial_synergy` | `financial_synergy` | `financialSynergy` | 财务协同 |
+| `stopstatus` | `stopstatus` | `stopstatus` | 停用状态 |
+| `ability_status` | `ability_status` | `abilityStatus` | 是否合格 |
+| `purchaseFreezeMark` | `purchaseFreezeMark` | `purchaseFreezeMark` | 采购冻结标识 |
+| `purchaseIsTransfer` | `purchaseIsTransfer` | `purchaseIsTransfer` | 采购是否传输 |
+| `receiptInvoiceVerification` | `receiptInvoiceVerification` | `receiptInvoiceVerification` | 基于收货的发票校验 |
+| `serviceBillingVerification` | `serviceBillingVerification` | `serviceBillingVerification` | 基于服务的开票校验 |
+| `customerFreezingSign` | `customerFreezingSign` | `customerFreezingSign` | 客商冻结标识 |
+| `customerIsTransfer` | `customerIsTransfer` | `customerIsTransfer` | 客商是否传输 |
+
+### 短整数 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `invoice_biz_type` | `invoice_biz_type` | `invoiceBizType` | 开票方式 |
+| `eva_source_type` | `eva_source_type` | `evaSourceType` | 评价类型 |
+| `cAccessStatus` | `cAccessStatus` | `accessstatus` | 供应商合作状态 |
+| `bFreezeStatus` | `bFreezeStatus` | `freezestatus` | 风险状态 |
+
+### 长整数 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | 供应商业务属性主键 |
+| `iCreditServiceDay` | `iCreditServiceDay` | `creditServiceDay` | 账期天数(原信用期限) |
+| `eva_ability_id` | `eva_ability_id` | `evaAbility` | 评价等级体系ID |
+| `ability_detial_id` | `ability_detial_id` | `abilityDetial` | 评价等级ID |
+| `eva_source_billid` | `eva_source_billid` | `evaSourceBillid` | 评价来源 |
+
+### 数值字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `fTaxRate` | `fTaxRate` | `taxrate` | 进项税率 |
+| `eva_score` | `eva_score` | `evaScore` | 评价得分 |
+
+### multiLanguage (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `cSimpleName` | `cSimpleName` | `simplename` | 供应商简称 |
+| `cRemark` | `cRemark` | `remark` | 备注 |
+
+### UserDefine (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `vendorExtendCharacterDefine` | `vendorExtendCharacterDefine` | `vendorExtendCharacterDefine` | 供应商业务信息特征自定义项 |
+
+### timestamp (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `blackTime` | `blackTime` | `blackTime` | 加入黑名单时间 |
+| `stop_time` | `stop_time` | `stoptime` | 停用时间 |
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |

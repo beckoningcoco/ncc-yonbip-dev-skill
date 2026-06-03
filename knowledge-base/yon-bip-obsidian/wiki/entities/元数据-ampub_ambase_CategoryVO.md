@@ -9,75 +9,169 @@ last_verified: 2026-06-03
 status: verified
 source_type: api_response
 ---
+
 # 资产类别 (`ampub.ambase.CategoryVO`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `pam_category` | 应用: `AMBD`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`pam_category` | domain：`ucf-amc-ambd` | 应用：`AMBD` | 业务对象ID：`3c9a78c4-1559-4380-a603-1880c9cd73a3`
 
-## 属性（47 个）
+## 基本信息
 
-| # | 字段 | 显示名 | 列 | 类型 | biztype |
-|---|------|--------|-----|------|---------|
-| 1 | `category_code` | category_code | `category_code` | String | `text` |
-| 2 | `category_name` | category_name | `category_name` | String | `multiLanguage` |
-| 3 | `special_flag` | special_flag | `special_flag` | Boolean | `switch` |
-| 4 | `line_category` | line_category | `line_category` | Boolean | `switch` |
-| 5 | `associate_fa_flag` | associate_fa_flag | `associate_fa_flag` | Boolean | `switch` |
-| 6 | `avg_use_life` | avg_use_life | `avg_use_life` | Integer | `int` |
-| 7 | `design_life` | design_life | `design_life` | Integer | `int` |
-| 8 | `portrait_flag` | portrait_flag | `portrait_flag` | Boolean | `switch` |
-| 9 | `memo` | 备注 | `memo` | String | `text` |
-| 10 | `pk_org` | pk_org | `pk_org` | String | `text` |
-| 11 | `fk_parent` | fk_parent | `fk_parent` | 2cc09807-e5f0-4c71-a7ac-c4f932b8bdb7 | `quote` |
-| 12 | `category_global` | category_global | `category_global` | String | `multiLanguage` |
-| 13 | `cooperate_flag` | cooperate_flag | `cooperate_flag` | Boolean | `switch` |
-| 14 | `name_pre_flag` | name_pre_flag | `name_pre_flag` | Boolean | `switch` |
-| 15 | `inv_flag` | inv_flag | `inv_flag` | Boolean | `switch` |
-| 16 | `innercode` | innercode | `innercode` | String | `text` |
-| 17 | `max_inner_code` | max_inner_code | `max_inner_code` | String | `text` |
-| 18 | `sync_status` | sync_status | `sync_status` | Short | `short` |
-| 19 | `creator` | 创建人 | `creator` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 20 | `creationtime` | creationtime | `creationtime` | DateTime | `timestamp` |
-| 21 | `modifier` | 修改人 | `modifier` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 22 | `modifiedtime` | modifiedtime | `modifiedtime` | DateTime | `timestamp` |
-| 23 | `sysid` | sysid | `sysid` | String | `text` |
-| 24 | `transi_type` | transi_type | `transi_type` | String | `text` |
-| 25 | `enablestate` | enablestate | `enablestate` | Short | `short` |
-| 26 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 27 | `id` | ID | `id` | String | `text` |
-| 28 | `level` | level | `level` | Integer | `int` |
-| 29 | `path` | path | `path` | String | `text` |
-| 30 | `isEnd` | 是否End | `isEnd` | Boolean | `switch` |
-| 31 | `seal_time` | seal_time | `seal_time` | DateTime | `timestamp` |
-| 32 | `dr` | 逻辑删除 | `dr` | Short | `short` |
-| 33 | `assetBusiness` | assetBusiness | `asset_business` | Short | `short` |
-| 34 | `pk_sealer` | pk_sealer | `pk_sealer` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 35 | `tenant` | tenant | `tenantid` | 5d1b0fb2-2218-4eaa-abc9-1c23516b6596 | `quote` |
-| 36 | `gatewayid` | gatewayid | `gatewayid` | String | `text` |
-| 37 | `userDefines` | userDefines | `user_defines` | f5c4a256-bc8b-4def-baf4-aea8a90b3080 | `UserDefine` |
-| 38 | `erpcode` | erpcode | `erpcode` | String | `text` |
-| 39 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 40 | `parent` | parent | `parent_id` | 2cc09807-e5f0-4c71-a7ac-c4f932b8bdb7 | `quote` |
-| 41 | `sort` | sort | `sort_num` | Integer | `int` |
-| 42 | `erpid` | erpid | `erpid` | String | `text` |
-| 43 | `attachgroup` | attachgroup | `` | 533df30b-d034-4212-b0d8-d0e678210cc4 | `` |
-| 44 | `bodyvos` | bodyvos | `` | 6633c37a-8585-4d3f-b332-1f0f57329c6c | `` |
-| 45 | `defines` | defines | `` | 0d336618-1aa0-4a0f-a3a1-581dd318b41d | `` |
-| 46 | `keyparts` | keyparts | `` | bd4e7978-d5bf-4ec6-9c2f-83a49c312ccc | `` |
-| 47 | `lineparam` | lineparam | `` | 6036c6f4-25d0-430c-a10e-e2a47378dba6 | `` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 资产类别 |
+| 物理表 | `pam_category` |
+| 数据库 schema | `ucf-amc-ambd` |
+| 所属应用 | `AMBD` |
+| 直连字段 | 47 个 |
+| 子表 | 5 个 |
+| 关联引用 | 13 个 |
 
-## 关联（13 个）
+## 子表
 
-- `lineparam` -> `ampub.ambase.LineParamVO` (0..n) 
-- `parent` -> `ampub.ambase.CategoryVO` () 
-- `creator` -> `base.user.BipUser` () 
-- `keyparts` -> `ampub.ambase.KeyPartsVO` (0..n) 
-- `ytenant` -> `yht.tenant.YhtTenant` () 
-- `modifier` -> `base.user.BipUser` () 
-- `defines` -> `ampub.ambase.CategoryVODefine` (1) [废]
-- `userDefines` -> `ampub.ambase.CategoryVODefines` () 
-- `pk_sealer` -> `base.user.BipUser` () 
-- `fk_parent` -> `ampub.ambase.CategoryVO` () 
-- `tenant` -> `baseapp.yht.PubTenant` () 
-- `bodyvos` -> `ampub.ambase.CateParamVO` (0..n) 
-- `attachgroup` -> `ampub.ambase.AttachGroupVO` (0..n) 
+| 字段名 | URI | 关系 |
+|--------|-----|------|
+| `lineparam` | `ampub.ambase.LineParamVO` | composition |
+| `keyparts` | `ampub.ambase.KeyPartsVO` | composition |
+| `bodyvos` | `ampub.ambase.CateParamVO` | composition |
+| `attachgroup` | `ampub.ambase.AttachGroupVO` | composition |
+| `defines` | `ampub.ambase.CategoryVODefine` | composition |
+
+## 关联引用 (13个)
+
+| 字段名 | 引用类型 |
+|--------|---------|
+| `` | `` |
+| `parent_id` | `` |
+| `creator` | `` |
+| `ytenant_id` | `` |
+| `modifier` | `` |
+| `user_defines` | `` |
+| `pk_sealer` | `` |
+| `fk_parent` | `` |
+| `tenantid` | `` |
+
+## 继承接口 (8个, 18字段)
+
+- **逻辑删除接口** (`baseapp.itf.LogicDelete`)
+  - `dr` → `dr`
+- **树型结构** (`baseapp.itf.ITree`)
+  - `` → ``
+  - `level` → `level`
+  - `parent_id` → `parent_id`
+  - `path` → `path`
+  - `sort_num` → `sort_num`
+- **租户接口** (`baseapp.itf.ITenant`)
+  - `tenantid` → `tenantid`
+- **审计信息** (`baseapp.itf.IAuditInfo`)
+  - `creationtime` → `creationtime`
+  - `creator` → `creator`
+  - `modifiedtime` → `modifiedtime`
+  - `modifier` → `modifier`
+- **ERP来源信息** (`baseapp.itf.IErpInfo`)
+  - `erpcode` → `erpcode`
+  - `erpid` → `erpid`
+  - `gatewayid` → `gatewayid`
+- **停启用状态** (`baseapp.itf.IEnableState`)
+  - `enablestate` → `enablestate`
+  - `pk_sealer` → `pk_sealer`
+  - `seal_time` → `seal_time`
+- **自动编码** (`baseapp.itf.IAutoCode`)
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 47 个直连字段
+
+### 文本字段 (12个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `category_code` | `category_code` | `category_code` | 资产类别编码 |
+| `memo` | `memo` | `memo` | 备注 |
+| `pk_org` | `pk_org` | `pk_org` | 资产组织 |
+| `innercode` | `innercode` | `innercode` | 内部编码 |
+| `max_inner_code` | `max_inner_code` | `max_inner_code` | 最大内部编码 |
+| `sysid` | `sysid` | `sysid` | 系统标识 |
+| `transi_type` | `transi_type` | `transi_type` | 交易类型 |
+| `id` | `id` | `id` | 资产类别主键 |
+| `path` | `path` | `path` | 路径 |
+| `gatewayid` | `gatewayid` | `gatewayid` | 网关主键 |
+| `erpcode` | `erpcode` | `erpcode` | erp系统编码 |
+| `erpid` | `erpid` | `erpid` | erp系统主键 |
+
+### 引用字段 (7个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `fk_parent` | `fk_parent` | `fk_parent` | 父类别主键 |
+| `creator` | `creator` | `creator` | 创建人 |
+| `modifier` | `modifier` | `modifier` | 最后修改人 |
+| `pk_sealer` | `pk_sealer` | `pk_sealer` | 启用人 |
+| `tenantid` | `tenantid` | `tenant` | 租户 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+| `parent_id` | `parent_id` | `parent` | 上级分类 |
+
+### 布尔字段 (8个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `special_flag` | `special_flag` | `special_flag` | 特种设备 |
+| `line_category` | `line_category` | `line_category` | 线性类别 |
+| `associate_fa_flag` | `associate_fa_flag` | `associate_fa_flag` | 固定资产核算 |
+| `portrait_flag` | `portrait_flag` | `portrait_flag` | 资产画像 |
+| `cooperate_flag` | `cooperate_flag` | `cooperate_flag` | 协同管理 |
+| `name_pre_flag` | `name_pre_flag` | `name_pre_flag` | 下级名称继承标志 |
+| `inv_flag` | `inv_flag` | `inv_flag` | 是否库存管理标记 |
+| `` | `isEnd` | `isEnd` | 是否末级 |
+
+### 整数 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `avg_use_life` | `avg_use_life` | `avg_use_life` | 平均使用寿命(月) |
+| `design_life` | `design_life` | `design_life` | 设计寿命(月) |
+| `level` | `level` | `level` | 层级 |
+| `sort_num` | `sort_num` | `sort` | 排序号 |
+
+### 短整数 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `sync_status` | `sync_status` | `sync_status` | 同步状态 |
+| `enablestate` | `enablestate` | `enablestate` | 启用状态 |
+| `dr` | `dr` | `dr` | 逻辑删除标识 |
+| `asset_business` | `asset_business` | `assetBusiness` | 资产业务分类 |
+
+### multiLanguage (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `category_name` | `category_name` | `category_name` | 资产类别名称 |
+| `category_global` | `category_global` | `category_global` | 全级次资产类别 |
+
+### timestamp (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `creationtime` | `creationtime` | `creationtime` | 创建时间 |
+| `modifiedtime` | `modifiedtime` | `modifiedtime` | 最后修改时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+| `seal_time` | `seal_time` | `seal_time` | 启用时间 |
+
+### UserDefine (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `user_defines` | `user_defines` | `userDefines` | 资产类别自定义项 |
+
+### other (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `` | `attachgroup` | 资产类别附件分组 |
+| `` | `` | `bodyvos` | 资产类别技术参数 |
+| `` | `` | `defines` | 资产类别自定义项 |
+| `` | `` | `keyparts` | 资产部位 |
+| `` | `` | `lineparam` | 线性参数 |

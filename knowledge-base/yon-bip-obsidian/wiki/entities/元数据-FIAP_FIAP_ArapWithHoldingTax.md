@@ -9,61 +9,128 @@ last_verified: 2026-06-03
 status: verified
 source_type: api_response
 ---
+
 # 事务代扣税孙表基类 (`FIAP.FIAP.ArapWithHoldingTax`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBip），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `arap_ledger_g_wht` | 应用: `EAP`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`arap_ledger_g_wht` | domain：`yonbip-fi-earap` | 应用：`EAP` | 业务对象ID：`cef1a6eb-e78c-4dbb-96e4-e90da988c9df`
 
-## 属性（33 个）
+## 基本信息
 
-| # | 字段 | 显示名 | 列 | 类型 | biztype |
-|---|------|--------|-----|------|---------|
-| 1 | `accBook` | accBook | `acc_book_id` | 5df8e763-5595-4a87-9ff9-a7ac3bd1e81e | `quote` |
-| 2 | `accPeriod` | accPeriod | `acc_period_id` | 0028813f-135a-485e-a5c3-c15a3d18168b | `quote` |
-| 3 | `accPeriodCode` | accPeriod编码 | `acc_period_code` | String | `text` |
-| 4 | `accWhtaxAmount` | accWhtaxAmount | `acc_whtax_amount` | Decimal | `number` |
-| 5 | `accYear` | accYear | `acc_year_id` | 0028813f-135a-485e-a5c3-c15a3d18168b | `quote` |
-| 6 | `accYearCode` | accYear编码 | `acc_year_code` | String | `text` |
-| 7 | `arapEventType` | arapEventType | `arap_event_type` | EventTypeEnum | `singleOption` |
-| 8 | `blnCarryover` | blnCarryover | `bln_carryover` | Short | `short` |
-| 9 | `carryoverPeriod` | carryoverPeriod | `carryover_period_id` | 0028813f-135a-485e-a5c3-c15a3d18168b | `quote` |
-| 10 | `carryoverPeriodCode` | carryoverPeriod编码 | `carryover_period_code` | String | `text` |
-| 11 | `carryoverYear` | carryoverYear | `carryover_year_id` | 0028813f-135a-485e-a5c3-c15a3d18168b | `quote` |
-| 12 | `carryoverYearCode` | carryoverYear编码 | `carryover_year_code` | String | `text` |
-| 13 | `createTime` | 创建时间 | `create_time` | DateTime | `dateTime` |
-| 14 | `creator` | 创建人 | `creator` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 15 | `dr` | 逻辑删除 | `dr` | Short | `short` |
-| 16 | `eventType` | eventType | `event_type_id` | ff8c5979-f9dc-4259-8b9f-6fe69da87bf6 | `quote` |
-| 17 | `financeOrg` | financeOrg | `finance_org_id` | 5d4c5590-da40-4b50-80a1-8d04da2f79e0 | `quote` |
-| 18 | `gblWhtaxAmount` | gblWhtaxAmount | `gbl_whtax_amount` | Decimal | `number` |
-| 19 | `grpWhtaxAmount` | grpWhtaxAmount | `grp_whtax_amount` | Decimal | `number` |
-| 20 | `id` | ID | `id` | String | `text` |
-| 21 | `modifier` | 修改人 | `modifier` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 22 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `dateTime` |
-| 23 | `orderNo` | orderNo | `order_no` | Integer | `int` |
-| 24 | `orgWhtaxAmount` | orgWhtaxAmount | `org_whtax_amount` | Decimal | `number` |
-| 25 | `oriWhtaxAmount` | oriWhtaxAmount | `ori_whtax_amount` | Decimal | `number` |
-| 26 | `oriWhtaxBaseAmount` | oriWhtaxBaseAmount | `ori_whtax_base_amount` | Decimal | `number` |
-| 27 | `pubts` | 时间戳 | `pubts` | DateTime | `dateTime` |
-| 28 | `rowNo` | rowNo | `row_no` | Decimal | `number` |
-| 29 | `whtax` | whtax | `whtax_id` | aaae292d-ebbc-4b8f-a9f7-b67bff16c947 | `quote` |
-| 30 | `whtaxRate` | whtaxRate | `whtax_rate` | Decimal | `number` |
-| 31 | `whtaxSubject` | whtaxSubject | `whtax_subject_id` | 01e7528c-c35c-4d33-b2aa-382b4b4f4534 | `quote` |
-| 32 | `whtaxType` | whtaxType | `whtax_type_id` | affa6a3e-faa4-4896-baca-8b4da5dda6d8 | `quote` |
-| 33 | `ytenantId` | ytenantID | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 事务代扣税孙表基类 |
+| 物理表 | `arap_ledger_g_wht` |
+| 数据库 schema | `yonbip-fi-earap` |
+| 所属应用 | `EAP` |
+| 直连字段 | 33 个 |
+| 子表 | 0 个 |
+| 关联引用 | 13 个 |
 
-## 关联（13 个）
+## 关联引用 (13个)
 
-- `creator` -> `base.user.BipUser` () 
-- `financeOrg` -> `org.func.FinanceOrg` () 
-- `whtax` -> `taxpubdoc.taxWithholding.taxWithholdingCode` () 
-- `carryoverYear` -> `bd.period.Period` () 
-- `modifier` -> `base.user.BipUser` () 
-- `carryoverPeriod` -> `bd.period.Period` () 
-- `eventType` -> `eeac.fievent.FiEventDO` () 
-- `ytenantId` -> `yht.tenant.YhtTenant` () 
-- `accPeriod` -> `bd.period.Period` () 
-- `whtaxType` -> `taxpubdoc.taxWithholding.taxWithholdingType` () 
-- `whtaxSubject` -> `bd.taxrate.TaxRateVO` () 
-- `accBook` -> `epub.accountbook.AccountBook` () 
-- `accYear` -> `bd.period.Period` () 
+| 字段名 | 引用类型 |
+|--------|---------|
+| `creator` | `bip-usercenter.bip_user_ref` |
+| `finance_org_id` | `ucf-org-center.bd_financeorgtreeref` |
+| `whtax_id` | `yonbip-fi-taxpubdoc.RefTable_6e574b3619` |
+| `carryover_year_id` | `` |
+| `modifier` | `bip-usercenter.bip_user_ref` |
+| `carryover_period_id` | `` |
+| `event_type_id` | `yonbip-fi-eaai2.RefTable_a70ca2f048` |
+| `ytenant_id` | `` |
+| `acc_period_id` | `finbd.bd_period` |
+| `whtax_type_id` | `yonbip-fi-taxpubdoc.RefTable_9623e95970` |
+| `whtax_subject_id` | `ucfbasedoc.bd_taxrate` |
+| `acc_book_id` | `fiepub.fiepub_accountbookref` |
+| `acc_year_id` | `finbd.bd_period` |
+
+## 继承接口 (4个, 11字段)
+
+- **逻辑删除** (`iuap.busiObj.LogicDelete`)
+  - `dr` → `dr`
+- **收付结转代扣税表** (`FIAP.FIAP.IEARAPCarryoverWithHoldingTax`)
+  - `bln_carryover` → `bln_carryover`
+  - `carryover_period_id` → `carryover_period_id`
+  - `carryover_period_code` → `carryover_period_code`
+  - `carryover_year_id` → `carryover_year_id`
+  - `carryover_year_code` → `carryover_year_code`
+- **统一租户接口** (`iuap.busiObj.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+- **审计信息** (`iuap.busiObj.IAuditInfo`)
+  - `create_time` → `create_time`
+  - `creator` → `creator`
+  - `modifier` → `modifier`
+  - `modify_time` → `modify_time`
+
+## 字段列表（按类型分组）
+
+> 共 33 个直连字段
+
+### 文本字段 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `acc_period_code` | `acc_period_code` | `accPeriodCode` | 会计期间编码 |
+| `acc_year_code` | `acc_year_code` | `accYearCode` | 会计年度编码 |
+| `carryover_period_code` | `carryover_period_code` | `carryoverPeriodCode` | 结转期间编码 |
+| `carryover_year_code` | `carryover_year_code` | `carryoverYearCode` | 结转年度编码 |
+| `id` | `id` | `id` | 主键 |
+
+### 引用字段 (13个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `acc_book_id` | `acc_book_id` | `accBook` | 账簿 |
+| `acc_period_id` | `acc_period_id` | `accPeriod` | 会计期间 |
+| `acc_year_id` | `acc_year_id` | `accYear` | 会计年度 |
+| `carryover_period_id` | `carryover_period_id` | `carryoverPeriod` | 结转期间 |
+| `carryover_year_id` | `carryover_year_id` | `carryoverYear` | 结转年度 |
+| `creator` | `creator` | `creator` | 创建人 |
+| `event_type_id` | `event_type_id` | `eventType` | 会计事务类型ID |
+| `finance_org_id` | `finance_org_id` | `financeOrg` | 会计主体 |
+| `modifier` | `modifier` | `modifier` | 修改人 |
+| `whtax_id` | `whtax_id` | `whtax` | 代扣税税码 |
+| `whtax_subject_id` | `whtax_subject_id` | `whtaxSubject` | 代扣税税目 |
+| `whtax_type_id` | `whtax_type_id` | `whtaxType` | 代扣税类型(系统) |
+| `ytenant_id` | `ytenant_id` | `ytenantId` | 租户id |
+
+### 日期时间 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+
+### 枚举字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `arap_event_type` | `arap_event_type` | `arapEventType` | 应收应付会计事务类型 |
+
+### 整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `order_no` | `order_no` | `orderNo` | 序号 |
+
+### 短整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `bln_carryover` | `bln_carryover` | `blnCarryover` | 是否结转 |
+| `dr` | `dr` | `dr` | 逻辑删除 |
+
+### 数值字段 (8个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `acc_whtax_amount` | `acc_whtax_amount` | `accWhtaxAmount` | 本币代扣税税额 |
+| `gbl_whtax_amount` | `gbl_whtax_amount` | `gblWhtaxAmount` | 全局币代扣税税额 |
+| `grp_whtax_amount` | `grp_whtax_amount` | `grpWhtaxAmount` | 集团币代扣税税额 |
+| `org_whtax_amount` | `org_whtax_amount` | `orgWhtaxAmount` | 组织币代扣税税额 |
+| `ori_whtax_amount` | `ori_whtax_amount` | `oriWhtaxAmount` | 代扣税税额 |
+| `ori_whtax_base_amount` | `ori_whtax_base_amount` | `oriWhtaxBaseAmount` | 税基 |
+| `row_no` | `row_no` | `rowNo` | 行号 |
+| `whtax_rate` | `whtax_rate` | `whtaxRate` | 税率 |

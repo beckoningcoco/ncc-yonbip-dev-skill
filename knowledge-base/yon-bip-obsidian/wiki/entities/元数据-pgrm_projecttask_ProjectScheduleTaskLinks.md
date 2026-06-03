@@ -12,34 +12,84 @@ source_type: api_response
 
 # 项目活动链接 (`pgrm.projecttask.ProjectScheduleTaskLinks`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `pgrm_activity_links` | 应用: `PGRM` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`pgrm_activity_links` | domain：`yonbip-pm-projectme` | 应用：`PGRM` | 业务对象ID：`f76a015a-f5ed-4916-8354-47da523fbe1f`
 
-## 属性（14 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `address` | address | `address` | String | `text` |
-| 2 | `createTime` | 创建时间 | `create_time` | DateTime | `dateTime` |
-| 3 | `creator` | 创建人 | `creator` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 4 | `defineCharacter` | defineCharacter | `define_character` | 2fcbece7-1e58-4a90-b348-2e862e6af800 | `UserDefine` |
-| 5 | `dr` | 逻辑删除 | `dr` | Short | `short` |
-| 6 | `id` | ID | `id` | String | `text` |
-| 7 | `modifier` | 修改人 | `modifier` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 8 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `dateTime` |
-| 9 | `name` | 名称 | `name` | String | `text` |
-| 10 | `orgId` | 组织ID | `org_id` | 14302233-1394-4a70-94e1-bed51636f312 | `quote` |
-| 11 | `projectId` | projectID | `project_id` | b1e7cbf6-094a-4200-b451-36bfa3ac3ff4 | `quote` |
-| 12 | `pubts` | 时间戳 | `pubts` | DateTime | `dateTime` |
-| 13 | `taskId` | taskID | `task_id` | b4a90beb-49ed-4301-b12e-9221d0d12fd1 | `quote` |
-| 14 | `ytenantId` | ytenantID | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 项目活动链接 |
+| 物理表 | `pgrm_activity_links` |
+| 数据库 schema | `yonbip-pm-projectme` |
+| 所属应用 | `PGRM` |
+| 直连字段 | 14 个 |
+| 子表 | 0 个 |
+| 关联引用 | 7 个 |
 
-## 关联（7 个）
+## 关联引用 (7个)
 
-- `creator` -> `base.user.BipUser` ()
-- `modifier` -> `base.user.BipUser` ()
-- `ytenantId` -> `yht.tenant.YhtTenant` ()
-- `defineCharacter` -> `pgrm.projecttask.ProjectScheduleTaskLinksdefineCharacterUserDefine` ()
-- `projectId` -> `bd.project.ProjectVO` ()
-- `orgId` -> `org.func.BaseOrg` ()
-- `taskId` -> `pgrm.projecttask.ProjectScheduleTask` (0..n)
+| 字段名 | 引用类型 |
+|--------|---------|
+| `creator` | `bip-usercenter.bip_user_ref` |
+| `modifier` | `bip-usercenter.bip_user_ref` |
+| `ytenant_id` | `` |
+| `define_character` | `` |
+| `project_id` | `` |
+| `org_id` | `` |
+| `task_id` | `yonbip-pm-projectme.RefTable_ebcf54ed61` |
+
+## 继承接口 (3个, 6字段)
+
+- **逻辑删除** (`iuap.busiObj.LogicDelete`)
+  - `dr` → `dr`
+- **统一租户接口** (`iuap.busiObj.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+- **审计信息** (`iuap.busiObj.IAuditInfo`)
+  - `create_time` → `create_time`
+  - `creator` → `creator`
+  - `modifier` → `modifier`
+  - `modify_time` → `modify_time`
+
+## 字段列表（按类型分组）
+
+> 共 14 个直连字段
+
+### 文本字段 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `address` | `address` | `address` | 链接地址 |
+| `id` | `id` | `id` | 主键 |
+| `name` | `name` | `name` | 链接名称 |
+
+### 引用字段 (6个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `creator` | `creator` | `creator` | 创建人 |
+| `modifier` | `modifier` | `modifier` | 修改人 |
+| `org_id` | `org_id` | `orgId` | 主组织 |
+| `project_id` | `project_id` | `projectId` | 项目 |
+| `task_id` | `task_id` | `taskId` | 项目活动主表外键 |
+| `ytenant_id` | `ytenant_id` | `ytenantId` | 租户id |
+
+### 日期时间 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+
+### 短整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dr` | `dr` | `dr` | 逻辑删除 |
+
+### UserDefine (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `define_character` | `define_character` | `defineCharacter` | 自定义项特征 |

@@ -12,50 +12,90 @@ source_type: api_response
 
 # 物料属性(自定义项)表 (`pc.product.ProductDefine`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `productdefine` | 应用: `GZTBDM` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`productdefine` | domain：`productcenter` | 应用：`GZTBDM` | 业务对象ID：``
 
-## 属性（35 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `id` | ID | `id` | Long | `long` |
-| 2 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 3 | `tenant` | tenant | `tenant_id` | Long | `long` |
-| 4 | `productId` | productID | `productId` | 89f3b06e-23df-4403-b4a7-19f99eeeae72 | `quote` |
-| 5 | `define1` | define1 | `define1` | String | `text` |
-| 6 | `define2` | define2 | `define2` | String | `text` |
-| 7 | `define3` | define3 | `define3` | String | `text` |
-| 8 | `define4` | define4 | `define4` | String | `text` |
-| 9 | `define5` | define5 | `define5` | String | `text` |
-| 10 | `define6` | define6 | `define6` | String | `text` |
-| 11 | `define7` | define7 | `define7` | String | `text` |
-| 12 | `define8` | define8 | `define8` | String | `text` |
-| 13 | `define9` | define9 | `define9` | String | `text` |
-| 14 | `define10` | define10 | `define10` | String | `text` |
-| 15 | `define11` | define11 | `define11` | String | `text` |
-| 16 | `define12` | define12 | `define12` | String | `text` |
-| 17 | `define13` | define13 | `define13` | String | `text` |
-| 18 | `define14` | define14 | `define14` | String | `text` |
-| 19 | `define15` | define15 | `define15` | String | `text` |
-| 20 | `define16` | define16 | `define16` | String | `text` |
-| 21 | `define17` | define17 | `define17` | String | `text` |
-| 22 | `define18` | define18 | `define18` | String | `text` |
-| 23 | `define19` | define19 | `define19` | String | `text` |
-| 24 | `define20` | define20 | `define20` | String | `text` |
-| 25 | `define21` | define21 | `define21` | String | `text` |
-| 26 | `define22` | define22 | `define22` | String | `text` |
-| 27 | `define23` | define23 | `define23` | String | `text` |
-| 28 | `define24` | define24 | `define24` | String | `text` |
-| 29 | `define25` | define25 | `define25` | String | `text` |
-| 30 | `define26` | define26 | `define26` | String | `text` |
-| 31 | `define27` | define27 | `define27` | String | `text` |
-| 32 | `define28` | define28 | `define28` | String | `text` |
-| 33 | `define29` | define29 | `define29` | String | `text` |
-| 34 | `define30` | define30 | `define30` | String | `text` |
-| 35 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 物料属性(自定义项)表 |
+| 物理表 | `productdefine` |
+| 数据库 schema | `productcenter` |
+| 所属应用 | `GZTBDM` |
+| 直连字段 | 35 个 |
+| 子表 | 0 个 |
+| 关联引用 | 2 个 |
 
-## 关联（2 个）
+## 关联引用 (2个)
 
-- `productId` -> `pc.product.Product` (1)
-- `ytenant` -> `yht.tenant.YhtTenant` ()
+| 字段名 | 引用类型 |
+|--------|---------|
+| `productId` | `` |
+| `ytenant_id` | `` |
+
+## 继承接口 (2个, 2字段)
+
+- **租户相关** (`coredoc.pub.TenantObselete`)
+  - `tenant_id` → `tenant_id`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 35 个直连字段
+
+### 文本字段 (30个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `define1` | `define1` | `define1` | 物料扩展属性1 |
+| `define2` | `define2` | `define2` | 物料扩展属性2 |
+| `define3` | `define3` | `define3` | 物料扩展属性3 |
+| `define4` | `define4` | `define4` | 物料扩展属性4 |
+| `define5` | `define5` | `define5` | 物料扩展属性5 |
+| `define6` | `define6` | `define6` | 物料扩展属性6 |
+| `define7` | `define7` | `define7` | 物料扩展属性7 |
+| `define8` | `define8` | `define8` | 物料扩展属性8 |
+| `define9` | `define9` | `define9` | 物料扩展属性9 |
+| `define10` | `define10` | `define10` | 物料扩展属性10 |
+| `define11` | `define11` | `define11` | 物料扩展属性11 |
+| `define12` | `define12` | `define12` | 物料扩展属性12 |
+| `define13` | `define13` | `define13` | 物料扩展属性13 |
+| `define14` | `define14` | `define14` | 物料扩展属性14 |
+| `define15` | `define15` | `define15` | 物料扩展属性15 |
+| `define16` | `define16` | `define16` | 物料扩展属性16 |
+| `define17` | `define17` | `define17` | 物料扩展属性17 |
+| `define18` | `define18` | `define18` | 物料扩展属性18 |
+| `define19` | `define19` | `define19` | 物料扩展属性19 |
+| `define20` | `define20` | `define20` | 物料扩展属性20 |
+| `define21` | `define21` | `define21` | 物料扩展属性21 |
+| `define22` | `define22` | `define22` | 物料扩展属性22 |
+| `define23` | `define23` | `define23` | 物料扩展属性23 |
+| `define24` | `define24` | `define24` | 物料扩展属性24 |
+| `define25` | `define25` | `define25` | 物料扩展属性25 |
+| `define26` | `define26` | `define26` | 物料扩展属性26 |
+| `define27` | `define27` | `define27` | 物料扩展属性27 |
+| `define28` | `define28` | `define28` | 物料扩展属性28 |
+| `define29` | `define29` | `define29` | 物料扩展属性29 |
+| `define30` | `define30` | `define30` | 物料扩展属性30 |
+
+### 引用字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户ID |
+| `productId` | `productId` | `productId` | 物料ID |
+
+### 长整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | 主键ID |
+| `tenant_id` | `tenant_id` | `tenant` | 租户ID(旧) |
+
+### timestamp (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubts` | `pubts` | `pubts` | 时间戳 |

@@ -12,21 +12,54 @@ source_type: api_response
 
 # 商城业务运费模板 (`aa.store.MallFreightTemplate`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `mp_mall_freight_template` | 应用: `Marketingpublic` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`mp_mall_freight_template` | domain：`yxybase` | 应用：`Marketingpublic` | 业务对象ID：``
 
-## 属性（5 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `dlyFeeRuleId` | dlyFeeRuleID | `dlyFeeRuleId` | b4505671-79b1-4593-8be4-ddc7eed18484 | `quote` |
-| 2 | `id` | ID | `id` | Long | `long` |
-| 3 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 4 | `storeId` | storeID | `storeId` | 16e4e14c-ab05-4ee5-bbb8-c67351c9a8b3 | `quote` |
-| 5 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 商城业务运费模板 |
+| 物理表 | `mp_mall_freight_template` |
+| 数据库 schema | `yxybase` |
+| 所属应用 | `Marketingpublic` |
+| 直连字段 | 5 个 |
+| 子表 | 0 个 |
+| 关联引用 | 3 个 |
 
-## 关联（3 个）
+## 关联引用 (3个)
 
-- `dlyFeeRuleId` -> `um.logisticssetting.Deliverytype` ()
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `storeId` -> `aa.store.Store` (0..n)
+| 字段名 | 引用类型 |
+|--------|---------|
+| `dlyFeeRuleId` | `` |
+| `ytenant_id` | `` |
+| `storeId` | `` |
+
+## 继承接口 (1个, 1字段)
+
+- **统一租户接口(扩展)** (`ucfbase.ucfbaseItf.IYTenantExt`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 5 个直连字段
+
+### 引用字段 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dlyFeeRuleId` | `dlyFeeRuleId` | `dlyFeeRuleId` | 运费模板 |
+| `storeId` | `storeId` | `storeId` | 门店 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 长整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+
+### timestamp (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubts` | `pubts` | `pubts` | 时间戳 |

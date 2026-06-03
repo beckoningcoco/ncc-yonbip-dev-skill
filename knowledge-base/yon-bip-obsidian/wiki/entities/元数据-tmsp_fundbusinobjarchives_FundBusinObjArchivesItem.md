@@ -9,58 +9,123 @@ last_verified: 2026-06-03
 status: verified
 source_type: api_response
 ---
+
 # 伙伴银行信息 (`tmsp.fundbusinobjarchives.FundBusinObjArchivesItem`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBip），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `tmsp_fundbusinobj_archives_item` | 应用: `TMSP`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`tmsp_fundbusinobj_archives_item` | domain：`yonbip-fi-ctmtmsp` | 应用：`TMSP` | 业务对象ID：`86d0f3de-b64f-43e9-9f07-52b7afcf541f`
 
-## 属性（33 个）
+## 基本信息
 
-| # | 字段 | 显示名 | 列 | 类型 | biztype |
-|---|------|--------|-----|------|---------|
-| 1 | `accountname` | accountname | `account_name` | String | `text` |
-| 2 | `address` | address | `address` | String | `text` |
-| 3 | `arthivesItemCharacterDefine` | arthivesItemCharacterDefine | `arthives_item_character_define` | 21113719-d545-4c55-996b-3ee74be93bed | `UserDefine` |
-| 4 | `authorizedAcccentity` | authorizedAcccentity | `authorized_acccentity` | String | `text` |
-| 5 | `bankaccount` | bankaccount | `bank_account` | String | `text` |
-| 6 | `bbankAccountId` | bbankAccountID | `bbank_account_id` | fbc20885-a507-45bd-a986-74d3fc28d38a | `quote` |
-| 7 | `bbankCode` | bbank编码 | `bbank_code` | String | `text` |
-| 8 | `bbankid` | bbankid | `bbank_id` | b7ee7189-ed97-48d5-91e4-808228664429 | `quote` |
-| 9 | `bcountryregion` | bcountryregion | `bcountry_region` | 8e9602ac-5ca2-4d06-aede-4a0af4c316bf | `quote` |
-| 10 | `benabled` | benabled | `benabled` | Boolean | `switch` |
-| 11 | `bfundbusinobjtypename` | bfundbusinobjtypename | `bfundbusinobjtype_name` | String | `text` |
-| 12 | `bisprivated` | bisprivated | `bisprivated` | Boolean | `switch` |
-| 13 | `bopenaccountbankid` | bopenaccountbankid | `bopenaccountbank_id` | 47a69dfe-37ef-4ad1-aa19-1d61797a7821 | `quote` |
-| 14 | `bremark` | bremark | `bremark` | String | `text` |
-| 15 | `createTime` | 创建时间 | `create_time` | DateTime | `dateTime` |
-| 16 | `creator` | 创建人 | `creator` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 17 | `currency` | currency | `currency` | 02b45339-eb4a-4a31-a8b5-d32f494f4e8e | `quote` |
-| 18 | `disablets` | disablets | `disablets` | DateTime | `dateTime` |
-| 19 | `dr` | 逻辑删除 | `dr` | Short | `short` |
-| 20 | `enable` | enable | `enable` | sys_intboolean | `singleOption` |
-| 21 | `enablets` | enablets | `enablets` | DateTime | `dateTime` |
-| 22 | `ext` | ext | `ext` | String | `text` |
-| 23 | `iban` | iban | `iban` | String | `text` |
-| 24 | `id` | ID | `id` | String | `text` |
-| 25 | `isdefaultaccount` | 是否defaultaccount | `isdefaultaccount` | Boolean | `switch` |
-| 26 | `isused` | 是否used | `isused` | Boolean | `switch` |
-| 27 | `linenumber` | linenumber | `linenumber` | String | `text` |
-| 28 | `mainid` | mainid | `mainid` | e969728a-efe8-49db-86b0-5f8e18c2f098 | `quote` |
-| 29 | `modifier` | 修改人 | `modifier` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 30 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `dateTime` |
-| 31 | `pubts` | 时间戳 | `pubts` | DateTime | `dateTime` |
-| 32 | `swift` | swift | `swift` | String | `text` |
-| 33 | `ytenantId` | ytenantID | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 伙伴银行信息 |
+| 物理表 | `tmsp_fundbusinobj_archives_item` |
+| 数据库 schema | `yonbip-fi-ctmtmsp` |
+| 所属应用 | `TMSP` |
+| 直连字段 | 33 个 |
+| 子表 | 0 个 |
+| 关联引用 | 10 个 |
 
-## 关联（10 个）
+## 关联引用 (10个)
 
-- `bbankid` -> `bd.bank.BankVO` () [废]
-- `creator` -> `base.user.BipUser` () 
-- `modifier` -> `base.user.BipUser` () 
-- `bbankAccountId` -> `bd.enterprise.OrgFinBankacctVO` () [废]
-- `bcountryregion` -> `bd.country.CountryVO` () [废]
-- `bopenaccountbankid` -> `bd.bank.BankDotVO` () [废]
-- `currency` -> `bd.currencytenant.CurrencyTenantVO` () [废]
-- `arthivesItemCharacterDefine` -> `tmsp.fundbusinobjarchives.FundBusinObjArchivesItemarthivesItemCharacterDefineUserDefine` () [废]
-- `ytenantId` -> `yht.tenant.YhtTenant` () 
-- `mainid` -> `tmsp.fundbusinobjarchives.FundBusinObjArchives` (0..n) [废]
+| 字段名 | 引用类型 |
+|--------|---------|
+| `bbank_id` | `ucfbasedoc.bd_bankcard` |
+| `creator` | `bip-usercenter.bip_user_ref` |
+| `modifier` | `bip-usercenter.bip_user_ref` |
+| `bbank_account_id` | `ucfbasedoc.bd_enterprisebank` |
+| `bcountry_region` | `ucfbasedoc.bd_countryref` |
+| `bopenaccountbank_id` | `ucfbasedoc.bd_bankdotref` |
+| `currency` | `ucfbasedoc.bd_currencytenantref` |
+| `arthives_item_character_define` | `` |
+| `ytenant_id` | `` |
+| `mainid` | `yonbip-fi-ctmtmsp.tmsp_fundbusinobj_Ref` |
+
+## 继承接口 (4个, 9字段)
+
+- **逻辑删除** (`iuap.busiObj.LogicDelete`)
+  - `dr` → `dr`
+- **统一租户接口** (`iuap.busiObj.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+- **审计信息** (`iuap.busiObj.IAuditInfo`)
+  - `create_time` → `create_time`
+  - `creator` → `creator`
+  - `modifier` → `modifier`
+  - `modify_time` → `modify_time`
+- **档案状态** (`iuap.busiObj.IEnable`)
+  - `disablets` → `disablets`
+  - `enable` → `enable`
+  - `enablets` → `enablets`
+
+## 字段列表（按类型分组）
+
+> 共 33 个直连字段
+
+### 文本字段 (12个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `account_name` | `account_name` | `accountname` | 账号名称 |
+| `address` | `address` | `address` | 开户行地址 |
+| `authorized_acccentity` | `authorized_acccentity` | `authorizedAcccentity` | 授权会计主体 |
+| `bank_account` | `bank_account` | `bankaccount` | 银行账号 |
+| `bbank_code` | `bbank_code` | `bbankCode` | 银行类别编码 |
+| `bfundbusinobjtype_name` | `bfundbusinobjtype_name` | `bfundbusinobjtypename` | 资金伙伴名称 |
+| `bremark` | `bremark` | `bremark` | 备注 |
+| `ext` | `ext` | `ext` | ext |
+| `iban` | `iban` | `iban` | IBAN |
+| `id` | `id` | `id` | 主键 |
+| `linenumber` | `linenumber` | `linenumber` | 联行号 |
+| `swift` | `swift` | `swift` | SWIFT编码 |
+
+### 引用字段 (9个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `bbank_account_id` | `bbank_account_id` | `bbankAccountId` | 银行账户ID |
+| `bbank_id` | `bbank_id` | `bbankid` | 银行类别id |
+| `bcountry_region` | `bcountry_region` | `bcountryregion` | 国家地区 |
+| `bopenaccountbank_id` | `bopenaccountbank_id` | `bopenaccountbankid` | 银行网点 |
+| `creator` | `creator` | `creator` | 创建人 |
+| `currency` | `currency` | `currency` | 币种 |
+| `mainid` | `mainid` | `mainid` | 资金伙伴档案id |
+| `modifier` | `modifier` | `modifier` | 修改人 |
+| `ytenant_id` | `ytenant_id` | `ytenantId` | 租户id |
+
+### 日期时间 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `disablets` | `disablets` | `disablets` | 停用时间 |
+| `enablets` | `enablets` | `enablets` | 启用时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+
+### 布尔字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `benabled` | `benabled` | `benabled` | 启停用状态 |
+| `bisprivated` | `bisprivated` | `bisprivated` | 是否对私 |
+| `isdefaultaccount` | `isdefaultaccount` | `isdefaultaccount` | 是否默认账户 |
+| `isused` | `isused` | `isused` | 是否被引用 |
+
+### 枚举字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `enable` | `enable` | `enable` | 档案状态 |
+
+### 短整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dr` | `dr` | `dr` | dr |
+
+### UserDefine (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `arthives_item_character_define` | `arthives_item_character_define` | `arthivesItemCharacterDefine` | 自定义特征 |

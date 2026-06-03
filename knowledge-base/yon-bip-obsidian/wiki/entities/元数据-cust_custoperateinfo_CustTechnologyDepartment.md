@@ -12,50 +12,113 @@ source_type: api_response
 
 # 客户部门 (`cust.custoperateinfo.CustTechnologyDepartment`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `cust_technology_depart` | 应用: `CUST` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`cust_technology_depart` | domain：`yycrm` | 应用：`CUST` | 业务对象ID：`ba744977-0dc5-48f7-97fe-e5d9a256a1bb`
 
-## 属性（25 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `id` | ID | `id` | Long | `long` |
-| 2 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 3 | `department` | department | `department` | String | `text` |
-| 4 | `num` | num | `num` | Decimal | `number` |
-| 5 | `parentDepart` | parentDepart | `parent_department` | String | `text` |
-| 6 | `org` | org | `org` | 14302233-1394-4a70-94e1-bed51636f312 | `quote` |
-| 7 | `saleArea` | saleArea | `salearea` | 75fb7b76-fdb5-4e87-ab0d-e4215a299634 | `quote` |
-| 8 | `dept` | dept | `dept` | ca871996-b447-42f9-8dac-dd7c21ee0662 | `quote` |
-| 9 | `ower` | ower | `ower` | 4effed83-35f5-4e3b-9be1-092b5ae602e8 | `quote` |
-| 10 | `customer` | customer | `customer` | 94b3280a-27a4-485a-b90b-b7bce57c6df2 | `quote` |
-| 11 | `bustype` | bustype | `bustype` | 19f9264d-28d1-4b47-9d28-f2e82654f3a9 | `quote` |
-| 12 | `code` | 编码 | `code` | String | `text` |
-| 13 | `createDate` | 创建日期 | `create_date` | Date | `date` |
-| 14 | `createTime` | 创建时间 | `create_time` | DateTime | `timestamp` |
-| 15 | `creator` | 创建人 | `creator` | String | `text` |
-| 16 | `creatorId` | 创建人ID | `creatorId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 17 | `custTechnologyDepartDefineCharacter` | custTechnologyDepartDefineCharacter | `cust_technology_depart_define_character` | cdf7d7ed-4586-4468-a1d0-84a274339c97 | `UserDefine` |
-| 18 | `departmentHead` | departmentHead | `department_head` | c7b03b3a-5fdb-472e-8c7e-332cbf23d66e | `quote` |
-| 19 | `modifier` | 修改人 | `modifier` | String | `text` |
-| 20 | `modifierId` | 修改人ID | `modifierId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 21 | `modifyDate` | 修改日期 | `modify_date` | Date | `date` |
-| 22 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `timestamp` |
-| 23 | `parent` | parent | `iParentId` | b54fc393-1d66-4f6e-806b-c8a50b5e788b | `quote` |
-| 24 | `path` | path | `path` | String | `text` |
-| 25 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 客户部门 |
+| 物理表 | `cust_technology_depart` |
+| 数据库 schema | `yycrm` |
+| 所属应用 | `CUST` |
+| 直连字段 | 25 个 |
+| 子表 | 0 个 |
+| 关联引用 | 12 个 |
 
-## 关联（12 个）
+## 关联引用 (12个)
 
-- `ower` -> `bd.staff.Staff` ()
-- `parent` -> `cust.custoperateinfo.CustTechnologyDepartment` ()
-- `org` -> `org.func.BaseOrg` ()
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `departmentHead` -> `cust.contact.Contact` ()
-- `creatorId` -> `base.user.User` ()
-- `modifierId` -> `base.user.User` ()
-- `saleArea` -> `aa.salearea.SaleArea` ()
-- `dept` -> `bd.adminOrg.DeptOrgVO` ()
-- `custTechnologyDepartDefineCharacter` -> `cust.custoperateinfo.CustTechnologyDepartDefineCharacter` ()
-- `bustype` -> `bd.bill.TransType` ()
-- `customer` -> `aa.merchant.Merchant` ()
+| 字段名 | 引用类型 |
+|--------|---------|
+| `ower` | `ucf-staff-center.bd_staff_ref` |
+| `iParentId` | `` |
+| `org` | `ucf-org-center.bd_salesorg` |
+| `ytenant_id` | `` |
+| `department_head` | `` |
+| `` | `` |
+| `salearea` | `productcenter.aa_salearearef` |
+| `dept` | `ucf-org-center.bd_dept_list_ref` |
+| `cust_technology_depart_define_character` | `` |
+| `bustype` | `` |
+| `customer` | `cust_customerref` |
+
+## 继承接口 (3个, 10字段)
+
+- **审计信息** (`base.itf.IAuditInfo`)
+  - `create_date` → `create_date`
+  - `create_time` → `create_time`
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `modify_date` → `modify_date`
+  - `modify_time` → `modify_time`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+- **自动编号** (`voucher.base.IAutoCode`)
+  - `` → ``
+
+## 字段列表（按类型分组）
+
+> 共 25 个直连字段
+
+### 文本字段 (6个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `department` | `department` | `department` | 部门名称 |
+| `parent_department` | `parent_department` | `parentDepart` | 上级部门或公司 |
+| `code` | `code` | `code` | 部门编码 |
+| `` | `creator` | `creator` | 创建人名称 |
+| `` | `modifier` | `modifier` | 修改人名称 |
+| `path` | `path` | `path` | 上级部门路径 |
+
+### 引用字段 (11个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `org` | `org` | `org` | 销售组织ID |
+| `salearea` | `salearea` | `saleArea` | 销售区域ID |
+| `dept` | `dept` | `dept` | 部门ID |
+| `ower` | `ower` | `ower` | 负责人ID |
+| `customer` | `customer` | `customer` | 客户ID |
+| `bustype` | `bustype` | `bustype` | 交易类型 |
+| `` | `creatorId` | `creatorId` | 创建人 |
+| `department_head` | `department_head` | `departmentHead` | 部门负责人 |
+| `` | `modifierId` | `modifierId` | 修改人 |
+| `iParentId` | `iParentId` | `parent` | 上级部门 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 日期字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_date` | `create_date` | `createDate` | 创建日期 |
+| `modify_date` | `modify_date` | `modifyDate` | 修改日期 |
+
+### 长整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+
+### 数值字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `num` | `num` | `num` | 人数 |
+
+### timestamp (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+
+### UserDefine (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `cust_technology_depart_define_character` | `cust_technology_depart_define_character` | `custTechnologyDepartDefineCharacter` | 客户部门自定义特征 |

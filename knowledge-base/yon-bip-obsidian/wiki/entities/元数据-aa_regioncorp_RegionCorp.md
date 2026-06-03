@@ -12,51 +12,152 @@ source_type: api_response
 
 # 地址档案 (`aa.regioncorp.RegionCorp`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `regioncorp` | 应用: `DPMSI` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`regioncorp` | domain：`productcenter` | 应用：`DPMSI` | 业务对象ID：`2d99e5eb-c47f-4dc2-8fd7-3c7d6eee8a19`
 
-## 属性（32 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `regionCorpSubData` | regionCorpSubData | `` | c4fee6a2-33a4-48ac-81ce-9e3b45ce59e5 | `` |
-| 2 | `cityCode` | city编码 | `cityCode` | String | `text` |
-| 3 | `code` | 编码 | `cCode` | String | `text` |
-| 4 | `id` | ID | `id` | Long | `long` |
-| 5 | `initDataEnd` | initDataEnd | `initDataEnd` | Boolean | `switch` |
-| 6 | `isCashOnDelivery` | 是否CashOnDelivery | `isCashOnDelivery` | Boolean | `switch` |
-| 7 | `isEnd` | 是否End | `isEnd` | Boolean | `switch` |
-| 8 | `keyWord` | keyWord | `keyWord` | String | `multiLanguage` |
-| 9 | `level` | 层级 | `levelType` | Integer | `int` |
-| 10 | `mergerName` | merger名称 | `mergerName` | String | `text` |
-| 11 | `name` | 名称 | `name` | String | `multiLanguage` |
-| 12 | `order` | order | `ordernum` | Integer | `int` |
-| 13 | `parent` | parent | `iParentId` | 0d98e246-387e-4239-a8da-c372e94fff77 | `quote` |
-| 14 | `parentCode` | parent编码 | `parentCode` | String | `text` |
-| 15 | `path` | path | `cPath` | String | `text` |
-| 16 | `showName` | show名称 | `showName` | String | `multiLanguage` |
-| 17 | `sourcetype` | sourcetype | `sourcetype` | Boolean | `switch` |
-| 18 | `zipCode` | zip编码 | `zipCode` | String | `text` |
-| 19 | `sort` | 排序 | `sort_num` | Integer | `int` |
-| 20 | `tenant` | tenant | `tenant_id` | c213cd56-d5de-421f-bae7-d77455b557cd | `quote` |
-| 21 | `createTime` | 创建时间 | `create_time` | DateTime | `timestamp` |
-| 22 | `createDate` | 创建日期 | `create_date` | Date | `date` |
-| 23 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `timestamp` |
-| 24 | `modifyDate` | 修改日期 | `modify_date` | Date | `date` |
-| 25 | `creator` | 创建人 | `creator` | String | `text` |
-| 26 | `modifier` | 修改人 | `modifier` | String | `text` |
-| 27 | `creatorId` | 创建人ID | `creatorId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 28 | `modifierId` | 修改人ID | `modifierId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 29 | `stopstatus` | stopstatus | `stopstatus` | Boolean | `switch` |
-| 30 | `stoptime` | stoptime | `stop_time` | DateTime | `timestamp` |
-| 31 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 32 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 地址档案 |
+| 物理表 | `regioncorp` |
+| 数据库 schema | `productcenter` |
+| 所属应用 | `DPMSI` |
+| 直连字段 | 32 个 |
+| 子表 | 1 个 |
+| 关联引用 | 6 个 |
 
-## 关联（6 个）
+## 子表
 
-- `parent` -> `aa.regioncorp.RegionCorp` ()
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `creatorId` -> `base.user.User` ()
-- `modifierId` -> `base.user.User` ()
-- `regionCorpSubData` -> `aa.regioncorp.RegionCorpSubData` (0..n)
-- `tenant` -> `base.tenant.Tenant` ()
+| 字段名 | URI | 关系 |
+|--------|-----|------|
+| `regionCorpSubData` | `aa.regioncorp.RegionCorpSubData` | composition |
+
+## 关联引用 (6个)
+
+| 字段名 | 引用类型 |
+|--------|---------|
+| `iParentId` | `` |
+| `ytenant_id` | `` |
+| `` | `` |
+| `tenant_id` | `` |
+
+## 继承接口 (7个, 29字段)
+
+- **树型结构** (`base.itf.ITree`)
+  - `` → ``
+  - `level` → `level`
+  - `parent_id` → `parent_id`
+  - `path` → `path`
+  - `sort_num` → `sort_num`
+- **租户相关** (`base.itf.ITenant`)
+  - `tenant_id` → `tenant_id`
+- **审计信息** (`base.itf.IAuditInfo`)
+  - `create_date` → `create_date`
+  - `create_time` → `create_time`
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `modify_date` → `modify_date`
+  - `modify_time` → `modify_time`
+- **停用信息** (`base.itf.IStopping`)
+  - `stopstatus` → `stopstatus`
+  - `stop_time` → `stop_time`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+- **树型结构** (`iuap.busiObj.ITree`)
+  - `ifend` → `ifend`
+  - `level` → `level`
+  - `name` → `name`
+  - `parent_id` → `parent_id`
+  - `path` → `path`
+  - `sort_num` → `sort_num`
+- **树型结构** (`ucfbase.ucfbaseItf.ITree`)
+  - `` → ``
+  - `level` → `level`
+  - `name` → `name`
+  - `parent_id` → `parent_id`
+  - `path` → `path`
+  - `sort_num` → `sort_num`
+
+## 字段列表（按类型分组）
+
+> 共 32 个直连字段
+
+### 文本字段 (8个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `cityCode` | `cityCode` | `cityCode` | 城市代码 |
+| `cCode` | `cCode` | `code` | 地址编码 |
+| `mergerName` | `mergerName` | `mergerName` | 全名称 |
+| `parentCode` | `parentCode` | `parentCode` | 上级地址编码 |
+| `cPath` | `cPath` | `path` | 路径 |
+| `zipCode` | `zipCode` | `zipCode` | 邮政编码 |
+| `` | `creator` | `creator` | 创建人名称 |
+| `` | `modifier` | `modifier` | 修改人名称 |
+
+### 引用字段 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iParentId` | `iParentId` | `parent` | 上级地址 |
+| `tenant_id` | `tenant_id` | `tenant` | 租户 |
+| `` | `creatorId` | `creatorId` | 创建人 |
+| `` | `modifierId` | `modifierId` | 修改人 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 日期字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_date` | `create_date` | `createDate` | 创建日期 |
+| `modify_date` | `modify_date` | `modifyDate` | 修改日期 |
+
+### 布尔字段 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `initDataEnd` | `initDataEnd` | `initDataEnd` | 初始化数据末级 |
+| `isCashOnDelivery` | `isCashOnDelivery` | `isCashOnDelivery` | 货到付款 |
+| `isEnd` | `isEnd` | `isEnd` | 是否末级 |
+| `sourcetype` | `sourcetype` | `sourcetype` | 是否系统预置 |
+| `stopstatus` | `stopstatus` | `stopstatus` | 停用状态 |
+
+### 整数 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `levelType` | `levelType` | `level` | 级别 |
+| `ordernum` | `ordernum` | `order` | 排序 |
+| `sort_num` | `sort_num` | `sort` | 排序号 |
+
+### 长整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+
+### other (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `` | `regionCorpSubData` | 地址档案子表 |
+
+### multiLanguage (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `keyWord` | `keyWord` | `keyWord` | 关键字 |
+| `name` | `name` | `name` | 地址名称 |
+| `showName` | `showName` | `showName` | 显示名称 |
+
+### timestamp (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+| `stop_time` | `stop_time` | `stoptime` | 停用时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |

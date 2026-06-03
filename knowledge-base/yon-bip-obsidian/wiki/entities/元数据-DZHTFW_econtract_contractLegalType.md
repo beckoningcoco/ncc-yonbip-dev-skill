@@ -9,33 +9,93 @@ last_verified: 2026-06-03
 status: verified
 source_type: api_response
 ---
+
 # 合同法律类别 (`DZHTFW.econtract.contractLegalType`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBip），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `clm_contract_legaltype` | 应用: `DZHTFW`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`clm_contract_legaltype` | domain：`iuap-apcom-contract` | 应用：`DZHTFW` | 业务对象ID：`200add05-4849-44b6-88d2-de1e20131a8f`
 
-## 属性（15 个）
+## 基本信息
 
-| # | 字段 | 显示名 | 列 | 类型 | biztype |
-|---|------|--------|-----|------|---------|
-| 1 | `code` | 编码 | `code` | String | `text` |
-| 2 | `name` | 名称 | `name` | String | `multiLanguage` |
-| 3 | `outerSysId` | outerSysID | `outer_sys_id` | String | `text` |
-| 4 | `remark` | remark | `remark` | String | `multiLanguage` |
-| 5 | `id` | ID | `id` | String | `text` |
-| 6 | `pubts` | 时间戳 | `pubts` | DateTime | `dateTime` |
-| 7 | `createTime` | 创建时间 | `create_time` | DateTime | `dateTime` |
-| 8 | `creator` | 创建人 | `creator` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 9 | `modifier` | 修改人 | `modifier` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 10 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `dateTime` |
-| 11 | `disablets` | disablets | `disablets` | DateTime | `dateTime` |
-| 12 | `enable` | enable | `enable` | sys_intboolean | `singleOption` |
-| 13 | `enablets` | enablets | `enablets` | DateTime | `dateTime` |
-| 14 | `ytenantId` | ytenantID | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 15 | `dr` | 逻辑删除 | `dr` | Short | `short` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 合同法律类别 |
+| 物理表 | `clm_contract_legaltype` |
+| 数据库 schema | `iuap-apcom-contract` |
+| 所属应用 | `DZHTFW` |
+| 直连字段 | 15 个 |
+| 子表 | 0 个 |
+| 关联引用 | 3 个 |
 
-## 关联（3 个）
+## 关联引用 (3个)
 
-- `creator` -> `base.user.BipUser` () 
-- `modifier` -> `base.user.BipUser` () 
-- `ytenantId` -> `yht.tenant.YhtTenant` () 
+| 字段名 | 引用类型 |
+|--------|---------|
+| `creator` | `bip-usercenter.bip_user_ref` |
+| `modifier` | `bip-usercenter.bip_user_ref` |
+| `ytenant_id` | `` |
+
+## 继承接口 (4个, 9字段)
+
+- **档案状态** (`iuap.busiObj.IEnable`)
+  - `disablets` → `disablets`
+  - `enable` → `enable`
+  - `enablets` → `enablets`
+- **审计信息** (`iuap.busiObj.IAuditInfo`)
+  - `create_time` → `create_time`
+  - `creator` → `creator`
+  - `modifier` → `modifier`
+  - `modify_time` → `modify_time`
+- **统一租户接口** (`iuap.busiObj.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+- **逻辑删除** (`iuap.busiObj.LogicDelete`)
+  - `dr` → `dr`
+
+## 字段列表（按类型分组）
+
+> 共 15 个直连字段
+
+### 文本字段 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `code` | `code` | `code` | 合同法律类别编码 |
+| `outer_sys_id` | `outer_sys_id` | `outerSysId` | 外部来源系统ID |
+| `id` | `id` | `id` | 主键 |
+
+### 引用字段 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `creator` | `creator` | `creator` | 创建人 |
+| `modifier` | `modifier` | `modifier` | 修改人 |
+| `ytenant_id` | `ytenant_id` | `ytenantId` | 租户id |
+
+### 日期时间 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+| `disablets` | `disablets` | `disablets` | 停用时间 |
+| `enablets` | `enablets` | `enablets` | 启用时间 |
+
+### 枚举字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `enable` | `enable` | `enable` | 档案状态 |
+
+### 短整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dr` | `dr` | `dr` | 逻辑删除 |
+
+### multiLanguage (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `name` | `name` | `name` | 合同法律类别名称 |
+| `remark` | `remark` | `remark` | 合同法律类别说明 |

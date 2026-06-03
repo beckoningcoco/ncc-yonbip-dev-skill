@@ -12,42 +12,126 @@ source_type: api_response
 
 # 特征组 (`base.character.Characteristics`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `base_characteristics` | 应用: `CHARACTER` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`base_characteristics` | domain：`u8c-userdefine` | 应用：`CHARACTER` | 业务对象ID：`c7210069-229b-45cd-8eee-25f753bf0138`
 
-## 属性（23 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `characteristicsType` | characteristicsType | `iCharacteristicsTypeId` | d4536390-1a46-49d5-8ffe-04412bfeb6d7 | `quote` |
-| 2 | `code` | 编码 | `cCode` | String | `text` |
-| 3 | `characterDomainId` | characterDomainID | `character_domain_id` | f62237fd-379b-49df-be61-9a5f588cc3a5 | `quote` |
-| 4 | `comment` | comment | `cComment` | String | `multiLanguage` |
-| 5 | `createDate` | 创建日期 | `create_date` | Date | `date` |
-| 6 | `createTime` | 创建时间 | `create_time` | DateTime | `timestamp` |
-| 7 | `creator` | 创建人 | `creator` | String | `text` |
-| 8 | `creatorId` | 创建人ID | `creatorId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 9 | `dr` | 逻辑删除 | `dr` | Short | `short` |
-| 10 | `erpCode` | erp编码 | `erpCode` | String | `text` |
-| 11 | `id` | ID | `id` | Long | `long` |
-| 12 | `modifier` | 修改人 | `modifier` | String | `text` |
-| 13 | `modifierId` | 修改人ID | `modifierId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 14 | `modifyDate` | 修改日期 | `modify_date` | Date | `date` |
-| 15 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `timestamp` |
-| 16 | `name` | 名称 | `cName` | String | `multiLanguage` |
-| 17 | `order` | order | `iOrder` | Integer | `int` |
-| 18 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 19 | `status` | 状态 | `status` | Integer | `int` |
-| 20 | `syncStatus` | syncStatus | `sync_status` | Integer | `int` |
-| 21 | `taskId` | taskID | `last_task_id` | String | `text` |
-| 22 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 23 | `characteristicsRelations` | characteristicsRelations | `` | cee65cbc-dfdf-46fd-894f-0202b993f534 | `` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 特征组 |
+| 物理表 | `base_characteristics` |
+| 数据库 schema | `u8c-userdefine` |
+| 所属应用 | `CHARACTER` |
+| 直连字段 | 23 个 |
+| 子表 | 1 个 |
+| 关联引用 | 6 个 |
 
-## 关联（6 个）
+## 子表
 
-- `characteristicsRelations` -> `base.character.CharacteristicsRelation` (0..n)
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `creatorId` -> `base.user.User` ()
-- `modifierId` -> `base.user.User` ()
-- `characterDomainId` -> `base.character.CharacterDomain` ()
-- `characteristicsType` -> `base.character.CharacteristicsType` ()
+| 字段名 | URI | 关系 |
+|--------|-----|------|
+| `characteristicsRelations` | `base.character.CharacteristicsRelation` | composition |
+
+## 关联引用 (6个)
+
+| 字段名 | 引用类型 |
+|--------|---------|
+| `` | `` |
+| `ytenant_id` | `` |
+| `creatorId` | `yonbip-ndi-meeting.RefTable_d3d3cf3d50` |
+| `modifierId` | `yonbip-ndi-meeting.RefTable_d3d3cf3d50` |
+| `character_domain_id` | `` |
+| `iCharacteristicsTypeId` | `` |
+
+## 继承接口 (5个, 12字段)
+
+- **erp编码** (`base.itf.IErpCode`)
+  - `erpCode` → `erpCode`
+- **排序** (`base.character.IOrder`)
+  - `iOrder` → `iOrder`
+- **逻辑删除相关** (`ucfbase.ucfbaseItf.LogicDelete`)
+  - `dr` → `dr`
+- **审计信息** (`base.itf.IAuditInfo`)
+  - `create_date` → `create_date`
+  - `create_time` → `create_time`
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `modify_date` → `modify_date`
+  - `modify_time` → `modify_time`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 23 个直连字段
+
+### 文本字段 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `cCode` | `cCode` | `code` | 编码 |
+| `creator` | `creator` | `creator` | 创建人名称 |
+| `erpCode` | `erpCode` | `erpCode` | 商家编码 |
+| `modifier` | `modifier` | `modifier` | 修改人名称 |
+| `last_task_id` | `last_task_id` | `taskId` | taskId |
+
+### 引用字段 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iCharacteristicsTypeId` | `iCharacteristicsTypeId` | `characteristicsType` | 特征组类型 |
+| `character_domain_id` | `character_domain_id` | `characterDomainId` | 特征域 |
+| `creatorId` | `creatorId` | `creatorId` | 创建人 |
+| `modifierId` | `modifierId` | `modifierId` | 修改人 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 日期字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_date` | `create_date` | `createDate` | 创建日期 |
+| `modify_date` | `modify_date` | `modifyDate` | 修改日期 |
+
+### 整数 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iOrder` | `iOrder` | `order` | 排序 |
+| `status` | `status` | `status` | 状态 |
+| `sync_status` | `sync_status` | `syncStatus` | syncStatus |
+
+### 短整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dr` | `dr` | `dr` | 逻辑删除标记 |
+
+### 长整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+
+### multiLanguage (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `cComment` | `cComment` | `comment` | 备注 |
+| `cName` | `cName` | `name` | 名称 |
+
+### timestamp (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+
+### other (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `` | `characteristicsRelations` | 特征组关联特征 |

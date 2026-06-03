@@ -9,72 +9,144 @@ last_verified: 2026-06-03
 status: verified
 source_type: api_response
 ---
+
 # 计税结果 (`earap.payment.TaxCalculationResult`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBip），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `stwb_tax_calc_result` | 应用: `EAP`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`stwb_tax_calc_result` | domain：`yonbip-fi-earapbill` | 应用：`EAP` | 业务对象ID：`548e9989-20b1-473c-ba02-9284b575a695`
 
-## 属性（40 个）
+## 基本信息
 
-| # | 字段 | 显示名 | 列 | 类型 | biztype |
-|---|------|--------|-----|------|---------|
-| 1 | `lineAmountMark` | lineAmountMark | `line_amount_mark` | String | `text` |
-| 2 | `calculationInputId` | calculationInputID | `calculation_input_id` | bce8f91c-16fa-4e46-99b9-47cd0e4a5f89 | `quote` |
-| 3 | `taxCategoryArchiveId` | taxCategoryArchiveID | `tax_category_archive_id` | 01a37978-70b8-4e8c-83d7-3a9b79d84917 | `quote` |
-| 4 | `finDeductTaxMny` | finDeductTaxMny | `fin_deduct_tax_mny` | Decimal | `number` |
-| 5 | `deductTaxrateQty` | deductTaxrateQty | `deduct_taxrate_qty` | Decimal | `number` |
-| 6 | `taxBureauArchiveId` | taxBureauArchiveID | `tax_bureau_archive_id` | d910183c-a1c4-48b2-8bc4-0b9f1dda6eb8 | `quote` |
-| 7 | `calculationInputBid` | calculationInputBid | `calculation_input_bid` | 002f1c0c-815d-4afd-a93e-446e31a5abc9 | `quote` |
-| 8 | `calculationComponentFormula` | calculationComponentFormula | `calculation_component_formula` | String | `bigText` |
-| 9 | `totDeductMny` | totDeductMny | `tot_deduct_mny` | Decimal | `number` |
-| 10 | `finTaxMny` | finTaxMny | `fin_tax_mny` | Decimal | `number` |
-| 11 | `taxrateQty` | taxrateQty | `taxrate_qty` | Decimal | `number` |
-| 12 | `taxItemId` | taxItemID | `tax_item_id` | 0eea81a1-2a5f-4f44-af40-c1da88b6edde | `quote` |
-| 13 | `taxrateId` | taxrateID | `taxrate_id` | 709cd092-3dd4-49ca-9eb9-7b8888551810 | `quote` |
-| 14 | `taxCodeId` | tax编码ID | `tax_code_id` | 3f7c3856-5b00-4506-b458-a64eed0d3bfb | `quote` |
-| 15 | `calculationComponentId` | calculationComponentID | `calculation_component_id` | f30c18c7-70b9-4933-a20f-0447c0f7eb26 | `quote` |
-| 16 | `withholdRemit` | withholdRemit | `withhold_remit` | taxpubdocYNEnum | `singleOption` |
-| 17 | `calcQty` | calcQty | `calc_qty` | Decimal | `number` |
-| 18 | `calcMny` | calcMny | `calc_mny` | Decimal | `number` |
-| 19 | `totDeductTaxMny` | totDeductTaxMny | `tot_deduct_tax_mny` | Decimal | `number` |
-| 20 | `calcTaxMny` | calcTaxMny | `calc_tax_mny` | Decimal | `number` |
-| 21 | `unitId` | unitID | `unit_id` | 9ea02a0b-3a48-4051-bcbe-59c7bcc7a25b | `quote` |
-| 22 | `bizObjType` | bizObjType | `biz_obj_type` | String | `text` |
-| 23 | `deductionType` | deductionType | `deduction_type` | fac5ac11-815b-47d3-ba4f-5cd47ff97c2e | `quote` |
-| 24 | `currencyId` | currencyID | `currency_id` | 02b45339-eb4a-4a31-a8b5-d32f494f4e8e | `quote` |
-| 25 | `localCurrencyId` | localCurrencyID | `local_currency_id` | 02b45339-eb4a-4a31-a8b5-d32f494f4e8e | `quote` |
-| 26 | `exchangeRate` | exchangeRate | `exchange_rate` | Decimal | `number` |
-| 27 | `exchangeRateMethod` | exchangeRateMethod | `exchange_rate_method` | String | `text` |
-| 28 | `oriTaxMny` | oriTaxMny | `ori_tax_mny` | Decimal | `number` |
-| 29 | `localTaxMny` | localTaxMny | `local_tax_mny` | Decimal | `number` |
-| 30 | `currType` | currType | `curr_type` | taxEngineCurrType | `singleOption` |
-| 31 | `mainid` | mainid | `mainid` | 83697b00-1e51-4a2d-a1d3-13cd2c8003f2 | `quote` |
-| 32 | `createTime` | 创建时间 | `create_time` | DateTime | `dateTime` |
-| 33 | `creator` | 创建人 | `creator` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 34 | `modifier` | 修改人 | `modifier` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 35 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `dateTime` |
-| 36 | `ytenantId` | ytenantID | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 37 | `dr` | 逻辑删除 | `dr` | Short | `short` |
-| 38 | `id` | ID | `id` | String | `text` |
-| 39 | `pubts` | 时间戳 | `pubts` | DateTime | `dateTime` |
-| 40 | `TaxCalculationResultDetailList` | TaxCalculationResultDetailList | `` | fafc3813-37be-4942-931e-cea27a2be252 | `` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 计税结果 |
+| 物理表 | `stwb_tax_calc_result` |
+| 数据库 schema | `yonbip-fi-earapbill` |
+| 所属应用 | `EAP` |
+| 直连字段 | 40 个 |
+| 子表 | 1 个 |
+| 关联引用 | 17 个 |
 
-## 关联（17 个）
+## 子表
 
-- `creator` -> `base.user.BipUser` () 
-- `localCurrencyId` -> `bd.currencytenant.CurrencyTenantVO` () [废]
-- `deductionType` -> `GZTBDM.taxpubdoc.deductionType` () [废]
-- `modifier` -> `base.user.BipUser` () 
-- `taxBureauArchiveId` -> `archive.taxArchives.TaxBureauArchive` () [废]
-- `taxCategoryArchiveId` -> `archive.taxArchives.TaxCategoryArchive` () [废]
-- `ytenantId` -> `yht.tenant.YhtTenant` () 
-- `taxCodeId` -> `taxpubdoc.taxengine.TaxCode` () [废]
-- `calculationComponentId` -> `taxpubdoc.taxengine.TaxCalculationComponent` () [废]
-- `calculationInputBid` -> `taxpubdoc.taxengine.TaxCalculationInputDetail` () [废]
-- `taxrateId` -> `archive.taxArchives.TaxRateArchive` () [废]
-- `TaxCalculationResultDetailList` -> `earap.payment.TaxCalculationResultDetail` (0..n) 
-- `calculationInputId` -> `taxpubdoc.taxengine.TaxCalculationInput` () [废]
-- `unitId` -> `pc.unit.Unit` () [废]
-- `currencyId` -> `bd.currencytenant.CurrencyTenantVO` () [废]
-- `mainid` -> `earap.payment.PaymentBody` (0..n) [废]
-- `taxItemId` -> `taxpubdoc.taxpubdoc.TaxItem` () [废]
+| 字段名 | URI | 关系 |
+|--------|-----|------|
+| `TaxCalculationResultDetailList` | `earap.payment.TaxCalculationResultDetail` | composition |
+
+## 关联引用 (17个)
+
+| 字段名 | 引用类型 |
+|--------|---------|
+| `creator` | `bip-usercenter.bip_user_ref` |
+| `local_currency_id` | `ucfbasedoc.bd_currencytenantref` |
+| `deduction_type` | `yonbip-fi-taxpubdoc.RefTable_948d15e041` |
+| `modifier` | `bip-usercenter.bip_user_ref` |
+| `tax_bureau_archive_id` | `yonbip-fi-taxpubdoc.RefTable_457b0fd24` |
+| `tax_category_archive_id` | `yonbip-fi-taxpubdoc.RefTable_c271791694` |
+| `ytenant_id` | `` |
+| `tax_code_id` | `yonbip-fi-taxpubdoc.RefTable_832e0ffa60` |
+| `calculation_component_id` | `yonbip-fi-taxpubdoc.RefTable_9ec104ed1` |
+| `calculation_input_bid` | `` |
+| `taxrate_id` | `yonbip-fi-taxpubdoc.RefTable_55c5b82f11` |
+| `` | `` |
+| `calculation_input_id` | `` |
+| `unit_id` | `productcenter.pc_unitref_new` |
+| `currency_id` | `ucfbasedoc.bd_currencytenantref` |
+| `mainid` | `` |
+| `tax_item_id` | `yonbip-fi-taxpubdoc.RefTable_182eb8090` |
+
+## 继承接口 (3个, 6字段)
+
+- **审计信息** (`iuap.busiObj.IAuditInfo`)
+  - `create_time` → `create_time`
+  - `creator` → `creator`
+  - `modifier` → `modifier`
+  - `modify_time` → `modify_time`
+- **统一租户接口** (`iuap.busiObj.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+- **逻辑删除** (`iuap.busiObj.LogicDelete`)
+  - `dr` → `dr`
+
+## 字段列表（按类型分组）
+
+> 共 40 个直连字段
+
+### 文本字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `line_amount_mark` | `line_amount_mark` | `lineAmountMark` | 行金额标识 |
+| `biz_obj_type` | `biz_obj_type` | `bizObjType` | 业务对象编码 |
+| `exchange_rate_method` | `exchange_rate_method` | `exchangeRateMethod` | 汇率折算方式 |
+| `id` | `id` | `id` | 主键 |
+
+### 引用字段 (16个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `calculation_input_id` | `calculation_input_id` | `calculationInputId` | 计税输入 |
+| `tax_category_archive_id` | `tax_category_archive_id` | `taxCategoryArchiveId` | 税种 |
+| `tax_bureau_archive_id` | `tax_bureau_archive_id` | `taxBureauArchiveId` | 税制 |
+| `calculation_input_bid` | `calculation_input_bid` | `calculationInputBid` | 计税输入明细id |
+| `tax_item_id` | `tax_item_id` | `taxItemId` | 税目 |
+| `taxrate_id` | `taxrate_id` | `taxrateId` | 税率 |
+| `tax_code_id` | `tax_code_id` | `taxCodeId` | 税码 |
+| `calculation_component_id` | `calculation_component_id` | `calculationComponentId` | 计税组件id |
+| `unit_id` | `unit_id` | `unitId` | 计税单位 |
+| `deduction_type` | `deduction_type` | `deductionType` | 抵扣类型 |
+| `currency_id` | `currency_id` | `currencyId` | 原币 |
+| `local_currency_id` | `local_currency_id` | `localCurrencyId` | 本币 |
+| `mainid` | `mainid` | `mainid` | 付款单明细 |
+| `creator` | `creator` | `creator` | 创建人 |
+| `modifier` | `modifier` | `modifier` | 修改人 |
+| `ytenant_id` | `ytenant_id` | `ytenantId` | 租户id |
+
+### 日期时间 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+
+### 枚举字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `withhold_remit` | `withhold_remit` | `withholdRemit` | 是否代扣代缴 |
+| `curr_type` | `curr_type` | `currType` | 计税币种 |
+
+### 短整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dr` | `dr` | `dr` | 逻辑删除 |
+
+### 数值字段 (12个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `fin_deduct_tax_mny` | `fin_deduct_tax_mny` | `finDeductTaxMny` | 最终减免税额 |
+| `deduct_taxrate_qty` | `deduct_taxrate_qty` | `deductTaxrateQty` | 减免税率值 |
+| `tot_deduct_mny` | `tot_deduct_mny` | `totDeductMny` | 累计减免金额 |
+| `fin_tax_mny` | `fin_tax_mny` | `finTaxMny` | 最终税额 |
+| `taxrate_qty` | `taxrate_qty` | `taxrateQty` | 税率值 |
+| `calc_qty` | `calc_qty` | `calcQty` | 计税数量 |
+| `calc_mny` | `calc_mny` | `calcMny` | 计税金额 |
+| `tot_deduct_tax_mny` | `tot_deduct_tax_mny` | `totDeductTaxMny` | 累计减免税额 |
+| `calc_tax_mny` | `calc_tax_mny` | `calcTaxMny` | 计算税额 |
+| `exchange_rate` | `exchange_rate` | `exchangeRate` | 汇率 |
+| `ori_tax_mny` | `ori_tax_mny` | `oriTaxMny` | 原币税额 |
+| `local_tax_mny` | `local_tax_mny` | `localTaxMny` | 本币税额 |
+
+### bigText (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `calculation_component_formula` | `calculation_component_formula` | `calculationComponentFormula` | 计税组件表达式 |
+
+### other (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `` | `TaxCalculationResultDetailList` | 计税结果明细 |

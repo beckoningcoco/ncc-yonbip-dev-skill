@@ -12,106 +12,176 @@ source_type: api_response
 
 # 项目活动物资清单 (`pgrm.projecttask.ProjectTaskMaterial`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `prpr_material_b` | 应用: `PGRM` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`prpr_material_b` | domain：`yonbip-pm-projectme` | 应用：`PGRM` | 业务对象ID：`f76a015a-f5ed-4916-8354-47da523fbe1f`
 
-## 属性（74 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `agentId` | agentID | `agent_id` | 94b3280a-27a4-485a-b90b-b7bce57c6df2 | `quote` |
-| 2 | `applyOrderFlag` | applyOrderFlag | `apply_order_flag` | xmyYesNo | `singleOption` |
-| 3 | `applyedQty` | applyedQty | `applyed_qty` | Decimal | `number` |
-| 4 | `auxiliaryUnitId` | auxiliaryUnitID | `auxiliary_unit_id` | String | `text` |
-| 5 | `closedPurchaseTaskQty` | closedPurchaseTaskQty | `closed_purchase_task_qty` | Decimal | `number` |
-| 6 | `completeQty` | completeQty | `complete_qty` | Decimal | `number` |
-| 7 | `conversionRate` | conversionRate | `conversion_rate` | String | `text` |
-| 8 | `cqtUnitId` | cqtUnitID | `cqt_unit_id` | 9ea02a0b-3a48-4051-bcbe-59c7bcc7a25b | `quote` |
-| 9 | `createTime` | 创建时间 | `create_time` | DateTime | `dateTime` |
-| 10 | `creator` | 创建人 | `creator` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 11 | `defineCharacteristic` | defineCharacteristic | `define_characteristic` | 16fef424-0dd4-4ae4-8845-cf69732a1ab2 | `UserDefine` |
-| 12 | `defineCharacteristics` | defineCharacteristics | `define_characteristics` | aff289c1-c874-42a8-af9f-f34cde718c16 | `FreeCT` |
-| 13 | `demandTime` | demandTime | `demand_time` | String | `date` |
-| 14 | `dr` | 逻辑删除 | `dr` | Short | `short` |
-| 15 | `edirection` | edirection | `edirection` | pmDirectionEnum | `singleOption` |
-| 16 | `effectFlag` | effectFlag | `effect_flag` | xmyYesNo | `singleOption` |
-| 17 | `id` | ID | `id` | String | `text` |
-| 18 | `inventoryOrg` | inventoryOrg | `inventory_org` | e18e914b-4518-4e8c-ac21-783145fe7da1 | `quote` |
-| 19 | `latestVersion` | latestVersion | `latest_version` | xmyYesNo | `singleOption` |
-| 20 | `materialDesc` | materialDesc | `material_desc` | String | `text` |
-| 21 | `materialSourceId` | materialSourceID | `material_source_id` | String | `text` |
-| 22 | `memo` | 备注 | `memo` | String | `text` |
-| 23 | `modifier` | 修改人 | `modifier` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 24 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `dateTime` |
-| 25 | `mrpDemandFlag` | mrpDemandFlag | `mrp_demand_flag` | aa_boolean | `singleOption` |
-| 26 | `oid` | oid | `oid` | String | `text` |
-| 27 | `orgId` | 组织ID | `org_id` | 14302233-1394-4a70-94e1-bed51636f312 | `quote` |
-| 28 | `prjSaleItemId` | prjSaleItemID | `prj_sale_item_id` | String | `text` |
-| 29 | `productId` | productID | `product_id` | 89f3b06e-23df-4403-b4a7-19f99eeeae72 | `quote` |
-| 30 | `productionOrderFlag` | productionOrderFlag | `production_order_flag` | xmyYesNo | `singleOption` |
-| 31 | `projectMaterialListId` | projectMaterialListID | `project_material_list_id` | 36541413-04c3-48bd-add3-4e382ae3904b | `quote` |
-| 32 | `projectScheduleTaskId` | projectScheduleTaskID | `activity_id` | b4a90beb-49ed-4301-b12e-9221d0d12fd1 | `quote` |
-| 33 | `pubts` | 时间戳 | `pubts` | DateTime | `dateTime` |
-| 34 | `purchaseContractId` | purchaseContractID | `purchaset_contract_id` | String | `text` |
-| 35 | `purchaseDirectShipFlag` | purchaseDirectShipFlag | `purchase_direct_ship_flag` | aa_boolean | `singleOption` |
-| 36 | `purchaseOrgId` | purchaseOrgID | `purchase_org_id` | a4916c85-f087-4e87-a178-0ad37aff7cd0 | `quote` |
-| 37 | `purchaseTaskQty` | purchaseTaskQty | `purchaset_taskt_qty` | Decimal | `number` |
-| 38 | `quantity` | quantity | `quantity` | Decimal | `number` |
-| 39 | `receiveAddress` | receiveAddress | `receive_address` | String | `text` |
-| 40 | `receiveMobile` | receiveMobile | `receive_mobile` | String | `text` |
-| 41 | `receiveTelePhone` | receiveTelePhone | `receive_tele_phone` | String | `text` |
-| 42 | `receiver` | receiver | `receiver` | String | `text` |
-| 43 | `receiverCustId` | receiverCustID | `receiver_cust_id` | 94b3280a-27a4-485a-b90b-b7bce57c6df2 | `quote` |
-| 44 | `requirementPlanFlag` | requirementPlanFlag | `requirement_plan_flag` | xmyYesNo | `singleOption` |
-| 45 | `reserveId` | reserveID | `reserve_id` | fdc23f28-4a7f-46e8-844b-345f01c13996 | `quote` |
-| 46 | `rowStatus` | rowStatus | `row_status` | prjc_mater_row_status | `singleOption` |
-| 47 | `rowType` | rowType | `row_type` | 877e3ccb-564a-48c3-9c63-73d9f63e6a18 | `quote` |
-| 48 | `shipmentFlag` | shipmentFlag | `shipment_flag` | xmyYesNo | `singleOption` |
-| 49 | `signedPurchContrQty` | signedPurchContrQty | `signed_purch_contr_qty` | Decimal | `number` |
-| 50 | `subRequisitionFlag` | subRequisitionFlag | `sub_requisition_flag` | xmyYesNo | `singleOption` |
-| 51 | `suggestVendorId` | suggestVendorID | `suggest_vendor_id` | 89bf026e-cc49-4fe7-9a7b-3e8fdcc77c1e | `quote` |
-| 52 | `supplierId` | supplierID | `supplier_id` | String | `text` |
-| 53 | `taxCategoryId` | taxCategoryID | `tax_category_id` | 01e7528c-c35c-4d33-b2aa-382b4b4f4534 | `quote` |
-| 54 | `taxMny` | taxMny | `tax_mny` | Decimal | `number` |
-| 55 | `taxRate` | taxRate | `tax_rate` | Decimal | `number` |
-| 56 | `totalMny` | totalMny | `total_mny` | Decimal | `number` |
-| 57 | `totalOutStockQty` | totalOutStockQty | `total_out_stock_qty` | Decimal | `number` |
-| 58 | `totalProductIncomingQty` | totalProductIncomingQty | `total_product_incoming_qty` | Decimal | `number` |
-| 59 | `totalProductQty` | totalProductQty | `total_product_qty` | Decimal | `number` |
-| 60 | `totalPurInStockQuantity` | totalPurInStockQuantity | `total_purin_stock_quantity` | Decimal | `number` |
-| 61 | `totalShipQty` | totalShipQty | `total_ship_qty` | Decimal | `number` |
-| 62 | `totalSignQty` | totalSignQty | `total_sign_qty` | Decimal | `number` |
-| 63 | `totalSubArriveQty` | totalSubArriveQty | `total_sub_arrive_qty` | Decimal | `number` |
-| 64 | `totalSubIncomingQty` | totalSubIncomingQty | `total_sub_incoming_qty` | Decimal | `number` |
-| 65 | `totalSubOrderQty` | totalSubOrderQty | `total_sub_order_qty` | Decimal | `number` |
-| 66 | `totalSubRequireQty` | totalSubRequireQty | `total_sub_require_qty` | Decimal | `number` |
-| 67 | `totalTaxMny` | totalTaxMny | `total_tax_mny` | Decimal | `number` |
-| 68 | `trackingNO` | trackingNO | `tracking_no` | String | `text` |
-| 69 | `unitPrice` | unitPrice | `unit_price` | Decimal | `number` |
-| 70 | `unitTaxPrice` | unitTaxPrice | `unit_tax_price` | Decimal | `number` |
-| 71 | `waitApplyedQty` | waitApplyedQty | `wait_applyed_qty` | Decimal | `number` |
-| 72 | `waitPurchaseTaskQty` | waitPurchaseTaskQty | `wait_purchase_task_qty` | Decimal | `number` |
-| 73 | `wbs` | wbs | `wbs` | 145cc7d2-79cf-4f3a-934c-c03b46d0fd42 | `quote` |
-| 74 | `ytenantId` | ytenantID | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 项目活动物资清单 |
+| 物理表 | `prpr_material_b` |
+| 数据库 schema | `yonbip-pm-projectme` |
+| 所属应用 | `PGRM` |
+| 直连字段 | 74 个 |
+| 子表 | 0 个 |
+| 关联引用 | 19 个 |
 
-## 关联（19 个）
+## 关联引用 (19个)
 
-- `projectMaterialListId` -> `rscm.projectmaterial.ProjectMaterialList` ()
-- `defineCharacteristic` -> `pgrm.projecttask.ProjectTaskMaterialdefineCharacteristicUserDefine` ()
-- `agentId` -> `aa.merchant.Merchant` ()
-- `creator` -> `base.user.BipUser` ()
-- `productId` -> `pc.product.Product` ()
-- `reserveId` -> `st.reservation.Reservation` ()
-- `modifier` -> `base.user.BipUser` ()
-- `wbs` -> `BGDM.wbs.wbs_doc` ()
-- `purchaseOrgId` -> `org.func.PurchaseOrg` ()
-- `ytenantId` -> `yht.tenant.YhtTenant` ()
-- `orgId` -> `org.func.BaseOrg` ()
-- `inventoryOrg` -> `org.func.InventoryOrg` ()
-- `rowType` -> `bd.bill.TransTypeAdmin` ()
-- `defineCharacteristics` -> `pgrm.projecttask.ProjectTaskMaterialdefineCharacteristicsFreeCT` ()
-- `projectScheduleTaskId` -> `pgrm.projecttask.ProjectScheduleTask` (0..n)
-- `receiverCustId` -> `aa.merchant.Merchant` ()
-- `suggestVendorId` -> `aa.vendor.Vendor` ()
-- `cqtUnitId` -> `pc.unit.Unit` ()
-- `taxCategoryId` -> `bd.taxrate.TaxRateVO` ()
+| 字段名 | 引用类型 |
+|--------|---------|
+| `project_material_list_id` | `` |
+| `define_characteristic` | `` |
+| `agent_id` | `productcenter.aa_merchant_master` |
+| `creator` | `bip-usercenter.bip_user_ref` |
+| `product_id` | `productcenter.pc_nomalproductref` |
+| `reserve_id` | `` |
+| `modifier` | `bip-usercenter.bip_user_ref` |
+| `wbs` | `yonbip-pm-commonbd.RefTable_1906842236` |
+| `purchase_org_id` | `ucf-org-center.bd_purchaseorg` |
+| `ytenant_id` | `` |
+| `org_id` | `ucf-org-center.org_pure_tree_ref` |
+| `inventory_org` | `ucf-org-center.bd_inventoryorg` |
+| `row_type` | `yonbip-pm-projectme.rscm_row_type_ref` |
+| `define_characteristics` | `` |
+| `activity_id` | `yonbip-pm-projectme.RefTable_ebcf54ed61` |
+| `receiver_cust_id` | `productcenter.aa_merchant_master` |
+| `suggest_vendor_id` | `yssupplier.aa_vendor` |
+| `cqt_unit_id` | `productcenter.pc_unitref` |
+| `tax_category_id` | `ucfbasedoc.bd_taxrate` |
+
+## 继承接口 (3个, 6字段)
+
+- **逻辑删除** (`iuap.busiObj.LogicDelete`)
+  - `dr` → `dr`
+- **统一租户接口** (`iuap.busiObj.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+- **审计信息** (`iuap.busiObj.IAuditInfo`)
+  - `create_time` → `create_time`
+  - `creator` → `creator`
+  - `modifier` → `modifier`
+  - `modify_time` → `modify_time`
+
+## 字段列表（按类型分组）
+
+> 共 74 个直连字段
+
+### 文本字段 (15个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `auxiliary_unit_id` | `auxiliary_unit_id` | `auxiliaryUnitId` | 辅单位 |
+| `conversion_rate` | `conversion_rate` | `conversionRate` | 辅单位换算率 |
+| `id` | `id` | `id` | 主键 |
+| `material_desc` | `material_desc` | `materialDesc` | 物料描述 |
+| `material_source_id` | `material_source_id` | `materialSourceId` | 来源ID |
+| `memo` | `memo` | `memo` | 备注 |
+| `oid` | `oid` | `oid` | 原始ID |
+| `prj_sale_item_id` | `prj_sale_item_id` | `prjSaleItemId` | 项目销售清单明细ID |
+| `purchaset_contract_id` | `purchaset_contract_id` | `purchaseContractId` | 采购合同Id |
+| `receive_address` | `receive_address` | `receiveAddress` | 收货地址 |
+| `receive_mobile` | `receive_mobile` | `receiveMobile` | 收货联系人移动电话 |
+| `receive_tele_phone` | `receive_tele_phone` | `receiveTelePhone` | 收货联系人固定电话 |
+| `receiver` | `receiver` | `receiver` | 收货联系人 |
+| `supplier_id` | `supplier_id` | `supplierId` | 供应商 |
+| `tracking_no` | `tracking_no` | `trackingNO` | 跟踪号 |
+
+### 引用字段 (17个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `agent_id` | `agent_id` | `agentId` | 客户 |
+| `cqt_unit_id` | `cqt_unit_id` | `cqtUnitId` | 计价单位 |
+| `creator` | `creator` | `creator` | 创建人 |
+| `inventory_org` | `inventory_org` | `inventoryOrg` | 库存组织 |
+| `modifier` | `modifier` | `modifier` | 修改人 |
+| `org_id` | `org_id` | `orgId` | 组织ID |
+| `product_id` | `product_id` | `productId` | 物料 |
+| `project_material_list_id` | `project_material_list_id` | `projectMaterialListId` | 物资清单id |
+| `activity_id` | `activity_id` | `projectScheduleTaskId` | 项目活动 |
+| `purchase_org_id` | `purchase_org_id` | `purchaseOrgId` | 采购组织 |
+| `receiver_cust_id` | `receiver_cust_id` | `receiverCustId` | 收货客户 |
+| `reserve_id` | `reserve_id` | `reserveId` | 跟踪线索Id |
+| `row_type` | `row_type` | `rowType` | 行类型 |
+| `suggest_vendor_id` | `suggest_vendor_id` | `suggestVendorId` | 建议委外商 |
+| `tax_category_id` | `tax_category_id` | `taxCategoryId` | 税率id |
+| `wbs` | `wbs` | `wbs` | WBS |
+| `ytenant_id` | `ytenant_id` | `ytenantId` | 租户id |
+
+### 日期字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `demand_time` | `demand_time` | `demandTime` | 需求时间 |
+
+### 日期时间 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+
+### 枚举字段 (11个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `apply_order_flag` | `apply_order_flag` | `applyOrderFlag` | 是否请购 |
+| `edirection` | `edirection` | `edirection` | 方向 |
+| `effect_flag` | `effect_flag` | `effectFlag` | 是否生效 |
+| `latest_version` | `latest_version` | `latestVersion` | 是否最新版本 |
+| `mrp_demand_flag` | `mrp_demand_flag` | `mrpDemandFlag` | 是否MRP需求 |
+| `production_order_flag` | `production_order_flag` | `productionOrderFlag` | 是否生产订单 |
+| `purchase_direct_ship_flag` | `purchase_direct_ship_flag` | `purchaseDirectShipFlag` | 采购直运标识 |
+| `requirement_plan_flag` | `requirement_plan_flag` | `requirementPlanFlag` | 是否计划独立需求 |
+| `row_status` | `row_status` | `rowStatus` | 行状态 |
+| `shipment_flag` | `shipment_flag` | `shipmentFlag` | 是否发货 |
+| `sub_requisition_flag` | `sub_requisition_flag` | `subRequisitionFlag` | 是否委外 |
+
+### 短整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dr` | `dr` | `dr` | 逻辑删除 |
+
+### 数值字段 (24个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `applyed_qty` | `applyed_qty` | `applyedQty` | 累计请购数量 |
+| `closed_purchase_task_qty` | `closed_purchase_task_qty` | `closedPurchaseTaskQty` | 采购任务关闭数量 |
+| `complete_qty` | `complete_qty` | `completeQty` | 累计完成数量 |
+| `purchaset_taskt_qty` | `purchaset_taskt_qty` | `purchaseTaskQty` | 累计采购任务数量 |
+| `quantity` | `quantity` | `quantity` | 数量 |
+| `signed_purch_contr_qty` | `signed_purch_contr_qty` | `signedPurchContrQty` | 签订采购合同数量 |
+| `tax_mny` | `tax_mny` | `taxMny` | 税额 |
+| `tax_rate` | `tax_rate` | `taxRate` | 税率 |
+| `total_mny` | `total_mny` | `totalMny` | 无税金额 |
+| `total_out_stock_qty` | `total_out_stock_qty` | `totalOutStockQty` | 累计出库数量 |
+| `total_product_incoming_qty` | `total_product_incoming_qty` | `totalProductIncomingQty` | 累计生产入库数量  |
+| `total_product_qty` | `total_product_qty` | `totalProductQty` | 累计生产数量 |
+| `total_purin_stock_quantity` | `total_purin_stock_quantity` | `totalPurInStockQuantity` | 累计采购入库数量 |
+| `total_ship_qty` | `total_ship_qty` | `totalShipQty` | 累计发货数量 |
+| `total_sign_qty` | `total_sign_qty` | `totalSignQty` | 累计签收确认数量 |
+| `total_sub_arrive_qty` | `total_sub_arrive_qty` | `totalSubArriveQty` | 累计委外到货数量 |
+| `total_sub_incoming_qty` | `total_sub_incoming_qty` | `totalSubIncomingQty` | 累计委外入库数量 |
+| `total_sub_order_qty` | `total_sub_order_qty` | `totalSubOrderQty` | 累计委外订单数量 |
+| `total_sub_require_qty` | `total_sub_require_qty` | `totalSubRequireQty` | 累计委外申请数量 |
+| `total_tax_mny` | `total_tax_mny` | `totalTaxMny` | 价税合计 |
+| `unit_price` | `unit_price` | `unitPrice` | 无税单价 |
+| `unit_tax_price` | `unit_tax_price` | `unitTaxPrice` | 含税单价 |
+| `wait_applyed_qty` | `wait_applyed_qty` | `waitApplyedQty` | 待请购数量 |
+| `wait_purchase_task_qty` | `wait_purchase_task_qty` | `waitPurchaseTaskQty` | 待采购任务数量 |
+
+### UserDefine (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `define_characteristic` | `define_characteristic` | `defineCharacteristic` | 自定义项属性 |
+
+### FreeCT (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `define_characteristics` | `define_characteristics` | `defineCharacteristics` | 自由项特征组 |

@@ -1,0 +1,87 @@
+---
+tags: [BIP, 元数据, 数据字典, marketing.cpq.OptionalQuotationRuleDetailGroup]
+created: 2026-06-03
+updated: 2026-06-03
+sources: [元数据API queryByUri]
+platform_version: "BIP V5"
+project: ""
+last_verified: 2026-06-03
+status: verified
+source_type: api_response
+---
+
+# 配置报价规则详情分组 (`marketing.cpq.OptionalQuotationRuleDetailGroup`)
+
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`optionalquotationruledetailgroup` | domain：`marketingbill` | 应用：`CPQ` | 业务对象ID：``
+
+## 基本信息
+
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 配置报价规则详情分组 |
+| 物理表 | `optionalquotationruledetailgroup` |
+| 数据库 schema | `marketingbill` |
+| 所属应用 | `CPQ` |
+| 直连字段 | 13 个 |
+| 子表 | 0 个 |
+| 关联引用 | 2 个 |
+
+## 关联引用 (2个)
+
+| 字段名 | 引用类型 |
+|--------|---------|
+| `optionalQuotationRuleId` | `` |
+| `ytenant_id` | `` |
+
+## 继承接口 (1个, 1字段)
+
+- **统一租户接口(扩展)** (`ucfbase.ucfbaseItf.IYTenantExt`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 13 个直连字段
+
+### 文本字段 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `code` | `code` | `code` | code |
+| `name` | `name` | `name` | name |
+| `parentCode` | `parentCode` | `parentCode` | 父节点 |
+
+### 引用字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `optionalQuotationRuleId` | `optionalQuotationRuleId` | `optionalQuotationRuleId` | 配置报价规则ID |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 布尔字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `inQuote` | `inQuote` | `inQuote` | 包含在报价内 |
+| `inQuoteCanUpdate` | `inQuoteCanUpdate` | `inQuoteCanUpdate` | 包含在报价内可改 |
+| `isBaseGroup` | `isBaseGroup` | `isBaseGroup` | 是否基件分组 |
+| `showDetail` | `showDetail` | `showDetail` | 报价展示明细商品 |
+
+### 长整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | id |
+
+### 数值字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `defaultDeductionRate` | `defaultDeductionRate` | `defaultDeductionRate` | 默认扣率 |
+| `defaultReverseDeductionRate` | `defaultReverseDeductionRate` | `defaultReverseDeductionRate` | 默认倒扣率(1-扣率) |
+
+### timestamp (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubuts` | `pubuts` | `pubts` | 时间戳 |

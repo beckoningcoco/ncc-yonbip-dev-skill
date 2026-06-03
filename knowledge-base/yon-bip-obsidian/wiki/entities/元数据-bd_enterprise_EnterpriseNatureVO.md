@@ -1,5 +1,5 @@
 ---
-tags: [BIP, 元数据, 数据字典, bd, bd.enterprise.EnterpriseNatureVO]
+tags: [BIP, 元数据, 数据字典, bd.enterprise.EnterpriseNatureVO]
 created: 2026-06-03
 updated: 2026-06-03
 sources: [元数据API queryByUri]
@@ -9,55 +9,84 @@ last_verified: 2026-06-03
 status: verified
 source_type: api_response
 ---
+
 # 企业性质 (`bd.enterprise.EnterpriseNatureVO`)
 
-> ⚡ **平台版本：BIP 旗舰版 V5** — 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `org_enterprise_nature` | 应用: `DPMSETL`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`org_enterprise_nature` | domain：`ucfbasedoc` | 应用：`DPMSETL` | 业务对象ID：`76690188-1f1d-4f54-add0-4fd5fa28558c`
 
-## 主键与编码
+## 基本信息
 
-| 角色 | 字段 | 列 | 类型 |
-|------|------|-----|------|
-| 主键 | `id` | `id` | String |
-| 编码 | `code` | `code` | |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 企业性质 |
+| 物理表 | `org_enterprise_nature` |
+| 数据库 schema | `ucfbasedoc` |
+| 所属应用 | `DPMSETL` |
+| 直连字段 | 14 个 |
+| 子表 | 0 个 |
+| 关联引用 | 3 个 |
 
-## 全部属性（14 个）
+## 关联引用 (3个)
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype | 必填 | 可空 |
-|---|--------|--------|-----|------|---------|------|------|
-| 1 | `id` | 主键ID | `id` | String | `text` |  | true |
-| 2 | `code` | 编码 | `code` | String | `text` | true | true |
-| 3 | `name` | 名称 | `name` | String | `multiLanguage` | true | true |
-| 4 | `enable` | enable | `enable` | Integer | `int` | false | true |
-| 5 | `sysid` | sysid | `sysid` | String | `text` |  | true |
-| 6 | `dr` | 逻辑删除 | `dr` | Integer | `int` |  | true |
-| 7 | `log` | log | `log` | String | `text` | false | true |
-| 8 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |  | true |
-| 9 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` | true | true |
-| 10 | `tenant` | tenant | `tenantid` | String | `text` | false | true |
-| 11 | `creationtime` | creationtime | `creationtime` | DateTime | `timestamp` |  | true |
-| 12 | `creator` | 创建人 | `creator` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |  | true |
-| 13 | `modifiedtime` | modifiedtime | `modifiedtime` | DateTime | `timestamp` |  | true |
-| 14 | `modifier` | 修改人 | `modifier` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |  | true |
+| 字段名 | 引用类型 |
+|--------|---------|
+| `creator` | `` |
+| `ytenant_id` | `` |
+| `modifier` | `` |
 
-## 关联属性（3 个）
+## 继承接口 (4个, 6字段)
 
-| # | 字段 | 目标实体 | 列 | 多重性 | 组合 | 废弃 |
-|---|------|---------|-----|--------|------|------|
-| 1 | `creator` | `base.user.BipUser` | `creator` |  |  |  |
-| 2 | `ytenant` | `yht.tenant.YhtTenant` | `ytenant_id` |  |  |  |
-| 3 | `modifier` | `base.user.BipUser` | `modifier` |  |  |  |
+- **审计信息** (`basedoc.basedocItf.AuditInfo`)
+  - `creationtime` → `creationtime`
+  - `creator` → `creator`
+  - `modifiedtime` → `modifiedtime`
+  - `modifier` → `modifier`
+- **逻辑删除(待废除)** (`basedoc.basedocItf.LogicDelete`)
+- **UCF公共状态** (`basedoc.basedocItf.BasedocIState`)
+  - `enable` → `enable`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
 
-## 依赖接口（4 个）
+## 字段列表（按类型分组）
 
-- `AuditInfo` → `basedoc.basedocItf.AuditInfo` (v289)
-- `LogicDelete` → `basedoc.basedocItf.LogicDelete` (v31)
-- `BasedocIState` → `basedoc.basedocItf.BasedocIState` (v101)
-- `IYTenant` → `ucfbase.ucfbaseItf.IYTenant` (v40)
+> 共 14 个直连字段
 
-## SQL 示例
+### 文本字段 (5个)
 
-```sql
-SELECT id, code, name, enable, sysid, dr, log, pubts
-FROM org_enterprise_nature
-```
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+| `code` | `code` | `code` | 编码 |
+| `sysid` | `sysid` | `sysid` | 应用标识 |
+| `log` | `log` | `log` | 操作日志 |
+| `tenantid` | `tenantid` | `tenant` | 租户(废弃) |
+
+### 引用字段 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户 |
+| `creator` | `creator` | `creator` | 创建人 |
+| `modifier` | `modifier` | `modifier` | 修改人 |
+
+### 整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `enable` | `enable` | `enable` | 状态 |
+| `dr` | `dr` | `dr` | 删除状态 |
+
+### multiLanguage (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `name` | `name` | `name` | 名称 |
+
+### timestamp (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+| `creationtime` | `creationtime` | `creationtime` | 创建时间 |
+| `modifiedtime` | `modifiedtime` | `modifiedtime` | 修改时间 |

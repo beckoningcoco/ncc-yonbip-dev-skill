@@ -12,42 +12,110 @@ source_type: api_response
 
 # 发票信息 (`aa.merchant.AgentInvoice`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `agentinvoicenew` | 应用: `DPMCUS` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`agentinvoicenew` | domain：`productcenter` | 应用：`DPMCUS` | 业务对象ID：``
 
-## 属性（21 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `id` | ID | `id` | Long | `long` |
-| 2 | `merchantId` | merchantID | `imerchantId` | 94b3280a-27a4-485a-b90b-b7bce57c6df2 | `quote` |
-| 3 | `erpCode` | erp编码 | `erpCode` | String | `text` |
-| 4 | `bdBillingType` | bdBillingType | `bd_billing_type` | 3a762abb-858d-4fc4-a60e-4850edf0ab1b | `quote` |
-| 5 | `title` | title | `cTitle` | String | `text` |
-| 6 | `receievInvoiceEmail` | receievInvoiceEmail | `cReceievInvoiceEmail` | String | `text` |
-| 7 | `receievInvoiceMobile` | receievInvoiceMobile | `cReceievInvoiceMobile` | String | `text` |
-| 8 | `taxNo` | taxNo | `cTaxNo` | String | `text` |
-| 9 | `telephone` | telephone | `cTelephone` | String | `text` |
-| 10 | `address` | address | `cAddress` | String | `multiLanguage` |
-| 11 | `name` | 名称 | `cName` | b7ee7189-ed97-48d5-91e4-808228664429 | `quote` |
-| 12 | `bankName` | bank名称 | `cBankName` | 47a69dfe-37ef-4ad1-aa19-1d61797a7821 | `quote` |
-| 13 | `bankAccount` | bankAccount | `cBankAccount` | String | `text` |
-| 14 | `isDefault` | 是否Default | `bDefaultInvoice` | Boolean | `switch` |
-| 15 | `remarks` | remarks | `cRemarks` | String | `text` |
-| 16 | `agentInvoiceCharacter` | agentInvoiceCharacter | `agent_invoice_character` | f5da0c57-a486-44de-a177-4f53ef7d1c18 | `UserDefine` |
-| 17 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 18 | `billingType` | billingType | `billingType` | InvoiceType | `` |
-| 19 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 20 | `tenant` | tenant | `tenant_id` | c213cd56-d5de-421f-bae7-d77455b557cd | `quote` |
-| 21 | `agentInvoiceDefine` | agentInvoiceDefine | `` | 071b7b43-d088-46d6-9d93-804e56678779 | `` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 发票信息 |
+| 物理表 | `agentinvoicenew` |
+| 数据库 schema | `productcenter` |
+| 所属应用 | `DPMCUS` |
+| 直连字段 | 21 个 |
+| 子表 | 1 个 |
+| 关联引用 | 8 个 |
 
-## 关联（8 个）
+## 子表
 
-- `agentInvoiceCharacter` -> `aa.merchant.AgentInvoiceCharacter` ()
-- `bdBillingType` -> `bd.invoice.InvoiceTypeVO` ()
-- `merchantId` -> `aa.merchant.Merchant` (0..n)
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `name` -> `bd.bank.BankVO` ()
-- `agentInvoiceDefine` -> `aa.merchant.AgentInvoiceDefine` (1)
-- `bankName` -> `bd.bank.BankDotVO` ()
-- `tenant` -> `base.tenant.Tenant` ()
+| 字段名 | URI | 关系 |
+|--------|-----|------|
+| `agentInvoiceDefine` | `aa.merchant.AgentInvoiceDefine` | composition |
+
+## 关联引用 (8个)
+
+| 字段名 | 引用类型 |
+|--------|---------|
+| `agent_invoice_character` | `` |
+| `bd_billing_type` | `ucfbasedoc.bd_invoiceref` |
+| `imerchantId` | `productcenter.aa_merchantref` |
+| `ytenant_id` | `` |
+| `cName` | `ucfbasedoc.bd_bankcard` |
+| `` | `` |
+| `cBankName` | `ucfbasedoc.bd_bankdotref` |
+| `tenant_id` | `` |
+
+## 继承接口 (3个, 3字段)
+
+- **租户相关** (`base.itf.ITenant`)
+  - `tenant_id` → `tenant_id`
+- **erp编码** (`base.itf.IErpCode`)
+  - `erpCode` → `erpCode`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 21 个直连字段
+
+### 文本字段 (8个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `erpCode` | `erpCode` | `erpCode` | ERP编码 |
+| `cTitle` | `cTitle` | `title` | 发票抬头 |
+| `cReceievInvoiceEmail` | `cReceievInvoiceEmail` | `receievInvoiceEmail` | 收票邮箱 |
+| `cReceievInvoiceMobile` | `cReceievInvoiceMobile` | `receievInvoiceMobile` | 收票手机号 |
+| `cTaxNo` | `cTaxNo` | `taxNo` | 税号 |
+| `cTelephone` | `cTelephone` | `telephone` | 电话 |
+| `cBankAccount` | `cBankAccount` | `bankAccount` | 银行账号 |
+| `cRemarks` | `cRemarks` | `remarks` | 备注 |
+
+### 引用字段 (6个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `imerchantId` | `imerchantId` | `merchantId` | 客户 |
+| `bd_billing_type` | `bd_billing_type` | `bdBillingType` | 发票类型 |
+| `cName` | `cName` | `name` | 银行类别 |
+| `cBankName` | `cBankName` | `bankName` | 银行网点 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户 |
+| `tenant_id` | `tenant_id` | `tenant` | 租户(废弃) |
+
+### 布尔字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `bDefaultInvoice` | `bDefaultInvoice` | `isDefault` | 默认发票信息 |
+
+### 长整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+
+### multiLanguage (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `cAddress` | `cAddress` | `address` | 地址 |
+
+### UserDefine (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `agent_invoice_character` | `agent_invoice_character` | `agentInvoiceCharacter` | 发票信息自定义项 |
+
+### timestamp (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+
+### other (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `billingType` | `billingType` | `billingType` | 默认发票类型(停用) |
+| `` | `` | `agentInvoiceDefine` | 客户档案发票信息自定义项(废弃) |

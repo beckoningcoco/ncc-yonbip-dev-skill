@@ -12,24 +12,70 @@ source_type: api_response
 
 # 例外商品 (`voucher.rebate.WhiteProduct`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `udh_rebatesharesetting_whiteproduct` | 应用: `BBSMK` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`udh_rebatesharesetting_whiteproduct` | domain：`marketingbill` | 应用：`BBSMK` | 业务对象ID：``
 
-## 属性（7 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `bizId` | bizID | `iBizId` | 94b3280a-27a4-485a-b90b-b7bce57c6df2 | `quote` |
-| 2 | `id` | ID | `id` | Long | `long` |
-| 3 | `pubts` | 时间戳 | `pubuts` | DateTime | `timestamp` |
-| 4 | `shareSettingId` | shareSettingID | `shareSettingId` | 6353a3f1-4736-4c35-bc35-64ec2ea8bb7d | `quote` |
-| 5 | `uordercorp` | uordercorp | `iCorpId` | Long | `long` |
-| 6 | `whiteProductDetails` | whiteProductDetails | `` | d7822ed6-dc54-4f33-8372-c6f011911bfc | `` |
-| 7 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 例外商品 |
+| 物理表 | `udh_rebatesharesetting_whiteproduct` |
+| 数据库 schema | `marketingbill` |
+| 所属应用 | `BBSMK` |
+| 直连字段 | 7 个 |
+| 子表 | 1 个 |
+| 关联引用 | 4 个 |
 
-## 关联（4 个）
+## 子表
 
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `bizId` -> `aa.merchant.Merchant` ()
-- `whiteProductDetails` -> `voucher.rebate.WhiteProductDetail` (0..n)
-- `shareSettingId` -> `voucher.rebate.RebateShareSetting` (0..n)
+| 字段名 | URI | 关系 |
+|--------|-----|------|
+| `whiteProductDetails` | `voucher.rebate.WhiteProductDetail` | composition |
+
+## 关联引用 (4个)
+
+| 字段名 | 引用类型 |
+|--------|---------|
+| `ytenant_id` | `` |
+| `iBizId` | `` |
+| `` | `` |
+| `shareSettingId` | `` |
+
+## 继承接口 (2个, 2字段)
+
+- **统一租户接口(扩展)** (`ucfbase.ucfbaseItf.IYTenantExt`)
+  - `ytenant_id` → `ytenant_id`
+- **U订货租户相关** (`base.itf.IUordercorp`)
+  - `iCorpId` → `iCorpId`
+
+## 字段列表（按类型分组）
+
+> 共 7 个直连字段
+
+### 引用字段 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iBizId` | `iBizId` | `bizId` | 供应商ID |
+| `shareSettingId` | `shareSettingId` | `shareSettingId` | 账户使用规则ID |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 长整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | 主键 |
+| `iCorpId` | `iCorpId` | `uordercorp` | 租户 |
+
+### timestamp (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubuts` | `pubuts` | `pubts` | 时间戳 |
+
+### other (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `` | `whiteProductDetails` | 例外商品明细 |

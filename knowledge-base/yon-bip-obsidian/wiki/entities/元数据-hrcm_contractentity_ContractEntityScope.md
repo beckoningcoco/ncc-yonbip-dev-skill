@@ -12,26 +12,68 @@ source_type: api_response
 
 # 适用范围 (`hrcm.contractentity.ContractEntityScope`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `cs_corp_scope_orgdept` | 应用: `HRCM` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`cs_corp_scope_orgdept` | domain：`hrcloud-contract` | 应用：`HRCM` | 业务对象ID：``
 
-## 属性（10 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `orgdeptId` | orgdeptID | `orgdept_id` | a4352e3c-3eda-4539-a7a9-ec00799be118 | `quote` |
-| 2 | `orgdeptName` | orgdept名称 | `orgdept_name` | String | `text` |
-| 3 | `contractentityId` | contractentityID | `contractentity_id` | a754b1bb-3377-4617-922e-a6108548cd73 | `quote` |
-| 4 | `createTime` | 创建时间 | `creationtime` | DateTime | `timestamp` |
-| 5 | `id` | ID | `id` | String | `text` |
-| 6 | `isDeleted` | 是否Deleted | `iDeleted` | Boolean | `switch` |
-| 7 | `modifyTime` | 修改时间 | `modifiedtime` | DateTime | `timestamp` |
-| 8 | `pubts` | 时间戳 | `ts` | DateTime | `timestamp` |
-| 9 | `tenant` | tenant | `tenantid` | String | `text` |
-| 10 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 适用范围 |
+| 物理表 | `cs_corp_scope_orgdept` |
+| 数据库 schema | `hrcloud-contract` |
+| 所属应用 | `HRCM` |
+| 直连字段 | 10 个 |
+| 子表 | 0 个 |
+| 关联引用 | 3 个 |
 
-## 关联（3 个）
+## 关联引用 (3个)
 
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `contractentityId` -> `hrcm.contractentity.ContractEntity` (0..n)
-- `orgdeptId` -> `bd.adminOrg.AdminOrgVO` ()
+| 字段名 | 引用类型 |
+|--------|---------|
+| `ytenant_id` | `` |
+| `contractentity_id` | `hrcloud-contract.hrcm_contractentity_ref` |
+| `orgdept_id` | `ucf-org-center.org_admin_dept_tree_ref` |
+
+## 继承接口 (3个, 3字段)
+
+- **租户接口** (`ucfbase.ucfbaseItf.ITenant`)
+  - `tenant_id` → `tenant_id`
+- **逻辑删除相关** (`base.itf.Deletable`)
+  - `iDeleted` → `iDeleted`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 10 个直连字段
+
+### 文本字段 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `orgdept_name` | `orgdept_name` | `orgdeptName` | 组织部门名称 |
+| `id` | `id` | `id` | ID |
+| `tenantid` | `tenantid` | `tenant` | 租户ID |
+
+### 引用字段 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `orgdept_id` | `orgdept_id` | `orgdeptId` | 组织部门ID |
+| `contractentity_id` | `contractentity_id` | `contractentityId` | 合同主体手工码 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 布尔字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iDeleted` | `iDeleted` | `isDeleted` | 逻辑删除标记 |
+
+### timestamp (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `creationtime` | `creationtime` | `createTime` | 创建时间 |
+| `modifiedtime` | `modifiedtime` | `modifyTime` | 修改时间 |
+| `ts` | `ts` | `pubts` | 时间戳 |

@@ -12,23 +12,56 @@ source_type: api_response
 
 # 账户使用规则交易类型记录表 (`voucher.rebate.RebateShareSettingTransTypeRecord`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `udh_rebatesharesetting_transtype_record` | 应用: `BBSMK` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`udh_rebatesharesetting_transtype_record` | domain：`marketingbill` | 应用：`BBSMK` | 业务对象ID：``
 
-## 属性（7 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `createTime` | 创建时间 | `dCreateTime` | DateTime | `timestamp` |
-| 2 | `id` | ID | `id` | Long | `long` |
-| 3 | `modifyTime` | 修改时间 | `dModifyTime` | DateTime | `timestamp` |
-| 4 | `pubts` | 时间戳 | `pubuts` | DateTime | `timestamp` |
-| 5 | `rebateShareSettingId` | rebateShareSettingID | `iRebateShareSettingId` | 6353a3f1-4736-4c35-bc35-64ec2ea8bb7d | `quote` |
-| 6 | `tradeType` | tradeType | `iTradeType` | 19f9264d-28d1-4b47-9d28-f2e82654f3a9 | `quote` |
-| 7 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 账户使用规则交易类型记录表 |
+| 物理表 | `udh_rebatesharesetting_transtype_record` |
+| 数据库 schema | `marketingbill` |
+| 所属应用 | `BBSMK` |
+| 直连字段 | 7 个 |
+| 子表 | 0 个 |
+| 关联引用 | 3 个 |
 
-## 关联（3 个）
+## 关联引用 (3个)
 
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `rebateShareSettingId` -> `voucher.rebate.RebateShareSetting` (0..n)
-- `tradeType` -> `bd.bill.TransType` ()
+| 字段名 | 引用类型 |
+|--------|---------|
+| `ytenant_id` | `` |
+| `iRebateShareSettingId` | `` |
+| `iTradeType` | `` |
+
+## 继承接口 (1个, 1字段)
+
+- **统一租户接口(扩展)** (`ucfbase.ucfbaseItf.IYTenantExt`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 7 个直连字段
+
+### 引用字段 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iRebateShareSettingId` | `iRebateShareSettingId` | `rebateShareSettingId` | 账户使用规则ID |
+| `iTradeType` | `iTradeType` | `tradeType` | 交易类型ID |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 长整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | 主键 |
+
+### timestamp (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dCreateTime` | `dCreateTime` | `createTime` | 创建时间 |
+| `dModifyTime` | `dModifyTime` | `modifyTime` | 修改时间 |
+| `pubuts` | `pubuts` | `pubts` | 时间戳 |

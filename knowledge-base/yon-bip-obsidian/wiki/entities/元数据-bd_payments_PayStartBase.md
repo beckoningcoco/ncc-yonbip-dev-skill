@@ -1,5 +1,5 @@
 ---
-tags: [BIP, 元数据, 数据字典, 采购入库, ST, bd.payments.PayStartBase]
+tags: [BIP, 元数据, 数据字典, bd.payments.PayStartBase]
 created: 2026-06-03
 updated: 2026-06-03
 sources: [元数据API queryByUri]
@@ -9,37 +9,99 @@ last_verified: 2026-06-03
 status: verified
 source_type: api_response
 ---
+
 # 付款起算依据 (`bd.payments.PayStartBase`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `bd_paystartbase` | 应用: `DPMSETL`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`bd_paystartbase` | domain：`ucfbasedoc` | 应用：`DPMSETL` | 业务对象ID：`513a09fb-13ae-480f-876d-0f1320033a4e`
 
-## 属性（19 个）
+## 基本信息
 
-| # | 字段 | 显示名 | 列 | 类型 | biztype |
-|---|------|--------|-----|------|---------|
-| 1 | `id` | ID | `id` | Long | `long` |
-| 2 | `code` | 编码 | `cCode` | String | `text` |
-| 3 | `name` | 名称 | `cName` | String | `multiLanguage` |
-| 4 | `objid` | objid | `objid` | String | `text` |
-| 5 | `sourcetype` | sourcetype | `sourcetype` | Boolean | `switch` |
-| 6 | `enable` | enable | `enable` | Integer | `int` |
-| 7 | `order` | order | `iorder` | Integer | `int` |
-| 8 | `comment` | comment | `cComment` | String | `text` |
-| 9 | `payBase` | payBase | `paybase` | String | `text` |
-| 10 | `startColumn` | startColumn | `startcolumn` | String | `text` |
-| 11 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 12 | `dr` | 逻辑删除 | `dr` | Integer | `int` |
-| 13 | `sysid` | sysid | `sysid` | String | `text` |
-| 14 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 15 | `tenant` | tenant | `tenantid` | String | `text` |
-| 16 | `creationtime` | creationtime | `creationtime` | DateTime | `timestamp` |
-| 17 | `creator` | 创建人 | `creator` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 18 | `modifiedtime` | modifiedtime | `modifiedtime` | DateTime | `timestamp` |
-| 19 | `modifier` | 修改人 | `modifier` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 付款起算依据 |
+| 物理表 | `bd_paystartbase` |
+| 数据库 schema | `ucfbasedoc` |
+| 所属应用 | `DPMSETL` |
+| 直连字段 | 19 个 |
+| 子表 | 0 个 |
+| 关联引用 | 3 个 |
 
-## 关联（3 个）
+## 关联引用 (3个)
 
-- `creator` -> `base.user.BipUser` () 
-- `ytenant` -> `yht.tenant.YhtTenant` () 
-- `modifier` -> `base.user.BipUser` () 
+| 字段名 | 引用类型 |
+|--------|---------|
+| `creator` | `` |
+| `ytenant_id` | `` |
+| `modifier` | `` |
+
+## 继承接口 (4个, 6字段)
+
+- **审计信息** (`basedoc.basedocItf.AuditInfo`)
+  - `creationtime` → `creationtime`
+  - `creator` → `creator`
+  - `modifiedtime` → `modifiedtime`
+  - `modifier` → `modifier`
+- **逻辑删除(待废除)** (`basedoc.basedocItf.LogicDelete`)
+- **UCF公共状态** (`basedoc.basedocItf.BasedocIState`)
+  - `enable` → `enable`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 19 个直连字段
+
+### 文本字段 (7个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `cCode` | `cCode` | `code` | 编码 |
+| `objid` | `objid` | `objid` | 外系统主键 |
+| `cComment` | `cComment` | `comment` | 备注 |
+| `paybase` | `paybase` | `payBase` | 付款依据 |
+| `startcolumn` | `startcolumn` | `startColumn` | 起算字段 |
+| `sysid` | `sysid` | `sysid` | 应用标识 |
+| `tenantid` | `tenantid` | `tenant` | 租户(废弃) |
+
+### 引用字段 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户 |
+| `creator` | `creator` | `creator` | 创建人 |
+| `modifier` | `modifier` | `modifier` | 修改人 |
+
+### 布尔字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `sourcetype` | `sourcetype` | `sourcetype` | 是否系统预置 |
+
+### 整数 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `enable` | `enable` | `enable` | 启用状态 |
+| `iorder` | `iorder` | `order` | 排序号码 |
+| `dr` | `dr` | `dr` | 删除状态 |
+
+### 长整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+
+### multiLanguage (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `cName` | `cName` | `name` | 名称 |
+
+### timestamp (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+| `creationtime` | `creationtime` | `creationtime` | 创建时间 |
+| `modifiedtime` | `modifiedtime` | `modifiedtime` | 修改时间 |

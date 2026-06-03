@@ -9,38 +9,99 @@ last_verified: 2026-06-03
 status: verified
 source_type: api_response
 ---
+
 # 会计事务类别 (`eeac.ficategory.FiCategoryDO`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBip），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `eac_fi_event_cat` | 应用: `EVNT`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`eac_fi_event_cat` | domain：`yonbip-fi-eeac` | 应用：`EVNT` | 业务对象ID：`2a7e257f-5f81-40eb-95c1-9cfb101266d2`
 
-## 属性（19 个）
+## 基本信息
 
-| # | 字段 | 显示名 | 列 | 类型 | biztype |
-|---|------|--------|-----|------|---------|
-| 1 | `blnUserDef` | blnUserDef | `bln_user_def` | Boolean | `switch` |
-| 2 | `code` | 编码 | `code` | String | `text` |
-| 3 | `fiServiceId` | fiServiceID | `fi_service_id` | e69ffd9f-7d8c-4b02-b8ae-3ee7aa18b2b2 | `quote` |
-| 4 | `name` | 名称 | `name` | String | `multiLanguage` |
-| 5 | `remarks` | remarks | `remarks` | String | `text` |
-| 6 | `socialMctype` | socialMctype | `social_mctype` | Integer | `int` |
-| 7 | `socialSrcid` | socialSrcid | `social_srcid` | String | `text` |
-| 8 | `socialTenantid` | socialTenantid | `social_tenantid` | String | `text` |
-| 9 | `sortNum` | sortNum | `sort_num` | Integer | `int` |
-| 10 | `sysId` | sysID | `sys_id` | String | `text` |
-| 11 | `usingStatus` | usingStatus | `using_status` | String | `text` |
-| 12 | `id` | ID | `id` | String | `text` |
-| 13 | `pubts` | 时间戳 | `pubts` | DateTime | `dateTime` |
-| 14 | `createTime` | 创建时间 | `create_time` | DateTime | `dateTime` |
-| 15 | `creator` | 创建人 | `creator` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 16 | `modifier` | 修改人 | `modifier` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 17 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `dateTime` |
-| 18 | `ytenantId` | ytenantID | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 19 | `dr` | 逻辑删除 | `dr` | Short | `short` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 会计事务类别 |
+| 物理表 | `eac_fi_event_cat` |
+| 数据库 schema | `yonbip-fi-eeac` |
+| 所属应用 | `EVNT` |
+| 直连字段 | 19 个 |
+| 子表 | 0 个 |
+| 关联引用 | 4 个 |
 
-## 关联（4 个）
+## 关联引用 (4个)
 
-- `fiServiceId` -> `eeac.fiservice.FiServiceDO` () [废]
-- `creator` -> `base.user.BipUser` () 
-- `modifier` -> `base.user.BipUser` () 
-- `ytenantId` -> `yht.tenant.YhtTenant` () 
+| 字段名 | 引用类型 |
+|--------|---------|
+| `fi_service_id` | `yonbip-fi-eeac.eeac_fi_service_ref` |
+| `creator` | `bip-usercenter.bip_user_ref` |
+| `modifier` | `bip-usercenter.bip_user_ref` |
+| `ytenant_id` | `` |
+
+## 继承接口 (3个, 6字段)
+
+- **审计信息** (`iuap.busiObj.IAuditInfo`)
+  - `create_time` → `create_time`
+  - `creator` → `creator`
+  - `modifier` → `modifier`
+  - `modify_time` → `modify_time`
+- **统一租户接口** (`iuap.busiObj.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+- **逻辑删除** (`iuap.busiObj.LogicDelete`)
+  - `dr` → `dr`
+
+## 字段列表（按类型分组）
+
+> 共 19 个直连字段
+
+### 文本字段 (7个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `code` | `code` | `code` | 编码 |
+| `remarks` | `remarks` | `remarks` | 备注 |
+| `social_srcid` | `social_srcid` | `socialSrcid` | 社会化来源id |
+| `social_tenantid` | `social_tenantid` | `socialTenantid` | 社会化来源租户 |
+| `sys_id` | `sys_id` | `sysId` | 关联id |
+| `using_status` | `using_status` | `usingStatus` | 使用控制 |
+| `id` | `id` | `id` | 主键 |
+
+### 引用字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `fi_service_id` | `fi_service_id` | `fiServiceId` | 财务服务 |
+| `creator` | `creator` | `creator` | 创建人 |
+| `modifier` | `modifier` | `modifier` | 修改人 |
+| `ytenant_id` | `ytenant_id` | `ytenantId` | 租户id |
+
+### 日期时间 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+
+### 布尔字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `bln_user_def` | `bln_user_def` | `blnUserDef` | 是否自定义 |
+
+### 整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `social_mctype` | `social_mctype` | `socialMctype` | 社会化管控类型 |
+| `sort_num` | `sort_num` | `sortNum` | 排序号 |
+
+### 短整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dr` | `dr` | `dr` | 逻辑删除 |
+
+### multiLanguage (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `name` | `name` | `name` | 名称 |

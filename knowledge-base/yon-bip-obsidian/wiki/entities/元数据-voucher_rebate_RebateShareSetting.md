@@ -1,5 +1,5 @@
 ---
-tags: [BIP, 元数据, 数据字典, voucher, voucher.rebate.RebateShareSetting]
+tags: [BIP, 元数据, 数据字典, voucher.rebate.RebateShareSetting]
 created: 2026-06-03
 updated: 2026-06-03
 sources: [元数据API queryByUri]
@@ -9,10 +9,11 @@ last_verified: 2026-06-03
 status: verified
 source_type: api_response
 ---
+
 # 返利分摊设置 (`voucher.rebate.RebateShareSetting`)
 
-> ⚡ **平台版本：BIP 旗舰版 V5** — 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `udh_rebatesharesetting` | 应用: `BBSMK` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`udh_rebatesharesetting` | domain：`marketingbill` | 应用：`BBSMK` | 业务对象ID：`2c418d2a-66d0-42bd-a347-2a6c6a4d7fee`
 
 ## 基本信息
 
@@ -20,91 +21,139 @@ source_type: api_response
 |------|-----|
 | 显示名 | 返利分摊设置 |
 | 物理表 | `udh_rebatesharesetting` |
-| 应用 | `BBSMK` |
-| 元数据类型 | `Class` |
+| 数据库 schema | `marketingbill` |
+| 所属应用 | `BBSMK` |
+| 直连字段 | 30 个 |
+| 子表 | 3 个 |
+| 关联引用 | 9 个 |
 
-## 主键与编码
+## 子表
 
-| 角色 | 字段 | 列 | 类型 |
-|------|------|-----|------|
-| 主键 | `id` | `id` | Long |
-| 编码 | `saleOrgId` | `iSaleOrgId` | |
+| 字段名 | URI | 关系 |
+|--------|-----|------|
+| `WhiteProduct` | `voucher.rebate.WhiteProduct` | composition |
+| `rebateShareSettingTransTypeRecords` | `voucher.rebate.RebateShareSettingTransTypeRecord` | composition |
+| `rebateShareSettingDetails` | `voucher.rebate.RebateShareSettingDetail` | composition |
 
-## 部署信息
+## 关联引用 (9个)
 
-- 部署时间: 2026-05-23 00:59:58:000
-- 安装来源: `/app/marketingbill/src/marketingbill-server/scripts/db/patch/mongodb/V5_R0_2507/0001_yonbip-mkt-mkc2b/0010_iuap_common/DML/0270_iuap_metadata/20260515/001rebate/202605081659_metadata_voucher-rebate_delta.zip`
+| 字段名 | 引用类型 |
+|--------|---------|
+| `rebateShareSettingDefineCharacter` | `` |
+| `iSaleOrgId` | `market_salesorgref` |
+| `` | `` |
+| `ytenant_id` | `` |
+| `iBizId` | `` |
+| `iSubmiterId` | `` |
+| `iModifierId` | `` |
 
-## 术语标记
+## 继承接口 (5个, 14字段)
 
-`isAssigned`, `isExtend`, `MasterData`, `isMain`, `doc`
+- **U订货租户相关** (`base.itf.IUordercorp`)
+  - `iCorpId` → `iCorpId`
+- **审计信息** (`base.itf.IAuditInfo`)
+  - `create_date` → `create_date`
+  - `create_time` → `create_time`
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `modify_date` → `modify_date`
+  - `modify_time` → `modify_time`
+- **商家相关** (`base.itf.IShop`)
+  - `iShopID` → `iShopID`
+- **启用** (`ucfbase.ucfbaseItf.IEnable`)
+  - `disablets` → `disablets`
+  - `enable` → `enable`
+  - `enablets` → `enablets`
+- **统一租户接口(扩展)** (`ucfbase.ucfbaseItf.IYTenantExt`)
+  - `ytenant_id` → `ytenant_id`
 
-## 依赖接口（5 个）
+## 字段列表（按类型分组）
 
-| 接口 | URI | 版本 | 属性数 |
-|------|-----|------|--------|
-| IUordercorp (`IUordercorp`) | `base.itf.IUordercorp` | 73 | 1 |
-| IAuditInfo (`IAuditInfo`) | `base.itf.IAuditInfo` | 340 | 8 |
-| IShop (`IShop`) | `base.itf.IShop` | 65 | 1 |
-| IEnable (`IEnable`) | `ucfbase.ucfbaseItf.IEnable` | 141 | 3 |
-| IYTenantExt (`IYTenantExt`) | `ucfbase.ucfbaseItf.IYTenantExt` | 24 | 1 |
+> 共 30 个直连字段
 
----
+### 文本字段 (5个)
 
-## 全部属性（30 个）
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `cName` | `cName` | `name` | 规则名称 |
+| `rebateType` | `rebateType` | `rebateType` | 费用适用类型 |
+| `cModifier` | `cModifier` | `modifier` | 修改人 |
+| `cCreator` | `cCreator` | `creator` | 创建人 |
+| `payMode` | `payMode` | `payMode` | 兑付方式 |
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype | 必填 | 可空 |
-|---|--------|--------|-----|------|---------|------|------|
-| 1 | `saleOrgId` | saleOrgId | `iSaleOrgId` | 14302233-1394-4a70-94e1-bed51636f312 | `quote` |  | true |
-| 2 | `name` | 名称 | `cName` | String | `text` |  | true |
-| 3 | `id` | 主键ID | `id` | Long | `long` |  | true |
-| 4 | `rebateType` | 返利类型 | `rebateType` | String | `text` |  | true |
-| 5 | `createTime` | 创建时间 | `create_time` | DateTime | `timestamp` |  | true |
-| 6 | `enable` | enable | `enable` | Short | `short` |  | true |
-| 7 | `createDate` | 创建日期 | `create_date` | Date | `date` |  | true |
-| 8 | `creatorId` | 创建人ID | `iSubmiterId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |  | true |
-| 9 | `modifierId` | 修改人ID | `iModifierId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |  | true |
-| 10 | `modifyDate` | 修改日期 | `modify_date` | Date | `date` |  | true |
-| 11 | `modifier` | 修改人 | `cModifier` | String | `text` |  | true |
-| 12 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `timestamp` |  | true |
-| 13 | `creator` | 创建人 | `cCreator` | String | `text` |  | true |
-| 14 | `WhiteProduct` | WhiteProduct | `` | 3f144d6c-d8e3-4d46-a5ef-1b85c0ab0e13 | `` |  |  |
-| 15 | `amountCalculationBasis` | amountCalculationBasis | `amountCalculationBasis` | AmountCalculationBasisEnum | `` |  | true |
-| 16 | `applicableDocType` | applicableDocType(类型) | `applicableDocType` | RebateApplicableDocTypeEnum | `` |  | true |
-| 17 | `bizId` | bizId | `iBizId` | 94b3280a-27a4-485a-b90b-b7bce57c6df2 | `quote` |  | true |
-| 18 | `disablets` | isablets(日期) | `disablets` | DateTime | `dateTime` |  | true |
-| 19 | `enablets` | enablets | `enablets` | DateTime | `dateTime` |  | true |
-| 20 | `iDeleted` | 是否删除 | `ideleted` | Short | `short` |  | true |
-| 21 | `isOrderDiscountControl` | 是否OrderDiscountControl | `isOrderDiscountControl` | Boolean | `switch` |  | true |
-| 22 | `payMode` | payMode | `payMode` | String | `text` |  | true |
-| 23 | `priority` | 优先级 | `priority` | Integer | `int` |  | true |
-| 24 | `pubts` | 时间戳 | `pubuts` | DateTime | `timestamp` |  | true |
-| 25 | `rebateShareSettingDefineCharacter` | rebateShareSettingDefineCharacter | `rebateShareSettingDefineCharacter` | 0516e5dc-d8bc-47fb-a362-13759d7f73ee | `UserDefine` |  | true |
-| 26 | `rebateShareSettingDetails` | rebateShareSettingDetails | `` | 1c2d408a-91fc-4ec8-bf88-ccbe6fbe37eb | `` |  |  |
-| 27 | `rebateShareSettingTransTypeRecords` | rebateShareSettingTransTypeRecords | `` | 84ae0101-8d36-489b-a66a-f4974d0de187 | `` |  |  |
-| 28 | `shop` | shop | `iShopID` | Long | `long` |  | true |
-| 29 | `uordercorp` | uordercorp | `iCorpId` | Long | `long` |  | true |
-| 30 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |  | true |
+### 引用字段 (5个)
 
-## 关联属性（9 个）
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iSaleOrgId` | `iSaleOrgId` | `saleOrgId` | 销售组织 |
+| `iSubmiterId` | `iSubmiterId` | `creatorId` | 创建人 |
+| `iModifierId` | `iModifierId` | `modifierId` | 修改人id |
+| `iBizId` | `iBizId` | `bizId` | 供应商id |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
 
-| # | 字段 | 显示名 | 目标实体 | 列 | 关系 | 多重性 | 组合 | 隔离 | 废弃 |
-|---|------|--------|---------|-----|------|--------|------|------|------|
-| 1 | `rebateShareSettingDefineCharacter` | rebateShareSettingDefineCharacter | `voucher.rebate.RebateShareSettingDefineCharacter` | `rebateShareSettingDefineCharacter` | 外键 |  |  | None |  |
-| 2 | `saleOrgId` | saleOrgId | `org.func.BaseOrg` | `iSaleOrgId` | 外键 |  |  | Service |  |
-| 3 | `WhiteProduct` | WhiteProduct | `voucher.rebate.WhiteProduct` | `` | WhiteProduct → shareSettingId | 0..n | Y | None |  |
-| 4 | `ytenant` | ytenant | `yht.tenant.YhtTenant` | `ytenant_id` | 外键 |  |  | Service |  |
-| 5 | `rebateShareSettingTransTypeRecords` | rebateShareSettingTransTypeRecords | `voucher.rebate.RebateShareSettingTransTypeRecord` | `` | rebateShareSettingTransTypeRecords → rebateShareSettingId | 0..n | Y | None |  |
-| 6 | `bizId` | bizId | `aa.merchant.Merchant` | `iBizId` | 外键 |  |  | Service |  |
-| 7 | `creatorId` | 创建人ID | `base.user.User` | `iSubmiterId` | 外键 |  |  | Service |  |
-| 8 | `modifierId` | 修改人ID | `base.user.User` | `iModifierId` | 外键 |  |  | Service |  |
-| 9 | `rebateShareSettingDetails` | rebateShareSettingDetails | `voucher.rebate.RebateShareSettingDetail` | `` | rebateShareSettingDetails → shareSettingId | 0..n | Y | None |  |
+### 日期字段 (2个)
 
----
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_date` | `create_date` | `createDate` | 创建日期 |
+| `modify_date` | `modify_date` | `modifyDate` | 修改日期 |
 
-## SQL 示例
+### 日期时间 (2个)
 
-```sql
-SELECT iSaleOrgId, cName, id, rebateType, create_time, enable, create_date, iSubmiterId
-FROM udh_rebatesharesetting
-```
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `disablets` | `disablets` | `disablets` | 停用时间 |
+| `enablets` | `enablets` | `enablets` | 启用时间 |
+
+### 布尔字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `isOrderDiscountControl` | `isOrderDiscountControl` | `isOrderDiscountControl` | 订单优惠控制 |
+
+### 整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `priority` | `priority` | `priority` | 优先级 |
+
+### 短整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `enable` | `enable` | `enable` | 是否启用 |
+| `ideleted` | `ideleted` | `iDeleted` | 删除标记 |
+
+### 长整数 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | 单据主表id |
+| `iShopID` | `iShopID` | `shop` | 商家 |
+| `iCorpId` | `iCorpId` | `uordercorp` | 租户 |
+
+### timestamp (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+| `pubuts` | `pubuts` | `pubts` | 时间戳 |
+
+### other (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `` | `WhiteProduct` | 例外商品 |
+| `amountCalculationBasis` | `amountCalculationBasis` | `amountCalculationBasis` | 金额计算依据 |
+| `applicableDocType` | `applicableDocType` | `applicableDocType` | 适用单据类型 |
+| `` | `` | `rebateShareSettingDetails` | 返利分摊设置明细 |
+| `` | `` | `rebateShareSettingTransTypeRecords` | 账户使用规则交易类型记录表 |
+
+### UserDefine (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `rebateShareSettingDefineCharacter` | `rebateShareSettingDefineCharacter` | `rebateShareSettingDefineCharacter` | 自定义项特征属性组 |

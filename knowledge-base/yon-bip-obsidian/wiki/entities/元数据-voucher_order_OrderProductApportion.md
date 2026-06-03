@@ -12,37 +12,97 @@ source_type: api_response
 
 # 订单分摊 (`voucher.order.OrderProductApportion`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `orderproductapportion` | 应用: `SCMSA` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`orderproductapportion` | domain：`udinghuo` | 应用：`SCMSA` | 业务对象ID：``
 
-## 属性（22 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `apportionAttr` | apportionAttr | `cApportionAttr` | String | `text` |
-| 2 | `apportionMoney` | apportionMoney | `fApportionMoney` | Decimal | `number` |
-| 3 | `apportionName` | apportion名称 | `cApportionName` | String | `text` |
-| 4 | `apportionNum` | apportionNum | `fApportionNum` | Decimal | `number` |
-| 5 | `apportionType` | apportionType | `cApportionType` | String | `text` |
-| 6 | `detailSkuId` | detailSkuID | `iDetailSkuId` | Long | `long` |
-| 7 | `discount` | discount | `iDiscount` | Decimal | `number` |
-| 8 | `enableMaxPreferential` | enableMaxPreferential | `bEnableMaxPreferential` | Boolean | `switch` |
-| 9 | `entityPreType` | entityPreType | `iEntityPreType` | Short | `short` |
-| 10 | `hide` | hide | `bHide` | Boolean | `switch` |
-| 11 | `id` | ID | `id` | Long | `long` |
-| 12 | `orderDetailId` | orderDetailID | `iOrderDetailId` | 3722d563-08aa-453d-ac82-6b8cf906b1ab | `quote` |
-| 13 | `orderId` | orderID | `iOrderId` | Long | `long` |
-| 14 | `orderNo` | orderNo | `cOrderNo` | String | `text` |
-| 15 | `overlimit` | overlimit | `bOverlimit` | Boolean | `switch` |
-| 16 | `preId` | preID | `iPreId` | Long | `long` |
-| 17 | `proId` | proID | `iProId` | Long | `long` |
-| 18 | `productType` | productType | `cProductType` | String | `text` |
-| 19 | `pubts` | 时间戳 | `pubuts` | DateTime | `timestamp` |
-| 20 | `type` | type | `pType` | Integer | `int` |
-| 21 | `uordercorp` | uordercorp | `iCorpId` | Long | `long` |
-| 22 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 订单分摊 |
+| 物理表 | `orderproductapportion` |
+| 数据库 schema | `udinghuo` |
+| 所属应用 | `SCMSA` |
+| 直连字段 | 22 个 |
+| 子表 | 0 个 |
+| 关联引用 | 2 个 |
 
-## 关联（2 个）
+## 关联引用 (2个)
 
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `orderDetailId` -> `voucher.order.OrderDetail` (0..n)
+| 字段名 | 引用类型 |
+|--------|---------|
+| `ytenant_id` | `` |
+| `iOrderDetailId` | `` |
+
+## 继承接口 (2个, 2字段)
+
+- **U订货租户相关** (`base.itf.IUordercorp`)
+  - `iCorpId` → `iCorpId`
+- **统一租户接口(扩展)** (`ucfbase.ucfbaseItf.IYTenantExt`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 22 个直连字段
+
+### 文本字段 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `cApportionAttr` | `cApportionAttr` | `apportionAttr` | 优惠阶梯 |
+| `cApportionName` | `cApportionName` | `apportionName` | 优惠名称 |
+| `cApportionType` | `cApportionType` | `apportionType` | 优惠类型 |
+| `cOrderNo` | `cOrderNo` | `orderNo` | 单据编号 |
+| `cProductType` | `cProductType` | `productType` | 商品类型 |
+
+### 引用字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iOrderDetailId` | `iOrderDetailId` | `orderDetailId` | 订单商品ID |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 布尔字段 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `bEnableMaxPreferential` | `bEnableMaxPreferential` | `enableMaxPreferential` | 是否启用最大数量 |
+| `bHide` | `bHide` | `hide` | 是否显示 |
+| `bOverlimit` | `bOverlimit` | `overlimit` | 是否超限额 |
+
+### 整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pType` | `pType` | `type` | 活动的类型 |
+
+### 短整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iEntityPreType` | `iEntityPreType` | `entityPreType` | 整单优惠的类型 |
+
+### 长整数 (6个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iDetailSkuId` | `iDetailSkuId` | `detailSkuId` | 商品SKUID |
+| `id` | `id` | `id` | id |
+| `iOrderId` | `iOrderId` | `orderId` | 订单Id |
+| `iPreId` | `iPreId` | `preId` | 活动的ID |
+| `iProId` | `iProId` | `proId` | 商品对应商品行的Id |
+| `iCorpId` | `iCorpId` | `uordercorp` | 租户 |
+
+### 数值字段 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `fApportionMoney` | `fApportionMoney` | `apportionMoney` | 优惠金额 |
+| `fApportionNum` | `fApportionNum` | `apportionNum` | 优惠的数量 |
+| `iDiscount` | `iDiscount` | `discount` | 折扣 |
+
+### timestamp (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubuts` | `pubuts` | `pubts` | 时间戳 |

@@ -9,33 +9,89 @@ last_verified: 2026-06-03
 status: verified
 source_type: api_response
 ---
+
 # 计税结果明细 (`earap.payment.TaxCalculationResultDetail`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBip），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `stwb_tax_calc_result_b` | 应用: `EAP`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`stwb_tax_calc_result_b` | domain：`yonbip-fi-earapbill` | 应用：`EAP` | 业务对象ID：`548e9989-20b1-473c-ba02-9284b575a695`
 
-## 属性（14 个）
+## 基本信息
 
-| # | 字段 | 显示名 | 列 | 类型 | biztype |
-|---|------|--------|-----|------|---------|
-| 1 | `calculationComponentFormula` | calculationComponentFormula | `calculation_component_formula` | String | `bigText` |
-| 2 | `calculationComponentId` | calculationComponentID | `calculation_component_id` | String | `text` |
-| 3 | `reliefAmount` | reliefAmount | `relief_amount` | Decimal | `number` |
-| 4 | `taxReliefBid` | taxReliefBid | `tax_relief_bid` | String | `text` |
-| 5 | `taxReliefId` | taxReliefID | `tax_relief_id` | String | `text` |
-| 6 | `createTime` | 创建时间 | `create_time` | DateTime | `dateTime` |
-| 7 | `creator` | 创建人 | `creator` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 8 | `modifier` | 修改人 | `modifier` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 9 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `dateTime` |
-| 10 | `ytenantId` | ytenantID | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 11 | `dr` | 逻辑删除 | `dr` | Short | `short` |
-| 12 | `mainid` | mainid | `mainid` | 08a46952-2d1c-44ab-b444-7e0571e3f66a | `quote` |
-| 13 | `id` | ID | `id` | String | `text` |
-| 14 | `pubts` | 时间戳 | `pubts` | DateTime | `dateTime` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 计税结果明细 |
+| 物理表 | `stwb_tax_calc_result_b` |
+| 数据库 schema | `yonbip-fi-earapbill` |
+| 所属应用 | `EAP` |
+| 直连字段 | 14 个 |
+| 子表 | 0 个 |
+| 关联引用 | 4 个 |
 
-## 关联（4 个）
+## 关联引用 (4个)
 
-- `creator` -> `base.user.BipUser` () 
-- `modifier` -> `base.user.BipUser` () 
-- `ytenantId` -> `yht.tenant.YhtTenant` () 
-- `mainid` -> `earap.payment.TaxCalculationResult` (0..n) [废]
+| 字段名 | 引用类型 |
+|--------|---------|
+| `creator` | `bip-usercenter.bip_user_ref` |
+| `modifier` | `bip-usercenter.bip_user_ref` |
+| `ytenant_id` | `` |
+| `mainid` | `` |
+
+## 继承接口 (3个, 6字段)
+
+- **审计信息** (`iuap.busiObj.IAuditInfo`)
+  - `create_time` → `create_time`
+  - `creator` → `creator`
+  - `modifier` → `modifier`
+  - `modify_time` → `modify_time`
+- **统一租户接口** (`iuap.busiObj.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+- **逻辑删除** (`iuap.busiObj.LogicDelete`)
+  - `dr` → `dr`
+
+## 字段列表（按类型分组）
+
+> 共 14 个直连字段
+
+### 文本字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `calculation_component_id` | `calculation_component_id` | `calculationComponentId` | 计税组件 |
+| `tax_relief_bid` | `tax_relief_bid` | `taxReliefBid` | 减免代码明细 |
+| `tax_relief_id` | `tax_relief_id` | `taxReliefId` | 减免代码 |
+| `id` | `id` | `id` | 主键 |
+
+### 引用字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `creator` | `creator` | `creator` | 创建人 |
+| `modifier` | `modifier` | `modifier` | 修改人 |
+| `ytenant_id` | `ytenant_id` | `ytenantId` | 租户id |
+| `mainid` | `mainid` | `mainid` | 计税结果 |
+
+### 日期时间 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+
+### 短整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dr` | `dr` | `dr` | 逻辑删除 |
+
+### 数值字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `relief_amount` | `relief_amount` | `reliefAmount` | 减免额 |
+
+### bigText (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `calculation_component_formula` | `calculation_component_formula` | `calculationComponentFormula` | 计税组件公式 |

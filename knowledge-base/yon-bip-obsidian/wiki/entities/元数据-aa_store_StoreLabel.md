@@ -12,36 +12,94 @@ source_type: api_response
 
 # 终端标签 (`aa.store.StoreLabel`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `mp_storelabel` | 应用: `Marketingpublic` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`mp_storelabel` | domain：`yxybase` | 应用：`Marketingpublic` | 业务对象ID：``
 
-## 属性（16 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `id` | ID | `id` | Long | `long` |
-| 2 | `terminal` | terminal | `terminalId` | 16e4e14c-ab05-4ee5-bbb8-c67351c9a8b3 | `quote` |
-| 3 | `label` | label | `labelId` | 65baa6d5-f5e1-486a-a5fe-e9dd532bf8c0 | `quote` |
-| 4 | `createTime` | 创建时间 | `create_time` | DateTime | `timestamp` |
-| 5 | `labelValueId` | labelValueID | `labelValueId` | d5e6877e-9cc6-44c4-886c-ba1d151fbdd8 | `quote` |
-| 6 | `createDate` | 创建日期 | `create_date` | Date | `date` |
-| 7 | `creator` | 创建人 | `creator` | String | `text` |
-| 8 | `creatorId` | 创建人ID | `creatorId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 9 | `modifier` | 修改人 | `modifier` | String | `text` |
-| 10 | `modifierId` | 修改人ID | `modifierId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 11 | `modifyDate` | 修改日期 | `modify_date` | Date | `date` |
-| 12 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `timestamp` |
-| 13 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 14 | `setlabelType` | setlabelType | `setlabel_type` | Short | `short` |
-| 15 | `tenant` | tenant | `tenant_id` | c213cd56-d5de-421f-bae7-d77455b557cd | `quote` |
-| 16 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 终端标签 |
+| 物理表 | `mp_storelabel` |
+| 数据库 schema | `yxybase` |
+| 所属应用 | `Marketingpublic` |
+| 直连字段 | 16 个 |
+| 子表 | 0 个 |
+| 关联引用 | 7 个 |
 
-## 关联（7 个）
+## 关联引用 (7个)
 
-- `labelValueId` -> `uhybase.labeldoc.LabelValue` ()
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `creatorId` -> `base.user.User` ()
-- `modifierId` -> `base.user.User` ()
-- `label` -> `uhybase.labeldoc.labeldoc` ()
-- `terminal` -> `aa.store.Store` (0..n)
-- `tenant` -> `base.tenant.Tenant` ()
+| 字段名 | 引用类型 |
+|--------|---------|
+| `labelValueId` | `uhy.mm_labelvalueref` |
+| `ytenant_id` | `` |
+| `` | `` |
+| `labelId` | `uhy.mm_labeldocref` |
+| `terminalId` | `` |
+| `tenant_id` | `` |
+
+## 继承接口 (3个, 10字段)
+
+- **租户相关** (`base.itf.ITenant`)
+  - `tenant_id` → `tenant_id`
+- **审计信息** (`base.itf.IAuditInfo`)
+  - `create_date` → `create_date`
+  - `create_time` → `create_time`
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `modify_date` → `modify_date`
+  - `modify_time` → `modify_time`
+- **统一租户接口(扩展)** (`ucfbase.ucfbaseItf.IYTenantExt`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 16 个直连字段
+
+### 文本字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `creator` | `creator` | 创建人名称 |
+| `` | `modifier` | `modifier` | 修改人名称 |
+
+### 引用字段 (7个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `terminalId` | `terminalId` | `terminal` | 终端ID |
+| `labelId` | `labelId` | `label` | 标签ID |
+| `labelValueId` | `labelValueId` | `labelValueId` | 标签值主键 |
+| `` | `creatorId` | `creatorId` | 创建人 |
+| `` | `modifierId` | `modifierId` | 修改人 |
+| `tenant_id` | `tenant_id` | `tenant` | 租户 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 日期字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_date` | `create_date` | `createDate` | 创建日期 |
+| `modify_date` | `modify_date` | `modifyDate` | 修改日期 |
+
+### 短整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `setlabel_type` | `setlabel_type` | `setlabelType` | 设置标签方式:0:人工,1:模型 |
+
+### 长整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+
+### timestamp (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_time` | `create_time` | `createTime` | 打标签时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |

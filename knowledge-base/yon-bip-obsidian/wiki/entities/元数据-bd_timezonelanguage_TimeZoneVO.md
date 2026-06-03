@@ -12,30 +12,73 @@ source_type: api_response
 
 # 时区 (`bd.timezonelanguage.TimeZoneVO`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `sdm_utc_time_base_with_name` | 应用: `DPMPI` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`sdm_utc_time_base_with_name` | domain：`iuap-apdoc-social` | 应用：`DPMPI` | 业务对象ID：`8c96451c-ec11-476d-b2a1-d4b23a4e283d`
 
-## 属性（15 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `auto_id` | auto_id | `auto_id` | String | `text` |
-| 2 | `city` | city | `city` | String | `multiLanguage` |
-| 3 | `cityserid` | cityserid | `cityserid` | String | `text` |
-| 4 | `dr` | 逻辑删除 | `dr` | Integer | `int` |
-| 5 | `id` | ID | `pk` | String | `text` |
-| 6 | `introduction` | introduction | `introduction` | String | `text` |
-| 7 | `off_set` | off_set | `off_set` | String | `text` |
-| 8 | `pk` | pk | `pk` | String | `text` |
-| 9 | `standard` | standard | `standard` | String | `text` |
-| 10 | `sys_id` | sys_id | `sys_id` | String | `text` |
-| 11 | `tenant_id` | tenant_id | `tenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 12 | `timename` | timename | `timename` | String | `multiLanguage` |
-| 13 | `timenameserid` | timenameserid | `timenameserid` | String | `text` |
-| 14 | `ts` | ts | `ts` | Long | `long` |
-| 15 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 时区 |
+| 物理表 | `sdm_utc_time_base_with_name` |
+| 数据库 schema | `iuap-apdoc-social` |
+| 所属应用 | `DPMPI` |
+| 直连字段 | 15 个 |
+| 子表 | 0 个 |
+| 关联引用 | 2 个 |
 
-## 关联（2 个）
+## 关联引用 (2个)
 
-- `tenant_id` -> `yht.tenant.YhtTenant` ()
-- `ytenant` -> `yht.tenant.YhtTenant` ()
+| 字段名 | 引用类型 |
+|--------|---------|
+| `tenant_id` | `` |
+| `ytenant_id` | `` |
+
+## 继承接口 (1个, 1字段)
+
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 15 个直连字段
+
+### 文本字段 (9个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `auto_id` | `auto_id` | `auto_id` | auto_id |
+| `cityserid` | `cityserid` | `cityserid` | 代表城市多语言key |
+| `pk` | `pk` | `id` | id |
+| `introduction` | `introduction` | `introduction` | 介绍 |
+| `off_set` | `off_set` | `off_set` | 偏移量 |
+| `pk` | `pk` | `pk` | 主键 |
+| `standard` | `standard` | `standard` | 标准 |
+| `sys_id` | `sys_id` | `sys_id` | sys_id |
+| `timenameserid` | `timenameserid` | `timenameserid` | 时区名称多语言key |
+
+### 引用字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `tenant_id` | `tenant_id` | `tenant_id` | 时区名称 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dr` | `dr` | `dr` | 删除标志 |
+
+### 长整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `ts` | `ts` | `ts` | 偏移量 |
+
+### multiLanguage (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `city` | `city` | `city` | 代表城市 |
+| `timename` | `timename` | `timename` | 时区名称 |

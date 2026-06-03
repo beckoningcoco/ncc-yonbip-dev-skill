@@ -12,57 +12,124 @@ source_type: api_response
 
 # 选配参数文件组件模版 (`vc.variantConfiguration.VariantConfigurationComponent`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `vc_component` | 应用: `ED` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`vc_component` | domain：`engineeringdata` | 应用：`ED` | 业务对象ID：``
 
-## 属性（31 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `bomComponentId` | bomComponentID | `bom_component_id` | f78e2b2f-0634-41d3-a002-c5a68f3e9992 | `quote` |
-| 2 | `bomId` | bomID | `bom_id` | f494c08f-f466-474b-937a-4773d56696ed | `quote` |
-| 3 | `bomLevel` | bomLevel | `bom_level` | String | `text` |
-| 4 | `bomUnit` | bomUnit | `bom_unit_id` | 9ea02a0b-3a48-4051-bcbe-59c7bcc7a25b | `quote` |
-| 5 | `componentFreeCT` | componentFreeCT | `component_freect_id` | e600c179-f49d-4cc6-804d-9c2217aaa118 | `UserDefine` |
-| 6 | `componentNum` | componentNum | `component_num` | Decimal | `number` |
-| 7 | `componentProductId` | componentProductID | `component_product_id` | 89f3b06e-23df-4403-b4a7-19f99eeeae72 | `quote` |
-| 8 | `componentUseNum` | componentUseNum | `component_use_num` | Decimal | `number` |
-| 9 | `createTime` | 创建时间 | `create_time` | DateTime | `dateTime` |
-| 10 | `creator` | 创建人 | `creator` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 11 | `denominatorQuantity` | denominatorQuantity | `denominator_quantity` | Decimal | `number` |
-| 12 | `groupEx` | groupEx | `group_ex` | Short | `short` |
-| 13 | `groupFirst` | groupFirst | `group_first` | Short | `short` |
-| 14 | `groupNo` | groupNo | `group_no` | String | `text` |
-| 15 | `id` | ID | `id` | Long | `long` |
-| 16 | `isShow` | 是否Show | `is_show` | Short | `short` |
-| 17 | `lineType` | lineType | `line_type` | Short | `short` |
-| 18 | `materialGroupNo` | materialGroupNo | `material_group_no` | String | `text` |
-| 19 | `modifier` | 修改人 | `modifier` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 20 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `dateTime` |
-| 21 | `mustSelect` | mustSelect | `must_select` | Short | `short` |
-| 22 | `numEdit` | numEdit | `num_edit` | Short | `short` |
-| 23 | `pBomId` | pBomID | `p_bom_id` | f494c08f-f466-474b-937a-4773d56696ed | `quote` |
-| 24 | `parentFreeCT` | parentFreeCT | `parent_freect_id` | 21352ede-0497-4f1a-81ce-cdc72f2edc7b | `UserDefine` |
-| 25 | `parentProductId` | parentProductID | `parent_product_id` | 89f3b06e-23df-4403-b4a7-19f99eeeae72 | `quote` |
-| 26 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 27 | `serialNo` | serialNo | `serial_no` | Integer | `int` |
-| 28 | `usageType` | usageType | `usage_type` | Short | `short` |
-| 29 | `variantConfiguration` | variantConfiguration | `variant_configuration_id` | f4984814-116e-4188-ab12-1b922a40f2cc | `quote` |
-| 30 | `variantConfigurationAttrGroup` | variantConfigurationAttrGroup | `vc_group_id` | 4bbdf6d9-0f0a-4a83-8f81-c210e9170ca0 | `quote` |
-| 31 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 选配参数文件组件模版 |
+| 物理表 | `vc_component` |
+| 数据库 schema | `engineeringdata` |
+| 所属应用 | `ED` |
+| 直连字段 | 31 个 |
+| 子表 | 0 个 |
+| 关联引用 | 13 个 |
 
-## 关联（13 个）
+## 关联引用 (13个)
 
-- `componentFreeCT` -> `vc.variantConfiguration.BomComponentFCT` ()
-- `bomId` -> `ed.bom.Bom` ()
-- `creator` -> `base.user.BipUser` ()
-- `parentProductId` -> `pc.product.Product` ()
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `bomComponentId` -> `ed.bom.BomComponent` ()
-- `modifier` -> `base.user.BipUser` ()
-- `componentProductId` -> `pc.product.Product` ()
-- `bomUnit` -> `pc.unit.Unit` ()
-- `parentFreeCT` -> `vc.variantConfiguration.BomParentFCT` ()
-- `variantConfiguration` -> `vc.variantConfiguration.VariantConfiguration` (0..n)
-- `variantConfigurationAttrGroup` -> `vc.variantConfiguration.VariantConfigurationAttrGroup` ()
-- `pBomId` -> `ed.bom.Bom` ()
+| 字段名 | 引用类型 |
+|--------|---------|
+| `component_freect_id` | `` |
+| `bom_id` | `` |
+| `` | `` |
+| `parent_product_id` | `` |
+| `ytenant_id` | `` |
+| `bom_component_id` | `` |
+| `component_product_id` | `` |
+| `bom_unit_id` | `` |
+| `parent_freect_id` | `` |
+| `variant_configuration_id` | `` |
+| `vc_group_id` | `` |
+| `p_bom_id` | `` |
+
+## 继承接口 (2个, 5字段)
+
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+- **审计信息** (`ucfbase.ucfbaseItf.IAuditInfo`)
+  - `create_time` → `create_time`
+  - `` → ``
+  - `` → ``
+  - `modify_time` → `modify_time`
+
+## 字段列表（按类型分组）
+
+> 共 31 个直连字段
+
+### 文本字段 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `bom_level` | `bom_level` | `bomLevel` | BOM层级 |
+| `group_no` | `group_no` | `groupNo` | 配置组号 |
+| `material_group_no` | `material_group_no` | `materialGroupNo` | 替代料组号 |
+
+### 引用字段 (11个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `bom_component_id` | `bom_component_id` | `bomComponentId` | 子件ID |
+| `bom_id` | `bom_id` | `bomId` | 子件BOMID |
+| `bom_unit_id` | `bom_unit_id` | `bomUnit` | 计量单位 |
+| `component_product_id` | `component_product_id` | `componentProductId` | 子件物料ID |
+| `` | `creator` | `creator` | 创建人 |
+| `` | `modifier` | `modifier` | 修改人 |
+| `p_bom_id` | `p_bom_id` | `pBomId` | 子件所属BOMID |
+| `parent_product_id` | `parent_product_id` | `parentProductId` | 父件物料ID |
+| `variant_configuration_id` | `variant_configuration_id` | `variantConfiguration` | 选配参数文件 |
+| `vc_group_id` | `vc_group_id` | `variantConfigurationAttrGroup` | 选配参数文件属性组 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 日期时间 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+
+### 整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `serial_no` | `serial_no` | `serialNo` | 顺序号 |
+
+### 短整数 (7个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `group_ex` | `group_ex` | `groupEx` | 组内互斥 |
+| `group_first` | `group_first` | `groupFirst` | 组内首选 |
+| `is_show` | `is_show` | `isShow` | 是否显示 |
+| `line_type` | `line_type` | `lineType` | 行类型 |
+| `must_select` | `must_select` | `mustSelect` | 是否必选 |
+| `num_edit` | `num_edit` | `numEdit` | 数量可改 |
+| `usage_type` | `usage_type` | `usageType` | 用量类型 |
+
+### 长整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+
+### 数值字段 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `component_num` | `component_num` | `componentNum` | 子件数量 |
+| `component_use_num` | `component_use_num` | `componentUseNum` | 本阶子件用量 |
+| `denominator_quantity` | `denominator_quantity` | `denominatorQuantity` | 母件底数 |
+
+### UserDefine (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `component_freect_id` | `component_freect_id` | `componentFreeCT` | 子件BOM自由项特征组 |
+| `parent_freect_id` | `parent_freect_id` | `parentFreeCT` | 父件BOM自由项特征组 |
+
+### timestamp (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubts` | `pubts` | `pubts` | 时间戳 |

@@ -12,34 +12,85 @@ source_type: api_response
 
 # 销售业务信息 (`aa.store.SalesBusinessInfo`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `mp_salessbusinessinfo` | 应用: `Marketingpublic` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`mp_salessbusinessinfo` | domain：`yxybase` | 应用：`Marketingpublic` | 业务对象ID：``
 
-## 属性（12 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `salesBusinessInfoDefineCharacter` | salesBusinessInfoDefineCharacter | `salesBusinessInfoDefineCharacter` | 99cac752-2ba4-435f-83c7-c8794d86c3ec | `UserDefine` |
-| 2 | `tenant` | tenant | `tenant_id` | c213cd56-d5de-421f-bae7-d77455b557cd | `quote` |
-| 3 | `id` | ID | `id` | Long | `long` |
-| 4 | `store` | store | `iStoreId` | 16e4e14c-ab05-4ee5-bbb8-c67351c9a8b3 | `quote` |
-| 5 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 6 | `saleOrg` | saleOrg | `saleorg` | 14302233-1394-4a70-94e1-bed51636f312 | `quote` |
-| 7 | `saleArea` | saleArea | `salearea` | 75fb7b76-fdb5-4e87-ab0d-e4215a299634 | `quote` |
-| 8 | `storeLevel` | storeLevel | `storelevel` | b46e7d42-ed6a-4e20-9e0b-75d45967a3db | `quote` |
-| 9 | `saleLatestFollowUpTime` | saleLatestFollowUpTime | `dSaleLatestFollowUpTime` | DateTime | `timestamp` |
-| 10 | `saleLatestFollowPerson` | saleLatestFollowPerson | `iSaleLatestFollowPerson` | 4effed83-35f5-4e3b-9be1-092b5ae602e8 | `quote` |
-| 11 | `salesBusinessInfoDefine` | salesBusinessInfoDefine | `` | 2eeb0361-a03e-4f53-a097-2bc9efb67750 | `` |
-| 12 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 销售业务信息 |
+| 物理表 | `mp_salessbusinessinfo` |
+| 数据库 schema | `yxybase` |
+| 所属应用 | `Marketingpublic` |
+| 直连字段 | 12 个 |
+| 子表 | 1 个 |
+| 关联引用 | 9 个 |
 
-## 关联（9 个）
+## 子表
 
-- `saleLatestFollowPerson` -> `bd.staff.Staff` ()
-- `storeLevel` -> `aa.store.StoreLevel` ()
-- `salesBusinessInfoDefine` -> `aa.store.SalesBusinessInfoDefine` (1)
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `saleArea` -> `aa.salearea.SaleArea` ()
-- `store` -> `aa.store.Store` (0..n)
-- `salesBusinessInfoDefineCharacter` -> `aa.store.SalesBusinessInfoDefineCharacter` ()
-- `saleOrg` -> `org.func.BaseOrg` ()
-- `tenant` -> `base.tenant.Tenant` ()
+| 字段名 | URI | 关系 |
+|--------|-----|------|
+| `salesBusinessInfoDefine` | `aa.store.SalesBusinessInfoDefine` | composition |
+
+## 关联引用 (9个)
+
+| 字段名 | 引用类型 |
+|--------|---------|
+| `iSaleLatestFollowPerson` | `ucf-staff-center.bd_staff_ref` |
+| `storelevel` | `aa_storelevel` |
+| `` | `` |
+| `ytenant_id` | `` |
+| `salearea` | `productcenter.aa_salearearef` |
+| `iStoreId` | `` |
+| `salesBusinessInfoDefineCharacter` | `` |
+| `saleorg` | `ucf-org-center.bd_salesorg` |
+| `tenant_id` | `` |
+
+## 继承接口 (2个, 2字段)
+
+- **租户相关** (`base.itf.ITenant`)
+  - `tenant_id` → `tenant_id`
+- **统一租户接口(扩展)** (`ucfbase.ucfbaseItf.IYTenantExt`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 12 个直连字段
+
+### 引用字段 (7个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `tenant_id` | `tenant_id` | `tenant` | 租户 |
+| `iStoreId` | `iStoreId` | `store` | 主表ID |
+| `saleorg` | `saleorg` | `saleOrg` | 销售组织id |
+| `salearea` | `salearea` | `saleArea` | 销售区域id |
+| `storelevel` | `storelevel` | `storeLevel` | 终端等级id |
+| `iSaleLatestFollowPerson` | `iSaleLatestFollowPerson` | `saleLatestFollowPerson` | 最近跟进人主键 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 长整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | 销售业务信息id |
+
+### UserDefine (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `salesBusinessInfoDefineCharacter` | `salesBusinessInfoDefineCharacter` | `salesBusinessInfoDefineCharacter` | 自定义项特征属性组 |
+
+### timestamp (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubts` | `pubts` | `pubts` | 销售业务信息时间戳 |
+| `dSaleLatestFollowUpTime` | `dSaleLatestFollowUpTime` | `saleLatestFollowUpTime` | 最近跟进时间 |
+
+### other (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `` | `salesBusinessInfoDefine` | 销售业务信息自定义项 |

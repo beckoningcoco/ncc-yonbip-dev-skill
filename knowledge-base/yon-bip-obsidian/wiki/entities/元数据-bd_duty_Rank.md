@@ -1,5 +1,5 @@
 ---
-tags: [BIP, 元数据, 数据字典, bd, bd.duty.Rank]
+tags: [BIP, 元数据, 数据字典, bd.duty.Rank]
 created: 2026-06-03
 updated: 2026-06-03
 sources: [元数据API queryByUri]
@@ -9,94 +9,142 @@ last_verified: 2026-06-03
 status: verified
 source_type: api_response
 ---
+
 # 职级 (`bd.duty.Rank`)
 
-> ⚡ **平台版本：BIP 旗舰版 V5** — 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `bd_rank` | 应用: `DPMSTF`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`bd_rank` | domain：`ucf-staff-center` | 应用：`DPMSTF` | 业务对象ID：`f266505e-2280-436b-93f8-c1909dd53d40`
 
-## 主键与编码
+## 基本信息
 
-| 角色 | 字段 | 列 | 类型 |
-|------|------|-----|------|
-| 主键 | `id` | `id` | String |
-| 编码 | `code` | `code` | |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 职级 |
+| 物理表 | `bd_rank` |
+| 数据库 schema | `ucf-staff-center` |
+| 所属应用 | `DPMSTF` |
+| 直连字段 | 42 个 |
+| 子表 | 0 个 |
+| 关联引用 | 10 个 |
 
-## 全部属性（42 个）
+## 关联引用 (10个)
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype | 必填 | 可空 |
-|---|--------|--------|-----|------|---------|------|------|
-| 1 | `id` | 主键ID | `id` | String | `text` |  | true |
-| 2 | `code` | 编码 | `code` | String | `text` | true | false |
-| 3 | `name` | 名称 | `name` | String | `multiLanguage` | false | true |
-| 4 | `org_id` | org_id | `org_id` | a4352e3c-3eda-4539-a7a9-ec00799be118 | `quote` |  | true |
-| 5 | `ranktype_id` | ranktype_id | `ranktype_id` | b5f4c40b-1358-4722-a759-06891ee69b00 | `quote` |  | true |
-| 6 | `maxrank_id` | maxrank_id | `maxrank_id` | e00dd36a-aace-43d2-9e87-156b36799fef | `quote` |  | true |
-| 7 | `minrank_id` | minrank_id | `minrank_id` | e00dd36a-aace-43d2-9e87-156b36799fef | `quote` |  | true |
-| 8 | `memo` | 备注 | `memo` | String | `multiLanguage` |  | true |
-| 9 | `user_define_character` | user_define_character | `user_define_character` | 2415227a-7b7b-4654-89a5-9ded4fc59715 | `UserDefine` |  | true |
-| 10 | `orderNo` | orderNo | `order_no` | Long | `long` |  | true |
-| 11 | `enable` | enable | `enable` | Integer | `int` | true | false |
-| 12 | `orgGroupId` | orgGroupID | `org_group_id` | String | `text` |  | true |
-| 13 | `creator` | 创建人 | `creator` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |  | true |
-| 14 | `createTime` | 创建时间 | `creationtime` | DateTime | `timestamp` |  | true |
-| 15 | `modifier` | 修改人 | `modifier` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |  | true |
-| 16 | `modifyTime` | 修改时间 | `modifiedtime` | DateTime | `timestamp` |  | true |
-| 17 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` | true | true |
-| 18 | `name2` | name2 | `name2` | String | `text` |  | true |
-| 19 | `name3` | name3 | `name3` | String | `text` |  | true |
-| 20 | `name4` | name4 | `name4` | String | `text` |  | true |
-| 21 | `name5` | name5 | `name5` | String | `text` |  | true |
-| 22 | `name6` | name6 | `name6` | String | `text` |  | true |
-| 23 | `memo2` | memo2 | `memo2` | String | `text` |  | true |
-| 24 | `memo3` | memo3 | `memo3` | String | `text` |  | true |
-| 25 | `memo4` | memo4 | `memo4` | String | `text` |  | true |
-| 26 | `memo5` | memo5 | `memo5` | String | `text` |  | true |
-| 27 | `memo6` | memo6 | `memo6` | String | `text` |  | true |
-| 28 | `ts` | ts | `ts` | DateTime | `timestamp` |  | false |
-| 29 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |  | true |
-| 30 | `objid` | objid | `objid` | String | `text` |  | true |
-| 31 | `businessid` | businessid | `businessid` | String | `text` |  | true |
-| 32 | `synchts` | synchts | `synchts` | DateTime | `timestamp` |  | true |
-| 33 | `distributionSite` | distributionSite | `distribution_site` | String | `text` |  | true |
-| 34 | `log` | log | `log` | String | `text` |  | true |
-| 35 | `dr` | 逻辑删除 | `dr` | Integer | `int` |  | true |
-| 36 | `tenantid` | tenantid | `tenantid` | String | `text` |  | true |
-| 37 | `tenant` | tenant | `tenantid` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` | true | true |
-| 38 | `starttime` | starttime | `start_time` | DateTime | `timestamp` |  | true |
-| 39 | `endtime` | endtime | `end_time` | DateTime | `timestamp` |  | true |
-| 40 | `jobtype_id` | jobtype_id | `jobtype_id` | b2f08443-e693-453c-a005-3c1dcc11af06 | `quote` | false | true |
-| 41 | `sysid` | sysid | `sysid` | String | `text` |  | true |
-| 42 | `bu_id` | bu_id | `bu_id` | String | `text` |  | true |
+| 字段名 | 引用类型 |
+|--------|---------|
+| `user_define_character` | `` |
+| `creator` | `` |
+| `ranktype_id` | `ucf-staff-center.bd_rank_type_ref` |
+| `ytenant_id` | `` |
+| `maxrank_id` | `ucf-staff-center.bd_graderef` |
+| `org_id` | `ucf-org-center.orgcenter_admin_tree_ref` |
+| `modifier` | `` |
+| `minrank_id` | `ucf-staff-center.bd_graderef` |
+| `jobtype_id` | `ucf-staff-center.bd_dutyType` |
+| `tenantid` | `` |
 
-## 关联属性（10 个）
+## 继承接口 (8个, 15字段)
 
-| # | 字段 | 目标实体 | 列 | 多重性 | 组合 | 废弃 |
-|---|------|---------|-----|--------|------|------|
-| 1 | `user_define_character` | `bd.duty.RankTZDefines` | `user_define_character` |  |  |  |
-| 2 | `creator` | `base.user.BipUser` | `creator` |  |  |  |
-| 3 | `ranktype_id` | `bd.ranktype.RankType` | `ranktype_id` |  |  |  |
-| 4 | `ytenant` | `yht.tenant.YhtTenant` | `ytenant_id` |  |  |  |
-| 5 | `maxrank_id` | `bd.duty.Grade` | `maxrank_id` |  |  |  |
-| 6 | `org_id` | `bd.adminOrg.AdminOrgVO` | `org_id` |  |  |  |
-| 7 | `modifier` | `base.user.BipUser` | `modifier` |  |  |  |
-| 8 | `minrank_id` | `bd.duty.Grade` | `minrank_id` |  |  |  |
-| 9 | `jobtype_id` | `bd.duty.DutyType` | `jobtype_id` |  |  |  |
-| 10 | `tenant` | `yht.tenant.YhtTenant` | `tenantid` |  |  |  |
+- **UCF公共状态** (`basedoc.basedocItf.BasedocIState`)
+  - `enable` → `enable`
+- **UCF公共租户相关** (`basedoc.basedocItf.BasedocITenant`)
+  - `tenantid` → `tenantid`
+- **审批信息** (`bd.itf.ISystemInfo`)
+  - `dr` → `dr`
+  - `enable` → `enable`
+  - `sysid` → `sysid`
+  - `tenantid` → `tenantid`
+  - `ts` → `ts`
+- **时间轴档案** (`hred.itf.ITimeLineDoc`)
+  - `end_time` → `end_time`
+  - `start_time` → `start_time`
+- **自动编号** (`voucher.base.IAutoCode`)
+  - `` → ``
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+- **逻辑删除(待废除)** (`basedoc.basedocItf.LogicDelete`)
+- **审计信息** (`ucfbase.ucfbaseItf.IAuditInfo`)
+  - `create_time` → `create_time`
+  - `` → ``
+  - `` → ``
+  - `modify_time` → `modify_time`
 
-## 依赖接口（8 个）
+## 字段列表（按类型分组）
 
-- `BasedocIState` → `basedoc.basedocItf.BasedocIState` (v101)
-- `BasedocITenant` → `basedoc.basedocItf.BasedocITenant` (v103)
-- `ISystemInfo` → `bd.itf.ISystemInfo` (v77)
-- `ITimeLineDoc` → `hred.itf.ITimeLineDoc` (v75)
-- `IAutoCode` → `voucher.base.IAutoCode` (v49)
-- `IYTenant` → `ucfbase.ucfbaseItf.IYTenant` (v40)
-- `LogicDelete` → `basedoc.basedocItf.LogicDelete` (v31)
-- `IAuditInfo` → `ucfbase.ucfbaseItf.IAuditInfo` (v192)
+> 共 42 个直连字段
 
-## SQL 示例
+### 文本字段 (20个)
 
-```sql
-SELECT id, code, name, org_id, ranktype_id, maxrank_id, minrank_id, memo
-FROM bd_rank
-```
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+| `code` | `code` | `code` | 职级编码 |
+| `org_group_id` | `org_group_id` | `orgGroupId` | 适用组织范围 |
+| `name2` | `name2` | `name2` | 名称备用2 |
+| `name3` | `name3` | `name3` | 名称备用3 |
+| `name4` | `name4` | `name4` | 名称备用4 |
+| `name5` | `name5` | `name5` | 名称备用5 |
+| `name6` | `name6` | `name6` | 名称备用6 |
+| `memo2` | `memo2` | `memo2` | 备注备用2 |
+| `memo3` | `memo3` | `memo3` | 备注备用3 |
+| `memo4` | `memo4` | `memo4` | 备注备用4 |
+| `memo5` | `memo5` | `memo5` | 备注备用5 |
+| `memo6` | `memo6` | `memo6` | 备注备用6 |
+| `objid` | `objid` | `objid` | 友企联同步主键 |
+| `businessid` | `businessid` | `businessid` | 友企联同步业务主键 |
+| `distribution_site` | `distribution_site` | `distributionSite` | 来源站点 |
+| `log` | `log` | `log` | 删除引用日志 |
+| `tenantid` | `tenantid` | `tenantid` | 租户标识 |
+| `sysid` | `sysid` | `sysid` | 应用主键 |
+| `bu_id` | `bu_id` | `bu_id` | 所属业务群 |
+
+### 引用字段 (9个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `org_id` | `org_id` | `org_id` | 所属组织 |
+| `ranktype_id` | `ranktype_id` | `ranktype_id` | 职级类别 |
+| `maxrank_id` | `maxrank_id` | `maxrank_id` | 最高职等 |
+| `minrank_id` | `minrank_id` | `minrank_id` | 最低职等 |
+| `creator` | `creator` | `creator` | 创建人 |
+| `modifier` | `modifier` | `modifier` | 修改人 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户ID |
+| `tenantid` | `tenantid` | `tenant` | 租户 |
+| `jobtype_id` | `jobtype_id` | `jobtype_id` | 职务类别 |
+
+### 整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `enable` | `enable` | `enable` | 状态 |
+| `dr` | `dr` | `dr` | 逻辑删除标识 |
+
+### 长整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `order_no` | `order_no` | `orderNo` | 排序号 |
+
+### multiLanguage (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `name` | `name` | `name` | 职级名称 |
+| `memo` | `memo` | `memo` | 备注 |
+
+### UserDefine (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `user_define_character` | `user_define_character` | `user_define_character` | 特征 |
+
+### timestamp (7个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `creationtime` | `creationtime` | `createTime` | 创建时间 |
+| `modifiedtime` | `modifiedtime` | `modifyTime` | 修改时间 |
+| `ts` | `ts` | `ts` | 时间戳 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+| `synchts` | `synchts` | `synchts` | 友企联同步时间戳 |
+| `start_time` | `start_time` | `starttime` | 开始时间 |
+| `end_time` | `end_time` | `endtime` | 结束时间 |

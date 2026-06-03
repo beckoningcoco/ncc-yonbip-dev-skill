@@ -12,39 +12,97 @@ source_type: api_response
 
 # 会计主体树成员 (`bd.virtualaccbody.VirtualAccbodyTreeMember`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `bd_virtualaccbody_tree_member` | 应用: `DPMACCT` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`bd_virtualaccbody_tree_member` | domain：`finbd` | 应用：`DPMACCT` | 业务对象ID：``
 
-## 属性（20 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `accentity` | accentity | `accentity` | e33ec72a-3857-4167-89e2-a437168ed3bb | `quote` |
-| 2 | `createDate` | 创建日期 | `create_date` | Date | `date` |
-| 3 | `createTime` | 创建时间 | `create_time` | DateTime | `timestamp` |
-| 4 | `creator` | 创建人 | `creator` | String | `text` |
-| 5 | `creatorId` | 创建人ID | `creatorId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 6 | `displayOrder` | displayOrder | `display_order` | Integer | `int` |
-| 7 | `id` | ID | `id` | String | `text` |
-| 8 | `isEnd` | 是否End | `isEnd` | Boolean | `switch` |
-| 9 | `level` | 层级 | `level` | Integer | `int` |
-| 10 | `modifier` | 修改人 | `modifier` | String | `text` |
-| 11 | `modifierId` | 修改人ID | `modifierId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |
-| 12 | `modifyDate` | 修改日期 | `modify_date` | Date | `date` |
-| 13 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `timestamp` |
-| 14 | `parent` | parent | `parent_id` | e33ec72a-3857-4167-89e2-a437168ed3bb | `quote` |
-| 15 | `path` | path | `path` | String | `text` |
-| 16 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 17 | `sort` | 排序 | `sort_num` | Integer | `int` |
-| 18 | `tenant` | tenant | `tenant_id` | c213cd56-d5de-421f-bae7-d77455b557cd | `quote` |
-| 19 | `treeVid` | treeVid | `tree_vid` | String | `text` |
-| 20 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 会计主体树成员 |
+| 物理表 | `bd_virtualaccbody_tree_member` |
+| 数据库 schema | `finbd` |
+| 所属应用 | `DPMACCT` |
+| 直连字段 | 20 个 |
+| 子表 | 0 个 |
+| 关联引用 | 6 个 |
 
-## 关联（6 个）
+## 关联引用 (6个)
 
-- `parent` -> `bd.virtualaccbody.VirtualAccbody` ()
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `creatorId` -> `base.user.User` ()
-- `modifierId` -> `base.user.User` ()
-- `accentity` -> `bd.virtualaccbody.VirtualAccbody` (0..n)
-- `tenant` -> `base.tenant.Tenant` ()
+| 字段名 | 引用类型 |
+|--------|---------|
+| `parent_id` | `` |
+| `ytenant_id` | `` |
+| `` | `` |
+| `accentity` | `` |
+| `tenant_id` | `` |
+
+## 继承接口 (3个, 10字段)
+
+- **审计信息** (`base.itf.IAuditInfo`)
+  - `create_date` → `create_date`
+  - `create_time` → `create_time`
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `modify_date` → `modify_date`
+  - `modify_time` → `modify_time`
+- **租户相关** (`base.itf.ITenant`)
+  - `tenant_id` → `tenant_id`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 20 个直连字段
+
+### 文本字段 (5个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `creator` | `creator` | 创建人名称 |
+| `id` | `id` | `id` | 主键id |
+| `` | `modifier` | `modifier` | 修改人名称 |
+| `path` | `path` | `path` | 路径 |
+| `tree_vid` | `tree_vid` | `treeVid` | 树维度 |
+
+### 引用字段 (6个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `accentity` | `accentity` | `accentity` | 会计主体 |
+| `` | `creatorId` | `creatorId` | 创建人 |
+| `` | `modifierId` | `modifierId` | 修改人 |
+| `parent_id` | `parent_id` | `parent` | 上级会计主体 |
+| `tenant_id` | `tenant_id` | `tenant` | 租户 |
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户id |
+
+### 日期字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_date` | `create_date` | `createDate` | 创建日期 |
+| `modify_date` | `modify_date` | `modifyDate` | 修改日期 |
+
+### 布尔字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `isEnd` | `isEnd` | `isEnd` | 是否末级 |
+
+### 整数 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `display_order` | `display_order` | `displayOrder` | 显示顺序 |
+| `level` | `level` | `level` | 层级 |
+| `sort_num` | `sort_num` | `sort` | 排序号 |
+
+### timestamp (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |

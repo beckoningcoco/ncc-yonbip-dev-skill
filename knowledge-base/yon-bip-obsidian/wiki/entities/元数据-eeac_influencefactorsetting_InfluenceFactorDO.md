@@ -9,39 +9,104 @@ last_verified: 2026-06-03
 status: verified
 source_type: api_response
 ---
+
 # 影响因素 (`eeac.influencefactorsetting.InfluenceFactorDO`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBip），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `epub_influence_factor` | 应用: `EVNT`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`epub_influence_factor` | domain：`yonbip-fi-eeac` | 应用：`EVNT` | 业务对象ID：`56295bbb-3f18-42d4-9e73-1d2f9b474cca`
 
-## 属性（20 个）
+## 基本信息
 
-| # | 字段 | 显示名 | 列 | 类型 | biztype |
-|---|------|--------|-----|------|---------|
-| 1 | `blnUserDef` | blnUserDef | `bln_user_def` | Boolean | `switch` |
-| 2 | `code` | 编码 | `code` | String | `text` |
-| 3 | `doctypeId` | doctypeID | `doctype_id` | 2ecd73ee-bb84-43ef-aa19-faa40bdd87f0 | `quote` |
-| 4 | `enumAttr` | enumAttr | `enum_attr` | String | `text` |
-| 5 | `name` | 名称 | `name` | String | `multiLanguage` |
-| 6 | `remarks` | remarks | `remarks` | String | `multiLanguage` |
-| 7 | `socialMctype` | socialMctype | `social_mctype` | Integer | `int` |
-| 8 | `socialSrcid` | socialSrcid | `social_srcid` | String | `text` |
-| 9 | `socialTenantid` | socialTenantid | `social_tenantid` | String | `text` |
-| 10 | `sortNum` | sortNum | `sort_num` | Integer | `int` |
-| 11 | `sysId` | sysID | `sys_id` | String | `text` |
-| 12 | `usingStatus` | usingStatus | `using_status` | String | `text` |
-| 13 | `id` | ID | `id` | String | `text` |
-| 14 | `pubts` | 时间戳 | `pubts` | DateTime | `dateTime` |
-| 15 | `createTime` | 创建时间 | `create_time` | DateTime | `dateTime` |
-| 16 | `creator` | 创建人 | `creator` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 17 | `modifier` | 修改人 | `modifier` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 18 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `dateTime` |
-| 19 | `ytenantId` | ytenantID | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 20 | `dr` | 逻辑删除 | `dr` | Short | `short` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 影响因素 |
+| 物理表 | `epub_influence_factor` |
+| 数据库 schema | `yonbip-fi-eeac` |
+| 所属应用 | `EVNT` |
+| 直连字段 | 20 个 |
+| 子表 | 0 个 |
+| 关联引用 | 4 个 |
 
-## 关联（4 个）
+## 关联引用 (4个)
 
-- `creator` -> `base.user.BipUser` () 
-- `modifier` -> `base.user.BipUser` () 
-- `doctypeId` -> `epub.doctype.DoctypePO` () [废]
-- `ytenantId` -> `yht.tenant.YhtTenant` () 
+| 字段名 | 引用类型 |
+|--------|---------|
+| `creator` | `bip-usercenter.bip_user_ref` |
+| `modifier` | `bip-usercenter.bip_user_ref` |
+| `doctype_id` | `fiepub.epub_doctype_ref` |
+| `ytenant_id` | `` |
+
+## 继承接口 (4个, 9字段)
+
+- **社会化企业群档案** (`bd.social.ISocialMcType`)
+  - `social_mctype` → `social_mctype`
+  - `social_srcid` → `social_srcid`
+  - `social_tenantid` → `social_tenantid`
+- **审计信息** (`iuap.busiObj.IAuditInfo`)
+  - `create_time` → `create_time`
+  - `creator` → `creator`
+  - `modifier` → `modifier`
+  - `modify_time` → `modify_time`
+- **统一租户接口** (`iuap.busiObj.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+- **逻辑删除** (`iuap.busiObj.LogicDelete`)
+  - `dr` → `dr`
+
+## 字段列表（按类型分组）
+
+> 共 20 个直连字段
+
+### 文本字段 (7个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `code` | `code` | `code` | 影响因素编码 |
+| `enum_attr` | `enum_attr` | `enumAttr` | 枚举属性 |
+| `social_srcid` | `social_srcid` | `socialSrcid` | 社会化来源id |
+| `social_tenantid` | `social_tenantid` | `socialTenantid` | 社会化来源租户 |
+| `sys_id` | `sys_id` | `sysId` | 关联0租户预置数据的id,取自本表的id |
+| `using_status` | `using_status` | `usingStatus` | 对预置数据的使用控制,0:停用;1:启用 |
+| `id` | `id` | `id` | 主键 |
+
+### 引用字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `doctype_id` | `doctype_id` | `doctypeId` | 档案类型 |
+| `creator` | `creator` | `creator` | 创建人 |
+| `modifier` | `modifier` | `modifier` | 修改人 |
+| `ytenant_id` | `ytenant_id` | `ytenantId` | 租户id |
+
+### 日期时间 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+
+### 布尔字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `bln_user_def` | `bln_user_def` | `blnUserDef` | 是否自定义 |
+
+### 整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `social_mctype` | `social_mctype` | `socialMctype` | 社会化管控类型 |
+| `sort_num` | `sort_num` | `sortNum` | 序号 |
+
+### 短整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dr` | `dr` | `dr` | 逻辑删除 |
+
+### multiLanguage (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `name` | `name` | `name` | 影响因素名称 |
+| `remarks` | `remarks` | `remarks` | 备注 |

@@ -1,5 +1,5 @@
 ---
-tags: [BIP, 元数据, 数据字典, aa, aa.agentlevel.AgentLevel]
+tags: [BIP, 元数据, 数据字典, aa.agentlevel.AgentLevel]
 created: 2026-06-03
 updated: 2026-06-03
 sources: [元数据API queryByUri]
@@ -9,65 +9,118 @@ last_verified: 2026-06-03
 status: verified
 source_type: api_response
 ---
+
 # 客户级别 (`aa.agentlevel.AgentLevel`)
 
-> ⚡ **平台版本：BIP 旗舰版 V5** — 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `agentlevel` | 应用: `DPMCUS`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`agentlevel` | domain：`productcenter` | 应用：`DPMCUS` | 业务对象ID：`d357b41d-c2f4-452a-8a06-7b7cd47719ed`
 
-## 主键与编码
+## 基本信息
 
-| 角色 | 字段 | 列 | 类型 |
-|------|------|-----|------|
-| 主键 | `id` | `id` | Long |
-| 编码 | `code` | `cCode` | |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 客户级别 |
+| 物理表 | `agentlevel` |
+| 数据库 schema | `productcenter` |
+| 所属应用 | `DPMCUS` |
+| 直连字段 | 23 个 |
+| 子表 | 0 个 |
+| 关联引用 | 4 个 |
 
-## 全部属性（23 个）
+## 关联引用 (4个)
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype | 必填 | 可空 |
-|---|--------|--------|-----|------|---------|------|------|
-| 1 | `id` | 主键ID | `id` | Long | `long` |  | true |
-| 2 | `code` | 编码 | `cCode` | String | `text` | true | true |
-| 3 | `name` | 名称 | `cName` | String | `multiLanguage` | true | true |
-| 4 | `erpCode` | erp编码 | `cErpCode` | String | `text` |  | true |
-| 5 | `isEnabled` | 是否Enabled | `isEnabled` | Boolean | `switch` |  | true |
-| 6 | `order` | order | `iOrder` | Integer | `int` |  | true |
-| 7 | `comment` | comment | `cComment` | String | `multiLanguage` |  | true |
-| 8 | `shop` | shop | `iShopID` | Long | `long` |  | true |
-| 9 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |  | true |
-| 10 | `iDeleted` | iDeleted | `iDeleted` | Integer | `int` |  | true |
-| 11 | `custType` | custType | `iCreatorType` | CustType | `` |  | true |
-| 12 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` | true | true |
-| 13 | `tenant` | tenant | `tenant_id` | c213cd56-d5de-421f-bae7-d77455b557cd | `quote` | true | true |
-| 14 | `outSysKey` | outSysKey | `cOutSysKey` | String | `text` |  | true |
-| 15 | `createDate` | 创建日期 | `create_date` | Date | `date` |  | true |
-| 16 | `createTime` | 创建时间 | `create_time` | DateTime | `timestamp` |  | true |
-| 17 | `creatorId` | 创建人ID | `creatorId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |  | true |
-| 18 | `creator` | 创建人 | `creator` | String | `text` |  | true |
-| 19 | `creatorName` | creator名称 | `cCreatorName` | String | `text` |  | true |
-| 20 | `modifyDate` | 修改日期 | `modify_date` | Date | `date` |  | true |
-| 21 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `timestamp` |  | true |
-| 22 | `modifierId` | 修改人ID | `modifierId` | 54800425-15da-4742-ae89-059d05e77c9b | `quote` |  | true |
-| 23 | `modifier` | 修改人 | `modifier` | String | `text` |  | true |
+| 字段名 | 引用类型 |
+|--------|---------|
+| `ytenant_id` | `` |
+| `` | `` |
+| `tenant_id` | `` |
 
-## 关联属性（4 个）
+## 继承接口 (4个, 11字段)
 
-| # | 字段 | 目标实体 | 列 | 多重性 | 组合 | 废弃 |
-|---|------|---------|-----|--------|------|------|
-| 1 | `ytenant` | `yht.tenant.YhtTenant` | `ytenant_id` |  |  |  |
-| 2 | `creatorId` | `base.user.User` | `creatorId` |  |  |  |
-| 3 | `modifierId` | `base.user.User` | `modifierId` |  |  |  |
-| 4 | `tenant` | `base.tenant.Tenant` | `tenant_id` |  |  |  |
+- **审计信息** (`base.itf.IAuditInfo`)
+  - `create_date` → `create_date`
+  - `create_time` → `create_time`
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `` → ``
+  - `modify_date` → `modify_date`
+  - `modify_time` → `modify_time`
+- **租户相关** (`base.itf.ITenant`)
+  - `tenant_id` → `tenant_id`
+- **商家相关** (`base.itf.IShop`)
+  - `iShopID` → `iShopID`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
 
-## 依赖接口（4 个）
+## 字段列表（按类型分组）
 
-- `IAuditInfo` → `base.itf.IAuditInfo` (v340)
-- `ITenant` → `base.itf.ITenant` (v73)
-- `IShop` → `base.itf.IShop` (v65)
-- `IYTenant` → `ucfbase.ucfbaseItf.IYTenant` (v40)
+> 共 23 个直连字段
 
-## SQL 示例
+### 文本字段 (6个)
 
-```sql
-SELECT id, cCode, cName, cErpCode, isEnabled, iOrder, cComment, iShopID
-FROM agentlevel
-```
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `cCode` | `cCode` | `code` | 编码 |
+| `cErpCode` | `cErpCode` | `erpCode` | 外部编码 |
+| `cOutSysKey` | `cOutSysKey` | `outSysKey` | 数据来源 |
+| `` | `creator` | `creator` | 创建人 |
+| `cCreatorName` | `cCreatorName` | `creatorName` | 创建人 |
+| `` | `modifier` | `modifier` | 修改人 |
+
+### 引用字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户 |
+| `tenant_id` | `tenant_id` | `tenant` | 租户(废弃) |
+| `` | `creatorId` | `creatorId` | 创建人 |
+| `` | `modifierId` | `modifierId` | 修改人 |
+
+### 日期字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_date` | `create_date` | `createDate` | 创建日期 |
+| `modify_date` | `modify_date` | `modifyDate` | 修改日期 |
+
+### 布尔字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `isEnabled` | `isEnabled` | `isEnabled` | 启用状态 |
+
+### 整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iOrder` | `iOrder` | `order` | 排序 |
+| `iDeleted` | `iDeleted` | `iDeleted` | 删除状态 |
+
+### 长整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+| `iShopID` | `iShopID` | `shop` | 商家 |
+
+### multiLanguage (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `cName` | `cName` | `name` | 名称 |
+| `cComment` | `cComment` | `comment` | 备注 |
+
+### timestamp (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+
+### other (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `iCreatorType` | `iCreatorType` | `custType` | 创建者类型 |

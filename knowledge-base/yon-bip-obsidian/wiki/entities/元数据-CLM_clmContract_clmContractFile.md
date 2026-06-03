@@ -9,42 +9,106 @@ last_verified: 2026-06-03
 status: verified
 source_type: api_response
 ---
+
 # 文本对象 (`CLM.clmContract.clmContractFile`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBip），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `clm_contractfile` | 应用: `CLM`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`clm_contractfile` | domain：`yonbip-ec-contract` | 应用：`CLM` | 业务对象ID：`90e8f765-9e16-49e4-8e6a-bda0de99e9a6`
 
-## 属性（18 个）
+## 基本信息
 
-| # | 字段 | 显示名 | 列 | 类型 | biztype |
-|---|------|--------|-----|------|---------|
-| 1 | `billType` | 票据类型 | `bill_type` | 4a227650-b866-4f4c-a6ca-2433297a1713 | `quote` |
-| 2 | `billid` | billid | `billid` | String | `text` |
-| 3 | `businessObject` | businessObject | `business_Object` | String | `text` |
-| 4 | `clmContractFileDetailList` | clmContractFileDetailList | `` | a06ad254-c939-434e-be75-7d4b0dec2557 | `` |
-| 5 | `contractType` | contractType | `contract_type` | b23c8bcc-9978-44fb-a5d5-b54d687b59bb | `quote` |
-| 6 | `contractfileConfigId` | contractfileConfigID | `contractfile_config_id` | 361c3cc9-358a-4933-a267-fd50da708e70 | `quote` |
-| 7 | `createTime` | 创建时间 | `create_time` | DateTime | `dateTime` |
-| 8 | `createType` | createType | `create_type` | createType | `singleOption` |
-| 9 | `creator` | 创建人 | `creator` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 10 | `dr` | 逻辑删除 | `dr` | Short | `short` |
-| 11 | `id` | ID | `id` | String | `text` |
-| 12 | `modifier` | 修改人 | `modifier` | 98ac0ca3-2fd2-4a38-8a21-5d8243cddc8b | `quote` |
-| 13 | `modifyTime` | 修改时间 | `modify_time` | DateTime | `dateTime` |
-| 14 | `orgId` | orgID | `org_id` | 14302233-1394-4a70-94e1-bed51636f312 | `quote` |
-| 15 | `pubts` | 时间戳 | `pubts` | DateTime | `dateTime` |
-| 16 | `status` | 状态 | `status` | clmContractFileStatus | `singleOption` |
-| 17 | `tranType` | tranType | `tran_type` | 19f9264d-28d1-4b47-9d28-f2e82654f3a9 | `quote` |
-| 18 | `ytenantId` | ytenantID | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 文本对象 |
+| 物理表 | `clm_contractfile` |
+| 数据库 schema | `yonbip-ec-contract` |
+| 所属应用 | `CLM` |
+| 直连字段 | 18 个 |
+| 子表 | 1 个 |
+| 关联引用 | 9 个 |
 
-## 关联（9 个）
+## 子表
 
-- `creator` -> `base.user.BipUser` () 
-- `contractType` -> `DZHTFW.econtract.contractType` () 
-- `billType` -> `bd.bill.BillTypeVO` () 
-- `modifier` -> `base.user.BipUser` () 
-- `clmContractFileDetailList` -> `CLM.clmContract.clmContractFileDetail` (0..n) 
-- `contractfileConfigId` -> `CLM.clmContract.clmContractFileConfig` () 
-- `ytenantId` -> `yht.tenant.YhtTenant` () 
-- `orgId` -> `org.func.BaseOrg` () 
-- `tranType` -> `bd.bill.TransType` () 
+| 字段名 | URI | 关系 |
+|--------|-----|------|
+| `clmContractFileDetailList` | `CLM.clmContract.clmContractFileDetail` | composition |
+
+## 关联引用 (9个)
+
+| 字段名 | 引用类型 |
+|--------|---------|
+| `creator` | `bip-usercenter.bip_user_ref` |
+| `contract_type` | `iuap-apcom-contract.contractTypeTreeRef` |
+| `bill_type` | `ucfbasedoc.bd_billtypetreeref` |
+| `modifier` | `bip-usercenter.bip_user_ref` |
+| `` | `` |
+| `contractfile_config_id` | `` |
+| `ytenant_id` | `` |
+| `org_id` | `ucf-org-center.org_pure_tree_ref` |
+| `tran_type` | `transtype.bd_billtyperef` |
+
+## 继承接口 (4个, 7字段)
+
+- **逻辑删除** (`iuap.busiObj.LogicDelete`)
+  - `dr` → `dr`
+- **统一租户接口** (`iuap.busiObj.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+- **审计信息** (`iuap.busiObj.IAuditInfo`)
+  - `create_time` → `create_time`
+  - `creator` → `creator`
+  - `modifier` → `modifier`
+  - `modify_time` → `modify_time`
+- **主组织** (`iuap.busiObj.OrgItf`)
+  - `org_id` → `org_id`
+
+## 字段列表（按类型分组）
+
+> 共 18 个直连字段
+
+### 文本字段 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `billid` | `billid` | `billid` | 单据id |
+| `business_Object` | `business_Object` | `businessObject` | 业务对象(系统) |
+| `id` | `id` | `id` | 主键 |
+
+### 引用字段 (8个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `bill_type` | `bill_type` | `billType` | 单据类型 |
+| `contract_type` | `contract_type` | `contractType` | 合同类型 |
+| `contractfile_config_id` | `contractfile_config_id` | `contractfileConfigId` | 合同文件配置id |
+| `creator` | `creator` | `creator` | 创建人 |
+| `modifier` | `modifier` | `modifier` | 修改人 |
+| `org_id` | `org_id` | `orgId` | 主组织 |
+| `tran_type` | `tran_type` | `tranType` | 交易类型 |
+| `ytenant_id` | `ytenant_id` | `ytenantId` | 租户id |
+
+### 日期时间 (3个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_time` | `create_time` | `createTime` | 创建时间 |
+| `modify_time` | `modify_time` | `modifyTime` | 修改时间 |
+| `pubts` | `pubts` | `pubts` | 时间戳 |
+
+### 枚举字段 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `create_type` | `create_type` | `createType` | 创建方式 |
+| `status` | `status` | `status` | 状态 |
+
+### 短整数 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `dr` | `dr` | `dr` | 逻辑删除 |
+
+### other (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `` | `` | `clmContractFileDetailList` | 合同文本对象明细 |

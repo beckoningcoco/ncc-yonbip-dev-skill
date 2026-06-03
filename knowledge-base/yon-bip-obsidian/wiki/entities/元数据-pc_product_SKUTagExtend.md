@@ -12,25 +12,65 @@ source_type: api_response
 
 # (停用)SKU标签关联表(管理组织) (`pc.product.SKUTagExtend`)
 
-> **平台版本：BIP 旗舰版 V5** -- 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
-> 物理表: `skutagnew` | 应用: `GZTBDM` | 类型: `Class`
+> **平台版本：BIP 旗舰版 V5**
+> 物理表：`skutagnew` | domain：`productcenter` | 应用：`GZTBDM` | 业务对象ID：``
 
-## 属性（8 个）
+## 基本信息
 
-| # | 字段名 | 显示名 | 列 | 类型 | biztype |
-|---|--------|--------|-----|------|---------|
-| 1 | `id` | ID | `id` | Long | `long` |
-| 2 | `ytenant` | ytenant | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` |
-| 3 | `tenant` | tenant | `tenant_id` | Long | `long` |
-| 4 | `productApplyRangeId` | productApplyRangeID | `productApplyRangeId` | ed1f55f2-a3f7-4617-8bd2-7f2f404843ab | `quote` |
-| 5 | `skuId` | skuID | `skuId` | 3e9ddc6d-edd0-4508-afcc-e4a20535f2f9 | `quote` |
-| 6 | `tagId` | tagID | `tagId` | 554a526a-26a3-42fa-a579-c795401e0e09 | `quote` |
-| 7 | `pubts` | 时间戳 | `pubts` | DateTime | `timestamp` |
-| 8 | `isCreator` | 是否Creator | `isCreator` | Boolean | `switch` |
+| 属性 | 值 |
+|------|-----|
+| 显示名 | (停用)SKU标签关联表(管理组织) |
+| 物理表 | `skutagnew` |
+| 数据库 schema | `productcenter` |
+| 所属应用 | `GZTBDM` |
+| 直连字段 | 8 个 |
+| 子表 | 0 个 |
+| 关联引用 | 4 个 |
 
-## 关联（4 个）
+## 关联引用 (4个)
 
-- `productApplyRangeId` -> `pc.product.ProductApplyRange` ()
-- `tagId` -> `pc.tag.Tag` ()
-- `ytenant` -> `yht.tenant.YhtTenant` ()
-- `skuId` -> `pc.product.ProductSKU` (0..n)
+| 字段名 | 引用类型 |
+|--------|---------|
+| `productApplyRangeId` | `` |
+| `tagId` | `` |
+| `ytenant_id` | `` |
+| `skuId` | `` |
+
+## 继承接口 (2个, 2字段)
+
+- **租户相关** (`coredoc.pub.TenantObselete`)
+  - `tenant_id` → `tenant_id`
+- **统一租户接口** (`ucfbase.ucfbaseItf.IYTenant`)
+  - `ytenant_id` → `ytenant_id`
+
+## 字段列表（按类型分组）
+
+> 共 8 个直连字段
+
+### 引用字段 (4个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `ytenant_id` | `ytenant_id` | `ytenant` | 租户ID |
+| `productApplyRangeId` | `productApplyRangeId` | `productApplyRangeId` | 物料适用范围ID |
+| `skuId` | `skuId` | `skuId` | SKUID |
+| `tagId` | `tagId` | `tagId` | 标签ID |
+
+### 布尔字段 (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `isCreator` | `isCreator` | `isCreator` | 是否创建者 |
+
+### 长整数 (2个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `id` | `id` | `id` | ID |
+| `tenant_id` | `tenant_id` | `tenant` | 租户ID(旧) |
+
+### timestamp (1个)
+
+| 字段名 | 数据库列 | 字段编码 | 显示名 |
+|--------|---------|---------|--------|
+| `pubts` | `pubts` | `pubts` | 时间戳 |

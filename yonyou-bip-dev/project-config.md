@@ -12,3 +12,4 @@
 | 泸州老窖 | BIP 旗舰版 | `references/projects/泸州老窖-BIP.md` |
 | 机械总院 | BIP 旗舰版 本地部署 | `references/projects/机械总院-BIP-旗舰版.md` |
 | 国投中鲁 | BIP R6 | `references/projects/国投中鲁-BIP-R6.md` |
+| 水投 | NCC 2207 | `references/projects/水投-NCC2207.md` |

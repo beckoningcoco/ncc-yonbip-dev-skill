@@ -1,0 +1,150 @@
+---
+tags: ["BIP", "元数据", "数据字典", "ycContractManagement", "cpu-contract.contract.ContractVODefine"]
+created: 2026-06-04
+updated: 2026-06-04
+sources: [元数据API queryByUri]
+platform_version: "BIP V5"
+project: ""
+last_verified: 2026-06-04
+status: verified
+source_type: api_response
+---
+
+# 采购合同表头自定义项 (`cpu-contract.contract.ContractVODefine`)
+
+> ⚡ **平台版本：BIP 旗舰版 V5** — 仅适用于用友 BIP 旗舰版（YonBIP），不适用于 NCC / NC Cloud 高级版。
+
+> YonBIP ycContractManagement 模块实体元数据字典。
+> 物理表：`cpu_ct_define` | 所属应用：`ycContractManagement`
+> 来源：元数据API `queryByUri` 返回的 `cpu-contract.contract.ContractVODefine` 实体完整定义。
+
+## 基本信息
+
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 采购合同表头自定义项 |
+| 物理表 | `cpu_ct_define` |
+| 数据库 schema | `cpu-contract` |
+| 所属应用 | `ycContractManagement` |
+| 元数据类型 | `Class` |
+| 元数据层级 | `0` |
+| 是否业务对象 | `true` |
+| 构建时间 | `2026-06-04 14:16:23.7050` |
+
+## 主键与编码
+
+| 角色 | 字段名 | 数据库列 | 类型 | 说明 |
+|------|--------|---------|------|------|
+| 主键 | `id` | `id` | 6c20fd57-9f69-497e-a1af-d0b30f9be5c3 | 合同ID |
+
+## 部署信息
+
+- **部署时间**: 2026-01-23 23:41:38:000
+- **安装来源**: `/app/data_scripts/cpu-cooperation-bootstrap/scripts/db/patch/mongodb/V5_R0_2507/0001_cpu_cooperation/0010_iuap_common/DML/0270_iuap_metadata/202512/0000-public-only/202512111524_metadata_cpu-contract-contract_delta.zip`
+- **安装人**: mongoTools
+- **安装排名**: `0ea2328f-b126-4d88-90c0-de4a8a4e7f21`
+
+## 术语标记
+
+`BusinessData`, `userdef`
+
+## 约束
+
+- **migration_id** (MetaClassPrimary): 合同ID — 唯一字段: `['id']`
+
+## 依赖接口（共 2 个）
+
+| # | 接口名 | URI | 版本 | 属性数 |
+|---|--------|-----|------|--------|
+| 1 | 自由自定义项 (`AttrextItem`) | `base.itf.AttrextItem` | 1816 | 60 |
+| 2 | 统一租户接口 (`IYTenant`) | `ucfbase.ucfbaseItf.IYTenant` | 40 | 1 |
+
+---
+
+## 直接属性（共 62 个）
+
+| # | 字段名 | 显示名 | 数据库列 | 类型 | 业务类型 | 必填 | 可空 |
+|---|--------|--------|---------|------|---------|------|------|
+| 1 | `define1` | 自定义项1 | `define1` | String | `text` |  | ✓ |
+| 2 | `define10` | 自定义项10 | `define10` | String | `text` |  | ✓ |
+| 3 | `define11` | 自定义项11 | `define11` | String | `text` |  | ✓ |
+| 4 | `define12` | 自定义项12 | `define12` | String | `text` |  | ✓ |
+| 5 | `define13` | 自定义项13 | `define13` | String | `text` |  | ✓ |
+| 6 | `define14` | 自定义项14 | `define14` | String | `text` |  | ✓ |
+| 7 | `define15` | 自定义项15 | `define15` | String | `text` |  | ✓ |
+| 8 | `define16` | 自定义项16 | `define16` | String | `text` |  | ✓ |
+| 9 | `define17` | 自定义项17 | `define17` | String | `text` |  | ✓ |
+| 10 | `define18` | 自定义项18 | `define18` | String | `text` |  | ✓ |
+| 11 | `define19` | 自定义项19 | `define19` | String | `text` |  | ✓ |
+| 12 | `define2` | 自定义项2 | `define2` | String | `text` |  | ✓ |
+| 13 | `define20` | 自定义项20 | `define20` | String | `text` |  | ✓ |
+| 14 | `define21` | 自定义项21 | `define21` | String | `text` |  | ✓ |
+| 15 | `define22` | 自定义项22 | `define22` | String | `text` |  | ✓ |
+| 16 | `define23` | 自定义项23 | `define23` | String | `text` |  | ✓ |
+| 17 | `define24` | 自定义项24 | `define24` | String | `text` |  | ✓ |
+| 18 | `define25` | 自定义项25 | `define25` | String | `text` |  | ✓ |
+| 19 | `define26` | 自定义项26 | `define26` | String | `text` |  | ✓ |
+| 20 | `define27` | 自定义项27 | `define27` | String | `text` |  | ✓ |
+| 21 | `define28` | 自定义项28 | `define28` | String | `text` |  | ✓ |
+| 22 | `define29` | 自定义项29 | `define29` | String | `text` |  | ✓ |
+| 23 | `define3` | 自定义项3 | `define3` | String | `text` |  | ✓ |
+| 24 | `define30` | 自定义项30 | `define30` | String | `text` |  | ✓ |
+| 25 | `define31` | 自定义项31 | `define31` | String | `text` |  | ✓ |
+| 26 | `define32` | 自定义项32 | `define32` | String | `text` |  | ✓ |
+| 27 | `define33` | 自定义项33 | `define33` | String | `text` |  | ✓ |
+| 28 | `define34` | 自定义项34 | `define34` | String | `text` |  | ✓ |
+| 29 | `define35` | 自定义项35 | `define35` | String | `text` |  | ✓ |
+| 30 | `define36` | 自定义项36 | `define36` | String | `text` |  | ✓ |
+| 31 | `define37` | 自定义项37 | `define37` | String | `text` |  | ✓ |
+| 32 | `define38` | 自定义项38 | `define38` | String | `text` |  | ✓ |
+| 33 | `define39` | 自定义项39 | `define39` | String | `text` |  | ✓ |
+| 34 | `define4` | 自定义项4 | `define4` | String | `text` |  | ✓ |
+| 35 | `define40` | 自定义项40 | `define40` | String | `text` |  | ✓ |
+| 36 | `define41` | 自定义项41 | `define41` | String | `text` |  | ✓ |
+| 37 | `define42` | 自定义项42 | `define42` | String | `text` |  | ✓ |
+| 38 | `define43` | 自定义项43 | `define43` | String | `text` |  | ✓ |
+| 39 | `define44` | 自定义项44 | `define44` | String | `text` |  | ✓ |
+| 40 | `define45` | 自定义项45 | `define45` | String | `text` |  | ✓ |
+| 41 | `define46` | 自定义项46 | `define46` | String | `text` |  | ✓ |
+| 42 | `define47` | 自定义项47 | `define47` | String | `text` |  | ✓ |
+| 43 | `define48` | 自定义项48 | `define48` | String | `text` |  | ✓ |
+| 44 | `define49` | 自定义项49 | `define49` | String | `text` |  | ✓ |
+| 45 | `define5` | 自定义项5 | `define5` | String | `text` |  | ✓ |
+| 46 | `define50` | 自定义项50 | `define50` | String | `text` |  | ✓ |
+| 47 | `define51` | 自定义项51 | `define51` | String | `text` |  | ✓ |
+| 48 | `define52` | 自定义项52 | `define52` | String | `text` |  | ✓ |
+| 49 | `define53` | 自定义项53 | `define53` | String | `text` |  | ✓ |
+| 50 | `define54` | 自定义项54 | `define54` | String | `text` |  | ✓ |
+| 51 | `define55` | 自定义项55 | `define55` | String | `text` |  | ✓ |
+| 52 | `define56` | 自定义项56 | `define56` | String | `text` |  | ✓ |
+| 53 | `define57` | 自定义项57 | `define57` | String | `text` |  | ✓ |
+| 54 | `define58` | 自定义项58 | `define58` | String | `text` |  | ✓ |
+| 55 | `define59` | 自定义项59 | `define59` | String | `text` |  | ✓ |
+| 56 | `define6` | 自定义项6 | `define6` | String | `text` |  | ✓ |
+| 57 | `define60` | 自定义项60 | `define60` | String | `text` |  | ✓ |
+| 58 | `define7` | 自定义项7 | `define7` | String | `text` |  | ✓ |
+| 59 | `define8` | 自定义项8 | `define8` | String | `text` |  | ✓ |
+| 60 | `define9` | 自定义项9 | `define9` | String | `text` |  | ✓ |
+| 61 | `id` | 合同ID | `id` | 6c20fd57-9f69-497e-a1af-d0b30f9be5c3 | `quote` |  | ✓ |
+| 62 | `ytenant` | 租户id | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 | `quote` | ✓ | ✓ |
+
+---
+
+## 关联属性（共 2 个）
+
+> Composition = 生命周期由此实体管理; Service = 仅外键引用; None = 内联
+
+| # | 字段名 | 显示名 | 目标实体 | 数据库列 | 关系 | 多重性 | 组合 | 隔离级 | 已废弃 |
+|---|--------|--------|---------|---------|------|--------|------|--------|--------|
+| 1 | `ytenant` | 租户id | `yht.tenant.YhtTenant` | `ytenant_id` |  →  |  |  | Service |  |
+| 2 | `id` | 合同ID | `cpu-contract.contract.ContractVO` | `id` | defines → id | 1 | true | None |  |
+
+### Composition（子表）
+
+- **id**: `defines` → `cpu-contract.contract.ContractVO` | 1
+
+### Service（外键引用）
+
+| 字段 | 目标实体 | 数据库列 |
+|------|---------|---------|
+| `ytenant` (租户id) | `yht.tenant.YhtTenant` | `ytenant_id` |

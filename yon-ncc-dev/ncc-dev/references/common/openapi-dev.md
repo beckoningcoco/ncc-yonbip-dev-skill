@@ -210,3 +210,13 @@ Body: JSON 请求体
 
 ### was 环境访问 opm 报错 SRVE0260E
 - URL 需要加 `/index.html`：`http://ip:port/nccloud/resources/opm/index.html`
+
+---
+
+## 特殊情况：FIP 外部接口单（资产包模式）
+
+> **如果用户要开发的是 FIP 外部接口单（TXBill）的 OpenAPI**，
+> 请参考 [[openapi-fip-txbill-pattern]]，不使用本文档的标准模式。
+>
+> 区别：资产包模式使用 `AbstractRestResource` + `transferBill()` + `IFipMessageService.sendMessage()`，
+> 而非 `AbstractNCCRestResource` + 手动 JSON 解析 + 直接持久化。

@@ -232,6 +232,7 @@ NCLocator.getInstance().lookup(IPreAlertPlugin.class);
 | `references/common/nc65-datadict-summary.md` | NC65 数据字典索引（179模块5312表，按领域分组，含表名/中文名/VO类） | 需要查找数据库表名、VO 类、字段结构时 |
 | `references/common/arap-payablebill-frontend.md` | 应付单卡片前端实战参考（目录结构、按钮分发、NCModal弹框、数据操作API、缓存机制、联查模式、入库明细弹框） | 涉及应付单/付款单/报销单前端客开、入库明细弹框、EAM集成时 |
 | `references/common/openapi-dev.md` | NCC OpenAPI 开发完整指南（Restlet+JAX-RS，5步：写Java类→写.rest文件→写.md文档→**前台注册**→调用测试） | 涉及 OpenAPI、开放接口、REST API、servlet 开发时 |
+| `references/common/openapi-fip-txbill-pattern.md` | 资产包 OpenAPI Resources 模式（FIP 外部接口单专用）：`AbstractRestResource` + `transferBill()` + `IFipMessageService.sendMessage()`，仅适用于外部接口单，不适用于付款单等其他单据 | 提到"资产包"开发 OpenAPI / Resources 类 / 外部接口单 OpenAPI 时 |
 
 
 ## 通用编码规则

@@ -7,6 +7,8 @@ description: >
 
 # YonQL 与 SQL 使用场景区分
 
+> ⚠️ `billQueryRepository.queryBySchema` 仅适用于 **BIP 旗舰版**，NCC 不适用。NCC 使用 `nc.bs.dao.BaseDAO` 或原生 SQL。
+
 ## API 与查询语种对应
 
 | API | 查询语种 | FROM | SELECT |

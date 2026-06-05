@@ -1,0 +1,77 @@
+---
+tags: ["BIP", "元数据", "数据字典", "QMSQIT", "QMSQIT.incominspectorder.IncomInspectOrderSimRecord"]
+created: 2026-06-05
+updated: 2026-06-05
+sources: [元数据API queryByUri]
+platform_version: "BIP V5"
+project: ""
+last_verified: 2026-06-05
+status: verified
+source_type: api_response
+---
+
+# 样本记录 (`QMSQIT.incominspectorder.IncomInspectOrderSimRecord`)
+
+> QMSQIT | 物理表：`qms_qit_incom_sim_record`
+
+## 基本信息
+
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 样本记录 |
+| 物理表 | `qms_qit_incom_sim_record` |
+| 数据库 schema | `QMS-QIT` |
+| 所属应用 | `QMSQIT` |
+| 构建时间 | `2026-06-05 16:45:27.0390` |
+
+## 主键与编码
+
+| 角色 | 字段名 | 类型 | 说明 |
+|------|--------|------|------|
+| 主键 | `id` | String | ID |
+
+---
+
+## 直接属性（26个）
+
+| # | 字段名 | 显示名 | 数据库列 | 类型 |
+|---|--------|--------|---------|------|
+| 1 | `ytenant` | 租户id | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 |
+| 2 | `tenant` | 租户ID | `tenant_id` | String |
+| 3 | `id` | ID | `id` | String |
+| 4 | `pk_inspectorder_simple` | 样本号id | `pk_inspectorder_simple` | String |
+| 5 | `pk_inspectorder_b` | 检验项目id | `pk_inspectorder_b` | 602ac289-2dbc-4c0a-9972-33796c984402 |
+| 6 | `pk_inspectorder_h` | 检验单id | `pk_inspectorder_h` | d4ef5893-2422-4c08-8e7e-df2087db7a8f |
+| 7 | `code` | 检验单号 | `code` | String |
+| 8 | `createDate` | 创建日期 | `create_date` | Date |
+| 9 | `createTime` | 创建时间 | `create_time` | DateTime |
+| 10 | `creator` | 创建人名称 | `creator` | String |
+| 11 | `creatorId` | 创建人 | `creatorId` | 54800425-15da-4742-ae89-059d05e77c9b |
+| 12 | `inspect_value` | 检验值 | `inspect_value` | String |
+| 13 | `inspecttime` | 检验时间 | `inspecttime` | DateTime |
+| 14 | `modifier` | 修改人名称 | `modifier` | String |
+| 15 | `modifierId` | 修改人 | `modifierId` | 54800425-15da-4742-ae89-059d05e77c9b |
+| 16 | `modifyDate` | 修改日期 | `modify_date` | Date |
+| 17 | `modifyTime` | 修改时间 | `modify_time` | DateTime |
+| 18 | `pk_inspect_item_code` | 检验项目编码 | `pk_inspect_item_code` | String |
+| 19 | `pk_inspector` | 检验员 | `pk_inspector` | 4effed83-35f5-4e3b-9be1-092b5ae602e8 |
+| 20 | `pk_inspector_code` | 检验员编码 | `pk_inspector_code` | String |
+| 21 | `pk_qualify_grade` | 质量等级 | `pk_qualify_grade` | String |
+| 22 | `sample_code` | 样本号 | `sample_code` | String |
+| 23 | `sample_inspect_result` | 样本检验结果 | `sample_inspect_result` | String |
+| 24 | `vnote` | 备注 | `vnote` | String |
+| 25 | `dr` | 逻辑删除标记 | `dr` | Short |
+| 26 | `pubts` | 时间戳 | `pubts` | DateTime |
+
+---
+
+## 关联属性（6个）
+
+| # | 字段名 | 显示名 | 目标实体 | 隔离级 | 组合 |
+|---|--------|--------|---------|--------|------|
+| 1 | `ytenant` | 租户id | `yht.tenant.YhtTenant` | Service |  |
+| 2 | `creatorId` | 创建人 | `base.user.User` | Service |  |
+| 3 | `modifierId` | 修改人 | `base.user.User` | Service |  |
+| 4 | `pk_inspectorder_b` | 检验项目id | `QMSQIT.incominspectorder.qms_qit_incominspectorder_b` | None | true |
+| 5 | `pk_inspectorder_h` | 检验单id | `QMSQIT.incominspectorder.qms_qit_incominspectorder_h` | None |  |
+| 6 | `pk_inspector` | 检验员 | `bd.staff.Staff` | Service |  |

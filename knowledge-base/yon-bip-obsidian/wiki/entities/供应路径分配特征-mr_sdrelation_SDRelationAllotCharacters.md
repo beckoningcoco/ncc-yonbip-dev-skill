@@ -1,0 +1,53 @@
+---
+tags: ["BIP", "元数据", "数据字典", "MR", "mr.sdrelation.SDRelationAllotCharacters"]
+created: 2026-06-05
+updated: 2026-06-05
+sources: [元数据API queryByUri]
+platform_version: "BIP V5"
+project: ""
+last_verified: 2026-06-05
+status: verified
+source_type: api_response
+---
+
+# 供应路径分配特征 (`mr.sdrelation.SDRelationAllotCharacters`)
+
+> MR | 物理表：`mr_sd_relation_allot_characters`
+
+## 基本信息
+
+| 属性 | 值 |
+|------|-----|
+| 显示名 | 供应路径分配特征 |
+| 物理表 | `mr_sd_relation_allot_characters` |
+| 数据库 schema | `yonbip-mm-plan` |
+| 所属应用 | `MR` |
+| 构建时间 | `2026-06-05 15:17:13.9330` |
+
+## 主键与编码
+
+| 角色 | 字段名 | 类型 | 说明 |
+|------|--------|------|------|
+| 主键 | `id` | Long | ID |
+
+---
+
+## 直接属性（5个）
+
+| # | 字段名 | 显示名 | 数据库列 | 类型 |
+|---|--------|--------|---------|------|
+| 1 | `characterId` | 特征ID | `character_id` | 1a5d304f-40a4-47a2-a075-f8b5ab6af37b |
+| 2 | `id` | ID | `id` | Long |
+| 3 | `pubts` | 时间戳 | `pubts` | DateTime |
+| 4 | `sdRelationAllotId` | 供应路径分配ID | `sd_relation_allot_id` | 46ef5ff1-51f4-47b7-80b3-fb2cf278c76a |
+| 5 | `ytenant` | 租户id | `ytenant_id` | e4933a03-9dea-472b-a644-cdd654222f45 |
+
+---
+
+## 关联属性（3个）
+
+| # | 字段名 | 显示名 | 目标实体 | 隔离级 | 组合 |
+|---|--------|--------|---------|--------|------|
+| 1 | `ytenant` | 租户id | `yht.tenant.YhtTenant` | Service |  |
+| 2 | `sdRelationAllotId` | 供应路径分配ID | `mr.sdrelation.SDRelationAllot` | None | true |
+| 3 | `characterId` | 特征ID | `base.character.Character` | Service |  |

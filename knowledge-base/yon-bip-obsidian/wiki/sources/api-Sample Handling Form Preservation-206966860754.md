@@ -1,0 +1,239 @@
+---
+title: "留样处理单保存"
+apiId: "2069668607549767687"
+apiPath: "请求方式	POST"
+method: "ContentType	application/json"
+category: "Sample Retention Processing Document"
+domain: "QMS"
+date: 2026-06-07
+ingested: 2026-06-07
+tags: [YonBIP, OpenAPI, Sample Retention Processing Document]
+platform_version: "BIP"
+source_type: community-api-docs
+---
+
+# 留样处理单保存
+
+>  请求方式	POST | Sample Retention Processing Document (QMS)
+
+
+## 1. 请求说明
+
+请求域名	动态域名，获取方式详见 获取租户所在数据中心域名
+请求地址	/yonbip/QMS_QIT/retentionsamprocess/save
+请求方式	POST
+ContentType	application/json
+应用场景	开放API
+事务和幂等性	MDD幂等
+用户身份	支持传递普通用户身份，详细说明见开放平台用户认证接入规范
+来源	系统级
+
+## 2. 请求参数
+
+名称	类型	参数位置	必填	描述
+access_token	string	query	是	调用方应用token
+Body参数
+名称	类型	数组	必填	描述
+data	object	否	是	业务数据
+resubmitCheckKey	string	否	否	保证请求的幂等性,该值由客户端生成,并且必须是全局唯一的，长度不能超过32位。更多信息,请参见«MDD幂等性»
+code	string	否	否	单据编号：优先按编码规则，编码规则若为自动编码（不可改），按自动编码规则生成，若为自动编码（可改），以输入为准 若为手工编码，以输入为准，后台保存时校验必输。 示例：LYCL2023122900001
+transType	string	否	否	交易类型id，id和编码都存在时以id为准，均为空时按默认交易类型赋值
+tranTypeCode	string	否	否	交易类型编码，id和编码都存在时以id为准，均为空时按默认交易类型赋值
+processType	string	否	是	处理类型：0-检验、1-销毁
+vouchdate	date
+格式:yyyy-MM-dd HH:mm:ss	否	否	单据日期，为空时按当前业务日期赋值
+processPeople	string	否	否	业务员id
+processPeopleCode	string	否	否	业务员编码
+_status	string	否	是	操作标识：Insert为新增，Update为更新
+detailList	object	是	是	详细信息
+
+## 3. 请求示例
+
+Url: /yonbip/QMS_QIT/retentionsamprocess/save?access_token=访问令牌
+Body: {
+	"data": {
+		"resubmitCheckKey": "",
+		"code": "LYCL2023122900001",
+		"transType": "",
+		"tranTypeCode": "",
+		"processType": "",
+		"vouchdate": "2026-06-07 13:18:14",
+		"processPeople": "",
+		"processPeopleCode": "",
+		"_status": "",
+		"detailList": [
+			{
+				"sampleRecordCode": "",
+				"processNum": 0
+			}
+		]
+	}
+}
+
+## 4. 返回值参数
+
+名称	类型	数组	描述
+billtype	string	否	事项类型, 1:销售发票、2:其它应收事项、3:销售发票(红字)、4:其它应收事项(红字)、5:订单日报、6:内部交易结算单、7:收款单、8:其它应付事项、9:客户退款单、10:付款单、11:供应商退款单、12:转账单、13:汇率损益单、14:外币兑换单、
+creator	string	否	创建人
+creator	string	否	创建人
+displayCode	string	否	异常码
+displayCode	string	否	异常码
+message	string	否	信息 示例：操作成功
+data	string	否	响应信息
+salesOrgId	string	否	销售组织id
+saleDepartmentId	string	否	销售部门id
+transactionTypeId	string	否	交易类型id
+settlementOrgId	string	否	开票组织id
+bizId	string	否	商家id
+createDate	string	否	创建时间
+synSourceOrg	string	否	协同来源组织id
+ecsuiteuser	string	否	气泡联系人
+ecsuiteuser	string	否	气泡联系人
+billtype	string	否	事项类型, 1:销售发票、2:其它应收事项、3:销售发票(红字)、4:其它应收事项(红字)、5:订单日报、6:内部交易结算单、7:收款单、8:其它应付事项、9:客户退款单、10:付款单、11:供应商退款单、12:转账单、13:汇率损益单、14:外币兑换单、
+creator	string	否	创建人
+displayCode	string	否	异常码
+message	string	否	信息 示例：操作成功
+data	string	否	响应信息
+icaConfirmTime	DateTime	否	确认时间 示例：2022-09-26 00:00:00
+cpickrowno	string	否	波次号
+cpickrowno	string	否	波次号
+cpickrowno	string	否	波次号
+code	string	否	单据编号
+code	string	否	单据编号
+code	string	否	返回编码 示例：200
+message	string	否	message 示例：操作成功
+data	object	否	data
+successOrder	object	是	successOrder
+failedOrder	object	是	failedOrder
+failCount	number
+小数位数:0,最大长度:10	否	failCount 示例：1
+successCount	number
+小数位数:0,最大长度:10	否	successCount 示例：1
+count	number
+小数位数:0,最大长度:10	否	count 示例：2
+message	string	否	返回信息 示例：操作成功
+data	object	否	返回数据
+code	string	否	单据编号
+createTime	date
+格式:yyyy-MM-dd HH:mm:ss	否	创建时间 示例：2023-11-02 13:50:48
+creatorId	string	否	创建人id 示例：1503246490875723783
+id	string	否	单据id 示例：1852885373117530115
+modifier	string	否	修改人 示例：李四
+modifierId	string	否	修改人id 示例：1768148966910722049
+modifyTime	date
+格式:yyyy-MM-dd HH:mm:ss	否	修改时间 示例：2023-12-25 10:44:22
+orgId	string	否	质检组织id 示例：1503239447124639752
+orgName	string	否	质检组织 示例：测试组织
+orgCode	string	否	质检组织编码
+processPeople	string	否	业务员id 示例：1800113590987915269
+processPeopleName	string	否	业务员 示例：张杰
+processType	string	否	处理类型：0-检验、1-销毁 示例：0
+pubts	date
+格式:yyyy-MM-dd HH:mm:ss	否	时间戳 示例：2023-12-25 10:44:22
+returncount	number
+小数位数:0,最大长度:10	否	退回次数 示例：0
+status	number
+小数位数:0,最大长度:1	否	单据状态：0-开立、1-已审核、3-审核中 示例：0
+transType	string	否	交易类型id 示例：1499805938599592507
+transTypeName	string	否	交易类型 示例：留样处理
+verifystate	number
+小数位数:0,最大长度:2	否	单据状态：0-开立、1-审核中、2-已审批、4-已驳回。 示例：0
+detailList	object	是	详细信息
+
+## 5. 正确返回示例
+
+{
+	"code": "200",
+	"message": "操作成功",
+	"data": {
+		"code": "",
+		"createTime": "2023-11-02 13:50:48",
+		"creatorId": "1503246490875723783",
+		"id": "1852885373117530115",
+		"modifier": "李四",
+		"modifierId": "1768148966910722049",
+		"modifyTime": "2023-12-25 10:44:22",
+		"orgId": "1503239447124639752",
+		"orgName": "测试组织",
+		"orgCode": "",
+		"processPeople": "1800113590987915269",
+		"processPeopleName": "张杰",
+		"processType": "0",
+		"pubts": "2023-12-25 10:44:22",
+		"returncount": 0,
+		"status": 0,
+		"transType": "1499805938599592507",
+		"transTypeName": "留样处理",
+		"verifystate": 0,
+		"detailList": [
+			{
+				"batchNo": "",
+				"id": "",
+				"isCheckApply": 0,
+				"processNum": 0,
+				"productId": "",
+				"productIdModel": "",
+				"productCode": "",
+				"productModelDescription": "",
+				"productName": "",
+				"retentionResidueNum": 0,
+				"retentionsampleProcessId": "",
+				"sampleDefineId": "",
+				"sampleRecordCode": "",
+				"sampleRecordId": "",
+				"source": "qms_qit_sample_record_card",
+				"sourceAutoId": "",
+				"sourceId": "",
+				"supplierId": "",
+				"supplierName": "",
+				"unitId": "",
+				"unitName": "",
+				"unitPrecision": 0,
+				"upcode": "YP202403290010"
+			}
+		]
+	}
+}
+
+## 6. 业务异常码
+
+异常码	异常码信息	描述
+暂时没有数据哦~
+
+## 7. 错误返回码
+
+错误码	错误信息	描述
+1002	数据不存在	按照提示代码解决
+1001	价税合计必须小于0	请确认价税合计金额
+1002	数据不存在	按照提示代码解决
+0	未传入优惠券档案id	coupon_id值填写有误
+暂时没有数据哦~
+
+## 9. 接口变更日志
+
+	序号	修改时间	变更内容概要
+暂时没有数据哦~
+
+## 1. 请求说明
+
+
+## 2. 请求参数
+
+
+## 3. 请求示例
+
+
+## 4. 返回值参数
+
+
+## 5. 正确返回示例
+
+
+## 6. 业务异常码
+
+
+## 7. 错误返回码
+
+
+## 9. 接口变更日志
+

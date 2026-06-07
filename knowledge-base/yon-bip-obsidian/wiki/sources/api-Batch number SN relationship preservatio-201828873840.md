@@ -1,0 +1,381 @@
+---
+title: "批号序列号关系保存"
+apiId: "2018288738404139013"
+apiPath: "请求方式	POST"
+method: "ContentType	application/json"
+category: "Batch No. and SN Relationship"
+domain: "QMS"
+date: 2026-06-07
+ingested: 2026-06-07
+tags: [YonBIP, OpenAPI, Batch No. and SN Relationship]
+platform_version: "BIP"
+source_type: community-api-docs
+---
+
+# 批号序列号关系保存
+
+>  请求方式	POST | Batch No. and SN Relationship (QMS)
+
+
+## 1. 请求说明
+
+请求域名	动态域名，获取方式详见 获取租户所在数据中心域名
+请求地址	/yonbip/QMS_QIT/bnsnrelation/save
+请求方式	POST
+ContentType	application/json
+应用场景	开放API
+事务和幂等性	MDD幂等
+用户身份	支持传递普通用户身份，详细说明见开放平台用户认证接入规范
+来源	系统级
+
+## 2. 请求参数
+
+名称	类型	参数位置	必填	描述
+access_token	string	query	是	调用方应用token
+Body参数
+名称	类型	数组	必填	描述
+data	object	否	是	业务数据
+resubmitCheckKey	string	否	否	保证请求的幂等性,该值由客户端生成,并且必须是全局唯一的，长度不能超过32位。更多信息,请参见«MDD幂等性»
+id	long	否	否	批号序列号关系id，_status为新增态时可空；_status为更新态时，code和id任一不为空，都有值默认取id 示例：1838088463367798789
+code	string	否	否	批号序列号关系单据编码，_status为新增态时可空；_status为更新态时，code和id任一不为空，都有值默认取id 示例：LSR202310130002
+transTypeId	string	否	否	交易类型id 示例：1816680405052424199
+transTypeCode	string	否	否	交易类型编码 示例：BNSNR01
+stockOrgId	string	否	否	库存组织id，_status为新增态时，编码和id任一不为空，都有值默认取id 示例：1676253442828926979
+stockOrgCode	string	否	否	库存组织编码，_status为新增态时，编码和id任一不为空，都有值默认取id 示例：0810YWDY
+productId	long	否	否	物料id，_status为新增态时，编码和id任一不为空，都有值默认取id 示例：1743670728436219908
+productCode	string	否	否	物料编码，_status为新增态时，编码和id任一不为空，都有值默认取id 示例：5-1-1---411612
+busiDate	date
+格式:yyyy-MM-dd	否	否	业务日期 示例：2023-05-26
+factoryId	string	否	否	生产组织id，编码和id都有值时默认取id 示例：1539613318901137418
+factoryCode	string	否	否	生产组织编码，编码和id都有值时默认取id 示例：YX001
+purchaseOrgId	string	否	否	采购组织id，编码和id都有值时默认取id 示例：2018251148821004294
+purchaseOrgCode	string	否	否	采购组织编码，编码和id都有值时默认取id 示例：ywdy01
+deptId	string	否	否	部门id，编码和id都有值时默认取id 示例：2018251148821004295
+deptCode	string	否	否	部门编码，编码和id都有值时默认取id 示例：XG01
+supplierId	long	否	否	供应商id，编码和id都有值时默认取id 示例：2018251148821004295
+supplierCode	string	否	否	供应商编码，编码和id都有值时默认取id 示例：GY01
+batchNo	string	否	否	批次号，_status为新增态时，批次号和序列号任一不为空 示例：PCDAA001003020220817000003
+sn	string	否	否	序列号，_status为新增态时，批次号和序列号任一不为空 示例：SN000000000002
+num	BigDecimal	否	否	数量，_status为Insert时不为空，序列号不为空时数量必须为1 示例：100
+unitId	long	否	否	单位id，编码和id都有值时默认取id 示例：2018257969241128969
+unitCode	string	否	否	单位编码，编码和id都有值时默认取id 示例：PFM
+processOrder	int	否	否	工序顺序号 示例：10
+processId	long	否	否	工序ID，编码和id都有值时默认取id 示例：2021979755959549959
+processCode	string	否	否	工序编码，编码和id都有值时默认取id 示例：TFP
+remark	string	否	否	备注 示例：批号序列号关系基本信息
+sourceType	string	否	否	来源单据类型：IMPSFC_proceOrder-生产订单，po_subcontract_order-委外订单，po_finishedreport-完工报告，st_storeprorecord-产品入库，st_osminrecord-委外入库 示例：IMPSFC_proceOrder
+sourceDocId	string	否	否	来源单据ID 示例：2021979755959123959
+sourceCode	string	否	否	来源单据号 示例：SCDD006203
+sourceDetailId	string	否	否	来源单据行ID 示例：2018257969241128456
+sourceLineNum	int	否	否	来源单据行号 示例：20
+orderType	string	否	否	源头订单类型：IMPSFC_proceOrder-生产订单，po_subcontract_order-委外订单 示例：po_subcontract_order
+orderId	string	否	否	源头订单ID 示例：2018257969241128457
+orderCode	string	否	否	源头订单号 示例：SCDD006203
+orderDetailId	string	否	否	源头订单行ID 示例：1918257969241128457
+orderLineNum	int	否	否	源头订单行号 示例：20
+_status	string	否	是	操作标识：Insert为新增，Update为更新 示例：Insert
+bnSnRelationBodyList	object	是	否	批号序列号关系详细信息：_status为新增态详细信息不为空
+
+## 3. 请求示例
+
+Url: /yonbip/QMS_QIT/bnsnrelation/save?access_token=访问令牌
+Body: {
+	"data": {
+		"resubmitCheckKey": "",
+		"id": 1838088463367798789,
+		"code": "LSR202310130002",
+		"transTypeId": "1816680405052424199",
+		"transTypeCode": "BNSNR01",
+		"stockOrgId": "1676253442828926979",
+		"stockOrgCode": "0810YWDY",
+		"productId": 1743670728436219908,
+		"productCode": "5-1-1---411612",
+		"busiDate": "2023-05-26",
+		"factoryId": "1539613318901137418",
+		"factoryCode": "YX001",
+		"purchaseOrgId": "2018251148821004294",
+		"purchaseOrgCode": "ywdy01",
+		"deptId": "2018251148821004295",
+		"deptCode": "XG01",
+		"supplierId": 2018251148821004295,
+		"supplierCode": "GY01",
+		"batchNo": "PCDAA001003020220817000003",
+		"sn": "SN000000000002",
+		"num": 100,
+		"unitId": 2018257969241128969,
+		"unitCode": "PFM",
+		"processOrder": 10,
+		"processId": 2021979755959549959,
+		"processCode": "TFP",
+		"remark": "批号序列号关系基本信息",
+		"sourceType": "IMPSFC_proceOrder",
+		"sourceDocId": "2021979755959123959",
+		"sourceCode": "SCDD006203",
+		"sourceDetailId": "2018257969241128456",
+		"sourceLineNum": 20,
+		"orderType": "po_subcontract_order",
+		"orderId": "2018257969241128457",
+		"orderCode": "SCDD006203",
+		"orderDetailId": "1918257969241128457",
+		"orderLineNum": 20,
+		"_status": "Insert",
+		"bnSnRelationBodyList": [
+			{
+				"id": 2018262865491787784,
+				"productId": 2018264007965147144,
+				"productCode": "000018",
+				"batchNo": "PCDAA001003020220817000003",
+				"sn": "SN000000000002",
+				"num": 200,
+				"unitId": 2018265768889679872,
+				"unitCode": "PFM",
+				"supplyOrgId": "1539613318901137418",
+				"supplyOrgCode": "YX001",
+				"purchaseOrgId": "2018251148821004294",
+				"purchaseOrgCode": "ywdy01",
+				"deptId": "2018251148821004295",
+				"deptCode": "XG01",
+				"supplierId": 2018251148821004295,
+				"supplierCode": "GY01",
+				"warehouseId": 2018251148821004295,
+				"warehouseCode": "CK01",
+				"remark": "批号序列号关系详细信息",
+				"sourceType": "osm_order",
+				"sourceDocId": "2021979755959123959",
+				"sourceCode": "",
+				"sourceDetailId": "2018257969241128459",
+				"sourceLineNum": 20
+			}
+		]
+	}
+}
+
+## 4. 返回值参数
+
+名称	类型	数组	描述
+billtype	string	否	事项类型, 1:销售发票、2:其它应收事项、3:销售发票(红字)、4:其它应收事项(红字)、5:订单日报、6:内部交易结算单、7:收款单、8:其它应付事项、9:客户退款单、10:付款单、11:供应商退款单、12:转账单、13:汇率损益单、14:外币兑换单、
+creator	string	否	创建人
+creator	string	否	创建人
+displayCode	string	否	异常码
+displayCode	string	否	异常码
+message	string	否	信息 示例：操作成功
+data	string	否	响应信息
+salesOrgId	string	否	销售组织id
+saleDepartmentId	string	否	销售部门id
+transactionTypeId	string	否	交易类型id
+settlementOrgId	string	否	开票组织id
+bizId	string	否	商家id
+createDate	string	否	创建时间
+synSourceOrg	string	否	协同来源组织id
+ecsuiteuser	string	否	气泡联系人
+ecsuiteuser	string	否	气泡联系人
+billtype	string	否	事项类型, 1:销售发票、2:其它应收事项、3:销售发票(红字)、4:其它应收事项(红字)、5:订单日报、6:内部交易结算单、7:收款单、8:其它应付事项、9:客户退款单、10:付款单、11:供应商退款单、12:转账单、13:汇率损益单、14:外币兑换单、
+creator	string	否	创建人
+displayCode	string	否	异常码
+message	string	否	信息 示例：操作成功
+data	string	否	响应信息
+icaConfirmTime	DateTime	否	确认时间 示例：2022-09-26 00:00:00
+cpickrowno	string	否	波次号
+cpickrowno	string	否	波次号
+cpickrowno	string	否	波次号
+code	string	否	单据编号
+code	string	否	单据编号
+code	string	否	返回编码 示例：200
+message	string	否	message 示例：操作成功
+data	object	否	data
+successOrder	object	是	successOrder
+failedOrder	object	是	failedOrder
+failCount	number
+小数位数:0,最大长度:10	否	failCount 示例：1
+successCount	number
+小数位数:0,最大长度:10	否	successCount 示例：1
+count	number
+小数位数:0,最大长度:10	否	count 示例：2
+message	string	否	返回信息 示例：操作成功
+data	object	否	返回数据
+qms_qit_incominspectorder_sourcelistList	object	是	源单信息
+id	long	否	单据id 示例：1503239447124639752
+code	string	否	单据编码 示例：LSR202406120001
+transType	string	否	交易类型id 示例：2018273877799993353
+transType_name	string	否	交易类型 示例：批号序列号关系
+stockOrgId	string	否	库存组织id 示例：2018274384594075650
+stockOrg_name	string	否	库存组织 示例：王哈哈集团
+productId	long	否	物料id 示例：2018274977311621124
+product_code	string	否	物料编码 示例：5-1-1---411612
+product_name	string	否	物料名称 示例：Rachel物料3
+product_name	string	否	物料名称 示例：Rachel物料3
+busiDate	Date	否	业务日期 示例：2023-11-02
+factoryId	string	否	生产组织id 示例：2018277391083241480
+factory_name	string	否	生产组织 示例：西柚工厂220714
+purchaseOrgId	string	否	采购组织id 示例：2018251148821004294
+purchaseOrg_name	string	否	采购组织 示例：西单大悦城店
+deptId	string	否	部门id 示例：2018251148821004295
+dept_name	string	否	部门 示例：销管一部
+supplierId	long	否	供应商id 示例：2018279057530552321
+supplier_name	string	否	供应商 示例：ssx_供应商1
+verifystate	int	否	单据状态：0-开立、1-审核中、2-已审核 示例：2
+pubts	DateTime	否	时间戳 示例：2023-12-25 10:44:22
+batchNo	string	否	批次号 示例：PCDAA001003020220817000003
+sn	string	否	序列号 示例：SN000000000002
+num	BigDecimal	否	数量 示例：100
+unit	long	否	单位id 示例：2018257969241128969
+unit_name	string	否	单位 示例：千克
+bomId	long	否	BOMid 示例：2018283008877395972
+bomVersion	string	否	BOM版本 示例：1.0
+remark	string	否	备注 示例：批号序列号关系基本信息
+processOrder	int	否	工序顺序号 示例：10
+processId	long	否	工序ID 示例：2021979755959549959
+process_name	string	否	工序 示例：清洗
+sourceType	string	否	来源单据类型：IMPSFC_proceOrder-生产订单，po_subcontract_order-委外订单，po_finishedreport-完工报告，st_storeprorecord-产品入库，st_osminrecord-委外入库 示例：IMPSFC_proceOrder
+sourceDocId	string	否	来源单据ID 示例：2021979755959123959
+sourceCode	string	否	来源单据号 示例：SCDD006203
+sourceDetailId	string	否	来源单据行ID 示例：2018257969241128456
+sourceLineNum	int	否	来源单据行号 示例：20
+orderType	string	否	源头订单类型：IMPSFC_proceOrder-生产订单，po_subcontract_order-委外订单 示例：po_subcontract_order
+orderId	string	否	源头订单ID 示例：2018257969241128457
+orderCode	string	否	源头订单号 示例：SCDD006203
+orderDetailId	string	否	源头订单行ID 示例：1918257969241128457
+orderLineNum	int	否	源头订单行号 示例：20
+creatorId	long	否	创建人id 示例：1503246490875723783
+creator	string	否	创建人 示例：张三
+createTime	DateTime	否	创建时间 示例：2023-11-02 13:50:48
+modifierId	long	否	修改人id 示例：1768148966910722049
+modifier	string	否	修改人 示例：李四
+modifyTime	DateTime	否	修改时间 示例：2023-12-25 10:44:22
+audito	long	否	审核人id 示例：1768148966910722049
+auditor	string	否	审核人 示例：李四
+auditTime	DateTime	否	审核时间 示例：2023-12-25 10:44:22
+BnSnRelationBodyList	object	是	详细信息
+
+## 5. 正确返回示例
+
+{
+	"code": "200",
+	"message": "操作成功",
+	"data": {
+		"id": 1503239447124639752,
+		"code": "LSR202406120001",
+		"transType": "2018273877799993353",
+		"transType_name": "批号序列号关系",
+		"stockOrgId": "2018274384594075650",
+		"stockOrg_name": "王哈哈集团",
+		"productId": 2018274977311621124,
+		"product_code": "5-1-1---411612",
+		"product_name": "Rachel物料3",
+		"busiDate": "2023-11-02",
+		"factoryId": "2018277391083241480",
+		"factory_name": "西柚工厂220714",
+		"purchaseOrgId": "2018251148821004294",
+		"purchaseOrg_name": "西单大悦城店",
+		"deptId": "2018251148821004295",
+		"dept_name": "销管一部",
+		"supplierId": 2018279057530552321,
+		"supplier_name": "ssx_供应商1",
+		"verifystate": 2,
+		"pubts": "2023-12-25 10:44:22",
+		"batchNo": "PCDAA001003020220817000003",
+		"sn": "SN000000000002",
+		"num": 100,
+		"unit": 2018257969241128969,
+		"unit_name": "千克",
+		"bomId": 2018283008877395972,
+		"bomVersion": "1.0",
+		"remark": "批号序列号关系基本信息",
+		"processOrder": 10,
+		"processId": 2021979755959549959,
+		"process_name": "清洗",
+		"sourceType": "IMPSFC_proceOrder",
+		"sourceDocId": "2021979755959123959",
+		"sourceCode": "SCDD006203",
+		"sourceDetailId": "2018257969241128456",
+		"sourceLineNum": 20,
+		"orderType": "po_subcontract_order",
+		"orderId": "2018257969241128457",
+		"orderCode": "SCDD006203",
+		"orderDetailId": "1918257969241128457",
+		"orderLineNum": 20,
+		"creatorId": 1503246490875723783,
+		"creator": "张三",
+		"createTime": "2023-11-02 13:50:48",
+		"modifierId": 1768148966910722049,
+		"modifier": "李四",
+		"modifyTime": "2023-12-25 10:44:22",
+		"audito": 1768148966910722049,
+		"auditor": "李四",
+		"auditTime": "2023-12-25 10:44:22",
+		"BnSnRelationBodyList": [
+			{
+				"id": 1500425710867054598,
+				"parentId": 1503239447124639752,
+				"lineNo": 10,
+				"productId": 2018274977311621124,
+				"product_code": "5-1-1---411612",
+				"product_name": "Rachel物料3",
+				"batchNo": "PCDAA001003020220817000003",
+				"sn": "SN000000000002",
+				"num": 100,
+				"unit": 2018257969241128969,
+				"unit_name": "千克",
+				"remark": "批号序列号关系详细信息",
+				"supplyOrgId": "1539613318901137418",
+				"supplyOrg_name": "清洗工厂",
+				"purchaseOrgId": "2018251148821004294",
+				"purchaseOrg_name": "采购1",
+				"deptId": "2018251148821004295",
+				"dept_name": "生产部门",
+				"supplierId": 2018251148821004295,
+				"supplier_name": "ssx_供应商1",
+				"warehouseId": 2018251148821004295,
+				"warehouse_name": "1号仓库",
+				"sourceType": "osm_order",
+				"sourceDocId": "2021979755959123959",
+				"sourceCode": "",
+				"sourceDetailId": "2018257969241128459",
+				"sourceLineNum": 20
+			}
+		]
+	}
+}
+
+## 6. 业务异常码
+
+异常码	异常码信息	描述
+暂时没有数据哦~
+
+## 7. 错误返回码
+
+错误码	错误信息	描述
+1002	数据不存在	按照提示代码解决
+1001	价税合计必须小于0	请确认价税合计金额
+1002	数据不存在	按照提示代码解决
+0	未传入优惠券档案id	coupon_id值填写有误
+999	批号序列号关系保存异常	返回错误信息
+
+## 9. 接口变更日志
+
+	序号	修改时间	变更内容概要
+暂时没有数据哦~
+
+## 1. 请求说明
+
+
+## 2. 请求参数
+
+
+## 3. 请求示例
+
+
+## 4. 返回值参数
+
+
+## 5. 正确返回示例
+
+
+## 6. 业务异常码
+
+
+## 7. 错误返回码
+
+
+## 9. 接口变更日志
+

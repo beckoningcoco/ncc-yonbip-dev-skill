@@ -1,0 +1,203 @@
+---
+title: "检验项目分类列表查询"
+apiId: "1656222110589124610"
+apiPath: "请求方式	GET"
+method: "ContentType	application/json"
+category: "Inspection Charac. Category"
+domain: "IMCS"
+date: 2026-06-07
+ingested: 2026-06-07
+tags: [YonBIP, OpenAPI, Inspection Charac. Category]
+platform_version: "BIP"
+source_type: community-api-docs
+---
+
+# 检验项目分类列表查询
+
+>  请求方式	GET | Inspection Charac. Category (IMCS)
+
+
+## 1. 请求说明
+
+请求域名	动态域名，获取方式详见 获取租户所在数据中心域名
+请求地址	/yonbip/imcs/checkprojectclass/list
+请求方式	GET
+ContentType	application/json
+应用场景	开放API
+事务和幂等性	无
+用户身份	支持传递普通用户身份，详细说明见开放平台用户认证接入规范
+来源	系统级
+
+## 2. 请求参数
+
+名称	类型	参数位置	必填	描述
+access_token	string	query	是	调用方应用token
+code	string	query	否	检验项目分类编码    示例: klkl1
+name	string	query	否	检验项目分类名称    示例: klkl12
+applyOrgId	string	query	否	使用组织id，传值为组织id或组织编码皆可，单组织时不填，多组织必填，单组织租户下传值不生效，后台自动赋值为当前租户组织    示例: hm2
+
+## 3. 请求示例
+
+Url: /yonbip/imcs/checkprojectclass/list?access_token=访问令牌&code=klkl1&name=klkl12&applyOrgId=hm2
+
+## 4. 返回值参数
+
+名称	类型	数组	描述
+billtype	string	否	事项类型, 1:销售发票、2:其它应收事项、3:销售发票(红字)、4:其它应收事项(红字)、5:订单日报、6:内部交易结算单、7:收款单、8:其它应付事项、9:客户退款单、10:付款单、11:供应商退款单、12:转账单、13:汇率损益单、14:外币兑换单、
+creator	string	否	创建人
+creator	string	否	创建人
+displayCode	string	否	异常码
+displayCode	string	否	异常码
+message	string	否	信息 示例：操作成功
+data	string	否	响应信息
+salesOrgId	string	否	销售组织id
+saleDepartmentId	string	否	销售部门id
+transactionTypeId	string	否	交易类型id
+settlementOrgId	string	否	开票组织id
+bizId	string	否	商家id
+createDate	string	否	创建时间
+synSourceOrg	string	否	协同来源组织id
+ecsuiteuser	string	否	气泡联系人
+ecsuiteuser	string	否	气泡联系人
+billtype	string	否	事项类型, 1:销售发票、2:其它应收事项、3:销售发票(红字)、4:其它应收事项(红字)、5:订单日报、6:内部交易结算单、7:收款单、8:其它应付事项、9:客户退款单、10:付款单、11:供应商退款单、12:转账单、13:汇率损益单、14:外币兑换单、
+creator	string	否	创建人
+displayCode	string	否	异常码
+message	string	否	信息 示例：操作成功
+data	string	否	响应信息
+icaConfirmTime	DateTime	否	确认时间 示例：2022-09-26 00:00:00
+cpickrowno	string	否	波次号
+cpickrowno	string	否	波次号
+cpickrowno	string	否	波次号
+code	string	否	单据编号
+code	string	否	单据编号
+message	string	否	message 示例：操作成功
+data	object	否	data
+successOrder	object	是	successOrder
+failedOrder	object	是	failedOrder
+failCount	number
+小数位数:0,最大长度:10	否	failCount 示例：1
+successCount	number
+小数位数:0,最大长度:10	否	successCount 示例：1
+count	number
+小数位数:0,最大长度:10	否	count 示例：2
+qms_qit_incominspectorder_sourcelistList	object	是	源单信息
+product_name	string	否	物料名称 示例：Rachel物料3
+code	string	否	返回码，成功时返回200 示例：200
+message	string	否	返回信息 示例：操作成功
+data	object	是	调用成功时的返回数据
+parent	string	否	上级分类id 示例：2751094813053184
+note	string	否	备注 示例：备注1
+creator	string	否	创建人名称 示例：17611538853
+code	string	否	检验项目分类编码 示例：test01
+applyOrgId	string	否	使用组织id 示例：2731287669068800
+orgName	string	否	管理组织名称 示例：企业账号级
+level	long	否	分类层级 示例：2
+applyRangeId	long	否	适用范围id 示例：1655651266479521800
+creatorId	long	否	创建人id 示例：1648819365096194000
+vclassify	string	否	上级分类名称 示例：测试
+orgId	string	否	管理组织id 示例：666666
+applyOrgName	string	否	使用组织名称 示例：lj采购
+createTime	string	否	创建时间 示例：2023-02-09 19:46:16
+name	string	否	检验项目分类名称 示例：分类测试1
+id	string	否	检验项目分类id 示例：1655651266479521799
+pubts	string	否	时间戳 示例：2023-02-09 19:46:16
+children	object	是	下级分类数据，递归数据结构，children中的数据下可能还会继续包含children相同结构的下级数据
+modifier	string	否	更新人名称 示例：昵称-lj
+modifierId	long	否	更新人id 示例：2694968729983488
+modifyTime	string	否	更新时间 示例：2023-03-14 10:42:58
+
+## 5. 正确返回示例
+
+{
+	"code": "200",
+	"message": "操作成功",
+	"data": [
+		{
+			"parent": "2751094813053184",
+			"note": "备注1",
+			"creator": "17611538853",
+			"code": "test01",
+			"applyOrgId": "2731287669068800",
+			"orgName": "企业账号级",
+			"level": 2,
+			"applyRangeId": 1655651266479521800,
+			"creatorId": 1648819365096194000,
+			"vclassify": "测试",
+			"orgId": "666666",
+			"applyOrgName": "lj采购",
+			"createTime": "2023-02-09 19:46:16",
+			"name": "分类测试1",
+			"id": "1655651266479521799",
+			"pubts": "2023-02-09 19:46:16",
+			"children": [
+				{
+					"parent": "1655651266479521799",
+					"note": "beizhu",
+					"creator": "17611538853",
+					"code": "test02",
+					"applyOrgId": "2731287669068800",
+					"orgName": "企业账号级",
+					"level": 3,
+					"applyRangeId": 1655651738925924400,
+					"creatorId": 1648819365096194000,
+					"vclassify": "test01",
+					"orgId": "666666",
+					"applyOrgName": "lj采购",
+					"createTime": "2023-02-09 19:47:10",
+					"name": "分类2",
+					"id": "1655651738925924355",
+					"pubts": "2023-02-09 19:47:10",
+					"modifier": "昵称-lj",
+					"modifierId": 2694968729983488,
+					"modifyTime": "2023-03-14 10:42:58"
+				}
+			],
+			"modifier": "昵称-lj",
+			"modifierId": 2694968729983488,
+			"modifyTime": "2023-03-14 10:42:58"
+		}
+	]
+}
+
+## 6. 业务异常码
+
+异常码	异常码信息	描述
+暂时没有数据哦~
+
+## 7. 错误返回码
+
+错误码	错误信息	描述
+1002	数据不存在	按照提示代码解决
+1001	价税合计必须小于0	请确认价税合计金额
+1002	数据不存在	按照提示代码解决
+0	未传入优惠券档案id	coupon_id值填写有误
+999	取决于错误类型，以实际返回内容为准	
+
+## 9. 接口变更日志
+
+	序号	修改时间	变更内容概要
+暂时没有数据哦~
+
+## 1. 请求说明
+
+
+## 2. 请求参数
+
+
+## 3. 请求示例
+
+
+## 4. 返回值参数
+
+
+## 5. 正确返回示例
+
+
+## 6. 业务异常码
+
+
+## 7. 错误返回码
+
+
+## 9. 接口变更日志
+

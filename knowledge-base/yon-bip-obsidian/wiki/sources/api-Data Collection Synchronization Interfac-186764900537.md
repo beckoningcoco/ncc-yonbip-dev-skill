@@ -1,0 +1,169 @@
+---
+title: "数据采集同步接口"
+apiId: "1867649005372047362"
+apiPath: "请求方式	POST"
+method: "ContentType	application/json"
+category: "Data Collection"
+domain: "PFMM"
+date: 2026-06-07
+ingested: 2026-06-07
+tags: [YonBIP, OpenAPI, Data Collection]
+platform_version: "BIP"
+source_type: community-api-docs
+---
+
+# 数据采集同步接口
+
+>  请求方式	POST | Data Collection (PFMM)
+
+
+## 1. 请求说明
+
+请求域名	动态域名，获取方式详见 获取租户所在数据中心域名
+请求地址	/yonbip/hrcloud/openApi/syncSheetData
+请求方式	POST
+ContentType	application/json
+应用场景	开放API
+事务和幂等性	MDD幂等
+用户身份	支持传递普通用户身份，详细说明见开放平台用户认证接入规范
+来源	系统级
+
+## 2. 请求参数
+
+名称	类型	参数位置	必填	描述
+access_token	string	query	是	调用方应用token
+Body参数
+名称	类型	数组	必填	描述
+results	object	是	是	数据采集指标集合
+id	string	否	是	指标id
+planValue	string	否	否	目标值
+actualValue	string	否	否	完成值
+weight	number
+小数位数:2,最大长度:10	否	否	权重(0-100,小数位数2)
+evalstandard	string	否	否	评分标准
+extend1	string	否	否	扩展1
+extend2	string	否	否	扩展2
+extend3	string	否	否	扩展3
+extend4	string	否	否	扩展4
+extend5	string	否	否	扩展5
+extend6	string	否	否	扩展6
+extend7	string	否	否	扩展7
+extend8	string	否	否	扩展8
+extend9	string	否	否	扩展9
+extend10	string	否	否	扩展10
+extend11	string	否	否	扩展11
+extend12	string	否	否	扩展12
+extend13	string	否	否	扩展13
+extend14	string	否	否	扩展14
+extend15	string	否	否	扩展15
+extend16	string	否	否	扩展16
+
+## 3. 请求示例
+
+Url: /yonbip/hrcloud/openApi/syncSheetData?access_token=访问令牌
+Body: {
+	"results": [
+		{
+			"id": "",
+			"planValue": "",
+			"actualValue": "",
+			"weight": 0,
+			"evalstandard": "",
+			"extend1": "",
+			"extend2": "",
+			"extend3": "",
+			"extend4": "",
+			"extend5": "",
+			"extend6": "",
+			"extend7": "",
+			"extend8": "",
+			"extend9": "",
+			"extend10": "",
+			"extend11": "",
+			"extend12": "",
+			"extend13": "",
+			"extend14": "",
+			"extend15": "",
+			"extend16": ""
+		}
+	]
+}
+
+## 4. 返回值参数
+
+名称	类型	数组	描述
+billtype	string	否	事项类型, 1:销售发票、2:其它应收事项、3:销售发票(红字)、4:其它应收事项(红字)、5:订单日报、6:内部交易结算单、7:收款单、8:其它应付事项、9:客户退款单、10:付款单、11:供应商退款单、12:转账单、13:汇率损益单、14:外币兑换单、
+creator	string	否	创建人
+creator	string	否	创建人
+displayCode	string	否	异常码
+displayCode	string	否	异常码
+message	string	否	信息 示例：操作成功
+data	string	否	响应信息
+salesOrgId	string	否	销售组织id
+saleDepartmentId	string	否	销售部门id
+transactionTypeId	string	否	交易类型id
+settlementOrgId	string	否	开票组织id
+bizId	string	否	商家id
+createDate	string	否	创建时间
+synSourceOrg	string	否	协同来源组织id
+ecsuiteuser	string	否	气泡联系人
+ecsuiteuser	string	否	气泡联系人
+billtype	string	否	事项类型, 1:销售发票、2:其它应收事项、3:销售发票(红字)、4:其它应收事项(红字)、5:订单日报、6:内部交易结算单、7:收款单、8:其它应付事项、9:客户退款单、10:付款单、11:供应商退款单、12:转账单、13:汇率损益单、14:外币兑换单、
+creator	string	否	创建人
+displayCode	string	否	异常码
+message	string	否	信息 示例：操作成功
+data	string	否	响应信息
+
+## 5. 正确返回示例
+
+{
+	"code": "200",
+	"message": "",
+	"data": {}
+}
+
+## 6. 业务异常码
+
+异常码	异常码信息	描述
+暂时没有数据哦~
+
+## 7. 错误返回码
+
+错误码	错误信息	描述
+1002	数据不存在	按照提示代码解决
+1001	价税合计必须小于0	请确认价税合计金额
+1002	数据不存在	按照提示代码解决
+200	成功	成功
+300	保存报错请联系开发人员	保存报错请联系开发人员
+310101	参数不能为空或者档案编码不存在或者code不一致	参数不能为空或者档案编码不存在或者code不一致
+310008	参数校验失败，参数xx是必填的	参数校验失败，参数xx是必填的
+310015	参数校验错误，未通过正则匹配	参数校验错误，未通过正则匹配
+
+## 9. 接口变更日志
+
+	序号	修改时间	变更内容概要
+暂时没有数据哦~
+
+## 1. 请求说明
+
+
+## 2. 请求参数
+
+
+## 3. 请求示例
+
+
+## 4. 返回值参数
+
+
+## 5. 正确返回示例
+
+
+## 6. 业务异常码
+
+
+## 7. 错误返回码
+
+
+## 9. 接口变更日志
+

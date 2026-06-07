@@ -1,0 +1,230 @@
+---
+title: "所有权调出回写"
+apiId: "1795703973835964423"
+apiPath: "请求方式	POST"
+method: "ContentType	application/json"
+category: "Ownership Transfer-out"
+domain: "GAM"
+date: 2026-06-07
+ingested: 2026-06-07
+tags: [YonBIP, OpenAPI, Ownership Transfer-out]
+platform_version: "BIP"
+source_type: community-api-docs
+---
+
+# 所有权调出回写
+
+>  请求方式	POST | Ownership Transfer-out (GAM)
+
+
+## 1. 请求说明
+
+请求域名	动态域名，获取方式详见 获取租户所在数据中心域名
+请求地址	/yonbip/am/deployoutcard/save
+请求方式	POST
+ContentType	application/json
+应用场景	开放API
+事务和幂等性	无
+来源	系统级
+
+## 2. 请求参数
+
+名称	类型	参数位置	必填	描述
+access_token	string	query	是	调用方应用token
+Body参数
+名称	类型	数组	必填	描述
+data	object	是	是	所有权调出主表
+id	string	否	是	所有权调出主表id 示例：1457341416411234309
+pubts	string	否	是	表头时间戳 示例：2023-01-17 17:18:13
+actual_invoice_amount	BigDecimal	否	否	实开发票总额 示例：6666.66
+bodyvos_tax	object	是	是	税票明细表体
+bodyvos	object	是	是	所有权调出表体
+
+## 3. 请求示例
+
+Url: /yonbip/am/deployoutcard/save?access_token=访问令牌
+Body: {
+	"data": [
+		{
+			"id": "1457341416411234309",
+			"pubts": "2023-01-17 17:18:13",
+			"actual_invoice_amount": 6666.66,
+			"bodyvos_tax": [
+				{
+					"main_id": "1457005695971885057",
+					"invoice_code": "0110015435643",
+					"invoice_number": "2454654712078",
+					"bill_date": "2024-05-15",
+					"check_code": "69254926776588787",
+					"money": 888.88,
+					"rate": 0.3333,
+					"tax": 55.67,
+					"levied_total": 567.89,
+					"red_dashed": "0:否，1:是",
+					"bill_memo": "备注"
+				}
+			],
+			"bodyvos": [
+				{
+					"id": "1456444129022050313",
+					"real_opening_amount": 664.21,
+					"pubts": "2023-01-04 23:06:13"
+				}
+			]
+		}
+	]
+}
+
+## 4. 返回值参数
+
+名称	类型	数组	描述
+billtype	string	否	事项类型, 1:销售发票、2:其它应收事项、3:销售发票(红字)、4:其它应收事项(红字)、5:订单日报、6:内部交易结算单、7:收款单、8:其它应付事项、9:客户退款单、10:付款单、11:供应商退款单、12:转账单、13:汇率损益单、14:外币兑换单、
+creator	string	否	创建人
+creator	string	否	创建人
+displayCode	string	否	异常码
+displayCode	string	否	异常码
+message	string	否	信息 示例：操作成功
+data	string	否	响应信息
+salesOrgId	string	否	销售组织id
+saleDepartmentId	string	否	销售部门id
+transactionTypeId	string	否	交易类型id
+settlementOrgId	string	否	开票组织id
+bizId	string	否	商家id
+createDate	string	否	创建时间
+synSourceOrg	string	否	协同来源组织id
+ecsuiteuser	string	否	气泡联系人
+ecsuiteuser	string	否	气泡联系人
+billtype	string	否	事项类型, 1:销售发票、2:其它应收事项、3:销售发票(红字)、4:其它应收事项(红字)、5:订单日报、6:内部交易结算单、7:收款单、8:其它应付事项、9:客户退款单、10:付款单、11:供应商退款单、12:转账单、13:汇率损益单、14:外币兑换单、
+creator	string	否	创建人
+displayCode	string	否	异常码
+message	string	否	信息 示例：操作成功
+data	string	否	响应信息
+icaConfirmTime	DateTime	否	确认时间 示例：2022-09-26 00:00:00
+cpickrowno	string	否	波次号
+cpickrowno	string	否	波次号
+cpickrowno	string	否	波次号
+code	string	否	单据编号
+code	string	否	单据编号
+message	string	否	message 示例：操作成功
+data	object	否	data
+successOrder	object	是	successOrder
+failedOrder	object	是	failedOrder
+failCount	number
+小数位数:0,最大长度:10	否	failCount 示例：1
+successCount	number
+小数位数:0,最大长度:10	否	successCount 示例：1
+count	number
+小数位数:0,最大长度:10	否	count 示例：2
+qms_qit_incominspectorder_sourcelistList	object	是	源单信息
+product_name	string	否	物料名称 示例：Rachel物料3
+code	string	否	状态码 示例：200
+message	string	否	返回信息 示例：操作成功！
+message	string	否	提示信息 示例：操作成功！
+data	object	否	返回数据
+pageIndex	long	否	页码 示例：1
+pageSize	long	否	每条页数 示例：2
+recordCount	long	否	记录数 示例：5
+recordList	object	是	返回数据
+beginPageIndex	long	否	起始页 示例：1
+endPageIndex	long	否	结束页 示例：2
+pageCount	long	否	页数 示例：1
+data	object	否	数据
+count	long	否	数量 示例：1
+sucessCount	long	否	成功数量 示例：1
+failCount	long	否	失败数量 示例：0
+messages	object	是	提示信息
+infos	object	是	提示信息
+failInfos	object	是	错误信息
+
+## 5. 正确返回示例
+
+{
+	"code": "200",
+	"message": "操作成功！",
+	"data": {
+		"count": 1,
+		"sucessCount": 1,
+		"failCount": 0,
+		"messages": [
+			{}
+		],
+		"infos": [
+			{
+				"id": "1674854297208619009",
+				"bodyvos_tax": [
+					{
+						"main_id": "",
+						"invoice_code": "",
+						"invoice_number": "",
+						"bill_date": "",
+						"check_code": "",
+						"money": 0,
+						"rate": 0,
+						"tax": 0,
+						"levied_total": 0,
+						"red_dashed": "0:否，1:是",
+						"bill_memo": ""
+					}
+				],
+				"modifier": "00001951-7ca3-47ac-a462-d5a66e3e6724",
+				"modifier__name": "默认用户",
+				"modifiedtime": "2023-03-07 16:45:02",
+				"pubts": "2023-03-07 16:45:04",
+				"actual_invoice_amount": 600,
+				"bodyvos": [
+					{
+						"id": "1821793426285264899",
+						"real_opening_amount": 600,
+						"main_id": "1821793426285264898"
+					}
+				]
+			}
+		],
+		"failInfos": [
+			{}
+		]
+	}
+}
+
+## 6. 业务异常码
+
+异常码	异常码信息	描述
+暂时没有数据哦~
+
+## 7. 错误返回码
+
+错误码	错误信息	描述
+1002	数据不存在	按照提示代码解决
+1001	价税合计必须小于0	请确认价税合计金额
+1002	数据不存在	按照提示代码解决
+0	未传入优惠券档案id	coupon_id值填写有误
+999	报错具体提示信息，例如：服务端逻辑异常	查看日志找对应异常服务定位产生原因
+
+## 9. 接口变更日志
+
+	序号	修改时间	变更内容概要
+暂时没有数据哦~
+
+## 1. 请求说明
+
+
+## 2. 请求参数
+
+
+## 3. 请求示例
+
+
+## 4. 返回值参数
+
+
+## 5. 正确返回示例
+
+
+## 6. 业务异常码
+
+
+## 7. 错误返回码
+
+
+## 9. 接口变更日志
+

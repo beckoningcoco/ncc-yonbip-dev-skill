@@ -1,0 +1,130 @@
+---
+title: "电子影像发票保存（原厂开发专用）"
+apiId: "1940506038849503237"
+apiPath: "请求方式	POST"
+method: "ContentType	application/json"
+category: "File Services"
+domain: "SYS"
+date: 2026-06-07
+ingested: 2026-06-07
+tags: [YonBIP, OpenAPI, File Services]
+platform_version: "BIP"
+source_type: community-api-docs
+---
+
+# 电子影像发票保存（原厂开发专用）
+
+> `ContentType	application/json` 请求方式	POST | 分类: File Services (SYS)
+
+
+## 1. 请求说明
+
+请求域名	动态域名，获取方式详见 获取租户所在数据中心域名
+
+请求地址	/yonbip/ssc/img/invoice/tax/save
+
+请求方式	POST
+
+ContentType	application/json
+
+应用场景	开放API
+
+事务和幂等性	无
+
+用户身份	支持传递普通用户身份，详细说明见开放平台用户认证接入规范
+
+来源	系统级
+
+
+## 2. 请求参数
+
+| 名称 | 类型 | 参数位置 | 必填 | 描述 |
+| access_token | string | query | 是 | 调用方应用token |
+Body参数
+
+| 名称 | 类型 | 数组 | 必填 | 描述 |
+| uuid | string | 否 | 是 | 保证请求幂等性,该值由客户端生成,并且必须是全局唯一的 示例：13233432422 |
+| barcode | string | 否 | 是 | 单据影像任务唯一标识 示例：261X1001ZZ1000000000C0AO |
+| opTime | string | 否 | 是 | 操作时间 示例：2022-07-22 14:50:45 |
+| factorycode | string | 否 | 是 | 厂商编码 示例：shy |
+| billid | string | 否 | 是 | 单据pk 示例：单据pk |
+| data | object | 否 | 是 | 发票上传相关信息 |
+| billType | string | 否 | 是 | 发票类型 示例：invoice |
+| filePath | string | 否 | 否 | 文件路径 |
+| saveToken | string | 否 | 是 | 保存token：增值税发票来源于查验的token，其他来源于ocrtoken 示例：14425252110 |
+| fpdm | string | 否 | 否 | 发票代码（对于全电发票可以不传发票代码，其他发票需要传入发票代码参数） 示例：3333333 |
+| fphm | string | 否 | 是 | 发票号码 示例：112321 |
+| data | object | 否 | 是 | 发票详情信息 |
+
+## 3. 请求示例
+
+Url: /yonbip/ssc/img/invoice/tax/save?access_token=访问令牌
+Body: {
+	"uuid": "13233432422",
+	"barcode": "261X1001ZZ1000000000C0AO",
+	"opTime": "2022-07-22 14:50:45",
+	"factorycode": "shy",
+	"billid": "单据pk",
+	"data": {
+		"billType": "invoice",
+		"filePath": "",
+		"saveToken": "14425252110",
+		"fpdm": "3333333",
+		"fphm": "112321",
+		"data": {}
+	}
+}
+
+## 4. 返回值参数
+
+| 名称 | 类型 | 数组 | 描述 |
+| code | string | 否 | 状态码 示例：200 |
+| message | string | 否 | 信息说明 示例：请求成功 |
+
+## 5. 正确返回示例
+
+{
+	"code": "200",
+	"message": "请求成功"
+}
+
+## 6. 业务异常码
+
+暂时没有数据哦~
+
+
+## 7. 错误返回码
+
+1023070105450	保存发票台账失败,税务云返回提示:发票号码为[XXXX],发票代码为[XXXX]的增值税发票已存在于进项电子票据。	需要检查发票信息是否正确，或从进项电子票据删除重复的发票信息
+
+
+## 9. 接口变更日志
+
+序号	修改时间	变更内容概要
+
+暂时没有数据哦~
+
+
+## 1. 请求说明
+
+
+## 2. 请求参数
+
+
+## 3. 请求示例
+
+
+## 4. 返回值参数
+
+
+## 5. 正确返回示例
+
+
+## 6. 业务异常码
+
+
+## 7. 错误返回码
+
+
+## 9. 接口变更日志
+

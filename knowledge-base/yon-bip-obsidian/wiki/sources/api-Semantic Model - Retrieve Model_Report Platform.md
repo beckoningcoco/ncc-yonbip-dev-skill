@@ -1,0 +1,138 @@
+---
+title: "语义模型-获取模型_报表平台"
+apiId: "2320540353035239425"
+apiPath: "请求方式	GET"
+method: "ContentType	application/json"
+category: "Report Platform"
+domain: "PF"
+date: 2026-06-07
+ingested: 2026-06-07
+tags: [YonBIP, OpenAPI, Report Platform]
+platform_version: "BIP"
+source_type: community-api-docs
+---
+
+# 语义模型-获取模型_报表平台
+
+> `ContentType	application/json` 请求方式	GET | 分类: Report Platform (PF)
+
+
+## 1. 请求说明
+
+请求域名	动态域名，获取方式详见 获取租户所在数据中心域名
+
+请求地址	/yonbip/CPC/semantic/v1/model/report/{id}
+
+请求方式	GET
+
+ContentType	application/json
+
+应用场景	开放API
+
+事务和幂等性	无
+
+用户身份	支持传递普通用户身份，详细说明见开放平台用户认证接入规范
+
+来源	系统级
+
+
+## 2. 请求参数
+
+| 名称 | 类型 | 参数位置 | 必填 | 描述 |
+| access_token | string | query | 是 | 调用方应用token |
+| id | string | path | 是 | 模型ID，模型属性页面上的主键, 36位字符串 |
+
+## 3. 请求示例
+
+Url: /yonbip/CPC/semantic/v1/model/report/{id}?access_token=访问令牌
+
+## 4. 返回值参数
+
+| 名称 | 类型 | 数组 | 描述 |
+| code | string | 否 | 编码 示例：200 |
+| message | string | 否 | 提示信息 示例：操作成功 |
+| data | object | 否 | 数据结构 |
+| status | int | 否 | 执行状态码，0：失败，1：成功 示例：1 |
+| msg | string | 否 | 执行信息 示例：SUCCESS |
+| data | object | 否 | 返回数据模型 |
+| detail | string | 否 | 详细错误信息 示例：null |
+| errorStack | object | 是 | 错误堆栈 示例：[] |
+
+## 5. 正确返回示例
+
+{
+	"code": "200",
+	"message": "操作成功",
+	"data": {
+		"status": 1,
+		"msg": "SUCCESS",
+		"data": {
+			"code": "PM_20220822_04",
+			"codeName": "销售",
+			"label": "销售",
+			"modelParams": [
+				{
+					"code": "aa",
+					"dataType": "STRING",
+					"defaultValue": "bb",
+					"required": false
+				}
+			],
+			"columns": [
+				{
+					"code": "agentId.id",
+					"alias": "agentId_id",
+					"label": "客户ID",
+					"type": "NUMBER",
+					"auxFlag": true,
+					"length": 20
+				}
+			]
+		},
+		"detail": "null",
+		"errorStack": []
+	}
+}
+
+## 6. 业务异常码
+
+暂时没有数据哦~
+
+
+## 7. 错误返回码
+
+500	服务器异常	检查智能分析服务状态
+
+403	无权限	检查当前语义模型是否有权限访问
+
+
+## 9. 接口变更日志
+
+序号	修改时间	变更内容概要
+
+暂时没有数据哦~
+
+
+## 1. 请求说明
+
+
+## 2. 请求参数
+
+
+## 3. 请求示例
+
+
+## 4. 返回值参数
+
+
+## 5. 正确返回示例
+
+
+## 6. 业务异常码
+
+
+## 7. 错误返回码
+
+
+## 9. 接口变更日志
+

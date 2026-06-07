@@ -1,0 +1,179 @@
+---
+title: "结算方式对照详情分页查询V2"
+apiId: "2174282586153549829"
+apiPath: "请求方式	POST"
+method: "ContentType	application/json"
+category: "Payment Method Mapping"
+domain: "MD"
+date: 2026-06-07
+ingested: 2026-06-07
+tags: [YonBIP, OpenAPI, Payment Method Mapping]
+platform_version: "BIP"
+source_type: community-api-docs
+---
+
+# 结算方式对照详情分页查询V2
+
+> `ContentType	application/json` 请求方式	POST | 分类: Payment Method Mapping (MD)
+
+
+## 1. 请求说明
+
+请求域名	开放API: 动态域名，获取方式详见 获取租户所在数据中心域名
+
+集成API: 详细域名信息，请见 连接配置
+
+请求地址	/yonbip/digitalModel/settlemethodcontrast/batchQueryDetail
+
+请求方式	POST
+
+ContentType	application/json
+
+应用场景	开放API/集成API
+
+API类别	列表查询
+
+事务和幂等性	无
+
+来源	系统级
+
+
+## 2. 请求参数
+
+| 名称 | 类型 | 参数位置 | 必填 | 描述 |
+| access_token | string | query | 是 | 调用方应用token |
+Body参数
+
+| 名称 | 类型 | 数组 | 必填 | 描述 |
+| pageIndex | number |
+| 小数位数:0,最大长度:10 | 否 | 是 | 页码 |
+| pageSize | number |
+| 小数位数:0,最大长度:10 | 否 | 是 | 页大小 |
+| startTs | date |
+| 格式:yyyy-MM-dd HH:mm:ss | 否 | 否 | pubts开始时间 |
+| endTs | date |
+| 格式:yyyy-MM-dd HH:mm:ss | 否 | 否 | pubts结束时间 |
+| ids | string | 是 | 否 | 主键id集合 示例：["2211575684096589833","2211575684096589834"] |
+
+## 3. 请求示例
+
+Url: /yonbip/digitalModel/settlemethodcontrast/batchQueryDetail?access_token=访问令牌
+Body: {
+	"pageIndex": 0,
+	"pageSize": 0,
+	"startTs": "2026-06-07 11:49:11",
+	"endTs": "2026-06-07 11:49:11",
+	"ids": [
+		"2211575684096589833",
+		"2211575684096589834"
+	]
+}
+
+## 4. 返回值参数
+
+| 名称 | 类型 | 数组 | 描述 |
+| code | string | 否 | 返回码，调用成功时返回200 |
+| message | string | 否 | 调用失败时的错误信息 |
+| data | object | 否 | 返回数据 |
+| pageIndex | number |
+| 小数位数:0,最大长度:10 | 否 | 当前页数 |
+| pageSize | number |
+| 小数位数:0,最大长度:10 | 否 | 每行页数 |
+| recordCount | number |
+| 小数位数:0,最大长度:10 | 否 | 总数 |
+| recordList | object | 是 | 处理数据 |
+
+## 5. 正确返回示例
+
+{
+	"code": "",
+	"message": "",
+	"data": {
+		"pageIndex": 0,
+		"pageSize": 0,
+		"recordCount": 0,
+		"recordList": [
+			{
+				"bank": "",
+				"bankAccountId": "",
+				"bankAccountId___code": "",
+				"bankAccountId___name": "",
+				"cashAccountId": "",
+				"cashAccountId___code": "",
+				"cashAccountId___name": "",
+				"comment": "",
+				"currency": "",
+				"currency___code": "",
+				"currency___name": "",
+				"isDefault": true,
+				"onlineShopId": "",
+				"onlineShopId___code": "",
+				"onlineShopId___name": "",
+				"openBank": "",
+				"order": 0,
+				"orgId": "",
+				"orgId___code": "",
+				"orgId___name": "",
+				"settleMethodId": "",
+				"settleMethodId___code": "",
+				"settleMethodId___name": "",
+				"storeId": "",
+				"storeId___code": "",
+				"storeId___name": ""
+			}
+		]
+	}
+}
+
+## 6. 业务异常码
+
+暂时没有数据哦~
+
+
+## 7. 错误返回码
+
+暂时没有数据哦~
+
+
+## 9. 接口变更日志
+
+序号	修改时间	变更内容概要
+
+1	2026-01-15
+
+更新
+
+请求说明
+
+结算方式对照详情分页查询
+
+2	2025-06-30
+
+更新
+
+请求说明
+
+
+## 1. 请求说明
+
+
+## 2. 请求参数
+
+
+## 3. 请求示例
+
+
+## 4. 返回值参数
+
+
+## 5. 正确返回示例
+
+
+## 6. 业务异常码
+
+
+## 7. 错误返回码
+
+
+## 9. 接口变更日志
+

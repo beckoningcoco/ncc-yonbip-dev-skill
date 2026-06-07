@@ -1,0 +1,160 @@
+---
+title: "客户-联系人信息查询V1"
+apiId: "2459112902975553544"
+apiPath: "请求方式	POST"
+method: "ContentType	application/json"
+category: "Customer"
+domain: "MD"
+date: 2026-06-07
+ingested: 2026-06-07
+tags: [YonBIP, OpenAPI, Customer]
+platform_version: "BIP"
+source_type: community-api-docs
+---
+
+# 客户-联系人信息查询V1
+
+> `ContentType	application/json` 请求方式	POST | 分类: Customer (MD)
+
+
+## 1. 请求说明
+
+请求域名	开放API: 动态域名，获取方式详见 获取租户所在数据中心域名
+
+集成API: 详细域名信息，请见 连接配置
+
+请求地址	/yonbip/PFC/merchant/contacter/v1/list
+
+请求方式	POST
+
+ContentType	application/json
+
+应用场景	开放API/集成API
+
+API类别	列表查询
+
+事务和幂等性	无
+
+用户身份	支持传递普通用户身份，详细说明见开放平台用户认证接入规范
+
+来源	系统级
+
+
+## 2. 请求参数
+
+| 名称 | 类型 | 参数位置 | 必填 | 描述 |
+| access_token | string | query | 是 | 调用方应用token |
+Body参数
+
+| 名称 | 类型 | 数组 | 必填 | 描述 |
+| merchantCodes | string | 是 | 是 | 客户编码集合 |
+| pageIndex | number |
+| 小数位数:0,最大长度:10 | 否 | 否 | 页码 示例：1 默认值：1 |
+| pageSize | number |
+| 小数位数:0,最大长度:4 | 否 | 否 | 页大小,最大1000 示例：10 默认值：10 |
+
+## 3. 请求示例
+
+Url: /yonbip/PFC/merchant/contacter/v1/list?access_token=访问令牌
+Body: {
+	"merchantCodes": [
+		""
+	],
+	"pageIndex": 1,
+	"pageSize": 10
+}
+
+## 4. 返回值参数
+
+| 名称 | 类型 | 数组 | 描述 |
+| code | string | 否 | 返回码 示例：200 |
+| data | object | 否 | 返回数据 |
+| message | string | 否 | 调用时的信息； 示例：处理成功 |
+| code | string | 否 | 返回码，调用成功时返回200； 示例：200 |
+| pageIndex | number |
+| 小数位数:0,最大长度:10 | 否 | 当前页码 示例：1 |
+| pageSize | number |
+| 小数位数:0,最大长度:10 | 否 | 当前页大小 示例：20 |
+| recordCount | number |
+| 小数位数:0,最大长度:20 | 否 | 总数量 示例：300 |
+| recordList | object | 是 | 调用成功时的返回数据； |
+
+## 5. 正确返回示例
+
+{
+	"code": "200",
+	"data": {
+		"message": "处理成功",
+		"code": "200",
+		"pageIndex": 1,
+		"pageSize": 20,
+		"recordCount": 300,
+		"recordList": [
+			{
+				"id": 1733407568979558408,
+				"merchantId": "",
+				"merchantId___code": "",
+				"merchantId___name": "",
+				"fullName": {
+					"zh_CN": "简体",
+					"en_US": "英文",
+					"zh_TW": "繁体"
+				},
+				"gender": 0,
+				"positionName": "职务",
+				"areaCodeMobile": "区号手机号",
+				"mobile": "备用手机号",
+				"telePhone": "固定电话",
+				"email": "邮箱",
+				"qq": "QQ",
+				"weChat": "微信",
+				"remarks": "备注",
+				"isDefault": true,
+				"contactDepartment": "",
+				"stopStatus": "",
+				"pubts": "2026-06-07 11:43:18"
+			}
+		]
+	}
+}
+
+## 6. 业务异常码
+
+暂时没有数据哦~
+
+
+## 7. 错误返回码
+
+暂时没有数据哦~
+
+
+## 9. 接口变更日志
+
+序号	修改时间	变更内容概要
+
+暂时没有数据哦~
+
+
+## 1. 请求说明
+
+
+## 2. 请求参数
+
+
+## 3. 请求示例
+
+
+## 4. 返回值参数
+
+
+## 5. 正确返回示例
+
+
+## 6. 业务异常码
+
+
+## 7. 错误返回码
+
+
+## 9. 接口变更日志
+

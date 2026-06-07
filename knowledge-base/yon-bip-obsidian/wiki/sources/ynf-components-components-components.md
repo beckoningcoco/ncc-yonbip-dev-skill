@@ -1,0 +1,106 @@
+---
+title: "组件属性样式介绍"
+source: "https://c2.yonyoucloud.com/iuap-yonbuilder-designer/ucf-wh/docs-mdf/ynf/index.html#/components/components"
+section: "YNF-组件"
+date: 2026-06-07
+ingested: 2026-06-07
+tags: [YNF, 前端框架, 新一代, 组件]
+platform_version: "BIP V5"
+source_type: ynf-docs
+images: 15
+---
+
+# 组件属性样式介绍
+
+> 来源：https://c2.yonyoucloud.com/iuap-yonbuilder-designer/ucf-wh/docs-mdf/ynf/index.html#/components/components | 所属：YNF-组件
+
+# [](#组件属性样式介绍)组件属性样式介绍
+
+## [](#组件介绍)组件介绍：
+
+组件，作为设计器最基础的部分，也是使用最多的能力。在搭建单据过程中通过托拉拽组件组合成需要的内容。本篇文档主要从组件的分类，功能及使用场景，组件的样式，属性分别介绍。
+
+## [](#组件分类)组件分类
+
+组件包含：内置组件和扩展组件。
+内置组件中包含布局容器，数据容器，输入组件，通用组件，业务组件，导航组件，高级组件，图表组件。
+
+扩展组件是在内置组件不能满足用户需求的情况下。在资源中心的组件库进行自定义开发，可以在设计器的组件区引用。
+接下来主要讲解内置组件内容。PC端与移动端大部分组件相同，小部分组件由于平台使用方式不同而有差异。
+
+![](https://design.yonyoucloud.com/static/ucf/iuap-yonbuilder-designer.docs-mdf-fe/20250116-135007/ynf/static/f001.47c765ec.png)
+
+## [](#组件基本组成部分)组件基本组成部分：
+
+如何适应不同场景对于组件的需求，就要通过右侧属性区进行设置。通过设置一些属性控制组件的功能，比如是否必填，默认值，数据源等。或者通过样式区改变组件的基础样式，比如修改组件的背景色，边框，字体等。右侧区包含：属性区，样式区，动作区。
+
+属性区：包含基础属性，高级属性。基础属性是每个组件都有的内容。高级属性每个组件各有不同。下面介绍一下基础属性。高级属性分别介绍。
+
+![](https://design.yonyoucloud.com/static/ucf/iuap-yonbuilder-designer.docs-mdf-fe/20250116-135007/ynf/static/f002.6dc160e4.png)
+
+![](https://design.yonyoucloud.com/static/ucf/iuap-yonbuilder-designer.docs-mdf-fe/20250116-135007/ynf/static/f003.7327b114.png)
+
+标识：是组件的唯一标识。即组件编码。
+
+标题：组件拖入画布区默认带有标题，可以修改 标题文字或隐藏标题或设置显示位置在左侧或顶部。
+
+字段说明：对于当前组件的说明文字，设置后在运行时展示。在组件的右侧会有一个小问号图标？。点击可显示说明文字。
+
+组件类型：每一种组件的类型相同，标识不同。
+
+布局占比：指的是组件在单据一行中占据的比例，占据一列，二列，三列，整行。（放在form组件或折叠面板中生效）
+
+显示：开关。控制当前组件在运行时显示或隐藏。可固定开或关。也可以设置动态控制。如左图中。切换动态控制后会出现mobx提示，点击修改打开动态设置面板。在面板中可按照公式设置，交互规则设置，表达式设置。
+
+必填：开关。控制当前组件在运行时是否必填。打开后有必填红星 * 图标。
+
+只读：开关。控制当前组件在运行时状态。打开后当前组件的值，只能看不能编辑修改。
+
+禁用：开关。控制当前组件在运行时状态。打开后当前组件置灰显示。不可操作。
+
+数据源：有2种情况。一种是数据建模后组件会默认绑定对应的实体字段。一种是反向建模后需要手动关联组件与实体字段。
+
+默认值：指的是组件在没有值的情况下，默认显示的内容。不同组件的默认值不同，可以是输入字符，可以是选择的数值如日期。
+
+标题位置：指的是可切换组件的标题在左侧或顶部显示。
+
+输入框样式：指的是输入类组件的边框样式，可以是全边框，底部下划线样式，无边框样式。
+显示标题：可以切换组件标题是否显示。
+
+计算属性-自定义赋值：打开自定义弹窗，可以通过交互规则或公式或表达式实现自定义赋值。（如下图）
+
+![](https://design.yonyoucloud.com/static/ucf/iuap-yonbuilder-designer.docs-mdf-fe/20250116-135007/ynf/static/f004.852d3bf5.png)
+样式区：
+每个组件的样式区不同。在此介绍一下常用样式。
+![](https://design.yonyoucloud.com/static/ucf/iuap-yonbuilder-designer.docs-mdf-fe/20250116-135007/ynf/static/f005.b3ac4196.png)
+尺寸：指的当前组件整体宽高。可设置单位是px或rem或%
+![](https://design.yonyoucloud.com/static/ucf/iuap-yonbuilder-designer.docs-mdf-fe/20250116-135007/ynf/static/f006.1a130108.png)
+排序：指的当前组件在页面的位置，上移，下移，置顶，置底。
+![](data:image/png;base64,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)
+排列：指的是容器类组件内部元素的排列方式，横向或纵向排列，可切换对齐，居中方式。
+![](https://design.yonyoucloud.com/static/ucf/iuap-yonbuilder-designer.docs-mdf-fe/20250116-135007/ynf/static/f008.984f557f.png)
+扩张比：该属性默认值为0。
+如果所有子元素的flex-grow属性都为1，则它们将等分剩余空间（如果有的话）。如果一个子元素的flex-grow属性为2，其他子元素都为1，则前者占据的剩余空间将比其他项多一倍。
+收缩比：该属性默认值为1。
+如果所有项目的flex-shrink属性都为1，当空间不足时，都将等比例缩小。如果一个项目的flex-shrink属性为0，其他项目都为1，则空间不足时，前者不缩小。
+![](https://design.yonyoucloud.com/static/ucf/iuap-yonbuilder-designer.docs-mdf-fe/20250116-135007/ynf/static/f009.e4008441.png)
+空间：控制组件的外边距margin和内边距padding。可统一控制也可单独控制上下左右。
+![](https://design.yonyoucloud.com/static/ucf/iuap-yonbuilder-designer.docs-mdf-fe/20250116-135007/ynf/static/f010.88e7b585.png)
+装饰：可设置背景色，背景图，渐变背景色，圆角，边框粗细及颜色。投影。
+
+![](https://design.yonyoucloud.com/static/ucf/iuap-yonbuilder-designer.docs-mdf-fe/20250116-135007/ynf/static/f011.08c2b438.png)
+
+定位：可设置当前组件是相对定位或绝对定位或固定位置等。
+可设置Z轴位置，即多个元素在同一个位置时候在前后展示。
+
+![](https://design.yonyoucloud.com/static/ucf/iuap-yonbuilder-designer.docs-mdf-fe/20250116-135007/ynf/static/f012.08c67f0d.png)
+Hover样式设置：即组件hover状态的样式，可设置宽高尺寸，背景色，圆角边框等。
+有部分属性【受控于主题】指的是在主题设置的地方会设置这些属性，直接引用主题设置项。
+![](https://design.yonyoucloud.com/static/ucf/iuap-yonbuilder-designer.docs-mdf-fe/20250116-135007/ynf/static/f013.92b5dd24.png)
+
+动作区：
+是每个组件的动作，如按钮的点击动作，文本框的值改变动作，不同组件有不同的动作，此处仅以文本框举例。
+
+![](https://design.yonyoucloud.com/static/ucf/iuap-yonbuilder-designer.docs-mdf-fe/20250116-135007/ynf/static/f014.5d807b7a.png)
+点击动作后会绑定唤起前后端函数或者直接绑定动作。
+![](https://design.yonyoucloud.com/static/ucf/iuap-yonbuilder-designer.docs-mdf-fe/20250116-135007/ynf/static/f015.2cc24201.png)

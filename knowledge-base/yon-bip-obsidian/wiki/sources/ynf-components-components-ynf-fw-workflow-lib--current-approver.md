@@ -1,0 +1,118 @@
+---
+title: "当前审批人 CurrentApprover"
+source: "https://c2.yonyoucloud.com/iuap-yonbuilder-designer/ucf-wh/docs-mdf/ynf/index.html#/components/ynf-fw-workflow-lib--current-approver"
+section: "YNF-组件"
+date: 2026-06-07
+ingested: 2026-06-07
+tags: [YNF, 前端框架, 新一代, 组件]
+platform_version: "BIP V5"
+source_type: ynf-docs
+images: 13
+---
+
+# 当前审批人 CurrentApprover
+
+> 来源：https://c2.yonyoucloud.com/iuap-yonbuilder-designer/ucf-wh/docs-mdf/ynf/index.html#/components/ynf-fw-workflow-lib--current-approver | 所属：YNF-组件
+
+# [](#当前审批人-currentapprover)当前审批人 CurrentApprover
+
+展示审批人审核后，添加的审批意见
+
+import { CurrentApprover } from "ynf-lib-pro"
+
+## [](#何时使用)何时使用
+
+- 当需要在列表上展示审批人的时候使用
+
+## [](#如何配置)如何配置
+
+## [](#一对象建模)一、对象建模
+
+- 在应用构建的对象建模里新建一个子表，并且子表需要勾选审批任务
+
+![alt text](https://design.yonyoucloud.com/static/ucf/iuap-yonbuilder-designer.docs-mdf-fe/20250116-135007/ynf/static/CurrentApprover-image1.ea5f37cd.png)
+
+- 在业务属性里将系统属性审批任务里的字段都一一添加,并且编码名称和类型引用都要对应
+- 这一步在专业版中应该不需要
+
+![alt text](https://design.yonyoucloud.com/static/ucf/iuap-yonbuilder-designer.docs-mdf-fe/20250116-135007/ynf/static/CurrentApprover-image2.0bd90f73.png)
+
+![alt text](https://design.yonyoucloud.com/static/ucf/iuap-yonbuilder-designer.docs-mdf-fe/20250116-135007/ynf/static/CurrentApprover-image3.b33f076e.png)
+
+## [](#二设计器界面)二、设计器界面
+
+1、数据源列表的数据源添加子数据源
+
+![alt text](https://design.yonyoucloud.com/static/ucf/iuap-yonbuilder-designer.docs-mdf-fe/20250116-135007/ynf/static/CurrentApprover-image4.3f4d790e.png)
+
+2、选中子数据源，勾选右边的数据源类型选 TAG
+
+![alt text](https://design.yonyoucloud.com/static/ucf/iuap-yonbuilder-designer.docs-mdf-fe/20250116-135007/ynf/static/CurrentApprover-image5.73e98053.png)
+
+预览后list接口里会出现一个子表
+
+![alt text](https://design.yonyoucloud.com/static/ucf/iuap-yonbuilder-designer.docs-mdf-fe/20250116-135007/ynf/static/CurrentApprover-image6.753c4dd2.png)
+
+3、选中zi表 右键打开编辑，因为后端返回的数据源里没有审批人名称，需要在数据源里手动添加
+
+![alt text](https://design.yonyoucloud.com/static/ucf/iuap-yonbuilder-designer.docs-mdf-fe/20250116-135007/ynf/static/CurrentApprover-image7.f3b6f324.png)
+
+![alt text](https://design.yonyoucloud.com/static/ucf/iuap-yonbuilder-designer.docs-mdf-fe/20250116-135007/ynf/static/CurrentApprover-image8.7bdd6fc6.png)
+
+{
+
+ "alias": "auditor_name",
+
+ "bizType": "quote",
+
+ "caption": "审批人111",
+
+ "field": "auditor.name",
+
+ "nid": "nid_1729236459343_85",
+
+ "virtualField": false,
+
+ "parentNid": "nid_1729236459318_57",
+
+ "UIT#designProps": {
+
+ "UIT#allModelPathNids": [
+
+ "nid_83",
+
+ "nid_1729236459318_57",
+
+ "nid_1729236459343_85"
+
+ ],
+
+ "UIT#isBizData": false
+
+ },
+
+ "bNeedCreateEntity": true
+
+ },
+
+4、在数据的stores里添加子表
+
+![alt text](https://design.yonyoucloud.com/static/ucf/iuap-yonbuilder-designer.docs-mdf-fe/20250116-135007/ynf/static/CurrentApprover-image9.65fac07c.png)
+
+5、添加的子表数据源关联数据源，点确定
+
+![alt text](https://design.yonyoucloud.com/static/ucf/iuap-yonbuilder-designer.docs-mdf-fe/20250116-135007/ynf/static/CurrentApprover-image10.280a363e.png)
+
+6、拖入当前审批人和当前审批环节组件到表格
+
+![alt text](https://design.yonyoucloud.com/static/ucf/iuap-yonbuilder-designer.docs-mdf-fe/20250116-135007/ynf/static/CurrentApprover-image11.98323c87.png)
+
+7、选中当前审批人字段，点右边最下面的数据源
+
+![alt text](data:image/png;base64,UklGRgwXAABXRUJQVlA4IAAXAACwdQCdASr0AcoAPm0wlUgkIqIhI1K7iIANiWNuvmtAZqugK/Aj17emXbQ+YD9cPWL6QD9VetJ9AD9a+td/bX0t9VQ8w/3Htt/vv5L+ffjG8veynr6Zz+vr/H9D/5D9j/vP5sf4L90vlH/gfkr588Aj1X/kPER2wEuPqF+xn0v/Sf2j95PeJ97/zH9o9UPsH/kvcA/n/9V/1/rZ/of+h43n3v/Sfr38BX8y/u3/U/Xj4Z/6H/0/5/8rfcH9Of+f/PfAl/Qf7Z/y+wf+4P//91n9uCx+aR+vHSsmoxcO7q9JREZ24xHisa2z5WiVwA4CfMm0qSeHFcgQXEAnOELoHnVNFVnzLUru9g24qjapiaoiKZPSSw5uP3e/nhHWu5y/BqQfN7a0f3bWW2VvzamP2kwEcM4uIBObpYnDDLFv1nAeJpeUgoOUgIM9tLkVadMnEAnOLiATnFxAJzjATT4hmhcVyBBcQCc4uIBOcWoQt5FqFxMrN7Vuii4+fH9NGmBIbYYM/bSUdccKkEFusdpDW+wtM8meMUmeTPGKTPGXgEtT2MFgA9U8PkBwN+XQp7U7Jps6cQ9oK8DHJfOqSyNPwI0nuvw1XuAAK+DKNtVM9H4JWqz7gcfcDj7gITIRe7V6ZnsQja8mn7UGcXB6+TLnT6VOrXs22dMsaW9dbiuQIJFfgs1VTMgf6qYu41OXv9fbYgeK3DyRi2GUDWTWGe2UMqkIROpM+mZVkYEda+F987ZBgHiwmd5Vtlgh3FLHwDbNzQaLZUwYsQwdMh8QOuM03Rc9VCgTLBy6d3AjBopOFJuWmHQPdPQQ+rB5KvpGFBjrKMeptuoINYT3mBnBspG12tJc0fY87JwFVL2m3sYx/BEBKFqoyj5CyeKmvBTL3w9sEqv6DohklaY0Tl56pdFLnxGPtMqw3Xi6UOaXtsYXwDUIPY4SY14COX7wdVyQ5vTtI0HdcEc8/UTRafo4AIkDmy9WzAxfEc9tb8gljYsgaq6nXNhEGuxigk+t4SCRwLGxJZQV9JrHnGaE2Br8lLZe8fAVnQF3IJQaT0r5JasLnakwxxv96zyZ3UvMkLBqpM8lg1Ly5vtlHSmorF1MT0PZXeplMUCGn+fjLXBAVQ8gy3z5j/S4QUpynerWuhULgTXQqFwJroVC4E1y7WX+SFFoQ+S8dEs6Q1ahyh6NdO2dAFeKMouhULgTXQqFqjNAxwFoaUD6cWYg+J9ybkK2csnY122B4v0ASd3ZqA9LAWqlPV79Mi8khkA8gAD+/ghX/8EM+yv/uH8J6hgMdD7Uz8EyV6wfz+ON042f+X76LwjWPHww9pFXQDDCNCgrEW2ZXy3Y68KaaAXHkjG/TDrMnJJs2cdyq4Lsk7hIGB86IOlYtipa9T1urLb3zjO8H9n/cEAv22tZqh9+D8mDvus3wzsYxSp4ybF/AXbZ6lrhuK9DGBYkUsuG4E0teB1/DHvB5+polysi2PCkaA1fbH9SfvrlQE5KiTFATBtMW1WFMObG7gFE6RM65UqImmrCnXiIV/gky15RsaJmG/h8lTxNDeodBJbqusEeoWVxqWe1wr5g7rZZEpArfxvi0G8S6qY9YmectW/gPcKajbRJvalwaEfi3AdyV9IZj7SRV/61uvaH3Jmjh/MG7xh7sbTd6LrlJE1s54aAxLihj/qUGE/9ENtJKpT7m35iInkI+0PH224/8Gwj+qUY9aJOUyVtytsqWslTl5hT5Tab9/tQTJrdx1hwPnqm/VX/+J2tV/JsQt2CWJ1N2GH04oWoDiql5SE9ZJ0lqO3KE/OFalcTvRXKYeS6PdSQvUwMSDJFrOBSD/aJv7LO6Rn/C9AAYN7YxHQak+TwwHe8wjghps7AYDNeDxxD+k3nsQHC3yX927WfL1j9xu/pu34+EPeC5DN1vgGxRbBlatoNzvvkwVM9veCVkpp5olejPAYVYW9/dxR/6fzdl5xMmiADghSGnUKAekE4mbnur9TWv+qb7HpEH6nGEjDlQc8hdYm8kj8+MGMfv0wqOLx1cv/ugzbcMCEh3muzz8+5Vm3RTveXSw4dbSWZMyIZGn7mQPWCz+Dz+xNao3HbcOB7r9U6zU2wWIxLkcNFtU0vVbncIRjtupT5KrJpuMptqShZHftT63qzU/GmhqT6hGVSkYkVKKa+7L5z3hK0wXodDGoWra6cYBKJei0VV4AAO87d3Wx9f56PkQDjV0bTl+gZqGw2CkTt9praIsLfzwicoQyaUG3vBG46U3reni9nVRYGRYL5eGAJE5KJ7FdqK1wxvENYbX7gApgz4qpT6YKuXFJEgpVvvDsrpLwMPRHqW8gPehb8AHvCEO5rWChdJkBLOAAAAAA3xAAAAAlFzilNUf3BUe/ai2MatYIHT7sAqPxaEOvu2owvFyXeqv6sQ8PCIl191XVQfXFO7nxNWNsmeALoSEWsiz1HHJTVQevdfPdn+IjUoWP6bbzG+NKuhSZuClx3bY8HKUOjrm5WXQ7W8hheBl2qM+hGTIhj1cxjMaJL70wP6elidj/5vSiRUCi89ZHt1kUNC7vn/2cWDMn3k7znfA0zR1TOn/gJy8HCSp1YQ4p57fqhfWnha8wBzJ/+18Kq4YeQPMFkTUSykivb82eHdg68FwqYiNm9jppJADdabIU604fInQ283X2m8SmLATPziX44Ud1DwzRJQY6gsfeSD02kRVLVIEPw8yQ5Q/I7+Fw9LijsKx/r9nP7Y8pozm2Bj9Ptb6AVBRWBDELeIe8PESoZK52JQzMJITLOFwLQJYs4RvVi/7zkRa3TLpqElqDKb8nZDZvAw2IphuyIzjAeB3nTNd2IM0gn8he5oeyl1l4acnxVLSHAzgZ1LYhEqzAizuWXyd49gr7BHykldeqUrGudAqAXC7Al48gpGQTjxWoq0aLuh2+cIBd2l8+l2G26P827qqodo3i6wBpdphjIvE/FrI+cl7K60rG7Fb/pld8k7sNuUxoxLV0YIfOEiv5nMOKrcZarRUPOgCyHTAtzrKiCz2VNZMvh/8v2/lsPIfVqoa4PJzt9FdvrRynkjKvL/dTWScwiKFlUcx90aO/AgvvsnV8ZY3fiaa5Jtpw/oZ7zQtykOEReeQqNFhCB4qTgNOlKu+EwIhp3F1Wc5k+38P/+pK+LsWcjrYKLAuvF7E9Dshz91WwBRWMx8A9aGQBywSlNBY0wtlG0gkVo6AvNia2ZzHaapkE2qP1XPvIzo3iR4kh9DWeYlrOnbbFCEUoZm4KJsl9vYXULwvqnABLTSqflsZZWgjefbpdBslqpIt02Kxpjn7uySc8RYCsbWPt3jNwoMWP7cZ7wjkrr9huJ1oOtI4tKFo7HsutpM1rp2iFXNGdJ73TMXZE4GPdL5hTr+Jdp0fGw87TF3oj8PizKT2DJq2/rYwtsuk3FmuMP48khliQ+rPO4N0YdTkBL9M08v60vbo9r2piQuaXyB0maF7HjfiVeVBTib5SJ9kmAb7sxOzNtjQxlPpDtXQrtlrA8UuaYgAAAQuZofLAZUI138Q9pSd+0oQF7KZ919ihzB1uuCUcmJMpKfrUSrzBs2uML9sgPjftkB8b9jDtACyejNY2snAAGPahIyGfHZdiKwPnuW7+bwTSh26hf6m85jlr29U2GEIbAFfAVbjenTeDr6RpJtRkexVn8ks2oC5g3Fm4ReAIZuk6FtOyLJGRC/wmuezQcOdW+bdmRGU/4xVIISTTHnzHef+qdP4eBLLdSuN/ibfzweLbuoG4QMd0RZYP7kHvsdPjXoryeXyJdi+WraTKt/dwYlrXQsXLFnM7ZMvgq4vNTybkSUpjm3rr3EJnf8fxXZI+H0iVZCaA+pBLdKZ/JOi0xfSxSsxqT0jyo07d8bJO5AxNJc1gjE0lzWCMTScGo5QQuDKGFZkjHcXP7PaIkVNqxCCGi0Rd2kaqjBXjbZYSFmM+QIPmvv12dNTEJXfbxypUl4JHO/WrPyWYEjL2w5/aYBLr6dfswnPgTbstgGtasGJ8+ZyjE1ZBp6I0nF4ejangn3roEPNSdWZG47pl1dycJhhs/TINpxugtO6jWmI/pCUKWNlAacHL6zF/AS9O4Wz1Ttq5caL2Thz/sWMj6U52Q/A716bMoMgQ7QIIHF18FQ/6vbTnlEkqUd21CUC6M3c9Zj4CqvvyNyLVtv+wlaFbJRyUHI1iGH3Hs+7zIR0yQU/brtKoeS39QOeF6vyNWVejdTmHsETj+nDkioiTxb1FDGLk6NC/6BNkkb6PtDwG1EnmSfyLXCG1ee/BpJ/ZRqO6+pCdtaTv/ocy/Kvc9eNdIJBJ8GEf4AZrPUfFkzLeu6MQPqWlBCGtyEYiLT0AybdFDo2f+FLgiNNv6sKJvHer/+e+NSWaYP3vwH+ZFWwCAjymfgMCurp5xIAP/1H+92j8nH9NKXGyjPVKPITGI7uJghKRx5AYNj0cidbLsU1plb3pVgahxR/+6mK1c5L2mulp8vIWxOWbqEWV8Zzw6QM6vmFyPsS0SzyPNeuuPLxwRi/UAN+cADmegNnq5ExuWaJCcDjVmFa9+u2G7JznP+UG3Il9GC2E90ogCQq6VAgDHrBk/3w2Olu+FupH+k88cajXBVoDLJBwvzp8bcYYsHnhReuU467U2YfuMUipkSKur0keR6vGPPwpYCPCW6IafAztQFzgkKDEl/08hr62HKC8+YuAqFpbeIa7oT2BmxTbidHHbFIuKYXTAFfTHsyf+GIdWNkFMcbmJ1HPlNbPysEaJUjmLlAcoCvG/mQiKLfKxOPYCD1A3AGV8gb7PrY+fmHSgjBdtSvg2gSlktNmeJlHXbrUsqgZWJ6eNW2Sd6YUcokm0RAqdbTrcuQOo3fsyuI7E0BW7fQcXVKBOuyBlbmAG/o4WXMu1wx37klIDXtRnmw931IGOznZMjT9YdGnxZrXY1y+UrRrRYxJ32Bwk7N4HKC9XvehI6dTKXm/W0uWTLG2X8Ug2bO5T3NcicyK5JkD/fL2wgwArmjxssoEg7+f4Aek0xDX2U2iVdtEPQbT+ykLZY01aP0RxD6jn2CbFm/DbbFx1fd2GgUjqZNWTZK9E1ARSpXsZxVTCEc/EONDWPJFI6BVivxzzz14h6l3wBQEWDJlMh7B3C0kPqamsvTe079rWmrFqKqSfl+P6EKcdDfZLCnSF73r5gFDGOvA8+rpT4/wI8dz+jsNYVFQbmM1JZCL1XDUmtB2O74bl2S/MGbz+MCD2+cyuyCJz8enUYUXMQDZeJ39t2My8zWrO/JzPSflIMX67R9A3gYQs+MyUuiwU8+wZ93GYlBTU5KFAfJfRDMML6wxT5sGE2Zj61oINvVt8iDtRjGx3EELJzzKweEiPU4K7lNfxjxOmvallxPsBBeX1LFTb7pElgSg9AOs8oWEAWLO+1umJQtWxxSgJc3rPFp2MKLqM1gUAHuybhZTJ3biAG0kmBEww/sh3T060F+3AGeJV8A5Vy/pRKiN9VsEWipqhBa8TFGB8X9o07URCak02PSyTxVfRkgeVdlY/+a6s2J3NDPb85HQs2OXVC5wFdGRh9YAK59+xJ5JzDoYuZEQ7nHne3a4HwG3qF5LCMFlm0f/LNSZohihdTOxaWUcJe5ESYONi8yDTqM5IjQAv+FzoHQoB/33ao7hZ4l2cvXQ9yOWXoCZYzKv+qjPSOw1YYoyI6QO0qX/Hhq+dXTAPhvBHaGFjPwF0Puik5NlbAR+q1vyXykzZ7ZDJ0uAN7UzSDZq8uLNopRXRZRZDu0H43XZ2w2COP+TbqZBEipjOVY/lG1yPlrhIeH/CteO3JRS767XEjrCH/8MPCxF+8DpbmoV56X3kb2GmiZtDvudiY5B7qM8kw45C22aBecFFZlNB/tCD74af+H2JEPVayyIwKqk5mgYs4BprOXKYETOwTrGMsmFlOiiNshp5ThcwmqLpNNd9yCR4YDw6rHvaussEqUFxLmJcCvTk8oagydH6bVcFEHpIfN80oqyHWDZEOedDYJSDbDZXtSEsCkYp17fEBQv/PE5mMugdevLW9XU9Ed4QB5y86V52o7n4/j5wRk6Ue3Gw1MytoeEVdIyFtSPAvy5j8Gdgu6JrLim/jIvPUU8VLx2mTSsy2v+zoatmTd1YdWDPJ5eADRGDa2rWhnkMLbbTcX+Mh+GWX/nLzwXoaaZxuWPhhqJIh1S0WrU28dnEzDWsjfumNAfvVf99A9pG5kWo6iaifqN4m0RXeBCA4Alh+NcGJ8LF2uJyfZHuHqb39LYNNAgRZKDkguxkghhZ2CZlguo7jIFtGJcS7ffgATsRFy1xgl+l/1rjsn16JFKjKBm1DNfXf+LaFm4AxmWtDMHME7RjeukSF4hElafb4AJ6R9cLPK2MqyrPBw3QrRvsigdHz+3f5XtZMEcncska3XtuM6uvoTUZehWod4zF/17TSjABgtdbG0NghNfxoo+V4pJTiuvINBm7Owy8geAUurQ/pUoS9QLVXvWW19LVmlc7MWdxr53fD/9nhbDVHAM9lyfzyRALoEKvn7bSrFdQhSpwf+nSM/wXaN/yVaCKY4kByzBMk4qwqFBZucPaghqgwnOGCgwpmDheBRG7k7j1JWz36PeuuHUGktTxeircn0Zg4qESDjHzWzy0PgdjyXXd4ZJPwKbNjZv/MVXFCEVzBA4gy1/Mp/p3awiIDlmwPFGxNkEOfQKo3nAayX2JdTBn0Sx944rEaRhx4TdRThOBz7rkrPIAIG1mny2X0AF7upKqi7gcjOQLrHjOjeToRQfShQ8rqN9q20wugqVxvLr/mJAP7Brd8Dprlt4n6xe/3zyhU2/4VVlLj1oCkqSHbXiqWBlEj4sHctjjdrpHTxm7C0iNojrhySsMrK2gvMTwKy1J/xUnkiq5hXkuxWjY8KOWI70XbKv+iBiUu81zJeEIFf8Qxt9i6wRwqCnzN0n+VJqPSf/Dv1l1nRO3kBH2bF8n1cYxrQ34dOOTmGSyRr44xwCk1LxpJmf+SPAwZJBxe35M3MB8S9KjJvb+IvyDboB7Ujf1rpu5c8s3/1NNn+VajiV/cP7z//fxJ+EQyMvP3uxmy5ECuCpgY7e9PlR0zTfiJMHOt6Z1InCVG9My8P0ReMzOAWcm/n2MnTkyT64N//XPkLlRkgB9PP3vSSbnb+VIw7Bi/47LGALxuf298JHb1IEKgAfr+yM2BF4V0NeE86Tew1TY4xSvWaE5sLCKL65au8F1W/qT9OvOAQeFWHL2EGVnF4xViVBCDSL7J17y15XyO81vlrLTKeFqy6FvUwtXRYuO3pjeiZHtzssapg8Ftg5HYFjwHMF7AXsaHh2ltRrEMWlwMvHa67LdXfuB6PMNGPXXIiz7/7r0rH9181v0xtIdUHXhcOGX4gZRoobc6ItNnrZZUtHZvdJoKiVOkgvChBRZd2uNZvQukZarDoOP7arLU+XVrRgubQCp0kW7l9e1dimAT7VPbUoZI/qnleB/lYEedbpbMrLa2XsvFf9rMt8+xjg+dRFkmsV/7mL9GjA3gmRjzkrx02aJVJ835SZ5s62uJY8nhdZXOHKklxUxMkmFhCk/9gRzKluARK63TbW6Mj+PBsCETwVXL7LazTYQezAlTICNnbXRJGeJOtq8lGc+rU12aZ3FAZcX6ZtomucG8HQLdUQC6d9tTDsBezp9WZANmHemS+oXYwlY4nG5RivTZsOHWxGu4BDfX1UwjS6S5FYARRTWUs0wWGcRCWvIY4tuhX8YvmryJTQwCkO9d+JP7FSxmQoEJ0dI1xk2B4/+oBNfIqjwjnDzkcSB8vLgD2PsD0ASx9OQwwFGOrHIkL4+YhaiEia5wrXO/sCh4dEdTpBJ02iaABaSTdZoR2WhslmmBAAAAA==)
+
+选中子表里的审批人
+
+![alt text](https://design.yonyoucloud.com/static/ucf/iuap-yonbuilder-designer.docs-mdf-fe/20250116-135007/ynf/static/CurrentApprover-image13.60b75d74.png)
+
+然后预览就可以

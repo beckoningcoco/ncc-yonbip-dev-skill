@@ -1,0 +1,131 @@
+---
+title: "浮点数输入框 InputFloat"
+source: "https://c2.yonyoucloud.com/iuap-yonbuilder-designer/ucf-wh/docs-mdf/mdf/index.html#/components-web/01-inputfloat"
+section: "Web组件"
+date: 2026-06-07
+ingested: 2026-06-07
+tags: [MDF, 前端框架, Web组件]
+platform_version: "BIP V5"
+source_type: mdf-docs
+images: 0
+---
+
+# 浮点数输入框 InputFloat
+
+> 来源：https://c2.yonyoucloud.com/iuap-yonbuilder-designer/ucf-wh/docs-mdf/mdf/index.html#/components-web/01-inputfloat | 所属：Web组件
+
+# [](#浮点数输入框-inputfloat)浮点数输入框 InputFloat
+
+## [](#1-功能说明)1. 功能说明
+
+通过鼠标或键盘输入内容，是基础的表单域组件。
+
+## [](#2-效果展示)2. 效果展示
+
+待补...
+
+## [](#3-基本属性)3. 基本属性
+
+### [](#31-在单据中)3.1. 在单据中
+
+||属性名称||属性含义||值类型||属性说明|
+||numPoint||小数位数精度||number||控制小数点后位数|
+||max||最大值||number|||
+||min||最小值||number|||
+||step||每次改变步数||number/string|||
+
+**说明：**
+
+- InputFloat组件兼容了Input组件多数属性，其他属性可参考[Input组件](#/components-web/01-input)
+
+## [](#4-控制示例)4. 控制示例
+
+[SimpleModel 简单模型](#/api/02-simple-model)
+
+### [](#41-在卡片中)4.1. 在卡片中
+
+想要控制组件的状态，需要先拿到组件的模型，在MDF框架中，每个组件都会绑定一个模型，我们可以在扩展脚本中通过**viewmodel.get(cItemName)的方式获取到想要操作组件的模型，利用模型的API进行组件的控制，其中cItemName为该组件对应**billitem_base表中的cItemName
+
+**示例：**
+
+// 设置条件隐藏
+
+viewmodel.get(cItemName).setVisible(false)
+
+ 
+
+// 设置条件只读
+
+viewmodel.get(cItemName).setReadOnly(true)
+
+ 
+
+// 设置条件禁用
+
+viewmodel.get(cItemName).setDisabled(true)
+
+ 
+
+// 设置提示信息
+
+viewmodel.get(cItemName).setState('placeholder', '提示信息')
+
+### [](#42-在表格中)4.2. 在表格中
+
+表格中获取组件的情况分两种，一种是浏览态，一种是编辑态
+
+#### [](#421-浏览态)4.2.1. 浏览态
+
+在浏览态的表格中，可以通过更新组件所在的单元格模型的方式来更新组件的的状态或内容
+
+对于API使用不了解的可以参考详细使用文档 --
+[Table表格](#/components-web/04-table)、[GridModel表格模型](#/components-web/04-table)
+
+**示例：**
+
+// 获取表格模型
+
+const gridModle = viewmodel.getGridModel()
+
+// 修改单元格内容
+
+gridModle.setCellValue(0, cellName, '我是一个全新的value', false, true)
+
+// 修改单元格状态
+
+gridModle.setCellState(0, cellName, 'disabled', true)
+
+#### [](#422-编辑态)4.2.2. 编辑态
+
+在编辑态的表格中，可以通过操作表格行模型中对应列模型的方式更新组件状态或内容
+
+对于API使用不了解的可以参考详细使用文档 --
+[Table表格](#/components-web/04-table)、[GridModel表格模型](#/components-web/04-table)
+
+**示例：**
+
+// 获取表格模型
+
+const gridModle = viewmodel.getGridModel()
+
+// 获取编辑态行模型
+
+const editRwoModel = gridModle.getEditRowModel()
+
+// 获取组件所在的列模型
+
+const cItemName = editRwoModel.get(cItemName)
+
+// 操作组件模型更新value
+
+cItemName.setValue('我是一个全新的value')
+
+## [](#5-faq)5. FAQ
+
+**常见问题1 ?**
+
+解答内容...
+
+**常见问题2 ?**
+
+解答内容...

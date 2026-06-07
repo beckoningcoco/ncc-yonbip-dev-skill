@@ -1,0 +1,137 @@
+---
+title: "树表格 TreeTable"
+source: "https://c2.yonyoucloud.com/iuap-yonbuilder-designer/ucf-wh/docs-mdf/mdf/index.html#/components-web/04-treetable"
+section: "Web组件"
+date: 2026-06-07
+ingested: 2026-06-07
+tags: [MDF, 前端框架, Web组件]
+platform_version: "BIP V5"
+source_type: mdf-docs
+images: 1
+---
+
+# 树表格 TreeTable
+
+> 来源：https://c2.yonyoucloud.com/iuap-yonbuilder-designer/ucf-wh/docs-mdf/mdf/index.html#/components-web/04-treetable | 所属：Web组件
+
+# [](#树表格-treetable)树表格 TreeTable
+
+## [](#1-效果展示)1. 效果展示
+
+![](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABIcAAAC1CAYAAADFjJ8uAAAZEklEQVR4nO3df4zX9Z0n8OcwqNSzRNFSoMaOldteiK7L1dIMQwJ6vaQCGd1Er+6OcRPxyniYGNd4hdWLYyKVnnEbEi3DFkxqli1NbSrEob1c1+IFmIR6pa6euU1QsauAUNDqnj+qI/fH9/ud+c4vGHBmvt+Zz+OREL4/3t8v7++85jPM9/l9vd+fhjePHjuRk5h50YyT3Q0AAADABDal1hMAAAAAoHaEQwAAAAAFJhwCAAAAKDDhEAAAAECBCYcAAAAACkw4BAAAAFBgwiEAAACAAhMOAQAAABSYcAgAAACgwIRDAAAAAAUmHAIAAAAosIKEQ/vyzmUP5b1Bt92Wdw/XaEoAAAAAdaDhzaPHTpxswMyLZozXXEbkvXVz8+EPqm5YvCKN2ZyeZ4cYvPihfObxJfno1uZ8POD+hsVLcuLZnUOMvzHTkpTCoxvTkxU55+U1Obd30L68c+v+nN07LslzD+Wtb24+yayXZOruTfnsrBG+yPFweEc6NiQrH1ia2YPuPJQd93dk2+EkmZ/2je2Zn+RQV0c6th86xRP3je99tq6ObJvTkfb5fdc3ZmU6llX9y4d3pOP+bTnVsyezc90DHVlaT19LAAAAmMCm1noCp+vc1ftz7urS5ffWzc3HX1+T6VetKd3w3EN5+8BtOf+Gz/WOf2/d3PQs7c4Fj7+edy77Raa+vCbnVgKelzdl2nMP5a3vz+0NhT548ra89e2dKQU6+3PBrGTIQGig//yTXLB6/hB3HM27t64ZrZc/emYtzcoFHdnYNT8dyw6nc2Vn9vXeOTvXPbAxG4cIYGa3dvSFOod3pGP77HR8q/K6D2XH/dvSP1yqWJmV/Z6pIyu3ly9+pT0bW5PMui4dvWHVoey4f2Nye3UQVL4NAAAAGDUTLhwqdfQ8lk8W70yWduf8q0qBzvvfrnQBbc5b3y5davzx/kxfvT/nHv5J3r5sTU4k6blscz4sj3z/sjV5v3z5j8/dmGlXJdNu2JRpNwwMdObn7KWP5f1bkzw+dzxe5LiYvWxlFty/MTu+0pH2jZXQpRTwzP5UnTmzs/SBjVlaecYRdQ6VeoYOD+xOun9ltpUvzm/vyCWfZloAAADAIBMwHJqf6S+vyjuXJQ3f6esQavhud7+OoQ+evC1/rH7YsJ09/cf2W7bWMjdvVZaV3bApyW3543PDhEM/uDFv/WDou5IldfqFnp2lD3TkUFdHVg5cLrayqs+n3NGTJIe2V3X8DDE0mZ/2ysV9nVn51CXpeKCj77Yks5d1pGOYGc1a1pGNy5JhO4eeGvGLAwAAAEagPjOLYR3Nu9X7B5XDm6nfrdzft/xrkJOGN0njj0t/l5atlbqTGsr7BL23bm7entud82/YlGnZl3eGeoIJtaysb9lXaZlYJZCp3Lctsx/ov29Q6Z6RLisrm9+ejbN3pOP+HVl5e7JxiD2F5rdv7O0o6n3O6nG9nUPz077xuk/3sgEAAIBBJlg49Ll89vH9KQUum9L4+Dfy8a3705iX03Oqh46wcyhJ8twv0pOdScvcvP3d7py/en+ybm7efrI7598wOq+ktsrLvvZ1puNg6ZZBm01X2oH67QOUzJozePvqoez7u5XZ9oWOdCxbmo4HkhzeMei5DnV1ZNvAB85amo6NSzNc59CpN6wGAAAATscEC4cGeO4X6fmTb+Ts/I9Tjx1h51ByNO9+/+U0LF6Sxu88lPzNprx3w5pSR1GS5PUzeP56XVbWX7+uoKT3jGbV9nUO3Fh66GVl87+1MbO6OtLRNWBvoSqH30gu+Ur1Lb/LtvtXZl/1Rtb2HAIAAIAxNREyi+FdtSYXXJV88GT5ejksmpbkg4FjR9g59MGTa9KzdFUadzyWUqdS35Kw6v2I3r9sTd5f/FDvWc4m1rKyM3P4jUP9l4GdYlnZkHsLVS8bm3VdOvptfH1Jrnugvbw/Uf/OoX1/15FDI2taAgAAAE7DxA6HyqbdsCnTcjTv3ro5eXZz3vn6/ky/YVOmpX+gc7LOoWRu3lr8UBr/5LKcvfri9Owo3Vp9JrTGH+/PBatHcFr7CWqozaYzq7LPz6EcemN+vvat03zOypnKetelVZaNlVUCptZhnuB/d2bl9n1J5qf9W7GsDAAAAEbZpAiHcvgnebtlTfLd7lzw+Ofy3rq5eev7pa6e0gbTSWUz6xP/ZX+mX1V5YGXvojXlJWNVt5cvlU5tP4I5TLRlZfs6s7JzX5LD2fGVjizttyn1UOO3ZVsuGfYsY0M51NWRjjeuKz3v4eEG/S75wvwkh5LD29KxcsAuRL37IO1L58p9SWbHttQAAAAweuousziV3k6gxQ/lrN7rK3LOy/t7A55zV+/Puc89lLfW7cu01fPLY5Zk6u79mT7rJE/+aUywZWX7fp20b9yY+dmXzpWD9xHq5yvtac++zL++PUOu7Bq4VCxJ9nWWgqHKkrNZszPrcOfg8Cezc90Ds5PsG7Rh9WDlpWYAAADAqGl48+ixEycbMPOiGeM1FwAAAADG2ZRaTwAAAACA2hEOAQAAABSYcAgAAACgwIRDAAAAAAUmHAIAAAAoMOEQAAAAQIEJhwAAAAAKTDgEAAAAUGBTaz2BevHbf3op257+n0mS65b/x/zZn86r8YwAAAAAxl7Dm0ePnTjZgJkXzRivudREJRT67T+91O/2P/vTeUIiAAAAYNIrbDg0XCg0kJAIAAAAmMxOGQ6tvGPNeM0FAAAAgHFW2M4hAAAAAEawIfW7/+/DJElDQ0OmTJmShoaGNDQ0jPnERmJq44l83FMfc0E96o161Bf1gOE5PgAAauuUp7I/ceKkjUU1deKT+p1bEalHfVGP+qIeMDzHBwBAbZ0yHKpnPZ98UuspUEU96ot61Bf1gOE5PgAAamtCh0Of1HFXUxGpR31Rj/qiHjA8xwcAQG1N6HCop8cnjfVEPeqLetQX9YDhOT4AAGprQodD9bwfUhGpR31Rj/qiHjA8xwcAQG1N6HDIJ431RT3qi3rUF/WA4Tk+AABqa0KHQ/YoqC/qUV/Uo76oBwzP8QEAUFsTOhzq6emp9RSooh71RT3qi3rA8BwfAAC1NaHDobHao+B4111ZtHB9Xhx024I8+vzA0S/k0YULsqj6z93b8/RjA25buCCLFt6Vp4+MyZTrwtjuGXEsT9+9YJgaDO3Fcg3u6TqWPL/+tB47GYxlPUrHQ/X3c/k4uHt7jj+/vvT3sI+uGjtmM6w/Z1aPvp8v93QdG8HYIX7GHNmeexYuGPQzDeqJPYcAAGpraq0n8Gn0fDIWexS8kH9YuztpuzpzjiSZWbp1xsVNSXZn664XcseVV1SNvyJ37NmbJY8tSPuWtnTuuTOXJ0las3xV36gXH1uQ9i1NaZo5BlOuE2NTj6QUDF2bdd2la1tvX5Ctg8a0ZPVT38vymS/k0YUryvf31ePFx7YM89jqmk0uY1ePk9uza0vSnbQ+dml2rZrTr3b9dD+Y1oUP9r+t+b5sf6Q1M8ZlpuPrtOvx/Posun1L79Xutddm0drBw5rv/XkeXnZhcmROmtp2Z931dyVPfS/LKz9rZrZmzb2/SuvaLdn5/J25/Mozfw0wVmr18woAgJIJHQ598snof9J4vOvxbG2+L9tXtSZdd2XR2t39B2xZkUWV92ttm7Nr1RVJXsjOLUnarukLGcpv7G7asDd3XHksB14Z9anWnbGoR6kbYkW2DhPilEK3JG23lt8Ml8K6v+y6K62VN9LPr0/7lpRrUXlkOXDKpZkzBrOuB6NejyPbc8/1Dyb3/jxrTjJs4aq96cyC7Gyak+O5MMsf2ZvlvfdW6tmS5ubd6e6evOHcQKdTj97v64oBoVnf/W35q2UXlm6ceWGWr9qbpixI+0+2J688OCiUqw5H+x8PUFtj8/8HAAAjNaHDoTP5pPGs7zSmMbvywd80D3FvuWsou6s6GoZ681oJFsqOvJrXkjQ39cUMx18/MPjpmydvEJGMTT0eXbgiW8sh3PGuu7Lomat73yT3BUOVkC69AUbpPfHutC8sv8Nu25w7rqw8pi2de67Jge4kbZdOyi6VZAzqMbMli5uTdc/szsFrTv48l6/aO0TgcyxP310Khqq7vNoXphAB0enU4/JVe7Or0nlY/p4e2GU1MNw53nVXWp+5Otsf2ZtdSZLW3lDueNddaV27WyBE3dI5BABQWxM6HDpxOp80vvGjnPPDpvRc9uc5keTsv7whefjJ/PELVWOOvJrX2u7L6lcezLrutqy+90DWrd3SFzAM9KXSX8d//atSGFFZ9tG2OdubkqQlTbOT5OCkDyKSMahHuQvojiRDB3dDdD/MbM3De1qrQqDhQofq556cRr8eF2bhNS3J2l9lZ/l7P79en0Vrq46PfkvFqr7+vUuk2tL51KX54fXr07Tnztyx5+dpuvva0jE2iZeUJadZj7KBHUTNzS3p7i51M269fUFS/f3/1atz09oH07rw1UKEbUwuZ3J8AAAweiZ0OHQ6nzRO3fXTNDzws/IL/lkakpy47nDyzVl9g2a25uFF67NoS3LThjuz8PW7cuo9aY5lzzOlN2s3bfh5mp6o6ijK7qy7fkHf9S0rsuiVyfsGeNTr0c8VvUHCuu6cIkgoL/PrVen0ui+ry6HGga670r425Q6WEU97QhmLesz46tVpzoPZuiVJWpKv3plde+6s6thq6f817Xf73iyfmRx/fn2SLWlfeKA09pG9WV7uEmtd+KtJW5PTqUe/UKi6M27gmMoysbbN2bWqNXfsuTRZuCI/7Lq5tA8RTBA6hwAAamtCh0MNpzH2428+mY+bvpNp63+TEz/9WfK/evLh1waOOpann+jbuPi15paU3sQO0znUfF+2fzt5dojNdmcs+152Lau+pbxE6kuTt3to9OtRUb3JdNkQmxlXuoiOdz1eHluqXXNbW9KdNN/bkqbyar+mcsjx7K+PZfkkfRM9JvUod2Ydr97TKUkOvdq7lO/AofRu5F4ZX23GlXfm4acuzT3ffTVNvbdO/k6u06nH5av2ZteicrdV9T5nQ+jfPVf6OiZ9S8mq9e05VJy9npgYTuf4AABg9E3oU9k3TDmdXycP5+z1/y0n7nwyPU/8eRrW/2iIZKy0/OumDXuza8/erLkmSXNLmtOWzqfuS3Pzfdm+oS1pvi+d97aUHjLz0nxxVF7NxDfq9eg9BfeKvu6IPXsH/dleqUWSyvKz5uaWlN4A782apgPpTvLFi6tCoHLdug8cPKPXOhGM/vFR9vz6QaHDi7tKS8Zuaku27nph0PhFCxfk0cfKf3eVN7a+5uZcPrN6zOQ+1frp1aNP5efRrg1tQ17v5/n1WVQ+nf2MZd8bdIz0PlYwRJ050+MDAIDRMaE7hxqnnE62NSt//Iee0sWvPZmPvznUmL5P3ZPk4IHdScrdQ9eXbmstdwm1dydpvrr0mA1t2Xp79Uf7r+bpu1f0O1PQTRs2n8ZcJ6ZRr0el66TfJtOncOTVvJa2LL7mQLq7k75lf21ZcmVS3qk3yRVZ0pZs3fJMXlx1xaR8ozz6x8cQZ9FKUn22vjsWJVtvfzxP39i3NKwUHLWkqdImdHFrHt5zaR5deG0WPVNaHnhwV+lJJ/NyqNOrR5/qM4wNdb3ai+WvY7/uLZgAzvT4AABgdEzo38amjNEvky8+tiCLFpbeBN90zdXJyTqHhnRplj/Sv7vljtmlM5pNZmNVj9MysyV/teHmLBxwc/O9Nw8KgOY0tSQ5kANHxmlu42zU63Fke364JYO+/0vL+Fqy+sYrkitvzurm3Vn3k0r3UDk4ar46Cy+ufrJSELvrkdYcfGxBfti0Oaubk+61fz9pu4fOtB4j7xyq7LVVDkJhAqmL/z8AAAqsQJ1DI1DuUPnihr3pzIK0b2lJ08UZcaiz9fZrSxe+NPyY6tPdTzZj/snvKfZeKbkwl1+ZHH+973ppw+PBBu8LNbmMej1mtmRx231Zs6o16fpV6bZfl5eYtW0udwpdmOW3tGXd7StyT9PP8/BXS6Fo8zUtmZFXkySvvX4subLSHVQKNLrzeBbfWw47jmRSdr2MeefQ88+Ul19eMyk74ZjcdA4BANTWhA6HGhpGeY+C3s1zj+XFXS1J261ZPvvVPFu575HSsO3XlDd6bbu13+bSg89WVj5LVu96qLZ0TtIlM8kY1GOgYc7aNNTGu4NUL00ryJvn0a/HhVm+qrS59PEkye6sW7u7tDF7dV2uvDPb7z2Q1rUP5umnvle1IfXNWd28JevWXptF1ZtZV53hbPkkDuvOtB79N5yu8nx5w+qy46+Xdlu/adEVwx4T/YKl5vuy65HWQWOgFsb8/w8AAE6q4c2jx06cbMC0aeemoaEhDQ0NmTJlSu/levDuv76bz5732VpPgzL1qC/qUV/UA4bn+AAAqK0J3cc9pU5CKkrUo76oR31RDxie4wMAoLYmdDjU2Dihpz/pqEd9UY/6oh4wPMcHAEBtTejfxupleRsl6lFf1KO+qAcMz/EBAFBbEzoc8kljfVGP+qIe9UU9YHiODwCA2jrlb2P1/GnelAa/TNYT9agv6lFf1AOG5/gAAKitEf02Vk9nKKs2xSeNdUU96ot61Bf1gOE5PgAAamtEnUPVf+qJs5vUF/WoL+pRX9QDhuf4AACoramnGnDwzSNJ+paX1VtABAAAAMCZO2U4NP2z05OUQqHGxsa67CACAAAA4MxM6D2HAAAAAPh07AAJAAAAUGDCIQAAAIACEw4BAAAAFJhwCAAAAKDAhEMAAAAABSYcAgAAACgw4RAAAABAgQmHAAAAAAps6lg86b++83aO//5wenp6RjS+sbExMy6alfOmnz8W0wEAAABgGGMSDh3//eF8fs4Xc860z4xo/IcfvJ83D74mHAIAAAAYZ2OyrKynp2fEwVCSnDPtMyPuMgIAAABg9IzrnkPv/ctz2fvS0Xw0nv8ode5odn7nlrTfVvrz3//xaK0nRJLkpWy97ZZsfanW8wAAAGCsjWM49FHe+T878uQ/vpQ/fDJ+/yr17mhmX/9EOjc9kc5Nq3PJjzZk5+9rPadi++e/vyXttz2XLKn1TAAAABgPzlZGjc3Ll+f1XZ6/ZH8OH6nlfPjyzU+kc9MtmV/riQAAADAuxmRD6mrvvfLL/LTrufz+o+S9N/bnnXf/kMf/tjtnnXVuLmn5i7Re9bmcNdaTYIJ4Kft2fj3zb671PAAAAKA4xjwcOmv6nHx53pWZ9dFHOZYD+Zcjc3LZvHmZftZZuejz/0YwRPLSE2n/218m+Xru2nRLvlzr+QAAAECBjH04dNG8LPgP85J8lMP5bX5z1lVZ/I3FuciCNirm3ZLOTbeksgnyvr9+IjfNO+WjAAAAgFEw7hHN2Y1nj/c/yYQxLzf99dez8zdOkQUAAADjZRzDobNy4aLbc8d/ukrXEH1eein/3HvlaHY+9css+ffahgAAAGC8jPmysmpnnfe5zDpvPP9F6t7Mg9l227q8Ur76pb94JP9VNgQAAADjpuHNo8dOnGzAJ5mahoaGNDQ0ZMqUKb2XT+Z3r/zffH7OF3POtM+MaBIffvB+3jz4Wi750r8b+cwBAAAA+NTGpHNoxkWz8ubB19LT0zOi8Y2NjZlx0ayxmAoAAAAAJzEm4dB508/PedPPH4unBgAAAGAU2RoaAAAAoMCEQwAAAAAFJhwCAAAAKDDhEAAAAECBCYcAAAAACkw4BAAAAFBgpwyHGhoaxmMeAAAAANTAiDqHGhoahEQAAAAAk9CIOoeq/wAAAAAweUw91YC3//B2kr7lZQIiAAAAgMnjlOHQv236Qu9lwRAAAADA5HLKcEggBAAAADB5OZU9AAAAQIEJhwAAAAAKTDgEAAAAUGDCIQAAAIACEw4BAAAAFJhwCAAAAKDAhEMAAAAABSYcAgAAACgw4RAAAABAgQmHAAAAAApMOAQAAABQYMIhAAAAgAITDgEAAAAUmHAIAAAAoMCEQwAAAAAFJhwCAAAAKDDhEAAAAECBCYcAAAAACkw4BAAAAFBgwiEAAACAAhMOAQAAABSYcAgAAACgwIRDAAAAAAUmHAIAAAAoMOEQAAAAQIEJhwAAAAAKTDgEAAAAUGDCIQAAAIACEw4BAAAAFJhwCAAAAKDAhEMAAAAABSYcAgAAACgw4RAAAABAgQmHAAAAAApMOAQAAABQYMIhAAAAgAITDgEAAAAUmHAIAAAAoMCEQwAAAAAFJhwCAAAAKDDhEAAAAECBCYcAAAAACkw4BAAAAFBgwiEAAACAAhMOAQAAABSYcAgAAACgwIRDAAAAAAUmHAIAAAAoMOEQAAAAQIEJhwAAAAAKTDgEAAAAUGDCIQAAAIACEw4BAAAAFJhwCAAAAKDAhEMAAAAABSYcAgAAACgw4RAAAABAgQmHAAAAAApMOAQAAABQYMIhAAAAgAITDgEAAAAUmHAIAAAAoMCEQwAAAAAFJhwCAAAAKDDhEAAAAECBCYcAAAAACkw4BAAAAFBgwiEAAACAAhMOAQAAABSYcAgAAACgwIRDAAAAAAUmHAIAAAAoMOEQAAAAQIEJhwAAAAAKTDgEAAAAUGDCIQAAAIAC+/9l5S1hT9XmnAAAAABJRU5ErkJggg==)
+
+## [](#2-常用api)2. 常用API
+
+### [](#21-treetable展开指定层级)2.1. treeTable展开指定层级
+
+     expandLayer(num);
+
+### [](#22-treetable-默认展开行)2.2. treeTable 默认展开行
+
+    afterMount之后 设置setState('expandAllRow',true)
+
+### [](#23-树表扩展标题筛选功能)2.3. 树表扩展标题筛选功能
+
+1、获取筛选项
+
+监听beforeSetColFilterDataSourceMap钩子，参数有colFilterDataSourceMap(空对象，将筛选项存到这),
+
+colFilterKeysMap(筛选列), firstColFilterKey(第一个筛选列)；
+
+获取每列的可筛选项；
+
+2、筛选
+
+监听beforeFilter钩子，参数有rows,
+
+filterParams:，扩展实现筛选，调用treemodel.setRows()更新数据，钩子方法return
+
+false；
+
+3、获取树表数据
+
+treemodel.get('dataSource')：获取原始数据；
+
+treemodel.get('rows')：树表中展示的数据；
+
+### [](#24-树表选择上级自动选中下级)2.4. 树表选择上级自动选中下级
+
+cStyle里配置： childrenIsIncluded:true (设计器扩展属性里配置)
+
+### [](#25-树表大文本单元格设置展开收起)2.5. 树表大文本单元格设置展开/收起
+
+cStyle里配置：maxRows:xxx; textareaShowMore:true
+
+### [](#26-树表设置行扩展类)2.6. 树表设置行扩展类
+
+// 设置行className
+
+treemodel.setRowState(index, 'className', 'bg-red');
+
+//
+
+public_fixedDataTableRow_bg-red是扩展样式表中的自定义样式类；如果样式已加载但是不起作用，可以和public_fixedDataTableCell_main等类名配合使用
+
+### [](#27-树表设置大文本字段)2.7. 树表设置大文本字段
+
+1、列cControlType设置为：textarea；或者cControlType为input，cStyle中设置type:'textarea'
+
+2、需要设置newRender才生效
+
+### [](#28-树表设置显示checkbox)2.8. 树表设置显示checkbox
+
+在init中：
+
+treemodel.setState('multiple', true)
+
+treemodel.setState('showCheckBox', true)
+
+## [](#3-newrender)3. newRender
+
+### [](#31-使用场景)3.1. 使用场景
+
+树表子数据比较多，并且非懒加载的情况下可以使用newRender，可以解决滚动树表卡顿的问题
+
+### [](#32-使用方式)3.2. 使用方式
+
+1、树表cStyle配置：{ newRender: true }
+
+2、扩展脚本：yya.getTreeModel().setState('newRender', true)
+
+FAQ
+
+**如何控制树表上按钮的显示隐藏？**
+
+let treeModel = viewmodel.getTreeModel()
+
+//对于删除和新增的按钮按照条件进行过滤
+
+treeModel.on('afterSetDataSource', () => {
+
+ const rows = treeModel.getNodesByKeys()
+
+ const actions = treeModel.getCache('actions')
+
+ const actionsStates = []
+
+ rows.forEach((data, index) => {
+
+ actions.forEach(action => {
+
+ if (action.cItemName === 'btnAdd') {
+
+ actionsStates.push({ "key": data.id, "itemName": "btnAdd", "name": "visible", "value": data.isEnd });
+
+ } else {
+
+ actionsStates.push({ "key": data.id, "itemName": "btnDelete", "name": "visible", "value": !data.isSystem });
+
+ }
+
+ })
+
+ })
+
+ treeModel.setActionsState(actionsStates)
+
+})

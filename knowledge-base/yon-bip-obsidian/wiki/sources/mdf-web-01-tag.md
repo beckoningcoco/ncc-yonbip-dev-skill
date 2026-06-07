@@ -1,0 +1,65 @@
+---
+title: "标签 Tag"
+source: "https://c2.yonyoucloud.com/iuap-yonbuilder-designer/ucf-wh/docs-mdf/mdf/index.html#/components-web/01-tag"
+section: "Web组件"
+date: 2026-06-07
+ingested: 2026-06-07
+tags: [MDF, 前端框架, Web组件]
+platform_version: "BIP V5"
+source_type: mdf-docs
+images: 1
+---
+
+# 标签 Tag
+
+> 来源：https://c2.yonyoucloud.com/iuap-yonbuilder-designer/ucf-wh/docs-mdf/mdf/index.html#/components-web/01-tag | 所属：Web组件
+
+# [](#标签-tag)标签 Tag
+
+## [](#1-功能说明)1. 功能说明
+
+进行标记和分类的小标签
+
+## [](#2-效果展示)2. 效果展示
+
+![](data:image/png;base64,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)
+
+## [](#3-基本属性)3. 基本属性
+
+### [](#31-在单据中)3.1. 在单据中
+
+||属性名称||属性含义||值类型||属性说明|
+||color||标签颜色||string||可设置颜色值|
+||bHidden||是否显示标签||boolean||true-隐藏 false -显示|
+||onClose||关闭时的回调||function||参数为关闭当前tag的index|
+||cStyle||扩展属性||string||所有的扩展属性都配在这个属性中|
+
+### [](#32-在卡片中)3.2. 在卡片中
+
+想要控制组件的状态，需要先拿到组件的模型，在MDF框架中，每个组件都会绑定一个模型，我们可以在扩展脚本中通过viewmodel.get(cItemName)的方式获取到想要操作组件的模型，利用模型的API进行组件的控制，其中cItemName为该组件对应billitem_base表中的cItemName
+
+示例：
+
+// 设置条件隐藏
+
+viewmodel.get(cItemName).setVisible(true)
+
+// 设置条件禁用
+
+viewmodel.get(cItemName).setDisabled(true)
+
+## [](#4-faq)4. FAQ
+
+**常见问题1 为什么浏览态样式变化了?**
+
+答：按照UE标准，tag与refer的多选在浏览态时表现统一。如果需要呈现原样式：
+
+对于参照提供方：extendField中配置showText：false
+
+对于参照使用方：cstyle中配置showText：false
+
+（二者都可实现）
+
+**常见问题2 ?**
+
+解答内容...

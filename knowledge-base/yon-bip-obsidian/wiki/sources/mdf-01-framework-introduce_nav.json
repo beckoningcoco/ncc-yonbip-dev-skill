@@ -1,0 +1,210 @@
+[
+  [
+    "介绍",
+    "#/introduce/01-preview"
+  ],
+  [
+    "MDF框架介绍",
+    "#/introduce/01-mdf-framework-introduce"
+  ],
+  [
+    "前端脚手架介绍 ☆",
+    "#/introduce/01-mdf-cli-introduce"
+  ],
+  [
+    "前端框架调试方法 ①",
+    "#/introduce/02-mdf-framework-debug"
+  ],
+  [
+    "领域前端调试方法 ②",
+    "#/introduce/02-domain-fe-debug-description"
+  ],
+  [
+    "专属化与Node调试 ③",
+    "#/introduce/02-primises-and-node-debug"
+  ],
+  [
+    "后端框架调试方法",
+    "#/introduce/02-jave-debug-description"
+  ],
+  [
+    "MDF谷歌调试插件",
+    "#/introduce/02-chrome-debug-plugin"
+  ],
+  [
+    "性能问题排查指南",
+    "#/introduce/02-mdf-preformance-description"
+  ],
+  [
+    "--MDF内存泄漏优化记录",
+    "#/introduce/02-mdf-memory-optimize"
+  ],
+  [
+    "--MDF性能优化记录",
+    "#/introduce/02-mdf-performance-optimize"
+  ],
+  [
+    "MDF框架实施手册",
+    "#/introduce/02-mdf-framework-use-description"
+  ],
+  [
+    "框架能力相关规则",
+    "#/introduce/02-mdf-framework-rule"
+  ],
+  [
+    "MDF问题流转声明",
+    "#/introduce/02-mdf-to-bug-description"
+  ],
+  [
+    "React18适配方案",
+    "#/introduce/03-upgrade-react18"
+  ],
+  [
+    "RTL适配方案",
+    "#/introduce/03-stylertl"
+  ],
+  [
+    "前端工程合并方案",
+    "#/introduce/03-qianduangongchenghebingfangan"
+  ],
+  [
+    "MDF 3.0脚手架升级指南",
+    "#/introduce/03-mdf-cli30-upgrade"
+  ],
+  [
+    "MDF 4.1脚手架升级指南",
+    "#/introduce/03-mdf-cli41-upgrade"
+  ],
+  [
+    "TinperNext专属化升级方案",
+    "#/introduce/03-tinper-next-primises-upgrade"
+  ],
+  [
+    "TinperNext升级及去除vendor依赖技术实现方案",
+    "#/introduce/03-tinper-next-remove-vendor"
+  ],
+  [
+    "TNS专属化升级方案",
+    "#/introduce/03-tns-primises-upgrade"
+  ],
+  [
+    "MDF框架上下文改造注意事项",
+    "#/introduce/03-mdf-context-upgrade-description"
+  ],
+  [
+    "YonBuilder移动端升级方案",
+    "#/introduce/03-yon-builder-mobile-upgrade"
+  ],
+  [
+    "MDF前端接口调用规范化",
+    "#/introduce/03-mdf-impl-request-introduce"
+  ],
+  [
+    "关于嵌套和上下游单据补参方案",
+    "#/introduce/03-transfer-params"
+  ],
+  [
+    "移动端性能优化影响范围",
+    "#/introduce/03-mobile-performance-optimize"
+  ],
+  [
+    "MDF前端技术分享2022",
+    "#/introduce/04-mdf-media-share2022"
+  ],
+  [
+    "MDF功能返讲系列2022",
+    "#/introduce/04-mdf-media-week2022"
+  ],
+  [
+    "MDF一线实施专题分享2022",
+    "#/introduce/04-mdf-media-line2022"
+  ],
+  [
+    "MDF应届生培训2022",
+    "#/introduce/04-mdf-media-new2022"
+  ],
+  [
+    "读懂MDF和MDD",
+    "#/introduce/05-read-mdf-and-mdd"
+  ],
+  [
+    "前端框架事件机制",
+    "#/introduce/05-mdf-event-intoduce"
+  ],
+  [
+    "加密解密插件@mdf/crypto",
+    "#/introduce/05-mdf-pako-and-crypto"
+  ],
+  [
+    "使用MDF框架加强Web安全防护设计",
+    "#/introduce/05-mdf-safe-web"
+  ],
+  [
+    "Excel、DB、UI模板关系",
+    "#/introduce/05-excel-dbui-template"
+  ],
+  [
+    "统一fieldId方案",
+    "#/introduce/05-union-field-id"
+  ],
+  [
+    "1. 名词解释",
+    "#/introduce/01-mdf-framework-introduce#1-%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A"
+  ],
+  [
+    "2. 框架概览",
+    "#/introduce/01-mdf-framework-introduce#2-%E6%A1%86%E6%9E%B6%E6%A6%82%E8%A7%88"
+  ],
+  [
+    "3. MDF框架",
+    "#/introduce/01-mdf-framework-introduce#3-mdf%E6%A1%86%E6%9E%B6"
+  ],
+  [
+    "3.1. 架构设计",
+    "#/introduce/01-mdf-framework-introduce#31-%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1"
+  ],
+  [
+    "3.2. 理解编程模型",
+    "#/introduce/01-mdf-framework-introduce#32-%E7%90%86%E8%A7%A3%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B"
+  ],
+  [
+    "3.3. 理解多端组件",
+    "#/introduce/01-mdf-framework-introduce#33-%E7%90%86%E8%A7%A3%E5%A4%9A%E7%AB%AF%E7%BB%84%E4%BB%B6"
+  ],
+  [
+    "3.4. 理解渲染引擎",
+    "#/introduce/01-mdf-framework-introduce#34-%E7%90%86%E8%A7%A3%E6%B8%B2%E6%9F%93%E5%BC%95%E6%93%8E"
+  ],
+  [
+    "3.5. 分层扩展设计",
+    "#/introduce/01-mdf-framework-introduce#35-%E5%88%86%E5%B1%82%E6%89%A9%E5%B1%95%E8%AE%BE%E8%AE%A1"
+  ],
+  [
+    "4. MDF服务",
+    "#/introduce/01-mdf-framework-introduce#4-mdf%E6%9C%8D%E5%8A%A1"
+  ],
+  [
+    "4.1. 演变",
+    "#/introduce/01-mdf-framework-introduce#41-%E6%BC%94%E5%8F%98"
+  ],
+  [
+    "4.2. 架构设计",
+    "#/introduce/01-mdf-framework-introduce#42-%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1"
+  ],
+  [
+    "4.3. 统一资源管理",
+    "#/introduce/01-mdf-framework-introduce#43-%E7%BB%9F%E4%B8%80%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86"
+  ],
+  [
+    "5. 元数据",
+    "#/introduce/01-mdf-framework-introduce#5-%E5%85%83%E6%95%B0%E6%8D%AE"
+  ],
+  [
+    "5.1. UI元数据",
+    "#/introduce/01-mdf-framework-introduce#51-ui%E5%85%83%E6%95%B0%E6%8D%AE"
+  ],
+  [
+    "5.2. UI模板",
+    "#/introduce/01-mdf-framework-introduce#52-ui%E6%A8%A1%E6%9D%BF"
+  ]
+]

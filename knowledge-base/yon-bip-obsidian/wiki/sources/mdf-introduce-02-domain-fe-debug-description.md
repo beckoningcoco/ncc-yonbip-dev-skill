@@ -1,0 +1,145 @@
+---
+title: "领域前端调试方法 ②"
+source: "https://c2.yonyoucloud.com/iuap-yonbuilder-designer/ucf-wh/docs-mdf/mdf/index.html#/introduce/02-domain-fe-debug-description"
+section: "介绍"
+date: 2026-06-07
+ingested: 2026-06-07
+tags: [MDF, 前端框架, 介绍]
+platform_version: "BIP V5"
+source_type: mdf-docs
+images: 1
+---
+
+# 领域前端调试方法 ②
+
+> 来源：https://c2.yonyoucloud.com/iuap-yonbuilder-designer/ucf-wh/docs-mdf/mdf/index.html#/introduce/02-domain-fe-debug-description | 所属：介绍
+
+# [](#领域前端调试方法-)领域前端调试方法 ②
+
+## [](#1-首先理解去iframe之后的前端模型)1. 首先理解去Iframe之后的前端模型
+
+去Iframe之前，每个领域有独立的Node端和静态资源。通过 iframe
+的方式内嵌在工作台中，与工作台、其它领域互不干扰。前端框架作为领域静态资源的一部分存在，每个领域中都有一份前端框架。
+
+去Iframe之后，所有去Iframe的领域共用同一份前端框架。工作台中首先加载一份公共的前端框架（来自于统一Node），然后在打开领域节点的时候，再加载领域的扩展，此时的领域扩展只包含自定义组件、自定义配置、扩展脚本等。
+
+## [](#2-原有调试方法与新模型的冲突)2. 原有调试方法与新模型的冲突
+
+去Iframe之前，本地调试时需要在本地启动 Node 端与静态资源（一般是 npm run
+debug:server 和 npm run debug:extend），基本上能复原90%以上的前端场景。
+
+此时，调试领域前端的时候，直接修改前端工程即可，调试领域后端的时候，使本地启动的Node端连接到本地的业务后端即可。虽然需要同时启动
+debug:extend、debug:server，占用内存较多，但是逻辑还算是比较清晰的。
+
+在去Iframe之后，原来的方式已经不能复现实际场景了。要完整复现的话，**需要使用如下的方式：**
+
+- 启动工作台的前端、启动前端框架、启动领域前端扩展、启动Node服务
+- 修改工作台中的配置，或添加新菜单，使其能指向本地的前端框架、本地的前端扩展
+- 开始调试
+
+这种方式需要启动的项目过多，步骤繁琐且内存消耗大，影响开发调试的效率。
+
+## [](#3-新的调试思路)3. 新的调试思路
+
+新的调试是使用网络代理的方式，将线上环境（test/daily/pre/prod等均可）中的一部分资源调用转向本地。
+
+这中间的关键点，就是将线上的资源重定向到本地。**主要有两种方式：**
+
+- 浏览器级别的转发，需要浏览器插件（如Resource
+Override），仅主流浏览器（Chrome、Firefox及新版Edge、Opera、QQ、搜狗等基于Chrome内核的浏览器）支持。
+- 系统级别的转发，需要配置系统级网络抓包调试工具（如Charles、Fiddler等，部分收费）
+
+另外因为浏览器的安全限制，部分转发需要使用HTTPS证书，涉及到在本地颁发、安装和使用HTTPS证书。调试前端扩展的时候，如果使用的Chrome等浏览器，还可使用
+[http://127.0.0.1](http://127.0.0.1)
+的方式绕过，如果是调试后端，需要cookie，那就需要设置好HTTPS证书了。
+
+## [](#4-领域调试)4. 领域调试
+
+上面的文章中主要解决的前端框架调试的问题。部分思路可参考，不过它没有明确指出领域的调试流程。
+
+下面我详细解释下领域的前端和后端调试的流程。
+
+下面所有的流程都假定开发者使用了Chrome浏览器，安装了Resource
+Override插件。
+
+如果需要调试IE等不支持插件的浏览器，需要自己配置Charles等工具，此处不展开。
+
+### [](#41-领域前端扩展调试)4.1. 领域前端扩展调试
+
+按照新的调试思路，领域前端调试时主要是完成一件事：转发领域的前端扩展到本地。
+
+举例来说，在daily环境中，采购的前端扩展资源是类似这样的地址：
+
+[https://***/upu/javascripts/extend.min.js?_=a9cc97f7-29fa-4b70-90e4-eaa3a1175c93](https://u8cupu-daily.yyuap.com/upu/javascripts/extend.min.js?_=a9cc97f7-29fa-4b70-90e4-eaa3a1175c93)
+
+领域使用 npm run debug:extend 启动本地扩展时，一般会提供这样的地址：
+
+[http://127.0.0.1:3005/static/javascripts/extend.js](http://127.0.0.1:3005/static/javascripts/extend.js)
+
+我们可以在Resource Override插件中配置上如下的转发：
+
+||From||To|
+||https://*/upu/javascripts/extend.min.js*||[http://127.0.0.1:3005/static/javascripts/extend.js](http://127.0.0.1:3005/static/javascripts/extend.js)|
+
+CSS同理，不再赘述。
+
+### [](#42-领域后端调试)4.2. 领域后端调试
+
+Resource Override不仅能转发前端资源，也能转发后端接口。
+
+一个正常的后端接口请求，**一般是如下的流程：**
+
+![](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAusAAACTCAYAAAA3F1e4AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAB8sSURBVHhe7Z1tryVVmYb9NfwB/wCfNJnMByeBZHiJxGFa/TK+tX6YYNKZyPDSiETAtDriYKMjCGJ0xOYlBnAUbURQWhjBRlqNAga6WwndIx+s4d6e+/icdZ6qXbVfa699XcmVvWvVqlVVq9audZ/qfU6/7f/+/OfmjXPnEBERERFxTSqTnz9/vnn5D680b775ZmPellVGRERERMTVq8B+5uzZnahOWEdEREREHI16wq6n64awjoiIiIg4Il965eWdqE5YR0REREQclYR1RERERMSRSlhHRERERByphHVEREREXLl/ev315tXTpye/QKlAWrM6R52rzjnriy61vSGsIyIiIuLSVWjdhpBeqnMeGti1nSGsIyIiIuLS1VPmMshuizr3rE/a1DaGsI6IiIiIS3cbn6pbnXvWJ21qG0NYR0REREx86aWX0nJst6vPygDbx18891zz3PPPpes2zaxP2lR9Q1hHRERETCSsD3cRYf37P/hBc9311zVXXHFFc8kll0x8z3ve0xw+fLh57IePpdtsglmftKn6Zilh/fdvXagPHzzYfPNb30rXd6ltpm2n9j9+6FDzi+ef31eu/T7++ON7yuO6f7z00l6qrrYp20FERMTtcNawfubs2eaa667bk0eUKVTmbPG5z38+zSsq75OftG22/bqdN6zf9sXbJuH8+sPXNw8+9GDz9M9PNE+feLq5/4EHmmvf6j+t+8/bb0+3bfOuu+/el/P+7epPNB/48If2lVutf+Z/n23+9aqrmieeerL59W9/Myl75NFHdtu8+dZb9+2ry6xP2lR9s7Qn613Bucs+Yb2tjga4Ovif3/veNMjHD0nX8ZV1ERER16Xmtq4HSJrHNPeNIbh1za22bxgdg4sI68ojyiUxCJaqrrbRtrF/fG3bVN243zE4T1hXUL/sssuaBx58IF0vj91//ySw3/6lL6Xrp6ng/YEPfXDy6rLnT/5yN5THurE8hnWVtwV9hfjYRjTrkzZV38wd1jXAsoPtUtvc+41vpOu61OCNQVrLHqga0L6ZqbwM7HE7LWu7bB+qc+rXv95TFxERcV1qvrrq4x9PA65D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)
+
+**转发有两个方式：**
+
+- 拦截"浏览器 -> 统一Node"的过程，转向本地Node服务或领域后台
+- 拦截"统一Node -> 领域后台"的过程，转向本地领域后台
+
+因为统一Node在远程服务器上，除非本地调试的后端能用端口映射的方式在远程暴露出端口，否则网络上是不通的。所以这里没有选择这种方式，而是用了在浏览器
+-> 统一Node 的过程进行拦截的方式。
+
+统一Node中业务比较简单，除了 POST /meta
+等为数不多的接口是对后端接口进行了再加工，其它的大多是 /uniform/
+开头的纯转发接口。
+
+一般来说，调试的时候只需要配置 uniform 接口的转发即可。
+
+**这个转发也有两种方式：**
+
+- 本地启动一份统一Node的代码，并将 /uniform/* 的接口转发到本地。
+- 本地不启动Node，直接把 /uniform/* 接口转到本地后端服务。
+
+假设本地Node使用3007端口，本地领域后端使用8080端口，并假设我们要转发daily环境的接口：
+
+那么**方案一需要配置如下的转发：**
+
+||From||To|
+||https://*/mdf-node/uniform/*||[http://127.0.0.1:3007/uniform/](http://127.0.0.1:3007/uniform/)*|
+
+**方案二需要配置如下的转发：**
+
+||From||To|
+||https://*/mdf-node/uniform/*||[http://127.0.0.1:8080/](http://127.0.0.1:8080/)*|
+
+注意因为后端接口一般需要用到Cookie，而线上环境使用的域名是
+.[yyuap.com](http://yyuap.com)或.[dowork.com](http://dowork.com)等域名，所以转发目标不能配置
+[http://127.0.0.1，而应该相应地使用](http://127.0.0.1%EF%BC%8C%E8%80%8C%E5%BA%94%E8%AF%A5%E7%9B%B8%E5%BA%94%E5%9C%B0%E4%BD%BF%E7%94%A8)
+.[yyuap.com](http://yyuap.com) 或 .[diwork.com](http://diwork.com)
+的域名。
+
+但是这会带来新的问题，在 daily / pre / prod 等环境中，工作台通过 HTTPS
+的方式加载，HTTPS 的页面里面不允许请求 HTTP 的资源（除非是
+[http://127.0.0.1），所以需要配置成HTTPS的域名，这会涉及到本地的HTTPS证书的问题。](http://127.0.0.1%EF%BC%89%EF%BC%8C%E6%89%80%E4%BB%A5%E9%9C%80%E8%A6%81%E9%85%8D%E7%BD%AE%E6%88%90HTTPS%E7%9A%84%E5%9F%9F%E5%90%8D%EF%BC%8C%E8%BF%99%E4%BC%9A%E6%B6%89%E5%8F%8A%E5%88%B0%E6%9C%AC%E5%9C%B0%E7%9A%84HTTPS%E8%AF%81%E4%B9%A6%E7%9A%84%E9%97%AE%E9%A2%98%E3%80%82)
+
+**更新后的配置为：**
+
+||From||To|
+||https://*/mdf-node/uniform/*||[https://local.yyuap.com:3007/uniform/](https://local.yyuap.com:3007/uniform/)*|
+
+**或**
+
+||From||To|
+||https://*/mdf-node/uniform/*||[https://local.yyuap.com:8080/](https://local.yyuap.com:8080/)*|
+
+后面可能会再提供一个标准的用于后端调试的Node端，即使用方案一。到时候会将相关证书等内置在工程中。

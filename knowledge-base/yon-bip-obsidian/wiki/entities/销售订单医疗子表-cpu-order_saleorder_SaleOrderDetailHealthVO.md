@@ -20,7 +20,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 销售订单医疗子表 |
 | 物理表 | `cpu_sale_order_detail_health` |
-| 数据库 schema | `cpu-order` |
+| domain/服务域 | `cpu-order` |
+| schema | `cpu_cooperation` |
 | 所属应用 | `ycSaleCoor` |
 | 构建时间 | `2026-06-04 23:32:51.0690` |
 

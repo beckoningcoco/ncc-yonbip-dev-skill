@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 上市类型 |
 | 物理表 | `hrbd_listing_type` |
-| 数据库 schema | `ucf-staff-center` |
+| domain/服务域 | `ucf-staff-center` |
+| schema | `iuap_apdoc_basedoc` |
 | 所属应用 | `HRORG` |
 | 直连字段 | 15 个 |
 | 子表 | 0 个 |

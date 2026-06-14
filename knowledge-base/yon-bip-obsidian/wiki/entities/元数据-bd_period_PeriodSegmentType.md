@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 会计分期类型 |
 | 物理表 | `bd_period_segment_type` |
-| 数据库 schema | `finbd` |
+| domain/服务域 | `finbd` |
+| schema | `iuap_apdoc_finbd` |
 | 所属应用 | `FP` |
 | 直连字段 | 20 个 |
 | 子表 | 0 个 |

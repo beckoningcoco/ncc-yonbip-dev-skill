@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 科目表多版本 |
 | 物理表 | `epub_accsubjectchart_version` |
-| 数据库 schema | `fiepub` |
+| domain/服务域 | `fiepub` |
+| schema | `fiepub` |
 | 所属应用 | `FP` |
 | 直连字段 | 55 个 |
 | 子表 | 1 个 |

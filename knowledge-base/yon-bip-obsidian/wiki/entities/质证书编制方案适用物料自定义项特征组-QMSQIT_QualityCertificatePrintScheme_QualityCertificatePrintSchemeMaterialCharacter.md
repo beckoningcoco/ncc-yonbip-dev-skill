@@ -20,7 +20,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 质证书编制方案适用物料自定义项特征组 |
 | 物理表 | `qms_qit_qualitycertps_psm_definect` |
-| 数据库 schema | `QMS-QIT` |
+| domain/服务域 | `QMS-QIT` |
+| schema | `qms_qit_rejectbill` |
 | 所属应用 | `QMSQIT` |
 | 构建时间 | `2026-06-05 16:47:34.6000` |
 

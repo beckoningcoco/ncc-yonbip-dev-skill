@@ -21,7 +21,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 返利汇总 |
 | 物理表 | `invoicerebatesum` |
-| 数据库 schema | `udinghuo` |
+| domain/服务域 | `udinghuo` |
 | 所属应用 | `SCMSA` |
 | 直连字段 | 8 个 |
 | 子表 | 0 个 |

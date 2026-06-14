@@ -21,7 +21,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 站点 |
 | 物理表 | `distribution_site` |
-| 数据库 schema | `yonbip-hr-commonbe` |
+| domain/服务域 | `yonbip-hr-commonbe` |
 | 所属应用 | `HRPUB` |
 | 直连字段 | 18 个 |
 | 子表 | 0 个 |

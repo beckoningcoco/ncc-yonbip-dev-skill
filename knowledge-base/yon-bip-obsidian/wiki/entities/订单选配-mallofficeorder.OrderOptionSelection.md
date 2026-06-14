@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 订单选配 |
 | 物理表 | `order_option_selection` |
-| 数据库 schema | `yonbip-cpu-mall` |
+| domain/服务域 | `yonbip-cpu-mall` |
+| schema | `cpu_mall` |
 | 所属应用 | `ycYuncaiMall` |
 | 元数据类型 | `Class` |
 | 元数据层级 | `0` |

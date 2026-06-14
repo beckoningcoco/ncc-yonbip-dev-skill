@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 坏账期初设置明细信息 |
 | 物理表 | `arap_baddebt_provision_b` |
-| 数据库 schema | `yonbip-fi-earap` |
+| domain/服务域 | `yonbip-fi-earap` |
+| schema | `fiearap` |
 | 所属应用 | `EAR` |
 | 直连字段 | 55 个 |
 | 子表 | 0 个 |

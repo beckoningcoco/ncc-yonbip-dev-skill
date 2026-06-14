@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 计量单位分组 |
 | 物理表 | `unit_group` |
-| 数据库 schema | `productcenter` |
+| domain/服务域 | `productcenter` |
+| schema | `iuap_apdoc_coredoc` |
 | 所属应用 | `GZTBDM` |
 | 直连字段 | 22 个 |
 | 子表 | 0 个 |

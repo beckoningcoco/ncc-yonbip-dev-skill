@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 管控策略映射 |
 | 物理表 | `cpu_business_rule_control_strategy_mapping` |
-| 数据库 schema | `cpu-base` |
+| domain/服务域 | `cpu-base` |
+| schema | `cpu_baseservice` |
 | 所属应用 | `ycPriceCenter` |
 | 业务对象ID | `9d45aa66-5b52-48a4-b484-92eb7aee2383` |
 | 元数据类型 | `Class` |

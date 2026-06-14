@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | (停用)ProductOfflineRetail |
 | 物理表 | `` |
-| 数据库 schema | `productcenter` |
+| domain/服务域 | `productcenter` |
+| schema | `iuap_apdoc_coredoc` |
 | 所属应用 | `pc` |
 | 直连字段 | 89 个 |
 | 子表 | 0 个 |

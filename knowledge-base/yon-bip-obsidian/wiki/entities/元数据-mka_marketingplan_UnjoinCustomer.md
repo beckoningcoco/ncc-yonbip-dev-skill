@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 营销方案排除客户 |
 | 物理表 | `mka_unjoin_customer` |
-| 数据库 schema | `yycrm` |
+| domain/服务域 | `yycrm` |
+| schema | `crm` |
 | 所属应用 | `MKA` |
 | 直连字段 | 6 个 |
 | 子表 | 0 个 |

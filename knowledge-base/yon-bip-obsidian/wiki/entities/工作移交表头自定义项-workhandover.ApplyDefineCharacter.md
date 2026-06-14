@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 工作移交表头自定义项 |
 | 物理表 | `cpu_workhandover_apply_define_character` |
-| 数据库 schema | `cpu-bi-service` |
+| domain/服务域 | `cpu-bi-service` |
+| schema | `cpu_baseservice` |
 | 所属应用 | `ycBase` |
 | 业务对象ID | `056ad437-01b1-4d2c-b0f4-94ae96f9cd7a` |
 | 元数据类型 | `Class` |

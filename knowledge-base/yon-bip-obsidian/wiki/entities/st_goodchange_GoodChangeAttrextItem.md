@@ -22,6 +22,7 @@ source_type: api_response
 | uri | st.goodchange.GoodChangeAttrextItem |
 | tableName | st_goodchange_attrextitem |
 | domain | ustock |
+| schema | `ustock` |
 | applicationCode | ST |
 | superUri | ? |
 | isBusinessObject | true |

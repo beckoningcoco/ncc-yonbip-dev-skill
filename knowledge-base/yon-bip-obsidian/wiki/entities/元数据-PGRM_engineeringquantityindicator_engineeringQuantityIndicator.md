@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 工程量指标 |
 | 物理表 | `pgrm_eng_quantity_indicator` |
-| 数据库 schema | `yonbip-pm-projectme` |
+| domain/服务域 | `yonbip-pm-projectme` |
+| schema | `pmcloud` |
 | 所属应用 | `PGRM` |
 | 直连字段 | 23 个 |
 | 子表 | 0 个 |

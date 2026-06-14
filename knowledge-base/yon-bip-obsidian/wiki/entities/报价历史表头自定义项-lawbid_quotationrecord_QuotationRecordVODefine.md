@@ -22,7 +22,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 报价历史表头自定义项 |
 | 物理表 | `cpu_quotation_record_freedefine` |
-| 数据库 schema | `yonbip-cpu-lawbid` |
+| domain/服务域 | `yonbip-cpu-lawbid` |
+| schema | `cpu_lawbid` |
 | 所属应用 | `ycSouringBid` |
 | 构建时间 | `2026-06-04 20:00:36.3190` |
 

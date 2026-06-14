@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 收回规则时间设置 |
 | 物理表 | `crmc_retake_time_set` |
-| 数据库 schema | `yycrm` |
+| domain/服务域 | `yycrm` |
+| schema | `crm` |
 | 所属应用 | `CRMC` |
 | 直连字段 | 7 个 |
 | 子表 | 0 个 |

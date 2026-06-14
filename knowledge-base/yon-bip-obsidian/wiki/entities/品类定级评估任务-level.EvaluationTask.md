@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 品类定级评估任务 |
 | 物理表 | `cpu_category_level_task` |
-| 数据库 schema | `yonbip-cpu-bctask` |
+| domain/服务域 | `yonbip-cpu-bctask` |
+| schema | `cpu_base_doc` |
 | 所属应用 | `ycBase` |
 | 业务对象ID | `a33a2f1d-f042-46a6-88ba-d83a527a1bdf` |
 | 元数据类型 | `Class` |

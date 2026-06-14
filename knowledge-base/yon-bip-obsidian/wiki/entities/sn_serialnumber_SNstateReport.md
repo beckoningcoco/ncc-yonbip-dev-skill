@@ -22,6 +22,7 @@ source_type: api_response
 | uri | sn.serialnumber.SNstateReport |
 | tableName | sn_state |
 | domain | ustock |
+| schema | `ustock` |
 | applicationCode | ST |
 | superUri | base.entity.BizObject |
 | isBusinessObject | true |

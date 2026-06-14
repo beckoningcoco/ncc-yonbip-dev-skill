@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 优质优价历史库表头 |
 | 物理表 | `cpu_price_history` |
-| 数据库 schema | `cpu-bi-service` |
+| domain/服务域 | `cpu-bi-service` |
+| schema | `cpu_baseservice` |
 | 所属应用 | `ycPriceCenter` |
 | 业务对象ID | `5e8b72fa-8d2c-4828-81a7-d61c56733c4b` |
 | 元数据类型 | `Class` |

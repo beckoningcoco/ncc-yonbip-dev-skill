@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 项目采购基本信息 |
 | 物理表 | `pm_purchase_execution` |
-| 数据库 schema | `yonbip-pm-revexp` |
+| domain/服务域 | `yonbip-pm-revexp` |
+| schema | `pmcloud` |
 | 所属应用 | `PRPR` |
 | 直连字段 | 68 个 |
 | 子表 | 1 个 |

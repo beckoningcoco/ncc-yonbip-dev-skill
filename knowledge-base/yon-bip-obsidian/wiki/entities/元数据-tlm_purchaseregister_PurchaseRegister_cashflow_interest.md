@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 申购现金流利息分段 |
 | 物理表 | `tlm_purchaseregiste_cashflow_interest` |
-| 数据库 schema | `yonbip-fi-ctmtlm` |
+| domain/服务域 | `yonbip-fi-ctmtlm` |
+| schema | `yonbip_fi_ctmfm` |
 | 所属应用 | `TLM` |
 | 直连字段 | 29 个 |
 | 子表 | 0 个 |

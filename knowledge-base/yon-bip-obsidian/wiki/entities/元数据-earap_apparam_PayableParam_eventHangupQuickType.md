@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 会计事务参数,应付事务自动挂起款项类型 |
 | 物理表 | `ap_param_hangup_quicktype` |
-| 数据库 schema | `yonbip-fi-earapbill` |
+| domain/服务域 | `yonbip-fi-earapbill` |
+| schema | `fiearapbill` |
 | 所属应用 | `EAP` |
 | 直连字段 | 10 个 |
 | 子表 | 0 个 |

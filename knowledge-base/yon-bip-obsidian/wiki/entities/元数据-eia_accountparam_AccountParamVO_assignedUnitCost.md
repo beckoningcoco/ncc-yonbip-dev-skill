@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 允许指定单价得会计事务多选引用子实体 |
 | 物理表 | `ia_account_param_assigned` |
-| 数据库 schema | `yonbip-fi-eia` |
+| domain/服务域 | `yonbip-fi-eia` |
+| schema | `fieia` |
 | 所属应用 | `EIA` |
 | 直连字段 | 10 个 |
 | 子表 | 0 个 |

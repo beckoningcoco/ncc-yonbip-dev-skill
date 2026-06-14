@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 会计主体列表 |
 | 物理表 | `bd_booktypebody` |
-| 数据库 schema | `finbd` |
+| domain/服务域 | `finbd` |
+| schema | `iuap_apdoc_finbd` |
 | 所属应用 | `GL` |
 | 直连字段 | 9 个 |
 | 子表 | 0 个 |

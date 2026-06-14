@@ -20,7 +20,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 销售发票表头自定义项特征 |
 | 物理表 | `cpu_saleinvoice_usercharacteristicsdefine` |
-| 数据库 schema | `cpu-cooperation` |
+| domain/服务域 | `cpu-cooperation` |
+| schema | `cpu_cooperation` |
 | 所属应用 | `ycSaleCoor` |
 | 构建时间 | `2026-06-04 23:31:13.7770` |
 

@@ -22,6 +22,7 @@ source_type: api_response
 | uri | st.pickingrequisition.PickingRequisitionUserdefItem |
 | tableName | po_picking_requisition_userdefItem |
 | domain | ustock |
+| schema | `ustock` |
 | applicationCode | ST |
 | superUri | ? |
 | isBusinessObject | true |

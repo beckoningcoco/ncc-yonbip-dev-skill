@@ -20,7 +20,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 计量规则表 |
 | 物理表 | `ucg_measure_rule` |
-| 数据库 schema | `iuap-ipaas-base` |
+| domain/服务域 | `iuap-ipaas-base` |
 | 所属应用 | `INPAPI` |
 | 构建时间 | `2026-06-05 18:03:37.5180` |
 

@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 分录合并规则子表 |
 | 物理表 | `aai_gl_merge_rule_b` |
-| 数据库 schema | `yonbip-fi-eaai` |
+| domain/服务域 | `yonbip-fi-eaai` |
+| schema | `fieaai` |
 | 所属应用 | `AAI` |
 | 直连字段 | 11 个 |
 | 关联引用 | 5 个 |

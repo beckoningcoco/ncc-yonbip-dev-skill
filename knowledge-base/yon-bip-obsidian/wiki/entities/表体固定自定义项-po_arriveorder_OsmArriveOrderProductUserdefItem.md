@@ -20,7 +20,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 表体固定自定义项 |
 | 物理表 | `po_osm_arrive_order_product_userdefItem` |
-| 数据库 schema | `productionorder` |
+| domain/服务域 | `productionorder` |
 | 所属应用 | `OSM` |
 | 构建时间 | `2026-06-05 09:57:01.2690` |
 

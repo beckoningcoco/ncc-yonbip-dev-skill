@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 特种设备目录自定义项 |
 | 物理表 | `pam_catalogue_define` |
-| 数据库 schema | `ucf-amc-aum` |
+| domain/服务域 | `ucf-amc-aum` |
+| schema | `amc_aum` |
 | 所属应用 | `SEM` |
 | 直连字段 | 66 个 |
 | 子表 | 0 个 |

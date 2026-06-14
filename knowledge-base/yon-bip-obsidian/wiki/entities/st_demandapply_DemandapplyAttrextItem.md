@@ -22,6 +22,7 @@ source_type: api_response
 | uri | st.demandapply.DemandapplyAttrextItem |
 | tableName | st_demandapply_AttrextItem |
 | domain | ustock |
+| schema | `ustock` |
 | applicationCode | ST |
 | superUri | ? |
 | isBusinessObject | true |

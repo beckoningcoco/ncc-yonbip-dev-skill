@@ -20,7 +20,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 批号序列号追溯池子表自由项特征 |
 | 物理表 | `qms_qts_b_tracepool_b_fct` |
-| 数据库 schema | `QMS-DFM` |
+| domain/服务域 | `QMS-DFM` |
+| schema | `qms_dfm` |
 | 所属应用 | `QMSQTS` |
 | 构建时间 | `2026-06-05 17:01:39.7760` |
 

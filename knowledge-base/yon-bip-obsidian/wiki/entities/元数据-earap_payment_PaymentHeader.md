@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 付款单基本信息 |
 | 物理表 | `ap_payment_h` |
-| 数据库 schema | `yonbip-fi-earapbill` |
+| domain/服务域 | `yonbip-fi-earapbill` |
+| schema | `fiearapbill` |
 | 所属应用 | `EAP` |
 | 直连字段 | 98 个 |
 | 子表 | 3 个 |

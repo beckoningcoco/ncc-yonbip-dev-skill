@@ -22,6 +22,7 @@ source_type: api_response
 | uri | st.inventoryclosing.InventoryClosing |
 | tableName | st_inventory_closing |
 | domain | ustock |
+| schema | `ustock` |
 | applicationCode | ST |
 | superUri | base.entity.BizObject |
 | isBusinessObject | true |

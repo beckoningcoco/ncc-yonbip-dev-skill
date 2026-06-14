@@ -20,7 +20,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 销售订单表头自定义项特征 |
 | 物理表 | `cpu_sale_order_header_define` |
-| 数据库 schema | `cpu-order` |
+| domain/服务域 | `cpu-order` |
+| schema | `cpu_cooperation` |
 | 所属应用 | `ycSaleCoor` |
 | 构建时间 | `2026-06-04 23:31:28.4330` |
 

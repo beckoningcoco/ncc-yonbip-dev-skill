@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 电子钱包支付方式信息表 |
 | 物理表 | `cpu_ew_pay_type` |
-| 数据库 schema | `yonbip-cpu-bcsourcing` |
+| domain/服务域 | `yonbip-cpu-bcsourcing` |
+| schema | `cpu_pubbiz_sourcing` |
 | 所属应用 | `` |
 | 业务对象ID | `54993336-7dae-4f55-9e5b-3c6d453b0cc1` |
 | 元数据类型 | `Class` |

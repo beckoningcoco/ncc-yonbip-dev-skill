@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 物料模板辅计量换算对照 |
 | 物理表 | `producttpl_assist_unitexchange` |
-| 数据库 schema | `productcenter` |
+| domain/服务域 | `productcenter` |
+| schema | `iuap_apdoc_coredoc` |
 | 所属应用 | `GZTBDM` |
 | 直连字段 | 15 个 |
 | 子表 | 0 个 |

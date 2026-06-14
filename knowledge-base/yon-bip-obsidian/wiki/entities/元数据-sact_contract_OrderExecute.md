@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 合同执行情况 |
 | 物理表 | `sact_orderexecute` |
-| 数据库 schema | `sact` |
+| domain/服务域 | `sact` |
+| schema | `scmmp` |
 | 所属应用 | `SACT` |
 | 直连字段 | 21 个 |
 | 子表 | 0 个 |

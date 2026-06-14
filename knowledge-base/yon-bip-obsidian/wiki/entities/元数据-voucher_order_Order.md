@@ -21,7 +21,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 销售订单 |
 | 物理表 | `orders` |
-| 数据库 schema | `udinghuo` |
+| domain/服务域 | `udinghuo` |
 | 所属应用 | `SCMSA` |
 | 直连字段 | 212 个 |
 | 关联引用 | 52 个 |

@@ -21,7 +21,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | BOM子件规则明细 |
 | 物理表 | `vc_variant_rule_detail` |
-| 数据库 schema | `engineeringdata` |
+| domain/服务域 | `engineeringdata` |
 | 所属应用 | `ED` |
 | 直连字段 | 15 个 |
 | 子表 | 0 个 |

@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 接口返回值 |
 | 物理表 | `ssc_ia_interface_ret_register` |
-| 数据库 schema | `yonbip-mid-sscia` |
+| domain/服务域 | `yonbip-mid-sscia` |
+| schema | `intelligent_audit` |
 | 所属应用 | `ZNSH` |
 | 直连字段 | 21 个 |
 | 子表 | 0 个 |

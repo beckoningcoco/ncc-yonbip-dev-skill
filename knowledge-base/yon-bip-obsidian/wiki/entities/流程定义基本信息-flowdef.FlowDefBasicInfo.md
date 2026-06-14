@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 流程定义基本信息 |
 | 物理表 | `cpu_flow_def_basic_info` |
-| 数据库 schema | `yonbip-cpu-bcsourcing` |
+| domain/服务域 | `yonbip-cpu-bcsourcing` |
+| schema | `cpu_pubbiz_sourcing` |
 | 所属应用 | `ycBase` |
 | 业务对象ID | `86eb302a-6633-4885-ab8f-3cfd4754fa95` |
 | 元数据类型 | `Class` |

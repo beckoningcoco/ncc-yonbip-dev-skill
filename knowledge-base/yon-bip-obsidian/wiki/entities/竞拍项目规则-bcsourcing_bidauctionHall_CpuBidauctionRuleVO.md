@@ -20,7 +20,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 竞拍项目规则 |
 | 物理表 | `cpu_bidauction_rule` |
-| 数据库 schema | `yonbip-cpu-bcsourcing` |
+| domain/服务域 | `yonbip-cpu-bcsourcing` |
+| schema | `cpu_pubbiz_sourcing` |
 | 所属应用 | `ycSouring` |
 | 构建时间 | `2026-06-04 23:43:05.2830` |
 

@@ -21,7 +21,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 企业 |
 | 物理表 | `cpu_enterprise` |
-| 数据库 schema | `cpu-privilege-service` |
+| domain/服务域 | `cpu-privilege-service` |
 | 所属应用 | `` |
 | 直连字段 | 12 个 |
 | 子表 | 0 个 |

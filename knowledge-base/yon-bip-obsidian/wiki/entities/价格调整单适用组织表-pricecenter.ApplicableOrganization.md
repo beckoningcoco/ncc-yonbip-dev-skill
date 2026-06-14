@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 价格调整单适用组织表 |
 | 物理表 | `pu_adjustprice_applicable_organization` |
-| 数据库 schema | `yuncai-upu-service` |
+| domain/服务域 | `yuncai-upu-service` |
+| schema | `cpu_baseservice` |
 | 所属应用 | `ycPriceCenter` |
 | 元数据类型 | `Class` |
 | 元数据层级 | `0` |

@@ -22,6 +22,7 @@ source_type: api_response
 | uri | st.demandapply.DemandApplyDetail |
 | tableName | st_demandapply_b |
 | domain | ustock |
+| schema | `ustock` |
 | applicationCode | ST |
 | superUri | st.voucher.UstockVouchLine |
 | isBusinessObject | true |

@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 资产图片 |
 | 物理表 | `pam_equip_image` |
-| 数据库 schema | `ucf-amc-ambd` |
+| domain/服务域 | `ucf-amc-ambd` |
+| schema | `amc_ambd` |
 | 所属应用 | `AIM` |
 | 直连字段 | 11 个 |
 | 子表 | 0 个 |

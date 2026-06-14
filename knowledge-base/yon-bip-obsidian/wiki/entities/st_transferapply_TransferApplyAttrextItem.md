@@ -22,6 +22,7 @@ source_type: api_response
 | uri | st.transferapply.TransferApplyAttrextItem |
 | tableName | st_transferapply_AttrextItem |
 | domain | ustock |
+| schema | `ustock` |
 | applicationCode | ST |
 | superUri | ? |
 | isBusinessObject | true |

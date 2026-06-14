@@ -20,7 +20,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 平台班次 |
 | 物理表 | `platform_shift` |
-| 数据库 schema | `yonbip-hr-tm` |
+| domain/服务域 | `yonbip-hr-tm` |
+| schema | `yonbip_hr_tm` |
 | 所属应用 | `GZTORG` |
 | 构建时间 | `2026-06-05 09:22:49.2440` |
 

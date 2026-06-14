@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 员工任职(主职) |
 | 物理表 | `bd_staff_mainjob` |
-| 数据库 schema | `ucf-staff-center` |
+| domain/服务域 | `ucf-staff-center` |
+| schema | `iuap_apdoc_basedoc` |
 | 所属应用 | `DPMSTF` |
 | 直连字段 | 38 个 |
 | 子表 | 1 个 |

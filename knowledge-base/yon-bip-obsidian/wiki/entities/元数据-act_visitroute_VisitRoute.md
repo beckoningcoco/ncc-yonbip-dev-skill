@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 拜访路线 |
 | 物理表 | `dsfa_visit_route` |
-| 数据库 schema | `yycrm` |
+| domain/服务域 | `yycrm` |
+| schema | `crm` |
 | 所属应用 | `ACT` |
 | 直连字段 | 41 个 |
 | 子表 | 3 个 |

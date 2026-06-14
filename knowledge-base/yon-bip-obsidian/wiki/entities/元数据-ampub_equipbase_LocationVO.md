@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 位置 |
 | 物理表 | `pam_location` |
-| 数据库 schema | `ucf-amc-ambd` |
+| domain/服务域 | `ucf-amc-ambd` |
+| schema | `amc_ambd` |
 | 所属应用 | `AMBD` |
 | 直连字段 | 42 个 |
 | 关联引用 | 15 个 |

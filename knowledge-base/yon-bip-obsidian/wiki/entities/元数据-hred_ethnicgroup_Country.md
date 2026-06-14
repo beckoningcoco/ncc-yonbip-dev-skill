@@ -21,7 +21,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 国家/地区 |
 | 物理表 | `hred_ethnicgroup_country` |
-| 数据库 schema | `hrcloud-staff-mgr` |
+| domain/服务域 | `hrcloud-staff-mgr` |
 | 所属应用 | `HRED` |
 | 直连字段 | 10 个 |
 | 子表 | 0 个 |

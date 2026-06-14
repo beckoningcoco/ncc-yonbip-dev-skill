@@ -20,7 +20,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 单次备货计划反馈表体自定义项特征 |
 | 物理表 | `cpu_single_stockplan_feedback_character_define` |
-| 数据库 schema | `cpu-order` |
+| domain/服务域 | `cpu-order` |
+| schema | `cpu_cooperation` |
 | 所属应用 | `ycSaleCoor` |
 | 构建时间 | `2026-06-04 23:33:05.0170` |
 

@@ -20,7 +20,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 检验记录自由项特征组自定义项实体 |
 | 物理表 | `qms_dfm_check_freeitem` |
-| 数据库 schema | `QMS-DFM` |
+| domain/服务域 | `QMS-DFM` |
+| schema | `qms_dfm` |
 | 所属应用 | `QIC` |
 | 构建时间 | `2026-06-05 16:44:21.5650` |
 

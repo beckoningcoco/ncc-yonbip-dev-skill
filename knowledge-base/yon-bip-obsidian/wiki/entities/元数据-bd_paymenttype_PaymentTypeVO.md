@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 款项类型 |
 | 物理表 | `bd_paymenttype` |
-| 数据库 schema | `finbd` |
+| domain/服务域 | `finbd` |
+| schema | `iuap_apdoc_finbd` |
 | 所属应用 | `DPMACCT` |
 | 直连字段 | 25 个 |
 | 关联引用 | 5 个 |

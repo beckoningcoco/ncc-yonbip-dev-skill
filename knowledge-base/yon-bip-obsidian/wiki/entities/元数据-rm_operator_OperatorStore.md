@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 店员所属门店 |
 | 物理表 | `mp_storeemployee_store` |
-| 数据库 schema | `yxybase` |
+| domain/服务域 | `yxybase` |
+| schema | `pricecenter` |
 | 所属应用 | `RM` |
 | 直连字段 | 4 个 |
 | 子表 | 0 个 |

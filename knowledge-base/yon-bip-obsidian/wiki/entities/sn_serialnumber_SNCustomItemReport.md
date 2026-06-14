@@ -22,6 +22,7 @@ source_type: api_response
 | uri | sn.serialnumber.SNCustomItemReport |
 | tableName | sn_customitem |
 | domain | ustock |
+| schema | `ustock` |
 | applicationCode | ST |
 | superUri | ? |
 | isBusinessObject | true |

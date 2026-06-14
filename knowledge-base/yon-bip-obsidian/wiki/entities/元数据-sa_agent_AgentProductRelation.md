@@ -21,7 +21,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 客户商品对照表 |
 | 物理表 | `agentproductrelation` |
-| 数据库 schema | `udinghuo` |
+| domain/服务域 | `udinghuo` |
 | 所属应用 | `SCMSA` |
 | 直连字段 | 46 个 |
 | 子表 | 2 个 |

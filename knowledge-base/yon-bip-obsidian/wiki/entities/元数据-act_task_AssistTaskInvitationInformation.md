@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 协访邀请信息 |
 | 物理表 | `act_assist_task_invitation_information` |
-| 数据库 schema | `yycrm` |
+| domain/服务域 | `yycrm` |
+| schema | `crm` |
 | 所属应用 | `ACT` |
 | 直连字段 | 10 个 |
 | 子表 | 0 个 |

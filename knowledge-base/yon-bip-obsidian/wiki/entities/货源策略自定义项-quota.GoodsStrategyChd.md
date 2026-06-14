@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 货源策略自定义项 |
 | 物理表 | `cpu_gdstrgy_chd` |
-| 数据库 schema | `cpu-base` |
+| domain/服务域 | `cpu-base` |
+| schema | `cpu_baseservice` |
 | 所属应用 | `ycPriceCenter` |
 | 业务对象ID | `74135449-a4c4-4058-aa52-0055f25b4cc1` |
 | 元数据类型 | `Class` |

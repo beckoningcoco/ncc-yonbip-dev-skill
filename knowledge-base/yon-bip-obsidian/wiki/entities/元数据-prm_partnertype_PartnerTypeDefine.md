@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 伙伴类型自定义项 |
 | 物理表 | `prm_partnertype_define` |
-| 数据库 schema | `yycrm` |
+| domain/服务域 | `yycrm` |
+| schema | `crm` |
 | 所属应用 | `PRM` |
 | 直连字段 | 63 个 |
 | 子表 | 0 个 |

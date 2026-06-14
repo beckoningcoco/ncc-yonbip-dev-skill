@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 物流公司 |
 | 物理表 | `ec_express` |
-| 数据库 schema | `dst` |
+| domain/服务域 | `dst` |
+| schema | `omsdata` |
 | 所属应用 | `SDOC` |
 | 直连字段 | 37 个 |
 | 关联引用 | 11 个 |

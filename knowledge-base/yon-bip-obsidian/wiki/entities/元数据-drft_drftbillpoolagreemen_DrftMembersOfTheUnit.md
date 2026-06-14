@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 成员单位 |
 | 物理表 | `drft_membersoftheunit` |
-| 数据库 schema | `drft` |
+| domain/服务域 | `drft` |
+| schema | `ctmdrft` |
 | 所属应用 | `DRFT` |
 | 直连字段 | 10 个 |
 | 子表 | 0 个 |

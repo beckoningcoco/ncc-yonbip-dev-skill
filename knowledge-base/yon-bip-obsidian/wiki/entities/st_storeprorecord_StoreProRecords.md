@@ -22,6 +22,7 @@ source_type: api_response
 | uri | st.storeprorecord.StoreProRecords |
 | tableName | st_storeprorecords |
 | domain | ustock |
+| schema | `ustock` |
 | applicationCode | ST |
 | superUri | st.voucher.UstockVouchLine |
 | isBusinessObject | true |

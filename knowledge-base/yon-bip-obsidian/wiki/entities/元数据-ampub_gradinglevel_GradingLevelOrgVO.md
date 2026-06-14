@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 适用组织 |
 | 物理表 | `pam_grading_level_org` |
-| 数据库 schema | `ucf-amc-aim` |
+| domain/服务域 | `ucf-amc-aim` |
+| schema | `amc_aim` |
 | 所属应用 | `IASS` |
 | 直连字段 | 7 个 |
 | 子表 | 0 个 |

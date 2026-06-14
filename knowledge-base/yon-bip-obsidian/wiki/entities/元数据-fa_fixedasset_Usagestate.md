@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 固定资产使用状态 |
 | 物理表 | `at_usagestate` |
-| 数据库 schema | `yonyoufi` |
+| domain/服务域 | `yonyoufi` |
+| schema | `figl` |
 | 所属应用 | `FA` |
 | 直连字段 | 9 个 |
 | 子表 | 1 个 |

@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 仓库库存组织关联表 |
 | 物理表 | `aa_warehouse_stock` |
-| 数据库 schema | `productcenter` |
+| domain/服务域 | `productcenter` |
+| schema | `iuap_apdoc_coredoc` |
 | 所属应用 | `DPMSI` |
 | 直连字段 | 7 个 |
 | 子表 | 0 个 |

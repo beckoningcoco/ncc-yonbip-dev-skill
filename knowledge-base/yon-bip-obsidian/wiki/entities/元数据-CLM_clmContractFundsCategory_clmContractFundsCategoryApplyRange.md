@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 合同款项类别适用范围 |
 | 物理表 | `clm_funds_category_apply_range` |
-| 数据库 schema | `yonbip-ec-contract` |
+| domain/服务域 | `yonbip-ec-contract` |
+| schema | `yonbip_clm_contract` |
 | 所属应用 | `CLM` |
 | 直连字段 | 12 个 |
 | 子表 | 0 个 |

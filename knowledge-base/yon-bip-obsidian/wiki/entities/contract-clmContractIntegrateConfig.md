@@ -22,6 +22,7 @@ source_type: api_response
 | uri | CLM.clmConfigure.clmContractIntegrateConfig |
 | tableName | clm_contract_integrate_config |
 | domain | yonbip-ec-contract |
+| schema | `yonbip_clm_contract` |
 | applicationCode | CLM |
 | superUri | iuap.busiObj.BizObject |
 | isBusinessObject | true |

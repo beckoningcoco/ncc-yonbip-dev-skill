@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 合同变更大事记信息 |
 | 物理表 | `clm_contract_change_events` |
-| 数据库 schema | `yonbip-ec-contract` |
+| domain/服务域 | `yonbip-ec-contract` |
+| schema | `yonbip_clm_contract` |
 | 所属应用 | `CLM` |
 | 直连字段 | 28 个 |
 | 子表 | 0 个 |

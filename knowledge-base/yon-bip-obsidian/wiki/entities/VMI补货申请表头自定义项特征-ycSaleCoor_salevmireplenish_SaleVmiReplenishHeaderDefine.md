@@ -20,7 +20,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | VMI补货申请表头自定义项特征 |
 | 物理表 | `cpu_sale_vmi_replenish_header_define` |
-| 数据库 schema | `cpu-cooperation` |
+| domain/服务域 | `cpu-cooperation` |
+| schema | `cpu_cooperation` |
 | 所属应用 | `ycSaleCoor` |
 | 构建时间 | `2026-06-04 23:32:17.8880` |
 

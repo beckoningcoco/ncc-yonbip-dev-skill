@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 服务和参数的映射关系 |
 | 物理表 | `service_to_param` |
-| 数据库 schema | `yonbip-cpu-bctask` |
+| domain/服务域 | `yonbip-cpu-bctask` |
+| schema | `cpu_base_doc` |
 | 所属应用 | `ycBase` |
 | 业务对象ID | `7c61407c-21c6-49a9-a44f-1359d7ea8ff2` |
 | 元数据类型 | `Class` |

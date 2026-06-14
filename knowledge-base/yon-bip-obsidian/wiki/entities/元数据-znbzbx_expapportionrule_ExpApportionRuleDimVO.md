@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 分摊规则转换/分摊维度 |
 | 物理表 | `znbz_expapportionrule_dim` |
-| 数据库 schema | `znbzbx` |
+| domain/服务域 | `znbzbx` |
+| schema | `znbz` |
 | 所属应用 | `RBSM` |
 | 直连字段 | 14 个 |
 | 子表 | 0 个 |

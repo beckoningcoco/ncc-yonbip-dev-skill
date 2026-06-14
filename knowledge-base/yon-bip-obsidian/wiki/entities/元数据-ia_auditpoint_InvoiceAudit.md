@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 票单检查 |
 | 物理表 | `ssc_ia_invoice_audit` |
-| 数据库 schema | `yonbip-mid-sscia` |
+| domain/服务域 | `yonbip-mid-sscia` |
+| schema | `intelligent_audit` |
 | 所属应用 | `ZNSH` |
 | 直连字段 | 20 个 |
 | 子表 | 1 个 |

@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 物流公司 |
 | 物理表 | `deliverycorp` |
-| 数据库 schema | `productcenter` |
+| domain/服务域 | `productcenter` |
+| schema | `iuap_apdoc_coredoc` |
 | 所属应用 | `DPMSI` |
 | 直连字段 | 22 个 |
 | 关联引用 | 5 个 |

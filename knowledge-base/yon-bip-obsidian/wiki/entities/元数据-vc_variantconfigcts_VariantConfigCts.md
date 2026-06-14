@@ -21,7 +21,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 特征选配单表头 |
 | 物理表 | `vc_variantconfigcts` |
-| 数据库 schema | `engineeringdata` |
+| domain/服务域 | `engineeringdata` |
 | 所属应用 | `ED` |
 | 直连字段 | 38 个 |
 | 子表 | 1 个 |

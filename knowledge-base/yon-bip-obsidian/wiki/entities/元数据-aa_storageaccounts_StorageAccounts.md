@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 钱包多账户 |
 | 物理表 | `mp_storageaccounts` |
-| 数据库 schema | `membercenter` |
+| domain/服务域 | `membercenter` |
+| schema | `yilian` |
 | 所属应用 | `` |
 | 直连字段 | 19 个 |
 | 子表 | 0 个 |

@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 融入登记 |
 | 物理表 | `tlm_financein` |
-| 数据库 schema | `yonbip-fi-ctmtlm` |
+| domain/服务域 | `yonbip-fi-ctmtlm` |
+| schema | `yonbip_fi_ctmfm` |
 | 所属应用 | `TLM` |
 | 直连字段 | 339 个 |
 | 子表 | 25 个 |

@@ -21,7 +21,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 客户商品适用范围自定义项 |
 | 物理表 | `uo_define_agentproductapplyrangedefine` |
-| 数据库 schema | `udinghuo` |
+| domain/服务域 | `udinghuo` |
 | 所属应用 | `SCMSA` |
 | 直连字段 | 1 个 |
 | 子表 | 0 个 |

@@ -20,7 +20,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 变更协同表体物料信息 |
 | 物理表 | `cpu_suppliercn_b` |
-| 数据库 schema | `yonbip-cpu-synergy` |
+| domain/服务域 | `yonbip-cpu-synergy` |
 | 所属应用 | `ycQualityCollaboration` |
 | 构建时间 | `2026-06-04 23:32:16.5920` |
 

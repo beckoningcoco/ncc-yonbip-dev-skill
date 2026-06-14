@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 供应商资质 |
 | 物理表 | `aa_vendorqualify` |
-| 数据库 schema | `yssupplier` |
+| domain/服务域 | `yssupplier` |
+| schema | `iuap_apdoc_coredoc` |
 | 所属应用 | `DPMSPL` |
 | 直连字段 | 24 个 |
 | 子表 | 1 个 |

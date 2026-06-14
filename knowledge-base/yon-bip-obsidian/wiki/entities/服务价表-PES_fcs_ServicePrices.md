@@ -20,7 +20,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 服务价表 |
 | 物理表 | `imp_fcs_service_prices` |
-| 数据库 schema | `imppes` |
+| domain/服务域 | `imppes` |
 | 所属应用 | `IMP_PES` |
 | 构建时间 | `2026-06-05 17:17:30.5210` |
 

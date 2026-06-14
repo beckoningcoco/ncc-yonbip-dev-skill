@@ -20,7 +20,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 服务项目标准 |
 | 物理表 | `imp_pes_sp_project_standard` |
-| 数据库 schema | `imppes` |
+| domain/服务域 | `imppes` |
 | 所属应用 | `IMP_PES` |
 | 构建时间 | `2026-06-05 17:20:04.2690` |
 

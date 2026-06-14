@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 组织分组 |
 | 物理表 | `cpu_org_group` |
-| 数据库 schema | `yonbip-cpu-bctask` |
+| domain/服务域 | `yonbip-cpu-bctask` |
+| schema | `cpu_base_doc` |
 | 所属应用 | `` |
 | 业务对象ID | `a14c5403-b2da-4583-b385-1a35d3d75f61` |
 | 元数据类型 | `Class` |

@@ -23,6 +23,7 @@ source_type: api_response
 | uri | CLM.clmContract.clm_contract_counterpart |
 | tableName | clm_contract_counterpart |
 | domain | yonbip-ec-contract |
+| schema | `yonbip_clm_contract` |
 | applicationCode | CLM |
 | superUri | iuap.busiObj.BizObject |
 | isBusinessObject | true |

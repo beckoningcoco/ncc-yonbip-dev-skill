@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 账簿 |
 | 物理表 | `epub_accountbook` |
-| 数据库 schema | `fiepub` |
+| domain/服务域 | `fiepub` |
+| schema | `fiepub` |
 | 所属应用 | `FP` |
 | 直连字段 | 64 个 |
 | 关联引用 | 35 个 |

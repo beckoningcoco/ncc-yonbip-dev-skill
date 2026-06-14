@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 采购分类维度 |
 | 物理表 | `cpu_supplycategory_pcview` |
-| 数据库 schema | `cpu-base` |
+| domain/服务域 | `cpu-base` |
+| schema | `cpu_baseservice` |
 | 所属应用 | `ycPriceCenter` |
 | 业务对象ID | `8e40c137-4181-473e-a32c-5aaf08ba6b18` |
 | 元数据类型 | `Class` |

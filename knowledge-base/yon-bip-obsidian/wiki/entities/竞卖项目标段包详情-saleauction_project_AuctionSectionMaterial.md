@@ -20,7 +20,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 竞卖项目标段包详情 |
 | 物理表 | `cpu_project_section_material` |
-| 数据库 schema | `yonbip-cpu-lawbid` |
+| domain/服务域 | `yonbip-cpu-lawbid` |
+| schema | `cpu_lawbid` |
 | 所属应用 | `ycAuction` |
 | 构建时间 | `2026-06-04 23:45:26.5370` |
 

@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 合同标的自由自定义项 |
 | 物理表 | `sact_contractobject_free_define` |
-| 数据库 schema | `sact` |
+| domain/服务域 | `sact` |
+| schema | `scmmp` |
 | 所属应用 | `SACT` |
 | 直连字段 | 64 个 |
 | 子表 | 0 个 |

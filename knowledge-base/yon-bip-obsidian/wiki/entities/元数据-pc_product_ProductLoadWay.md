@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 物料装载方式(整合) |
 | 物理表 | `productloadway` |
-| 数据库 schema | `productcenter` |
+| domain/服务域 | `productcenter` |
+| schema | `iuap_apdoc_coredoc` |
 | 所属应用 | `GZTBDM` |
 | 直连字段 | 8 个 |
 | 子表 | 0 个 |

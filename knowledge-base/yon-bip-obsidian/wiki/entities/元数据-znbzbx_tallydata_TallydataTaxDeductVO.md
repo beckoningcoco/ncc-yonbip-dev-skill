@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 账单税务抵扣 |
 | 物理表 | `znbz_tallydatataxdeduct` |
-| 数据库 schema | `znbzbx` |
+| domain/服务域 | `znbzbx` |
+| schema | `znbz` |
 | 所属应用 | `RBSM` |
 | 直连字段 | 17 个 |
 | 子表 | 0 个 |

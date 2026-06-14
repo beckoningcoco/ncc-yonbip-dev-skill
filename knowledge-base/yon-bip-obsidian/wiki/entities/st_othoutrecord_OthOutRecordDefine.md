@@ -22,6 +22,7 @@ source_type: api_response
 | uri | st.othoutrecord.OthOutRecordDefine |
 | tableName | st_othoutrecord_define |
 | domain | ustock |
+| schema | `ustock` |
 | applicationCode | ST |
 | superUri | ? |
 | isBusinessObject | true |

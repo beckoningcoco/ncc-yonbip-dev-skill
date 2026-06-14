@@ -20,7 +20,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 自由项特征组实体 |
 | 物理表 | `salecheckbill_free_property_characteristics` |
-| 数据库 schema | `cpu-cooperation` |
+| domain/服务域 | `cpu-cooperation` |
+| schema | `cpu_cooperation` |
 | 所属应用 | `ycSaleCoor` |
 | 构建时间 | `2026-06-04 23:32:24.4950` |
 

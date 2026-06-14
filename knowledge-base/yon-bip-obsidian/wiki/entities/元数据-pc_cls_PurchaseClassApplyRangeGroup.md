@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 采购品类适用范围组 |
 | 物理表 | `purchase_class_apply_range_group` |
-| 数据库 schema | `productcenter` |
+| domain/服务域 | `productcenter` |
+| schema | `iuap_apdoc_coredoc` |
 | 所属应用 | `GZTBDM` |
 | 直连字段 | 6 个 |
 | 子表 | 0 个 |

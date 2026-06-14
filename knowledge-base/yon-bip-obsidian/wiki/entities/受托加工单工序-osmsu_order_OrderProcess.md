@@ -20,7 +20,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 受托加工单工序 |
 | 物理表 | `osmsu_order_process` |
-| 数据库 schema | `yonbip-cpu-synergy` |
+| domain/服务域 | `yonbip-cpu-synergy` |
 | 所属应用 | `ycSaleCoor` |
 | 构建时间 | `2026-06-04 23:33:10.4780` |
 

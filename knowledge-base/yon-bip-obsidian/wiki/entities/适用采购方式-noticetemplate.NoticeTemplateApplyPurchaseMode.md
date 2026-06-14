@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 适用采购方式 |
 | 物理表 | `cpu_notice_template_apply_purchase_mode` |
-| 数据库 schema | `yonbip-cpu-bctask` |
+| domain/服务域 | `yonbip-cpu-bctask` |
+| schema | `cpu_base_doc` |
 | 所属应用 | `ycBase` |
 | 元数据类型 | `Class` |
 | 元数据层级 | `0` |

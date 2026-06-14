@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 年度经营计划 |
 | 物理表 | `cust_operate_target` |
-| 数据库 schema | `yycrm` |
+| domain/服务域 | `yycrm` |
+| schema | `crm` |
 | 所属应用 | `CUST` |
 | 直连字段 | 28 个 |
 | 子表 | 1 个 |

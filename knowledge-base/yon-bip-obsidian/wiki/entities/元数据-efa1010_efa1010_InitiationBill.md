@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 固定资产期初 |
 | 物理表 | `fa_bill_add` |
-| 数据库 schema | `yonbip-fi-efa` |
+| domain/服务域 | `yonbip-fi-efa` |
+| schema | `fiefa` |
 | 所属应用 | `EFA` |
 | 直连字段 | 68 个 |
 | 子表 | 9 个 |

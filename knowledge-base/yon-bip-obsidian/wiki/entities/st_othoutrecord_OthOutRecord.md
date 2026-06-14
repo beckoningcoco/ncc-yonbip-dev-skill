@@ -22,6 +22,7 @@ source_type: api_response
 | uri | st.othoutrecord.OthOutRecord |
 | tableName | st_othoutrecord |
 | domain | ustock |
+| schema | `ustock` |
 | applicationCode | ST |
 | superUri | retail.voucher.RetailVouch |
 | isBusinessObject | true |

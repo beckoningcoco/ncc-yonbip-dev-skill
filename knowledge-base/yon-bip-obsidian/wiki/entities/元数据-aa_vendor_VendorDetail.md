@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 供应商业务属性(使用组织)-弃用 |
 | 物理表 | `aa_vendordetail` |
-| 数据库 schema | `yssupplier` |
+| domain/服务域 | `yssupplier` |
+| schema | `iuap_apdoc_coredoc` |
 | 所属应用 | `DPMSPL` |
 | 直连字段 | 72 个 |
 | 子表 | 0 个 |

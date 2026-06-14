@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 流水账来源信息 |
 | 物理表 | `fa_ledger_b_source` |
-| 数据库 schema | `yonbip-fi-efa` |
+| domain/服务域 | `yonbip-fi-efa` |
+| schema | `fiefa` |
 | 所属应用 | `EFA` |
 | 直连字段 | 39 个 |
 | 子表 | 0 个 |

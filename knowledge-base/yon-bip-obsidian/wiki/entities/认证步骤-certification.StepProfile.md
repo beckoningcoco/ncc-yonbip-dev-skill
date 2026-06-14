@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 认证步骤 |
 | 物理表 | `cpu_step_profile` |
-| 数据库 schema | `cpu-supplymgr` |
+| domain/服务域 | `cpu-supplymgr` |
+| schema | `cpu_suppliermgr` |
 | 所属应用 | `ycSupplierManagement` |
 | 业务对象ID | `6c6b9f21-5059-4e03-b5b9-cf6adb8de1c1` |
 | 元数据类型 | `Class` |

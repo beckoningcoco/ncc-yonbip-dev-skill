@@ -20,7 +20,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 电子钱包供应商交易申请表 |
 | 物理表 | `cpu_ew_supplier_trans_apply` |
-| 数据库 schema | `yonbip-cpu-bcsourcing` |
+| domain/服务域 | `yonbip-cpu-bcsourcing` |
+| schema | `cpu_pubbiz_sourcing` |
 | 所属应用 | `ycBusinessCenter` |
 | 构建时间 | `2026-06-04 23:42:36.7440` |
 

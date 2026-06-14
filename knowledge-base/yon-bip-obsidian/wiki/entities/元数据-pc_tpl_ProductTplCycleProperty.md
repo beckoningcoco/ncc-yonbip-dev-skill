@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 物料模板-周期购 |
 | 物理表 | `product_tpl_cycleprop` |
-| 数据库 schema | `productcenter` |
+| domain/服务域 | `productcenter` |
+| schema | `iuap_apdoc_coredoc` |
 | 所属应用 | `GZTBDM` |
 | 直连字段 | 13 个 |
 | 子表 | 0 个 |

@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 物流配送重量 |
 | 物理表 | `ec_express_weight` |
-| 数据库 schema | `dst` |
+| domain/服务域 | `dst` |
+| schema | `omsdata` |
 | 所属应用 | `SDOC` |
 | 直连字段 | 15 个 |
 | 关联引用 | 5 个 |

@@ -25,7 +25,8 @@ source_type: api_response
 | 显示名 | 流水账主表 |
 | 描述 |  |
 | 物理表 | `ia_ledger` |
-| 数据库 schema | `yonbip-fi-eia` |
+| domain/服务域 | `yonbip-fi-eia` |
+| schema | `fieia` |
 | 所属应用 | `EIA` |
 | 元数据类型 | `Class` |
 | 元数据层级 | `2` |

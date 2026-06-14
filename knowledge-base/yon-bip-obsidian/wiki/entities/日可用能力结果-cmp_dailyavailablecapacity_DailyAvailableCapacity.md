@@ -20,7 +20,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 日可用能力结果 |
 | 物理表 | `cmp_daily_available_capacity` |
-| 数据库 schema | `yonbip-mm-plan` |
+| domain/服务域 | `yonbip-mm-plan` |
+| schema | `requirements_planning` |
 | 所属应用 | `DCRP` |
 | 构建时间 | `2026-06-05 13:58:35.3340` |
 

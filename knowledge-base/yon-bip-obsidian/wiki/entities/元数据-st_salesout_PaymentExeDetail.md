@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 收款执行明细 |
 | 物理表 | `paymentexedetail` |
-| 数据库 schema | `ustock` |
+| domain/服务域 | `ustock` |
+| schema | `ustock` |
 | 所属应用 | `ST` |
 | 直连字段 | 14 个 |
 | 关联引用 | 4 个 |

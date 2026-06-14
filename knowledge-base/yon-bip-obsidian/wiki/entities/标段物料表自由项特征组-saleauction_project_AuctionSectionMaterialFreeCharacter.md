@@ -20,7 +20,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 标段物料表自由项特征组 |
 | 物理表 | `cpu_sale_auction_project_section_material_free_character` |
-| 数据库 schema | `yonbip-cpu-lawbid` |
+| domain/服务域 | `yonbip-cpu-lawbid` |
+| schema | `cpu_lawbid` |
 | 所属应用 | `ycAuction` |
 | 构建时间 | `2026-06-04 23:45:41.4180` |
 

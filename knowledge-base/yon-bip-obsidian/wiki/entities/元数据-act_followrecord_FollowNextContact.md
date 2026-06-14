@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 下次联系人 |
 | 物理表 | `act_followrecord_next_contact` |
-| 数据库 schema | `yycrm` |
+| domain/服务域 | `yycrm` |
+| schema | `crm` |
 | 所属应用 | `ACT` |
 | 直连字段 | 5 个 |
 | 子表 | 0 个 |

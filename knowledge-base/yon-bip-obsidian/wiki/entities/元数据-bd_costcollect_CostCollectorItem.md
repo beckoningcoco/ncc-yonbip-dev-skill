@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 成本收集器 |
 | 物理表 | `bd_cost_collector_item` |
-| 数据库 schema | `finbd` |
+| domain/服务域 | `finbd` |
+| schema | `iuap_apdoc_finbd` |
 | 所属应用 | `DPMACCT` |
 | 直连字段 | 31 个 |
 | 关联引用 | 11 个 |

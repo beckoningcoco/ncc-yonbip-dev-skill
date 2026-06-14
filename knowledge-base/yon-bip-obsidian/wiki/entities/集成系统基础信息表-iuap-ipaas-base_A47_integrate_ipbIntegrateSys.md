@@ -20,7 +20,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 集成系统基础信息表 |
 | 物理表 | `ipb_integrate_sys` |
-| 数据库 schema | `iuap-ipaas-base` |
+| domain/服务域 | `iuap-ipaas-base` |
 | 所属应用 | `iuap-ipaas-base` |
 | 构建时间 | `2026-06-05 18:03:47.9320` |
 

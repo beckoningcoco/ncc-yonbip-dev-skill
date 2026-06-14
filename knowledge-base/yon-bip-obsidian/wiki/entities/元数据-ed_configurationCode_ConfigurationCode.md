@@ -21,7 +21,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 配置号 |
 | 物理表 | `ed_configuration_code` |
-| 数据库 schema | `engineeringdata` |
+| domain/服务域 | `engineeringdata` |
 | 所属应用 | `ED` |
 | 直连字段 | 17 个 |
 | 子表 | 0 个 |

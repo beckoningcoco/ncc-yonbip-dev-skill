@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 项目模板专属属性 |
 | 物理表 | `prtp_project_template_param` |
-| 数据库 schema | `yonbip-pm-projectme` |
+| domain/服务域 | `yonbip-pm-projectme` |
+| schema | `pmcloud` |
 | 所属应用 | `PRTP` |
 | 直连字段 | 23 个 |
 | 子表 | 0 个 |

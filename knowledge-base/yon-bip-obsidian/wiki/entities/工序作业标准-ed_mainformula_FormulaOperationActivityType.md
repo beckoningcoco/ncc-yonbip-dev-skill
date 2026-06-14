@@ -20,7 +20,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 工序作业标准 |
 | 物理表 | `ed_route_operation_activitytype` |
-| 数据库 schema | `engineeringdata` |
+| domain/服务域 | `engineeringdata` |
 | 所属应用 | `ED` |
 | 构建时间 | `2026-06-05 09:26:26.9050` |
 

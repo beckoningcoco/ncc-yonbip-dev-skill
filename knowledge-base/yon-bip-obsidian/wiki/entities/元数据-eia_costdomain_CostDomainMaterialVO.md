@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 物料计价方式子表 |
 | 物理表 | `ia_cost_domain_m` |
-| 数据库 schema | `yonbip-fi-eia` |
+| domain/服务域 | `yonbip-fi-eia` |
+| schema | `fieia` |
 | 所属应用 | `EIA` |
 | 直连字段 | 11 个 |
 | 关联引用 | 5 个 |

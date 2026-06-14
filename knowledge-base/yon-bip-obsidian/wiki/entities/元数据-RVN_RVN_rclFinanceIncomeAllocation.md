@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 融资收益分摊 |
 | 物理表 | `rcl_finance_income_allocation` |
-| 数据库 schema | `yonbip-fi-ercl` |
+| domain/服务域 | `yonbip-fi-ercl` |
+| schema | `fiercl` |
 | 所属应用 | `RVN` |
 | 直连字段 | 41 个 |
 | 子表 | 3 个 |

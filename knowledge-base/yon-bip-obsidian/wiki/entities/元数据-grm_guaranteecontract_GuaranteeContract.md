@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 担保合同 |
 | 物理表 | `grm_guarantee_contract` |
-| 数据库 schema | `yonbip-fi-ctmgrm` |
+| domain/服务域 | `yonbip-fi-ctmgrm` |
+| schema | `yonbip_fi_ctmfm` |
 | 所属应用 | `GRM` |
 | 直连字段 | 144 个 |
 | 子表 | 13 个 |

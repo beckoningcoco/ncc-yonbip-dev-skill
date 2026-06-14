@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 代扣税税码 |
 | 物理表 | `tax_withholding_code` |
-| 数据库 schema | `yonbip-fi-taxpubdoc` |
+| domain/服务域 | `yonbip-fi-taxpubdoc` |
+| schema | `iuap_apdoc_basedoc` |
 | 所属应用 | `DPMTAX` |
 | 直连字段 | 21 个 |
 | 子表 | 2 个 |

@@ -22,7 +22,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 打分结果建议指标项子表 |
 | 物理表 | `cpu_ai_mark_result_item` |
-| 数据库 schema | `yonbip-cpu-lawbid` |
+| domain/服务域 | `yonbip-cpu-lawbid` |
+| schema | `cpu_lawbid` |
 | 所属应用 | `ycSouringBid` |
 | 构建时间 | `2026-06-04 19:56:19.7900` |
 

@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 汇兑损益日志 |
 | 物理表 | `fi_exchange_gains_losses_rule_sync_log_tb` |
-| 数据库 schema | `yonbip-fi-egl` |
+| domain/服务域 | `yonbip-fi-egl` |
+| schema | `figl` |
 | 所属应用 | `GL` |
 | 直连字段 | 14 个 |
 | 子表 | 0 个 |

@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 客户公海成员 |
 | 物理表 | `sfa_customerhighseas_member` |
-| 数据库 schema | `yycrm` |
+| domain/服务域 | `yycrm` |
+| schema | `crm` |
 | 所属应用 | `SFA` |
 | 直连字段 | 9 个 |
 | 子表 | 0 个 |

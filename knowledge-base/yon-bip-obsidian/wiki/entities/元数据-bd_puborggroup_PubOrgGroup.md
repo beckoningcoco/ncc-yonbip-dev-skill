@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 分级管理组织集合 |
 | 物理表 | `pub_org_group` |
-| 数据库 schema | `ucfbasedoc` |
+| domain/服务域 | `ucfbasedoc` |
+| schema | `iuap_apdoc_basedoc` |
 | 所属应用 | `DPMPI` |
 | 直连字段 | 7 个 |
 | 子表 | 1 个 |

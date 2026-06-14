@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 城市分级 |
 | 物理表 | `znbz_areaclass` |
-| 数据库 schema | `znbzbx` |
+| domain/服务域 | `znbzbx` |
+| schema | `znbz` |
 | 所属应用 | `RBSM` |
 | 直连字段 | 30 个 |
 | 子表 | 2 个 |

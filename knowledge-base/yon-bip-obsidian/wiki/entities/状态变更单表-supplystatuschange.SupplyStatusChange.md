@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 状态变更单表 |
 | 物理表 | `cpu_supply_status_change` |
-| 数据库 schema | `cpu-supplymgr` |
+| domain/服务域 | `cpu-supplymgr` |
+| schema | `cpu_suppliermgr` |
 | 所属应用 | `ycSupplierManagement` |
 | 业务对象ID | `580b57af-9549-4b04-ae59-8122d9e8f92b` |
 | 元数据类型 | `Class` |

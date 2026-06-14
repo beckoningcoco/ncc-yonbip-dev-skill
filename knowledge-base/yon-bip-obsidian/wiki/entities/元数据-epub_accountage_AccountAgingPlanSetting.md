@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 账龄方案设置 |
 | 物理表 | `epub_account_ageplan_set` |
-| 数据库 schema | `fiepub` |
+| domain/服务域 | `fiepub` |
+| schema | `fiepub` |
 | 所属应用 | `FP` |
 | 直连字段 | 23 个 |
 | 子表 | 1 个 |

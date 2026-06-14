@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 物资推荐供应商 |
 | 物理表 | `rscm_supplier_suggested` |
-| 数据库 schema | `yonbip-pm-projectme` |
+| domain/服务域 | `yonbip-pm-projectme` |
+| schema | `pmcloud` |
 | 所属应用 | `RSCM` |
 | 直连字段 | 20 个 |
 | 子表 | 1 个 |

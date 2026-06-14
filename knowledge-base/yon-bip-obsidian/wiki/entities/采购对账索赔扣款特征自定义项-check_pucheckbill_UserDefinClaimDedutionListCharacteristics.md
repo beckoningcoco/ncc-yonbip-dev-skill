@@ -20,7 +20,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 采购对账索赔扣款特征自定义项 |
 | 物理表 | `pu_checkbill_claim_characteristics` |
-| 数据库 schema | `cpu-cooperation` |
+| domain/服务域 | `cpu-cooperation` |
+| schema | `cpu_cooperation` |
 | 所属应用 | `ycPurchaseSynergy` |
 | 构建时间 | `2026-06-04 23:34:00.1940` |
 

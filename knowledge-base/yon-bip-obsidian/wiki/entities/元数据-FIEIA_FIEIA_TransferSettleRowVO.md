@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 内部结算综合信息 |
 | 物理表 | `` |
-| 数据库 schema | `yonbip-fi-eia` |
+| domain/服务域 | `yonbip-fi-eia` |
+| schema | `fieia` |
 | 所属应用 | `EIA` |
 | 直连字段 | 82 个 |
 | 子表 | 0 个 |

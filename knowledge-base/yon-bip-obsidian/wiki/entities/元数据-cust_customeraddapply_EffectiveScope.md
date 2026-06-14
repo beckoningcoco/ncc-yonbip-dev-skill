@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 生效范围 |
 | 物理表 | `cust_customeraddapply_effective_scope` |
-| 数据库 schema | `yycrm` |
+| domain/服务域 | `yycrm` |
+| schema | `crm` |
 | 所属应用 | `CUST` |
 | 直连字段 | 5 个 |
 | 子表 | 0 个 |

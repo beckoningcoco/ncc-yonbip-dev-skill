@@ -20,7 +20,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 产品自由自定义项 |
 | 物理表 | `po_subcontract_requisition_product_extItem` |
-| 数据库 schema | `productionorder` |
+| domain/服务域 | `productionorder` |
 | 所属应用 | `OSM` |
 | 构建时间 | `2026-06-05 09:58:45.5510` |
 

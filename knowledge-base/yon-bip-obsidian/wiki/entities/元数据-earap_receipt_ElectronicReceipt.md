@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 电子回执单 |
 | 物理表 | `arap_electronic_receipt` |
-| 数据库 schema | `yonbip-fi-earapbill` |
+| domain/服务域 | `yonbip-fi-earapbill` |
+| schema | `fiearapbill` |
 | 所属应用 | `EAR` |
 | 直连字段 | 13 个 |
 | 子表 | 0 个 |

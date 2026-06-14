@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 角色导入辅助 |
 | 物理表 | `mp_storeemployee_role` |
-| 数据库 schema | `yxybase` |
+| domain/服务域 | `yxybase` |
+| schema | `pricecenter` |
 | 所属应用 | `RM` |
 | 直连字段 | 4 个 |
 | 子表 | 0 个 |

@@ -22,6 +22,7 @@ source_type: api_response
 | uri | st.osminrecord.OsmInRecord |
 | tableName | st_osminrecord |
 | domain | ustock |
+| schema | `ustock` |
 | applicationCode | ST |
 | superUri | retail.voucher.RetailVouch |
 | isBusinessObject | true |

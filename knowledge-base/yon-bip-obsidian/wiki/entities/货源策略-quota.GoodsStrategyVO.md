@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 货源策略 |
 | 物理表 | `cpu_gdstrgy` |
-| 数据库 schema | `cpu-base` |
+| domain/服务域 | `cpu-base` |
+| schema | `cpu_baseservice` |
 | 所属应用 | `ycPriceCenter` |
 | 业务对象ID | `fda5c330-9b43-4e42-b7fc-0b5cc1fa0990` |
 | 元数据类型 | `Class` |

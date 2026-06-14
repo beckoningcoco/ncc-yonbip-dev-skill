@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 商机报备子表自定义项扩展 |
 | 物理表 | `sfa_opptreport_item_def` |
-| 数据库 schema | `yycrm` |
+| domain/服务域 | `yycrm` |
+| schema | `crm` |
 | 所属应用 | `SFA` |
 | 直连字段 | 72 个 |
 | 子表 | 0 个 |

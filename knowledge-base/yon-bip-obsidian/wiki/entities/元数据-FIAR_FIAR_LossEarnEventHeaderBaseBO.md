@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 汇兑损益事务基本信息基类 |
 | 物理表 | `arap_ledger_h` |
-| 数据库 schema | `yonbip-fi-earap` |
+| domain/服务域 | `yonbip-fi-earap` |
+| schema | `fiearap` |
 | 所属应用 | `EAR` |
 | 直连字段 | 56 个 |
 | 子表 | 1 个 |

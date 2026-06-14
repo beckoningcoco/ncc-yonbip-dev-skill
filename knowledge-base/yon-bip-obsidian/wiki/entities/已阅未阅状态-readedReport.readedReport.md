@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 已阅未阅状态 |
 | 物理表 | `cpu_readed_report` |
-| 数据库 schema | `yonbip-cpu-bctask` |
+| domain/服务域 | `yonbip-cpu-bctask` |
+| schema | `cpu_base_doc` |
 | 所属应用 | `ycBase` |
 | 业务对象ID | `d5c738e2-208a-4053-a970-0151dbb26b87` |
 | 元数据类型 | `Class` |

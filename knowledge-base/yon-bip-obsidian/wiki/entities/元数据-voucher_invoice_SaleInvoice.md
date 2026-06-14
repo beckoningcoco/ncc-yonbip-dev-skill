@@ -21,7 +21,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 销售发票主表 |
 | 物理表 | `voucher_saleinvoice` |
-| 数据库 schema | `udinghuo` |
+| domain/服务域 | `udinghuo` |
 | 所属应用 | `SCMSA` |
 | 直连字段 | 182 个 |
 | 子表 | 7 个 |

@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 商品品牌子表 |
 | 物理表 | `aa_product_range` |
-| 数据库 schema | `yxybase` |
+| domain/服务域 | `yxybase` |
+| schema | `pricecenter` |
 | 所属应用 | `` |
 | 直连字段 | 4 个 |
 | 子表 | 0 个 |

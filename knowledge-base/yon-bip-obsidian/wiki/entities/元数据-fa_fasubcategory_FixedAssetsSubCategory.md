@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 固定资产子类别 |
 | 物理表 | `fa_category_sub` |
-| 数据库 schema | `yonbip-fi-efa` |
+| domain/服务域 | `yonbip-fi-efa` |
+| schema | `fiefa` |
 | 所属应用 | `EFA` |
 | 直连字段 | 21 个 |
 | 关联引用 | 6 个 |

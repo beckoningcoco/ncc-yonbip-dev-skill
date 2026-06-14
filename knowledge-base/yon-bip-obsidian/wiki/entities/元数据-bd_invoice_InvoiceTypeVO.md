@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 发票类型 |
 | 物理表 | `bd_invoice_type` |
-| 数据库 schema | `ucfbasedoc` |
+| domain/服务域 | `ucfbasedoc` |
+| schema | `iuap_apdoc_basedoc` |
 | 所属应用 | `DPMTAX` |
 | 直连字段 | 19 个 |
 | 子表 | 0 个 |

@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 物料状态明细-控制点明细 |
 | 物理表 | `pc_materialstatus_detail_action` |
-| 数据库 schema | `productcenter` |
+| domain/服务域 | `productcenter` |
+| schema | `iuap_apdoc_coredoc` |
 | 所属应用 | `GZTBDM` |
 | 直连字段 | 9 个 |
 | 子表 | 0 个 |

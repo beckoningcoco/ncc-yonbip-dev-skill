@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 交易单管理表体自定义项特征 |
 | 物理表 | `cpu_ew_trans_apply_detail_define_character` |
-| 数据库 schema | `yonbip-cpu-bcsourcing` |
+| domain/服务域 | `yonbip-cpu-bcsourcing` |
+| schema | `cpu_pubbiz_sourcing` |
 | 所属应用 | `ycBase` |
 | 元数据类型 | `Class` |
 | 元数据层级 | `0` |

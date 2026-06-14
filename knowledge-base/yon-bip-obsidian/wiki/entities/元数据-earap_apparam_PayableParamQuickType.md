@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 应付汇兑损益参数,款项类型不计算汇兑损益设置 |
 | 物理表 | `ap_param_quicktype` |
-| 数据库 schema | `yonbip-fi-earapbill` |
+| domain/服务域 | `yonbip-fi-earapbill` |
+| schema | `fiearapbill` |
 | 所属应用 | `EAP` |
 | 直连字段 | 10 个 |
 | 子表 | 0 个 |

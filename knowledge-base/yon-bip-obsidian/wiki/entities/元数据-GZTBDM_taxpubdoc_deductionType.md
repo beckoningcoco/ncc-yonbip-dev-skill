@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 抵扣类型 |
 | 物理表 | `tax_deduction_type` |
-| 数据库 schema | `yonbip-fi-taxpubdoc` |
+| domain/服务域 | `yonbip-fi-taxpubdoc` |
+| schema | `iuap_apdoc_basedoc` |
 | 所属应用 | `DPMTAX` |
 | 直连字段 | 17 个 |
 | 子表 | 0 个 |

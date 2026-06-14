@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 融资结息明细信息 |
 | 物理表 | `tlm_settleinterest_detail` |
-| 数据库 schema | `yonbip-fi-ctmtlm` |
+| domain/服务域 | `yonbip-fi-ctmtlm` |
+| schema | `yonbip_fi_ctmfm` |
 | 所属应用 | `TLM` |
 | 直连字段 | 44 个 |
 | 子表 | 0 个 |

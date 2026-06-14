@@ -23,6 +23,7 @@ source_type: api_response
 | uri | CLM.clmContract.clmEventRecord |
 | tableName | clm_event_record |
 | domain | yonbip-ec-contract |
+| schema | `yonbip_clm_contract` |
 | applicationCode | CLM |
 | superUri | iuap.busiObj.BizObject |
 | isBusinessObject | true |

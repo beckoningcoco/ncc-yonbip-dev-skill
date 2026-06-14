@@ -20,7 +20,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 序列号自由项特征组 |
 | 物理表 | `cpu_deliveryorder_detail_barcode_characteristics` |
-| 数据库 schema | `cpu-order` |
+| domain/服务域 | `cpu-order` |
+| schema | `cpu_cooperation` |
 | 所属应用 | `ycSaleCoor` |
 | 构建时间 | `2026-06-04 23:34:04.2740` |
 

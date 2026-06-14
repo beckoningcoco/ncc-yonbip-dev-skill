@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 科目分类影响因素 |
 | 物理表 | `epub_subject_cat_influence` |
-| 数据库 schema | `yonbip-fi-eeac` |
+| domain/服务域 | `yonbip-fi-eeac` |
+| schema | `fieeac` |
 | 所属应用 | `EVNT` |
 | 直连字段 | 11 个 |
 | 子表 | 0 个 |

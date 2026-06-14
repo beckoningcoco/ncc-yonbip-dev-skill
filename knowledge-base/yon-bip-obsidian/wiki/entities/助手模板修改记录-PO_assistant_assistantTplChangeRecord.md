@@ -20,7 +20,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 助手模板修改记录 |
 | 物理表 | `assistant_tpl_change_record` |
-| 数据库 schema | `productionorder` |
+| domain/服务域 | `productionorder` |
 | 所属应用 | `PO` |
 | 构建时间 | `2026-06-05 09:32:53.1710` |
 

@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 微信工作台待办注册 |
 | 物理表 | `cpu_wx_todo` |
-| 数据库 schema | `yonbip-cpu-bctask` |
+| domain/服务域 | `yonbip-cpu-bctask` |
+| schema | `cpu_base_doc` |
 | 所属应用 | `ycBase` |
 | 业务对象ID | `d601f424-2f13-44c5-9059-2fa3f745dc19` |
 | 元数据类型 | `Class` |

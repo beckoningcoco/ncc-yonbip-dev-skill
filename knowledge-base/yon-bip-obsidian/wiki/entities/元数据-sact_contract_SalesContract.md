@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 销售合同 |
 | 物理表 | `sact_salescontract` |
-| 数据库 schema | `sact` |
+| domain/服务域 | `sact` |
+| schema | `scmmp` |
 | 所属应用 | `SACT` |
 | 直连字段 | 153 个 |
 | 子表 | 11 个 |

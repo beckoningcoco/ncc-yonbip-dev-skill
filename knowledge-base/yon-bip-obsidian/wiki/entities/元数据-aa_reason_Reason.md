@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 原因档案 |
 | 物理表 | `aa_reason` |
-| 数据库 schema | `productcenter` |
+| domain/服务域 | `productcenter` |
+| schema | `iuap_apdoc_coredoc` |
 | 所属应用 | `DPMSI` |
 | 直连字段 | 20 个 |
 | 关联引用 | 4 个 |

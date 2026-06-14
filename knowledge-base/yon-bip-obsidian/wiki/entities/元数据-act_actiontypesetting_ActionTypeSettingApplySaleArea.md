@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | (行动类型设置)行动类型设置适用销售区域 |
 | 物理表 | `act_actiontypesetting_salearea` |
-| 数据库 schema | `yycrm` |
+| domain/服务域 | `yycrm` |
+| schema | `crm` |
 | 所属应用 | `ACT` |
 | 直连字段 | 14 个 |
 | 子表 | 0 个 |

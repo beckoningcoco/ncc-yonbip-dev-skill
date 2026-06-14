@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 供应商评价组 |
 | 物理表 | `cpu_evaluate_group` |
-| 数据库 schema | `cpu-supplymgr` |
+| domain/服务域 | `cpu-supplymgr` |
+| schema | `cpu_suppliermgr` |
 | 所属应用 | `ycSupplierManagement` |
 | 业务对象ID | `1483fb40-7e97-4d37-a8ba-7e2dfad5afbe` |
 | 元数据类型 | `Class` |

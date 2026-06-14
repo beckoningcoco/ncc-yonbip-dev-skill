@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 高级配置阶梯单价 |
 | 物理表 | `znbz_senior_ladder` |
-| 数据库 schema | `znbzbx` |
+| domain/服务域 | `znbzbx` |
+| schema | `znbz` |
 | 所属应用 | `RBSM` |
 | 直连字段 | 7 个 |
 | 子表 | 0 个 |

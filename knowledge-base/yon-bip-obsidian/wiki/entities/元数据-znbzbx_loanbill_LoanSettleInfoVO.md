@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 借款/预付单结算信息 |
 | 物理表 | `znbz_loansettleinfo` |
-| 数据库 schema | `znbzbx` |
+| domain/服务域 | `znbzbx` |
+| schema | `znbz` |
 | 所属应用 | `RBSM` |
 | 直连字段 | 116 个 |
 | 子表 | 1 个 |

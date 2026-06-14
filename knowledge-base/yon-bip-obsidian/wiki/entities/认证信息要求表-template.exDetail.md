@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 认证信息要求表 |
 | 物理表 | `cpu_target_template_detail` |
-| 数据库 schema | `cpu-supplymgr` |
+| domain/服务域 | `cpu-supplymgr` |
+| schema | `cpu_suppliermgr` |
 | 所属应用 | `ycSupplierManagement` |
 | 元数据类型 | `Class` |
 | 元数据层级 | `0` |

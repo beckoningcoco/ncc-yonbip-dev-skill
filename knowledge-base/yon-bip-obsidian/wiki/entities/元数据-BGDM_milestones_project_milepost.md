@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 项目里程碑 |
 | 物理表 | `bgdm_project_milepost` |
-| 数据库 schema | `yonbip-pm-commonbd` |
+| domain/服务域 | `yonbip-pm-commonbd` |
+| schema | `pmcloud` |
 | 所属应用 | `BGDM` |
 | 直连字段 | 29 个 |
 | 子表 | 0 个 |

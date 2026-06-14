@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 固定资产盘盈分配信息 |
 | 物理表 | `fa_bill_invtry_profit_assign` |
-| 数据库 schema | `yonbip-fi-efa` |
+| domain/服务域 | `yonbip-fi-efa` |
+| schema | `fiefa` |
 | 所属应用 | `EFA` |
 | 直连字段 | 31 个 |
 | 子表 | 0 个 |

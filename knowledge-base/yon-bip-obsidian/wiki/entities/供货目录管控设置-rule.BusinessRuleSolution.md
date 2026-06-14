@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 供货目录管控设置 |
 | 物理表 | `cpu_business_rule_solution` |
-| 数据库 schema | `cpu-base` |
+| domain/服务域 | `cpu-base` |
+| schema | `cpu_baseservice` |
 | 所属应用 | `ycPriceCenter` |
 | 业务对象ID | `23ee04af-1f28-4f3f-b858-0d3d12b6eb9b` |
 | 元数据类型 | `Class` |

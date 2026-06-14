@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 电子合同模板 |
 | 物理表 | `contract_template` |
-| 数据库 schema | `iuap-apcom-contract` |
+| domain/服务域 | `iuap-apcom-contract` |
+| schema | `iuap_apcom_contract` |
 | 所属应用 | `DZHTFW` |
 | 直连字段 | 27 个 |
 | 子表 | 0 个 |

@@ -20,7 +20,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 计划区域 |
 | 物理表 | `mr_mrp_area` |
-| 数据库 schema | `yonbip-mm-plan` |
+| domain/服务域 | `yonbip-mm-plan` |
+| schema | `requirements_planning` |
 | 所属应用 | `MR` |
 | 构建时间 | `2026-06-05 15:10:21.6090` |
 

@@ -21,7 +21,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 子件阶梯损耗 |
 | 物理表 | `ed_bom_component_step_loss` |
-| 数据库 schema | `engineeringdata` |
+| domain/服务域 | `engineeringdata` |
 | 所属应用 | `ED` |
 | 直连字段 | 12 个 |
 | 子表 | 0 个 |

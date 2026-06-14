@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 线性参考点 |
 | 物理表 | `pam_line_refer_point` |
-| 数据库 schema | `ucf-amc-ambd` |
+| domain/服务域 | `ucf-amc-ambd` |
+| schema | `amc_ambd` |
 | 所属应用 | `AIM` |
 | 直连字段 | 25 个 |
 | 子表 | 1 个 |

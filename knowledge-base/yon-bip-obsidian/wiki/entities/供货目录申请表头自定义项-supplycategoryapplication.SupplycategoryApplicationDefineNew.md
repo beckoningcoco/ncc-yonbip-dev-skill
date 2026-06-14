@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 供货目录申请表头自定义项 |
 | 物理表 | `cpu_supplycategory_application_defineCharacter` |
-| 数据库 schema | `cpu-base` |
+| domain/服务域 | `cpu-base` |
+| schema | `cpu_baseservice` |
 | 所属应用 | `ycPriceCenter` |
 | 业务对象ID | `3bd159a8-0ee2-43cf-9fc1-1058d6046d14` |
 | 元数据类型 | `Class` |

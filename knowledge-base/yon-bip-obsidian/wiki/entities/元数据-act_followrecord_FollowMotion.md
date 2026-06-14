@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 跟进记录关联动作 |
 | 物理表 | `act_followrecord_motion` |
-| 数据库 schema | `yycrm` |
+| domain/服务域 | `yycrm` |
+| schema | `crm` |
 | 所属应用 | `ACT` |
 | 直连字段 | 5 个 |
 | 子表 | 0 个 |

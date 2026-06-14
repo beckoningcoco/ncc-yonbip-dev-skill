@@ -20,7 +20,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 成交服务费 |
 | 物理表 | `cpu_service_charge_notice` |
-| 数据库 schema | `yonbip-cpu-lawbid` |
+| domain/服务域 | `yonbip-cpu-lawbid` |
+| schema | `cpu_lawbid` |
 | 所属应用 | `ycSouringAuction` |
 | 构建时间 | `2026-06-04 23:25:02.7720` |
 

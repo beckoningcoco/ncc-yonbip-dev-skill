@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 风险项引用指标 |
 | 物理表 | `rcp_riskruleindicator` |
-| 数据库 schema | `yonbip-mid-sscia` |
+| domain/服务域 | `yonbip-mid-sscia` |
+| schema | `intelligent_audit` |
 | 所属应用 | `ZNSH` |
 | 直连字段 | 16 个 |
 | 子表 | 0 个 |

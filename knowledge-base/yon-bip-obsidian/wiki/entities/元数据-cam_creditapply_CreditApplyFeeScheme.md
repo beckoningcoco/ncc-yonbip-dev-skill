@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 授信费用方案 |
 | 物理表 | `cam_creditapply_fee_scheme` |
-| 数据库 schema | `yonbip-fi-ctmcam` |
+| domain/服务域 | `yonbip-fi-ctmcam` |
+| schema | `yonbip_fi_ctmfm` |
 | 所属应用 | `CAM` |
 | 直连字段 | 33 个 |
 | 子表 | 0 个 |

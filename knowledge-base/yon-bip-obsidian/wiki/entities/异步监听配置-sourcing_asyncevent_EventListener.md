@@ -20,7 +20,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 异步监听配置 |
 | 物理表 | `gscm_async_event_listener` |
-| 数据库 schema | `yonbip-cpu-sourcing` |
+| domain/服务域 | `yonbip-cpu-sourcing` |
 | 所属应用 | `ycSouringInquiry` |
 | 构建时间 | `2026-06-04 23:06:26.9320` |
 

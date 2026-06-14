@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 币种 |
 | 物理表 | `bd_currency_tenant` |
-| 数据库 schema | `ucfbasedoc` |
+| domain/服务域 | `ucfbasedoc` |
+| schema | `iuap_apdoc_basedoc` |
 | 所属应用 | `DPMPI` |
 | 直连字段 | 28 个 |
 | 子表 | 0 个 |

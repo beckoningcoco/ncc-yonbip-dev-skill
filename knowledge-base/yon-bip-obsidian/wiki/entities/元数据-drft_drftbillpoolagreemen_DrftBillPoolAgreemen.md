@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 票据池协议 |
 | 物理表 | `drft_billpoolagreemen` |
-| 数据库 schema | `drft` |
+| domain/服务域 | `drft` |
+| schema | `ctmdrft` |
 | 所属应用 | `DRFT` |
 | 直连字段 | 51 个 |
 | 子表 | 1 个 |

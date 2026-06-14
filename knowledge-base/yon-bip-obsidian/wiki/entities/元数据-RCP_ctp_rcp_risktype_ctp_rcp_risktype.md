@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 风险类别 |
 | 物理表 | `rcp_risktype` |
-| 数据库 schema | `yonbip-mid-sscia` |
+| domain/服务域 | `yonbip-mid-sscia` |
+| schema | `intelligent_audit` |
 | 所属应用 | `RCP` |
 | 直连字段 | 29 个 |
 | 子表 | 0 个 |

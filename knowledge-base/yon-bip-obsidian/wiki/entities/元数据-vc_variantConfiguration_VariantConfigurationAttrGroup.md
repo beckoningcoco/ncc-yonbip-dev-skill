@@ -21,7 +21,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 选配参数文件属性组 |
 | 物理表 | `vc_attr_group` |
-| 数据库 schema | `engineeringdata` |
+| domain/服务域 | `engineeringdata` |
 | 所属应用 | `ED` |
 | 直连字段 | 15 个 |
 | 子表 | 0 个 |

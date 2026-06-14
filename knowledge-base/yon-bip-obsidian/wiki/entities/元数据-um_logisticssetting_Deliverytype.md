@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 物流设置 |
 | 物理表 | `deliverytype` |
-| 数据库 schema | `umall` |
+| domain/服务域 | `umall` |
+| schema | `upmalls` |
 | 所属应用 | `SDMA` |
 | 直连字段 | 48 个 |
 | 子表 | 3 个 |

@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 商城业务运费模板 |
 | 物理表 | `mp_mall_freight_template` |
-| 数据库 schema | `yxybase` |
+| domain/服务域 | `yxybase` |
+| schema | `pricecenter` |
 | 所属应用 | `Marketingpublic` |
 | 直连字段 | 5 个 |
 | 子表 | 0 个 |

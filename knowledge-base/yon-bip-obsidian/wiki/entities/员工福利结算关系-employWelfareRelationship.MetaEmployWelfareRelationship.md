@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 员工福利结算关系 |
 | 物理表 | `cpu_employee_welfare_relationship` |
-| 数据库 schema | `yonbip-cpu-mall` |
+| domain/服务域 | `yonbip-cpu-mall` |
+| schema | `cpu_mall` |
 | 所属应用 | `ycYuncaiMall` |
 | 业务对象ID | `9dd21b3e-1aa3-40de-a44a-62a1f791fed8` |
 | 元数据类型 | `Class` |

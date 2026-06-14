@@ -20,7 +20,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 定标变更单子表 |
 | 物理表 | `cpu_pdrevise_detail` |
-| 数据库 schema | `yonbip-cpu-sourcing` |
+| domain/服务域 | `yonbip-cpu-sourcing` |
 | 所属应用 | `ycSouringInquiry` |
 | 构建时间 | `2026-06-04 23:07:05.5480` |
 

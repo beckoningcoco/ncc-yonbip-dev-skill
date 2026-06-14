@@ -22,6 +22,7 @@ source_type: api_response
 | uri | st.storescrapped.StoreScrappeds |
 | tableName | st_goodchanges |
 | domain | ustock |
+| schema | `ustock` |
 | applicationCode | ST |
 | superUri | st.goodchange.GoodChanges |
 | isBusinessObject | true |

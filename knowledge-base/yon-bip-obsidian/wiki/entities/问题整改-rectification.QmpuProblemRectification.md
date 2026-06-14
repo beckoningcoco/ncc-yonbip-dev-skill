@@ -24,7 +24,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 问题整改 |
 | 物理表 | `qmpu_problem_rectification` |
-| 数据库 schema | `yonbip-cpu-synergy` |
+| domain/服务域 | `yonbip-cpu-synergy` |
 | 所属应用 | `ycQualityCollaboration` |
 | 业务对象ID | `44e2bb11-2802-4fc4-9660-133069e57379` |
 | 元数据类型 | `Class` |

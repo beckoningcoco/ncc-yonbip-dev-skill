@@ -20,7 +20,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 装箱单自由项特征组 |
 | 物理表 | `st_boxingrecords_characteristics` |
-| 数据库 schema | `uscmpub` |
+| domain/服务域 | `uscmpub` |
+| schema | `usp_plantransportroute` |
 | 所属应用 | `BCD` |
 | 构建时间 | `2026-06-04 23:34:35.2020` |
 

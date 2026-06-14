@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 收发货点 |
 | 物理表 | `usp_sendandreceivesite` |
-| 数据库 schema | `uscmpub` |
+| domain/服务域 | `uscmpub` |
+| schema | `usp_plantransportroute` |
 | 所属应用 | `SCCS` |
 | 直连字段 | 23 个 |
 | 子表 | 0 个 |

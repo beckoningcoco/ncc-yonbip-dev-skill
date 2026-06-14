@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 保函费用 |
 | 物理表 | `lgm_guaranteefee` |
-| 数据库 schema | `yonbip-fi-ctmlgm` |
+| domain/服务域 | `yonbip-fi-ctmlgm` |
+| schema | `yonbip_fi_ctmlc` |
 | 所属应用 | `LGM` |
 | 直连字段 | 106 个 |
 | 子表 | 0 个 |

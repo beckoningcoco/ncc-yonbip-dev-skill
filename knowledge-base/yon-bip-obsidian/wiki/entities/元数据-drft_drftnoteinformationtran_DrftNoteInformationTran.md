@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 票据信息子表 |
 | 物理表 | `drft_noteinformation_tran` |
-| 数据库 schema | `drft` |
+| domain/服务域 | `drft` |
+| schema | `ctmdrft` |
 | 所属应用 | `DRFT` |
 | 直连字段 | 31 个 |
 | 子表 | 0 个 |

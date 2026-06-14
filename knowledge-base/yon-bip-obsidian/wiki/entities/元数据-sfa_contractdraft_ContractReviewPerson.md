@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 合同条款的评审人 |
 | 物理表 | `sfa_contract_review_person` |
-| 数据库 schema | `yycrm` |
+| domain/服务域 | `yycrm` |
+| schema | `crm` |
 | 所属应用 | `SFA` |
 | 直连字段 | 8 个 |
 | 子表 | 0 个 |

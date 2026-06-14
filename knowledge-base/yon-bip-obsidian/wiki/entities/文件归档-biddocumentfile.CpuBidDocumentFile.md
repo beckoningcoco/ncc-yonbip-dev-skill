@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 文件归档 |
 | 物理表 | `cpu_bid_document_file` |
-| 数据库 schema | `yonbip-cpu-bctask` |
+| domain/服务域 | `yonbip-cpu-bctask` |
+| schema | `cpu_base_doc` |
 | 所属应用 | `ycBase` |
 | 业务对象ID | `f47ebe1a-60c4-4c38-912e-cdb15d8a9dae` |
 | 元数据类型 | `Class` |

@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 贸易路径主表 |
 | 物理表 | `scmmp_traderoute` |
-| 数据库 schema | `scmmp` |
+| domain/服务域 | `scmmp` |
+| schema | `scmmp` |
 | 所属应用 | `SCCS` |
 | 直连字段 | 33 个 |
 | 子表 | 1 个 |

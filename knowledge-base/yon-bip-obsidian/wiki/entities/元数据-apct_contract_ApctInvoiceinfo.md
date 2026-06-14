@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 收票信息 |
 | 物理表 | `apct_apct_invoiceinfo` |
-| 数据库 schema | `apct` |
+| domain/服务域 | `apct` |
+| schema | `apct` |
 | 所属应用 | `APCT` |
 | 直连字段 | 21 个 |
 | 子表 | 0 个 |

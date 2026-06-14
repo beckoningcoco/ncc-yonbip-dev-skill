@@ -20,7 +20,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 对账事项表体自定义项 |
 | 物理表 | `cpu_checkpool_detail_usercharacteristicsdefine` |
-| 数据库 schema | `cpu-cooperation` |
+| domain/服务域 | `cpu-cooperation` |
+| schema | `cpu_cooperation` |
 | 所属应用 | `ycPurchaseSynergy` |
 | 构建时间 | `2026-06-04 23:33:57.3730` |
 

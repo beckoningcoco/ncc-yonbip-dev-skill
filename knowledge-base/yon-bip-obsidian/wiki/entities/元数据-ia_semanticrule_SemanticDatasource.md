@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 语义模型数据源，执行语义模型时就靠他链接数据库 |
 | 物理表 | `ssc_ia_semantic_datasource` |
-| 数据库 schema | `yonbip-mid-sscia` |
+| domain/服务域 | `yonbip-mid-sscia` |
+| schema | `intelligent_audit` |
 | 所属应用 | `ZNSH` |
 | 直连字段 | 23 个 |
 | 子表 | 0 个 |

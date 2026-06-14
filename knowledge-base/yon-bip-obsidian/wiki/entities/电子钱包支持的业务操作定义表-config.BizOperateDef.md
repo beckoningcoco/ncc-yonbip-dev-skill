@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 电子钱包支持的业务操作定义表 |
 | 物理表 | `cpu_ew_biz_operate_def` |
-| 数据库 schema | `yonbip-cpu-bcsourcing` |
+| domain/服务域 | `yonbip-cpu-bcsourcing` |
+| schema | `cpu_pubbiz_sourcing` |
 | 所属应用 | `` |
 | 业务对象ID | `e2a9e9ea-71b5-4179-847f-69fd5da2534d` |
 | 元数据类型 | `Class` |

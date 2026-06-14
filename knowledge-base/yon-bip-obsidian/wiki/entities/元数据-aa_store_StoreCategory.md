@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 终端分类 |
 | 物理表 | `mp_store_category` |
-| 数据库 schema | `yxybase` |
+| domain/服务域 | `yxybase` |
+| schema | `pricecenter` |
 | 所属应用 | `Marketingpublic` |
 | 直连字段 | 13 个 |
 | 子表 | 0 个 |

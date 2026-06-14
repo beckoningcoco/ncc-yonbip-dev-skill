@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 拜访小结 |
 | 物理表 | `dsfa_visitsummary` |
-| 数据库 schema | `yycrm` |
+| domain/服务域 | `yycrm` |
+| schema | `crm` |
 | 所属应用 | `DSFA` |
 | 直连字段 | 72 个 |
 | 子表 | 3 个 |

@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 业务事项 |
 | 物理表 | `eac_busi_event` |
-| 数据库 schema | `yonbip-fi-eeac` |
+| domain/服务域 | `yonbip-fi-eeac` |
+| schema | `fieeac` |
 | 所属应用 | `EVNT` |
 | 直连字段 | 44 个 |
 | 关联引用 | 9 个 |

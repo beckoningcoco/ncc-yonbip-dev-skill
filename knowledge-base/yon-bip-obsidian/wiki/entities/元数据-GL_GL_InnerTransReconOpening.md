@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 内部交易对账期初 |
 | 物理表 | `gl_inner_trans_recon_opening_tb` |
-| 数据库 schema | `yonbip-fi-egl` |
+| domain/服务域 | `yonbip-fi-egl` |
+| schema | `figl` |
 | 所属应用 | `GL` |
 | 直连字段 | 38 个 |
 | 子表 | 0 个 |

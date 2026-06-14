@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 业务对象关系 |
 | 物理表 | `ssc_ia_voucher_relation` |
-| 数据库 schema | `yonbip-mid-sscia` |
+| domain/服务域 | `yonbip-mid-sscia` |
+| schema | `intelligent_audit` |
 | 所属应用 | `ZNSH` |
 | 直连字段 | 28 个 |
 | 子表 | 1 个 |

@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 批次档案表 |
 | 物理表 | `batchno` |
-| 数据库 schema | `yonbip-scm-scmbd` |
+| domain/服务域 | `yonbip-scm-scmbd` |
+| schema | `scmbd` |
 | 所属应用 | `DPMBTSN` |
 | 直连字段 | 72 个 |
 | 子表 | 0 个 |

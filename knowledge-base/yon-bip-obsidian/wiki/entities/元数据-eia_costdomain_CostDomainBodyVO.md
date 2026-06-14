@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 成本域详细信息 |
 | 物理表 | `ia_cost_domain_b` |
-| 数据库 schema | `yonbip-fi-eia` |
+| domain/服务域 | `yonbip-fi-eia` |
+| schema | `fieia` |
 | 所属应用 | `EIA` |
 | 直连字段 | 11 个 |
 | 关联引用 | 6 个 |

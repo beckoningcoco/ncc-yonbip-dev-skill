@@ -20,7 +20,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 计划策略独立需求来源类型 |
 | 物理表 | `mr_time_fence_demand_type` |
-| 数据库 schema | `yonbip-mm-plan` |
+| domain/服务域 | `yonbip-mm-plan` |
+| schema | `requirements_planning` |
 | 所属应用 | `MR` |
 | 构建时间 | `2026-06-05 15:17:20.7710` |
 

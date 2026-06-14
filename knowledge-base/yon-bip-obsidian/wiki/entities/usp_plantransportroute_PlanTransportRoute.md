@@ -22,6 +22,7 @@ source_type: api_response
 | uri | usp.plantransportroute.PlanTransportRoute |
 | tableName | usp_plantransportroute |
 | domain | uscmpub |
+| schema | `usp_plantransportroute` |
 | applicationCode | SCCS |
 | superUri | base.entity.BizObject |
 | isBusinessObject | true |

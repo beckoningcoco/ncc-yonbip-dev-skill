@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 伙伴银行信息 |
 | 物理表 | `tmsp_fundbusinobj_archives_item` |
-| 数据库 schema | `yonbip-fi-ctmtmsp` |
+| domain/服务域 | `yonbip-fi-ctmtmsp` |
+| schema | `yonbip_fi_ctmpub` |
 | 所属应用 | `TMSP` |
 | 直连字段 | 33 个 |
 | 子表 | 0 个 |

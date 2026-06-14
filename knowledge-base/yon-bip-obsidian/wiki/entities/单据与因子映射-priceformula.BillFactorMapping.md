@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 单据与因子映射 |
 | 物理表 | `bill_factor_mapping` |
-| 数据库 schema | `cpu-bi-service` |
+| domain/服务域 | `cpu-bi-service` |
+| schema | `cpu_baseservice` |
 | 所属应用 | `ycPriceCenter` |
 | 业务对象ID | `8da20156-bf1e-4015-8037-4d3fa4523d28` |
 | 元数据类型 | `Class` |

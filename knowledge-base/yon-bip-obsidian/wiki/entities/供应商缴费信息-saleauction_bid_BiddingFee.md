@@ -20,7 +20,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 供应商缴费信息 |
 | 物理表 | `cpu_bidding_fee` |
-| 数据库 schema | `yonbip-cpu-lawbid` |
+| domain/服务域 | `yonbip-cpu-lawbid` |
+| schema | `cpu_lawbid` |
 | 所属应用 | `ycBusinessCenter` |
 | 构建时间 | `2026-06-04 23:43:48.1350` |
 

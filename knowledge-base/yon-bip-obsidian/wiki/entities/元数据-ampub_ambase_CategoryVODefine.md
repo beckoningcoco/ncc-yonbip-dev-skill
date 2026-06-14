@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 资产类别自定义项 |
 | 物理表 | `pam_category_define` |
-| 数据库 schema | `ucf-amc-ambd` |
+| domain/服务域 | `ucf-amc-ambd` |
+| schema | `amc_ambd` |
 | 所属应用 | `AMBD` |
 | 直连字段 | 66 个 |
 | 子表 | 0 个 |

@@ -20,7 +20,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 补货需求头自定义项 |
 | 物理表 | `po_replenish_demand_userdefitem` |
-| 数据库 schema | `productionorder` |
+| domain/服务域 | `productionorder` |
 | 所属应用 | `PO` |
 | 构建时间 | `2026-06-05 09:34:13.7060` |
 

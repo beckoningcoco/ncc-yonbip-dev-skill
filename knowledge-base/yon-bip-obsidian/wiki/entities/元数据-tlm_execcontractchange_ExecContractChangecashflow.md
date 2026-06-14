@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 融入变更现金流 |
 | 物理表 | `tlm_execcontchange_cashflow` |
-| 数据库 schema | `yonbip-fi-ctmtlm` |
+| domain/服务域 | `yonbip-fi-ctmtlm` |
+| schema | `yonbip_fi_ctmfm` |
 | 所属应用 | `TLM` |
 | 直连字段 | 50 个 |
 | 子表 | 1 个 |

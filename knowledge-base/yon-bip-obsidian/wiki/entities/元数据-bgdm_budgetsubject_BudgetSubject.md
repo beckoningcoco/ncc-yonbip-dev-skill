@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 科目表 |
 | 物理表 | `bgdm_budgetsubject` |
-| 数据库 schema | `yonbip-pm-commonbd` |
+| domain/服务域 | `yonbip-pm-commonbd` |
+| schema | `pmcloud` |
 | 所属应用 | `BGDM` |
 | 直连字段 | 21 个 |
 | 子表 | 2 个 |

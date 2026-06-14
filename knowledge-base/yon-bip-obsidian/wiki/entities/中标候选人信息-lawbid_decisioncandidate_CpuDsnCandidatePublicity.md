@@ -22,7 +22,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 中标候选人信息 |
 | 物理表 | `cpu_candidate_result` |
-| 数据库 schema | `yonbip-cpu-lawbid` |
+| domain/服务域 | `yonbip-cpu-lawbid` |
+| schema | `cpu_lawbid` |
 | 所属应用 | `ycSouringBid` |
 | 构建时间 | `2026-06-04 20:00:11.8130` |
 

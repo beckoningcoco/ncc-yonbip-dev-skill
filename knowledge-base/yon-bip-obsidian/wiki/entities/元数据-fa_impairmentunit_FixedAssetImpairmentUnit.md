@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 固定资产减值单元 |
 | 物理表 | `fa_impairment_unit` |
-| 数据库 schema | `yonbip-fi-efa` |
+| domain/服务域 | `yonbip-fi-efa` |
+| schema | `fiefa` |
 | 所属应用 | `EFA` |
 | 直连字段 | 21 个 |
 | 关联引用 | 6 个 |

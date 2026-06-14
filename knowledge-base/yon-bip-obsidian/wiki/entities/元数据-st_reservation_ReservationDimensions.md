@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 跟踪线索维度子表 |
 | 物理表 | `st_reservationdimensions` |
-| 数据库 schema | `ustock` |
+| domain/服务域 | `ustock` |
+| schema | `ustock` |
 | 所属应用 | `ST` |
 | 直连字段 | 8 个 |
 | 子表 | 0 个 |

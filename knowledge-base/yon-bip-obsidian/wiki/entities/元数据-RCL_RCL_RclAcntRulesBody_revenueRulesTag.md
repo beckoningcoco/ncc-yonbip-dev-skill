@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 收入确认规则 |
 | 物理表 | `rcl_acntrules_b_revenuerulestag` |
-| 数据库 schema | `yonbip-fi-ercl` |
+| domain/服务域 | `yonbip-fi-ercl` |
+| schema | `fiercl` |
 | 所属应用 | `RVN` |
 | 直连字段 | 10 个 |
 | 子表 | 0 个 |

@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 物料SKU |
 | 物理表 | `productsku` |
-| 数据库 schema | `productcenter` |
+| domain/服务域 | `productcenter` |
+| schema | `iuap_apdoc_coredoc` |
 | 所属应用 | `GZTBDM` |
 | 直连字段 | 70 个 |
 | 子表 | 12 个 |

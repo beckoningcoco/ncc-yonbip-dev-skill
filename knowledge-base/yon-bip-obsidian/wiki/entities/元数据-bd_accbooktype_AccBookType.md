@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 业务账簿主表 |
 | 物理表 | `bd_accbooktype` |
-| 数据库 schema | `finbd` |
+| domain/服务域 | `finbd` |
+| schema | `iuap_apdoc_finbd` |
 | 所属应用 | `GL` |
 | 直连字段 | 26 个 |
 | 子表 | 2 个 |

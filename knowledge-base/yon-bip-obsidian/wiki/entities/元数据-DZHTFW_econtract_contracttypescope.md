@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 合同类型适用组织 |
 | 物理表 | `clm_contracttype_scope` |
-| 数据库 schema | `iuap-apcom-contract` |
+| domain/服务域 | `iuap-apcom-contract` |
+| schema | `iuap_apcom_contract` |
 | 所属应用 | `DZHTFW` |
 | 直连字段 | 13 个 |
 | 子表 | 1 个 |

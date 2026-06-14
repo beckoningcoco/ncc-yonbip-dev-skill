@@ -22,6 +22,7 @@ source_type: api_response
 | uri | st.returnapply.ReturnApplys |
 | tableName | st_returnapplys |
 | domain | ustock |
+| schema | `ustock` |
 | applicationCode | ST |
 | superUri | retail.voucher.RetailVouchLine |
 | isBusinessObject | true |

@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 名单原因 |
 | 物理表 | `rsm_listreason` |
-| 数据库 schema | `yonbip-fi-ctmrsm` |
+| domain/服务域 | `yonbip-fi-ctmrsm` |
+| schema | `yonbip_fi_ctmpub` |
 | 所属应用 | `YONBIP-FI-CTMRSM` |
 | 直连字段 | 15 个 |
 | 子表 | 1 个 |

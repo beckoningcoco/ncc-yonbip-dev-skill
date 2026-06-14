@@ -20,7 +20,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 工单协助人员表 |
 | 物理表 | `sms_so_persons` |
-| 数据库 schema | `imppes` |
+| domain/服务域 | `imppes` |
 | 所属应用 | `IMP_PES` |
 | 构建时间 | `2026-06-05 17:20:17.8460` |
 

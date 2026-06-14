@@ -20,7 +20,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 安装计划-安装作业 |
 | 物理表 | `sms_installation_plan_details` |
-| 数据库 schema | `imppes` |
+| domain/服务域 | `imppes` |
 | 所属应用 | `IMP_PES` |
 | 构建时间 | `2026-06-05 17:19:57.1690` |
 

@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 参数数据审计表 |
 | 物理表 | `param_audit_data` |
-| 数据库 schema | `yonbip-fi-eia` |
+| domain/服务域 | `yonbip-fi-eia` |
+| schema | `fieia` |
 | 所属应用 | `EIA` |
 | 直连字段 | 14 个 |
 | 子表 | 0 个 |

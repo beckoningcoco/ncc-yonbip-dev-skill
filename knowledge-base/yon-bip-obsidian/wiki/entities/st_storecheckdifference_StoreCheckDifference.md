@@ -22,6 +22,7 @@ source_type: api_response
 | uri | st.storecheckdifference.StoreCheckDifference |
 | tableName | st_storecheckdifference |
 | domain | ustock |
+| schema | `ustock` |
 | applicationCode | ST |
 | superUri | st.pubstorecheckdifference.PubStoreCheckDifference |
 | isBusinessObject | true |

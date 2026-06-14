@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 投资支出类别 |
 | 物理表 | `bd_investment_pay` |
-| 数据库 schema | `ucfbasedoc` |
+| domain/服务域 | `ucfbasedoc` |
+| schema | `iuap_apdoc_basedoc` |
 | 所属应用 | `DPMPRJ` |
 | 直连字段 | 21 个 |
 | 子表 | 0 个 |

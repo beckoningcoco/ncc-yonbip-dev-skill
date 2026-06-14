@@ -22,6 +22,7 @@ source_type: api_response
 | uri | st.osminrecord.OsmInRecordDefine |
 | tableName | st_osminrecord_define |
 | domain | ustock |
+| schema | `ustock` |
 | applicationCode | ST |
 | superUri | ? |
 | isBusinessObject | true |

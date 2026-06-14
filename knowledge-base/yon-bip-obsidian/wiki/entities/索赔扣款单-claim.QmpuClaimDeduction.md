@@ -24,7 +24,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 索赔扣款单 |
 | 物理表 | `qmpu_claim_deduction` |
-| 数据库 schema | `yonbip-cpu-synergy` |
+| domain/服务域 | `yonbip-cpu-synergy` |
 | 所属应用 | `ycQualityCollaboration` |
 | 业务对象ID | `e2a533bd-7ef1-4e0e-b24c-75aaccd630cc` |
 | 元数据类型 | `Class` |

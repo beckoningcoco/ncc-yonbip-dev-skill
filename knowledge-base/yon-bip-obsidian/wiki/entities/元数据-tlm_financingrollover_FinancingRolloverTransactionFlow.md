@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 交易进度表 |
 | 物理表 | `tlm_financingrollover_transaction_flow` |
-| 数据库 schema | `yonbip-fi-ctmtlm` |
+| domain/服务域 | `yonbip-fi-ctmtlm` |
+| schema | `yonbip_fi_ctmfm` |
 | 所属应用 | `TLM` |
 | 直连字段 | 52 个 |
 | 子表 | 0 个 |

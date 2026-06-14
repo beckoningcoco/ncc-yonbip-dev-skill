@@ -20,7 +20,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 序列号自由项特征组实体 |
 | 物理表 | `po_finished_report_sn_ct` |
-| 数据库 schema | `productionorder` |
+| domain/服务域 | `productionorder` |
 | 所属应用 | `PO` |
 | 构建时间 | `2026-06-05 09:36:04.6950` |
 

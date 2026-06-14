@@ -20,7 +20,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 调拨出库单子表 |
 | 物理表 | `st_storeout_b` |
-| 数据库 schema | `ustock` |
+| domain/服务域 | `ustock` |
+| schema | `ustock` |
 | 所属应用 | `ST` |
 | 构建时间 | `2026-06-05 09:57:48.4370` |
 

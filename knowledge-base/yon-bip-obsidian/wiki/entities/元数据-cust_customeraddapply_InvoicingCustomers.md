@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 申请单开票客户 |
 | 物理表 | `cust_customeraddapply_invoicingcustomers` |
-| 数据库 schema | `yycrm` |
+| domain/服务域 | `yycrm` |
+| schema | `crm` |
 | 所属应用 | `CUST` |
 | 直连字段 | 9 个 |
 | 子表 | 0 个 |

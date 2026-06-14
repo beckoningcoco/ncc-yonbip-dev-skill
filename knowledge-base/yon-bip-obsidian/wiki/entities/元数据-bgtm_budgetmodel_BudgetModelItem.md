@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 预算模型明细 |
 | 物理表 | `bgtm_budget_model_b` |
-| 数据库 schema | `yonbip-pm-projectme` |
+| domain/服务域 | `yonbip-pm-projectme` |
+| schema | `pmcloud` |
 | 所属应用 | `BGTM` |
 | 直连字段 | 22 个 |
 | 子表 | 0 个 |

@@ -22,6 +22,7 @@ source_type: api_response
 | uri | st.standingbookdetail.StandingBookDetailReport |
 | tableName | st_certificate |
 | domain | ustock |
+| schema | `ustock` |
 | applicationCode | ST |
 | superUri | base.entity.BizObject |
 | isBusinessObject | true |

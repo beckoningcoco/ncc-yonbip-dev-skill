@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 准入管理物料分类 |
 | 物理表 | `cpu_manage_material_class` |
-| 数据库 schema | `cpu-supplymgr` |
+| domain/服务域 | `cpu-supplymgr` |
+| schema | `cpu_suppliermgr` |
 | 所属应用 | `ycSupplierManagement` |
 | 业务对象ID | `6845ace5-fc82-4109-b76a-120064707dde` |
 | 元数据类型 | `Class` |

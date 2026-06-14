@@ -20,7 +20,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 生态应用钉钉服务信息表 |
 | 物理表 | `open_app_service_dd` |
-| 数据库 schema | `iuap-ipaas-base` |
+| domain/服务域 | `iuap-ipaas-base` |
 | 所属应用 | `INPAPI` |
 | 构建时间 | `2026-06-05 18:03:54.3780` |
 

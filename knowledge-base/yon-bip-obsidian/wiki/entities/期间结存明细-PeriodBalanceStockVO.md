@@ -22,7 +22,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 期间结存明细 |
 | 物理表 | `ia_period_balance_stock` |
-| 数据库 schema | `yonbip-fi-eia` |
+| domain/服务域 | `yonbip-fi-eia` |
+| schema | `fieia` |
 | 所属应用 | `EIA` |
 | 元数据类型 | `Class` |
 | 直连字段 | 314 个 |

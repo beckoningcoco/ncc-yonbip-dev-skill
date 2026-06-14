@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 销售出库单序列号 |
 | 物理表 | `st_salesouts_sn` |
-| 数据库 schema | `ustock` |
+| domain/服务域 | `ustock` |
+| schema | `ustock` |
 | 所属应用 | `ST` |
 | 直连字段 | 46 个 |
 | 关联引用 | 6 个 |

@@ -22,7 +22,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 成交结果公告中标供应商物料 |
 | 物理表 | `cpu_result_notice_supplier_material` |
-| 数据库 schema | `yonbip-cpu-lawbid` |
+| domain/服务域 | `yonbip-cpu-lawbid` |
+| schema | `cpu_lawbid` |
 | 所属应用 | `ycSouringBid` |
 | 构建时间 | `2026-06-04 20:00:16.4030` |
 

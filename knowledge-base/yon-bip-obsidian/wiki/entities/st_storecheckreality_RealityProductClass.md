@@ -22,6 +22,7 @@ source_type: api_response
 | uri | st.storecheckreality.RealityProductClass |
 | tableName | st_storecheckreality_productclass |
 | domain | ustock |
+| schema | `ustock` |
 | applicationCode | ST |
 | superUri | base.entity.BizObject |
 | isBusinessObject | true |

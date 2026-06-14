@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 微信工作台 |
 | 物理表 | `cpu_wx_workbeach` |
-| 数据库 schema | `yonbip-cpu-bctask` |
+| domain/服务域 | `yonbip-cpu-bctask` |
+| schema | `cpu_base_doc` |
 | 所属应用 | `ycBase` |
 | 业务对象ID | `8b4cb209-3904-49a4-8360-aabcb2ea76e7` |
 | 元数据类型 | `Class` |

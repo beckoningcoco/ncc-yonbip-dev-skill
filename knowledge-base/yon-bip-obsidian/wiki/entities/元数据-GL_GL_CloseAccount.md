@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 总账关账 |
 | 物理表 | `fi_close_account` |
-| 数据库 schema | `yonbip-fi-egl` |
+| domain/服务域 | `yonbip-fi-egl` |
+| schema | `figl` |
 | 所属应用 | `GL` |
 | 直连字段 | 16 个 |
 | 子表 | 0 个 |

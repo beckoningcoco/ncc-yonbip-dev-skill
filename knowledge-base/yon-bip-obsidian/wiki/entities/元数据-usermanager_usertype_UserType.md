@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 用户类型 |
 | 物理表 | `mdd_user_type` |
-| 数据库 schema | `bip-usercenter` |
+| domain/服务域 | `bip-usercenter` |
+| schema | `iuap_apcom_auth` |
 | 所属应用 | `` |
 | 直连字段 | 17 个 |
 | 子表 | 0 个 |

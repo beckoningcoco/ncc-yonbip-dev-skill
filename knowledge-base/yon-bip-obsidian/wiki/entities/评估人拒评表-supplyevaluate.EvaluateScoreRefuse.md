@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 评估人拒评表 |
 | 物理表 | `cpu_evaluate_psn_object_refuse` |
-| 数据库 schema | `cpu-supplymgr` |
+| domain/服务域 | `cpu-supplymgr` |
+| schema | `cpu_suppliermgr` |
 | 所属应用 | `ycSupplierManagement` |
 | 业务对象ID | `a8accd53-f49b-4fbe-8918-37e9cc0fe94e` |
 | 元数据类型 | `Class` |

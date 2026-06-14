@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | BOM传输点 |
 | 物理表 | `bgdm_bom_reference_point` |
-| 数据库 schema | `yonbip-pm-commonbd` |
+| domain/服务域 | `yonbip-pm-commonbd` |
+| schema | `pmcloud` |
 | 所属应用 | `BGDM` |
 | 直连字段 | 15 个 |
 | 子表 | 0 个 |

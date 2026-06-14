@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 业务板块 |
 | 物理表 | `bd_business_segment` |
-| 数据库 schema | `ucf-staff-center` |
+| domain/服务域 | `ucf-staff-center` |
+| schema | `iuap_apdoc_basedoc` |
 | 所属应用 | `HRORG` |
 | 直连字段 | 15 个 |
 | 子表 | 0 个 |

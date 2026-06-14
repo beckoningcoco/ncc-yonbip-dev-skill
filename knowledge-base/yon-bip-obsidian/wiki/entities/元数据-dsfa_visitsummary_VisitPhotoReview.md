@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 小结照片审核 |
 | 物理表 | `dsfa_photo_review` |
-| 数据库 schema | `yycrm` |
+| domain/服务域 | `yycrm` |
+| schema | `crm` |
 | 所属应用 | `DSFA` |
 | 直连字段 | 22 个 |
 | 子表 | 0 个 |

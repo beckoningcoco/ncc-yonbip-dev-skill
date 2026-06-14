@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 管理维度 |
 | 物理表 | `crmc_auth_dimension` |
-| 数据库 schema | `yycrm` |
+| domain/服务域 | `yycrm` |
+| schema | `crm` |
 | 所属应用 | `CRMC` |
 | 直连字段 | 16 个 |
 | 子表 | 0 个 |

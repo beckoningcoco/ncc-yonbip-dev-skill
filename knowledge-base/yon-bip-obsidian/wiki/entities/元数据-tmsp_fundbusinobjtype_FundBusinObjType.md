@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 资金业务伙伴类型 |
 | 物理表 | `tmsp_fundbusinobj_type` |
-| 数据库 schema | `yonbip-fi-ctmtmsp` |
+| domain/服务域 | `yonbip-fi-ctmtmsp` |
+| schema | `yonbip_fi_ctmpub` |
 | 所属应用 | `TMSP` |
 | 直连字段 | 25 个 |
 | 子表 | 0 个 |

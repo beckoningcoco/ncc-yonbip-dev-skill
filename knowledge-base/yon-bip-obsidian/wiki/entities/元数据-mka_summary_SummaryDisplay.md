@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 活动小结活动陈列 |
 | 物理表 | `mka_summary_display` |
-| 数据库 schema | `yycrm` |
+| domain/服务域 | `yycrm` |
+| schema | `crm` |
 | 所属应用 | `MKA` |
 | 直连字段 | 19 个 |
 | 子表 | 0 个 |

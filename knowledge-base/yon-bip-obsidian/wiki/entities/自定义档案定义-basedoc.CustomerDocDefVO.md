@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 自定义档案定义 |
 | 物理表 | `cpu_user_def_doc_type` |
-| 数据库 schema | `cpu-pubapp` |
+| domain/服务域 | `cpu-pubapp` |
+| schema | `cpu_base_doc` |
 | 所属应用 | `ycBase` |
 | 业务对象ID | `30530c5e-99bd-4a77-b97c-8c51db2128aa` |
 | 元数据类型 | `Class` |

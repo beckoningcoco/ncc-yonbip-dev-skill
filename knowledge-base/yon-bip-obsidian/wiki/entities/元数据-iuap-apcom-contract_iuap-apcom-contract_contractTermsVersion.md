@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 条款版本号标识表 |
 | 物理表 | `contract_terms_version` |
-| 数据库 schema | `iuap-apcom-contract` |
+| domain/服务域 | `iuap-apcom-contract` |
+| schema | `iuap_apcom_contract` |
 | 所属应用 | `iuap-apcom-contract` |
 | 直连字段 | 24 个 |
 | 子表 | 0 个 |

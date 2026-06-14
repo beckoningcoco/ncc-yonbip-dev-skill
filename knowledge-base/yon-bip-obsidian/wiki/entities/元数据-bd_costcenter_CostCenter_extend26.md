@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | BIP用户多选引用子实体 |
 | 物理表 | `iuap_quotelist_i92076_35254245285954382` |
-| 数据库 schema | `finbd` |
+| domain/服务域 | `finbd` |
+| schema | `iuap_apdoc_finbd` |
 | 所属应用 | `DPMACCT` |
 | 直连字段 | 12 个 |
 | 子表 | 0 个 |

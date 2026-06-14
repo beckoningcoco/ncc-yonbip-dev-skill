@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 会员等级 |
 | 物理表 | `mp_memberlevel` |
-| 数据库 schema | `uhy` |
+| domain/服务域 | `uhy` |
+| schema | `yilian` |
 | 所属应用 | `SDMB` |
 | 直连字段 | 63 个 |
 | 子表 | 2 个 |

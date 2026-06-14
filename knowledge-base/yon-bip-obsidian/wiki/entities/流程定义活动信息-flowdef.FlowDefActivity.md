@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 流程定义活动信息 |
 | 物理表 | `cpu_flow_def_activity` |
-| 数据库 schema | `yonbip-cpu-bcsourcing` |
+| domain/服务域 | `yonbip-cpu-bcsourcing` |
+| schema | `cpu_pubbiz_sourcing` |
 | 所属应用 | `ycBase` |
 | 元数据类型 | `Class` |
 | 元数据层级 | `0` |

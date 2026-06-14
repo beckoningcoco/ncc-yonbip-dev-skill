@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 凭证分录 |
 | 物理表 | `fi_voucher_b` |
-| 数据库 schema | `yonbip-fi-egl` |
+| domain/服务域 | `yonbip-fi-egl` |
+| schema | `figl` |
 | 所属应用 | `GL` |
 | 直连字段 | 98 个 |
 | 子表 | 3 个 |

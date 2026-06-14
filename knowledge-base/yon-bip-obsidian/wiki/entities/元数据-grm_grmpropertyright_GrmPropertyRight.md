@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 担保物权管理 |
 | 物理表 | `grm_propertyright` |
-| 数据库 schema | `yonbip-fi-ctmgrm` |
+| domain/服务域 | `yonbip-fi-ctmgrm` |
+| schema | `yonbip_fi_ctmfm` |
 | 所属应用 | `GRM` |
 | 直连字段 | 79 个 |
 | 子表 | 6 个 |

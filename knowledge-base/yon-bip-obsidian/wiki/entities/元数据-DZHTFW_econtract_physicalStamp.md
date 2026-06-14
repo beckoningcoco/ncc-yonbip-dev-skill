@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 物理印章 |
 | 物理表 | `clm_physical_stamp` |
-| 数据库 schema | `iuap-apcom-contract` |
+| domain/服务域 | `iuap-apcom-contract` |
+| schema | `iuap_apcom_contract` |
 | 所属应用 | `DZHTFW` |
 | 直连字段 | 26 个 |
 | 子表 | 0 个 |

@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 招标附件 |
 | 物理表 | `sfa_bidding_attachment` |
-| 数据库 schema | `yycrm` |
+| domain/服务域 | `yycrm` |
+| schema | `crm` |
 | 所属应用 | `SFA` |
 | 直连字段 | 21 个 |
 | 子表 | 1 个 |

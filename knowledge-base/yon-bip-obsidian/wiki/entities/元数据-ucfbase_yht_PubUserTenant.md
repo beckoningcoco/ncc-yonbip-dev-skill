@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 友互通用户租户 |
 | 物理表 | `idx_user_relation` |
-| 数据库 schema | `esdomain` |
+| domain/服务域 | `esdomain` |
+| schema | `iuap_uuas_usercenter` |
 | 所属应用 | `` |
 | 直连字段 | 9 个 |
 | 子表 | 0 个 |

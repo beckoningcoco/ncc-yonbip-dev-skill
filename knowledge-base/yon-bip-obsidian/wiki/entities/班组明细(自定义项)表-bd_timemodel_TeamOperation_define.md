@@ -20,7 +20,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 班组明细(自定义项)表 |
 | 物理表 | `bd_team_b_define` |
-| 数据库 schema | `ucfbasedoc` |
+| domain/服务域 | `ucfbasedoc` |
+| schema | `iuap_apdoc_basedoc` |
 | 所属应用 | `DPMWDC` |
 | 构建时间 | `2026-06-05 09:25:07.0870` |
 

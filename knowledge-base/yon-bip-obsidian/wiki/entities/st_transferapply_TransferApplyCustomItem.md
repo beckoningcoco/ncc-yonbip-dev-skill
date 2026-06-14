@@ -22,6 +22,7 @@ source_type: api_response
 | uri | st.transferapply.TransferApplyCustomItem |
 | tableName | st_transferapply_customitem |
 | domain | ustock |
+| schema | `ustock` |
 | applicationCode | ST |
 | superUri | ? |
 | isBusinessObject | true |

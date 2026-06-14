@@ -23,6 +23,7 @@ source_type: api_response
 | uri | CLM.clmContract.foodList |
 | tableName | iuap_extend_i92076_foodlist |
 | domain | yonbip-ec-contract |
+| schema | `yonbip_clm_contract` |
 | applicationCode | CLM |
 | superUri | iuap.busiObj.BizObject |
 | isBusinessObject | true |

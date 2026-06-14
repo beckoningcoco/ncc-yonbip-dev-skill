@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 应付推单校验表 |
 | 物理表 | `ap_bill_pushcheck` |
-| 数据库 schema | `yonbip-fi-earapbill` |
+| domain/服务域 | `yonbip-fi-earapbill` |
+| schema | `fiearapbill` |
 | 所属应用 | `EAR` |
 | 直连字段 | 15 个 |
 | 子表 | 0 个 |

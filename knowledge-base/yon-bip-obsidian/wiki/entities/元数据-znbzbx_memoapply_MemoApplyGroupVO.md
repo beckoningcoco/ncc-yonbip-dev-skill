@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 事项申请项目团队子表 |
 | 物理表 | `znbz_memoapply_group` |
-| 数据库 schema | `znbzbx` |
+| domain/服务域 | `znbzbx` |
+| schema | `znbz` |
 | 所属应用 | `RBSM` |
 | 直连字段 | 13 个 |
 | 子表 | 0 个 |

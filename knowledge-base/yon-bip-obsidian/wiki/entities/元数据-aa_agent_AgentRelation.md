@@ -21,7 +21,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 客户交易关系 |
 | 物理表 | `agentrelation` |
-| 数据库 schema | `udinghuo` |
+| domain/服务域 | `udinghuo` |
 | 所属应用 | `` |
 | 直连字段 | 23 个 |
 | 子表 | 0 个 |

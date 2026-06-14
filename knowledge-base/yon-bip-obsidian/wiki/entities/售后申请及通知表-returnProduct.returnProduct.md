@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 售后申请及通知表 |
 | 物理表 | `return_product` |
-| 数据库 schema | `yonbip-cpu-mall` |
+| domain/服务域 | `yonbip-cpu-mall` |
+| schema | `cpu_mall` |
 | 所属应用 | `ycYuncaiMall` |
 | 业务对象ID | `224aef88-b911-4730-8ddf-12790775a324` |
 | 元数据类型 | `Class` |

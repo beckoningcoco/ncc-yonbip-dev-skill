@@ -22,7 +22,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 供应商邀约信息 |
 | 物理表 | `cpu_invitation_info` |
-| 数据库 schema | `cpu-supplymgr` |
+| domain/服务域 | `cpu-supplymgr` |
+| schema | `cpu_suppliermgr` |
 | 所属应用 | `ycSupplierManagement` |
 | 元数据类型 | `Class` |
 | 构建时间 | `2026-06-04 16:38:00.1930` |

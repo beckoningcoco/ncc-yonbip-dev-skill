@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 参考点类型主表自定义项 |
 | 物理表 | `pam_line_refer_define` |
-| 数据库 schema | `ucf-amc-aim` |
+| domain/服务域 | `ucf-amc-aim` |
+| schema | `amc_aim` |
 | 所属应用 | `AMPUB` |
 | 直连字段 | 66 个 |
 | 子表 | 0 个 |

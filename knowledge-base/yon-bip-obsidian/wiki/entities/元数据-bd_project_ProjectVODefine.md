@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 项目(自定义项)表 |
 | 物理表 | `bd_project_define` |
-| 数据库 schema | `ucfbasedoc` |
+| domain/服务域 | `ucfbasedoc` |
+| schema | `iuap_apdoc_basedoc` |
 | 所属应用 | `DPMPRJ` |
 | 直连字段 | 62 个 |
 | 子表 | 0 个 |

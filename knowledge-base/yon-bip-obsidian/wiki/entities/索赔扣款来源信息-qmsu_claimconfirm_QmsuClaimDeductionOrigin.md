@@ -20,7 +20,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 索赔扣款来源信息 |
 | 物理表 | `qmsu_claim_deduction_origin` |
-| 数据库 schema | `yonbip-cpu-synergy` |
+| domain/服务域 | `yonbip-cpu-synergy` |
 | 所属应用 | `ycSaleCoor` |
 | 构建时间 | `2026-06-04 23:31:57.1060` |
 

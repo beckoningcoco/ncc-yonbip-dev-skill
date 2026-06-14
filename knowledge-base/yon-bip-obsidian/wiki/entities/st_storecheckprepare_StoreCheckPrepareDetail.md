@@ -22,6 +22,7 @@ source_type: api_response
 | uri | st.storecheckprepare.StoreCheckPrepareDetail |
 | tableName | st_storecheckprepare_b |
 | domain | ustock |
+| schema | `ustock` |
 | applicationCode | ST |
 | superUri | retail.voucher.RetailVouchLine |
 | isBusinessObject | true |

@@ -22,6 +22,7 @@ source_type: api_response
 | uri | st.goodchange.GoodChanges |
 | tableName | st_goodchanges |
 | domain | ustock |
+| schema | `ustock` |
 | applicationCode | ST |
 | superUri | st.voucher.UstockVouchLine |
 | isBusinessObject | true |

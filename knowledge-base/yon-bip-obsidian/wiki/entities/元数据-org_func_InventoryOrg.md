@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 库存组织 |
 | 物理表 | `org_inventory` |
-| 数据库 schema | `ucf-org-center` |
+| domain/服务域 | `ucf-org-center` |
+| schema | `iuap_apdoc_basedoc` |
 | 所属应用 | `GZTORG` |
 | 直连字段 | 78 个 |
 | 子表 | 1 个 |

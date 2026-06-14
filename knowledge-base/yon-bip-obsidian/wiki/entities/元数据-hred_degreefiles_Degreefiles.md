@@ -21,7 +21,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 学位档案 |
 | 物理表 | `degreefiles` |
-| 数据库 schema | `hrcloud-staff-mgr` |
+| domain/服务域 | `hrcloud-staff-mgr` |
 | 所属应用 | `HRED` |
 | 直连字段 | 30 个 |
 | 子表 | 1 个 |

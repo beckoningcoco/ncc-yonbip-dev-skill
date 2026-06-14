@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 库存状态主表 |
 | 物理表 | `st_stockstatusrecord` |
-| 数据库 schema | `ustock` |
+| domain/服务域 | `ustock` |
+| schema | `ustock` |
 | 所属应用 | `ST` |
 | 直连字段 | 22 个 |
 | 关联引用 | 4 个 |

@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 单据动作运营 |
 | 物理表 | `bd_billtype_action` |
-| 数据库 schema | `transtype` |
+| domain/服务域 | `transtype` |
+| schema | `iuap_apdoc_basedoc` |
 | 所属应用 | `BMMMM` |
 | 直连字段 | 10 个 |
 | 子表 | 0 个 |

@@ -20,7 +20,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 适用对象明细 |
 | 物理表 | `qms_qit_step_applicable_object` |
-| 数据库 schema | `QMS-QIT` |
+| domain/服务域 | `QMS-QIT` |
+| schema | `qms_qit_rejectbill` |
 | 所属应用 | `QMSQIT` |
 | 构建时间 | `2026-06-05 16:43:09.9680` |
 

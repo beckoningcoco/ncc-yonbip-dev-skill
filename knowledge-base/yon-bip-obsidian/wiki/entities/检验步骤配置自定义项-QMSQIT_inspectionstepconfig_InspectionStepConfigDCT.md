@@ -20,7 +20,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 检验步骤配置自定义项 |
 | 物理表 | `qms_qit_inspection_step_config_dct` |
-| 数据库 schema | `QMS-QIT` |
+| domain/服务域 | `QMS-QIT` |
+| schema | `qms_qit_rejectbill` |
 | 所属应用 | `QMSQIT` |
 | 构建时间 | `2026-06-05 16:45:44.0380` |
 

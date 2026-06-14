@@ -22,7 +22,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 报价历史物料价格梯度明细 |
 | 物理表 | `cpu_quotation_record_materiel_step` |
-| 数据库 schema | `yonbip-cpu-lawbid` |
+| domain/服务域 | `yonbip-cpu-lawbid` |
+| schema | `cpu_lawbid` |
 | 所属应用 | `ycSouringBid` |
 | 构建时间 | `2026-06-04 20:16:44.5320` |
 

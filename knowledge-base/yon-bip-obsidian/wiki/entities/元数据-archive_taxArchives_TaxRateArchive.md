@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 税率档案 |
 | 物理表 | `bd_taxrate` |
-| 数据库 schema | `yonbip-fi-taxpubdoc` |
+| domain/服务域 | `yonbip-fi-taxpubdoc` |
+| schema | `iuap_apdoc_basedoc` |
 | 所属应用 | `DPMTAX` |
 | 直连字段 | 44 个 |
 | 子表 | 2 个 |

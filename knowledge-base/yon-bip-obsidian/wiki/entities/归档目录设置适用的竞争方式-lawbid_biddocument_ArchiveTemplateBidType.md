@@ -22,7 +22,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 归档目录设置适用的竞争方式 |
 | 物理表 | `cpu_archive_template_bid_type` |
-| 数据库 schema | `yonbip-cpu-lawbid` |
+| domain/服务域 | `yonbip-cpu-lawbid` |
+| schema | `cpu_lawbid` |
 | 所属应用 | `` |
 | 构建时间 | `2026-06-04 20:14:22.5620` |
 

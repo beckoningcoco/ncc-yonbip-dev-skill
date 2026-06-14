@@ -20,7 +20,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 制样要求自定义特征组 |
 | 物理表 | `qms_qit_samp_prepare_requ_dct` |
-| 数据库 schema | `QMS-QIT` |
+| domain/服务域 | `QMS-QIT` |
+| schema | `qms_qit_rejectbill` |
 | 所属应用 | `QMSQIT` |
 | 构建时间 | `2026-06-05 16:47:49.8480` |
 

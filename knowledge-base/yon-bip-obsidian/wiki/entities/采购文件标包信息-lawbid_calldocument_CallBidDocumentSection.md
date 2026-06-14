@@ -22,7 +22,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 采购文件标包信息 |
 | 物理表 | `cpu_call_bid_document_section` |
-| 数据库 schema | `yonbip-cpu-lawbid` |
+| domain/服务域 | `yonbip-cpu-lawbid` |
+| schema | `cpu_lawbid` |
 | 所属应用 | `ycSouringBid` |
 | 构建时间 | `2026-06-04 19:56:47.1770` |
 

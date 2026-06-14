@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 租赁对象 |
 | 物理表 | `pam_rent_object` |
-| 数据库 schema | `ucf-amc-ambd` |
+| domain/服务域 | `ucf-amc-ambd` |
+| schema | `amc_ambd` |
 | 所属应用 | `AIM` |
 | 直连字段 | 33 个 |
 | 子表 | 1 个 |

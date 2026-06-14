@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 采购对账单主表 |
 | 物理表 | `pu_checkbill` |
-| 数据库 schema | `cpu-cooperation` |
+| domain/服务域 | `cpu-cooperation` |
+| schema | `cpu_cooperation` |
 | 所属应用 | `ycPurchaseSynergy` |
 | 业务对象ID | `7065e83e-7f60-4b06-b534-534e283699be` |
 | 元数据类型 | `Class` |

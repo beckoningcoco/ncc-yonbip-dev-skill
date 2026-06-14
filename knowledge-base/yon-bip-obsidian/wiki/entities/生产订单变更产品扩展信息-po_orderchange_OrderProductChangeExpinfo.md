@@ -20,7 +20,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 生产订单变更产品扩展信息 |
 | 物理表 | `po_order_product_change_expinfo` |
-| 数据库 schema | `productionorder` |
+| domain/服务域 | `productionorder` |
 | 所属应用 | `PO` |
 | 构建时间 | `2026-06-05 09:35:30.5120` |
 

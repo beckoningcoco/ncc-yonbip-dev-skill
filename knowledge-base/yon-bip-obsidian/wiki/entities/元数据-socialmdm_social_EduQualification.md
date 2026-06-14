@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 学历 |
 | 物理表 | `mdm_educationtbcode` |
-| 数据库 schema | `iuap-apdoc-social` |
+| domain/服务域 | `iuap-apdoc-social` |
+| schema | `iuap_apdoc_social` |
 | 所属应用 | `DPMPI` |
 | 直连字段 | 19 个 |
 | 子表 | 0 个 |

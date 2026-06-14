@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 不到区改用物流 |
 | 物理表 | `ec_express_unrange` |
-| 数据库 schema | `dst` |
+| domain/服务域 | `dst` |
+| schema | `omsdata` |
 | 所属应用 | `SDOC` |
 | 直连字段 | 15 个 |
 | 关联引用 | 7 个 |

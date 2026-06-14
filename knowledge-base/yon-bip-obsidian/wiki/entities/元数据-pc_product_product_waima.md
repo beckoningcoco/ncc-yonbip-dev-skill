@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 外码 |
 | 物理表 | `iuap_extend_i92076_product_waima` |
-| 数据库 schema | `productcenter` |
+| domain/服务域 | `productcenter` |
+| schema | `iuap_apdoc_coredoc` |
 | 所属应用 | `GZTBDM` |
 | 直连字段 | 15 个 |
 | 子表 | 0 个 |

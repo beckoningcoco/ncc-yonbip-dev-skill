@@ -21,7 +21,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 销售订单表体自由自定义项 |
 | 物理表 | `uo_define_orderdetailfreedefine` |
-| 数据库 schema | `udinghuo` |
+| domain/服务域 | `udinghuo` |
 | 所属应用 | `SCMSA` |
 | 直连字段 | 65 个 |
 | 子表 | 0 个 |

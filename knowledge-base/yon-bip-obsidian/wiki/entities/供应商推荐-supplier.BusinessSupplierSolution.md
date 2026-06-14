@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 供应商推荐 |
 | 物理表 | `cpu_business_rule_solution` |
-| 数据库 schema | `cpu-base` |
+| domain/服务域 | `cpu-base` |
+| schema | `cpu_baseservice` |
 | 所属应用 | `ycBase` |
 | 业务对象ID | `90fb3f73-1471-4c8b-8f30-d9931f8e5f77` |
 | 元数据类型 | `Class` |

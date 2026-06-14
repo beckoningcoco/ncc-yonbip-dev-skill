@@ -20,7 +20,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 适用物料 |
 | 物理表 | `ed_route_applicable_material` |
-| 数据库 schema | `engineeringdata` |
+| domain/服务域 | `engineeringdata` |
 | 所属应用 | `ED` |
 | 构建时间 | `2026-06-05 09:25:08.4620` |
 

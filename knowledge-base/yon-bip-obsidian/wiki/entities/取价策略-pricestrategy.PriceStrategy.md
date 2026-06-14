@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 取价策略 |
 | 物理表 | `cpu_price_strategy` |
-| 数据库 schema | `cpu-bi-service` |
+| domain/服务域 | `cpu-bi-service` |
+| schema | `cpu_baseservice` |
 | 所属应用 | `ycPriceCenter` |
 | 业务对象ID | `e5061d58-8ef0-4f1f-a57e-c04d890a7756` |
 | 元数据类型 | `Class` |

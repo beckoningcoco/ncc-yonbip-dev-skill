@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 基准职位 |
 | 物理表 | `os_base_post` |
-| 数据库 schema | `MDDHR` |
+| domain/服务域 | `MDDHR` |
+| schema | `hr_orgsystem` |
 | 所属应用 | `HRORG` |
 | 直连字段 | 45 个 |
 | 子表 | 0 个 |

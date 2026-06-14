@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 准入管理 |
 | 物理表 | `cpu_supply_manage` |
-| 数据库 schema | `cpu-supplymgr` |
+| domain/服务域 | `cpu-supplymgr` |
+| schema | `cpu_suppliermgr` |
 | 所属应用 | `ycSupplierManagement` |
 | 业务对象ID | `a7034d59-ea79-4759-a5a2-6d09bb7ef2d0` |
 | 元数据类型 | `Class` |

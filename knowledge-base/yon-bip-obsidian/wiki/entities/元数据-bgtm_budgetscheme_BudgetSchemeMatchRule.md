@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 项目适配规则 |
 | 物理表 | `bgtm_budget_scheme_match_rule` |
-| 数据库 schema | `yonbip-pm-projectme` |
+| domain/服务域 | `yonbip-pm-projectme` |
+| schema | `pmcloud` |
 | 所属应用 | `BGTM` |
 | 直连字段 | 11 个 |
 | 子表 | 0 个 |

@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 应付结算清单计划信息 |
 | 物理表 | `ap_payable_g` |
-| 数据库 schema | `yonbip-ec-contract` |
+| domain/服务域 | `yonbip-ec-contract` |
+| schema | `yonbip_clm_contract` |
 | 所属应用 | `STB` |
 | 直连字段 | 39 个 |
 | 子表 | 0 个 |

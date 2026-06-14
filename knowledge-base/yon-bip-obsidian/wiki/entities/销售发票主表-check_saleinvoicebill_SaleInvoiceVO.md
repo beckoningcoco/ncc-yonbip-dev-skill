@@ -20,7 +20,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 销售发票主表 |
 | 物理表 | `sale_invoice` |
-| 数据库 schema | `cpu-cooperation` |
+| domain/服务域 | `cpu-cooperation` |
+| schema | `cpu_cooperation` |
 | 所属应用 | `ycSaleCoor` |
 | 构建时间 | `2026-06-04 23:30:46.2740` |
 

@@ -20,7 +20,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 补货需求拉单卡片(子件物料) |
 | 物理表 | `v_po_replenish_demand_card_child_material` |
-| 数据库 schema | `productionorder` |
+| domain/服务域 | `productionorder` |
 | 所属应用 | `PO` |
 | 构建时间 | `2026-06-05 09:34:05.9050` |
 

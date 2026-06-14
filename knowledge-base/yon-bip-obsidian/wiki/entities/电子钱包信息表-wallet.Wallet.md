@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 电子钱包信息表 |
 | 物理表 | `cpu_ew_wallet` |
-| 数据库 schema | `yonbip-cpu-bcsourcing` |
+| domain/服务域 | `yonbip-cpu-bcsourcing` |
+| schema | `cpu_pubbiz_sourcing` |
 | 所属应用 | `ycBase` |
 | 业务对象ID | `4452365c-12b8-4809-8442-24b8bab6835a` |
 | 元数据类型 | `Class` |

@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 采购用途 |
 | 物理表 | `purpose` |
-| 数据库 schema | `yonbip-cpu-mall` |
+| domain/服务域 | `yonbip-cpu-mall` |
+| schema | `cpu_mall` |
 | 所属应用 | `` |
 | 业务对象ID | `27b2552c-37d0-4f58-95ac-87fda1f39771` |
 | 元数据类型 | `Class` |

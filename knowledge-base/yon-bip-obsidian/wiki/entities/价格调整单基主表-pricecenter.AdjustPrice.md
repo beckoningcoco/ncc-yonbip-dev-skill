@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 价格调整单基主表 |
 | 物理表 | `pu_adjustprice` |
-| 数据库 schema | `yuncai-upu-service` |
+| domain/服务域 | `yuncai-upu-service` |
+| schema | `cpu_baseservice` |
 | 所属应用 | `ycPriceCenter` |
 | 业务对象ID | `42a87ff3-c7bf-4f78-a68d-e13a5eb53bd9` |
 | 元数据类型 | `Class` |

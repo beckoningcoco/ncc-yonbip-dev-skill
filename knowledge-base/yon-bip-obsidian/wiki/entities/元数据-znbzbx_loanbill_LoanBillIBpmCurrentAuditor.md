@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 借款单审批当前审批人 |
 | 物理表 | `znbz_loanbill_ibpmcurrentauditor` |
-| 数据库 schema | `znbzbx` |
+| domain/服务域 | `znbzbx` |
+| schema | `znbz` |
 | 所属应用 | `RBSM` |
 | 直连字段 | 16 个 |
 | 子表 | 0 个 |

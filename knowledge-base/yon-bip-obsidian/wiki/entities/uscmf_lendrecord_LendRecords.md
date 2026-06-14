@@ -22,6 +22,7 @@ source_type: api_response
 | uri | uscmf.lendrecord.LendRecords |
 | tableName | uscmf_lendrecords |
 | domain | uscmf |
+| schema | `ustock` |
 | applicationCode | ST |
 | superUri | retail.voucher.RetailVouchLine |
 | isBusinessObject | true |

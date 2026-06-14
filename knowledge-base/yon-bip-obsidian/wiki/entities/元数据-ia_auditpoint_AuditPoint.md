@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 规则 |
 | 物理表 | `ssc_ia_audit_point` |
-| 数据库 schema | `yonbip-mid-sscia` |
+| domain/服务域 | `yonbip-mid-sscia` |
+| schema | `intelligent_audit` |
 | 所属应用 | `ZNSH` |
 | 直连字段 | 64 个 |
 | 子表 | 24 个 |

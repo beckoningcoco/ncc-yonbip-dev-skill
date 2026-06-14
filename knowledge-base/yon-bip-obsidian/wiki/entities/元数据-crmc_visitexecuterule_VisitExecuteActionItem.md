@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 拜访执行规则行动事项 |
 | 物理表 | `crmc_visit_execute_action_item` |
-| 数据库 schema | `yycrm` |
+| domain/服务域 | `yycrm` |
+| schema | `crm` |
 | 所属应用 | `CRMC` |
 | 直连字段 | 16 个 |
 | 子表 | 6 个 |

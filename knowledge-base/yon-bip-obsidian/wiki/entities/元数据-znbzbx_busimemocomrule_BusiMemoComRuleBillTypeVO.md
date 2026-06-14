@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 费用项目-交易类型适用单据 |
 | 物理表 | `znbz_busimemo_comrule_billtype` |
-| 数据库 schema | `znbzbx` |
+| domain/服务域 | `znbzbx` |
+| schema | `znbz` |
 | 所属应用 | `RBSM` |
 | 直连字段 | 8 个 |
 | 子表 | 0 个 |

@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 公众号 |
 | 物理表 | `mp_wxaccount` |
-| 数据库 schema | `uhy` |
+| domain/服务域 | `uhy` |
+| schema | `yilian` |
 | 所属应用 | `SDMB` |
 | 直连字段 | 27 个 |
 | 子表 | 1 个 |

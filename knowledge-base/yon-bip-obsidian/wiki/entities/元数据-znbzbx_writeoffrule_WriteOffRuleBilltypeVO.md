@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 受控交易类型 |
 | 物理表 | `znbz_writeoffrule_billtype` |
-| 数据库 schema | `znbzbx` |
+| domain/服务域 | `znbzbx` |
+| schema | `znbz` |
 | 所属应用 | `RBSM` |
 | 直连字段 | 9 个 |
 | 子表 | 0 个 |

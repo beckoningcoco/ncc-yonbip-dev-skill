@@ -20,7 +20,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 自定义插件配置表 |
 | 物理表 | `ucg_base_plugin_custom_prop` |
-| 数据库 schema | `iuap-ipaas-base` |
+| domain/服务域 | `iuap-ipaas-base` |
 | 所属应用 | `INPAPI` |
 | 构建时间 | `2026-06-05 18:03:09.4520` |
 

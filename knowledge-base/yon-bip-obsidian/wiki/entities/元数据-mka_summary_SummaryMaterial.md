@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 活动小结活动物料 |
 | 物理表 | `mka_summary_material` |
-| 数据库 schema | `yycrm` |
+| domain/服务域 | `yycrm` |
+| schema | `crm` |
 | 所属应用 | `MKA` |
 | 直连字段 | 28 个 |
 | 子表 | 1 个 |

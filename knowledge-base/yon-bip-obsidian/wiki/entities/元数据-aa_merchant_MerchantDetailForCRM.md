@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 客户适用范围组详情(CRM) |
 | 物理表 | `merchant_detail_for_crm` |
-| 数据库 schema | `productcenter` |
+| domain/服务域 | `productcenter` |
+| schema | `iuap_apdoc_coredoc` |
 | 所属应用 | `DPMCUS` |
 | 直连字段 | 22 个 |
 | 子表 | 0 个 |

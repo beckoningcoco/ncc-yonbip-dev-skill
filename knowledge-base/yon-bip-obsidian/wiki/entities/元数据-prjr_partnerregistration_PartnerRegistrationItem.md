@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 人员信息 |
 | 物理表 | `prjr_partner_registration_b` |
-| 数据库 schema | `yonbip-pm-projectme` |
+| domain/服务域 | `yonbip-pm-projectme` |
+| schema | `pmcloud` |
 | 所属应用 | `PRJR` |
 | 直连字段 | 25 个 |
 | 子表 | 0 个 |

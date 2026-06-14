@@ -22,6 +22,7 @@ source_type: api_response
 | uri | uscmf.lendrecord.LendRecordDefine |
 | tableName | uscmf_lendrecord_define |
 | domain | uscmf |
+| schema | `ustock` |
 | applicationCode | ST |
 | superUri | ? |
 | isBusinessObject | true |

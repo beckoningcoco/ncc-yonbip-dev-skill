@@ -20,7 +20,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 工艺路线自由项特征组自定义项实体 |
 | 物理表 | `ed_routing_ct` |
-| 数据库 schema | `engineeringdata` |
+| domain/服务域 | `engineeringdata` |
 | 所属应用 | `ED` |
 | 构建时间 | `2026-06-05 09:25:16.7350` |
 

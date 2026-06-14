@@ -22,6 +22,7 @@ source_type: api_response
 | uri | st.returnapply.ReturnApplyCustomItem |
 | tableName | st_returnapply_customitem |
 | domain | ustock |
+| schema | `ustock` |
 | applicationCode | ST |
 | superUri | ? |
 | isBusinessObject | true |

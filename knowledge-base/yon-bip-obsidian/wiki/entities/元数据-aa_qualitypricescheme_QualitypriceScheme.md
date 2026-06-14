@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 优质优价方案 |
 | 物理表 | `cpu_qualityprice_scheme` |
-| 数据库 schema | `cpu-bi-service` |
+| domain/服务域 | `cpu-bi-service` |
+| schema | `cpu_baseservice` |
 | 所属应用 | `ycPriceCenter` |
 | 直连字段 | 33 个 |
 | 关联引用 | 9 个 |

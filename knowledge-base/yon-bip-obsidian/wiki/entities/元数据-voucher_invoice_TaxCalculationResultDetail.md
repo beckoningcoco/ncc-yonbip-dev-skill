@@ -21,7 +21,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 计税结果明细 |
 | 物理表 | `tax_calc_result_b` |
-| 数据库 schema | `udinghuo` |
+| domain/服务域 | `udinghuo` |
 | 所属应用 | `SCMSA` |
 | 直连字段 | 14 个 |
 | 子表 | 0 个 |

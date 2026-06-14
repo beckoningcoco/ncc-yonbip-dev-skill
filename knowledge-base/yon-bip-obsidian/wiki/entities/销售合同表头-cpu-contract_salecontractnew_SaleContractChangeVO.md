@@ -20,7 +20,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 销售合同表头 |
 | 物理表 | `cpu_sale_ct_history` |
-| 数据库 schema | `cpu-contract` |
+| domain/服务域 | `cpu-contract` |
+| schema | `cpu_cooperation` |
 | 所属应用 | `ycBusinessCenter` |
 | 构建时间 | `2026-06-04 23:42:29.6360` |
 

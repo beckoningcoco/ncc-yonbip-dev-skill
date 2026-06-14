@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 实际费用子表填报明细 |
 | 物理表 | `mka_actual_cost_info_property` |
-| 数据库 schema | `yycrm` |
+| domain/服务域 | `yycrm` |
+| schema | `crm` |
 | 所属应用 | `MKA` |
 | 直连字段 | 184 个 |
 | 子表 | 0 个 |

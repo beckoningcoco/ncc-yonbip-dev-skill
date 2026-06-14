@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 配额协议子表自定义项 |
 | 物理表 | `cpu_qtagree_alt_chd` |
-| 数据库 schema | `cpu-base` |
+| domain/服务域 | `cpu-base` |
+| schema | `cpu_baseservice` |
 | 所属应用 | `ycPriceCenter` |
 | 业务对象ID | `18547817-2a6e-40cf-ad11-0ed2b1c68184` |
 | 元数据类型 | `Class` |

@@ -22,7 +22,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 采购方式所设置的采购流程 |
 | 物理表 | `cpu_purchase_doc_flow` |
-| 数据库 schema | `yonbip-cpu-lawbid` |
+| domain/服务域 | `yonbip-cpu-lawbid` |
+| schema | `cpu_lawbid` |
 | 所属应用 | `ycSouring` |
 | 构建时间 | `2026-06-04 20:00:33.4130` |
 

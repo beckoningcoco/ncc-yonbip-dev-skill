@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 模版分类主表 |
 | 物理表 | `cpu_target_template_class` |
-| 数据库 schema | `cpu-supplymgr` |
+| domain/服务域 | `cpu-supplymgr` |
+| schema | `cpu_suppliermgr` |
 | 所属应用 | `ycSupplierManagement` |
 | 业务对象ID | `f61160d9-74f1-4235-908e-9657559bdeec` |
 | 元数据类型 | `Class` |

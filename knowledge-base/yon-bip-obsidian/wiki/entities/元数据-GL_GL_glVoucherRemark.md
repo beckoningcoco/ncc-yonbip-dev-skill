@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 凭证常用摘要 |
 | 物理表 | `bd_remark` |
-| 数据库 schema | `yonbip-fi-egl` |
+| domain/服务域 | `yonbip-fi-egl` |
+| schema | `figl` |
 | 所属应用 | `GL` |
 | 直连字段 | 12 个 |
 | 子表 | 0 个 |

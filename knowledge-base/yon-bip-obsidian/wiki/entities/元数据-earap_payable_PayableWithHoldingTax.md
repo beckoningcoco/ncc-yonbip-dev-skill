@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 应付结算清单代扣税信息 |
 | 物理表 | `ap_payable_g_wht` |
-| 数据库 schema | `yonbip-ec-contract` |
+| domain/服务域 | `yonbip-ec-contract` |
+| schema | `yonbip_clm_contract` |
 | 所属应用 | `STB` |
 | 直连字段 | 22 个 |
 | 子表 | 0 个 |

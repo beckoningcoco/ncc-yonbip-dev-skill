@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 采购定价要素 |
 | 物理表 | `cpu_price_factor_adjust` |
-| 数据库 schema | `cpu-bi-service` |
+| domain/服务域 | `cpu-bi-service` |
+| schema | `cpu_baseservice` |
 | 所属应用 | `ycPriceCenter` |
 | 业务对象ID | `dc18d939-1c2b-4272-81c4-9d299b956018` |
 | 元数据类型 | `Class` |

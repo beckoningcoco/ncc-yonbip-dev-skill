@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 卡券可用时间段关系表 |
 | 物理表 | `mp_couponusetime` |
-| 数据库 schema | `uhy` |
+| domain/服务域 | `uhy` |
+| schema | `yilian` |
 | 所属应用 | `SDMB` |
 | 直连字段 | 8 个 |
 | 子表 | 0 个 |

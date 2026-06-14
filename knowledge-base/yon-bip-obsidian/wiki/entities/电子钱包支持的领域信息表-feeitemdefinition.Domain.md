@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 电子钱包支持的领域信息表 |
 | 物理表 | `cpu_ew_domain` |
-| 数据库 schema | `yonbip-cpu-bcsourcing` |
+| domain/服务域 | `yonbip-cpu-bcsourcing` |
+| schema | `cpu_pubbiz_sourcing` |
 | 所属应用 | `ycBase` |
 | 业务对象ID | `8d3c0c04-dc4c-43fb-96b6-fdf495413ee2` |
 | 元数据类型 | `Class` |

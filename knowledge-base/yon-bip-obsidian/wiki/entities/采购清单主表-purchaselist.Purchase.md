@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 采购清单主表 |
 | 物理表 | `cpu_purchase` |
-| 数据库 schema | `yonbip-cpu-bctask` |
+| domain/服务域 | `yonbip-cpu-bctask` |
+| schema | `cpu_base_doc` |
 | 所属应用 | `ycBase` |
 | 业务对象ID | `f0048bab-fcfc-4140-966c-81eadb6d3f22` |
 | 元数据类型 | `Class` |

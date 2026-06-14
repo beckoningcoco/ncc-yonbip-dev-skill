@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 客户资质文件管理 |
 | 物理表 | `cust_customeraddapply_qualification_document` |
-| 数据库 schema | `yycrm` |
+| domain/服务域 | `yycrm` |
+| schema | `crm` |
 | 所属应用 | `CUST` |
 | 直连字段 | 17 个 |
 | 子表 | 0 个 |

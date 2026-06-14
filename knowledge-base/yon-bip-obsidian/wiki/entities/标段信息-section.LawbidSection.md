@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 标段信息 |
 | 物理表 | `cpu_project_section` |
-| 数据库 schema | `yonbip-cpu-lawbid` |
+| domain/服务域 | `yonbip-cpu-lawbid` |
+| schema | `cpu_lawbid` |
 | 所属应用 | `ycSouringBid` |
 | 业务对象ID | `f01fc94e-3996-4d8f-ad47-c7ae96a99125` |
 | 元数据类型 | `Class` |

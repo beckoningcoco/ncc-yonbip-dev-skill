@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 基本信息自定义项 |
 | 物理表 | `at_fixedassets_info_customitem` |
-| 数据库 schema | `yonyoufi` |
+| domain/服务域 | `yonyoufi` |
+| schema | `figl` |
 | 所属应用 | `FA` |
 | 直连字段 | 61 个 |
 | 子表 | 0 个 |

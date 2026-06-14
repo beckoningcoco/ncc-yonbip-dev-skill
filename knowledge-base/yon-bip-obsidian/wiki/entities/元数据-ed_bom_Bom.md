@@ -21,7 +21,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 成品信息 |
 | 物理表 | `ed_bom` |
-| 数据库 schema | `engineeringdata` |
+| domain/服务域 | `engineeringdata` |
 | 所属应用 | `ED` |
 | 直连字段 | 106 个 |
 | 子表 | 6 个 |

@@ -21,7 +21,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 订单分摊 |
 | 物理表 | `orderproductapportion` |
-| 数据库 schema | `udinghuo` |
+| domain/服务域 | `udinghuo` |
 | 所属应用 | `SCMSA` |
 | 直连字段 | 22 个 |
 | 子表 | 0 个 |

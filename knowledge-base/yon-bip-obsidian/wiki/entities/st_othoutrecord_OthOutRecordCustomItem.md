@@ -22,6 +22,7 @@ source_type: api_response
 | uri | st.othoutrecord.OthOutRecordCustomItem |
 | tableName | st_othoutrecord_customitem |
 | domain | ustock |
+| schema | `ustock` |
 | applicationCode | ST |
 | superUri | ? |
 | isBusinessObject | true |

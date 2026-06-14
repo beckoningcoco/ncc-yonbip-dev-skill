@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 计税结果 |
 | 物理表 | `tax_calc_result` |
-| 数据库 schema | `yonbip-ec-contract` |
+| domain/服务域 | `yonbip-ec-contract` |
+| schema | `yonbip_clm_contract` |
 | 所属应用 | `STB` |
 | 直连字段 | 52 个 |
 | 子表 | 1 个 |

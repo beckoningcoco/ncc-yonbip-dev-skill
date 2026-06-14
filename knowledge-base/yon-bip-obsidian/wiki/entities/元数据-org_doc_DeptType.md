@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 部门性质 |
 | 物理表 | `org_dept_type` |
-| 数据库 schema | `ucf-org-center` |
+| domain/服务域 | `ucf-org-center` |
+| schema | `iuap_apdoc_basedoc` |
 | 所属应用 | `GZTORG` |
 | 直连字段 | 20 个 |
 | 子表 | 0 个 |

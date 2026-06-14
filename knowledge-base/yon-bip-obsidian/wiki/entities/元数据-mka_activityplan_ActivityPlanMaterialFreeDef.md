@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 活动计划物料自由自定义项扩展 |
 | 物理表 | `mka_activityplan_material_freedef` |
-| 数据库 schema | `yycrm` |
+| domain/服务域 | `yycrm` |
+| schema | `crm` |
 | 所属应用 | `MKA` |
 | 直连字段 | 64 个 |
 | 子表 | 0 个 |

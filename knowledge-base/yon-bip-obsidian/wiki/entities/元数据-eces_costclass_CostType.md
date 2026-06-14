@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 成本类型 |
 | 物理表 | `cc_ces_costclass` |
-| 数据库 schema | `yonbip-fi-ecesweb` |
+| domain/服务域 | `yonbip-fi-ecesweb` |
+| schema | `fiecc` |
 | 所属应用 | `ECE` |
 | 直连字段 | 18 个 |
 | 子表 | 0 个 |

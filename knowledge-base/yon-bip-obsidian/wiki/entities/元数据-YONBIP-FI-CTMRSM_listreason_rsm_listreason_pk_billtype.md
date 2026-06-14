@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 默认适用业务多选引用子实体 |
 | 物理表 | `rsm_listreason_billtype` |
-| 数据库 schema | `yonbip-fi-ctmrsm` |
+| domain/服务域 | `yonbip-fi-ctmrsm` |
+| schema | `yonbip_fi_ctmpub` |
 | 所属应用 | `YONBIP-FI-CTMRSM` |
 | 直连字段 | 10 个 |
 | 子表 | 0 个 |

@@ -22,7 +22,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 采购入库单主表 |
 | 物理表 | `st_purinrecord` |
-| 数据库 schema | `ustock` |
+| domain/服务域 | `ustock` |
+| schema | `ustock` |
 | 应用 | `ST` |
 | 元数据类型 | `Class` |
 | 元数据层级 | `2` |

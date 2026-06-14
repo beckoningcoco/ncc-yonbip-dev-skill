@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 友户通租户 |
 | 物理表 | `pub_tenant` |
-| 数据库 schema | `yht` |
+| domain/服务域 | `yht` |
+| schema | `iuap_uuas_usercenter` |
 | 所属应用 | `` |
 | 直连字段 | 1 个 |
 | 子表 | 0 个 |

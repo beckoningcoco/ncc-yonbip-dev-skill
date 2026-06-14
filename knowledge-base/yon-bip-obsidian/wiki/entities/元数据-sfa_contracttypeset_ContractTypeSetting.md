@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 合同类型设置 |
 | 物理表 | `sfa_contract_type_setting` |
-| 数据库 schema | `yycrm` |
+| domain/服务域 | `yycrm` |
+| schema | `crm` |
 | 所属应用 | `SFA` |
 | 直连字段 | 15 个 |
 | 子表 | 1 个 |

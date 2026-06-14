@@ -20,7 +20,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 供应商报价表 |
 | 物理表 | `cpu_dsn_result` |
-| 数据库 schema | `yonbip-cpu-lawbid` |
+| domain/服务域 | `yonbip-cpu-lawbid` |
+| schema | `cpu_lawbid` |
 | 所属应用 | `ycSouringAuction` |
 | 构建时间 | `2026-06-04 23:25:55.1310` |
 

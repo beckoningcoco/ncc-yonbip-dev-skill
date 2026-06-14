@@ -22,6 +22,7 @@ source_type: api_response
 | uri | st.storein.StoreInAttrextItem |
 | tableName | st_storein_AttrextItem |
 | domain | ustock |
+| schema | `ustock` |
 | applicationCode | ST |
 | superUri | ? |
 | isBusinessObject | true |

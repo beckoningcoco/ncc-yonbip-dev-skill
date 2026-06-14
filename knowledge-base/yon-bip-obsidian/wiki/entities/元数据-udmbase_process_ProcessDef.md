@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 流程定义 |
 | 物理表 | `process_def` |
-| 数据库 schema | `udm` |
+| domain/服务域 | `udm` |
+| schema | `udm` |
 | 所属应用 | `SDDM` |
 | 直连字段 | 39 个 |
 | 子表 | 0 个 |

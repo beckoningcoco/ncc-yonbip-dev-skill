@@ -20,7 +20,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 时格资料 |
 | 物理表 | `mr_time_bucket` |
-| 数据库 schema | `yonbip-mm-plan` |
+| domain/服务域 | `yonbip-mm-plan` |
+| schema | `requirements_planning` |
 | 所属应用 | `MR` |
 | 构建时间 | `2026-06-05 09:33:17.8590` |
 

@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 合同条款 |
 | 物理表 | `apct_apct_change_item` |
-| 数据库 schema | `apct` |
+| domain/服务域 | `apct` |
+| schema | `apct` |
 | 所属应用 | `APCT` |
 | 直连字段 | 20 个 |
 | 子表 | 0 个 |

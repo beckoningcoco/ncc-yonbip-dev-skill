@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 销售出库单主表自定义项 |
 | 物理表 | `st_salesout_customitem` |
-| 数据库 schema | `ustock` |
+| domain/服务域 | `ustock` |
+| schema | `ustock` |
 | 所属应用 | `ST` |
 | 直连字段 | 62 个 |
 | 关联引用 | 2 个 |

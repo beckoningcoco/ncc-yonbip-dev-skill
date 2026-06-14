@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 待计算行清单子表 |
 | 物理表 | `ia_cal_rows_b` |
-| 数据库 schema | `yonbip-fi-eia` |
+| domain/服务域 | `yonbip-fi-eia` |
+| schema | `fieia` |
 | 所属应用 | `EIA` |
 | 直连字段 | 24 个 |
 | 子表 | 0 个 |

@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 使用物料表 |
 | 物理表 | `mka_display_material` |
-| 数据库 schema | `yycrm` |
+| domain/服务域 | `yycrm` |
+| schema | `crm` |
 | 所属应用 | `CRMC` |
 | 直连字段 | 16 个 |
 | 子表 | 0 个 |

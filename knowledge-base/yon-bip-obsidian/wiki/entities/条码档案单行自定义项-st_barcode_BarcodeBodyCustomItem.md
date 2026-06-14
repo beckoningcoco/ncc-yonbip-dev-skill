@@ -20,7 +20,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 条码档案单行自定义项 |
 | 物理表 | `st_barcode_body_customitem` |
-| 数据库 schema | `uscmpub` |
+| domain/服务域 | `uscmpub` |
+| schema | `usp_plantransportroute` |
 | 所属应用 | `BCD` |
 | 构建时间 | `2026-06-04 23:34:18.5510` |
 

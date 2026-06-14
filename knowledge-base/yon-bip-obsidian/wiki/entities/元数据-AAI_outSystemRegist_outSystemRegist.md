@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 目标系统注册 |
 | 物理表 | `aai_system_regist` |
-| 数据库 schema | `yonbip-fi-eaai` |
+| domain/服务域 | `yonbip-fi-eaai` |
+| schema | `fieaai` |
 | 所属应用 | `AAI` |
 | 直连字段 | 26 个 |
 | 关联引用 | 4 个 |

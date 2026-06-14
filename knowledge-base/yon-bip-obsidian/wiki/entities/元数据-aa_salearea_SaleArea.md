@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 销售区域 |
 | 物理表 | `aa_salearea` |
-| 数据库 schema | `productcenter` |
+| domain/服务域 | `productcenter` |
+| schema | `iuap_apdoc_coredoc` |
 | 所属应用 | `DPMCUS` |
 | 直连字段 | 32 个 |
 | 子表 | 2 个 |

@@ -21,7 +21,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 客户 |
 | 物理表 | `agent` |
-| 数据库 schema | `udinghuo` |
+| domain/服务域 | `udinghuo` |
 | 所属应用 | `` |
 | 直连字段 | 13 个 |
 | 子表 | 1 个 |

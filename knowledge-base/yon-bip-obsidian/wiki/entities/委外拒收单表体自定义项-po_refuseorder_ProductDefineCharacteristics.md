@@ -20,7 +20,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 委外拒收单表体自定义项 |
 | 物理表 | `po_osm_arrive_order_product_dct` |
-| 数据库 schema | `productionorder` |
+| domain/服务域 | `productionorder` |
 | 所属应用 | `` |
 | 构建时间 | `2026-06-05 09:57:07.0900` |
 

@@ -22,6 +22,7 @@ source_type: api_response
 | uri | st.pickingrequisition.PickingRequisitionDetail |
 | tableName | po_picking_requisition_detail |
 | domain | ustock |
+| schema | `ustock` |
 | applicationCode | ST |
 | superUri | voucher.base.VouchLine |
 | isBusinessObject | true |

@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 特种设备 |
 | 物理表 | `pam_special_asset` |
-| 数据库 schema | `ucf-amc-ambd` |
+| domain/服务域 | `ucf-amc-ambd` |
+| schema | `amc_ambd` |
 | 所属应用 | `AIM` |
 | 直连字段 | 22 个 |
 | 子表 | 1 个 |

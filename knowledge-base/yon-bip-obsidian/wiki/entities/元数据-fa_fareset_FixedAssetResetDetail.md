@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 重启单表体 |
 | 物理表 | `fa_bill_restart_dtl` |
-| 数据库 schema | `yonbip-fi-efa` |
+| domain/服务域 | `yonbip-fi-efa` |
+| schema | `fiefa` |
 | 所属应用 | `EFA` |
 | 直连字段 | 85 个 |
 | 子表 | 0 个 |

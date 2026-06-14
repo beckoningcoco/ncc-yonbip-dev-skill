@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 商机报备参与人 |
 | 物理表 | `cust_relateperson` |
-| 数据库 schema | `yycrm` |
+| domain/服务域 | `yycrm` |
+| schema | `crm` |
 | 所属应用 | `SFA` |
 | 直连字段 | 17 个 |
 | 子表 | 0 个 |

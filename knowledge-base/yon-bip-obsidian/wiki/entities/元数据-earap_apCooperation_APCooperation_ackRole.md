@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | APCooperation_ackRole |
 | 物理表 | `arap_cooperation_ack_role` |
-| 数据库 schema | `yonbip-fi-earapbill` |
+| domain/服务域 | `yonbip-fi-earapbill` |
+| schema | `fiearapbill` |
 | 所属应用 | `EAP` |
 | 直连字段 | 10 个 |
 | 子表 | 0 个 |

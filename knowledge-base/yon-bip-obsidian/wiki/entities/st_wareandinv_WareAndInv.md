@@ -22,6 +22,7 @@ source_type: api_response
 | uri | st.wareandinv.WareAndInv |
 | tableName | st_wareandinv |
 | domain | ustock |
+| schema | `ustock` |
 | applicationCode | ST |
 | superUri | archive.base.TenantArchive |
 | isBusinessObject | true |

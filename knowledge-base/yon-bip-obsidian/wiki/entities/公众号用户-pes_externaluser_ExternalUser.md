@@ -20,7 +20,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 公众号用户 |
 | 物理表 | `pes_ss_external_user` |
-| 数据库 schema | `imppes` |
+| domain/服务域 | `imppes` |
 | 所属应用 | `IMP_PES` |
 | 构建时间 | `2026-06-05 17:17:21.1720` |
 

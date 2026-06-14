@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 计划运输路线 |
 | 物理表 | `usp_plantransportroute` |
-| 数据库 schema | `uscmpub` |
+| domain/服务域 | `uscmpub` |
+| schema | `usp_plantransportroute` |
 | 所属应用 | `SCCS` |
 | 直连字段 | 28 个 |
 | 子表 | 1 个 |

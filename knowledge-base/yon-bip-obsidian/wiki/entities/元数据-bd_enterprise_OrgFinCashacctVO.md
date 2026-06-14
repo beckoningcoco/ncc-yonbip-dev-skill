@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 企业现金账户 |
 | 物理表 | `org_fin_bankacct` |
-| 数据库 schema | `ucfbasedoc` |
+| domain/服务域 | `ucfbasedoc` |
+| schema | `iuap_apdoc_basedoc` |
 | 所属应用 | `DPMSETL` |
 | 直连字段 | 28 个 |
 | 关联引用 | 7 个 |

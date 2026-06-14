@@ -20,7 +20,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 异常申报详情自由项特征实体 |
 | 物理表 | `imp_sfc_exp_apply_detail_ct` |
-| 数据库 schema | `IMP-SFC` |
+| domain/服务域 | `IMP-SFC` |
+| schema | `production_order` |
 | 所属应用 | `IMPSFC` |
 | 构建时间 | `2026-06-05 09:23:54.5550` |
 

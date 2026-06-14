@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 报销单子表 |
 | 物理表 | `znbz_expensebill_b` |
-| 数据库 schema | `znbzbx` |
+| domain/服务域 | `znbzbx` |
+| schema | `znbz` |
 | 所属应用 | `RBSM` |
 | 直连字段 | 345 个 |
 | 子表 | 5 个 |

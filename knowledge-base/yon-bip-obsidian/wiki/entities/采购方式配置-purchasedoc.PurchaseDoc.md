@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 采购方式配置 |
 | 物理表 | `cpu_purchase_doc` |
-| 数据库 schema | `yonbip-cpu-lawbid` |
+| domain/服务域 | `yonbip-cpu-lawbid` |
+| schema | `cpu_lawbid` |
 | 所属应用 | `ycSouring` |
 | 业务对象ID | `50ef7a70-1fc7-417b-be10-39bfa625880c` |
 | 元数据类型 | `Class` |

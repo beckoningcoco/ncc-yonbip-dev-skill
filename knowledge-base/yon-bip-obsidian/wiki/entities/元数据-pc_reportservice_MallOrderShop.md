@@ -21,7 +21,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 商城订货商家 |
 | 物理表 | `v_mallordershop` |
-| 数据库 schema | `productcenter-report` |
+| domain/服务域 | `productcenter-report` |
 | 所属应用 | `` |
 | 直连字段 | 6 个 |
 | 子表 | 0 个 |

@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 税目税率 |
 | 物理表 | `bd_taxrate` |
-| 数据库 schema | `ucfbasedoc` |
+| domain/服务域 | `ucfbasedoc` |
+| schema | `iuap_apdoc_basedoc` |
 | 所属应用 | `GZTBDM` |
 | 直连字段 | 20 个 |
 | 子表 | 0 个 |

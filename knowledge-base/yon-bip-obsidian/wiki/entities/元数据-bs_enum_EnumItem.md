@@ -21,7 +21,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 枚举项 |
 | 物理表 | `aa_enum_item` |
-| 数据库 schema | `u8c-baseservice` |
+| domain/服务域 | `u8c-baseservice` |
 | 所属应用 | `` |
 | 直连字段 | 10 个 |
 | 子表 | 0 个 |

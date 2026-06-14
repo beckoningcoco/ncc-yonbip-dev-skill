@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 通用报销单预提冲销（自定义项）表 |
 | 物理表 | `znbz_withholdingcav_userdef` |
-| 数据库 schema | `znbzbx` |
+| domain/服务域 | `znbzbx` |
+| schema | `znbz` |
 | 所属应用 | `RBSM` |
 | 直连字段 | 64 个 |
 | 子表 | 0 个 |

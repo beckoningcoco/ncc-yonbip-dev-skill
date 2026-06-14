@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 计提跌价准备孙表 |
 | 物理表 | `ia_depreciationbill_g` |
-| 数据库 schema | `yonbip-fi-eia` |
+| domain/服务域 | `yonbip-fi-eia` |
+| schema | `fieia` |
 | 所属应用 | `EIA` |
 | 直连字段 | 24 个 |
 | 子表 | 0 个 |

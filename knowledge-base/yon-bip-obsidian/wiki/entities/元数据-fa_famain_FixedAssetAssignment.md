@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 分配信息 |
 | 物理表 | `fa_asset_asgmt` |
-| 数据库 schema | `yonbip-fi-efa` |
+| domain/服务域 | `yonbip-fi-efa` |
+| schema | `fiefa` |
 | 所属应用 | `EFA` |
 | 直连字段 | 20 个 |
 | 子表 | 0 个 |

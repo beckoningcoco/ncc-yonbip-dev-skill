@@ -20,7 +20,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 检验记录处理结果明细扩展表 |
 | 物理表 | `qms_dfm_inspect_result_expinfo` |
-| 数据库 schema | `QMS-DFM` |
+| domain/服务域 | `QMS-DFM` |
+| schema | `qms_dfm` |
 | 所属应用 | `QIC` |
 | 构建时间 | `2026-06-05 16:46:43.7630` |
 

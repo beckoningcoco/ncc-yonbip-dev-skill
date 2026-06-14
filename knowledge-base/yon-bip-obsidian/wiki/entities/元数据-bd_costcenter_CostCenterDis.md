@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 成本中心组织信息 |
 | 物理表 | `bd_costcenter_dis` |
-| 数据库 schema | `finbd` |
+| domain/服务域 | `finbd` |
+| schema | `iuap_apdoc_finbd` |
 | 所属应用 | `DPMACCT` |
 | 直连字段 | 17 个 |
 | 子表 | 0 个 |

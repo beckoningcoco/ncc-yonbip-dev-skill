@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 公海设置 |
 | 物理表 | `crmc_high_seas` |
-| 数据库 schema | `yycrm` |
+| domain/服务域 | `yycrm` |
+| schema | `crm` |
 | 所属应用 | `CRMC` |
 | 直连字段 | 35 个 |
 | 子表 | 6 个 |

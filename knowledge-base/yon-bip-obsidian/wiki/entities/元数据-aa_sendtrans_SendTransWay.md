@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 发运方式 |
 | 物理表 | `aa_sendtransway` |
-| 数据库 schema | `productcenter` |
+| domain/服务域 | `productcenter` |
+| schema | `iuap_apdoc_coredoc` |
 | 所属应用 | `DPMSI` |
 | 直连字段 | 22 个 |
 | 子表 | 0 个 |

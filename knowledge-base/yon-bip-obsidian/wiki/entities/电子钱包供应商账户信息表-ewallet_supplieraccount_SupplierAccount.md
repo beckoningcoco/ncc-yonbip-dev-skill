@@ -20,7 +20,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 电子钱包供应商账户信息表 |
 | 物理表 | `cpu_ew_supplier_account` |
-| 数据库 schema | `yonbip-cpu-bcsourcing` |
+| domain/服务域 | `yonbip-cpu-bcsourcing` |
+| schema | `cpu_pubbiz_sourcing` |
 | 所属应用 | `ycBusinessCenter` |
 | 构建时间 | `2026-06-04 23:42:35.3990` |
 

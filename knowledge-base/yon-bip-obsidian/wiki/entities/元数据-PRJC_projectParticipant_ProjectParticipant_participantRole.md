@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 参与方角色多选引用子实体 |
 | 物理表 | `prjc_project_participantrole` |
-| 数据库 schema | `yonbip-pm-projectme` |
+| domain/服务域 | `yonbip-pm-projectme` |
+| schema | `pmcloud` |
 | 所属应用 | `PRJC` |
 | 直连字段 | 10 个 |
 | 子表 | 0 个 |

@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 物料价格趋势 |
 | 物理表 | `cpu_biprice` |
-| 数据库 schema | `cpu-bi-service` |
+| domain/服务域 | `cpu-bi-service` |
+| schema | `cpu_baseservice` |
 | 所属应用 | `ycPriceCenter` |
 | 业务对象ID | `4e1aff57-9893-47ad-9348-7c126683e3c2` |
 | 元数据类型 | `Class` |

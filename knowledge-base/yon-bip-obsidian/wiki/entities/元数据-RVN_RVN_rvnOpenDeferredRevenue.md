@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 期初递延收入确认 |
 | 物理表 | `rvn_deferred_revenue_h` |
-| 数据库 schema | `yonbip-fi-ercl` |
+| domain/服务域 | `yonbip-fi-ercl` |
+| schema | `fiercl` |
 | 所属应用 | `RVN` |
 | 直连字段 | 74 个 |
 | 子表 | 1 个 |

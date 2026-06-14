@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 增加方式 |
 | 物理表 | `at_addway` |
-| 数据库 schema | `yonyoufi` |
+| domain/服务域 | `yonyoufi` |
+| schema | `figl` |
 | 所属应用 | `FA` |
 | 直连字段 | 7 个 |
 | 子表 | 1 个 |

@@ -21,7 +21,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 价格项主表 |
 | 物理表 | `udh_business_items` |
-| 数据库 schema | `marketingbill` |
+| domain/服务域 | `marketingbill` |
 | 所属应用 | `B2Bpricing` |
 | 直连字段 | 25 个 |
 | 子表 | 1 个 |

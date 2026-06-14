@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 科目分类 |
 | 物理表 | `epub_subject_cat` |
-| 数据库 schema | `yonbip-fi-eeac` |
+| domain/服务域 | `yonbip-fi-eeac` |
+| schema | `fieeac` |
 | 所属应用 | `EVNT` |
 | 直连字段 | 22 个 |
 | 子表 | 1 个 |

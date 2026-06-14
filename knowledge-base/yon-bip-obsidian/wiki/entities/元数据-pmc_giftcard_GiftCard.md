@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 礼品卡主表信息 |
 | 物理表 | `mk_giftcard` |
-| 数据库 schema | `upromotion` |
+| domain/服务域 | `upromotion` |
+| schema | `upmalls` |
 | 所属应用 | `PMC` |
 | 直连字段 | 31 个 |
 | 子表 | 0 个 |

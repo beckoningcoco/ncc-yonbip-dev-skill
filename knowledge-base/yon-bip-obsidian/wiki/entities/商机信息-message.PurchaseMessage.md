@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 商机信息 |
 | 物理表 | `cpu_pending_message` |
-| 数据库 schema | `yonbip-cpu-bctask` |
+| domain/服务域 | `yonbip-cpu-bctask` |
+| schema | `cpu_base_doc` |
 | 所属应用 | `ycBase` |
 | 业务对象ID | `7e89efe6-1cd3-4579-ac79-03fafde2dbc8` |
 | 元数据类型 | `Class` |

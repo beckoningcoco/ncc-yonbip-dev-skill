@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 模块启用时间 |
 | 物理表 | `bd_modular_enabletime` |
-| 数据库 schema | `finbd` |
+| domain/服务域 | `finbd` |
+| schema | `iuap_apdoc_finbd` |
 | 所属应用 | `GL` |
 | 直连字段 | 14 个 |
 | 子表 | 0 个 |

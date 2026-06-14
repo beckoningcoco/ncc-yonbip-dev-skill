@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 营销方案参与范围条件设定 |
 | 物理表 | `mka_partake_scope_condition` |
-| 数据库 schema | `yycrm` |
+| domain/服务域 | `yycrm` |
+| schema | `crm` |
 | 所属应用 | `MKA` |
 | 直连字段 | 14 个 |
 | 子表 | 0 个 |

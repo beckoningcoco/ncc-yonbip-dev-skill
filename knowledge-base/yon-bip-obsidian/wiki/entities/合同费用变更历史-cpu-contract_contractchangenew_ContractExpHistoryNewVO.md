@@ -20,7 +20,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 合同费用变更历史 |
 | 物理表 | `cpu_ct_exp_history` |
-| 数据库 schema | `cpu-contract` |
+| domain/服务域 | `cpu-contract` |
+| schema | `cpu_cooperation` |
 | 所属应用 | `ycContractManagement` |
 | 构建时间 | `2026-06-04 23:44:19.4540` |
 

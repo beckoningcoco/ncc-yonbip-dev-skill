@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 联系人信息 |
 | 物理表 | `contacter` |
-| 数据库 schema | `productcenter` |
+| domain/服务域 | `productcenter` |
+| schema | `iuap_apdoc_coredoc` |
 | 所属应用 | `DPMCUS` |
 | 直连字段 | 27 个 |
 | 子表 | 1 个 |

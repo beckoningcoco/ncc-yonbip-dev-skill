@@ -20,7 +20,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 合同变更中心_自定义特征 |
 | 物理表 | `clm_contract_change_center_ct` |
-| 数据库 schema | `yonbip-ec-contract` |
+| domain/服务域 | `yonbip-ec-contract` |
+| schema | `yonbip_clm_contract` |
 | 所属应用 | `CLM` |
 | 构建时间 | `2026-06-04 23:45:08.0490` |
 

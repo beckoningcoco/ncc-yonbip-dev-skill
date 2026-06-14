@@ -20,9 +20,10 @@ source_type: api_response
 |------|-----|
 | 显示名 | 仪器设备 |
 | 物理表 | `qms_dfm_instrument_equip` |
-| 数据库 schema | `QMS-DFM` |
+| domain/服务域 | `QMS-DFM` |
+| schema | `qms_dfm` |
 | 所属应用 | `QIC` |
-| 构建时间 | `2026-06-05 16:44:31.5990` |
+| 构建时间 | `2026-06-05 17:29:29.5740` |
 
 ## 主键与编码
 

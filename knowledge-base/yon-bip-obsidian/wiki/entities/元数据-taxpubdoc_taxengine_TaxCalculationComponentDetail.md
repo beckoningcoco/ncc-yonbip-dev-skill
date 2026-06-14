@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 计税组件公式变量 |
 | 物理表 | `tax_calculation_component_b` |
-| 数据库 schema | `yonbip-fi-taxpubdoc` |
+| domain/服务域 | `yonbip-fi-taxpubdoc` |
+| schema | `iuap_apdoc_basedoc` |
 | 所属应用 | `DPMTAX` |
 | 直连字段 | 12 个 |
 | 子表 | 0 个 |

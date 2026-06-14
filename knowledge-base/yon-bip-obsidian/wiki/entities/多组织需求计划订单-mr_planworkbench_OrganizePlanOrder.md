@@ -20,7 +20,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 多组织需求计划订单 |
 | 物理表 | `mr_plan_order` |
-| 数据库 schema | `yonbip-mm-plan` |
+| domain/服务域 | `yonbip-mm-plan` |
+| schema | `requirements_planning` |
 | 所属应用 | `MR` |
 | 构建时间 | `2026-06-05 15:11:33.1990` |
 

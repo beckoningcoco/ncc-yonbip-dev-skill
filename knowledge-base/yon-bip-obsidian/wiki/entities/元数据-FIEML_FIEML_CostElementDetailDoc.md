@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 成本要素明细档案 |
 | 物理表 | `` |
-| 数据库 schema | `yonbip-fi-eml` |
+| domain/服务域 | `yonbip-fi-eml` |
+| schema | `fiecc` |
 | 所属应用 | `EML` |
 | 直连字段 | 7 个 |
 | 子表 | 0 个 |

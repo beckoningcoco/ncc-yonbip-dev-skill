@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 应付核销方案 |
 | 物理表 | `arap_verify_plan_h` |
-| 数据库 schema | `yonbip-fi-earap` |
+| domain/服务域 | `yonbip-fi-earap` |
+| schema | `fiearap` |
 | 所属应用 | `EAP` |
 | 直连字段 | 25 个 |
 | 子表 | 3 个 |

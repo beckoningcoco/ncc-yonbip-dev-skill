@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 辅助核算项 |
 | 物理表 | `fi_auxiliary` |
-| 数据库 schema | `yonbip-fi-egl` |
+| domain/服务域 | `yonbip-fi-egl` |
+| schema | `figl` |
 | 所属应用 | `GL` |
 | 直连字段 | 117 个 |
 | 子表 | 0 个 |

@@ -20,7 +20,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 供应需求类型 |
 | 物理表 | `po_ds_doctype` |
-| 数据库 schema | `productionorder` |
+| domain/服务域 | `productionorder` |
 | 所属应用 | `` |
 | 构建时间 | `2026-06-05 09:34:47.7290` |
 

@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 服务控制类型 |
 | 物理表 | `pc_service_control_type` |
-| 数据库 schema | `productcenter` |
+| domain/服务域 | `productcenter` |
+| schema | `iuap_apdoc_coredoc` |
 | 所属应用 | `GZTBDM` |
 | 直连字段 | 14 个 |
 | 子表 | 0 个 |

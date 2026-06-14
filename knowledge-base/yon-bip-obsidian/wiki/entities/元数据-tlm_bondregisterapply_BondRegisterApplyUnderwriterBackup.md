@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 承销商子表区备份 |
 | 物理表 | `tlm_bondregisterapply_underwriter_backup` |
-| 数据库 schema | `yonbip-fi-ctmtlm` |
+| domain/服务域 | `yonbip-fi-ctmtlm` |
+| schema | `yonbip_fi_ctmfm` |
 | 所属应用 | `TLM` |
 | 直连字段 | 27 个 |
 | 子表 | 0 个 |

@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 申请单银行信息 |
 | 物理表 | `cust_customeraddapply_agent_financial` |
-| 数据库 schema | `yycrm` |
+| domain/服务域 | `yycrm` |
+| schema | `crm` |
 | 所属应用 | `CUST` |
 | 直连字段 | 25 个 |
 | 子表 | 0 个 |

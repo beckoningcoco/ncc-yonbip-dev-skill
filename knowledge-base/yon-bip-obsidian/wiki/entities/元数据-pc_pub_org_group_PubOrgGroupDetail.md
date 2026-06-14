@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 分级管理集合详情 |
 | 物理表 | `pub_org_group_detail` |
-| 数据库 schema | `productcenter` |
+| domain/服务域 | `productcenter` |
+| schema | `iuap_apdoc_coredoc` |
 | 所属应用 | `GZTBDM` |
 | 直连字段 | 6 个 |
 | 子表 | 0 个 |

@@ -20,7 +20,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 付款计划子表 |
 | 物理表 | `pu_paymentschedules` |
-| 数据库 schema | `upu` |
+| domain/服务域 | `upu` |
+| schema | `upurchase` |
 | 所属应用 | `PU` |
 | 构建时间 | `2026-06-04 23:31:53.0720` |
 

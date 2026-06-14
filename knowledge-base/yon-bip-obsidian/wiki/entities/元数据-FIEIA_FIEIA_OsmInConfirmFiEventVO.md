@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 委外入库确认 |
 | 物理表 | `ia_ledger` |
-| 数据库 schema | `yonbip-fi-eia` |
+| domain/服务域 | `yonbip-fi-eia` |
+| schema | `fieia` |
 | 所属应用 | `EIA` |
 | 直连字段 | 87 个 |
 | 子表 | 1 个 |

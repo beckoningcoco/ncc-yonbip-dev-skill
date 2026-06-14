@@ -20,7 +20,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 管控策略-采购品类 |
 | 物理表 | `cpu_business_rule_control_strategy_purchase_class` |
-| 数据库 schema | `cpu-base` |
+| domain/服务域 | `cpu-base` |
+| schema | `cpu_baseservice` |
 | 所属应用 | `ycBase` |
 | 构建时间 | `2026-06-04 23:10:27.7670` |
 

@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 通话记录 |
 | 物理表 | `gscm_csp_call` |
-| 数据库 schema | `yycrm` |
+| domain/服务域 | `yycrm` |
+| schema | `crm` |
 | 所属应用 | `ACT` |
 | 直连字段 | 32 个 |
 | 子表 | 0 个 |

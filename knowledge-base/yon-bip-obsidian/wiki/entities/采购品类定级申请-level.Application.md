@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 采购品类定级申请 |
 | 物理表 | `cpu_category_level_application` |
-| 数据库 schema | `yonbip-cpu-bctask` |
+| domain/服务域 | `yonbip-cpu-bctask` |
+| schema | `cpu_base_doc` |
 | 所属应用 | `ycBase` |
 | 业务对象ID | `40898fa9-2c7a-46e6-9a92-dd6c19446141` |
 | 元数据类型 | `Class` |

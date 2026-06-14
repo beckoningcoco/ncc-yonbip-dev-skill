@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 第三方抵押担保 |
 | 物理表 | `grm_guarantee_contract_item_third_mortgage` |
-| 数据库 schema | `yonbip-fi-ctmgrm` |
+| domain/服务域 | `yonbip-fi-ctmgrm` |
+| schema | `yonbip_fi_ctmfm` |
 | 所属应用 | `GRM` |
 | 直连字段 | 32 个 |
 | 子表 | 0 个 |

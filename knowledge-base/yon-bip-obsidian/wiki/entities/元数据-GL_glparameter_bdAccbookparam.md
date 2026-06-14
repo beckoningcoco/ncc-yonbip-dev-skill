@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 会计核算账簿总账参数 |
 | 物理表 | `bd_accbookparam` |
-| 数据库 schema | `yonbip-fi-egl` |
+| domain/服务域 | `yonbip-fi-egl` |
+| schema | `figl` |
 | 所属应用 | `yonbip-fi-egl` |
 | 直连字段 | 99 个 |
 | 子表 | 1 个 |

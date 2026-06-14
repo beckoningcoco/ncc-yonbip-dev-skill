@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 账簿总账参数GL01自动审核业务来源应用表 |
 | 物理表 | `gl_accbookparam_ext_autoaudit` |
-| 数据库 schema | `yonbip-fi-egl` |
+| domain/服务域 | `yonbip-fi-egl` |
+| schema | `figl` |
 | 所属应用 | `yonbip-fi-egl` |
 | 直连字段 | 16 个 |
 | 子表 | 0 个 |

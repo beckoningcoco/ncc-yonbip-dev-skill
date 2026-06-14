@@ -20,7 +20,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 能力需求(订单) |
 | 物理表 | `cmp_capacity_demand` |
-| 数据库 schema | `yonbip-mm-plan` |
+| domain/服务域 | `yonbip-mm-plan` |
+| schema | `requirements_planning` |
 | 所属应用 | `DCRP` |
 | 构建时间 | `2026-06-05 13:58:39.8350` |
 

@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 会计事务 |
 | 物理表 | `eac_fi_event` |
-| 数据库 schema | `yonbip-fi-eeac` |
+| domain/服务域 | `yonbip-fi-eeac` |
+| schema | `fieeac` |
 | 所属应用 | `EVNT` |
 | 直连字段 | 50 个 |
 | 子表 | 2 个 |

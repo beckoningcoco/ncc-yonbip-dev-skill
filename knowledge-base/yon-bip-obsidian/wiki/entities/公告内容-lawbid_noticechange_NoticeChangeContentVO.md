@@ -22,7 +22,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 公告内容 |
 | 物理表 | `cpu_notice_content` |
-| 数据库 schema | `yonbip-cpu-lawbid` |
+| domain/服务域 | `yonbip-cpu-lawbid` |
+| schema | `cpu_lawbid` |
 | 所属应用 | `ycSouringBid` |
 | 构建时间 | `2026-06-04 20:00:29.3710` |
 

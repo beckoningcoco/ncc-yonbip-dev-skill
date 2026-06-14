@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 采购合同主表 |
 | 物理表 | `cpu_ct` |
-| 数据库 schema | `cpu-contract` |
+| domain/服务域 | `cpu-contract` |
+| schema | `cpu_cooperation` |
 | 所属应用 | `ycContractManagement` |
 | 业务对象ID | `6df3bac7-6df7-4404-a525-c658562ccb59` |
 | 元数据类型 | `Class` |

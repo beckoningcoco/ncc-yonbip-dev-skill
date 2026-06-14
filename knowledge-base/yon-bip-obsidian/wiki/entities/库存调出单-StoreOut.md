@@ -25,7 +25,8 @@ source_type: api_response
 | 显示名 | 调拨出库单主表 |
 | 描述 |  |
 | 物理表 | `st_storeout` |
-| 数据库 schema | `ustock` |
+| domain/服务域 | `ustock` |
+| schema | `ustock` |
 | 所属应用 | `ST` |
 | 元数据类型 | `Class` |
 | 元数据层级 | `2` |

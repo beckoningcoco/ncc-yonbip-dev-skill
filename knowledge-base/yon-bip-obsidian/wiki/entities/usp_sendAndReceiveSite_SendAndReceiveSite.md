@@ -22,6 +22,7 @@ source_type: api_response
 | uri | usp.sendAndReceiveSite.SendAndReceiveSite |
 | tableName | usp_sendandreceivesite |
 | domain | uscmpub |
+| schema | `usp_plantransportroute` |
 | applicationCode | SCCS |
 | superUri | base.entity.BizObject |
 | isBusinessObject | true |

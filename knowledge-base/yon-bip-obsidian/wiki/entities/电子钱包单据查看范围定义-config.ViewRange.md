@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 电子钱包单据查看范围定义 |
 | 物理表 | `cpu_ew_view_range_def` |
-| 数据库 schema | `yonbip-cpu-bcsourcing` |
+| domain/服务域 | `yonbip-cpu-bcsourcing` |
+| schema | `cpu_pubbiz_sourcing` |
 | 所属应用 | `` |
 | 业务对象ID | `a3e9a1a9-c3c8-4afe-95d4-0b52903f1892` |
 | 元数据类型 | `Class` |

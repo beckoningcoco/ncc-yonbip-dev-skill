@@ -20,7 +20,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 抽样计划放宽信息表 |
 | 物理表 | `qms_dfm_sampleplanrelax` |
-| 数据库 schema | `QMS-DFM` |
+| domain/服务域 | `QMS-DFM` |
+| schema | `qms_dfm` |
 | 所属应用 | `QIC` |
 | 构建时间 | `2026-06-05 16:48:16.0670` |
 

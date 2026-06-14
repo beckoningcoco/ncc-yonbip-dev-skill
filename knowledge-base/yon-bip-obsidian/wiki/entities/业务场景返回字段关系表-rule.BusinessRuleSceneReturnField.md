@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 业务场景返回字段关系表 |
 | 物理表 | `cpu_business_rule_scene_return_field` |
-| 数据库 schema | `cpu-base` |
+| domain/服务域 | `cpu-base` |
+| schema | `cpu_baseservice` |
 | 所属应用 | `ycPriceCenter` |
 | 元数据类型 | `Class` |
 | 元数据层级 | `0` |

@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 授信与金融产品对照 |
 | 物理表 | `cam_finance_product` |
-| 数据库 schema | `yonbip-fi-ctmcam` |
+| domain/服务域 | `yonbip-fi-ctmcam` |
+| schema | `yonbip_fi_ctmfm` |
 | 所属应用 | `CAM` |
 | 直连字段 | 24 个 |
 | 子表 | 1 个 |

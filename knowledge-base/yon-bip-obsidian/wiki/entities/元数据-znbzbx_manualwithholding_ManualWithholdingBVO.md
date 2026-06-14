@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 手工预提单表体 |
 | 物理表 | `znbz_manualwithholding_b` |
-| 数据库 schema | `znbzbx` |
+| domain/服务域 | `znbzbx` |
+| schema | `znbz` |
 | 所属应用 | `RBSM` |
 | 直连字段 | 136 个 |
 | 子表 | 1 个 |

@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 标签值 |
 | 物理表 | `mp_labelvalue` |
-| 数据库 schema | `uhy` |
+| domain/服务域 | `uhy` |
+| schema | `yilian` |
 | 所属应用 | `SDMB` |
 | 直连字段 | 6 个 |
 | 子表 | 0 个 |

@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 折旧清单 |
 | 物理表 | `at_depreciation_record` |
-| 数据库 schema | `yonyoufi` |
+| domain/服务域 | `yonyoufi` |
+| schema | `figl` |
 | 所属应用 | `FA` |
 | 直连字段 | 37 个 |
 | 子表 | 2 个 |

@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 收入确认主表基类 |
 | 物理表 | `rvn_revenue_h` |
-| 数据库 schema | `yonbip-fi-ercl` |
+| domain/服务域 | `yonbip-fi-ercl` |
+| schema | `fiercl` |
 | 所属应用 | `RVN` |
 | 直连字段 | 72 个 |
 | 子表 | 2 个 |

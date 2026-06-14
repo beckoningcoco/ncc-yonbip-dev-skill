@@ -20,7 +20,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 优化目标清单 |
 | 物理表 | `cmp_capacity_optimization_goal` |
-| 数据库 schema | `yonbip-mm-plan` |
+| domain/服务域 | `yonbip-mm-plan` |
+| schema | `requirements_planning` |
 | 所属应用 | `DCRP` |
 | 构建时间 | `2026-06-05 13:58:16.0470` |
 

@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 使用状态 |
 | 物理表 | `fa_usage_state` |
-| 数据库 schema | `yonbip-fi-efa` |
+| domain/服务域 | `yonbip-fi-efa` |
+| schema | `fiefa` |
 | 所属应用 | `EFA` |
 | 直连字段 | 17 个 |
 | 关联引用 | 4 个 |

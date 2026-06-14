@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 收款/退款单明细信息 |
 | 物理表 | `ar_collection_b` |
-| 数据库 schema | `yonbip-fi-earapbill` |
+| domain/服务域 | `yonbip-fi-earapbill` |
+| schema | `fiearapbill` |
 | 所属应用 | `EAR` |
 | 直连字段 | 13 个 |
 | 子表 | 0 个 |

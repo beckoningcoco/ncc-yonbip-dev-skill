@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 配额协议模板 |
 | 物理表 | `cpu_qtagree_template` |
-| 数据库 schema | `cpu-base` |
+| domain/服务域 | `cpu-base` |
+| schema | `cpu_baseservice` |
 | 所属应用 | `ycPriceCenter` |
 | 业务对象ID | `372f6d62-2a93-4171-b20f-302a6e696970` |
 | 元数据类型 | `Class` |

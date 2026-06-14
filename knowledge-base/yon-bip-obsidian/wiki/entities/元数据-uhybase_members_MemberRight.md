@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 会员权益 |
 | 物理表 | `mp_memberrightdoc` |
-| 数据库 schema | `uhy` |
+| domain/服务域 | `uhy` |
+| schema | `yilian` |
 | 所属应用 | `SDMB` |
 | 直连字段 | 19 个 |
 | 子表 | 2 个 |

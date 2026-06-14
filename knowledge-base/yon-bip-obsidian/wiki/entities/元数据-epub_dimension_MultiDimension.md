@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 科目多维结构 |
 | 物理表 | `epub_multidimension` |
-| 数据库 schema | `fiepub` |
+| domain/服务域 | `fiepub` |
+| schema | `fiepub` |
 | 所属应用 | `FP` |
 | 直连字段 | 216 个 |
 | 子表 | 0 个 |

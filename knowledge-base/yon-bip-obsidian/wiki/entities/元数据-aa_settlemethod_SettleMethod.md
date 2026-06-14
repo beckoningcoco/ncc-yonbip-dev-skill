@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 结算方式 |
 | 物理表 | `settle_method` |
-| 数据库 schema | `productcenter` |
+| domain/服务域 | `productcenter` |
+| schema | `iuap_apdoc_coredoc` |
 | 所属应用 | `DPMSETL` |
 | 直连字段 | 30 个 |
 | 子表 | 1 个 |

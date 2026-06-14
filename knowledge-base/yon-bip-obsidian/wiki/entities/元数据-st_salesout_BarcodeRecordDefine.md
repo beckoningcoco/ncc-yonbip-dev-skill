@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 条码自定义项 |
 | 物理表 | `st_barcode_record_define_back` |
-| 数据库 schema | `ustock` |
+| domain/服务域 | `ustock` |
+| schema | `ustock` |
 | 所属应用 | `ST` |
 | 直连字段 | 62 个 |
 | 关联引用 | 2 个 |

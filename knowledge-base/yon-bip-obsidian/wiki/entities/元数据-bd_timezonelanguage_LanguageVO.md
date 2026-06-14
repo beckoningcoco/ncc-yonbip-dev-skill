@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 语言 |
 | 物理表 | `sdm_base_language_table_with_names` |
-| 数据库 schema | `iuap-apdoc-social` |
+| domain/服务域 | `iuap-apdoc-social` |
+| schema | `iuap_apdoc_social` |
 | 所属应用 | `DPMPI` |
 | 直连字段 | 12 个 |
 | 子表 | 0 个 |

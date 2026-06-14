@@ -21,7 +21,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 薪资组参照 |
 | 物理表 | `wa_group_doc` |
-| 数据库 schema | `yonbip-hr-paybiz` |
+| domain/服务域 | `yonbip-hr-paybiz` |
 | 所属应用 | `HRXZHS_MDD` |
 | 直连字段 | 27 个 |
 | 子表 | 1 个 |

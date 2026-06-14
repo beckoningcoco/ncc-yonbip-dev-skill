@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 资产部位 |
 | 物理表 | `pam_key_parts` |
-| 数据库 schema | `ucf-amc-ambd` |
+| domain/服务域 | `ucf-amc-ambd` |
+| schema | `amc_ambd` |
 | 所属应用 | `AMBD` |
 | 直连字段 | 12 个 |
 | 子表 | 1 个 |

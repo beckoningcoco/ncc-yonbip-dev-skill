@@ -26,7 +26,7 @@ parent_entity: voucher.order.Order
 | 显示名 | 订单详情 |
 | 描述 | 订单详情 |
 | 物理表 | `orderdetail` |
-| 数据库 schema | `udinghuo` |
+| domain/服务域 | `udinghuo` |
 | 所属应用 | `SCMSA` |
 | 元数据类型 | `Class` |
 | 元数据层级 | `2` |

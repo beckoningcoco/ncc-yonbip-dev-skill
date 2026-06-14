@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 参与人 |
 | 物理表 | `cust_relateperson` |
-| 数据库 schema | `sact` |
+| domain/服务域 | `sact` |
+| schema | `scmmp` |
 | 所属应用 | `SACT` |
 | 直连字段 | 14 个 |
 | 子表 | 0 个 |

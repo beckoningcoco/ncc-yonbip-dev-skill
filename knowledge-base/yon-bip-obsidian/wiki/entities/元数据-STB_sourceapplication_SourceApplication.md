@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 来源应用 |
 | 物理表 | `stb_source_application` |
-| 数据库 schema | `yonbip-ec-contract` |
+| domain/服务域 | `yonbip-ec-contract` |
+| schema | `yonbip_clm_contract` |
 | 所属应用 | `STB` |
 | 直连字段 | 16 个 |
 | 子表 | 0 个 |

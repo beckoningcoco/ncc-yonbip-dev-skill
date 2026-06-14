@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 套件商品 |
 | 物理表 | `ec_suite_goods` |
-| 数据库 schema | `dst` |
+| domain/服务域 | `dst` |
+| schema | `omsdata` |
 | 所属应用 | `SDOC` |
 | 直连字段 | 20 个 |
 | 子表 | 1 个 |

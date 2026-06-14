@@ -22,6 +22,7 @@ source_type: api_response
 | uri | st.storenotice.StoreNotice |
 | tableName | st_storenotice |
 | domain | ustock |
+| schema | `ustock` |
 | applicationCode | ST |
 | superUri | retail.voucher.RetailVouch |
 | isBusinessObject | true |

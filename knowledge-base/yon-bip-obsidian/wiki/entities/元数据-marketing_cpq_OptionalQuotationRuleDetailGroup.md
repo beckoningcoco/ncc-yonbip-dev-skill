@@ -21,7 +21,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 配置报价规则详情分组 |
 | 物理表 | `optionalquotationruledetailgroup` |
-| 数据库 schema | `marketingbill` |
+| domain/服务域 | `marketingbill` |
 | 所属应用 | `CPQ` |
 | 直连字段 | 13 个 |
 | 子表 | 0 个 |

@@ -22,6 +22,7 @@ source_type: api_response
 | uri | st.morphologyConversion.MorphologyConversionCustomItem |
 | tableName | st_morphologyconversion_customitem |
 | domain | ustock |
+| schema | `ustock` |
 | applicationCode | ST |
 | superUri | ? |
 | isBusinessObject | true |

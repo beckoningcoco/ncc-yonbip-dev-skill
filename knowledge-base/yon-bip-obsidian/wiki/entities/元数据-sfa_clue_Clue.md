@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 线索 |
 | 物理表 | `sfa_clue` |
-| 数据库 schema | `yycrm` |
+| domain/服务域 | `yycrm` |
+| schema | `crm` |
 | 所属应用 | `SFA` |
 | 直连字段 | 133 个 |
 | 子表 | 5 个 |

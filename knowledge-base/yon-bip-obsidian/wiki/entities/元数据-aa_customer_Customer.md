@@ -21,7 +21,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 客户档案 |
 | 物理表 | `agent` |
-| 数据库 schema | `uorder-base` |
+| domain/服务域 | `uorder-base` |
 | 所属应用 | `free0907` |
 | 直连字段 | 19 个 |
 | 子表 | 0 个 |

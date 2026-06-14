@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 用户密级枚举对象 |
 | 物理表 | `military_usersecretobj` |
-| 数据库 schema | `yonbip-ndi-jgmj` |
+| domain/服务域 | `yonbip-ndi-jgmj` |
+| schema | `yonbip_ndi_jgmj` |
 | 所属应用 | `GFJGMJ` |
 | 直连字段 | 15 个 |
 | 子表 | 0 个 |

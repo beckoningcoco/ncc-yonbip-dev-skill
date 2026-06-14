@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 会计主体树成员 |
 | 物理表 | `bd_virtualaccbody_tree_member` |
-| 数据库 schema | `finbd` |
+| domain/服务域 | `finbd` |
+| schema | `iuap_apdoc_finbd` |
 | 所属应用 | `DPMACCT` |
 | 直连字段 | 20 个 |
 | 子表 | 0 个 |

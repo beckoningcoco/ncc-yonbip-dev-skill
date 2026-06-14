@@ -22,6 +22,7 @@ source_type: api_response
 | uri | st.storecheck.StoreCheck |
 | tableName | st_storecheck |
 | domain | ustock |
+| schema | `ustock` |
 | applicationCode | ST |
 | superUri | ? |
 | isBusinessObject | true |

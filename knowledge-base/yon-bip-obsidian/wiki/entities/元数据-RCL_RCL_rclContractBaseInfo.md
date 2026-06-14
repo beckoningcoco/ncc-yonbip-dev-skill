@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 基本信息 |
 | 物理表 | `rcl_contract_b` |
-| 数据库 schema | `yonbip-fi-ercl` |
+| domain/服务域 | `yonbip-fi-ercl` |
+| schema | `fiercl` |
 | 所属应用 | `RVN` |
 | 直连字段 | 120 个 |
 | 子表 | 2 个 |

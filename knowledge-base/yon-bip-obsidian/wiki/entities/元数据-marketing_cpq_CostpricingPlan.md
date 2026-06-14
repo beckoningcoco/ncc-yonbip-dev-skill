@@ -21,7 +21,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 成本取价方案 |
 | 物理表 | `udh_cpq_costpricing_plan` |
-| 数据库 schema | `marketingbill` |
+| domain/服务域 | `marketingbill` |
 | 所属应用 | `CPQ` |
 | 直连字段 | 21 个 |
 | 子表 | 1 个 |

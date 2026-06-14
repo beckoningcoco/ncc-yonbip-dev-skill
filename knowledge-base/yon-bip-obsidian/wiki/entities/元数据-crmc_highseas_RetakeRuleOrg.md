@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 收回规则适用组织 |
 | 物理表 | `crmc_retake_rule_org` |
-| 数据库 schema | `yycrm` |
+| domain/服务域 | `yycrm` |
+| schema | `crm` |
 | 所属应用 | `CRMC` |
 | 直连字段 | 5 个 |
 | 子表 | 0 个 |

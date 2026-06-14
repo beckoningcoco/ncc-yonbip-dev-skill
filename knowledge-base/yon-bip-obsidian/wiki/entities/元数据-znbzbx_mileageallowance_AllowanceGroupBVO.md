@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 匹配项 |
 | 物理表 | `znbz_mileageallowance_group_b` |
-| 数据库 schema | `znbzbx` |
+| domain/服务域 | `znbzbx` |
+| schema | `znbz` |
 | 所属应用 | `RBSM` |
 | 直连字段 | 6 个 |
 | 子表 | 0 个 |

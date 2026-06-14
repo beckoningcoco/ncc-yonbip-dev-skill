@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | (停用)物料定金时间关联(使用组织) |
 | 物理表 | `productdeposittimedetail` |
-| 数据库 schema | `productcenter` |
+| domain/服务域 | `productcenter` |
+| schema | `iuap_apdoc_coredoc` |
 | 所属应用 | `GZTBDM` |
 | 直连字段 | 13 个 |
 | 子表 | 0 个 |

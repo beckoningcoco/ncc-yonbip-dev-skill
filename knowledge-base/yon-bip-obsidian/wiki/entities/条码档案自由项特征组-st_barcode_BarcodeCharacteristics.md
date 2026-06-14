@@ -20,7 +20,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 条码档案自由项特征组 |
 | 物理表 | `st_barcode_characteristics` |
-| 数据库 schema | `uscmpub` |
+| domain/服务域 | `uscmpub` |
+| schema | `usp_plantransportroute` |
 | 所属应用 | `BCD` |
 | 构建时间 | `2026-06-04 23:34:20.1000` |
 

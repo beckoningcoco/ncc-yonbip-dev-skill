@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 表单模板实例 |
 | 物理表 | `cpu_tpl_bill_template_inst` |
-| 数据库 schema | `yonbip-cpu-bcsourcing` |
+| domain/服务域 | `yonbip-cpu-bcsourcing` |
+| schema | `cpu_pubbiz_sourcing` |
 | 所属应用 | `ycBase` |
 | 业务对象ID | `4727b777-bfe8-4ea0-8b30-0a13b7e82a1a` |
 | 元数据类型 | `Class` |

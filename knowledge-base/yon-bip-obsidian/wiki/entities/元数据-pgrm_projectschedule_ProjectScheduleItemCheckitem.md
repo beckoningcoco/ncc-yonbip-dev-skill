@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 进度计划检查项 |
 | 物理表 | `pgrm_schedule_item_checkitem` |
-| 数据库 schema | `yonbip-pm-projectme` |
+| domain/服务域 | `yonbip-pm-projectme` |
+| schema | `pmcloud` |
 | 所属应用 | `PGRM` |
 | 直连字段 | 16 个 |
 | 子表 | 1 个 |

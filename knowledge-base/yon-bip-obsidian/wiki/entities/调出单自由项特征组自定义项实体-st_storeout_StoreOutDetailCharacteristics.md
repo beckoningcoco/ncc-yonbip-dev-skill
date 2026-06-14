@@ -20,7 +20,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 调出单自由项特征组自定义项实体 |
 | 物理表 | `st_storeout_b_characteristics` |
-| 数据库 schema | `ustock` |
+| domain/服务域 | `ustock` |
+| schema | `ustock` |
 | 所属应用 | `ST` |
 | 构建时间 | `2026-06-05 09:58:48.5010` |
 

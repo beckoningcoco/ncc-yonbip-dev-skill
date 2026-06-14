@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 收款协议 |
 | 物理表 | `bd_receiveagreement` |
-| 数据库 schema | `ucfbasedoc` |
+| domain/服务域 | `ucfbasedoc` |
+| schema | `iuap_apdoc_basedoc` |
 | 所属应用 | `DPMSETL` |
 | 直连字段 | 31 个 |
 | 子表 | 2 个 |

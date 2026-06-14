@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 物资清单模板详情 |
 | 物理表 | `prpr_material_list_template_b` |
-| 数据库 schema | `yonbip-pm-projectme` |
+| domain/服务域 | `yonbip-pm-projectme` |
+| schema | `pmcloud` |
 | 所属应用 | `RSCM` |
 | 直连字段 | 13 个 |
 | 子表 | 0 个 |

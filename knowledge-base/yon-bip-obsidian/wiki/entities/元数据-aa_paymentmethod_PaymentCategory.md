@@ -21,7 +21,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 收款方式分类 |
 | 物理表 | `aa_payment_method_category` |
-| 数据库 schema | `retail` |
+| domain/服务域 | `retail` |
 | 所属应用 | `RM` |
 | 直连字段 | 19 个 |
 | 子表 | 1 个 |

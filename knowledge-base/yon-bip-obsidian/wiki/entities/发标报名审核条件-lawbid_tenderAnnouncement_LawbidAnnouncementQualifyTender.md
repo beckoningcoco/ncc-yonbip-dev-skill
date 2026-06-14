@@ -22,7 +22,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 发标报名审核条件 |
 | 物理表 | `cpu_bid_pjt_qualify_tender` |
-| 数据库 schema | `yonbip-cpu-lawbid` |
+| domain/服务域 | `yonbip-cpu-lawbid` |
+| schema | `cpu_lawbid` |
 | 所属应用 | `ycSouringBid` |
 | 构建时间 | `2026-06-04 20:03:12.8650` |
 

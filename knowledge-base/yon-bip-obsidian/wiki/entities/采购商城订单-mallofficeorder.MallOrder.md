@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 采购商城订单 |
 | 物理表 | `mall_order` |
-| 数据库 schema | `yonbip-cpu-mall` |
+| domain/服务域 | `yonbip-cpu-mall` |
+| schema | `cpu_mall` |
 | 所属应用 | `ycYuncaiMall` |
 | 业务对象ID | `7633ebba-0022-42c6-bf5c-e535d6bec695` |
 | 元数据类型 | `Class` |

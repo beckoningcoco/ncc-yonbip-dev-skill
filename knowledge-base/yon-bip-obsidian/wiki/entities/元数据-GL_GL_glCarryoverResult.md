@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 期末结转报告 |
 | 物理表 | `gl_carryover_result` |
-| 数据库 schema | `yonbip-fi-egl` |
+| domain/服务域 | `yonbip-fi-egl` |
+| schema | `figl` |
 | 所属应用 | `GL` |
 | 直连字段 | 19 个 |
 | 子表 | 0 个 |

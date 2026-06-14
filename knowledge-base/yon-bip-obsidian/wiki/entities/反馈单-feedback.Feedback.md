@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 反馈单 |
 | 物理表 | `cpu_feedback_mdd` |
-| 数据库 schema | `cpu-supplymgr` |
+| domain/服务域 | `cpu-supplymgr` |
+| schema | `cpu_suppliermgr` |
 | 所属应用 | `ycSupplierManagement` |
 | 业务对象ID | `8ce959b2-712d-4fc2-b2b9-e91abf05f3b8` |
 | 元数据类型 | `Class` |

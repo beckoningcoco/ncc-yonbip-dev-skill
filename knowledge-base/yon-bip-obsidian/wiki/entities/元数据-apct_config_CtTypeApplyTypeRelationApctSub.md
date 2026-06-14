@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 申请类型合同类型-合同类型子表 |
 | 物理表 | `apct_cttype_applytype_relation_apct_sub` |
-| 数据库 schema | `apct` |
+| domain/服务域 | `apct` |
+| schema | `apct` |
 | 所属应用 | `APCT` |
 | 直连字段 | 15 个 |
 | 子表 | 0 个 |

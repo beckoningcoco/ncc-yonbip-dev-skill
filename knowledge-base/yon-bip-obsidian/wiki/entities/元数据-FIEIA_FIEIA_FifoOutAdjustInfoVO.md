@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 先进先出出库调整信息 |
 | 物理表 | `ia_fifo_out_adjust_info` |
-| 数据库 schema | `yonbip-fi-eia` |
+| domain/服务域 | `yonbip-fi-eia` |
+| schema | `fieia` |
 | 所属应用 | `EIA` |
 | 直连字段 | 45 个 |
 | 子表 | 0 个 |

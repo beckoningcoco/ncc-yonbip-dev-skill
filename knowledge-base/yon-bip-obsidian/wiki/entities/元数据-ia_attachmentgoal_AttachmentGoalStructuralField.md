@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 附件识别对象结构化字段 |
 | 物理表 | `ssc_ia_attachment_goal_structural_field` |
-| 数据库 schema | `yonbip-mid-sscia` |
+| domain/服务域 | `yonbip-mid-sscia` |
+| schema | `intelligent_audit` |
 | 所属应用 | `ZNSH` |
 | 直连字段 | 21 个 |
 | 子表 | 0 个 |

@@ -20,7 +20,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 计税结果明细 |
 | 物理表 | `tax_calc_result_b` |
-| 数据库 schema | `productionorder` |
+| domain/服务域 | `productionorder` |
 | 所属应用 | `OSM` |
 | 构建时间 | `2026-06-05 09:58:55.0150` |
 

@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 版本信息表 |
 | 物理表 | `version` |
-| 数据库 schema | `umall` |
+| domain/服务域 | `umall` |
+| schema | `upmalls` |
 | 所属应用 | `SDMA` |
 | 直连字段 | 15 个 |
 | 子表 | 0 个 |

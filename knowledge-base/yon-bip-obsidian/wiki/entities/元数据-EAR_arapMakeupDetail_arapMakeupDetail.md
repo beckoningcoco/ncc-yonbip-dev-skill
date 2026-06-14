@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 确认补差明细 |
 | 物理表 | `arap_makeup_detail` |
-| 数据库 schema | `yonbip-fi-earap` |
+| domain/服务域 | `yonbip-fi-earap` |
+| schema | `fiearap` |
 | 所属应用 | `EAR` |
 | 直连字段 | 28 个 |
 | 子表 | 0 个 |

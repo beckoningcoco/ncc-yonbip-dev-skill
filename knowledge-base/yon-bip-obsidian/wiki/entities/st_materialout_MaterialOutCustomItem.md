@@ -22,6 +22,7 @@ source_type: api_response
 | uri | st.materialout.MaterialOutCustomItem |
 | tableName | st_materialout_customitem |
 | domain | ustock |
+| schema | `ustock` |
 | applicationCode | ST |
 | superUri | ? |
 | isBusinessObject | true |

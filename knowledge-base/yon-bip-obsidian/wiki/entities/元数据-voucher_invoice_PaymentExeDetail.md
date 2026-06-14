@@ -21,7 +21,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 收款执行明细 |
 | 物理表 | `paymentexedetail` |
-| 数据库 schema | `udinghuo` |
+| domain/服务域 | `udinghuo` |
 | 所属应用 | `SCMSA` |
 | 直连字段 | 58 个 |
 | 子表 | 0 个 |

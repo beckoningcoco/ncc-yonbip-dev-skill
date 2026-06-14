@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 折旧分配维度定义 |
 | 物理表 | `fa_depr_dimension` |
-| 数据库 schema | `yonbip-fi-efa` |
+| domain/服务域 | `yonbip-fi-efa` |
+| schema | `fiefa` |
 | 所属应用 | `EFA` |
 | 直连字段 | 17 个 |
 | 子表 | 0 个 |

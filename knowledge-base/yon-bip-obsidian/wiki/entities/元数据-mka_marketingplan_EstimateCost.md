@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 营销方案费用子表 |
 | 物理表 | `mka_estimate_cost` |
-| 数据库 schema | `yycrm` |
+| domain/服务域 | `yycrm` |
+| schema | `crm` |
 | 所属应用 | `MKA` |
 | 直连字段 | 66 个 |
 | 子表 | 1 个 |

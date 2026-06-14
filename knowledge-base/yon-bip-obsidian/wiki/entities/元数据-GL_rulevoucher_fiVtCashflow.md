@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 规则凭证现金流量定义子表 |
 | 物理表 | `fi_vt_cashflow` |
-| 数据库 schema | `yonbip-fi-egl` |
+| domain/服务域 | `yonbip-fi-egl` |
+| schema | `figl` |
 | 所属应用 | `GL` |
 | 直连字段 | 19 个 |
 | 子表 | 0 个 |

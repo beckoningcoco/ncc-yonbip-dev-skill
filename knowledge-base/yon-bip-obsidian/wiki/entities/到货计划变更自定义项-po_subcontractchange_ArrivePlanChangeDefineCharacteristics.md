@@ -20,7 +20,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 到货计划变更自定义项 |
 | 物理表 | `osm_arrive_plan_change_dct` |
-| 数据库 schema | `productionorder` |
+| domain/服务域 | `productionorder` |
 | 所属应用 | `OSM` |
 | 构建时间 | `2026-06-05 09:57:15.2240` |
 

@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 多栏账设置 |
 | 物理表 | `gl_multicolumn` |
-| 数据库 schema | `yonbip-fi-egl` |
+| domain/服务域 | `yonbip-fi-egl` |
+| schema | `figl` |
 | 所属应用 | `GL` |
 | 直连字段 | 23 个 |
 | 子表 | 1 个 |

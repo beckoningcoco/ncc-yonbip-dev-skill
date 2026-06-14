@@ -20,7 +20,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 供应商最新报价明细表 |
 | 物理表 | `cpu_hall_quotation_detail_recent` |
-| 数据库 schema | `yonbip-cpu-bcsourcing` |
+| domain/服务域 | `yonbip-cpu-bcsourcing` |
+| schema | `cpu_pubbiz_sourcing` |
 | 所属应用 | `ycSouring` |
 | 构建时间 | `2026-06-04 23:44:15.1700` |
 

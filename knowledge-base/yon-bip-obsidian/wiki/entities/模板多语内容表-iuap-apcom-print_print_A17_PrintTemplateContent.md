@@ -20,7 +20,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 模板多语内容表 |
 | 物理表 | `print_template_content` |
-| 数据库 schema | `iuap-apcom-print` |
+| domain/服务域 | `iuap-apcom-print` |
 | 所属应用 | `BMMPT` |
 | 构建时间 | `2026-06-04 23:34:41.6490` |
 

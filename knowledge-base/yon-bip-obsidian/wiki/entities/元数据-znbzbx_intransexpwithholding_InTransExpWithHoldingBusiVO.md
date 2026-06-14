@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 业务数据 |
 | 物理表 | `znbz_intransexpwithholding_busi` |
-| 数据库 schema | `znbzbx` |
+| domain/服务域 | `znbzbx` |
+| schema | `znbz` |
 | 所属应用 | `RBSM` |
 | 直连字段 | 62 个 |
 | 子表 | 1 个 |

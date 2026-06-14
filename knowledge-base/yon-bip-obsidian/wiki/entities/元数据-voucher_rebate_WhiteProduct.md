@@ -21,7 +21,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 例外商品 |
 | 物理表 | `udh_rebatesharesetting_whiteproduct` |
-| 数据库 schema | `marketingbill` |
+| domain/服务域 | `marketingbill` |
 | 所属应用 | `BBSMK` |
 | 直连字段 | 7 个 |
 | 子表 | 1 个 |

@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 期初履约记录 |
 | 物理表 | `rcl_appoint_r` |
-| 数据库 schema | `yonbip-fi-ercl` |
+| domain/服务域 | `yonbip-fi-ercl` |
+| schema | `fiercl` |
 | 所属应用 | `RVN` |
 | 直连字段 | 81 个 |
 | 子表 | 0 个 |

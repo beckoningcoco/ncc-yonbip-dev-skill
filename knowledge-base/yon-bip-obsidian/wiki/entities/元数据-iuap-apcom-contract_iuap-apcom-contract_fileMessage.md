@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 文件信息表 |
 | 物理表 | `file_message` |
-| 数据库 schema | `iuap-apcom-contract` |
+| domain/服务域 | `iuap-apcom-contract` |
+| schema | `iuap_apcom_contract` |
 | 所属应用 | `iuap-apcom-contract` |
 | 直连字段 | 12 个 |
 | 子表 | 0 个 |

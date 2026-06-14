@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 卡券 |
 | 物理表 | `mp_coupon` |
-| 数据库 schema | `membercenter` |
+| domain/服务域 | `membercenter` |
+| schema | `yilian` |
 | 所属应用 | `` |
 | 直连字段 | 22 个 |
 | 子表 | 0 个 |

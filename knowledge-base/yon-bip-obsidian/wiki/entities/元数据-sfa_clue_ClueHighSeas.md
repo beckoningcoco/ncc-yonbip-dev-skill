@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 线索公海 |
 | 物理表 | `sfa_cluehighseas` |
-| 数据库 schema | `yycrm` |
+| domain/服务域 | `yycrm` |
+| schema | `crm` |
 | 所属应用 | `SFA` |
 | 直连字段 | 47 个 |
 | 子表 | 8 个 |

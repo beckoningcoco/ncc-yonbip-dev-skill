@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 任务类型设置关联事项 |
 | 物理表 | `act_actiontypesetting_actmatt` |
-| 数据库 schema | `yycrm` |
+| domain/服务域 | `yycrm` |
+| schema | `crm` |
 | 所属应用 | `ACT` |
 | 直连字段 | 21 个 |
 | 子表 | 0 个 |

@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 合同变更付款协议 |
 | 物理表 | `clm_contract_change_payterm` |
-| 数据库 schema | `yonbip-ec-contract` |
+| domain/服务域 | `yonbip-ec-contract` |
+| schema | `yonbip_clm_contract` |
 | 所属应用 | `CLM` |
 | 直连字段 | 43 个 |
 | 子表 | 0 个 |

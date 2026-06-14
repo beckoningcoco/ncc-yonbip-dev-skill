@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 业务期间 |
 | 物理表 | `bd_business_period` |
-| 数据库 schema | `ucfbasedoc` |
+| domain/服务域 | `ucfbasedoc` |
+| schema | `iuap_apdoc_basedoc` |
 | 所属应用 | `DPMPI` |
 | 直连字段 | 21 个 |
 | 子表 | 0 个 |

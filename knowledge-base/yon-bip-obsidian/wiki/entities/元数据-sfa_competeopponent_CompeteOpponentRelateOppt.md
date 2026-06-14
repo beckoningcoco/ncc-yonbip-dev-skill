@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 商机相关竞争对手 |
 | 物理表 | `sfa_opponent_relate_oppt` |
-| 数据库 schema | `yycrm` |
+| domain/服务域 | `yycrm` |
+| schema | `crm` |
 | 所属应用 | `SFA` |
 | 直连字段 | 15 个 |
 | 子表 | 0 个 |

@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 风险业务清单操作明细 |
 | 物理表 | `rcp_riskbusinesslistdetail` |
-| 数据库 schema | `yonbip-mid-sscia` |
+| domain/服务域 | `yonbip-mid-sscia` |
+| schema | `intelligent_audit` |
 | 所属应用 | `RCP` |
 | 直连字段 | 18 个 |
 | 子表 | 1 个 |

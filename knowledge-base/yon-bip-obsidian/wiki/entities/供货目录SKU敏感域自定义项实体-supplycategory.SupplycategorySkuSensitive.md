@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 供货目录SKU敏感域自定义项实体 |
 | 物理表 | `` |
-| 数据库 schema | `cpu-base` |
+| domain/服务域 | `cpu-base` |
+| schema | `cpu_baseservice` |
 | 所属应用 | `ycPriceCenter` |
 | 业务对象ID | `a747781b-3318-482d-8ff5-ef29dfd46424` |
 | 元数据类型 | `Class` |

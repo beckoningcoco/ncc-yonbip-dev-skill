@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 商城订单明细自由项特征组 |
 | 物理表 | `order_detail_dct` |
-| 数据库 schema | `yonbip-cpu-mall` |
+| domain/服务域 | `yonbip-cpu-mall` |
+| schema | `cpu_mall` |
 | 所属应用 | `ycYuncaiMall` |
 | 元数据类型 | `Class` |
 | 元数据层级 | `2` |

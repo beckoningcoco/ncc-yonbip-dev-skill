@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 货位档案 |
 | 物理表 | `aa_goodsposition` |
-| 数据库 schema | `productcenter` |
+| domain/服务域 | `productcenter` |
+| schema | `iuap_apdoc_coredoc` |
 | 所属应用 | `DPMSI` |
 | 直连字段 | 32 个 |
 | 关联引用 | 10 个 |

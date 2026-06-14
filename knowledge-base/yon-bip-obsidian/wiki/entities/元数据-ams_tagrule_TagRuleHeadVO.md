@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 资产标签 |
 | 物理表 | `pam_tagrule` |
-| 数据库 schema | `ucf-amc-aim` |
+| domain/服务域 | `ucf-amc-aim` |
+| schema | `amc_aim` |
 | 所属应用 | `AMS` |
 | 直连字段 | 25 个 |
 | 子表 | 2 个 |

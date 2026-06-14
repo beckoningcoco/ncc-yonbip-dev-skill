@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 使用权资产变更缩减项 |
 | 物理表 | `fa_lease_change_reduce` |
-| 数据库 schema | `yonbip-fi-efa` |
+| domain/服务域 | `yonbip-fi-efa` |
+| schema | `fiefa` |
 | 所属应用 | `EFA` |
 | 直连字段 | 13 个 |
 | 子表 | 0 个 |

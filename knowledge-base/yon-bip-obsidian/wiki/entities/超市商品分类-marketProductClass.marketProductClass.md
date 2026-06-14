@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 超市商品分类 |
 | 物理表 | `cpu_marketproduct_class` |
-| 数据库 schema | `yonbip-cpu-bctask` |
+| domain/服务域 | `yonbip-cpu-bctask` |
+| schema | `cpu_base_doc` |
 | 所属应用 | `ycYuncaiMall` |
 | 业务对象ID | `53eaf6d1-4b9c-4575-b4f1-18da553158a9` |
 | 元数据类型 | `Class` |

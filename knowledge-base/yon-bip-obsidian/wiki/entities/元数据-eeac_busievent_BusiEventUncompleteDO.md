@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 业务事项关结账数据参数 |
 | 物理表 | `eac_busi_event_uncomplete` |
-| 数据库 schema | `yonbip-fi-eeac` |
+| domain/服务域 | `yonbip-fi-eeac` |
+| schema | `fieeac` |
 | 所属应用 | `EVNT` |
 | 直连字段 | 16 个 |
 | 关联引用 | 4 个 |

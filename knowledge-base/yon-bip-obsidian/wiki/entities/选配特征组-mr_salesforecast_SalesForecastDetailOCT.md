@@ -20,7 +20,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 选配特征组 |
 | 物理表 | `mr_sales_forecast_detail_oct` |
-| 数据库 schema | `requirementsplanning` |
+| domain/服务域 | `requirementsplanning` |
 | 所属应用 | `MR` |
 | 构建时间 | `2026-06-05 15:18:16.4740` |
 

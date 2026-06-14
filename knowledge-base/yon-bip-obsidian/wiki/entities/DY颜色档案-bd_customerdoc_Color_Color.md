@@ -20,7 +20,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | DY颜色档案 |
 | 物理表 | `bd_cust_doc` |
-| 数据库 schema | `ucfbasedoc` |
+| domain/服务域 | `ucfbasedoc` |
+| schema | `iuap_apdoc_basedoc` |
 | 所属应用 | `DPMPI` |
 | 构建时间 | `2026-06-04 23:08:36.0090` |
 

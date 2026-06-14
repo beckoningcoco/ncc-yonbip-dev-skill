@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 计划模板 |
 | 物理表 | `pm_pgrm_wbstpl` |
-| 数据库 schema | `yonbip-pm-projectme` |
+| domain/服务域 | `yonbip-pm-projectme` |
+| schema | `pmcloud` |
 | 所属应用 | `PGRM` |
 | 直连字段 | 30 个 |
 | 子表 | 2 个 |

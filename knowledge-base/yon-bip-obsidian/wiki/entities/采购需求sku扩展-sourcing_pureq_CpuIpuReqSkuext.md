@@ -20,7 +20,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 采购需求sku扩展 |
 | 物理表 | `cpu_ipu_req_skuext` |
-| 数据库 schema | `yonbip-cpu-sourcing` |
+| domain/服务域 | `yonbip-cpu-sourcing` |
 | 所属应用 | `ycReqManagement` |
 | 构建时间 | `2026-06-04 23:26:20.2410` |
 

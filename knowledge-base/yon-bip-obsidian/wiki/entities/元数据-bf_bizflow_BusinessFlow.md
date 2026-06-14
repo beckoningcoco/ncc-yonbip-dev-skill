@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 业务流 |
 | 物理表 | `business_flow` |
-| 数据库 schema | `iuap-yonbuilder-businesssflow` |
+| domain/服务域 | `iuap-yonbuilder-businesssflow` |
+| schema | `iuap_apcom_businesssflow` |
 | 所属应用 | `APPBZP` |
 | 直连字段 | 5 个 |
 | 子表 | 0 个 |

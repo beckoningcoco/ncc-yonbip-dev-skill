@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 客户角色信息 |
 | 物理表 | `merchantroleinfo` |
-| 数据库 schema | `productcenter` |
+| domain/服务域 | `productcenter` |
+| schema | `iuap_apdoc_coredoc` |
 | 所属应用 | `DPMCUS` |
 | 直连字段 | 17 个 |
 | 子表 | 0 个 |

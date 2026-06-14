@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 试算平衡结果详情 |
 | 物理表 | `gl_balance_trial_detail` |
-| 数据库 schema | `yonbip-fi-egl` |
+| domain/服务域 | `yonbip-fi-egl` |
+| schema | `figl` |
 | 所属应用 | `GL` |
 | 直连字段 | 14 个 |
 | 子表 | 0 个 |

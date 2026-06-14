@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 陈列规格 |
 | 物理表 | `mka_display` |
-| 数据库 schema | `yycrm` |
+| domain/服务域 | `yycrm` |
+| schema | `crm` |
 | 所属应用 | `CRMC` |
 | 直连字段 | 34 个 |
 | 子表 | 6 个 |

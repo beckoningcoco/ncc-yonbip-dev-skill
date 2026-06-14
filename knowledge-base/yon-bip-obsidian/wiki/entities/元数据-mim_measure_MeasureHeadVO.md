@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 计量器具目录 |
 | 物理表 | `pam_measure` |
-| 数据库 schema | `ucf-amc-aum` |
+| domain/服务域 | `ucf-amc-aum` |
+| schema | `amc_aum` |
 | 所属应用 | `MIM` |
 | 直连字段 | 26 个 |
 | 子表 | 1 个 |

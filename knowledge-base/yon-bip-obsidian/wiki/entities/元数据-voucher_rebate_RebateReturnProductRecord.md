@@ -21,7 +21,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 返利回退商品记录 |
 | 物理表 | `rebateReturnProductRecord` |
-| 数据库 schema | `marketingbill` |
+| domain/服务域 | `marketingbill` |
 | 所属应用 | `BBSMK` |
 | 直连字段 | 29 个 |
 | 子表 | 0 个 |

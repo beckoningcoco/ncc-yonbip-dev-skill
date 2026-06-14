@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 总额对账历史 |
 | 物理表 | `gl_inner_trans_total_amt_recon_record` |
-| 数据库 schema | `yonbip-fi-egl` |
+| domain/服务域 | `yonbip-fi-egl` |
+| schema | `figl` |
 | 所属应用 | `GL` |
 | 直连字段 | 48 个 |
 | 子表 | 0 个 |

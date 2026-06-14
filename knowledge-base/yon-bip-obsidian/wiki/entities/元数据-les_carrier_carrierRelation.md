@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 承运关系 |
 | 物理表 | `ils_les_c_relation` |
-| 数据库 schema | `IMP-ILSBD` |
+| domain/服务域 | `IMP-ILSBD` |
+| schema | `ils_les` |
 | 所属应用 | `DPMSI` |
 | 直连字段 | 13 个 |
 | 子表 | 1 个 |

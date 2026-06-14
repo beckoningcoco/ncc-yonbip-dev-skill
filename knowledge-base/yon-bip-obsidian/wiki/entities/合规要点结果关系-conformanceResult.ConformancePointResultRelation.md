@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 合规要点结果关系 |
 | 物理表 | `cpu_conformance_point_result_type_relation` |
-| 数据库 schema | `yonbip-cpu-bcsourcing` |
+| domain/服务域 | `yonbip-cpu-bcsourcing` |
+| schema | `cpu_pubbiz_sourcing` |
 | 所属应用 | `ycBase` |
 | 业务对象ID | `d63fc8d6-76ba-4e5b-ad2e-50343917faf1` |
 | 元数据类型 | `Class` |

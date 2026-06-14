@@ -22,6 +22,7 @@ source_type: api_response
 | uri | st.stockstatuschange.StockStatusChange |
 | tableName | st_goodchange |
 | domain | ustock |
+| schema | `ustock` |
 | applicationCode | ST |
 | superUri | st.goodchange.GoodChange |
 | isBusinessObject | true |

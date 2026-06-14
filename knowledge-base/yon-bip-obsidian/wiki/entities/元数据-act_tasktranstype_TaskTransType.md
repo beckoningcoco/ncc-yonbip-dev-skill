@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 任务交易类型 |
 | 物理表 | `act_task_trans_type` |
-| 数据库 schema | `yycrm` |
+| domain/服务域 | `yycrm` |
+| schema | `crm` |
 | 所属应用 | `ACT` |
 | 直连字段 | 30 个 |
 | 子表 | 2 个 |

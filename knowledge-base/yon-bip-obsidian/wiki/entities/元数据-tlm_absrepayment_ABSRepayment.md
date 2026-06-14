@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 专项还款登记 |
 | 物理表 | `tlm_absrepayment` |
-| 数据库 schema | `yonbip-fi-ctmtlm` |
+| domain/服务域 | `yonbip-fi-ctmtlm` |
+| schema | `yonbip_fi_ctmfm` |
 | 所属应用 | `TLM` |
 | 直连字段 | 76 个 |
 | 子表 | 3 个 |

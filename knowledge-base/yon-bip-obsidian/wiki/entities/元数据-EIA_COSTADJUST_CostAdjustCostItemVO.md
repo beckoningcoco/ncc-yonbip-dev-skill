@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 费用调整费用项目 |
 | 物理表 | `ia_ledger_g` |
-| 数据库 schema | `yonbip-fi-eia` |
+| domain/服务域 | `yonbip-fi-eia` |
+| schema | `fieia` |
 | 所属应用 | `EIA` |
 | 直连字段 | 39 个 |
 | 子表 | 0 个 |

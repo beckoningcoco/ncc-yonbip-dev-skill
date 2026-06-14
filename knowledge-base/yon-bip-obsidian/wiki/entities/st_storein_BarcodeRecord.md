@@ -22,6 +22,7 @@ source_type: api_response
 | uri | st.storein.BarcodeRecord |
 | tableName | st_barcode_detail_back |
 | domain | ustock |
+| schema | `ustock` |
 | applicationCode | ST |
 | superUri | st.barcode.BarcodeRecordBase |
 | isBusinessObject | true |

@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 舱位等级档案 |
 | 物理表 | `znbz_seatgrade` |
-| 数据库 schema | `znbzbx` |
+| domain/服务域 | `znbzbx` |
+| schema | `znbz` |
 | 所属应用 | `RBSM` |
 | 直连字段 | 31 个 |
 | 子表 | 0 个 |

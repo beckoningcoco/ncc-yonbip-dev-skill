@@ -21,7 +21,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 盈亏显示规则明细 |
 | 物理表 | `udh_cpq_phasedisplay_ruleitem` |
-| 数据库 schema | `marketingbill` |
+| domain/服务域 | `marketingbill` |
 | 所属应用 | `CPQ` |
 | 直连字段 | 7 个 |
 | 子表 | 0 个 |

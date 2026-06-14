@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 收付关结账检查项目 |
 | 物理表 | `arap_period_check_items` |
-| 数据库 schema | `yonbip-fi-earap` |
+| domain/服务域 | `yonbip-fi-earap` |
+| schema | `fiearap` |
 | 所属应用 | `EAP` |
 | 直连字段 | 17 个 |
 | 子表 | 0 个 |

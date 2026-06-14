@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 费用 |
 | 物理表 | `act_followrecord_expense` |
-| 数据库 schema | `yycrm` |
+| domain/服务域 | `yycrm` |
+| schema | `crm` |
 | 所属应用 | `ACT` |
 | 直连字段 | 18 个 |
 | 子表 | 0 个 |

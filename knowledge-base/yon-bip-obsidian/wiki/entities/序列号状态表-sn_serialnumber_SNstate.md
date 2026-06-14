@@ -20,7 +20,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 序列号状态表 |
 | 物理表 | `sn_state` |
-| 数据库 schema | `ustock` |
+| domain/服务域 | `ustock` |
+| schema | `ustock` |
 | 所属应用 | `ST` |
 | 构建时间 | `2026-06-04 23:34:17.1890` |
 

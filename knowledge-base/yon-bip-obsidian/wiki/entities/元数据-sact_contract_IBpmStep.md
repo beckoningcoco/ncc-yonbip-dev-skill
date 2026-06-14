@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 当前业务阶段 |
 | 物理表 | `sact_ibpmstep` |
-| 数据库 schema | `sact` |
+| domain/服务域 | `sact` |
+| schema | `scmmp` |
 | 所属应用 | `SACT` |
 | 直连字段 | 10 个 |
 | 子表 | 0 个 |

@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 收入规则明细信息 |
 | 物理表 | `rcl_acntrules_b` |
-| 数据库 schema | `yonbip-fi-ercl` |
+| domain/服务域 | `yonbip-fi-ercl` |
+| schema | `fiercl` |
 | 所属应用 | `RVN` |
 | 直连字段 | 48 个 |
 | 子表 | 1 个 |

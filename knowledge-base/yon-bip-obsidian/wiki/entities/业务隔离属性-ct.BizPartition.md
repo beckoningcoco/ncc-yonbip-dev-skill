@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 业务隔离属性 |
 | 物理表 | `cpu_pub_biz_partition` |
-| 数据库 schema | `cpu-bi-service` |
+| domain/服务域 | `cpu-bi-service` |
+| schema | `cpu_baseservice` |
 | 所属应用 | `ycPriceCenter` |
 | 业务对象ID | `130db27d-f23a-4dac-851e-6572b33f0916` |
 | 元数据类型 | `Class` |

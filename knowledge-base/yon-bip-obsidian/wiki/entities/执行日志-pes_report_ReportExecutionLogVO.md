@@ -20,7 +20,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 执行日志 |
 | 物理表 | `pes_dim_rpt_exection_log` |
-| 数据库 schema | `imppes` |
+| domain/服务域 | `imppes` |
 | 所属应用 | `IMP_PES` |
 | 构建时间 | `2026-06-05 17:19:10.3600` |
 

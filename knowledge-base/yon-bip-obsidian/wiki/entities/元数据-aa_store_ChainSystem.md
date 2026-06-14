@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 连锁系统 |
 | 物理表 | `mp_chainsystem` |
-| 数据库 schema | `yxybase` |
+| domain/服务域 | `yxybase` |
+| schema | `pricecenter` |
 | 所属应用 | `Marketingpublic` |
 | 直连字段 | 12 个 |
 | 子表 | 2 个 |

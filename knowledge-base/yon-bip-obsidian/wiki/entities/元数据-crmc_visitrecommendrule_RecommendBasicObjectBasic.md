@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 推荐项对象子表 |
 | 物理表 | `crmc_recommend_basic_object` |
-| 数据库 schema | `yycrm` |
+| domain/服务域 | `yycrm` |
+| schema | `crm` |
 | 所属应用 | `CRMC` |
 | 直连字段 | 6 个 |
 | 子表 | 0 个 |

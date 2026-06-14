@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 融资申请现金流 |
 | 物理表 | `tlm_financingapply_cash_flow` |
-| 数据库 schema | `yonbip-fi-ctmtlm` |
+| domain/服务域 | `yonbip-fi-ctmtlm` |
+| schema | `yonbip_fi_ctmfm` |
 | 所属应用 | `TLM` |
 | 直连字段 | 49 个 |
 | 子表 | 1 个 |

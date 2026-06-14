@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 运营客户表 |
 | 物理表 | `cpu_operating_customer` |
-| 数据库 schema | `yonbip-cpu-mall` |
+| domain/服务域 | `yonbip-cpu-mall` |
+| schema | `cpu_mall` |
 | 所属应用 | `ycYuncaiMall` |
 | 业务对象ID | `4760cf91-b8b7-45f1-82f1-721b8941dad1` |
 | 元数据类型 | `Class` |

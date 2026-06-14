@@ -20,7 +20,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 供应路径-需求 |
 | 物理表 | `mr_sd_relation_demand` |
-| 数据库 schema | `yonbip-mm-plan` |
+| domain/服务域 | `yonbip-mm-plan` |
+| schema | `requirements_planning` |
 | 所属应用 | `MR` |
 | 构建时间 | `2026-06-05 15:17:16.7960` |
 

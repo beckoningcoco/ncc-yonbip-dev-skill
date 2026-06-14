@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 收款退款单业务阶段信息 |
 | 物理表 | `ap_payment_b_bpmstep` |
-| 数据库 schema | `yonbip-fi-earapbill` |
+| domain/服务域 | `yonbip-fi-earapbill` |
+| schema | `fiearapbill` |
 | 所属应用 | `EAP` |
 | 直连字段 | 15 个 |
 | 子表 | 0 个 |

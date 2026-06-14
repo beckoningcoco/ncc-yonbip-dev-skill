@@ -20,7 +20,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 应用和云市场产品映射表 |
 | 物理表 | `open_app_product` |
-| 数据库 schema | `iuap-ipaas-base` |
+| domain/服务域 | `iuap-ipaas-base` |
 | 所属应用 | `INPAPI` |
 | 构建时间 | `2026-06-05 18:03:38.8480` |
 

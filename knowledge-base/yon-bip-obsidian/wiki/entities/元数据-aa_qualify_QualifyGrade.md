@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 资质等级 |
 | 物理表 | `aa_qualify_grade` |
-| 数据库 schema | `yssupplier` |
+| domain/服务域 | `yssupplier` |
+| schema | `iuap_apdoc_coredoc` |
 | 所属应用 | `DPMSPL` |
 | 直连字段 | 5 个 |
 | 子表 | 0 个 |

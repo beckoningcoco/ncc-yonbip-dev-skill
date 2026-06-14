@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 计税单 |
 | 物理表 | `arap_ledger_g_taxcalc` |
-| 数据库 schema | `yonbip-fi-earap` |
+| domain/服务域 | `yonbip-fi-earap` |
+| schema | `fiearap` |
 | 所属应用 | `EAP` |
 | 直连字段 | 61 个 |
 | 子表 | 0 个 |

@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 物料自由项特征组 |
 | 物理表 | `cpu_qtagree_chm` |
-| 数据库 schema | `cpu-base` |
+| domain/服务域 | `cpu-base` |
+| schema | `cpu_baseservice` |
 | 所属应用 | `ycPriceCenter` |
 | 业务对象ID | `1b8ce37f-2b1b-43c4-92e5-a2633fbcd8ff` |
 | 元数据类型 | `Class` |

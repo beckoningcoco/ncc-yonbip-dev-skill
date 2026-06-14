@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | (停用)客户适用范围详情 |
 | 物理表 | `merchantapplyrangedetail` |
-| 数据库 schema | `productcenter` |
+| domain/服务域 | `productcenter` |
+| schema | `iuap_apdoc_coredoc` |
 | 所属应用 | `DPMCUS` |
 | 直连字段 | 57 个 |
 | 子表 | 0 个 |

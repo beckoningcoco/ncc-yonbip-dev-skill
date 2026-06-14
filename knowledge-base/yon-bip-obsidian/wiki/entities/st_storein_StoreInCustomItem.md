@@ -22,6 +22,7 @@ source_type: api_response
 | uri | st.storein.StoreInCustomItem |
 | tableName | st_storein_customitem |
 | domain | ustock |
+| schema | `ustock` |
 | applicationCode | ST |
 | superUri | ? |
 | isBusinessObject | true |

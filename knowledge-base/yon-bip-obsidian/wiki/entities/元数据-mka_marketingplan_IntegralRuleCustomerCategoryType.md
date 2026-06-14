@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 积分规则客户类型孙表 |
 | 物理表 | `mka_integral_rule_customerCategoryType` |
-| 数据库 schema | `yycrm` |
+| domain/服务域 | `yycrm` |
+| schema | `crm` |
 | 所属应用 | `MKA` |
 | 直连字段 | 6 个 |
 | 子表 | 0 个 |

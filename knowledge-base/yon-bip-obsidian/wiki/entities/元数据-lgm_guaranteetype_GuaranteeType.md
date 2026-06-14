@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 保函类型 |
 | 物理表 | `lgm_guaranteetype` |
-| 数据库 schema | `yonbip-fi-ctmlgm` |
+| domain/服务域 | `yonbip-fi-ctmlgm` |
+| schema | `yonbip_fi_ctmlc` |
 | 所属应用 | `LGM` |
 | 直连字段 | 20 个 |
 | 子表 | 0 个 |

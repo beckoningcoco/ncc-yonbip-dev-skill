@@ -24,7 +24,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 询价单 |
 | 物理表 | `ipu_quotation` |
-| 数据库 schema | `yonbip-cpu-sourcing` |
+| domain/服务域 | `yonbip-cpu-sourcing` |
 | 所属应用 | `ycSouringInquiry` |
 | 业务对象ID | `411130be-d87d-4ae3-9ec1-218747ac5e4c` |
 | 元数据类型 | `Class` |

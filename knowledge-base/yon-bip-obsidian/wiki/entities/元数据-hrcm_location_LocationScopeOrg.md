@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 适用范围 |
 | 物理表 | `cs_location_scope_org` |
-| 数据库 schema | `hrcloud-contract` |
+| domain/服务域 | `hrcloud-contract` |
+| schema | `corehr` |
 | 所属应用 | `HRCM` |
 | 直连字段 | 6 个 |
 | 子表 | 0 个 |

@@ -21,7 +21,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 友互通租户 |
 | 物理表 | `` |
-| 数据库 schema | `ucf-amc-es` |
+| domain/服务域 | `ucf-amc-es` |
 | 所属应用 | `` |
 | 直连字段 | 3 个 |
 | 子表 | 0 个 |

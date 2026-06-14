@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 对账事项 |
 | 物理表 | `cpu_godownentry` |
-| 数据库 schema | `cpu-cooperation` |
+| domain/服务域 | `cpu-cooperation` |
+| schema | `cpu_cooperation` |
 | 所属应用 | `ycPurchaseSynergy` |
 | 业务对象ID | `9fb641a8-be3b-45ff-bd91-7460562a1016` |
 | 元数据类型 | `Class` |

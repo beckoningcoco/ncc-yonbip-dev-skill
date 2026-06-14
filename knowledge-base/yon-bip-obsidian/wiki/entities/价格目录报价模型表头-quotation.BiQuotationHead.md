@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 价格目录报价模型表头 |
 | 物理表 | `cpu_bi_quotation_head` |
-| 数据库 schema | `cpu-bi-service` |
+| domain/服务域 | `cpu-bi-service` |
+| schema | `cpu_baseservice` |
 | 所属应用 | `ycPriceCenter` |
 | 业务对象ID | `dbe6fec3-a020-4e23-8d6d-aef9ae36768c` |
 | 元数据类型 | `Class` |

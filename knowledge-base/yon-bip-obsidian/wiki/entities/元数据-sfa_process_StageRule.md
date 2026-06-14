@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 阶段规则 |
 | 物理表 | `sfa_stage_rule` |
-| 数据库 schema | `yycrm` |
+| domain/服务域 | `yycrm` |
+| schema | `crm` |
 | 所属应用 | `SFA` |
 | 直连字段 | 18 个 |
 | 子表 | 3 个 |

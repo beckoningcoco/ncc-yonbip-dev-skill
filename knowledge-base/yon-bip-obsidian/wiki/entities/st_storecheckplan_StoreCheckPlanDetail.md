@@ -22,6 +22,7 @@ source_type: api_response
 | uri | st.storecheckplan.StoreCheckPlanDetail |
 | tableName | st_storecheckplan_b |
 | domain | ustock |
+| schema | `ustock` |
 | applicationCode | ST |
 | superUri | st.pubstorecheck.PubStoreCheckDetail |
 | isBusinessObject | true |

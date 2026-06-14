@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 普通发票信息 |
 | 物理表 | `invoice_info_base` |
-| 数据库 schema | `yonbip-cpu-mall` |
+| domain/服务域 | `yonbip-cpu-mall` |
+| schema | `cpu_mall` |
 | 所属应用 | `ycYuncaiMall` |
 | 业务对象ID | `8ef03e47-33ed-4b64-89a4-5b5b3aea20fc` |
 | 元数据类型 | `Class` |

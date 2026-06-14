@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 计税结果 |
 | 物理表 | `stwb_tax_calc_result` |
-| 数据库 schema | `yonbip-fi-earapbill` |
+| domain/服务域 | `yonbip-fi-earapbill` |
+| schema | `fiearapbill` |
 | 所属应用 | `EAR` |
 | 直连字段 | 40 个 |
 | 子表 | 1 个 |

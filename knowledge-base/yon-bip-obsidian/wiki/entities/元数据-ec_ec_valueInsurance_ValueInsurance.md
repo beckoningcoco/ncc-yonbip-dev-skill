@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 保价策略主表 |
 | 物理表 | `oms_valueInsurance` |
-| 数据库 schema | `dst` |
+| domain/服务域 | `dst` |
+| schema | `omsdata` |
 | 所属应用 | `` |
 | 直连字段 | 9 个 |
 | 关联引用 | 3 个 |

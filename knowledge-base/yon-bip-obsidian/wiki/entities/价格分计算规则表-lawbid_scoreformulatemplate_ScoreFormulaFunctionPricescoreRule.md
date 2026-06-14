@@ -22,7 +22,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 价格分计算规则表 |
 | 物理表 | `cpu_score_formula_template_pricescore_rule` |
-| 数据库 schema | `yonbip-cpu-lawbid` |
+| domain/服务域 | `yonbip-cpu-lawbid` |
+| schema | `cpu_lawbid` |
 | 所属应用 | `ycSouringBid` |
 | 构建时间 | `2026-06-04 20:00:39.0320` |
 

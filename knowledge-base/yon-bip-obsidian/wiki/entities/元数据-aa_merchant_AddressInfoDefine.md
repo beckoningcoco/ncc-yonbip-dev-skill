@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 客户档案地址信息自定义项(废弃) |
 | 物理表 | `addressinfo_define` |
-| 数据库 schema | `productcenter` |
+| domain/服务域 | `productcenter` |
+| schema | `iuap_apdoc_coredoc` |
 | 所属应用 | `DPMCUS` |
 | 直连字段 | 63 个 |
 | 子表 | 0 个 |

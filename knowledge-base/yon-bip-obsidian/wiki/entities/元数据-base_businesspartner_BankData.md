@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 银行信息(废弃) |
 | 物理表 | `base_bankdata` |
-| 数据库 schema | `productcenter` |
+| domain/服务域 | `productcenter` |
+| schema | `iuap_apdoc_coredoc` |
 | 所属应用 | `DPMBP` |
 | 直连字段 | 20 个 |
 | 子表 | 0 个 |

@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 保管者对象 |
 | 物理表 | `st_custodian` |
-| 数据库 schema | `ustock` |
+| domain/服务域 | `ustock` |
+| schema | `ustock` |
 | 所属应用 | `ST` |
 | 直连字段 | 17 个 |
 | 关联引用 | 5 个 |

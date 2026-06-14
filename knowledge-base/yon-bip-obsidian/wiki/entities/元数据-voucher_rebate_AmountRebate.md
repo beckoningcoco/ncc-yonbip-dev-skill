@@ -21,7 +21,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 金额返利 |
 | 物理表 | `rebate` |
-| 数据库 schema | `marketingbill` |
+| domain/服务域 | `marketingbill` |
 | 所属应用 | `BBSMK` |
 | 直连字段 | 97 个 |
 | 子表 | 3 个 |

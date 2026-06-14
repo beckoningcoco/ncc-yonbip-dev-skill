@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 出差申请变更单明细同行人参照表 |
 | 物理表 | `znbz_memoapplyalter_before_fellow` |
-| 数据库 schema | `znbzbx` |
+| domain/服务域 | `znbzbx` |
+| schema | `znbz` |
 | 所属应用 | `RBSM` |
 | 直连字段 | 7 个 |
 | 子表 | 0 个 |

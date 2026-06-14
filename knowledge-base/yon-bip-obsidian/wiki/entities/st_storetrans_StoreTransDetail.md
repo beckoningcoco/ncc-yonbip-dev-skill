@@ -22,6 +22,7 @@ source_type: api_response
 | uri | st.storetrans.StoreTransDetail |
 | tableName | st_storetrans_b |
 | domain | ustock |
+| schema | `ustock` |
 | applicationCode | ST |
 | superUri | st.voucher.UstockVouchLine |
 | isBusinessObject | true |

@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 还款单主表 |
 | 物理表 | `znbz_returnbill` |
-| 数据库 schema | `znbzbx` |
+| domain/服务域 | `znbzbx` |
+| schema | `znbz` |
 | 所属应用 | `RBSM` |
 | 直连字段 | 119 个 |
 | 子表 | 5 个 |

@@ -20,9 +20,10 @@ source_type: api_response
 |------|-----|
 | 显示名 | 不良项目 |
 | 物理表 | `qms_dfm_baditems` |
-| 数据库 schema | `QMS-DFM` |
+| domain/服务域 | `QMS-DFM` |
+| schema | `qms_dfm` |
 | 所属应用 | `QIC` |
-| 构建时间 | `2026-06-05 09:22:39.1170` |
+| 构建时间 | `2026-06-05 17:29:49.9370` |
 
 ## 主键与编码
 

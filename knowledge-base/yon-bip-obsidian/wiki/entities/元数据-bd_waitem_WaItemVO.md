@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 薪资项目 |
 | 物理表 | `wa_item` |
-| 数据库 schema | `ucfbasedoc` |
+| domain/服务域 | `ucfbasedoc` |
+| schema | `iuap_apdoc_basedoc` |
 | 所属应用 | `DPMPRJ` |
 | 直连字段 | 47 个 |
 | 关联引用 | 1 个 |

@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 管控范围列表 |
 | 物理表 | `bd_controlscope` |
-| 数据库 schema | `finbd` |
+| domain/服务域 | `finbd` |
+| schema | `iuap_apdoc_finbd` |
 | 所属应用 | `FP` |
 | 直连字段 | 33 个 |
 | 关联引用 | 15 个 |

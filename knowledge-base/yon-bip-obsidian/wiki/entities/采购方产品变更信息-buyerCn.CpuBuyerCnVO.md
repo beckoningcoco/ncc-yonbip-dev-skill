@@ -24,7 +24,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 采购方产品变更信息 |
 | 物理表 | `cpu_buyercn` |
-| 数据库 schema | `yonbip-cpu-synergy` |
+| domain/服务域 | `yonbip-cpu-synergy` |
 | 所属应用 | `ycQualityCollaboration` |
 | 业务对象ID | `101c29e6-3811-4e42-9c85-79596b1d410c` |
 | 元数据类型 | `Class` |

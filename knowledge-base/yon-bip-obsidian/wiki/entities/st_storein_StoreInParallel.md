@@ -22,6 +22,7 @@ source_type: api_response
 | uri | st.storein.StoreInParallel |
 | tableName | st_storein_parallel |
 | domain | ustock |
+| schema | `ustock` |
 | applicationCode | ST |
 | superUri | ? |
 | isBusinessObject | true |

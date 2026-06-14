@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 取价日志详情 |
 | 物理表 | `cpu_bi_price_query_record_detail` |
-| 数据库 schema | `cpu-bi-service` |
+| domain/服务域 | `cpu-bi-service` |
+| schema | `cpu_baseservice` |
 | 所属应用 | `ycPriceCenter` |
 | 元数据类型 | `Class` |
 | 元数据层级 | `0` |

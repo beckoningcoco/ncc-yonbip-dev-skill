@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 担保信息 |
 | 物理表 | `drft_noteinformation_contract` |
-| 数据库 schema | `drft` |
+| domain/服务域 | `drft` |
+| schema | `ctmdrft` |
 | 所属应用 | `DRFT` |
 | 直连字段 | 11 个 |
 | 子表 | 0 个 |

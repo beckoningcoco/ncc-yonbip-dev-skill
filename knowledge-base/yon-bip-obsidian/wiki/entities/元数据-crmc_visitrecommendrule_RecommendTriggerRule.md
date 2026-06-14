@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 触发规则 |
 | 物理表 | `crmc_recommend_trigger_rule` |
-| 数据库 schema | `yycrm` |
+| domain/服务域 | `yycrm` |
+| schema | `crm` |
 | 所属应用 | `CRMC` |
 | 直连字段 | 21 个 |
 | 子表 | 0 个 |

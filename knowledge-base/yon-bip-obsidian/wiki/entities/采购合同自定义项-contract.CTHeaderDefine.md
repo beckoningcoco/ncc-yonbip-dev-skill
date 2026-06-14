@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 采购合同自定义项 |
 | 物理表 | `cpu_ct_header_define` |
-| 数据库 schema | `cpu-contract` |
+| domain/服务域 | `cpu-contract` |
+| schema | `cpu_cooperation` |
 | 所属应用 | `ycContractManagement` |
 | 元数据类型 | `Class` |
 | 元数据层级 | `2` |

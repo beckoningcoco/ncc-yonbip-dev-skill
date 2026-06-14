@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 合同库 |
 | 物理表 | `clm_contract` |
-| 数据库 schema | `yonbip-ec-contract` |
+| domain/服务域 | `yonbip-ec-contract` |
+| schema | `yonbip_clm_contract` |
 | 所属应用 | `CLM` |
 | 直连字段 | 151 个 |
 | 子表 | 3 个 |

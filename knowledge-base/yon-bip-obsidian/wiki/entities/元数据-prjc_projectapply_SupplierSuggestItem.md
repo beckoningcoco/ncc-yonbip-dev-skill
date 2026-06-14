@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 供应商推荐明细 |
 | 物理表 | `prjc_supplier_suggest_b` |
-| 数据库 schema | `yonbip-pm-projectme` |
+| domain/服务域 | `yonbip-pm-projectme` |
+| schema | `pmcloud` |
 | 所属应用 | `PRJC` |
 | 直连字段 | 35 个 |
 | 子表 | 0 个 |

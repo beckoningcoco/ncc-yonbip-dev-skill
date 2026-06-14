@@ -24,7 +24,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 友互通用户租户 |
 | 物理表 | `idx_user_relation` |
-| 数据库 schema | `esdomin` |
+| domain/服务域 | `esdomin` |
 | 所属应用 | `` |
 | 元数据类型 | `Class` |
 | 元数据层级 | `0` |

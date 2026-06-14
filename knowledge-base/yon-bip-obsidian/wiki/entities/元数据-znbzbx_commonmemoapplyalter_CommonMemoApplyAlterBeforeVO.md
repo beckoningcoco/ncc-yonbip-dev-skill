@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 通用申请单子表变更前 |
 | 物理表 | `znbz_memoapplyalter_before` |
-| 数据库 schema | `znbzbx` |
+| domain/服务域 | `znbzbx` |
+| schema | `znbz` |
 | 所属应用 | `RBSM` |
 | 直连字段 | 244 个 |
 | 子表 | 3 个 |

@@ -22,7 +22,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 评标结果审批单汇总表 |
 | 物理表 | `cpu_scoring_group_gather_approval` |
-| 数据库 schema | `yonbip-cpu-lawbid` |
+| domain/服务域 | `yonbip-cpu-lawbid` |
+| schema | `cpu_lawbid` |
 | 所属应用 | `` |
 | 构建时间 | `2026-06-04 20:16:49.9870` |
 

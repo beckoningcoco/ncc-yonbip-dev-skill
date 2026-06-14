@@ -20,7 +20,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 谈判磋商价格谈判回复表体自定义项 |
 | 物理表 | `cpu_auction_clarify_material_freedefine` |
-| 数据库 schema | `yonbip-cpu-lawbid` |
+| domain/服务域 | `yonbip-cpu-lawbid` |
+| schema | `cpu_lawbid` |
 | 所属应用 | `ycBusinessCenter` |
 | 构建时间 | `2026-06-04 23:27:02.6030` |
 

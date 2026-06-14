@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 发票结算 |
 | 物理表 | `` |
-| 数据库 schema | `yonbip-fi-eia` |
+| domain/服务域 | `yonbip-fi-eia` |
+| schema | `fieia` |
 | 所属应用 | `EIA` |
 | 直连字段 | 62 个 |
 | 子表 | 1 个 |

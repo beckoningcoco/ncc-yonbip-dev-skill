@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | BIP用户 |
 | 物理表 | `ba_user` |
-| 数据库 schema | `u8c-auth` |
+| domain/服务域 | `u8c-auth` |
+| schema | `iuap_apcom_auth` |
 | 所属应用 | `GZTACT` |
 | 直连字段 | 17 个 |
 | 子表 | 0 个 |

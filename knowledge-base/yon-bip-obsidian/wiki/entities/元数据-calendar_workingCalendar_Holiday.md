@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 假日定义 |
 | 物理表 | `ts_holiday` |
-| 数据库 schema | `ucf-staff-center` |
+| domain/服务域 | `ucf-staff-center` |
+| schema | `iuap_apdoc_basedoc` |
 | 所属应用 | `DPMWDC` |
 | 直连字段 | 22 个 |
 | 子表 | 0 个 |

@@ -20,7 +20,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 计税结果明细 |
 | 物理表 | `tax_calc_result_b` |
-| 数据库 schema | `yonbip-cpu-sourcing` |
+| domain/服务域 | `yonbip-cpu-sourcing` |
 | 所属应用 | `ycSouringInquiry` |
 | 构建时间 | `2026-06-04 23:10:59.2920` |
 

@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 资产专项计划 |
 | 物理表 | `tlm_asset_specific_plan` |
-| 数据库 schema | `yonbip-fi-ctmtlm` |
+| domain/服务域 | `yonbip-fi-ctmtlm` |
+| schema | `yonbip_fi_ctmfm` |
 | 所属应用 | `TLM` |
 | 直连字段 | 18 个 |
 | 子表 | 0 个 |

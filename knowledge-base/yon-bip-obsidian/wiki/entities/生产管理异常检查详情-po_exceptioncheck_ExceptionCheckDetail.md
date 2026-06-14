@@ -20,7 +20,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 生产管理异常检查详情 |
 | 物理表 | `po_exception_check_detail` |
-| 数据库 schema | `productionorder` |
+| domain/服务域 | `productionorder` |
 | 所属应用 | `PO` |
 | 构建时间 | `2026-06-05 09:33:25.5970` |
 

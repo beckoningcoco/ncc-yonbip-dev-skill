@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 活动小结活动费用 |
 | 物理表 | `mka_actual_cost` |
-| 数据库 schema | `yycrm` |
+| domain/服务域 | `yycrm` |
+| schema | `crm` |
 | 所属应用 | `MKA` |
 | 直连字段 | 49 个 |
 | 子表 | 2 个 |

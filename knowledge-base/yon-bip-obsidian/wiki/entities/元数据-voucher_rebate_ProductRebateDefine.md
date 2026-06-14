@@ -21,7 +21,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 营销费用自由自定义项 |
 | 物理表 | `bd_rebate_define` |
-| 数据库 schema | `marketingbill` |
+| domain/服务域 | `marketingbill` |
 | 所属应用 | `BBSMK` |
 | 直连字段 | 64 个 |
 | 子表 | 0 个 |

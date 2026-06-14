@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 单据表协议行基类 |
 | 物理表 | `` |
-| 数据库 schema | `yonbip-fi-earapbill` |
+| domain/服务域 | `yonbip-fi-earapbill` |
+| schema | `fiearapbill` |
 | 所属应用 | `EAR` |
 | 直连字段 | 11 个 |
 | 子表 | 0 个 |

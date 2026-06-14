@@ -22,7 +22,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 评标任务主表 |
 | 物理表 | `cpu_mark_expert` |
-| 数据库 schema | `yonbip-cpu-lawbid` |
+| domain/服务域 | `yonbip-cpu-lawbid` |
+| schema | `cpu_lawbid` |
 | 所属应用 | `ycSouringBid` |
 | 构建时间 | `2026-06-04 19:24:57.5770` |
 

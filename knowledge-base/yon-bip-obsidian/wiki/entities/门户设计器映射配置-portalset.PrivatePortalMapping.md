@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 门户设计器映射配置 |
 | 物理表 | `cpu_private_portal_mapping` |
-| 数据库 schema | `yonbip-cpu-bctask` |
+| domain/服务域 | `yonbip-cpu-bctask` |
+| schema | `cpu_base_doc` |
 | 所属应用 | `ycBase` |
 | 业务对象ID | `d5f55830-55d1-4248-b032-66a7abbabd71` |
 | 元数据类型 | `Class` |

@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | WBS |
 | 物理表 | `bgdm_wbs_doc` |
-| 数据库 schema | `yonbip-pm-commonbd` |
+| domain/服务域 | `yonbip-pm-commonbd` |
+| schema | `pmcloud` |
 | 所属应用 | `BGDM` |
 | 直连字段 | 62 个 |
 | 关联引用 | 15 个 |

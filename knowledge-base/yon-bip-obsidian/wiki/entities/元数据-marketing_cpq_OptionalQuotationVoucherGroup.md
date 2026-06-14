@@ -21,7 +21,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 配置报价清单关联单据本币分组报价信息 |
 | 物理表 | `optionalquotationvouchergroup` |
-| 数据库 schema | `marketingbill` |
+| domain/服务域 | `marketingbill` |
 | 所属应用 | `CPQ` |
 | 直连字段 | 10 个 |
 | 子表 | 0 个 |

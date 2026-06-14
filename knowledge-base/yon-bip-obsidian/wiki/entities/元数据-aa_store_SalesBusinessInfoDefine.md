@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 销售业务信息自定义项 |
 | 物理表 | `mp_salessbusinessinfo_define` |
-| 数据库 schema | `yxybase` |
+| domain/服务域 | `yxybase` |
+| schema | `pricecenter` |
 | 所属应用 | `Marketingpublic` |
 | 直连字段 | 62 个 |
 | 子表 | 0 个 |

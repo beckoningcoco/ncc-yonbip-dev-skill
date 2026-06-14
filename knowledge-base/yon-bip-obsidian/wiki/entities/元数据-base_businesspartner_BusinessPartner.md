@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 业务伙伴 |
 | 物理表 | `base_businesspartner` |
-| 数据库 schema | `productcenter` |
+| domain/服务域 | `productcenter` |
+| schema | `iuap_apdoc_coredoc` |
 | 所属应用 | `DPMBP` |
 | 直连字段 | 53 个 |
 | 子表 | 5 个 |

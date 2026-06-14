@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 月结检查项结果记录 |
 | 物理表 | `rcl_check_item_result` |
-| 数据库 schema | `yonbip-fi-ercl` |
+| domain/服务域 | `yonbip-fi-ercl` |
+| schema | `fiercl` |
 | 所属应用 | `RVN` |
 | 直连字段 | 17 个 |
 | 子表 | 1 个 |

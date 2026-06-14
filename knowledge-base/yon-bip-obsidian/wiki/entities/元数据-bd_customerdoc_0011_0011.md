@@ -21,7 +21,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 专业技术职务 |
 | 物理表 | `hred_refer_proftechpost` |
-| 数据库 schema | `hrcloud-staff-mgr` |
+| domain/服务域 | `hrcloud-staff-mgr` |
 | 所属应用 | `HRED` |
 | 直连字段 | 31 个 |
 | 子表 | 1 个 |

@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 基础档案 |
 | 物理表 | `crmc_cust_doc` |
-| 数据库 schema | `yycrm` |
+| domain/服务域 | `yycrm` |
+| schema | `crm` |
 | 所属应用 | `CRMC` |
 | 直连字段 | 25 个 |
 | 子表 | 1 个 |

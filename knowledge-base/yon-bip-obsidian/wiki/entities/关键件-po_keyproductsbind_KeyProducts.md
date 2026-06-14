@@ -20,7 +20,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 关键件 |
 | 物理表 | `po_key_prds` |
-| 数据库 schema | `productionorder` |
+| domain/服务域 | `productionorder` |
 | 所属应用 | `PO` |
 | 构建时间 | `2026-06-05 09:33:34.7870` |
 

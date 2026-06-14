@@ -22,6 +22,7 @@ source_type: api_response
 | uri | st.storenotice.StoreNoticeLog |
 | tableName | st_storenotice_log |
 | domain | ustock |
+| schema | `ustock` |
 | applicationCode | ST |
 | superUri | base.entity.BizObject |
 | isBusinessObject | true |

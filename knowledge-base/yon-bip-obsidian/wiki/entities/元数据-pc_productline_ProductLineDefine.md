@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 产品线自定义项 |
 | 物理表 | `productline_define` |
-| 数据库 schema | `productcenter` |
+| domain/服务域 | `productcenter` |
+| schema | `iuap_apdoc_coredoc` |
 | 所属应用 | `GZTBDM` |
 | 直连字段 | 61 个 |
 | 子表 | 0 个 |

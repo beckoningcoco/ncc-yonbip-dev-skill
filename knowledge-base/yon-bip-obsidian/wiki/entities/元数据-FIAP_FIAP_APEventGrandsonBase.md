@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 应付事务计划基类 |
 | 物理表 | `arap_ledger_g` |
-| 数据库 schema | `yonbip-fi-earap` |
+| domain/服务域 | `yonbip-fi-earap` |
+| schema | `fiearap` |
 | 所属应用 | `EAP` |
 | 直连字段 | 62 个 |
 | 子表 | 0 个 |

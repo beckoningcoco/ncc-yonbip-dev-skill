@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 敏感数据权限 |
 | 物理表 | `sensdata_auth` |
-| 数据库 schema | `u8c-auth` |
+| domain/服务域 | `u8c-auth` |
+| schema | `iuap_apcom_auth` |
 | 所属应用 | `GZTACT` |
 | 直连字段 | 14 个 |
 | 子表 | 1 个 |

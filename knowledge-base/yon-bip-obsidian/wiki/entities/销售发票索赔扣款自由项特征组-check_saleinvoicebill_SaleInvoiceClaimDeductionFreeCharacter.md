@@ -20,7 +20,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 销售发票索赔扣款自由项特征组 |
 | 物理表 | `sale_invoice_claim_deduction_freecharacter` |
-| 数据库 schema | `cpu-cooperation` |
+| domain/服务域 | `cpu-cooperation` |
+| schema | `cpu_cooperation` |
 | 所属应用 | `ycSaleCoor` |
 | 构建时间 | `2026-06-04 23:32:31.0760` |
 

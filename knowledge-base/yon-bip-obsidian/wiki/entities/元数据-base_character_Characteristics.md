@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 特征组 |
 | 物理表 | `base_characteristics` |
-| 数据库 schema | `u8c-userdefine` |
+| domain/服务域 | `u8c-userdefine` |
+| schema | `iuap_metadata_extendservice` |
 | 所属应用 | `CHARACTER` |
 | 直连字段 | 23 个 |
 | 子表 | 1 个 |

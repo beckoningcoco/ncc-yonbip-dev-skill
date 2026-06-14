@@ -21,7 +21,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 工作中心分类(自定义项)表 |
 | 物理表 | `ed_workcenter_category_define` |
-| 数据库 schema | `engineeringdata` |
+| domain/服务域 | `engineeringdata` |
 | 所属应用 | `ED` |
 | 直连字段 | 62 个 |
 | 子表 | 0 个 |

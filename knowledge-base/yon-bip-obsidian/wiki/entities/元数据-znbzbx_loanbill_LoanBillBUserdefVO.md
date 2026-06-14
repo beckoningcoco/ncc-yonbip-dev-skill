@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 借款/预付单子表（自定义项）表 |
 | 物理表 | `znbz_loanbill_b_userdef` |
-| 数据库 schema | `znbzbx` |
+| domain/服务域 | `znbzbx` |
+| schema | `znbz` |
 | 所属应用 | `RBSM` |
 | 直连字段 | 64 个 |
 | 子表 | 0 个 |

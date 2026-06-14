@@ -20,7 +20,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 销售发票物料自由项特征组 |
 | 物理表 | `cpu_saleinvoice_free_characteristics_define` |
-| 数据库 schema | `cpu-cooperation` |
+| domain/服务域 | `cpu-cooperation` |
+| schema | `cpu_cooperation` |
 | 所属应用 | `ycSaleCoor` |
 | 构建时间 | `2026-06-04 23:34:01.5280` |
 

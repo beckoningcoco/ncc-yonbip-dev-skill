@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 应收账款明细 |
 | 物理表 | `grm_propertyright_fiear` |
-| 数据库 schema | `yonbip-fi-ctmgrm` |
+| domain/服务域 | `yonbip-fi-ctmgrm` |
+| schema | `yonbip_fi_ctmfm` |
 | 所属应用 | `GRM` |
 | 直连字段 | 9 个 |
 | 子表 | 0 个 |

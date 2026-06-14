@@ -20,7 +20,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 供应商产品变更信息 |
 | 物理表 | `cpu_suppliercn` |
-| 数据库 schema | `yonbip-cpu-synergy` |
+| domain/服务域 | `yonbip-cpu-synergy` |
 | 所属应用 | `ycQualityCollaboration` |
 | 构建时间 | `2026-06-04 23:30:58.2640` |
 

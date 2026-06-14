@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 合同主体 |
 | 物理表 | `cs_corp` |
-| 数据库 schema | `hrcloud-contract` |
+| domain/服务域 | `hrcloud-contract` |
+| schema | `corehr` |
 | 所属应用 | `HRCM` |
 | 直连字段 | 37 个 |
 | 子表 | 1 个 |

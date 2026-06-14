@@ -20,7 +20,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 平台班次 |
 | 物理表 | `platform_shift` |
-| 数据库 schema | `ucf-staff-center` |
+| domain/服务域 | `ucf-staff-center` |
+| schema | `iuap_apdoc_basedoc` |
 | 所属应用 | `DPMWDC` |
 | 构建时间 | `2026-06-05 09:21:20.0020` |
 

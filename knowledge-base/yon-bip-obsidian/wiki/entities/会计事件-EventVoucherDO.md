@@ -22,7 +22,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 事项分录 |
 | 物理表 | `aai_voucher` |
-| 数据库 schema | `yonbip-fi-eaai` |
+| domain/服务域 | `yonbip-fi-eaai` |
+| schema | `fieaai` |
 | 所属应用 | `AAI` |
 | 直连字段 | 124 个 |
 | 关联引用 | 27 个 |

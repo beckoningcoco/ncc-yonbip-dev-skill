@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 区域格式 |
 | 物理表 | `area_base_info` |
-| 数据库 schema | `ucfbasedoc` |
+| domain/服务域 | `ucfbasedoc` |
+| schema | `iuap_apdoc_basedoc` |
 | 所属应用 | `FRMT` |
 | 直连字段 | 24 个 |
 | 子表 | 4 个 |

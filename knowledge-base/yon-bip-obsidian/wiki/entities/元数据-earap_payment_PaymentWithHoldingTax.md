@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 付款单代扣税信息 |
 | 物理表 | `ap_payment_g_wht` |
-| 数据库 schema | `yonbip-fi-earapbill` |
+| domain/服务域 | `yonbip-fi-earapbill` |
+| schema | `fiearapbill` |
 | 所属应用 | `EAP` |
 | 直连字段 | 22 个 |
 | 子表 | 0 个 |

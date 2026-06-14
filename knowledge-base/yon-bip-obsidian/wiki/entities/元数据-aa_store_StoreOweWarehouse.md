@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 门店所属仓库 |
 | 物理表 | `mp_storeowewarehouse` |
-| 数据库 schema | `yxybase` |
+| domain/服务域 | `yxybase` |
+| schema | `pricecenter` |
 | 所属应用 | `Marketingpublic` |
 | 直连字段 | 14 个 |
 | 子表 | 0 个 |

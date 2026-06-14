@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 商品上架管理 |
 | 物理表 | `cpu_supplycategory` |
-| 数据库 schema | `cpu-base` |
+| domain/服务域 | `cpu-base` |
+| schema | `cpu_baseservice` |
 | 所属应用 | `ycYuncaiMall` |
 | 业务对象ID | `d180414e-bdd6-43a1-aef4-48646fbf7f53` |
 | 元数据类型 | `Class` |

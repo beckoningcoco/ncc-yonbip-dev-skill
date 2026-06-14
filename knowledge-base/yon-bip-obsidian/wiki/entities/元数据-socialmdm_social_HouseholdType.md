@@ -21,7 +21,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 户口性质 |
 | 物理表 | `mdm_householdtypetbcode` |
-| 数据库 schema | `hrcloud-staff-mgr` |
+| domain/服务域 | `hrcloud-staff-mgr` |
 | 所属应用 | `HRED` |
 | 直连字段 | 31 个 |
 | 子表 | 0 个 |

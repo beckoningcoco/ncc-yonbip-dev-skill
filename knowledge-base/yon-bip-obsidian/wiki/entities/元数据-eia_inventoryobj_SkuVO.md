@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 存货sku表 |
 | 物理表 | `ia_sku` |
-| 数据库 schema | `yonbip-fi-eia` |
+| domain/服务域 | `yonbip-fi-eia` |
+| schema | `fieia` |
 | 所属应用 | `EIA` |
 | 直连字段 | 19 个 |
 | 关联引用 | 4 个 |

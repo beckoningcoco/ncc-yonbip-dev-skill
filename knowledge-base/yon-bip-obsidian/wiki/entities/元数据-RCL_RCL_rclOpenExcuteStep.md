@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 执行过程 |
 | 物理表 | `rcl_execstep` |
-| 数据库 schema | `yonbip-fi-ercl` |
+| domain/服务域 | `yonbip-fi-ercl` |
+| schema | `fiercl` |
 | 所属应用 | `RVN` |
 | 直连字段 | 16 个 |
 | 子表 | 0 个 |

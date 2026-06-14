@@ -21,7 +21,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 替代方案主物料 |
 | 物理表 | `ed_alternate_plan_mainpro` |
-| 数据库 schema | `engineeringdata` |
+| domain/服务域 | `engineeringdata` |
 | 所属应用 | `ED` |
 | 直连字段 | 26 个 |
 | 子表 | 1 个 |

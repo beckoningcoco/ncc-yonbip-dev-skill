@@ -20,7 +20,7 @@ source_type: api_response
 |------|-----|
 | 显示名 | 定标单物料子表 |
 | 物理表 | `cpu_pricedecision_detail` |
-| 数据库 schema | `yonbip-cpu-sourcing` |
+| domain/服务域 | `yonbip-cpu-sourcing` |
 | 所属应用 | `ycSouringInquiry` |
 | 构建时间 | `2026-06-04 23:10:48.2730` |
 

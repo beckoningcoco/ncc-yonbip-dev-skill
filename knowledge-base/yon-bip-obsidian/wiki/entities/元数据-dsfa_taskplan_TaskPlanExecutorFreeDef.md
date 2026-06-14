@@ -21,7 +21,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 执行人自由自定义项 |
 | 物理表 | `dsfa_taskplan_executor_freedef` |
-| 数据库 schema | `yycrm` |
+| domain/服务域 | `yycrm` |
+| schema | `crm` |
 | 所属应用 | `DSFA` |
 | 直连字段 | 64 个 |
 | 子表 | 0 个 |

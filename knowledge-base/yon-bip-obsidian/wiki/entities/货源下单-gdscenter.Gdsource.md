@@ -24,7 +24,8 @@ source_type: api_response
 |------|-----|
 | 显示名 | 货源下单 |
 | 物理表 | `cpu_gdsource` |
-| 数据库 schema | `cpu-base` |
+| domain/服务域 | `cpu-base` |
+| schema | `cpu_baseservice` |
 | 所属应用 | `ycPriceCenter` |
 | 业务对象ID | `00ce71b6-41ab-4360-ad5d-dc8824e30983` |
 | 元数据类型 | `Class` |

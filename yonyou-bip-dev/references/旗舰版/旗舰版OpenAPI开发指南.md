@@ -7,6 +7,47 @@ description: >
 
 # 旗舰版 OpenAPI 开发指南
 
+## 🔴 代码生成强制规则（生成前必须执行，缺一不可）
+
+> 以下三条是 2026-06-14 实际犯错后总结的铁律，每次生成 OpenAPI 代码时必须按顺序执行。
+
+### 规则 1：代码含 SQL → 必须运行自验证
+
+生成含 SQL 的代码后，**立即调 `db-query` 验证**：
+
+```bash
+python C:\Users\99558\.claude\skills\db-query\scripts\db_query.py \
+  -p "对应项目" --yes -s "改写后的安全SELECT"
+```
+- SELECT → 加 `LIMIT 1`
+- INSERT/UPDATE/DELETE → 改写为 `SELECT 列名 FROM 表名 WHERE 1=0`
+- ❌ 验证失败 → 修正后重新生成，不交付半成品
+
+### 规则 2：写 SQL 前 → 先查知识库确认实体
+
+去 `D:\yon-bip-obsidian\yon-bip-obsidian\wiki\entities\` 下找实体元数据：
+- 确认 `schema`（数据库名）
+- 确认 `字段名 → 数据库列` 映射（column_name，不是 Java 驼峰）
+- 确认子表 URI 和关联关系
+- **禁止凭记忆编造表名/列名**
+
+### 规则 3：旗舰版保存/修改 → 调原厂 API，不裸写 SQL
+
+```
+❌ 错误：INSERT INTO udinghuo.orders ...
+✅ 正确：OpenServiceBuilder + Invoke.getResult() 调 platform API
+```
+- 参考文档：`旗舰版调用OpenAPI.md`、`openapi-sdk调用api的使用示例.md`
+- NCC 同理：保存走 `sendMessage()`，查询走 `BaseDAO`/`MDPersistenceService`
+
+### 生成流程
+
+```
+知识库查实体 → 选保存方式(原厂API) → 生成代码 → 自验证SQL → 交付
+```
+
+---
+
 ## 概述
 
 BIP 旗舰版提供两种 OpenAPI 场景：

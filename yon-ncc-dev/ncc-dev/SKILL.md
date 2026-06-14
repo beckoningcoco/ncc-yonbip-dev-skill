@@ -235,6 +235,35 @@ NCLocator.getInstance().lookup(IPreAlertPlugin.class);
 | `references/common/openapi-fip-txbill-pattern.md` | 资产包 OpenAPI Resources 模式（FIP 外部接口单专用）：`AbstractRestResource` + `transferBill()` + `IFipMessageService.sendMessage()`，仅适用于外部接口单，不适用于付款单等其他单据 | 提到"资产包"开发 OpenAPI / Resources 类 / 外部接口单 OpenAPI 时 |
 
 
+## NCC 数据库查询规则
+
+> **写 SQL 前必须先查 NCC 数据字典，绝不能凭记忆编造表名和字段名！**
+
+1. **先查数据字典**：`C:\Users\99558\.claude\skills\yon-ncc-dev\ncc数据字典\`
+   - 按模块编号查找：如 `2006_arap_应收应付`（ARAP）、`2012_fa_固定资产`（FA）、`4004_pu_采购管理`（PU）
+   - `index.json` 按拼音索引表名 → 找到具体模块 → 打开对应 `.md` 文件
+   - 每个文件包含完整的字段编码（数据库列名）、字段类型、引用模型
+2. **PostgreSQL 注意**：NCC 2312 测试环境使用 PolarDB PostgreSQL，表在 `bipuser` schema 下
+   - SQL 需加 `bipuser.` 前缀，如 `SELECT * FROM bipuser.fa_card WHERE dr = 0`
+3. **字段名用数据字典的字段编码**：数据字典中"字段编码"列就是数据库列名
+4. **不确定列名时**：`SELECT column_name FROM information_schema.columns WHERE table_schema='bipuser' AND table_name='表名'`
+
+**反例**：`SELECT * FROM fa_card` → PostgreSQL 上缺 schema
+**正例**：`SELECT pk_card, code, name FROM bipuser.fa_card WHERE dr = 0`
+
+### NCC SQL 自验证规则（AI 自动执行）
+
+> 生成包含 SQL 的代码后，**必须自动验证 SQL 正确性**，无需用户提示。
+
+1. **提取 SQL**：从生成的代码中提取 SQL 语句
+2. **改写为安全验证语句**：
+   - SELECT → 加 `LIMIT 1`（防止全表扫描）
+   - INSERT/UPDATE/DELETE → 改写为 `SELECT 列名 FROM bipuser.表名 WHERE 1=0`（只验证表名+列名存在）
+3. **自动执行**：`python C:\Users\99558\.claude\skills\db-query\scripts\db_query.py -p "天九" -e test --yes -s "改写后的SQL"`
+4. ❌ 失败 → 修正后重新生成，不交付半成品
+
+详细规则见 `yonyou-bip-dev` 技能中的 `数据库查询约束.md`。
+
 ## 通用编码规则
 
 ### 客户化前缀

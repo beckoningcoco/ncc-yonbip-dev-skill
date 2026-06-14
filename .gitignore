@@ -1,25 +1,29 @@
 # === yon-ncc-dev 生成数据 ===
-skills/yon-ncc-dev/class_index_*.json
-skills/yon-ncc-dev/decompiled/
-skills/yon-ncc-dev/cfr-*.jar
-skills/yon-ncc-dev/ncc_home_path.json
+yon-ncc-dev/class_index_*.json
+yon-ncc-dev/decompiled/
+yon-ncc-dev/cfr-*.jar
+yon-ncc-dev/ncc_home_path.json
 
 # === yonyou-bip-dev 生成数据 ===
-skills/yonyou-bip-dev/bip_home_path.json
-skills/yonyou-bip-dev/class_index_*.json
-skills/yonyou-bip-dev/decompiled/
-skills/yonyou-bip-dev/cfr-*.jar
+yonyou-bip-dev/bip_home_path.json
+yonyou-bip-dev/class_index_*.json
+yonyou-bip-dev/decompiled/
+yonyou-bip-dev/cfr-*.jar
 
 # === 本地配置文件（每人独立，不入库） ===
 path_config.json
-skills/yonyou-bip-dev/db_config.json
+yonyou-bip-dev/db_config.json
+
+# === 项目环境信息（含 VPN/密码等敏感信息，不入库） ===
+yonyou-bip-dev/references/projects/
+yon-ncc-dev/references/projects/
 
 # === baoyu-url-to-markdown 依赖 ===
-skills/baoyu-url-to-markdown/scripts/node_modules/
-skills/baoyu-url-to-markdown/scripts/url-to-markdown/
+baoyu-url-to-markdown/scripts/node_modules/
+baoyu-url-to-markdown/scripts/url-to-markdown/
 
 # === Obsidian 本地配置 ===
-.knowledge-base/yon-bip-obsidian/.obsidian/workspace*.json
+knowledge-base/yon-bip-obsidian/.obsidian/workspace*.json
 
 # === 知识库临时文件 ===
 knowledge-base/yon-bip-obsidian/_bc.txt
@@ -31,15 +35,3 @@ knowledge-base/yon-bip-obsidian/_titles*.txt
 Thumbs.db
 *.swp
 *.swo
-/yonyou-bip-dev/decompiled
-/yon-ncc-dev/decompiled
-/skill-creator
-/check
-/self-improving-agent
-/hunt
-/youtube-transcript
-/think
-/agent-browser
-/find-skills
-/llm-wiki-upgrade
-knowledge-base/yon-bip-obsidian/scripts/digest-sync.sh

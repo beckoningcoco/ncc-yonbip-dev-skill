@@ -95,6 +95,7 @@ if not exist "%SKILLS_DIR%" mkdir "%SKILLS_DIR%"
 
 call :install_skill yon-ncc-dev yon-ncc-dev
 call :install_skill yonyou-bip-dev yonyou-bip-dev
+call :install_skill db-query db-query
 call :install_skill baoyu-url-to-markdown baoyu-url-to-markdown
 call :install_skill llm-wiki llm-wiki
 :: === Auto-configure Claude Code permissions ===
@@ -211,8 +212,12 @@ echo.
 echo   Available skills:
 echo     - yon-ncc-dev       (NCC development)
 echo     - yonyou-bip-dev    (BIP development)
+echo     - db-query          (database query tool)
 echo     - baoyu-url-to-markdown
 echo     - llm-wiki          (knowledge base)
+echo.
+echo   Next step - run health check:
+echo     python %SKILLS_DIR%\db-query\scripts\check_config.py
 echo.
 echo   Usage:
 echo     setup.bat --quiet     # skip all prompts

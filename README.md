@@ -113,8 +113,17 @@ setup.bat -q --skip-ncc     # 组合使用
 
 ## 验证安装
 
+安装完成后，运行健康检查确认一切正常：
+
 ```bash
-# 测试数据库查询（以天九 NCC 为例）
+python ~/.claude/skills/db-query/scripts/check_config.py
+```
+
+会逐一检查：配置文件完整性 → 数据库连通性 → Python 依赖 → 关键目录。
+
+也可以手动测试数据库查询：
+
+```bash
 python ~/.claude/skills/db-query/scripts/db_query.py -p "天九" -s "SELECT 'Hello' AS greeting"
 
 # 测试 NCC 源码反编译

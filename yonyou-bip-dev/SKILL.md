@@ -138,6 +138,18 @@ description: >
 | Oracle 查询工具 | `C:\Users\<你的用户名>\Desktop\db_query.py` | 通用 Oracle 数据库查询，支持多项目多环境 |
 | 元数据查询 | `scripts/bip_metadata_query.py` | 通过 BIP OpenAPI 查询任意实体完整元数据，支持批量拉取所有子表 |
 | 实体排重 | `scripts/check_entity_dedup.py` | 扫描 wiki 判断实体是否已消化，避免重复拉取 |
+| 配置健康检查 | `../db-query/scripts/check_config.py` | 验证 path_config.json、db_config.json、Python 驱动、数据库连接 |
+| OpenAPI 开发 | `references/旗舰版/旗舰版OpenAPI开发指南.md` | BIP 旗舰版 OpenAPI 服务端开发（Controller → YMS 注册 → 发布 → 授权） |
+| OpenAPI 调用(客户端) | `references/旗舰版/旗舰版调用OpenAPI.md` | Java 后端调用 BIP OpenAPI（Token、签名、GET/POST） |
+| OpenAPI SDK 调用 | `references/旗舰版/openapi-sdk调用api的使用示例.md` | 独立 Maven 工程通过 SDK jar 调用 BIP OpenAPI |
+
+## 健康检查触发
+
+> 当用户说"检查下技能"、"健康检查"、"跑一下健康检查"、"帮我看看配置有没有问题"等类似表达时，直接执行：
+> ```bash
+> python C:\Users\99558\.claude\skills\db-query\scripts\check_config.py
+> ```
+> 显示结果并分析各项目状态（✅/⚠️/❌），配置缺失时询问是否帮助填写。
 
 ## 元数据/字典查询规则
 
